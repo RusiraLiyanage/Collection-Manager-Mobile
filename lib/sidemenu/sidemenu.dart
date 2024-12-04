@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../../AppState/appState.dart';
 import 'package:project_code_blue/screens/Accounting/invoices.dart';
 import 'package:project_code_blue/screens/Accounting/itServices.dart';
 import 'package:project_code_blue/screens/Accounting/licensing.dart';
@@ -22,6 +24,7 @@ class SideMenu extends StatefulWidget {
 class _SideMenuState extends State<SideMenu> {
   @override
   Widget build(BuildContext context) {
+    final appState = Provider.of<AppState>(context, listen: false);
     return Drawer(
       backgroundColor: Color(0xFFE6F7FA),
       shape: RoundedRectangleBorder(
@@ -72,6 +75,7 @@ class _SideMenuState extends State<SideMenu> {
                         ),
                       ),
                       onTap: () => {
+                        appState.setDrawerState(false),
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
@@ -143,6 +147,7 @@ class _SideMenuState extends State<SideMenu> {
                                 ),
                               ),
                               onTap: () => {
+                                appState.setDrawerState(false),
                                 Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
@@ -248,6 +253,7 @@ class _SideMenuState extends State<SideMenu> {
                         ),
                       ),
                       onTap: () => {
+                        appState.setDrawerState(false),
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
@@ -333,6 +339,7 @@ class _SideMenuState extends State<SideMenu> {
                         ),
                       ),
                       onTap: () => {
+                        appState.setDrawerState(false),
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
@@ -404,6 +411,7 @@ class _SideMenuState extends State<SideMenu> {
                               ),
                             ),
                             onTap: () => {
+                              appState.setDrawerState(false),
                               Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
@@ -566,6 +574,7 @@ class _SideMenuState extends State<SideMenu> {
                         ),
                       ),
                       onTap: () => {
+                        appState.setDrawerState(false),
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(

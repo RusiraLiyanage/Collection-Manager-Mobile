@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../AppState/appState.dart';
 import 'package:project_code_blue/sidemenu/sidemenu.dart';
 import '../Navigation/appBar.dart';
 
@@ -10,15 +12,12 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  bool _isDrawerOpen = false; // Track drawer state
   @override
   Widget build(BuildContext context) {
+    final appState = Provider.of<AppState>(context, listen: false);
     return Scaffold(
       onDrawerChanged: (isOpen) {
-        setState(() {
-          _isDrawerOpen = isOpen; // Update drawer state
-          print(isOpen);
-        });
+        appState.setDrawerState(isOpen); // Update global drawer state
       },
       drawer: SideMenu(
         navigationType: "bottomNavigation",

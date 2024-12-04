@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../AppState/appState.dart';
 import '../tabs/bottom_tabs.dart';
 
 class TabsPage extends StatefulWidget {
@@ -70,6 +72,7 @@ class _TabsPageState extends State<TabsPage> {
 
   @override
   Widget build(BuildContext context) {
+    final appState = Provider.of<AppState>(context);
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(5),
@@ -79,12 +82,6 @@ class _TabsPageState extends State<TabsPage> {
         ),
       ),
       body: Scaffold(
-        onDrawerChanged: (isOpen) {
-          setState(() {
-            _isDrawerOpen = isOpen; // Update drawer state
-            print(isOpen);
-          });
-        },
         body: IndexedStack(
           index: widget.selectedIndex,
           children: [
@@ -92,25 +89,80 @@ class _TabsPageState extends State<TabsPage> {
           ],
         ),
       ),
-      bottomNavigationBar: _isDrawerOpen
+      bottomNavigationBar: appState.isDrawerOpen
           ? null
           : BottomNavigationBar(
               type: BottomNavigationBarType.fixed,
               backgroundColor: const Color(0xFF01B4D2),
-              items: const <BottomNavigationBarItem>[
+              items: <BottomNavigationBarItem>[
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.dashboard),
-                  label: '',
+                  icon: Image.asset(
+                    _selectedIndex == 0 && widget.firstInstance == false
+                        ? 'assets/images/bottomNavigationIcons/selectedIcons/dashboard_selected.png' // Selected image
+                        : 'assets/images/bottomNavigationIcons/unselectedIcons/dashboard_unselected.png', // Unselected image
+                    height: 38, // Increase height
+                    fit: BoxFit
+                        .contain, // Ensures the image fits within the specified size
+                  ),
+                  label: 'Dashboard',
                 ),
-                BottomNavigationBarItem(icon: Icon(Icons.dashboard), label: ''),
-                BottomNavigationBarItem(icon: Icon(Icons.dashboard), label: ''),
-                BottomNavigationBarItem(icon: Icon(Icons.dashboard), label: ''),
-                BottomNavigationBarItem(icon: Icon(Icons.dashboard), label: ''),
+                BottomNavigationBarItem(
+                  icon: Image.asset(
+                    _selectedIndex == 1 && widget.firstInstance == false
+                        ? 'assets/images/bottomNavigationIcons/selectedIcons/onsiteJobs_selected.png' // Selected image
+                        : 'assets/images/bottomNavigationIcons/unselectedIcons/onsiteJobs_unselected.png', // Unselected image
+                    height: 38, // Increase height
+                    fit: BoxFit
+                        .contain, // Ensures the image fits within the specified size
+                  ),
+                  label: 'On-site Jobs',
+                ),
+                BottomNavigationBarItem(
+                  icon: Image.asset(
+                    _selectedIndex == 2 && widget.firstInstance == false
+                        ? 'assets/images/bottomNavigationIcons/selectedIcons/clientManagement_selected.png' // Selected image
+                        : 'assets/images/bottomNavigationIcons/unselectedIcons/clientManagement_unselected.png', // Unselected image
+                    height: 38, // Increase height
+                    fit: BoxFit
+                        .contain, // Ensures the image fits within the specified size
+                  ),
+                  label: 'Client M',
+                ),
+                BottomNavigationBarItem(
+                  icon: Image.asset(
+                    _selectedIndex == 3 && widget.firstInstance == false
+                        ? 'assets/images/bottomNavigationIcons/selectedIcons/collectionReports_selected.png' // Selected image
+                        : 'assets/images/bottomNavigationIcons/unselectedIcons/collectionReports_unselected.png', // Unselected image
+                    height: 38, // Increase height
+                    fit: BoxFit
+                        .contain, // Ensures the image fits within the specified size
+                  ),
+                  label: 'Collection R',
+                ),
+                BottomNavigationBarItem(
+                  icon: Image.asset(
+                    _selectedIndex == 4 && widget.firstInstance == false
+                        ? 'assets/images/bottomNavigationIcons/selectedIcons/accounting_selected.png' // Selected image
+                        : 'assets/images/bottomNavigationIcons/unselectedIcons/accounting_unselected.png', // Unselected image
+                    height: 38, // Increase height
+                    fit: BoxFit
+                        .contain, // Ensures the image fits within the specified size
+                  ),
+                  label: 'Accounting',
+                ),
               ],
               currentIndex: _selectedIndex,
               selectedItemColor:
                   widget.firstInstance ? Colors.white : const Color(0xFF005277),
               unselectedItemColor: Colors.white,
+              selectedLabelStyle: const TextStyle(
+                fontSize: 13, // Increase font size for selected label
+                fontWeight: FontWeight.bold, // Make it bold (optional)
+              ),
+              unselectedLabelStyle: const TextStyle(
+                fontSize: 13, // Increase font size for selected label
+                fontWeight: FontWeight.bold, // Make it bold (optional)
+              ),
               onTap: (index) =>
                   _onItemTapped(index, fromBottomNavigation: true),
             ),

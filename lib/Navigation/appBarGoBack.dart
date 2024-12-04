@@ -31,7 +31,7 @@ class AppBarGoBack extends StatelessWidget implements PreferredSizeWidget {
             size: 28,
           ),
           onPressed: () {
-            // Navigate back when pressed
+            // Open the drawer back when pressed
             Scaffold.of(context).openDrawer();
           },
         ),
