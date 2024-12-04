@@ -1,16 +1,41 @@
-# project_code_blue
+# Sample Assist Emergency Callout Management - Project Code Blue
 
-A new Flutter project.
+Briging Oncall ability to Sample Assist Collection Manager Desktop Application.
 
-## Getting Started
+## Project Team
 
-This project is a starting point for a Flutter application.
+### Rusira Senath Liyanage 
+- ### Project Manager 
+- ### Contact - rusira@sampleassist.com
 
-A few resources to get you started if this is your first Flutter project:
+### Jinchen Wang 
+- ### Frontend Lead
+- ### Contact - jinchen.wang@sampleassist.com
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### Jingwei Li 
+- ### Software Engineer 
+- ### Contact - jingwei.Li@sampleassist.com
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Jihoon Lee
+- ### AWS Lead 
+- ### Contact - jihoon.lee@sampleassist.com
+
+### Le Shi
+- ### UI/UX Lead
+- ### Contact - le.shi@sampleassist.com
+
+### Yejie Wang
+- ### Backend Lead 
+- ### Contact - yejie.wang@sampleassist.com
+
+### Yunheng Luo
+- ### Software Engineer
+- ### Contact - yunheng.luo@sampleassist.com
+
+### 
+
+## To Run 
+
+### ```1. flutter pub get```
+
+### ```2. flutter run {mobile_emulator_name}```
