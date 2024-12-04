@@ -10,10 +10,19 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  bool _isDrawerOpen = false; // Track drawer state
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: SideMenu(),
+      onDrawerChanged: (isOpen) {
+        setState(() {
+          _isDrawerOpen = isOpen; // Update drawer state
+          print(isOpen);
+        });
+      },
+      drawer: SideMenu(
+        navigationType: "bottomNavigation",
+      ),
       appBar: const MyAppBar(),
       body: Center(
         child: Text('Home Page'),

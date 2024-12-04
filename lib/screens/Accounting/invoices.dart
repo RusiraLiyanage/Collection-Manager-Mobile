@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_code_blue/Navigation/appBar.dart';
+import 'package:project_code_blue/Navigation/appBarGoBack.dart';
 import 'package:project_code_blue/sidemenu/sidemenu.dart';
 
 class Invoices extends StatelessWidget {
@@ -8,8 +9,10 @@ class Invoices extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: SideMenu(),
-      appBar: MyAppBar(),
+      drawer: SideMenu(
+        navigationType: "subPartNavigation",
+      ),
+      appBar: AppBarGoBack(),
       body: const Center(
         child: Text('Invoices Page'),
       ),

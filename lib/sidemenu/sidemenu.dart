@@ -1,9 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:project_code_blue/screens/Accounting/invoices.dart';
+import 'package:project_code_blue/screens/Accounting/itServices.dart';
+import 'package:project_code_blue/screens/Accounting/licensing.dart';
+import 'package:project_code_blue/screens/Accounting/tests.dart';
+import 'package:project_code_blue/screens/CollectorsCalendar/collectorsCalendar.dart';
+import 'package:project_code_blue/screens/Dashboard/testSampleResults.dart';
+import 'package:project_code_blue/screens/Dashboard/testsProcessed.dart';
+import 'package:project_code_blue/screens/FAQ/faq.dart';
 import 'package:project_code_blue/screens/OnsiteApprovals/onsiteApprovals.dart';
 import 'package:project_code_blue/screens/OnsiteJobs/onSiteJobsHome.dart';
 import '../tabs/tabs_page.dart';
 
 class SideMenu extends StatefulWidget {
+  String navigationType = "";
+  SideMenu({required this.navigationType});
+
   @override
   _SideMenuState createState() => _SideMenuState();
 }
@@ -26,7 +37,8 @@ class _SideMenuState extends State<SideMenu> {
               padding: EdgeInsets.zero, // Adjust vertical padding
               children: [
                 SizedBox(
-                  height: 125,
+                  height:
+                      widget.navigationType == "bottomNavigation" ? 125 : 165,
                   child: DrawerHeader(
                     child: Image(
                       image:
@@ -63,7 +75,9 @@ class _SideMenuState extends State<SideMenu> {
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => TabsPage(selectedIndex: 0)),
+                              builder: (context) => TabsPage(
+                                  selectedIndex: 0,
+                                  navigationMethod: "sidebar")),
                         )
                       },
                     ),
@@ -132,8 +146,9 @@ class _SideMenuState extends State<SideMenu> {
                                 Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) =>
-                                          TabsPage(selectedIndex: 1)),
+                                      builder: (context) => TabsPage(
+                                          selectedIndex: 1,
+                                          navigationMethod: "sidebar")),
                                 ),
                               },
                             ),
@@ -163,8 +178,8 @@ class _SideMenuState extends State<SideMenu> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                          TabsPage(selectedIndex: 2)),
-                                ),
+                                          const TestsProcessed()),
+                                )
                               },
                             ),
                             ListTile(
@@ -189,12 +204,12 @@ class _SideMenuState extends State<SideMenu> {
                                 ),
                               ),
                               onTap: () => {
-                                Navigator.pushReplacement(
+                                Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                          TabsPage(selectedIndex: 3)),
-                                ),
+                                          const TestSampleResults()),
+                                )
                               },
                             ),
                           ]),
@@ -236,7 +251,10 @@ class _SideMenuState extends State<SideMenu> {
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => TabsPage(selectedIndex: 2)),
+                              builder: (context) => TabsPage(
+                                  selectedIndex: 1,
+                                  navigationMethod:
+                                      "special_case")), // In here, inside tabs_page it is conditionally monitored
                         ),
                       },
                     ),
@@ -274,10 +292,10 @@ class _SideMenuState extends State<SideMenu> {
                         ),
                       ),
                       onTap: () => {
-                        Navigator.push(
+                        Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => OnsiteApprovals()),
+                              builder: (context) => const OnsiteApprovals()),
                         )
                       },
                     ),
@@ -318,7 +336,9 @@ class _SideMenuState extends State<SideMenu> {
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => TabsPage(selectedIndex: 3)),
+                              builder: (context) => TabsPage(
+                                  selectedIndex: 2,
+                                  navigationMethod: "sidebar")),
                         ),
                       },
                     ),
@@ -387,8 +407,9 @@ class _SideMenuState extends State<SideMenu> {
                               Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) =>
-                                        TabsPage(selectedIndex: 5)),
+                                    builder: (context) => TabsPage(
+                                        selectedIndex: 4,
+                                        navigationMethod: "sidebar")),
                               ),
                             },
                           ),
@@ -414,12 +435,11 @@ class _SideMenuState extends State<SideMenu> {
                               ),
                             ),
                             onTap: () => {
-                              Navigator.pushReplacement(
+                              Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) =>
-                                        TabsPage(selectedIndex: 6)),
-                              ),
+                                    builder: (context) => Tests()),
+                              )
                             },
                           ),
                           ListTile(
@@ -444,12 +464,11 @@ class _SideMenuState extends State<SideMenu> {
                               ),
                             ),
                             onTap: () => {
-                              Navigator.pushReplacement(
+                              Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) =>
-                                        TabsPage(selectedIndex: 7)),
-                              ),
+                                    builder: (context) => const Licensing()),
+                              )
                             },
                           ),
                           ListTile(
@@ -474,12 +493,11 @@ class _SideMenuState extends State<SideMenu> {
                               ),
                             ),
                             onTap: () => {
-                              Navigator.pushReplacement(
+                              Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) =>
-                                        TabsPage(selectedIndex: 8)),
-                              ),
+                                    builder: (context) => const ITServices()),
+                              )
                             },
                           ),
                           ListTile(
@@ -504,12 +522,11 @@ class _SideMenuState extends State<SideMenu> {
                               ),
                             ),
                             onTap: () => {
-                              Navigator.pushReplacement(
+                              Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) =>
-                                        TabsPage(selectedIndex: 9)),
-                              ),
+                                    builder: (context) => const Invoices()),
+                              )
                             },
                           ),
                         ],
@@ -552,7 +569,9 @@ class _SideMenuState extends State<SideMenu> {
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => TabsPage(selectedIndex: 4)),
+                              builder: (context) => TabsPage(
+                                  selectedIndex: 3,
+                                  navigationMethod: "sidebar")),
                         ),
                       },
                     ),
@@ -590,12 +609,11 @@ class _SideMenuState extends State<SideMenu> {
                         ),
                       ),
                       onTap: () => {
-                        Navigator.pushReplacement(
+                        Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) =>
-                                  TabsPage(selectedIndex: 11)),
-                        ),
+                              builder: (context) => const CollectorsCalendar()),
+                        )
                       },
                     ),
                     Padding(
@@ -638,12 +656,10 @@ class _SideMenuState extends State<SideMenu> {
                         ),
                       ),
                       onTap: () => {
-                        Navigator.pushReplacement(
+                        Navigator.push(
                           context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  TabsPage(selectedIndex: 12)),
-                        ),
+                          MaterialPageRoute(builder: (context) => const FAQ()),
+                        )
                       },
                     ),
                     Padding(

@@ -13,7 +13,9 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: SideMenu(),
+      drawer: SideMenu(
+        navigationType: "bottomNavigation",
+      ),
       appBar: MyAppBar(),
       body: Center(
         child: Text('Onsite Jobs Home Page'),

@@ -9,8 +9,11 @@ class OnsiteApprovals extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: SideMenu(
+        navigationType: "subPartNavigation",
+      ),
       appBar: AppBarGoBack(),
-      body: const Center(
+      body: Center(
         child: Text('Onsite Approvals Page'),
       ),
     );

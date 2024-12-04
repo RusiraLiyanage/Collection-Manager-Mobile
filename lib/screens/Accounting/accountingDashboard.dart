@@ -8,7 +8,9 @@ class AccountingDashboard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: SideMenu(),
+      drawer: SideMenu(
+        navigationType: "bottomNavigation",
+      ),
       appBar: MyAppBar(),
       body: const Center(
         child: Text('Accounting Dashboard Page'),
