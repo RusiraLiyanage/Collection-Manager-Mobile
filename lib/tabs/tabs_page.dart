@@ -61,7 +61,6 @@ class _TabsPageState extends State<TabsPage> {
 
   @override
   void initState() {
-    print("its called");
     if (widget.selectedIndex == 0) {
       widget.firstInstance = true;
     } else {
@@ -89,7 +88,7 @@ class _TabsPageState extends State<TabsPage> {
           ],
         ),
       ),
-      bottomNavigationBar: appState.isDrawerOpen
+      bottomNavigationBar: appState.isDrawerOpen || widget.selectedIndex == 0
           ? null
           : BottomNavigationBar(
               type: BottomNavigationBarType.fixed,

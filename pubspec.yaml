@@ -75,6 +75,9 @@ flutter:
     - assets/images/icons/faq.png
     - assets/images/icons/sectionIcon.png
     - assets/images/icons/faq.png
+    - assets/images/icons/splash_icon.png
+    - assets/images/icons/poweredBy_SA_splash.png
+    - assets/images/icons/splash_icon_double.png
     - assets/images/bottomNavigationIcons/selectedIcons/dashboard_selected.png
     - assets/images/bottomNavigationIcons/selectedIcons/onsiteJobs_selected.png
     - assets/images/bottomNavigationIcons/selectedIcons/clientManagement_selected.png

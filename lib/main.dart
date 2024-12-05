@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_code_blue/SplashScreen/splashScreen.dart';
 import 'package:provider/provider.dart';
 import './AppState/appState.dart';
 import 'package:project_code_blue/tabs/tabs_page.dart';
@@ -21,10 +22,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(
           scaffoldBackgroundColor: Colors.white, primaryColor: Colors.white),
-      home: TabsPage(
-        selectedIndex: 0,
-        navigationMethod: "app_startup",
-      ),
+      home: const SplashScreen(),
       debugShowCheckedModeBanner: false,
     );
   }
