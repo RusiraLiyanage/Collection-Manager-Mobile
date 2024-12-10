@@ -14,7 +14,7 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
 
     // Navigate to TabsPage after 3 seconds
-    Future.delayed(const Duration(seconds: 5), () {
+    Future.delayed(const Duration(seconds: 3), () {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
@@ -47,8 +47,8 @@ class _SplashScreenState extends State<SplashScreen> {
             // Main Logo
             Center(
               child: Image.asset(
-                'assets/images/icons/splash_icon_double.png', // Replace with your logo image path
-                height: 150, // Adjust size as needed
+                'assets/images/icons/splash_icon_double.png',
+                height: 120, // Adjust size as needed
                 fit: BoxFit.contain,
               ),
             ),
@@ -60,7 +60,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   bottom: 20,
                 ),
                 child: Image.asset(
-                  'assets/images/icons/poweredBy_SA_splash.png', // Replace with your "Powered by" image path
+                  'assets/images/icons/poweredBy_SA_splash.png',
                   height: 40, // Adjust size as needed
                   fit: BoxFit.contain,
                 ),
