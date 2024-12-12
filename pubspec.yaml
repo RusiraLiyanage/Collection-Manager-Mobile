@@ -77,6 +77,9 @@ flutter:
     - assets/images/icons/poweredBy_SA_splash.png
     - assets/images/icons/splash_icon_double.png
     - assets/images/icons/Powered by 2.png
+    - assets/images/icons/refresh_icon.png
+    - assets/images/icons/newJob_icon.png
+    - assets/images/icons/newCallOutJob_icon.png
     - assets/images/backgrounds/home-page-background.jpg
     - assets/images/bottomNavigationIcons/selectedIcons/dashboard_selected.png
     - assets/images/bottomNavigationIcons/selectedIcons/onsiteJobs_selected.png
@@ -89,7 +92,13 @@ flutter:
     - assets/images/bottomNavigationIcons/unselectedIcons/collectionReports_unselected.png
     - assets/images/bottomNavigationIcons/unselectedIcons/accounting_unselected.png
     - assets/images/welcomeBackIcons/welcomeBack_dashboard.png
-
+    - assets/images/welcomeBackIcons/welcomeBack_onSiteJobs.png
+    - assets/images/welcomeBackIcons/welcomeBack_onSiteApprovals.png
+    - assets/images/welcomeBackIcons/welcomeBack_clientManagement.png
+    - assets/images/welcomeBackIcons/welcomeBack_accounting.png
+    - assets/images/welcomeBackIcons/welcomeBack_collectionReports.png
+    - assets/images/welcomeBackIcons/welcomeBack_collectorsCalendar.png
+    - assets/images/welcomeBackIcons/welcomeBack_faq.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 

@@ -9,6 +9,7 @@ import 'package:project_code_blue/screens/CollectionReports/collectionReports.da
 import 'package:project_code_blue/screens/CollectorsCalendar/collectorsCalendar.dart';
 import 'package:project_code_blue/screens/Dashboard/testSampleResults.dart';
 import 'package:project_code_blue/screens/Dashboard/testsProcessed.dart';
+import 'package:project_code_blue/screens/HomeBottomApproach/homePage.dart';
 import 'package:project_code_blue/screens/OnsiteApprovals/onsiteApprovals.dart';
 import '../screens/home.dart';
 import '../screens/Dashboard/DashboardHome.dart';
@@ -24,7 +25,7 @@ class TabNavigationItem {
 
   static List<TabNavigationItem> get items => [
         TabNavigationItem(
-          page: const Home(),
+          page: const HomePage(),
           icon: Icon(Icons.home),
           title: Text("Home"),
         ),
