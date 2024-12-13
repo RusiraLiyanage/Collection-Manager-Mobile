@@ -12,9 +12,34 @@ class OnsiteJobsHome extends StatefulWidget {
 }
 
 class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
+  final List<String> items = [
+    "Newcastle City",
+    "Sydney Office",
+    "Melbourne Branch",
+  ]; // Example items list
+  String? _selectedValue;
+
+  final List<String> clients = [
+    "New Castle City Council",
+    "Wollongong City Council",
+    "Transport for New South Wales",
+  ]; // Example items list
+  String? _selectedClient;
+
+  final List<String> status = ["Show", "Hide"];
+  String? _selectedStatus; // State variable for selected value
+  @override
+  void initState() {
+    super.initState();
+    _selectedValue = items.first;
+    _selectedClient = clients.first;
+    _selectedStatus = status.first; // Initialize selected value
+  }
+
   @override
   Widget build(BuildContext context) {
     final appState = Provider.of<AppState>(context, listen: false);
+
     return Scaffold(
         onDrawerChanged: (isOpen) {
           appState.setDrawerState(isOpen); // Update global drawer state
@@ -104,10 +129,352 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
                         ),
                       ],
                     ),
-                  )
+                  ),
                 ],
               ),
-            )
+            ),
+            Container(
+              width: double.infinity,
+              height: 200,
+              color: Color(0xFF01B4D2).withOpacity(0.5),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8.0, top: 8.0),
+                    child: Text(
+                      "Filters",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                    child: Divider(
+                      color: Color(0xFF0047B3),
+                      thickness: 2,
+                    ),
+                  ),
+                  SizedBox(
+                    width: 3,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                    child: Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(right: 8.0),
+                          child: Text(
+                            "Service Office",
+                            style: TextStyle(
+                              color: Color(0xFF005277),
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        Container(
+                          width: 169,
+                          height: 28,
+                          child: DropdownButtonFormField<String>(
+                            value: _selectedValue,
+                            decoration: InputDecoration(
+                              contentPadding: const EdgeInsets.symmetric(
+                                  horizontal: 8, vertical: 4),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8),
+                                borderSide:
+                                    BorderSide(color: Colors.grey, width: 2),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8),
+                                borderSide: BorderSide(
+                                    color: Colors.grey,
+                                    width: 2), // Border color when focused
+                              ),
+                              fillColor: Colors
+                                  .white, // Set the background color to white
+                              filled: true,
+                            ),
+                            icon: Icon(Icons.arrow_drop_down,
+                                color: Colors.black),
+                            items: items
+                                .map((item) => DropdownMenuItem(
+                                      value: item,
+                                      child: Text(
+                                        item,
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          color: Color(0xFF007AFF),
+                                        ),
+                                      ),
+                                    ))
+                                .toList(),
+                            onChanged: (value) {
+                              setState(() {
+                                _selectedValue = value;
+                              });
+                            },
+                          ),
+                        ),
+                        SizedBox(
+                          height: 3,
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                    child: Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(right: 60.0),
+                          child: Text(
+                            "Client",
+                            style: TextStyle(
+                              color: Color(0xFF005277),
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        Container(
+                          width: 240,
+                          height: 28,
+                          child: DropdownButtonFormField<String>(
+                            focusColor: Colors.white,
+                            value: _selectedClient,
+                            decoration: InputDecoration(
+                              contentPadding: const EdgeInsets.symmetric(
+                                  horizontal: 8, vertical: 4),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8),
+                                borderSide:
+                                    BorderSide(color: Colors.grey, width: 2),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8),
+                                borderSide: BorderSide(
+                                    color: Colors.grey,
+                                    width: 2), // Border colo
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8),
+                                borderSide: BorderSide(
+                                    color: Colors.grey,
+                                    width: 2), // Border color when focused
+                              ),
+                              fillColor: Colors
+                                  .white, // Set the background color to white
+                              filled: true,
+                              // Enable the fill color
+                            ),
+                            icon: Icon(Icons.arrow_drop_down,
+                                color: Colors.black),
+                            items: clients
+                                .map((item) => DropdownMenuItem(
+                                      value: item,
+                                      child: Text(
+                                        item,
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          color: Color(0xFF007AFF),
+                                        ),
+                                      ),
+                                    ))
+                                .toList(),
+                            onChanged: (value) {
+                              setState(() {
+                                _selectedClient = value;
+                              });
+                            },
+                          ),
+                        ),
+                        SizedBox(
+                          height: 5,
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                    child: Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(right: 70.0),
+                          child: Text(
+                            "Date",
+                            style: TextStyle(
+                              color: Color(0xFF005277),
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        Container(
+                          width: 100,
+                          height: 28,
+                          child: TextField(
+                            decoration: InputDecoration(
+                              contentPadding: const EdgeInsets.symmetric(
+                                  horizontal: 8, vertical: 4),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8),
+                                borderSide: BorderSide(
+                                    color: Colors.grey,
+                                    width: 2), // Default border with thickness
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8),
+                                borderSide: BorderSide(
+                                    color: Colors.grey,
+                                    width: 3), // Border color when enabled
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8),
+                                borderSide: BorderSide(
+                                    color: Colors.grey,
+                                    width: 3), // Border color when focused
+                              ),
+                              fillColor: Colors.white,
+                              filled: true,
+                              hintText: 'Start', // Placeholder text
+                              hintStyle: TextStyle(
+                                color: Color(0xFF007AFF),
+                              ), // Style for the hint text
+                            ),
+                            style: TextStyle(
+                                fontSize: 14), // Text style for the input text
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 10.0),
+                          child: Container(
+                            width: 100,
+                            height: 28,
+                            child: TextField(
+                              decoration: InputDecoration(
+                                contentPadding: const EdgeInsets.symmetric(
+                                    horizontal: 8, vertical: 4),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                  borderSide: BorderSide(
+                                      color: Colors.grey,
+                                      width:
+                                          2), // Default border with thickness
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                  borderSide: BorderSide(
+                                      color: Colors.grey,
+                                      width: 3), // Border color when enabled
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                  borderSide: BorderSide(
+                                      color: Colors.grey,
+                                      width: 3), // Border color when focused
+                                ),
+                                fillColor: Colors.white,
+                                filled: true,
+                                hintText: 'Ends', // Placeholder text
+                                hintStyle: TextStyle(
+                                  color: Color(0xFF007AFF),
+                                ), // Style for the hint text
+                              ),
+                              style: TextStyle(
+                                  fontSize:
+                                      14), // Text style for the input text
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                    child: Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(right: 60.0),
+                          child: Text(
+                            "Status",
+                            style: TextStyle(
+                              color: Color(0xFF005277),
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        Container(
+                          width: 100,
+                          height: 28,
+                          child: DropdownButtonFormField<String>(
+                            focusColor: Colors.white,
+                            value: _selectedStatus,
+                            decoration: InputDecoration(
+                              contentPadding: const EdgeInsets.symmetric(
+                                  horizontal: 8, vertical: 4),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8),
+                                borderSide:
+                                    BorderSide(color: Colors.grey, width: 2),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8),
+                                borderSide: BorderSide(
+                                    color: Colors.grey,
+                                    width: 2), // Border colo
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8),
+                                borderSide: BorderSide(
+                                    color: Colors.grey,
+                                    width: 2), // Border color when focused
+                              ),
+                              fillColor: Colors
+                                  .white, // Set the background color to white
+                              filled: true,
+                              // Enable the fill color
+                            ),
+                            icon: Icon(Icons.arrow_drop_down,
+                                color: Colors.black),
+                            items: status
+                                .map((item) => DropdownMenuItem(
+                                      value: item,
+                                      child: Text(
+                                        item,
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          color: Color(0xFF007AFF),
+                                        ),
+                                      ),
+                                    ))
+                                .toList(),
+                            onChanged: (value) {
+                              setState(() {
+                                _selectedStatus = value;
+                              });
+                            },
+                          ),
+                        ),
+                        SizedBox(
+                          height: 5,
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ],
         ));
   }

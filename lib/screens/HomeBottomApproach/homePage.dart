@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:project_code_blue/AppState/appState.dart';
 import 'package:project_code_blue/Navigation/appBar.dart';
+import 'package:project_code_blue/screens/CollectorsCalendar/collectorsCalendar.dart';
+import 'package:project_code_blue/screens/FAQ/faq.dart';
+import 'package:project_code_blue/screens/OnsiteApprovals/onsiteApprovals.dart';
 import 'package:project_code_blue/sidemenu/sidemenu.dart';
+import 'package:project_code_blue/tabs/tabs_page.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -105,7 +109,7 @@ class _HomePageState extends State<HomePage> {
                               _buildMenuItem(
                                 iconPath:
                                     'assets/images/welcomeBackIcons/welcomeBack_onSiteApprovals.png',
-                                title: 'On-Site Approvals',
+                                title: 'On-site Approvals',
                               ),
                               _buildDivider(),
                               _buildMenuItem(
@@ -172,13 +176,76 @@ class _HomePageState extends State<HomePage> {
             fit: BoxFit.contain,
           ),
           const SizedBox(width: 16),
-          Text(
-            title,
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 16,
-              color: Color(0xFF1A576F),
+          GestureDetector(
+            child: Text(
+              title,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 16,
+                color: Color(0xFF1A576F),
+              ),
             ),
+            onTap: () {
+              if (title == "Dashboard") {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        TabsPage(selectedIndex: 1, navigationMethod: "sidebar"),
+                  ),
+                );
+              } else if (title == "On-site Jobs") {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => TabsPage(
+                          selectedIndex: 1,
+                          navigationMethod:
+                              "special_case")), // In here, inside tabs_page it is conditionally monitored
+                );
+              } else if (title == "On-site Approvals") {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const OnsiteApprovals(),
+                  ),
+                );
+              } else if (title == "Client Management") {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => TabsPage(
+                          selectedIndex: 2, navigationMethod: "sidebar")),
+                );
+              } else if (title == "Accounting") {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => TabsPage(
+                          selectedIndex: 4, navigationMethod: "sidebar")),
+                );
+              } else if (title == "Collection Reports") {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => TabsPage(
+                          selectedIndex: 3, navigationMethod: "sidebar")),
+                );
+              } else if (title == "Collector’s Calendar") {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const CollectorsCalendar()),
+                );
+              } else if (title == "FAQ") {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const FAQ(),
+                  ),
+                );
+              }
+            },
           ),
         ],
       ),
