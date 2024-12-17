@@ -162,9 +162,9 @@ class _TabsPageState extends State<TabsPage> {
                 fontSize: 13, // Increase font size for selected label
                 fontWeight: FontWeight.bold, // Make it bold (optional)
               ),
-              onTap: (index) =>
-                  _onItemTapped(index, fromBottomNavigation: true),
-            ),
+              onTap: (index) {
+                _onItemTapped(index, fromBottomNavigation: true);
+              }),
     );
   }
 }

@@ -22,6 +22,328 @@ class SideMenu extends StatefulWidget {
 }
 
 class _SideMenuState extends State<SideMenu> {
+  bool home = false;
+  bool dashboard = false;
+  bool dashboardHome = false;
+  bool testsProcessed = false;
+  bool testSampleResults = false;
+  bool onSiteJobs = false;
+  bool onSiteApprovals = false;
+  bool clientManagement = false;
+  bool accounting = false;
+  bool accountingDashboard = false;
+  bool tests = false;
+  bool licensing = false;
+  bool itServices = false;
+  bool invoices = false;
+  bool collectionReports = false;
+  bool collectorsCalendar = false;
+  bool faq = false;
+
+  void _updateSideBarColor({required String labelType}) {
+    if (labelType == "home") {
+      setState(() {
+        home = true;
+        dashboard = false;
+        dashboardHome = false;
+        testsProcessed = false;
+        testSampleResults = false;
+        onSiteJobs = false;
+        onSiteApprovals = false;
+        clientManagement = false;
+        accounting = false;
+        accountingDashboard = false;
+        tests = false;
+        licensing = false;
+        itServices = false;
+        invoices = false;
+        collectionReports = false;
+        collectorsCalendar = false;
+        faq = false;
+      });
+    } else if (labelType == "dashboardHome") {
+      setState(() {
+        home = false;
+        dashboard = true;
+        dashboardHome = true;
+        testsProcessed = false;
+        testSampleResults = false;
+        onSiteJobs = false;
+        onSiteApprovals = false;
+        clientManagement = false;
+        accounting = false;
+        accountingDashboard = false;
+        tests = false;
+        licensing = false;
+        itServices = false;
+        invoices = false;
+        collectionReports = false;
+        collectorsCalendar = false;
+        faq = false;
+      });
+    } else if (labelType == "testsProcessed") {
+      setState(() {
+        home = false;
+        dashboard = false;
+        dashboardHome = false;
+        testsProcessed = true;
+        testSampleResults = false;
+        onSiteJobs = false;
+        onSiteApprovals = false;
+        clientManagement = false;
+        accounting = false;
+        accountingDashboard = false;
+        tests = false;
+        licensing = false;
+        itServices = false;
+        invoices = false;
+        collectionReports = false;
+        collectorsCalendar = false;
+        faq = false;
+      });
+    } else if (labelType == "testSampleResults") {
+      setState(() {
+        home = false;
+        dashboard = false;
+        dashboardHome = false;
+        testsProcessed = false;
+        testSampleResults = true;
+        onSiteJobs = false;
+        onSiteApprovals = false;
+        clientManagement = false;
+        accounting = false;
+        accountingDashboard = false;
+        tests = false;
+        licensing = false;
+        itServices = false;
+        invoices = false;
+        collectionReports = false;
+        collectorsCalendar = false;
+        faq = false;
+      });
+    } else if (labelType == "onSiteJobs") {
+      setState(() {
+        home = false;
+        dashboard = false;
+        dashboardHome = false;
+        testsProcessed = false;
+        testSampleResults = false;
+        onSiteJobs = true;
+        onSiteApprovals = false;
+        clientManagement = false;
+        accounting = false;
+        accountingDashboard = false;
+        tests = false;
+        licensing = false;
+        itServices = false;
+        invoices = false;
+        collectionReports = false;
+        collectorsCalendar = false;
+        faq = false;
+      });
+    } else if (labelType == "onSiteApprovals") {
+      setState(() {
+        home = false;
+        dashboard = false;
+        dashboardHome = false;
+        testsProcessed = false;
+        testSampleResults = false;
+        onSiteJobs = false;
+        onSiteApprovals = true;
+        clientManagement = false;
+        accounting = false;
+        accountingDashboard = false;
+        tests = false;
+        licensing = false;
+        itServices = false;
+        invoices = false;
+        collectionReports = false;
+        collectorsCalendar = false;
+        faq = false;
+      });
+    } else if (labelType == "clientManagement") {
+      setState(() {
+        home = false;
+        dashboard = false;
+        dashboardHome = false;
+        testsProcessed = false;
+        testSampleResults = false;
+        onSiteJobs = false;
+        onSiteApprovals = false;
+        clientManagement = true;
+        accounting = false;
+        accountingDashboard = false;
+        tests = false;
+        licensing = false;
+        itServices = false;
+        invoices = false;
+        collectionReports = false;
+        collectorsCalendar = false;
+        faq = false;
+      });
+    } else if (labelType == "accountingDashboard") {
+      setState(() {
+        home = false;
+        dashboard = false;
+        dashboardHome = false;
+        testsProcessed = false;
+        testSampleResults = false;
+        onSiteJobs = false;
+        onSiteApprovals = false;
+        clientManagement = false;
+        accounting = true;
+        accountingDashboard = true;
+        tests = false;
+        licensing = false;
+        itServices = false;
+        invoices = false;
+        collectionReports = false;
+        collectorsCalendar = false;
+        faq = false;
+      });
+    } else if (labelType == "tests") {
+      setState(() {
+        home = false;
+        dashboard = false;
+        dashboardHome = false;
+        testsProcessed = false;
+        testSampleResults = false;
+        onSiteJobs = false;
+        onSiteApprovals = false;
+        clientManagement = false;
+        accounting = true;
+        accountingDashboard = false;
+        tests = true;
+        licensing = false;
+        itServices = false;
+        invoices = false;
+        collectionReports = false;
+        collectorsCalendar = false;
+        faq = false;
+      });
+    } else if (labelType == "licensing") {
+      setState(() {
+        home = false;
+        dashboard = false;
+        dashboardHome = false;
+        testsProcessed = false;
+        testSampleResults = false;
+        onSiteJobs = false;
+        onSiteApprovals = false;
+        clientManagement = false;
+        accounting = true;
+        accountingDashboard = false;
+        tests = false;
+        licensing = true;
+        itServices = false;
+        invoices = false;
+        collectionReports = false;
+        collectorsCalendar = false;
+        faq = false;
+      });
+    } else if (labelType == "itServices") {
+      setState(() {
+        home = false;
+        dashboard = false;
+        dashboardHome = false;
+        testsProcessed = false;
+        testSampleResults = false;
+        onSiteJobs = false;
+        onSiteApprovals = false;
+        clientManagement = false;
+        accounting = true;
+        accountingDashboard = false;
+        tests = false;
+        licensing = false;
+        itServices = true;
+        invoices = false;
+        collectionReports = false;
+        collectorsCalendar = false;
+        faq = false;
+      });
+    } else if (labelType == "invoices") {
+      setState(() {
+        home = false;
+        dashboard = false;
+        dashboardHome = false;
+        testsProcessed = false;
+        testSampleResults = false;
+        onSiteJobs = false;
+        onSiteApprovals = false;
+        clientManagement = false;
+        accounting = true;
+        accountingDashboard = false;
+        tests = false;
+        licensing = false;
+        itServices = false;
+        invoices = true;
+        collectionReports = false;
+        collectorsCalendar = false;
+        faq = false;
+      });
+    } else if (labelType == "collectionReports") {
+      setState(() {
+        home = false;
+        dashboard = true;
+        dashboardHome = false;
+        testsProcessed = false;
+        testSampleResults = false;
+        onSiteJobs = false;
+        onSiteApprovals = false;
+        clientManagement = false;
+        accounting = false;
+        accountingDashboard = false;
+        tests = false;
+        licensing = false;
+        itServices = false;
+        invoices = false;
+        collectionReports = true;
+        collectorsCalendar = false;
+        faq = false;
+      });
+    } else if (labelType == "collectorsCalendar") {
+      setState(() {
+        home = false;
+        dashboard = false;
+        dashboardHome = false;
+        testsProcessed = false;
+        testSampleResults = false;
+        onSiteJobs = false;
+        onSiteApprovals = false;
+        clientManagement = false;
+        accounting = false;
+        accountingDashboard = false;
+        tests = false;
+        licensing = false;
+        itServices = false;
+        invoices = false;
+        collectionReports = false;
+        collectorsCalendar = true;
+        faq = false;
+      });
+    } else if (labelType == "faq") {
+      setState(() {
+        home = false;
+        dashboard = false;
+        dashboardHome = false;
+        testsProcessed = false;
+        testSampleResults = false;
+        onSiteJobs = false;
+        onSiteApprovals = false;
+        clientManagement = false;
+        accounting = false;
+        accountingDashboard = false;
+        tests = false;
+        licensing = false;
+        itServices = false;
+        invoices = false;
+        collectionReports = false;
+        collectorsCalendar = false;
+        faq = true;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final appState = Provider.of<AppState>(context, listen: false);
@@ -61,22 +383,36 @@ class _SideMenuState extends State<SideMenu> {
                       leading: ImageIcon(
                         AssetImage(
                             'assets/images/icons/home.png'), // Path to your image asset
-                        color: Color(0xFF1A576F), // Optional: Adjust icon color
+                        color: home
+                            ? const Color(0xFF01B4D2)
+                            : const Color(
+                                0xFF1A576F), // Optional: Adjust icon color
                         size: 32, // Optional: Adjust icon size
                       ),
                       title: Align(
                         alignment: Alignment(-1.1, 0),
-                        child: const Text(
+                        child: Text(
                           'Home',
                           style: TextStyle(
-                              color: Color(0xFF1A576F),
+                              color: home
+                                  ? const Color(0xFF01B4D2)
+                                  : const Color(0xFF1A576F),
                               fontWeight: FontWeight.bold,
                               fontSize: 16),
                         ),
                       ),
                       onTap: () => {
                         appState.setDrawerState(false),
-                        Navigator.pushReplacement(
+                        appState.setHome(true),
+                        appState.setDashboard(false),
+                        appState.setOnsiteJobs(false),
+                        appState.setOnsiteApprovals(false),
+                        appState.setClientManagement(false),
+                        appState.setCollectionReports(false),
+                        appState.setAccounting(false),
+                        appState.setCollectorsCalendar(false),
+                        _updateSideBarColor(labelType: "home"),
+                        Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) => TabsPage(
@@ -106,20 +442,26 @@ class _SideMenuState extends State<SideMenu> {
                       child: ExpansionTile(
                           dense: true, // Makes ListTile more compact
                           visualDensity: VisualDensity(vertical: -4),
-                          iconColor: Color(0xFF1A576F),
+                          iconColor: appState.isDashboardOpen
+                              ? Color(0xFF01B4D2)
+                              : Color(0xFF1A576F),
                           leading: ImageIcon(
                             AssetImage(
                                 'assets/images/icons/dashboard.png'), // Path to your image asset
-                            color: Color(
-                                0xFF1A576F), // Optional: Adjust icon color
+                            color: appState.isDashboardOpen
+                                ? const Color(0xFF01B4D2)
+                                : const Color(
+                                    0xFF1A576F), // Optional: Adjust icon color
                             size: 32, // Optional: Adjust icon size
                           ),
                           title: Align(
                             alignment: Alignment(-1.1, 0),
-                            child: const Text(
+                            child: Text(
                               'Dashboard',
                               style: TextStyle(
-                                  color: Color(0xFF1A576F),
+                                  color: appState.isDashboardOpen
+                                      ? Color(0xFF01B4D2)
+                                      : Color(0xFF1A576F),
                                   fontWeight: FontWeight.bold,
                                   fontSize: 16),
                             ),
@@ -132,23 +474,29 @@ class _SideMenuState extends State<SideMenu> {
                               leading: ImageIcon(
                                 AssetImage(
                                     'assets/images/icons/sectionIcon.png'), // Path to your image asset
-                                color: Color(
-                                    0xFF1A576F), // Optional: Adjust icon color
+                                color: appState.isDashboardOpen
+                                    ? const Color(0xFF01B4D2)
+                                    : const Color(
+                                        0xFF1A576F), // Optional: Adjust icon color
                                 size: 32, // Optional: Adjust icon size
                               ),
                               title: Align(
                                 alignment: Alignment(-1.1, 0),
-                                child: const Text(
+                                child: Text(
                                   'Dashboard Home',
                                   style: TextStyle(
-                                      color: Color(0xFF1A576F),
+                                      color: appState.isDashboardOpen
+                                          ? Color(0xFF01B4D2)
+                                          : Color(0xFF1A576F),
                                       fontWeight: FontWeight.bold,
                                       fontSize: 16),
                                 ),
                               ),
                               onTap: () => {
                                 appState.setDrawerState(false),
-                                Navigator.pushReplacement(
+                                appState.setDashboard(true),
+                                //_updateSideBarColor(labelType: "dashboardHome"),
+                                Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => TabsPage(
@@ -164,22 +512,26 @@ class _SideMenuState extends State<SideMenu> {
                               leading: ImageIcon(
                                 AssetImage(
                                     'assets/images/icons/sectionIcon.png'), // Path to your image asset
-                                color: Color(
-                                    0xFF1A576F), // Optional: Adjust icon color
+                                color: testsProcessed
+                                    ? const Color(0xFF01B4D2)
+                                    : const Color(
+                                        0xFF1A576F), // Optional: Adjust icon color
                                 size: 32, // Optional: Adjust icon size
                               ),
                               title: Align(
                                 alignment: Alignment(-1.1, 0),
-                                child: const Text(
+                                child: Text(
                                   'Tests Processed',
                                   style: TextStyle(
-                                      color: Color(0xFF1A576F),
+                                      color: testsProcessed
+                                          ? Color(0xFF01B4D2)
+                                          : Color(0xFF1A576F),
                                       fontWeight: FontWeight.bold,
                                       fontSize: 16),
                                 ),
                               ),
                               onTap: () => {
-                                Navigator.pushReplacement(
+                                Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
@@ -194,16 +546,20 @@ class _SideMenuState extends State<SideMenu> {
                               leading: ImageIcon(
                                 AssetImage(
                                     'assets/images/icons/sectionIcon.png'), // Path to your image asset
-                                color: Color(
-                                    0xFF1A576F), // Optional: Adjust icon color
+                                color: testSampleResults
+                                    ? const Color(0xFF01B4D2)
+                                    : const Color(
+                                        0xFF1A576F), // Optional: Adjust icon color
                                 size: 32, // Optional: Adjust icon size
                               ),
                               title: Align(
                                 alignment: Alignment(-1.1, 0),
-                                child: const Text(
+                                child: Text(
                                   'Test Sample Results',
                                   style: TextStyle(
-                                      color: Color(0xFF1A576F),
+                                      color: testSampleResults
+                                          ? Color(0xFF01B4D2)
+                                          : Color(0xFF1A576F),
                                       fontWeight: FontWeight.bold,
                                       fontSize: 16),
                                 ),
@@ -239,22 +595,27 @@ class _SideMenuState extends State<SideMenu> {
                       leading: ImageIcon(
                         AssetImage(
                             'assets/images/icons/onSiteJobs.png'), // Path to your image asset
-                        color: Color(0xFF1A576F), // Optional: Adjust icon color
+                        color: onSiteJobs
+                            ? const Color(0xFF01B4D2)
+                            : const Color(
+                                0xFF1A576F), // Optional: Adjust icon color
                         size: 32, // Optional: Adjust icon size
                       ),
                       title: Align(
                         alignment: Alignment(-1.1, 0),
-                        child: const Text(
+                        child: Text(
                           'On-Site Jobs',
                           style: TextStyle(
-                              color: Color(0xFF1A576F),
+                              color: onSiteJobs
+                                  ? Color(0xFF01B4D2)
+                                  : Color(0xFF1A576F),
                               fontWeight: FontWeight.bold,
                               fontSize: 16),
                         ),
                       ),
                       onTap: () => {
                         appState.setDrawerState(false),
-                        Navigator.pushReplacement(
+                        Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) => TabsPage(
@@ -284,21 +645,26 @@ class _SideMenuState extends State<SideMenu> {
                       leading: ImageIcon(
                         AssetImage(
                             'assets/images/icons/onSiteApprovals.png'), // Path to your image asset
-                        color: Color(0xFF1A576F), // Optional: Adjust icon color
+                        color: onSiteApprovals
+                            ? const Color(0xFF01B4D2)
+                            : const Color(
+                                0xFF1A576F), // Optional: Adjust icon color
                         size: 32, // Optional: Adjust icon size
                       ),
                       title: Align(
                         alignment: Alignment(-1.1, 0),
-                        child: const Text(
+                        child: Text(
                           'On-Site Approvals',
                           style: TextStyle(
-                              color: Color(0xFF1A576F),
+                              color: onSiteApprovals
+                                  ? Color(0xFF01B4D2)
+                                  : Color(0xFF1A576F),
                               fontWeight: FontWeight.bold,
                               fontSize: 16),
                         ),
                       ),
                       onTap: () => {
-                        Navigator.pushReplacement(
+                        Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) => const OnsiteApprovals()),
@@ -325,22 +691,27 @@ class _SideMenuState extends State<SideMenu> {
                       leading: ImageIcon(
                         AssetImage(
                             'assets/images/icons/clientManagement.png'), // Path to your image asset
-                        color: Color(0xFF1A576F), // Optional: Adjust icon color
+                        color: clientManagement
+                            ? const Color(0xFF01B4D2)
+                            : const Color(
+                                0xFF1A576F), // Optional: Adjust icon color
                         size: 32, // Optional: Adjust icon size
                       ),
                       title: Align(
                         alignment: Alignment(-1.1, 0),
-                        child: const Text(
+                        child: Text(
                           'Client Management',
                           style: TextStyle(
-                              color: Color(0xFF1A576F),
+                              color: clientManagement
+                                  ? const Color(0xFF01B4D2)
+                                  : const Color(0xFF1A576F),
                               fontWeight: FontWeight.bold,
                               fontSize: 16),
                         ),
                       ),
                       onTap: () => {
                         appState.setDrawerState(false),
-                        Navigator.pushReplacement(
+                        Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) => TabsPage(
@@ -370,7 +741,9 @@ class _SideMenuState extends State<SideMenu> {
                       child: ExpansionTile(
                         dense: true, // Makes ListTile more compact
                         visualDensity: VisualDensity(vertical: -4),
-                        iconColor: Color(0xFF1A576F),
+                        iconColor: accounting
+                            ? const Color(0xFF01B4D2)
+                            : const Color(0xFF1A576F),
                         leading: ImageIcon(
                           AssetImage(
                               'assets/images/icons/accounting.png'), // Path to your image asset
@@ -380,10 +753,12 @@ class _SideMenuState extends State<SideMenu> {
                         ),
                         title: Align(
                           alignment: Alignment(-1.1, 0),
-                          child: const Text(
+                          child: Text(
                             'Accounting',
                             style: TextStyle(
-                                color: Color(0xFF1A576F),
+                                color: accounting
+                                    ? const Color(0xFF01B4D2)
+                                    : const Color(0xFF1A576F),
                                 fontWeight: FontWeight.bold,
                                 fontSize: 16),
                           ),
@@ -396,23 +771,27 @@ class _SideMenuState extends State<SideMenu> {
                             leading: ImageIcon(
                               AssetImage(
                                   'assets/images/icons/sectionIcon.png'), // Path to your image asset
-                              color: Color(
-                                  0xFF1A576F), // Optional: Adjust icon color
+                              color: accountingDashboard
+                                  ? const Color(0xFF01B4D2)
+                                  : const Color(
+                                      0xFF1A576F), // Optional: Adjust icon color
                               size: 32, // Optional: Adjust icon size
                             ),
                             title: Align(
                               alignment: Alignment(-1.1, 0),
-                              child: const Text(
+                              child: Text(
                                 'Accounting Dashboard',
                                 style: TextStyle(
-                                    color: Color(0xFF1A576F),
+                                    color: accountingDashboard
+                                        ? const Color(0xFF01B4D2)
+                                        : const Color(0xFF1A576F),
                                     fontWeight: FontWeight.bold,
                                     fontSize: 16),
                               ),
                             ),
                             onTap: () => {
                               appState.setDrawerState(false),
-                              Navigator.pushReplacement(
+                              Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => TabsPage(
@@ -428,16 +807,20 @@ class _SideMenuState extends State<SideMenu> {
                             leading: ImageIcon(
                               AssetImage(
                                   'assets/images/icons/sectionIcon.png'), // Path to your image asset
-                              color: Color(
-                                  0xFF1A576F), // Optional: Adjust icon color
+                              color: tests
+                                  ? const Color(0xFF01B4D2)
+                                  : const Color(
+                                      0xFF1A576F), // Optional: Adjust icon color
                               size: 32, // Optional: Adjust icon size
                             ),
                             title: Align(
                               alignment: Alignment(-1.1, 0),
-                              child: const Text(
+                              child: Text(
                                 ' Tests',
                                 style: TextStyle(
-                                    color: Color(0xFF1A576F),
+                                    color: tests
+                                        ? const Color(0xFF01B4D2)
+                                        : const Color(0xFF1A576F),
                                     fontWeight: FontWeight.bold,
                                     fontSize: 16),
                               ),
@@ -457,16 +840,20 @@ class _SideMenuState extends State<SideMenu> {
                             leading: ImageIcon(
                               AssetImage(
                                   'assets/images/icons/sectionIcon.png'), // Path to your image asset
-                              color: Color(
-                                  0xFF1A576F), // Optional: Adjust icon color
+                              color: licensing
+                                  ? const Color(0xFF01B4D2)
+                                  : const Color(
+                                      0xFF1A576F), // Optional: Adjust icon color
                               size: 32, // Optional: Adjust icon size
                             ),
                             title: Align(
                               alignment: Alignment(-1.1, 0),
-                              child: const Text(
+                              child: Text(
                                 ' Licensing',
                                 style: TextStyle(
-                                    color: Color(0xFF1A576F),
+                                    color: licensing
+                                        ? const Color(0xFF01B4D2)
+                                        : const Color(0xFF1A576F),
                                     fontWeight: FontWeight.bold,
                                     fontSize: 16),
                               ),
@@ -486,16 +873,20 @@ class _SideMenuState extends State<SideMenu> {
                             leading: ImageIcon(
                               AssetImage(
                                   'assets/images/icons/sectionIcon.png'), // Path to your image asset
-                              color: Color(
-                                  0xFF1A576F), // Optional: Adjust icon color
+                              color: itServices
+                                  ? const Color(0xFF01B4D2)
+                                  : const Color(
+                                      0xFF1A576F), // Optional: Adjust icon color
                               size: 32, // Optional: Adjust icon size
                             ),
                             title: Align(
                               alignment: Alignment(-1.1, 0),
-                              child: const Text(
+                              child: Text(
                                 ' IT Services',
                                 style: TextStyle(
-                                    color: Color(0xFF1A576F),
+                                    color: itServices
+                                        ? const Color(0xFF01B4D2)
+                                        : const Color(0xFF1A576F),
                                     fontWeight: FontWeight.bold,
                                     fontSize: 16),
                               ),
@@ -515,16 +906,20 @@ class _SideMenuState extends State<SideMenu> {
                             leading: ImageIcon(
                               AssetImage(
                                   'assets/images/icons/sectionIcon.png'), // Path to your image asset
-                              color: Color(
-                                  0xFF1A576F), // Optional: Adjust icon color
+                              color: invoices
+                                  ? const Color(0xFF01B4D2)
+                                  : const Color(
+                                      0xFF1A576F), // Optional: Adjust icon color
                               size: 32, // Optional: Adjust icon size
                             ),
                             title: Align(
                               alignment: Alignment(-1.1, 0),
-                              child: const Text(
+                              child: Text(
                                 ' Invoices',
                                 style: TextStyle(
-                                    color: Color(0xFF1A576F),
+                                    color: invoices
+                                        ? const Color(0xFF01B4D2)
+                                        : const Color(0xFF1A576F),
                                     fontWeight: FontWeight.bold,
                                     fontSize: 16),
                               ),
@@ -560,22 +955,27 @@ class _SideMenuState extends State<SideMenu> {
                       leading: ImageIcon(
                         AssetImage(
                             'assets/images/icons/collectionReports.png'), // Path to your image asset
-                        color: Color(0xFF1A576F), // Optional: Adjust icon color
+                        color: collectionReports
+                            ? const Color(0xFF01B4D2)
+                            : const Color(
+                                0xFF1A576F), // Optional: Adjust icon color
                         size: 32, // Optional: Adjust icon size
                       ),
                       title: Align(
                         alignment: Alignment(-1.1, 0),
-                        child: const Text(
+                        child: Text(
                           'Collection Reports',
                           style: TextStyle(
-                              color: Color(0xFF1A576F),
+                              color: collectionReports
+                                  ? const Color(0xFF01B4D2)
+                                  : const Color(0xFF1A576F),
                               fontWeight: FontWeight.bold,
                               fontSize: 16),
                         ),
                       ),
                       onTap: () => {
                         appState.setDrawerState(false),
-                        Navigator.pushReplacement(
+                        Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) => TabsPage(
@@ -604,15 +1004,20 @@ class _SideMenuState extends State<SideMenu> {
                       leading: ImageIcon(
                         AssetImage(
                             'assets/images/icons/calendar.png'), // Path to your image asset
-                        color: Color(0xFF1A576F), // Optional: Adjust icon color
+                        color: collectorsCalendar
+                            ? const Color(0xFF01B4D2)
+                            : const Color(
+                                0xFF1A576F), // Optional: Adjust icon color
                         size: 32, // Optional: Adjust icon size
                       ),
                       title: Align(
                         alignment: Alignment(-1.1, 0),
-                        child: const Text(
+                        child: Text(
                           'Collector\'s Calendar',
                           style: TextStyle(
-                              color: Color(0xFF1A576F),
+                              color: collectorsCalendar
+                                  ? const Color(0xFF01B4D2)
+                                  : const Color(0xFF1A576F),
                               fontWeight: FontWeight.bold,
                               fontSize: 16),
                         ),
@@ -649,17 +1054,21 @@ class _SideMenuState extends State<SideMenu> {
                             'assets/images/icons/faq.png',
                           ),
                           // Path to your image asset
-                          color:
-                              Color(0xFF1A576F), // Optional: Adjust icon color
+                          color: faq
+                              ? const Color(0xFF01B4D2)
+                              : const Color(
+                                  0xFF1A576F), // Optional: Adjust icon color
                           size: 22, // Optional: Adjust icon size
                         ),
                       ),
                       title: Align(
                         alignment: Alignment(-1.1, 0),
-                        child: const Text(
+                        child: Text(
                           '   FAQ',
                           style: TextStyle(
-                              color: Color(0xFF1A576F),
+                              color: faq
+                                  ? const Color(0xFF01B4D2)
+                                  : const Color(0xFF1A576F),
                               fontWeight: FontWeight.bold,
                               fontSize: 16),
                         ),
