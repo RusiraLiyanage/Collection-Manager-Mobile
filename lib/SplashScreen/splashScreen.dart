@@ -13,8 +13,8 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
 
-    // Navigate to TabsPage after 3 seconds
-    Future.delayed(const Duration(seconds: 3), () {
+    // Navigate to TabsPage after 2 seconds
+    Future.delayed(const Duration(seconds: 2), () {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(

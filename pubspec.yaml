@@ -80,6 +80,9 @@ flutter:
     - assets/images/icons/refresh_icon.png
     - assets/images/icons/newJob_icon.png
     - assets/images/icons/newCallOutJob_icon.png
+    - assets/images/icons/eye_icon.png
+    - assets/images/icons/document_icon.png
+    - assets/images/icons/dafault_icon.png
     - assets/images/backgrounds/home-page-background.jpg
     - assets/images/bottomNavigationIcons/selectedIcons/dashboard_selected.png
     - assets/images/bottomNavigationIcons/selectedIcons/onsiteJobs_selected.png
