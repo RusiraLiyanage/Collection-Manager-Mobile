@@ -32,7 +32,7 @@ class AppState extends ChangeNotifier {
   bool get isAccountingOpen => _isAccounting;
   bool get isAccountingDashboardOpen => _isAccountingDashboard;
   bool get isTestsOpen => _isTests;
-  bool get isLicesingOpen => _isLicensing;
+  bool get isLicensingOpen => _isLicensing;
   bool get isITServicesOpen => _isITServices;
   bool get isInvoicesOpen => _isInvoices;
   bool get isCollectionReportsOpen => _isCollectionReports;
@@ -56,6 +56,21 @@ class AppState extends ChangeNotifier {
     notifyListeners();
   }
 
+  void setDashboardHome(bool isSet) {
+    _isDashboardHome = isSet;
+    notifyListeners();
+  }
+
+  void setTestsProcessed(bool isSet) {
+    _isTestsProcessed = isSet;
+    notifyListeners();
+  }
+
+  void setTestSampleResults(bool isSet) {
+    _isTestSampleResults = isSet;
+    notifyListeners();
+  }
+
   void setOnsiteJobs(bool isSet) {
     _isOnsiteJobs = isSet;
     notifyListeners();
@@ -73,6 +88,31 @@ class AppState extends ChangeNotifier {
 
   void setAccounting(bool isSet) {
     _isAccounting = isSet;
+    notifyListeners();
+  }
+
+  void setAccountingDashboard(bool isSet) {
+    _isAccountingDashboard = isSet;
+    notifyListeners();
+  }
+
+  void setTests(bool isSet) {
+    _isTests = isSet;
+    notifyListeners();
+  }
+
+  void setLicensing(bool isSet) {
+    _isLicensing = isSet;
+    notifyListeners();
+  }
+
+  void setITServices(bool isSet) {
+    _isITServices = isSet;
+    notifyListeners();
+  }
+
+  void setInvoices(bool isSet) {
+    _isInvoices = isSet;
     notifyListeners();
   }
 

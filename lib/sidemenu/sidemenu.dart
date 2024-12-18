@@ -383,10 +383,9 @@ class _SideMenuState extends State<SideMenu> {
                       leading: ImageIcon(
                         AssetImage(
                             'assets/images/icons/home.png'), // Path to your image asset
-                        color: home
-                            ? const Color(0xFF01B4D2)
-                            : const Color(
-                                0xFF1A576F), // Optional: Adjust icon color
+                        color: appState.isHomeOpen
+                            ? Color(0xFF01B4D2)
+                            : Color(0xFF1A576F), // Optional: Adjust icon color
                         size: 32, // Optional: Adjust icon size
                       ),
                       title: Align(
@@ -394,9 +393,9 @@ class _SideMenuState extends State<SideMenu> {
                         child: Text(
                           'Home',
                           style: TextStyle(
-                              color: home
-                                  ? const Color(0xFF01B4D2)
-                                  : const Color(0xFF1A576F),
+                              color: appState.isHomeOpen
+                                  ? Color(0xFF01B4D2)
+                                  : Color(0xFF1A576F),
                               fontWeight: FontWeight.bold,
                               fontSize: 16),
                         ),
@@ -405,13 +404,22 @@ class _SideMenuState extends State<SideMenu> {
                         appState.setDrawerState(false),
                         appState.setHome(true),
                         appState.setDashboard(false),
+                        appState.setDashboardHome(false),
+                        appState.setTestsProcessed(false),
+                        appState.setTestSampleResults(false),
                         appState.setOnsiteJobs(false),
                         appState.setOnsiteApprovals(false),
                         appState.setClientManagement(false),
                         appState.setCollectionReports(false),
                         appState.setAccounting(false),
+                        appState.setAccountingDashboard(false),
+                        appState.setTests(false),
+                        appState.setLicensing(false),
+                        appState.setITServices(false),
+                        appState.setInvoices(false),
                         appState.setCollectorsCalendar(false),
-                        _updateSideBarColor(labelType: "home"),
+                        appState.setFAQ(false),
+                        //_updateSideBarColor(labelType: "home"),
                         Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -474,7 +482,7 @@ class _SideMenuState extends State<SideMenu> {
                               leading: ImageIcon(
                                 AssetImage(
                                     'assets/images/icons/sectionIcon.png'), // Path to your image asset
-                                color: appState.isDashboardOpen
+                                color: appState.isDashboardHomeOpen
                                     ? const Color(0xFF01B4D2)
                                     : const Color(
                                         0xFF1A576F), // Optional: Adjust icon color
@@ -485,7 +493,7 @@ class _SideMenuState extends State<SideMenu> {
                                 child: Text(
                                   'Dashboard Home',
                                   style: TextStyle(
-                                      color: appState.isDashboardOpen
+                                      color: appState.isDashboardHomeOpen
                                           ? Color(0xFF01B4D2)
                                           : Color(0xFF1A576F),
                                       fontWeight: FontWeight.bold,
@@ -494,7 +502,24 @@ class _SideMenuState extends State<SideMenu> {
                               ),
                               onTap: () => {
                                 appState.setDrawerState(false),
+                                appState.setDrawerState(false),
+                                appState.setHome(false),
                                 appState.setDashboard(true),
+                                appState.setDashboardHome(true),
+                                appState.setTestsProcessed(false),
+                                appState.setTestSampleResults(false),
+                                appState.setOnsiteJobs(false),
+                                appState.setOnsiteApprovals(false),
+                                appState.setClientManagement(false),
+                                appState.setCollectionReports(false),
+                                appState.setAccounting(false),
+                                appState.setAccountingDashboard(false),
+                                appState.setTests(false),
+                                appState.setLicensing(false),
+                                appState.setITServices(false),
+                                appState.setInvoices(false),
+                                appState.setCollectorsCalendar(false),
+                                appState.setFAQ(false),
                                 //_updateSideBarColor(labelType: "dashboardHome"),
                                 Navigator.push(
                                   context,
@@ -512,7 +537,7 @@ class _SideMenuState extends State<SideMenu> {
                               leading: ImageIcon(
                                 AssetImage(
                                     'assets/images/icons/sectionIcon.png'), // Path to your image asset
-                                color: testsProcessed
+                                color: appState.isTestsProcessedOpen
                                     ? const Color(0xFF01B4D2)
                                     : const Color(
                                         0xFF1A576F), // Optional: Adjust icon color
@@ -523,7 +548,7 @@ class _SideMenuState extends State<SideMenu> {
                                 child: Text(
                                   'Tests Processed',
                                   style: TextStyle(
-                                      color: testsProcessed
+                                      color: appState.isTestsProcessedOpen
                                           ? Color(0xFF01B4D2)
                                           : Color(0xFF1A576F),
                                       fontWeight: FontWeight.bold,
@@ -531,6 +556,24 @@ class _SideMenuState extends State<SideMenu> {
                                 ),
                               ),
                               onTap: () => {
+                                appState.setDrawerState(false),
+                                appState.setHome(false),
+                                appState.setDashboard(true),
+                                appState.setDashboardHome(false),
+                                appState.setTestsProcessed(true),
+                                appState.setTestSampleResults(false),
+                                appState.setOnsiteJobs(false),
+                                appState.setOnsiteApprovals(false),
+                                appState.setClientManagement(false),
+                                appState.setCollectionReports(false),
+                                appState.setAccounting(false),
+                                appState.setAccountingDashboard(false),
+                                appState.setTests(false),
+                                appState.setLicensing(false),
+                                appState.setITServices(false),
+                                appState.setInvoices(false),
+                                appState.setCollectorsCalendar(false),
+                                appState.setFAQ(false),
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
@@ -546,7 +589,7 @@ class _SideMenuState extends State<SideMenu> {
                               leading: ImageIcon(
                                 AssetImage(
                                     'assets/images/icons/sectionIcon.png'), // Path to your image asset
-                                color: testSampleResults
+                                color: appState.isTestSampleResultsOpen
                                     ? const Color(0xFF01B4D2)
                                     : const Color(
                                         0xFF1A576F), // Optional: Adjust icon color
@@ -557,7 +600,7 @@ class _SideMenuState extends State<SideMenu> {
                                 child: Text(
                                   'Test Sample Results',
                                   style: TextStyle(
-                                      color: testSampleResults
+                                      color: appState.isTestSampleResultsOpen
                                           ? Color(0xFF01B4D2)
                                           : Color(0xFF1A576F),
                                       fontWeight: FontWeight.bold,
@@ -565,6 +608,24 @@ class _SideMenuState extends State<SideMenu> {
                                 ),
                               ),
                               onTap: () => {
+                                appState.setDrawerState(false),
+                                appState.setHome(false),
+                                appState.setDashboard(true),
+                                appState.setDashboardHome(false),
+                                appState.setTestsProcessed(false),
+                                appState.setTestSampleResults(true),
+                                appState.setOnsiteJobs(false),
+                                appState.setOnsiteApprovals(false),
+                                appState.setClientManagement(false),
+                                appState.setCollectionReports(false),
+                                appState.setAccounting(false),
+                                appState.setAccountingDashboard(false),
+                                appState.setTests(false),
+                                appState.setLicensing(false),
+                                appState.setITServices(false),
+                                appState.setInvoices(false),
+                                appState.setCollectorsCalendar(false),
+                                appState.setFAQ(false),
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
@@ -595,7 +656,7 @@ class _SideMenuState extends State<SideMenu> {
                       leading: ImageIcon(
                         AssetImage(
                             'assets/images/icons/onSiteJobs.png'), // Path to your image asset
-                        color: onSiteJobs
+                        color: appState.isOnsiteJobsOpen
                             ? const Color(0xFF01B4D2)
                             : const Color(
                                 0xFF1A576F), // Optional: Adjust icon color
@@ -606,7 +667,7 @@ class _SideMenuState extends State<SideMenu> {
                         child: Text(
                           'On-Site Jobs',
                           style: TextStyle(
-                              color: onSiteJobs
+                              color: appState.isOnsiteJobsOpen
                                   ? Color(0xFF01B4D2)
                                   : Color(0xFF1A576F),
                               fontWeight: FontWeight.bold,
@@ -615,6 +676,23 @@ class _SideMenuState extends State<SideMenu> {
                       ),
                       onTap: () => {
                         appState.setDrawerState(false),
+                        appState.setHome(false),
+                        appState.setDashboard(false),
+                        appState.setDashboardHome(false),
+                        appState.setTestsProcessed(false),
+                        appState.setTestSampleResults(false),
+                        appState.setOnsiteJobs(true),
+                        appState.setOnsiteApprovals(false),
+                        appState.setClientManagement(false),
+                        appState.setCollectionReports(false),
+                        appState.setAccounting(false),
+                        appState.setAccountingDashboard(false),
+                        appState.setTests(false),
+                        appState.setLicensing(false),
+                        appState.setITServices(false),
+                        appState.setInvoices(false),
+                        appState.setCollectorsCalendar(false),
+                        appState.setFAQ(false),
                         Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -645,7 +723,7 @@ class _SideMenuState extends State<SideMenu> {
                       leading: ImageIcon(
                         AssetImage(
                             'assets/images/icons/onSiteApprovals.png'), // Path to your image asset
-                        color: onSiteApprovals
+                        color: appState.isOnsiteApprovals
                             ? const Color(0xFF01B4D2)
                             : const Color(
                                 0xFF1A576F), // Optional: Adjust icon color
@@ -656,7 +734,7 @@ class _SideMenuState extends State<SideMenu> {
                         child: Text(
                           'On-Site Approvals',
                           style: TextStyle(
-                              color: onSiteApprovals
+                              color: appState.isOnsiteApprovals
                                   ? Color(0xFF01B4D2)
                                   : Color(0xFF1A576F),
                               fontWeight: FontWeight.bold,
@@ -664,6 +742,23 @@ class _SideMenuState extends State<SideMenu> {
                         ),
                       ),
                       onTap: () => {
+                        appState.setHome(false),
+                        appState.setDashboard(false),
+                        appState.setDashboardHome(false),
+                        appState.setTestsProcessed(false),
+                        appState.setTestSampleResults(false),
+                        appState.setOnsiteJobs(false),
+                        appState.setOnsiteApprovals(true),
+                        appState.setClientManagement(false),
+                        appState.setCollectionReports(false),
+                        appState.setAccounting(false),
+                        appState.setAccountingDashboard(false),
+                        appState.setTests(false),
+                        appState.setLicensing(false),
+                        appState.setITServices(false),
+                        appState.setInvoices(false),
+                        appState.setCollectorsCalendar(false),
+                        appState.setFAQ(false),
                         Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -691,7 +786,7 @@ class _SideMenuState extends State<SideMenu> {
                       leading: ImageIcon(
                         AssetImage(
                             'assets/images/icons/clientManagement.png'), // Path to your image asset
-                        color: clientManagement
+                        color: appState.isClientManagementOpen
                             ? const Color(0xFF01B4D2)
                             : const Color(
                                 0xFF1A576F), // Optional: Adjust icon color
@@ -702,7 +797,7 @@ class _SideMenuState extends State<SideMenu> {
                         child: Text(
                           'Client Management',
                           style: TextStyle(
-                              color: clientManagement
+                              color: appState.isClientManagementOpen
                                   ? const Color(0xFF01B4D2)
                                   : const Color(0xFF1A576F),
                               fontWeight: FontWeight.bold,
@@ -711,6 +806,23 @@ class _SideMenuState extends State<SideMenu> {
                       ),
                       onTap: () => {
                         appState.setDrawerState(false),
+                        appState.setHome(false),
+                        appState.setDashboard(false),
+                        appState.setDashboardHome(false),
+                        appState.setTestsProcessed(false),
+                        appState.setTestSampleResults(false),
+                        appState.setOnsiteJobs(false),
+                        appState.setOnsiteApprovals(false),
+                        appState.setClientManagement(true),
+                        appState.setCollectionReports(false),
+                        appState.setAccounting(false),
+                        appState.setAccountingDashboard(false),
+                        appState.setTests(false),
+                        appState.setLicensing(false),
+                        appState.setITServices(false),
+                        appState.setInvoices(false),
+                        appState.setCollectorsCalendar(false),
+                        appState.setFAQ(false),
                         Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -741,14 +853,16 @@ class _SideMenuState extends State<SideMenu> {
                       child: ExpansionTile(
                         dense: true, // Makes ListTile more compact
                         visualDensity: VisualDensity(vertical: -4),
-                        iconColor: accounting
+                        iconColor: appState.isAccountingOpen
                             ? const Color(0xFF01B4D2)
                             : const Color(0xFF1A576F),
                         leading: ImageIcon(
                           AssetImage(
                               'assets/images/icons/accounting.png'), // Path to your image asset
-                          color:
-                              Color(0xFF1A576F), // Optional: Adjust icon color
+                          color: appState.isAccountingOpen
+                              ? const Color(0xFF01B4D2)
+                              : const Color(
+                                  0xFF1A576F), // Optional: Adjust icon color
                           size: 32, // Optional: Adjust icon size
                         ),
                         title: Align(
@@ -756,7 +870,7 @@ class _SideMenuState extends State<SideMenu> {
                           child: Text(
                             'Accounting',
                             style: TextStyle(
-                                color: accounting
+                                color: appState.isAccountingOpen
                                     ? const Color(0xFF01B4D2)
                                     : const Color(0xFF1A576F),
                                 fontWeight: FontWeight.bold,
@@ -771,7 +885,7 @@ class _SideMenuState extends State<SideMenu> {
                             leading: ImageIcon(
                               AssetImage(
                                   'assets/images/icons/sectionIcon.png'), // Path to your image asset
-                              color: accountingDashboard
+                              color: appState.isAccountingDashboardOpen
                                   ? const Color(0xFF01B4D2)
                                   : const Color(
                                       0xFF1A576F), // Optional: Adjust icon color
@@ -782,7 +896,7 @@ class _SideMenuState extends State<SideMenu> {
                               child: Text(
                                 'Accounting Dashboard',
                                 style: TextStyle(
-                                    color: accountingDashboard
+                                    color: appState.isAccountingDashboardOpen
                                         ? const Color(0xFF01B4D2)
                                         : const Color(0xFF1A576F),
                                     fontWeight: FontWeight.bold,
@@ -791,6 +905,23 @@ class _SideMenuState extends State<SideMenu> {
                             ),
                             onTap: () => {
                               appState.setDrawerState(false),
+                              appState.setHome(false),
+                              appState.setDashboard(false),
+                              appState.setDashboardHome(false),
+                              appState.setTestsProcessed(false),
+                              appState.setTestSampleResults(false),
+                              appState.setOnsiteJobs(false),
+                              appState.setOnsiteApprovals(false),
+                              appState.setClientManagement(false),
+                              appState.setCollectionReports(false),
+                              appState.setAccounting(true),
+                              appState.setAccountingDashboard(true),
+                              appState.setTests(false),
+                              appState.setLicensing(false),
+                              appState.setITServices(false),
+                              appState.setInvoices(false),
+                              appState.setCollectorsCalendar(false),
+                              appState.setFAQ(false),
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -807,7 +938,7 @@ class _SideMenuState extends State<SideMenu> {
                             leading: ImageIcon(
                               AssetImage(
                                   'assets/images/icons/sectionIcon.png'), // Path to your image asset
-                              color: tests
+                              color: appState.isTestsOpen
                                   ? const Color(0xFF01B4D2)
                                   : const Color(
                                       0xFF1A576F), // Optional: Adjust icon color
@@ -818,7 +949,7 @@ class _SideMenuState extends State<SideMenu> {
                               child: Text(
                                 ' Tests',
                                 style: TextStyle(
-                                    color: tests
+                                    color: appState.isTestsOpen
                                         ? const Color(0xFF01B4D2)
                                         : const Color(0xFF1A576F),
                                     fontWeight: FontWeight.bold,
@@ -826,6 +957,24 @@ class _SideMenuState extends State<SideMenu> {
                               ),
                             ),
                             onTap: () => {
+                              appState.setDrawerState(false),
+                              appState.setHome(false),
+                              appState.setDashboard(false),
+                              appState.setDashboardHome(false),
+                              appState.setTestsProcessed(false),
+                              appState.setTestSampleResults(false),
+                              appState.setOnsiteJobs(false),
+                              appState.setOnsiteApprovals(false),
+                              appState.setClientManagement(false),
+                              appState.setCollectionReports(false),
+                              appState.setAccounting(true),
+                              appState.setAccountingDashboard(false),
+                              appState.setTests(true),
+                              appState.setLicensing(false),
+                              appState.setITServices(false),
+                              appState.setInvoices(false),
+                              appState.setCollectorsCalendar(false),
+                              appState.setFAQ(false),
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -840,7 +989,7 @@ class _SideMenuState extends State<SideMenu> {
                             leading: ImageIcon(
                               AssetImage(
                                   'assets/images/icons/sectionIcon.png'), // Path to your image asset
-                              color: licensing
+                              color: appState.isLicensingOpen
                                   ? const Color(0xFF01B4D2)
                                   : const Color(
                                       0xFF1A576F), // Optional: Adjust icon color
@@ -851,7 +1000,7 @@ class _SideMenuState extends State<SideMenu> {
                               child: Text(
                                 ' Licensing',
                                 style: TextStyle(
-                                    color: licensing
+                                    color: appState.isLicensingOpen
                                         ? const Color(0xFF01B4D2)
                                         : const Color(0xFF1A576F),
                                     fontWeight: FontWeight.bold,
@@ -859,6 +1008,23 @@ class _SideMenuState extends State<SideMenu> {
                               ),
                             ),
                             onTap: () => {
+                              appState.setHome(false),
+                              appState.setDashboard(false),
+                              appState.setDashboardHome(false),
+                              appState.setTestsProcessed(false),
+                              appState.setTestSampleResults(false),
+                              appState.setOnsiteJobs(false),
+                              appState.setOnsiteApprovals(false),
+                              appState.setClientManagement(false),
+                              appState.setCollectionReports(false),
+                              appState.setAccounting(true),
+                              appState.setAccountingDashboard(false),
+                              appState.setTests(false),
+                              appState.setLicensing(true),
+                              appState.setITServices(false),
+                              appState.setInvoices(false),
+                              appState.setCollectorsCalendar(false),
+                              appState.setFAQ(false),
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -884,7 +1050,7 @@ class _SideMenuState extends State<SideMenu> {
                               child: Text(
                                 ' IT Services',
                                 style: TextStyle(
-                                    color: itServices
+                                    color: appState.isITServicesOpen
                                         ? const Color(0xFF01B4D2)
                                         : const Color(0xFF1A576F),
                                     fontWeight: FontWeight.bold,
@@ -892,6 +1058,23 @@ class _SideMenuState extends State<SideMenu> {
                               ),
                             ),
                             onTap: () => {
+                              appState.setHome(false),
+                              appState.setDashboard(false),
+                              appState.setDashboardHome(false),
+                              appState.setTestsProcessed(false),
+                              appState.setTestSampleResults(false),
+                              appState.setOnsiteJobs(false),
+                              appState.setOnsiteApprovals(false),
+                              appState.setClientManagement(false),
+                              appState.setCollectionReports(false),
+                              appState.setAccounting(true),
+                              appState.setAccountingDashboard(false),
+                              appState.setTests(false),
+                              appState.setLicensing(false),
+                              appState.setITServices(true),
+                              appState.setInvoices(false),
+                              appState.setCollectorsCalendar(false),
+                              appState.setFAQ(false),
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -906,7 +1089,7 @@ class _SideMenuState extends State<SideMenu> {
                             leading: ImageIcon(
                               AssetImage(
                                   'assets/images/icons/sectionIcon.png'), // Path to your image asset
-                              color: invoices
+                              color: appState.isInvoicesOpen
                                   ? const Color(0xFF01B4D2)
                                   : const Color(
                                       0xFF1A576F), // Optional: Adjust icon color
@@ -917,7 +1100,7 @@ class _SideMenuState extends State<SideMenu> {
                               child: Text(
                                 ' Invoices',
                                 style: TextStyle(
-                                    color: invoices
+                                    color: appState.isInvoicesOpen
                                         ? const Color(0xFF01B4D2)
                                         : const Color(0xFF1A576F),
                                     fontWeight: FontWeight.bold,
@@ -925,6 +1108,23 @@ class _SideMenuState extends State<SideMenu> {
                               ),
                             ),
                             onTap: () => {
+                              appState.setHome(false),
+                              appState.setDashboard(false),
+                              appState.setDashboardHome(false),
+                              appState.setTestsProcessed(false),
+                              appState.setTestSampleResults(false),
+                              appState.setOnsiteJobs(false),
+                              appState.setOnsiteApprovals(false),
+                              appState.setClientManagement(false),
+                              appState.setCollectionReports(false),
+                              appState.setAccounting(true),
+                              appState.setAccountingDashboard(false),
+                              appState.setTests(false),
+                              appState.setLicensing(false),
+                              appState.setITServices(false),
+                              appState.setInvoices(true),
+                              appState.setCollectorsCalendar(false),
+                              appState.setFAQ(false),
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -955,7 +1155,7 @@ class _SideMenuState extends State<SideMenu> {
                       leading: ImageIcon(
                         AssetImage(
                             'assets/images/icons/collectionReports.png'), // Path to your image asset
-                        color: collectionReports
+                        color: appState.isCollectionReportsOpen
                             ? const Color(0xFF01B4D2)
                             : const Color(
                                 0xFF1A576F), // Optional: Adjust icon color
@@ -966,7 +1166,7 @@ class _SideMenuState extends State<SideMenu> {
                         child: Text(
                           'Collection Reports',
                           style: TextStyle(
-                              color: collectionReports
+                              color: appState.isCollectionReportsOpen
                                   ? const Color(0xFF01B4D2)
                                   : const Color(0xFF1A576F),
                               fontWeight: FontWeight.bold,
@@ -975,6 +1175,23 @@ class _SideMenuState extends State<SideMenu> {
                       ),
                       onTap: () => {
                         appState.setDrawerState(false),
+                        appState.setHome(false),
+                        appState.setDashboard(false),
+                        appState.setDashboardHome(false),
+                        appState.setTestsProcessed(false),
+                        appState.setTestSampleResults(false),
+                        appState.setOnsiteJobs(false),
+                        appState.setOnsiteApprovals(false),
+                        appState.setClientManagement(false),
+                        appState.setCollectionReports(true),
+                        appState.setAccounting(false),
+                        appState.setAccountingDashboard(false),
+                        appState.setTests(false),
+                        appState.setLicensing(false),
+                        appState.setITServices(false),
+                        appState.setInvoices(false),
+                        appState.setCollectorsCalendar(false),
+                        appState.setFAQ(false),
                         Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -1004,7 +1221,7 @@ class _SideMenuState extends State<SideMenu> {
                       leading: ImageIcon(
                         AssetImage(
                             'assets/images/icons/calendar.png'), // Path to your image asset
-                        color: collectorsCalendar
+                        color: appState.isCollectorsCalendarOpen
                             ? const Color(0xFF01B4D2)
                             : const Color(
                                 0xFF1A576F), // Optional: Adjust icon color
@@ -1015,7 +1232,7 @@ class _SideMenuState extends State<SideMenu> {
                         child: Text(
                           'Collector\'s Calendar',
                           style: TextStyle(
-                              color: collectorsCalendar
+                              color: appState.isCollectorsCalendarOpen
                                   ? const Color(0xFF01B4D2)
                                   : const Color(0xFF1A576F),
                               fontWeight: FontWeight.bold,
@@ -1023,6 +1240,23 @@ class _SideMenuState extends State<SideMenu> {
                         ),
                       ),
                       onTap: () => {
+                        appState.setHome(false),
+                        appState.setDashboard(false),
+                        appState.setDashboardHome(false),
+                        appState.setTestsProcessed(false),
+                        appState.setTestSampleResults(false),
+                        appState.setOnsiteJobs(false),
+                        appState.setOnsiteApprovals(false),
+                        appState.setClientManagement(false),
+                        appState.setCollectionReports(false),
+                        appState.setAccounting(false),
+                        appState.setAccountingDashboard(false),
+                        appState.setTests(false),
+                        appState.setLicensing(false),
+                        appState.setITServices(false),
+                        appState.setInvoices(false),
+                        appState.setCollectorsCalendar(true),
+                        appState.setFAQ(false),
                         Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -1054,7 +1288,7 @@ class _SideMenuState extends State<SideMenu> {
                             'assets/images/icons/faq.png',
                           ),
                           // Path to your image asset
-                          color: faq
+                          color: appState.isFaqOpen
                               ? const Color(0xFF01B4D2)
                               : const Color(
                                   0xFF1A576F), // Optional: Adjust icon color
@@ -1066,7 +1300,7 @@ class _SideMenuState extends State<SideMenu> {
                         child: Text(
                           '   FAQ',
                           style: TextStyle(
-                              color: faq
+                              color: appState.isFaqOpen
                                   ? const Color(0xFF01B4D2)
                                   : const Color(0xFF1A576F),
                               fontWeight: FontWeight.bold,
@@ -1074,6 +1308,23 @@ class _SideMenuState extends State<SideMenu> {
                         ),
                       ),
                       onTap: () => {
+                        appState.setHome(false),
+                        appState.setDashboard(false),
+                        appState.setDashboardHome(false),
+                        appState.setTestsProcessed(false),
+                        appState.setTestSampleResults(false),
+                        appState.setOnsiteJobs(false),
+                        appState.setOnsiteApprovals(false),
+                        appState.setClientManagement(false),
+                        appState.setCollectionReports(false),
+                        appState.setAccounting(false),
+                        appState.setAccountingDashboard(false),
+                        appState.setTests(false),
+                        appState.setLicensing(false),
+                        appState.setITServices(false),
+                        appState.setInvoices(false),
+                        appState.setCollectorsCalendar(false),
+                        appState.setFAQ(true),
                         Navigator.push(
                           context,
                           MaterialPageRoute(builder: (context) => const FAQ()),
