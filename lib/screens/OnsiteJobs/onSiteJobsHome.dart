@@ -164,24 +164,44 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Image.asset(iconPath, height: 24), // Icon placeholder
-            const SizedBox(width: 12),
+            // Left-aligned title
             Expanded(
-              child: Text(
-                title,
-                style: const TextStyle(
-                  color: Colors.teal,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 14,
+              flex: 3, // Adjust the flex value to control space distribution
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  title,
+                  style: const TextStyle(
+                    color: Color(0xFF01B4D2),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14,
+                  ),
                 ),
               ),
             ),
-            Text(
-              value,
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 14,
-                fontWeight: isBold ? FontWeight.bold : FontWeight.normal,
+
+            // Center-aligned icon
+            Expanded(
+              flex: 1, // Adjust the flex value to control space distribution
+              child: Align(
+                alignment: Alignment.center,
+                child: Image.asset(iconPath, height: 24),
+              ),
+            ),
+
+            // Right-aligned value
+            Expanded(
+              flex: 3, // Adjust the flex value to control space distribution
+              child: Align(
+                alignment: Alignment.centerRight,
+                child: Text(
+                  value,
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 14,
+                    fontWeight: isBold ? FontWeight.bold : FontWeight.normal,
+                  ),
+                ),
               ),
             ),
           ],
@@ -633,80 +653,146 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
           SizedBox(
             height: 10,
           ),
+          Align(
+            alignment: Alignment.centerRight,
+            child: Padding(
+              padding: const EdgeInsets.only(
+                right: 18.0,
+                bottom: 5.0,
+              ),
+              child: Text(
+                "1 - 15 out of 100 records",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
           Center(
             child: Padding(
-              padding: const EdgeInsets.only(left: 10.0, right: 10.0),
+              padding: const EdgeInsets.only(left: 30.0, right: 45.0),
               child: Card(
                 elevation: 5,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15),
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.all(12.0),
+                  padding: const EdgeInsets.only(
+                    top: 12.0,
+                    bottom: 12.0,
+                    left: 18.0,
+                    right: 25.0,
+                  ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // Job Status Row
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Row(
-                            children: [
-                              Image.asset('assets/images/icons/eye_icon.png',
-                                  height: 20), // Eye Icon Placeholder
-                              const SizedBox(width: 8),
-                              const Text(
-                                'Job Status',
-                                style: TextStyle(
-                                  color: Colors.teal,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Container(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 12, vertical: 4),
-                                decoration: BoxDecoration(
-                                  color: Colors.amber,
-                                  borderRadius: BorderRadius.circular(8),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.grey.withOpacity(0.5),
-                                      spreadRadius: 1,
-                                      blurRadius: 4,
+                          // Left-aligned title
+                          Expanded(
+                            flex:
+                                3, // Adjust the flex value to control space distribution
+                            child: Align(
+                              alignment: Alignment.centerLeft,
+                              child: Row(
+                                children: [
+                                  FittedBox(
+                                    child: Image.asset(
+                                      "assets/images/icons/threeDots.png",
+                                      fit: BoxFit.cover,
                                     ),
-                                  ],
-                                ),
-                                child: const Text(
-                                  'Draft',
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold,
                                   ),
-                                ),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 8.0),
+                                    child: FittedBox(
+                                      child: Image.asset(
+                                        "assets/images/icons/eye_icon.png",
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
-                              const SizedBox(width: 16),
-                              Image.asset(
-                                  'assets/images/icons/document_icon.png',
-                                  height: 20), // Document Icon Placeholder
-                              const SizedBox(width: 8),
-                              const Text(
-                                '1',
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 16,
-                                ),
+                            ),
+                          ),
+
+                          // Center-aligned icon
+                          Expanded(
+                            flex:
+                                4, // Adjust the flex value to control space distribution
+                            child: Align(
+                              alignment: Alignment.center,
+                              child: Row(
+                                children: [
+                                  Text("Job Status"),
+                                  SizedBox(
+                                    width: 5,
+                                  ),
+                                  Container(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 3, vertical: 10),
+                                    decoration: BoxDecoration(
+                                      color: Colors.amber,
+                                      borderRadius: BorderRadius.circular(8),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.grey.withOpacity(0.5),
+                                          spreadRadius: 1,
+                                          blurRadius: 4,
+                                        ),
+                                      ],
+                                    ),
+                                    child: const Text(
+                                      'Draft',
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ],
+                            ),
+                          ),
+
+                          // Right-aligned value
+                          Expanded(
+                            flex:
+                                3, // Adjust the flex value to control space distribution
+                            child: Align(
+                              alignment: Alignment.centerRight,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  FittedBox(
+                                    child: Image.asset(
+                                      'assets/images/icons/document_icon.png',
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    width:
+                                        1, // Space between document icon and the number
+                                  ),
+                                  const Text(
+                                    '1',
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 19,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
                           ),
                         ],
                       ),
-                      const SizedBox(height: 16),
+                      const SizedBox(height: 5),
                       // Content Rows
                       _buildInfoRow(
                           iconPath: 'assets/images/icons/dafault_icon.png',
@@ -720,7 +806,7 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
                           iconPath: 'assets/images/icons/dafault_icon.png',
                           title: 'Authorized Rep',
                           value: 'John Roberts',
-                          isBold: true),
+                          isBold: false),
                       _buildInfoRow(
                           iconPath: 'assets/images/icons/dafault_icon.png',
                           title: 'Location',

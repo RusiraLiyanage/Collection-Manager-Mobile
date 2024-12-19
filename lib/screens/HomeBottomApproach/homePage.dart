@@ -167,6 +167,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _buildMenuItem({required String iconPath, required String title}) {
+    final appState = Provider.of<AppState>(context, listen: false);
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 50),
       child: Row(
@@ -187,6 +188,23 @@ class _HomePageState extends State<HomePage> {
             ),
             onTap: () {
               if (title == "Dashboard") {
+                appState.setHome(false);
+                appState.setDashboard(true);
+                appState.setDashboardHome(true);
+                appState.setTestsProcessed(false);
+                appState.setTestSampleResults(false);
+                appState.setOnsiteJobs(false);
+                appState.setOnsiteApprovals(false);
+                appState.setClientManagement(false);
+                appState.setCollectionReports(false);
+                appState.setAccounting(false);
+                appState.setAccountingDashboard(false);
+                appState.setTests(false);
+                appState.setLicensing(false);
+                appState.setITServices(false);
+                appState.setInvoices(false);
+                appState.setCollectorsCalendar(false);
+                appState.setFAQ(false);
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
@@ -195,6 +213,23 @@ class _HomePageState extends State<HomePage> {
                   ),
                 );
               } else if (title == "On-site Jobs") {
+                appState.setHome(false);
+                appState.setDashboard(false);
+                appState.setDashboardHome(false);
+                appState.setTestsProcessed(false);
+                appState.setTestSampleResults(false);
+                appState.setOnsiteJobs(true);
+                appState.setOnsiteApprovals(false);
+                appState.setClientManagement(false);
+                appState.setCollectionReports(false);
+                appState.setAccounting(false);
+                appState.setAccountingDashboard(false);
+                appState.setTests(false);
+                appState.setLicensing(false);
+                appState.setITServices(false);
+                appState.setInvoices(false);
+                appState.setCollectorsCalendar(false);
+                appState.setFAQ(false);
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
@@ -204,6 +239,23 @@ class _HomePageState extends State<HomePage> {
                               "special_case")), // In here, inside tabs_page it is conditionally monitored
                 );
               } else if (title == "On-site Approvals") {
+                appState.setHome(false);
+                appState.setDashboard(false);
+                appState.setDashboardHome(false);
+                appState.setTestsProcessed(false);
+                appState.setTestSampleResults(false);
+                appState.setOnsiteJobs(false);
+                appState.setOnsiteApprovals(true);
+                appState.setClientManagement(false);
+                appState.setCollectionReports(false);
+                appState.setAccounting(false);
+                appState.setAccountingDashboard(false);
+                appState.setTests(false);
+                appState.setLicensing(false);
+                appState.setITServices(false);
+                appState.setInvoices(false);
+                appState.setCollectorsCalendar(false);
+                appState.setFAQ(false);
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
@@ -211,6 +263,23 @@ class _HomePageState extends State<HomePage> {
                   ),
                 );
               } else if (title == "Client Management") {
+                appState.setHome(false);
+                appState.setDashboard(false);
+                appState.setDashboardHome(false);
+                appState.setTestsProcessed(false);
+                appState.setTestSampleResults(false);
+                appState.setOnsiteJobs(false);
+                appState.setOnsiteApprovals(false);
+                appState.setClientManagement(true);
+                appState.setCollectionReports(false);
+                appState.setAccounting(false);
+                appState.setAccountingDashboard(false);
+                appState.setTests(false);
+                appState.setLicensing(false);
+                appState.setITServices(false);
+                appState.setInvoices(false);
+                appState.setCollectorsCalendar(false);
+                appState.setFAQ(false);
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
@@ -218,6 +287,23 @@ class _HomePageState extends State<HomePage> {
                           selectedIndex: 2, navigationMethod: "sidebar")),
                 );
               } else if (title == "Accounting") {
+                appState.setHome(false);
+                appState.setDashboard(false);
+                appState.setDashboardHome(false);
+                appState.setTestsProcessed(false);
+                appState.setTestSampleResults(false);
+                appState.setOnsiteJobs(false);
+                appState.setOnsiteApprovals(false);
+                appState.setClientManagement(false);
+                appState.setCollectionReports(false);
+                appState.setAccounting(true);
+                appState.setAccountingDashboard(true);
+                appState.setTests(false);
+                appState.setLicensing(false);
+                appState.setITServices(false);
+                appState.setInvoices(false);
+                appState.setCollectorsCalendar(false);
+                appState.setFAQ(false);
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
@@ -225,6 +311,23 @@ class _HomePageState extends State<HomePage> {
                           selectedIndex: 4, navigationMethod: "sidebar")),
                 );
               } else if (title == "Collection Reports") {
+                appState.setHome(false);
+                appState.setDashboard(false);
+                appState.setDashboardHome(false);
+                appState.setTestsProcessed(false);
+                appState.setTestSampleResults(false);
+                appState.setOnsiteJobs(false);
+                appState.setOnsiteApprovals(false);
+                appState.setClientManagement(false);
+                appState.setCollectionReports(true);
+                appState.setAccounting(false);
+                appState.setAccountingDashboard(false);
+                appState.setTests(false);
+                appState.setLicensing(false);
+                appState.setITServices(false);
+                appState.setInvoices(false);
+                appState.setCollectorsCalendar(false);
+                appState.setFAQ(false);
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
@@ -232,12 +335,46 @@ class _HomePageState extends State<HomePage> {
                           selectedIndex: 3, navigationMethod: "sidebar")),
                 );
               } else if (title == "Collector’s Calendar") {
+                appState.setHome(false);
+                appState.setDashboard(false);
+                appState.setDashboardHome(false);
+                appState.setTestsProcessed(false);
+                appState.setTestSampleResults(false);
+                appState.setOnsiteJobs(false);
+                appState.setOnsiteApprovals(false);
+                appState.setClientManagement(false);
+                appState.setCollectionReports(false);
+                appState.setAccounting(false);
+                appState.setAccountingDashboard(false);
+                appState.setTests(false);
+                appState.setLicensing(false);
+                appState.setITServices(false);
+                appState.setInvoices(false);
+                appState.setCollectorsCalendar(true);
+                appState.setFAQ(false);
                 Navigator.push(
                   context,
                   MaterialPageRoute(
                       builder: (context) => const CollectorsCalendar()),
                 );
               } else if (title == "FAQ") {
+                appState.setHome(false);
+                appState.setDashboard(false);
+                appState.setDashboardHome(false);
+                appState.setTestsProcessed(false);
+                appState.setTestSampleResults(false);
+                appState.setOnsiteJobs(false);
+                appState.setOnsiteApprovals(false);
+                appState.setClientManagement(false);
+                appState.setCollectionReports(false);
+                appState.setAccounting(false);
+                appState.setAccountingDashboard(false);
+                appState.setTests(false);
+                appState.setLicensing(false);
+                appState.setITServices(false);
+                appState.setInvoices(false);
+                appState.setCollectorsCalendar(false);
+                appState.setFAQ(true);
                 Navigator.push(
                   context,
                   MaterialPageRoute(

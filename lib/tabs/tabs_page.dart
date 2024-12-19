@@ -164,6 +164,97 @@ class _TabsPageState extends State<TabsPage> {
               ),
               onTap: (index) {
                 _onItemTapped(index, fromBottomNavigation: true);
+                if (index == 0) {
+                  appState.setHome(false);
+                  appState.setDashboard(true);
+                  appState.setDashboardHome(true);
+                  appState.setTestsProcessed(false);
+                  appState.setTestSampleResults(false);
+                  appState.setOnsiteJobs(false);
+                  appState.setOnsiteApprovals(false);
+                  appState.setClientManagement(false);
+                  appState.setCollectionReports(false);
+                  appState.setAccounting(false);
+                  appState.setAccountingDashboard(false);
+                  appState.setTests(false);
+                  appState.setLicensing(false);
+                  appState.setITServices(false);
+                  appState.setInvoices(false);
+                  appState.setCollectorsCalendar(false);
+                  appState.setFAQ(false);
+                } else if (index == 1) {
+                  appState.setHome(false);
+                  appState.setDashboard(false);
+                  appState.setDashboardHome(false);
+                  appState.setTestsProcessed(false);
+                  appState.setTestSampleResults(false);
+                  appState.setOnsiteJobs(true);
+                  appState.setOnsiteApprovals(false);
+                  appState.setClientManagement(false);
+                  appState.setCollectionReports(false);
+                  appState.setAccounting(false);
+                  appState.setAccountingDashboard(false);
+                  appState.setTests(false);
+                  appState.setLicensing(false);
+                  appState.setITServices(false);
+                  appState.setInvoices(false);
+                  appState.setCollectorsCalendar(false);
+                  appState.setFAQ(false);
+                } else if (index == 2) {
+                  appState.setHome(false);
+                  appState.setDashboard(false);
+                  appState.setDashboardHome(false);
+                  appState.setTestsProcessed(false);
+                  appState.setTestSampleResults(false);
+                  appState.setOnsiteJobs(false);
+                  appState.setOnsiteApprovals(false);
+                  appState.setClientManagement(true);
+                  appState.setCollectionReports(false);
+                  appState.setAccounting(false);
+                  appState.setAccountingDashboard(false);
+                  appState.setTests(false);
+                  appState.setLicensing(false);
+                  appState.setITServices(false);
+                  appState.setInvoices(false);
+                  appState.setCollectorsCalendar(false);
+                  appState.setFAQ(false);
+                } else if (index == 3) {
+                  appState.setHome(false);
+                  appState.setDashboard(false);
+                  appState.setDashboardHome(false);
+                  appState.setTestsProcessed(false);
+                  appState.setTestSampleResults(false);
+                  appState.setOnsiteJobs(false);
+                  appState.setOnsiteApprovals(false);
+                  appState.setClientManagement(false);
+                  appState.setCollectionReports(true);
+                  appState.setAccounting(false);
+                  appState.setAccountingDashboard(false);
+                  appState.setTests(false);
+                  appState.setLicensing(false);
+                  appState.setITServices(false);
+                  appState.setInvoices(false);
+                  appState.setCollectorsCalendar(false);
+                  appState.setFAQ(false);
+                } else if (index == 4) {
+                  appState.setHome(false);
+                  appState.setDashboard(false);
+                  appState.setDashboardHome(false);
+                  appState.setTestsProcessed(false);
+                  appState.setTestSampleResults(false);
+                  appState.setOnsiteJobs(false);
+                  appState.setOnsiteApprovals(false);
+                  appState.setClientManagement(false);
+                  appState.setCollectionReports(false);
+                  appState.setAccounting(true);
+                  appState.setAccountingDashboard(true);
+                  appState.setTests(false);
+                  appState.setLicensing(false);
+                  appState.setITServices(false);
+                  appState.setInvoices(false);
+                  appState.setCollectorsCalendar(false);
+                  appState.setFAQ(false);
+                }
               }),
     );
   }

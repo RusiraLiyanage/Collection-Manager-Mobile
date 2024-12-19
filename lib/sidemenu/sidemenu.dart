@@ -453,6 +453,9 @@ class _SideMenuState extends State<SideMenu> {
                           iconColor: appState.isDashboardOpen
                               ? Color(0xFF01B4D2)
                               : Color(0xFF1A576F),
+                          collapsedIconColor: appState.isDashboardOpen
+                              ? Color(0xFF01B4D2)
+                              : Color(0xFF1A576F),
                           leading: ImageIcon(
                             AssetImage(
                                 'assets/images/icons/dashboard.png'), // Path to your image asset
@@ -501,7 +504,6 @@ class _SideMenuState extends State<SideMenu> {
                                 ),
                               ),
                               onTap: () => {
-                                appState.setDrawerState(false),
                                 appState.setDrawerState(false),
                                 appState.setHome(false),
                                 appState.setDashboard(true),
@@ -856,6 +858,9 @@ class _SideMenuState extends State<SideMenu> {
                         iconColor: appState.isAccountingOpen
                             ? const Color(0xFF01B4D2)
                             : const Color(0xFF1A576F),
+                        collapsedIconColor: appState.isAccountingOpen
+                            ? Color(0xFF01B4D2)
+                            : Color(0xFF1A576F),
                         leading: ImageIcon(
                           AssetImage(
                               'assets/images/icons/accounting.png'), // Path to your image asset
