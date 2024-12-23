@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
 import '../../AppState/appState.dart';
 import 'package:project_code_blue/sidemenu/sidemenu.dart';
@@ -32,6 +33,38 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
   String? _selectedClient;
 
   final List<String> status = ["Show", "Hide"];
+  final List<Map<String, String>> jobData = [
+    {
+      "jobNumber": "1",
+      "jobStatus": "Draft",
+      "dateTime": "30 Apr 2025 10:00",
+      "client": "Rail NSW",
+      "rep": "John Roberts",
+      "location": "Parramatta",
+      "service": "Random Testing",
+      "callout": "Callout",
+    },
+    {
+      "jobNumber": "2",
+      "jobStatus": "Draft",
+      "dateTime": "30 Apr 2025 10:00",
+      "client": "Rail NSW",
+      "rep": "John Roberts",
+      "location": "Parramatta",
+      "service": "Random Testing",
+      "callout": "Callout",
+    },
+    {
+      "jobNumber": "3",
+      "jobStatus": "Draft",
+      "dateTime": "30 Apr 2025 10:00",
+      "client": "Rail NSW",
+      "rep": "John Roberts",
+      "location": "Parramatta",
+      "service": "Random Testing",
+      "callout": "Non Callout",
+    }
+  ];
   String? _selectedStatus; // State variable for selected value
   @override
   void initState() {
@@ -217,6 +250,20 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
         navigationType: "bottomNavigation",
       ),
       appBar: MyAppBar(),
+      floatingActionButton: Container(
+        height: 40.0,
+        width: 40.0,
+        child: FittedBox(
+          child: FloatingActionButton(
+            onPressed: () {},
+            tooltip: "Scroll to Bottom",
+            child: Icon(
+              Icons.arrow_downward,
+              size: 40,
+            ),
+          ),
+        ),
+      ),
       body: Column(
         children: [
           Container(
@@ -668,159 +715,210 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
               ),
             ),
           ),
-          Center(
-            child: Padding(
-              padding: const EdgeInsets.only(left: 30.0, right: 45.0),
-              child: Card(
-                elevation: 5,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.only(
-                    top: 12.0,
-                    bottom: 12.0,
-                    left: 18.0,
-                    right: 25.0,
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          // Left-aligned title
-                          Expanded(
-                            flex:
-                                3, // Adjust the flex value to control space distribution
-                            child: Align(
-                              alignment: Alignment.centerLeft,
-                              child: Row(
-                                children: [
-                                  FittedBox(
-                                    child: Image.asset(
-                                      "assets/images/icons/threeDots.png",
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 8.0),
-                                    child: FittedBox(
-                                      child: Image.asset(
-                                        "assets/images/icons/eye_icon.png",
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
+          Expanded(
+            child: Scrollbar(
+              thumbVisibility: true,
+              interactive: true,
+              trackVisibility: true,
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: jobData.length,
+                      itemBuilder: (context, index) {
+                        final job = jobData[index];
+                        return Center(
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                              left: 30.0,
+                              right: 45.0,
+                              bottom: 10.0,
                             ),
-                          ),
+                            child: Card(
+                              elevation: 5,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.only(
+                                  top: 12.0,
+                                  bottom: 12.0,
+                                  left: 18.0,
+                                  right: 25.0,
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        // Left-aligned title
+                                        Expanded(
+                                          flex:
+                                              3, // Adjust the flex value to control space distribution
+                                          child: Align(
+                                            alignment: Alignment.centerLeft,
+                                            child: Row(
+                                              children: [
+                                                FittedBox(
+                                                  child: Image.asset(
+                                                    "assets/images/icons/threeDots.png",
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  width: 10,
+                                                ),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          top: 8.0),
+                                                  child: FittedBox(
+                                                    child: Image.asset(
+                                                      "assets/images/icons/eye_icon.png",
+                                                      fit: BoxFit.cover,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
 
-                          // Center-aligned icon
-                          Expanded(
-                            flex:
-                                4, // Adjust the flex value to control space distribution
-                            child: Align(
-                              alignment: Alignment.center,
-                              child: Row(
-                                children: [
-                                  Text("Job Status"),
-                                  SizedBox(
-                                    width: 5,
-                                  ),
-                                  Container(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 3, vertical: 10),
-                                    decoration: BoxDecoration(
-                                      color: Colors.amber,
-                                      borderRadius: BorderRadius.circular(8),
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.grey.withOpacity(0.5),
-                                          spreadRadius: 1,
-                                          blurRadius: 4,
+                                        // Center-aligned icon
+                                        Expanded(
+                                          flex:
+                                              4, // Adjust the flex value to control space distribution
+                                          child: Align(
+                                            alignment: Alignment.center,
+                                            child: Row(
+                                              children: [
+                                                Text("Job Status"),
+                                                SizedBox(
+                                                  width: 5,
+                                                ),
+                                                Container(
+                                                  padding: const EdgeInsets
+                                                      .symmetric(
+                                                      horizontal: 3,
+                                                      vertical: 10),
+                                                  decoration: BoxDecoration(
+                                                    color: Colors.amber,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8),
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                        color: Colors.grey
+                                                            .withOpacity(0.5),
+                                                        spreadRadius: 1,
+                                                        blurRadius: 4,
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  child: const Text(
+                                                    'Draft',
+                                                    style: TextStyle(
+                                                      color: Colors.black,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+
+                                        // Right-aligned value
+                                        Expanded(
+                                          flex:
+                                              3, // Adjust the flex value to control space distribution
+                                          child: Align(
+                                            alignment: Alignment.centerRight,
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.end,
+                                              children: [
+                                                FittedBox(
+                                                  child: Image.asset(
+                                                    'assets/images/icons/document_icon.png',
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                ),
+                                                const SizedBox(
+                                                  width:
+                                                      1, // Space between document icon and the number
+                                                ),
+                                                Text(
+                                                  job["jobNumber"]!,
+                                                  style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 19,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
                                         ),
                                       ],
                                     ),
-                                    child: const Text(
-                                      'Draft',
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ),
-                                ],
+                                    const SizedBox(height: 5),
+                                    // Content Rows
+                                    _buildInfoRow(
+                                        iconPath:
+                                            'assets/images/icons/dafault_icon.png',
+                                        title: 'Date / Time',
+                                        value: job["dateTime"]!),
+                                    _buildInfoRow(
+                                        iconPath:
+                                            'assets/images/icons/dafault_icon.png',
+                                        title: 'Client',
+                                        value: job["client"]!),
+                                    _buildInfoRow(
+                                        iconPath:
+                                            'assets/images/icons/dafault_icon.png',
+                                        title: 'Authorized Rep',
+                                        value: job["rep"]!,
+                                        isBold: false),
+                                    _buildInfoRow(
+                                        iconPath:
+                                            'assets/images/icons/dafault_icon.png',
+                                        title: job["location"]!,
+                                        value: 'Parramatta'),
+                                    _buildInfoRow(
+                                        iconPath:
+                                            'assets/images/icons/dafault_icon.png',
+                                        title: 'Service',
+                                        value: job["service"]!),
+                                    _buildInfoRow(
+                                        iconPath:
+                                            'assets/images/icons/dafault_icon.png',
+                                        title: 'Callout Job',
+                                        value: job["callout"]!),
+                                  ],
+                                ),
                               ),
                             ),
                           ),
-
-                          // Right-aligned value
-                          Expanded(
-                            flex:
-                                3, // Adjust the flex value to control space distribution
-                            child: Align(
-                              alignment: Alignment.centerRight,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  FittedBox(
-                                    child: Image.asset(
-                                      'assets/images/icons/document_icon.png',
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    width:
-                                        1, // Space between document icon and the number
-                                  ),
-                                  const Text(
-                                    '1',
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 19,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
+                        );
+                      },
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        'End of Job List',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
                       ),
-                      const SizedBox(height: 5),
-                      // Content Rows
-                      _buildInfoRow(
-                          iconPath: 'assets/images/icons/dafault_icon.png',
-                          title: 'Date / Time',
-                          value: '30 Apr 2025 10:00'),
-                      _buildInfoRow(
-                          iconPath: 'assets/images/icons/dafault_icon.png',
-                          title: 'Client',
-                          value: 'Rail NSW'),
-                      _buildInfoRow(
-                          iconPath: 'assets/images/icons/dafault_icon.png',
-                          title: 'Authorized Rep',
-                          value: 'John Roberts',
-                          isBold: false),
-                      _buildInfoRow(
-                          iconPath: 'assets/images/icons/dafault_icon.png',
-                          title: 'Location',
-                          value: 'Parramatta'),
-                      _buildInfoRow(
-                          iconPath: 'assets/images/icons/dafault_icon.png',
-                          title: 'Service',
-                          value: 'Random Testing'),
-                      _buildInfoRow(
-                          iconPath: 'assets/images/icons/dafault_icon.png',
-                          title: 'Callout Job',
-                          value: 'Callout'),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ),
