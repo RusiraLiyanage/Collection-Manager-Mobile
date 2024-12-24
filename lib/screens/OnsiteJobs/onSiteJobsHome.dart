@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../../AppState/appState.dart';
 import 'package:project_code_blue/sidemenu/sidemenu.dart';
 import '../../Navigation/appBar.dart';
+import 'package:number_pagination/number_pagination.dart';
 
 class OnsiteJobsHome extends StatefulWidget {
   const OnsiteJobsHome({super.key});
@@ -16,6 +17,8 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
   TextEditingController _startDateController = TextEditingController();
   TextEditingController _endDateController =
       TextEditingController(); // Controller for the text field
+  final ScrollController _scrollController = ScrollController();
+  bool isAtBottom = false; // Track whether the scroll is at the bottom
   DateTime? _selectedStartDate;
   DateTime? _selectedEndDate;
   final List<String> items = [
@@ -33,6 +36,7 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
   String? _selectedClient;
 
   final List<String> status = ["Show", "Hide"];
+  final List<String> filteringAmounts = ["15", "30", "60"];
   final List<Map<String, String>> jobData = [
     {
       "jobNumber": "1",
@@ -66,18 +70,43 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
     }
   ];
   String? _selectedStatus; // State variable for selected value
+  String? _selectedFilteringValue; // State variable for selected value
+
+  int currentPage = 1; // Track the current page
+  int totalPages = 3; // Total number of pages
+  int recordsPerPage = 15; // Number of records per page
+  int totalRecords = 100; // Total number of records
+
+  var selectedPageNumber = 1;
+
   @override
   void initState() {
     super.initState();
     _selectedValue = items.first;
     _selectedClient = clients.first;
-    _selectedStatus = status.first; // Initialize selected value
+    _selectedStatus = status.first;
+    _selectedFilteringValue = filteringAmounts.first;
+    // Initialize selected value
+
+    // Add listener to monitor scroll changes
+    _scrollController.addListener(() {
+      // Check if the scroll position is at the bottom
+      bool atBottom = _scrollController.position.atEdge &&
+          _scrollController.position.pixels > 0;
+
+      if (atBottom != isAtBottom) {
+        setState(() {
+          isAtBottom = atBottom;
+        });
+      }
+    });
   }
 
   @override
   void dispose() {
     _startDateController.dispose();
     _endDateController.dispose(); // Dispose the controller when done
+    _scrollController.dispose();
     super.dispose();
   }
 
@@ -255,10 +284,26 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
         width: 40.0,
         child: FittedBox(
           child: FloatingActionButton(
-            onPressed: () {},
-            tooltip: "Scroll to Bottom",
+            onPressed: () {
+              if (isAtBottom) {
+                // Scroll to the top
+                _scrollController.animateTo(
+                  0,
+                  duration: Duration(milliseconds: 500),
+                  curve: Curves.easeOut,
+                );
+              } else {
+                // Scroll to the bottom
+                _scrollController.animateTo(
+                  _scrollController.position.maxScrollExtent,
+                  duration: Duration(milliseconds: 500),
+                  curve: Curves.easeOut,
+                );
+              }
+            },
+            tooltip: isAtBottom ? "Scroll to Top" : "Scroll to Bottom",
             child: Icon(
-              Icons.arrow_downward,
+              isAtBottom ? Icons.arrow_upward : Icons.arrow_downward,
               size: 40,
             ),
           ),
@@ -720,7 +765,9 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
               thumbVisibility: true,
               interactive: true,
               trackVisibility: true,
+              controller: _scrollController,
               child: SingleChildScrollView(
+                controller: _scrollController,
                 child: Column(
                   children: [
                     ListView.builder(
@@ -908,15 +955,139 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
                       },
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        'End of Job List',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
+                      padding: const EdgeInsets.only(
+                        left: 20.0,
+                        right: 70,
+                      ),
+                      child: Align(
+                        alignment: Alignment.topLeft,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(right: 40.0),
+                              child: Text(
+                                "Show",
+                                style: TextStyle(
+                                  color: Color(0xFF005277),
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            Container(
+                              width: 100,
+                              height: 28,
+                              child: DropdownButtonFormField<String>(
+                                focusColor: Colors.white,
+                                value: _selectedFilteringValue,
+                                decoration: InputDecoration(
+                                  contentPadding: const EdgeInsets.symmetric(
+                                      horizontal: 8, vertical: 4),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(0),
+                                    borderSide: BorderSide(
+                                        color: Colors.grey, width: 2),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(0),
+                                    borderSide: BorderSide(
+                                        color: Colors.grey,
+                                        width: 2), // Border colo
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(0),
+                                    borderSide: BorderSide(
+                                        color: Colors.grey,
+                                        width: 2), // Border color when focused
+                                  ),
+                                  fillColor: Colors
+                                      .white, // Set the background color to white
+                                  filled: true,
+                                  // Enable the fill color
+                                ),
+                                icon: Icon(Icons.arrow_drop_down,
+                                    color: Colors.black),
+                                items: filteringAmounts
+                                    .map((item) => DropdownMenuItem(
+                                          value: item,
+                                          child: Text(
+                                            item,
+                                            style: TextStyle(
+                                              fontSize: 14,
+                                              color: Color(0xFF007AFF),
+                                            ),
+                                          ),
+                                        ))
+                                    .toList(),
+                                onChanged: (value) {
+                                  setState(() {
+                                    _selectedFilteringValue = value;
+                                  });
+                                },
+                              ),
+                            ),
+                            const Spacer(),
+                            Container(
+                              width: 60,
+                              height: 20,
+                              child: Text(
+                                "Navigate",
+                                style: TextStyle(
+                                  color: Color(0xFF005277),
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            // Left Arrow
+                            GestureDetector(
+                              onTap: () {
+                                // Handle left arrow click (e.g., navigate left)
+                              },
+                              child: Container(
+                                width: 28,
+                                height: 28,
+                                decoration: BoxDecoration(
+                                  border:
+                                      Border.all(color: Colors.grey, width: 2),
+                                  color: Colors.white,
+                                ),
+                                child: Icon(
+                                  Icons.arrow_left,
+                                  color: Color(0xFF005277),
+                                  size: 20,
+                                ),
+                              ),
+                            ),
+
+                            // Right Arrow
+                            GestureDetector(
+                              onTap: () {
+                                // Handle right arrow click (e.g., navigate right)
+                              },
+                              child: Container(
+                                width: 28,
+                                height: 28,
+                                decoration: BoxDecoration(
+                                  border:
+                                      Border.all(color: Colors.grey, width: 2),
+                                  color: Colors.white,
+                                ),
+                                child: Icon(
+                                  Icons.arrow_right,
+                                  color: Color(0xFF005277),
+                                  size: 20,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
+                    ),
+                    SizedBox(
+                      height: 10,
                     ),
                   ],
                 ),
