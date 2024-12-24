@@ -114,7 +114,7 @@ class _TabsPageState extends State<TabsPage> {
                     fit: BoxFit
                         .contain, // Ensures the image fits within the specified size
                   ),
-                  label: 'On-site Jobs',
+                  label: 'On-site',
                 ),
                 BottomNavigationBarItem(
                   icon: Image.asset(

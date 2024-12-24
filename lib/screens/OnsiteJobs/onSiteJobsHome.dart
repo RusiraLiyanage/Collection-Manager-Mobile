@@ -253,7 +253,7 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
 
             // Right-aligned value
             Expanded(
-              flex: 3, // Adjust the flex value to control space distribution
+              flex: 4, // Adjust the flex value to control space distribution
               child: Align(
                 alignment: Alignment.centerRight,
                 child: Text(
@@ -494,7 +494,7 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
                   child: Row(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(right: 60.0),
+                        padding: const EdgeInsets.only(right: 66.0),
                         child: Text(
                           "Client",
                           style: TextStyle(
@@ -504,7 +504,7 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
                         ),
                       ),
                       Container(
-                        width: 240,
+                        width: 260,
                         height: 28,
                         child: DropdownButtonFormField<String>(
                           focusColor: Colors.white,
@@ -568,7 +568,7 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
                   child: Row(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(right: 70.0),
+                        padding: const EdgeInsets.only(right: 75.0),
                         child: Text(
                           "Date",
                           style: TextStyle(
@@ -673,7 +673,7 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
                   child: Row(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(right: 60.0),
+                        padding: const EdgeInsets.only(right: 63.0),
                         child: Text(
                           "Status",
                           style: TextStyle(
@@ -837,7 +837,7 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
                                         // Center-aligned icon
                                         Expanded(
                                           flex:
-                                              4, // Adjust the flex value to control space distribution
+                                              5, // Adjust the flex value to control space distribution
                                           child: Align(
                                             alignment: Alignment.center,
                                             child: Row(
@@ -934,8 +934,8 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
                                     _buildInfoRow(
                                         iconPath:
                                             'assets/images/icons/dafault_icon.png',
-                                        title: job["location"]!,
-                                        value: 'Parramatta'),
+                                        title: 'location',
+                                        value: job["location"]!),
                                     _buildInfoRow(
                                         iconPath:
                                             'assets/images/icons/dafault_icon.png',
@@ -956,7 +956,7 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(
-                        left: 20.0,
+                        left: 10.0,
                         right: 70,
                       ),
                       child: Align(
@@ -965,7 +965,7 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Padding(
-                              padding: const EdgeInsets.only(right: 40.0),
+                              padding: const EdgeInsets.only(right: 30.0),
                               child: Text(
                                 "Show",
                                 style: TextStyle(
@@ -1028,7 +1028,7 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
                             ),
                             const Spacer(),
                             Container(
-                              width: 60,
+                              width: 65,
                               height: 20,
                               child: Text(
                                 "Navigate",
@@ -1087,7 +1087,21 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
                       ),
                     ),
                     SizedBox(
-                      height: 10,
+                      height: 20,
+                    ),
+                    Align(
+                        alignment: Alignment.topLeft,
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 10.0),
+                          child: FittedBox(
+                            child: Image.asset(
+                              "assets/images/icons/showAchieve.png",
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        )),
+                    SizedBox(
+                      height: 20,
                     ),
                   ],
                 ),
