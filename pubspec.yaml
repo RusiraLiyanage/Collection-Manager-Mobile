@@ -84,6 +84,7 @@ flutter:
     - assets/images/icons/threeDots.png
     - assets/images/icons/eye_icon.png
     - assets/images/icons/showAchieve.png
+    - assets/images/icons/hideArchieve.png
     - assets/images/icons/document_icon.png
     - assets/images/icons/dafault_icon.png
     - assets/images/backgrounds/home-page-background.jpg

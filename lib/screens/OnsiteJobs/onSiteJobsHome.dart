@@ -19,6 +19,7 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
       TextEditingController(); // Controller for the text field
   final ScrollController _scrollController = ScrollController();
   bool isAtBottom = false; // Track whether the scroll is at the bottom
+  bool isAtMiddle = false;
   DateTime? _selectedStartDate;
   DateTime? _selectedEndDate;
   final List<String> items = [
@@ -35,8 +36,35 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
   ]; // Example items list
   String? _selectedClient;
 
+  int currentPage = 1; // Tracks the current page
+  int itemsPerPage = 5; // Default items per page
+
+  int currentPageAchieved = 1; // Tracks the current page
+  int itemsPerPageAchieved = 5; // Default items per page
+
+  // Filtered jobs to display based on pagination
+  List<Map<String, String>> get paginatedJobData {
+    int startIndex = (currentPage - 1) * itemsPerPage;
+    int endIndex = startIndex + itemsPerPage;
+    endIndex = endIndex > jobData.length ? jobData.length : endIndex;
+    return jobData.sublist(startIndex, endIndex);
+  }
+
+  // Filtered achieved jobs to display based on pagination
+  List<Map<String, String>> get paginatedJobDataAchieved {
+    int startIndexAchieved = (currentPageAchieved - 1) * itemsPerPageAchieved;
+    int endIndexAchieved = startIndexAchieved + itemsPerPage;
+    endIndexAchieved = endIndexAchieved > jobDataAchieved.length
+        ? jobDataAchieved.length
+        : endIndexAchieved;
+    return jobData.sublist(startIndexAchieved, endIndexAchieved);
+  }
+
+  int get totalPages => (jobData.length / itemsPerPage).ceil();
+
   final List<String> status = ["Show", "Hide"];
-  final List<String> filteringAmounts = ["15", "30", "60"];
+  final List<String> filteringAmounts = ["5", "10", "15"];
+  final List<String> filteringAmountsArchieved = ["5", "10", "15"];
   final List<Map<String, String>> jobData = [
     {
       "jobNumber": "1",
@@ -67,17 +95,360 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
       "location": "Parramatta",
       "service": "Random Testing",
       "callout": "Non Callout",
+    },
+    {
+      "jobNumber": "4",
+      "jobStatus": "Draft",
+      "dateTime": "30 Apr 2025 10:00",
+      "client": "Rail NSW",
+      "rep": "John Roberts",
+      "location": "Parramatta",
+      "service": "Random Testing",
+      "callout": "Non Callout",
+    },
+    {
+      "jobNumber": "5",
+      "jobStatus": "Draft",
+      "dateTime": "30 Apr 2025 10:00",
+      "client": "Rail NSW",
+      "rep": "John Roberts",
+      "location": "Parramatta",
+      "service": "Random Testing",
+      "callout": "Non Callout",
+    },
+    {
+      "jobNumber": "6",
+      "jobStatus": "Draft",
+      "dateTime": "30 Apr 2025 10:00",
+      "client": "Rail NSW",
+      "rep": "John Roberts",
+      "location": "Parramatta",
+      "service": "Random Testing",
+      "callout": "Non Callout",
+    },
+    {
+      "jobNumber": "7",
+      "jobStatus": "Draft",
+      "dateTime": "30 Apr 2025 10:00",
+      "client": "Rail NSW",
+      "rep": "John Roberts",
+      "location": "Parramatta",
+      "service": "Random Testing",
+      "callout": "Non Callout",
+    },
+    {
+      "jobNumber": "8",
+      "jobStatus": "Draft",
+      "dateTime": "30 Apr 2025 10:00",
+      "client": "Rail NSW",
+      "rep": "John Roberts",
+      "location": "Parramatta",
+      "service": "Random Testing",
+      "callout": "Non Callout",
+    },
+    {
+      "jobNumber": "9",
+      "jobStatus": "Draft",
+      "dateTime": "30 Apr 2025 10:00",
+      "client": "Rail NSW",
+      "rep": "John Roberts",
+      "location": "Parramatta",
+      "service": "Random Testing",
+      "callout": "Non Callout",
+    },
+    {
+      "jobNumber": "10",
+      "jobStatus": "Draft",
+      "dateTime": "30 Apr 2025 10:00",
+      "client": "Rail NSW",
+      "rep": "John Roberts",
+      "location": "Parramatta",
+      "service": "Random Testing",
+      "callout": "Non Callout",
+    },
+    {
+      "jobNumber": "11",
+      "jobStatus": "Draft",
+      "dateTime": "30 Apr 2025 10:00",
+      "client": "Rail NSW",
+      "rep": "John Roberts",
+      "location": "Parramatta",
+      "service": "Random Testing",
+      "callout": "Callout",
+    },
+    {
+      "jobNumber": "12",
+      "jobStatus": "Draft",
+      "dateTime": "30 Apr 2025 10:00",
+      "client": "Rail NSW",
+      "rep": "John Roberts",
+      "location": "Parramatta",
+      "service": "Random Testing",
+      "callout": "Callout",
+    },
+    {
+      "jobNumber": "13",
+      "jobStatus": "Draft",
+      "dateTime": "30 Apr 2025 10:00",
+      "client": "Rail NSW",
+      "rep": "John Roberts",
+      "location": "Parramatta",
+      "service": "Random Testing",
+      "callout": "Non Callout",
+    },
+    {
+      "jobNumber": "14",
+      "jobStatus": "Draft",
+      "dateTime": "30 Apr 2025 10:00",
+      "client": "Rail NSW",
+      "rep": "John Roberts",
+      "location": "Parramatta",
+      "service": "Random Testing",
+      "callout": "Non Callout",
+    },
+    {
+      "jobNumber": "15",
+      "jobStatus": "Draft",
+      "dateTime": "30 Apr 2025 10:00",
+      "client": "Rail NSW",
+      "rep": "John Roberts",
+      "location": "Parramatta",
+      "service": "Random Testing",
+      "callout": "Non Callout",
+    },
+    {
+      "jobNumber": "16",
+      "jobStatus": "Draft",
+      "dateTime": "30 Apr 2025 10:00",
+      "client": "Rail NSW",
+      "rep": "John Roberts",
+      "location": "Parramatta",
+      "service": "Random Testing",
+      "callout": "Non Callout",
+    },
+    {
+      "jobNumber": "17",
+      "jobStatus": "Draft",
+      "dateTime": "30 Apr 2025 10:00",
+      "client": "Rail NSW",
+      "rep": "John Roberts",
+      "location": "Parramatta",
+      "service": "Random Testing",
+      "callout": "Non Callout",
+    },
+    {
+      "jobNumber": "18",
+      "jobStatus": "Draft",
+      "dateTime": "30 Apr 2025 10:00",
+      "client": "Rail NSW",
+      "rep": "John Roberts",
+      "location": "Parramatta",
+      "service": "Random Testing",
+      "callout": "Non Callout",
+    },
+    {
+      "jobNumber": "19",
+      "jobStatus": "Draft",
+      "dateTime": "30 Apr 2025 10:00",
+      "client": "Rail NSW",
+      "rep": "John Roberts",
+      "location": "Parramatta",
+      "service": "Random Testing",
+      "callout": "Non Callout",
+    },
+    {
+      "jobNumber": "20",
+      "jobStatus": "Draft",
+      "dateTime": "30 Apr 2025 10:00",
+      "client": "Rail NSW",
+      "rep": "John Roberts",
+      "location": "Parramatta",
+      "service": "Random Testing",
+      "callout": "Non Callout",
+    },
+  ];
+
+  int get totalPagesAchieved => (jobData.length / itemsPerPage).ceil();
+
+  final List<Map<String, String>> jobDataAchieved = [
+    {
+      "jobNumber": "1",
+      "jobStatus": "Draft",
+      "dateTime": "30 Apr 2025 10:00",
+      "client": "Rail NSW",
+      "rep": "John Roberts",
+      "location": "Parramatta",
+      "service": "Random Testing",
+      "callout": "Callout",
+    },
+    {
+      "jobNumber": "2",
+      "jobStatus": "Draft",
+      "dateTime": "30 Apr 2025 10:00",
+      "client": "Rail NSW",
+      "rep": "John Roberts",
+      "location": "Parramatta",
+      "service": "Random Testing",
+      "callout": "Callout",
+    },
+    {
+      "jobNumber": "3",
+      "jobStatus": "Draft",
+      "dateTime": "30 Apr 2025 10:00",
+      "client": "Rail NSW",
+      "rep": "John Roberts",
+      "location": "Parramatta",
+      "service": "Random Testing",
+      "callout": "Non Callout",
+    },
+    {
+      "jobNumber": "4",
+      "jobStatus": "Draft",
+      "dateTime": "30 Apr 2025 10:00",
+      "client": "Rail NSW",
+      "rep": "John Roberts",
+      "location": "Parramatta",
+      "service": "Random Testing",
+      "callout": "Non Callout",
+    },
+    {
+      "jobNumber": "5",
+      "jobStatus": "Draft",
+      "dateTime": "30 Apr 2025 10:00",
+      "client": "Rail NSW",
+      "rep": "John Roberts",
+      "location": "Parramatta",
+      "service": "Random Testing",
+      "callout": "Non Callout",
+    },
+    {
+      "jobNumber": "6",
+      "jobStatus": "Draft",
+      "dateTime": "30 Apr 2025 10:00",
+      "client": "Rail NSW",
+      "rep": "John Roberts",
+      "location": "Parramatta",
+      "service": "Random Testing",
+      "callout": "Non Callout",
+    },
+    {
+      "jobNumber": "7",
+      "jobStatus": "Draft",
+      "dateTime": "30 Apr 2025 10:00",
+      "client": "Rail NSW",
+      "rep": "John Roberts",
+      "location": "Parramatta",
+      "service": "Random Testing",
+      "callout": "Non Callout",
+    },
+    {
+      "jobNumber": "8",
+      "jobStatus": "Draft",
+      "dateTime": "30 Apr 2025 10:00",
+      "client": "Rail NSW",
+      "rep": "John Roberts",
+      "location": "Parramatta",
+      "service": "Random Testing",
+      "callout": "Non Callout",
+    },
+    {
+      "jobNumber": "9",
+      "jobStatus": "Draft",
+      "dateTime": "30 Apr 2025 10:00",
+      "client": "Rail NSW",
+      "rep": "John Roberts",
+      "location": "Parramatta",
+      "service": "Random Testing",
+      "callout": "Non Callout",
+    },
+    {
+      "jobNumber": "10",
+      "jobStatus": "Draft",
+      "dateTime": "30 Apr 2025 10:00",
+      "client": "Rail NSW",
+      "rep": "John Roberts",
+      "location": "Parramatta",
+      "service": "Random Testing",
+      "callout": "Non Callout",
+    },
+    {
+      "jobNumber": "11",
+      "jobStatus": "Draft",
+      "dateTime": "30 Apr 2025 10:00",
+      "client": "Rail NSW",
+      "rep": "John Roberts",
+      "location": "Parramatta",
+      "service": "Random Testing",
+      "callout": "Callout",
+    },
+    {
+      "jobNumber": "12",
+      "jobStatus": "Draft",
+      "dateTime": "30 Apr 2025 10:00",
+      "client": "Rail NSW",
+      "rep": "John Roberts",
+      "location": "Parramatta",
+      "service": "Random Testing",
+      "callout": "Callout",
+    },
+    {
+      "jobNumber": "13",
+      "jobStatus": "Draft",
+      "dateTime": "30 Apr 2025 10:00",
+      "client": "Rail NSW",
+      "rep": "John Roberts",
+      "location": "Parramatta",
+      "service": "Random Testing",
+      "callout": "Non Callout",
+    },
+    {
+      "jobNumber": "14",
+      "jobStatus": "Draft",
+      "dateTime": "30 Apr 2025 10:00",
+      "client": "Rail NSW",
+      "rep": "John Roberts",
+      "location": "Parramatta",
+      "service": "Random Testing",
+      "callout": "Non Callout",
+    },
+    {
+      "jobNumber": "15",
+      "jobStatus": "Draft",
+      "dateTime": "30 Apr 2025 10:00",
+      "client": "Rail NSW",
+      "rep": "John Roberts",
+      "location": "Parramatta",
+      "service": "Random Testing",
+      "callout": "Non Callout",
     }
   ];
+
   String? _selectedStatus; // State variable for selected value
   String? _selectedFilteringValue; // State variable for selected value
 
-  int currentPage = 1; // Track the current page
+  String? _selectedFilteringValueAchieved; // State variable for selected value
+
+/*   int currentPage = 1; // Track the current page
   int totalPages = 3; // Total number of pages
   int recordsPerPage = 15; // Number of records per page
-  int totalRecords = 100; // Total number of records
+  int totalRecords = 100; // Total number of records */
 
-  var selectedPageNumber = 1;
+  bool archieveJobsOpened = false;
+  bool showMainJobs = true;
+
+  String get displayRange {
+    int start = ((currentPage - 1) * itemsPerPage) + 1;
+    int end = currentPage * itemsPerPage;
+    end = end > jobData.length ? jobData.length : end;
+    return "$start - $end";
+  }
+
+  String get displayRangeAchieved {
+    int start = ((currentPageAchieved - 1) * itemsPerPageAchieved) + 1;
+    int end = currentPageAchieved * itemsPerPageAchieved;
+    end = end > jobDataAchieved.length ? jobDataAchieved.length : end;
+    return "$start - $end";
+  }
 
   @override
   void initState() {
@@ -86,6 +457,7 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
     _selectedClient = clients.first;
     _selectedStatus = status.first;
     _selectedFilteringValue = filteringAmounts.first;
+    _selectedFilteringValueAchieved = filteringAmountsArchieved.first;
     // Initialize selected value
 
     // Add listener to monitor scroll changes
@@ -97,6 +469,15 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
       if (atBottom != isAtBottom) {
         setState(() {
           isAtBottom = atBottom;
+        });
+      }
+    });
+
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels < 680) {
+        setState(() {
+          showMainJobs = true;
+          archieveJobsOpened = false;
         });
       }
     });
@@ -748,17 +1129,18 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
           Align(
             alignment: Alignment.centerRight,
             child: Padding(
-              padding: const EdgeInsets.only(
-                right: 18.0,
-                bottom: 5.0,
-              ),
-              child: Text(
-                "1 - 15 out of 100 records",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
+                padding: const EdgeInsets.only(
+                  right: 18.0,
+                  bottom: 5.0,
                 ),
-              ),
-            ),
+                child: showMainJobs
+                    ? Text(
+                        "$displayRange out of ${jobData.length} records",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      )
+                    : null),
           ),
           Expanded(
             child: Scrollbar(
@@ -772,9 +1154,9 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
                   children: [
                     ListView.builder(
                       shrinkWrap: true,
-                      itemCount: jobData.length,
+                      itemCount: paginatedJobData.length,
                       itemBuilder: (context, index) {
-                        final job = jobData[index];
+                        final job = paginatedJobData[index];
                         return Center(
                           child: Padding(
                             padding: const EdgeInsets.only(
@@ -1022,6 +1404,13 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
                                 onChanged: (value) {
                                   setState(() {
                                     _selectedFilteringValue = value;
+                                    itemsPerPage = int.parse(value!);
+                                    currentPage = 1; // Reset to first page
+                                    _scrollController.animateTo(
+                                      0,
+                                      duration: Duration(milliseconds: 500),
+                                      curve: Curves.easeOut,
+                                    );
                                   });
                                 },
                               ),
@@ -1045,6 +1434,16 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
                             GestureDetector(
                               onTap: () {
                                 // Handle left arrow click (e.g., navigate left)
+                                if (currentPage > 1) {
+                                  setState(() {
+                                    currentPage--;
+                                  });
+                                  _scrollController.animateTo(
+                                    0,
+                                    duration: Duration(milliseconds: 500),
+                                    curve: Curves.easeOut,
+                                  );
+                                }
                               },
                               child: Container(
                                 width: 28,
@@ -1066,6 +1465,16 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
                             GestureDetector(
                               onTap: () {
                                 // Handle right arrow click (e.g., navigate right)
+                                if (currentPage < totalPages) {
+                                  setState(() {
+                                    currentPage++;
+                                  });
+                                  _scrollController.animateTo(
+                                    0,
+                                    duration: Duration(milliseconds: 500),
+                                    curve: Curves.easeOut,
+                                  );
+                                }
                               },
                               child: Container(
                                 width: 28,
@@ -1093,16 +1502,542 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
                         alignment: Alignment.topLeft,
                         child: Padding(
                           padding: const EdgeInsets.only(left: 10.0),
-                          child: FittedBox(
-                            child: Image.asset(
-                              "assets/images/icons/showAchieve.png",
-                              fit: BoxFit.cover,
-                            ),
+                          child: GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                archieveJobsOpened = !archieveJobsOpened;
+                                if (!archieveJobsOpened) {
+                                  showMainJobs = true;
+                                } else {
+                                  showMainJobs = false;
+                                }
+                                if (archieveJobsOpened) {
+                                  _scrollController.animateTo(
+                                    _scrollController.position.pixels +
+                                        100, // Adjust this value to scroll further down
+                                    duration: Duration(milliseconds: 500),
+                                    curve: Curves.easeOut,
+                                  );
+                                }
+                              });
+                            },
+                            child: !archieveJobsOpened
+                                ? FittedBox(
+                                    child: Image.asset(
+                                      "assets/images/icons/showAchieve.png",
+                                      fit: BoxFit.cover,
+                                    ),
+                                  )
+                                : FittedBox(
+                                    child: Image.asset(
+                                      "assets/images/icons/hideArchieve.png",
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
                           ),
                         )),
                     SizedBox(
                       height: 20,
                     ),
+                    archieveJobsOpened
+                        ? Container(
+                            width: double.infinity,
+                            color: const Color(0xFF01B4D2).withOpacity(0.2),
+                            child: Column(
+                              children: [
+                                Divider(
+                                  thickness: 2.0,
+                                  indent: 10,
+                                  endIndent: 10,
+                                  color: Color(0xFF0047B3),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Align(
+                                  alignment: Alignment.topRight,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                      right: 10.0,
+                                    ),
+                                    child: Text(
+                                      "$displayRangeAchieved out of ${jobDataAchieved.length} records",
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                archieveJobsOpened
+                                    ? Column(
+                                        children: [
+                                          ListView.builder(
+                                            shrinkWrap:
+                                                true, // Allow ListView to adapt to its content
+                                            physics: ClampingScrollPhysics(),
+                                            itemCount:
+                                                paginatedJobDataAchieved.length,
+                                            itemBuilder: (context, index) {
+                                              final job =
+                                                  paginatedJobDataAchieved[
+                                                      index];
+                                              return Center(
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                    left: 30.0,
+                                                    right: 45.0,
+                                                    bottom: 10.0,
+                                                  ),
+                                                  child: Card(
+                                                    elevation: 5,
+                                                    shape:
+                                                        RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              15),
+                                                    ),
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                        top: 12.0,
+                                                        bottom: 12.0,
+                                                        left: 18.0,
+                                                        right: 25.0,
+                                                      ),
+                                                      child: Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Row(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .center,
+                                                            children: [
+                                                              // Left-aligned title
+                                                              Expanded(
+                                                                flex:
+                                                                    3, // Adjust the flex value to control space distribution
+                                                                child: Align(
+                                                                  alignment:
+                                                                      Alignment
+                                                                          .centerLeft,
+                                                                  child: Row(
+                                                                    children: [
+                                                                      FittedBox(
+                                                                        child: Image
+                                                                            .asset(
+                                                                          "assets/images/icons/threeDots.png",
+                                                                          fit: BoxFit
+                                                                              .cover,
+                                                                        ),
+                                                                      ),
+                                                                      SizedBox(
+                                                                        width:
+                                                                            10,
+                                                                      ),
+                                                                      Padding(
+                                                                        padding: const EdgeInsets
+                                                                            .only(
+                                                                            top:
+                                                                                8.0),
+                                                                        child:
+                                                                            FittedBox(
+                                                                          child:
+                                                                              Image.asset(
+                                                                            "assets/images/icons/eye_icon.png",
+                                                                            fit:
+                                                                                BoxFit.cover,
+                                                                          ),
+                                                                        ),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                              ),
+
+                                                              // Center-aligned icon
+                                                              Expanded(
+                                                                flex:
+                                                                    5, // Adjust the flex value to control space distribution
+                                                                child: Align(
+                                                                  alignment:
+                                                                      Alignment
+                                                                          .center,
+                                                                  child: Row(
+                                                                    children: [
+                                                                      Text(
+                                                                          "Job Status"),
+                                                                      SizedBox(
+                                                                        width:
+                                                                            5,
+                                                                      ),
+                                                                      Container(
+                                                                        padding: const EdgeInsets
+                                                                            .symmetric(
+                                                                            horizontal:
+                                                                                3,
+                                                                            vertical:
+                                                                                10),
+                                                                        decoration:
+                                                                            BoxDecoration(
+                                                                          color:
+                                                                              Colors.amber,
+                                                                          borderRadius:
+                                                                              BorderRadius.circular(8),
+                                                                          boxShadow: [
+                                                                            BoxShadow(
+                                                                              color: Colors.grey.withOpacity(0.5),
+                                                                              spreadRadius: 1,
+                                                                              blurRadius: 4,
+                                                                            ),
+                                                                          ],
+                                                                        ),
+                                                                        child:
+                                                                            const Text(
+                                                                          'Draft',
+                                                                          style:
+                                                                              TextStyle(
+                                                                            color:
+                                                                                Colors.black,
+                                                                            fontWeight:
+                                                                                FontWeight.bold,
+                                                                          ),
+                                                                        ),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                              ),
+
+                                                              // Right-aligned value
+                                                              Expanded(
+                                                                flex:
+                                                                    3, // Adjust the flex value to control space distribution
+                                                                child: Align(
+                                                                  alignment:
+                                                                      Alignment
+                                                                          .centerRight,
+                                                                  child: Row(
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .end,
+                                                                    children: [
+                                                                      FittedBox(
+                                                                        child: Image
+                                                                            .asset(
+                                                                          'assets/images/icons/document_icon.png',
+                                                                          fit: BoxFit
+                                                                              .cover,
+                                                                        ),
+                                                                      ),
+                                                                      const SizedBox(
+                                                                        width:
+                                                                            1, // Space between document icon and the number
+                                                                      ),
+                                                                      Text(
+                                                                        job["jobNumber"]!,
+                                                                        style:
+                                                                            TextStyle(
+                                                                          color:
+                                                                              Colors.black,
+                                                                          fontWeight:
+                                                                              FontWeight.bold,
+                                                                          fontSize:
+                                                                              19,
+                                                                        ),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          const SizedBox(
+                                                              height: 5),
+                                                          // Content Rows
+                                                          _buildInfoRow(
+                                                              iconPath:
+                                                                  'assets/images/icons/dafault_icon.png',
+                                                              title:
+                                                                  'Date / Time',
+                                                              value: job[
+                                                                  "dateTime"]!),
+                                                          _buildInfoRow(
+                                                              iconPath:
+                                                                  'assets/images/icons/dafault_icon.png',
+                                                              title: 'Client',
+                                                              value: job[
+                                                                  "client"]!),
+                                                          _buildInfoRow(
+                                                              iconPath:
+                                                                  'assets/images/icons/dafault_icon.png',
+                                                              title:
+                                                                  'Authorized Rep',
+                                                              value:
+                                                                  job["rep"]!,
+                                                              isBold: false),
+                                                          _buildInfoRow(
+                                                              iconPath:
+                                                                  'assets/images/icons/dafault_icon.png',
+                                                              title: 'location',
+                                                              value: job[
+                                                                  "location"]!),
+                                                          _buildInfoRow(
+                                                              iconPath:
+                                                                  'assets/images/icons/dafault_icon.png',
+                                                              title: 'Service',
+                                                              value: job[
+                                                                  "service"]!),
+                                                          _buildInfoRow(
+                                                              iconPath:
+                                                                  'assets/images/icons/dafault_icon.png',
+                                                              title:
+                                                                  'Callout Job',
+                                                              value: job[
+                                                                  "callout"]!),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              );
+                                            },
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                              left: 10.0,
+                                              right: 70,
+                                            ),
+                                            child: Align(
+                                              alignment: Alignment.topLeft,
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            right: 30.0),
+                                                    child: Text(
+                                                      "Show",
+                                                      style: TextStyle(
+                                                        color:
+                                                            Color(0xFF005277),
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    width: 100,
+                                                    height: 28,
+                                                    child:
+                                                        DropdownButtonFormField<
+                                                            String>(
+                                                      focusColor: Colors.white,
+                                                      value:
+                                                          _selectedFilteringValueAchieved,
+                                                      decoration:
+                                                          InputDecoration(
+                                                        contentPadding:
+                                                            const EdgeInsets
+                                                                .symmetric(
+                                                                horizontal: 8,
+                                                                vertical: 4),
+                                                        border:
+                                                            OutlineInputBorder(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(0),
+                                                          borderSide:
+                                                              BorderSide(
+                                                                  color: Colors
+                                                                      .grey,
+                                                                  width: 2),
+                                                        ),
+                                                        enabledBorder:
+                                                            OutlineInputBorder(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(0),
+                                                          borderSide: BorderSide(
+                                                              color:
+                                                                  Colors.grey,
+                                                              width:
+                                                                  2), // Border colo
+                                                        ),
+                                                        focusedBorder:
+                                                            OutlineInputBorder(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(0),
+                                                          borderSide: BorderSide(
+                                                              color:
+                                                                  Colors.grey,
+                                                              width:
+                                                                  2), // Border color when focused
+                                                        ),
+                                                        fillColor: Colors
+                                                            .white, // Set the background color to white
+                                                        filled: true,
+                                                        // Enable the fill color
+                                                      ),
+                                                      icon: Icon(
+                                                          Icons.arrow_drop_down,
+                                                          color: Colors.black),
+                                                      items:
+                                                          filteringAmountsArchieved
+                                                              .map((item) =>
+                                                                  DropdownMenuItem(
+                                                                    value: item,
+                                                                    child: Text(
+                                                                      item,
+                                                                      style:
+                                                                          TextStyle(
+                                                                        fontSize:
+                                                                            14,
+                                                                        color: Color(
+                                                                            0xFF007AFF),
+                                                                      ),
+                                                                    ),
+                                                                  ))
+                                                              .toList(),
+                                                      onChanged: (value) {
+                                                        setState(() {
+                                                          _selectedFilteringValueAchieved =
+                                                              value;
+
+                                                          itemsPerPageAchieved =
+                                                              int.parse(value!);
+                                                          currentPageAchieved =
+                                                              1; // Reset to first page
+                                                          _scrollController
+                                                              .animateTo(
+                                                            0,
+                                                            duration: Duration(
+                                                                milliseconds:
+                                                                    500),
+                                                            curve:
+                                                                Curves.easeOut,
+                                                          );
+                                                        });
+                                                      },
+                                                    ),
+                                                  ),
+                                                  const Spacer(),
+                                                  Container(
+                                                    width: 65,
+                                                    height: 20,
+                                                    child: Text(
+                                                      "Navigate",
+                                                      style: TextStyle(
+                                                        color:
+                                                            Color(0xFF005277),
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 10,
+                                                  ),
+                                                  // Left Arrow
+                                                  GestureDetector(
+                                                    onTap: () {
+                                                      // Handle left arrow click (e.g., navigate left)
+                                                      if (currentPageAchieved >
+                                                          1) {
+                                                        setState(() {
+                                                          currentPageAchieved--;
+                                                        });
+                                                        _scrollController
+                                                            .animateTo(
+                                                          0,
+                                                          duration: Duration(
+                                                              milliseconds:
+                                                                  500),
+                                                          curve: Curves.easeOut,
+                                                        );
+                                                      }
+                                                    },
+                                                    child: Container(
+                                                      width: 28,
+                                                      height: 28,
+                                                      decoration: BoxDecoration(
+                                                        border: Border.all(
+                                                            color: Colors.grey,
+                                                            width: 2),
+                                                        color: Colors.white,
+                                                      ),
+                                                      child: Icon(
+                                                        Icons.arrow_left,
+                                                        color:
+                                                            Color(0xFF005277),
+                                                        size: 20,
+                                                      ),
+                                                    ),
+                                                  ),
+
+                                                  // Right Arrow
+                                                  GestureDetector(
+                                                    onTap: () {
+                                                      // Handle right arrow click (e.g., navigate right)
+                                                      if (currentPageAchieved <
+                                                          totalPagesAchieved) {
+                                                        setState(() {
+                                                          currentPageAchieved++;
+                                                        });
+                                                        _scrollController
+                                                            .animateTo(
+                                                          0,
+                                                          duration: Duration(
+                                                              milliseconds:
+                                                                  500),
+                                                          curve: Curves.easeOut,
+                                                        );
+                                                      }
+                                                    },
+                                                    child: Container(
+                                                      width: 28,
+                                                      height: 28,
+                                                      decoration: BoxDecoration(
+                                                        border: Border.all(
+                                                            color: Colors.grey,
+                                                            width: 2),
+                                                        color: Colors.white,
+                                                      ),
+                                                      child: Icon(
+                                                        Icons.arrow_right,
+                                                        color:
+                                                            Color(0xFF005277),
+                                                        size: 20,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 15,
+                                          ),
+                                        ],
+                                      )
+                                    : SizedBox(
+                                        height: 2,
+                                      ),
+                              ],
+                            ),
+                          )
+                        : SizedBox(
+                            height: 2,
+                          ),
                   ],
                 ),
               ),
