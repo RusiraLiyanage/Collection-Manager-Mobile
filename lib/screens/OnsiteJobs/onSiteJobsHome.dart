@@ -53,7 +53,7 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
   // Filtered achieved jobs to display based on pagination
   List<Map<String, String>> get paginatedJobDataAchieved {
     int startIndexAchieved = (currentPageAchieved - 1) * itemsPerPageAchieved;
-    int endIndexAchieved = startIndexAchieved + itemsPerPage;
+    int endIndexAchieved = startIndexAchieved + itemsPerPageAchieved;
     endIndexAchieved = endIndexAchieved > jobDataAchieved.length
         ? jobDataAchieved.length
         : endIndexAchieved;
@@ -268,7 +268,8 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
     },
   ];
 
-  int get totalPagesAchieved => (jobData.length / itemsPerPage).ceil();
+  int get totalPagesAchieved =>
+      (jobDataAchieved.length / itemsPerPageAchieved).ceil();
 
   final List<Map<String, String>> jobDataAchieved = [
     {
@@ -1512,12 +1513,45 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
                                   showMainJobs = false;
                                 }
                                 if (archieveJobsOpened) {
-                                  _scrollController.animateTo(
-                                    _scrollController.position.pixels +
-                                        100, // Adjust this value to scroll further down
-                                    duration: Duration(milliseconds: 500),
-                                    curve: Curves.easeOut,
-                                  );
+                                  if (_selectedFilteringValue != "5") {
+                                    String? theSelected =
+                                        _selectedFilteringValue;
+                                    setState(() {
+                                      _selectedFilteringValue =
+                                          filteringAmounts.first;
+                                      itemsPerPage = 5;
+                                    });
+                                    // Calculate the target offset (80% of the scrollable extent)
+                                    print(theSelected);
+                                    if (theSelected == "10") {
+                                      final double targetOffset =
+                                          _scrollController
+                                                  .position.maxScrollExtent *
+                                              0.5;
+                                      _scrollController.animateTo(
+                                        targetOffset,
+                                        duration: Duration(milliseconds: 500),
+                                        curve: Curves.easeOut,
+                                      );
+                                    } else if (theSelected == "15") {
+                                      final double targetOffset =
+                                          _scrollController
+                                                  .position.maxScrollExtent *
+                                              0.35;
+                                      _scrollController.animateTo(
+                                        targetOffset,
+                                        duration: Duration(milliseconds: 500),
+                                        curve: Curves.easeOut,
+                                      );
+                                    }
+                                  } else {
+                                    _scrollController.animateTo(
+                                      _scrollController.position.pixels +
+                                          100, // Adjust this value to scroll further down
+                                      duration: Duration(milliseconds: 500),
+                                      curve: Curves.easeOut,
+                                    );
+                                  }
                                 }
                               });
                             },
@@ -1561,7 +1595,7 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
                                       right: 10.0,
                                     ),
                                     child: Text(
-                                      "$displayRangeAchieved out of ${jobDataAchieved.length} records",
+                                      "$displayRangeAchieved out of ${jobDataAchieved.length} achieved records",
                                       style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                       ),
@@ -1917,15 +1951,71 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
                                                               int.parse(value!);
                                                           currentPageAchieved =
                                                               1; // Reset to first page
-                                                          _scrollController
-                                                              .animateTo(
-                                                            0,
-                                                            duration: Duration(
-                                                                milliseconds:
-                                                                    500),
-                                                            curve:
-                                                                Curves.easeOut,
-                                                          );
+                                                          if (_selectedFilteringValueAchieved ==
+                                                              "5") {
+                                                            final double
+                                                                maxScrollExtent =
+                                                                _scrollController
+                                                                    .position
+                                                                    .maxScrollExtent;
+                                                            final double
+                                                                targetOffset =
+                                                                maxScrollExtent *
+                                                                    0.5; // Slightly more than half (60%).
+                                                            // Use animateTo to smoothly scroll to the desired position.
+                                                            _scrollController
+                                                                .animateTo(
+                                                              targetOffset,
+                                                              duration: Duration(
+                                                                  milliseconds:
+                                                                      500),
+                                                              curve: Curves
+                                                                  .easeInOut,
+                                                            );
+                                                          } else if (_selectedFilteringValueAchieved ==
+                                                              "10") {
+                                                            print("10 is here");
+                                                            final double
+                                                                maxScrollExtent =
+                                                                _scrollController
+                                                                    .position
+                                                                    .maxScrollExtent;
+                                                            final double
+                                                                targetOffset =
+                                                                maxScrollExtent *
+                                                                    0.5; // Slightly more than half (60%).
+                                                            // Use animateTo to smoothly scroll to the desired position.
+                                                            _scrollController
+                                                                .animateTo(
+                                                              targetOffset,
+                                                              duration: Duration(
+                                                                  milliseconds:
+                                                                      500),
+                                                              curve: Curves
+                                                                  .easeInOut,
+                                                            );
+                                                          } else if (_selectedFilteringValueAchieved ==
+                                                              "15") {
+                                                            final double
+                                                                maxScrollExtent =
+                                                                _scrollController
+                                                                    .position
+                                                                    .maxScrollExtent;
+                                                            final double
+                                                                targetOffset =
+                                                                maxScrollExtent *
+                                                                    0.55; // Slightly more than half (60%).
+                                                            // Use animateTo to smoothly scroll to the desired position.
+                                                            _scrollController
+                                                                .animateTo(
+                                                              targetOffset,
+                                                              duration: Duration(
+                                                                  milliseconds:
+                                                                      500),
+                                                              curve: Curves
+                                                                  .easeInOut,
+                                                            );
+                                                          }
                                                         });
                                                       },
                                                     ),
@@ -1956,14 +2046,71 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
                                                         setState(() {
                                                           currentPageAchieved--;
                                                         });
-                                                        _scrollController
-                                                            .animateTo(
-                                                          0,
-                                                          duration: Duration(
-                                                              milliseconds:
-                                                                  500),
-                                                          curve: Curves.easeOut,
-                                                        );
+                                                        if (_selectedFilteringValueAchieved ==
+                                                            "5") {
+                                                          final double
+                                                              maxScrollExtent =
+                                                              _scrollController
+                                                                  .position
+                                                                  .maxScrollExtent;
+                                                          final double
+                                                              targetOffset =
+                                                              maxScrollExtent *
+                                                                  0.5; // Slightly more than half (60%).
+                                                          // Use animateTo to smoothly scroll to the desired position.
+                                                          _scrollController
+                                                              .animateTo(
+                                                            targetOffset,
+                                                            duration: Duration(
+                                                                milliseconds:
+                                                                    500),
+                                                            curve: Curves
+                                                                .easeInOut,
+                                                          );
+                                                        } else if (_selectedFilteringValueAchieved ==
+                                                            "10") {
+                                                          print("10 is here");
+                                                          final double
+                                                              maxScrollExtent =
+                                                              _scrollController
+                                                                  .position
+                                                                  .maxScrollExtent;
+                                                          final double
+                                                              targetOffset =
+                                                              maxScrollExtent *
+                                                                  0.5; // Slightly more than half (60%).
+                                                          // Use animateTo to smoothly scroll to the desired position.
+                                                          _scrollController
+                                                              .animateTo(
+                                                            targetOffset,
+                                                            duration: Duration(
+                                                                milliseconds:
+                                                                    500),
+                                                            curve: Curves
+                                                                .easeInOut,
+                                                          );
+                                                        } else if (_selectedFilteringValueAchieved ==
+                                                            "15") {
+                                                          final double
+                                                              maxScrollExtent =
+                                                              _scrollController
+                                                                  .position
+                                                                  .maxScrollExtent;
+                                                          final double
+                                                              targetOffset =
+                                                              maxScrollExtent *
+                                                                  0.3; // Slightly more than half (60%).
+                                                          // Use animateTo to smoothly scroll to the desired position.
+                                                          _scrollController
+                                                              .animateTo(
+                                                            targetOffset,
+                                                            duration: Duration(
+                                                                milliseconds:
+                                                                    500),
+                                                            curve: Curves
+                                                                .easeInOut,
+                                                          );
+                                                        }
                                                       }
                                                     },
                                                     child: Container(
@@ -1993,14 +2140,72 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
                                                         setState(() {
                                                           currentPageAchieved++;
                                                         });
-                                                        _scrollController
-                                                            .animateTo(
-                                                          0,
-                                                          duration: Duration(
-                                                              milliseconds:
-                                                                  500),
-                                                          curve: Curves.easeOut,
-                                                        );
+                                                        if (_selectedFilteringValueAchieved ==
+                                                            "5") {
+                                                          print("5 is here");
+                                                          final double
+                                                              maxScrollExtent =
+                                                              _scrollController
+                                                                  .position
+                                                                  .maxScrollExtent;
+                                                          final double
+                                                              targetOffset =
+                                                              maxScrollExtent *
+                                                                  0.5; // Slightly more than half (60%).
+                                                          // Use animateTo to smoothly scroll to the desired position.
+                                                          _scrollController
+                                                              .animateTo(
+                                                            targetOffset,
+                                                            duration: Duration(
+                                                                milliseconds:
+                                                                    500),
+                                                            curve: Curves
+                                                                .easeInOut,
+                                                          );
+                                                        } else if (_selectedFilteringValueAchieved ==
+                                                            "10") {
+                                                          print("10 is here");
+                                                          final double
+                                                              maxScrollExtent =
+                                                              _scrollController
+                                                                  .position
+                                                                  .maxScrollExtent;
+                                                          final double
+                                                              targetOffset =
+                                                              maxScrollExtent *
+                                                                  0.35; // Slightly more than half (60%).
+                                                          // Use animateTo to smoothly scroll to the desired position.
+                                                          _scrollController
+                                                              .animateTo(
+                                                            targetOffset,
+                                                            duration: Duration(
+                                                                milliseconds:
+                                                                    500),
+                                                            curve: Curves
+                                                                .easeInOut,
+                                                          );
+                                                        } else if (_selectedFilteringValueAchieved ==
+                                                            "15") {
+                                                          final double
+                                                              maxScrollExtent =
+                                                              _scrollController
+                                                                  .position
+                                                                  .maxScrollExtent;
+                                                          final double
+                                                              targetOffset =
+                                                              maxScrollExtent *
+                                                                  0.3; // Slightly more than half (60%).
+                                                          // Use animateTo to smoothly scroll to the desired position.
+                                                          _scrollController
+                                                              .animateTo(
+                                                            targetOffset,
+                                                            duration: Duration(
+                                                                milliseconds:
+                                                                    500),
+                                                            curve: Curves
+                                                                .easeInOut,
+                                                          );
+                                                        }
                                                       }
                                                     },
                                                     child: Container(
