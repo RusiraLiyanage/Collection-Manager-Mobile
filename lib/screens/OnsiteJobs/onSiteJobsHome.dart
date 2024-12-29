@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/rendering.dart';
+import 'package:project_code_blue/screens/OnsiteJobs/newJob.dart';
 import 'package:provider/provider.dart';
 import '../../AppState/appState.dart';
 import 'package:project_code_blue/sidemenu/sidemenu.dart';
 import '../../Navigation/appBar.dart';
 import 'package:number_pagination/number_pagination.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class OnsiteJobsHome extends StatefulWidget {
   const OnsiteJobsHome({super.key});
@@ -753,7 +756,33 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
                         padding: const EdgeInsets.only(right: 8.0),
                         child: InkWell(
                           onTap: () {
-                            print("On tapped");
+                            showCupertinoModalBottomSheet(
+                                transitionBackgroundColor: Colors.transparent,
+                                enableDrag: false,
+                                isDismissible: false,
+                                expand: true,
+                                context: context,
+                                backgroundColor: Colors.transparent,
+                                builder: (context) => DraggableScrollableSheet(
+                                    initialChildSize:
+                                        0.985, // Sets the initial size to 50% of the screen
+                                    minChildSize:
+                                        0.985, // Minimum size (30% of the screen)
+                                    maxChildSize:
+                                        0.985, // Maximum size (80% of the screen)
+                                    builder: (context, scrollController) {
+                                      return Container(
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.vertical(
+                                            top: Radius.circular(40),
+                                          ),
+                                        ),
+                                        child: Container(
+                                          child: const NewJob(),
+                                        ),
+                                      );
+                                    }));
                           },
                           child: ClipRRect(
                             child: Image.asset(

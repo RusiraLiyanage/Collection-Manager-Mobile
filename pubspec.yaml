@@ -36,6 +36,8 @@ dependencies:
   cupertino_icons: ^1.0.6
   provider: ^6.1.2
   number_pagination: ^1.1.6
+  modal_bottom_sheet: ^3.0.0
+  flutter_steps: ^1.0.5
 
 dev_dependencies:
   flutter_test:
@@ -87,6 +89,8 @@ flutter:
     - assets/images/icons/hideArchieve.png
     - assets/images/icons/document_icon.png
     - assets/images/icons/dafault_icon.png
+    - assets/images/icons/X.png
+    - assets/images/icons/newJobIcon.png
     - assets/images/backgrounds/home-page-background.jpg
     - assets/images/bottomNavigationIcons/selectedIcons/dashboard_selected.png
     - assets/images/bottomNavigationIcons/selectedIcons/onsiteJobs_selected.png
