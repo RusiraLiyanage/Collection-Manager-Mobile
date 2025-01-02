@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/rendering.dart';
@@ -756,7 +757,53 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
                         padding: const EdgeInsets.only(right: 8.0),
                         child: InkWell(
                           onTap: () {
-                            showCupertinoModalBottomSheet(
+                            if (Platform.isAndroid) {
+                              showModalBottomSheet<void>(
+                                isScrollControlled:
+                                    true, // Allows controlling the height
+                                isDismissible: false,
+
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return DraggableScrollableSheet(
+                                    expand: false,
+                                    initialChildSize:
+                                        0.93, // Initial height of the sheet (80% of the screen)
+                                    minChildSize:
+                                        0.93, // Prevent shrinking below 80% of the screen
+                                    maxChildSize:
+                                        0.93, // Prevent expansion above 80% of the screen
+                                    builder: (BuildContext context,
+                                        ScrollController scrollController) {
+                                      return Container(
+                                        width: double.infinity,
+                                        decoration: const BoxDecoration(
+                                          color: Colors
+                                              .white, // Background color of the bottom sheet
+                                          borderRadius: BorderRadius.vertical(
+                                            top: Radius.circular(
+                                                16), // Rounded top corners
+                                          ),
+                                        ),
+                                        child: SingleChildScrollView(
+                                          controller:
+                                              scrollController, // Attach the scroll controller
+                                          child: Column(
+                                            children: const <Widget>[
+                                              SizedBox(
+                                                  height:
+                                                      20), // Add some top padding
+                                              Text('Hello world'),
+                                            ],
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                  );
+                                },
+                              );
+                            } else if (Platform.isIOS) {
+                              showCupertinoModalBottomSheet(
                                 transitionBackgroundColor: Colors.transparent,
                                 enableDrag: false,
                                 isDismissible: false,
@@ -764,25 +811,28 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
                                 context: context,
                                 backgroundColor: Colors.transparent,
                                 builder: (context) => DraggableScrollableSheet(
-                                    initialChildSize:
-                                        0.985, // Sets the initial size to 50% of the screen
-                                    minChildSize:
-                                        0.985, // Minimum size (30% of the screen)
-                                    maxChildSize:
-                                        0.985, // Maximum size (80% of the screen)
-                                    builder: (context, scrollController) {
-                                      return Container(
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius: BorderRadius.vertical(
-                                            top: Radius.circular(40),
-                                          ),
+                                  initialChildSize:
+                                      0.985, // Sets the initial size to 50% of the screen
+                                  minChildSize:
+                                      0.985, // Minimum size (30% of the screen)
+                                  maxChildSize:
+                                      0.985, // Maximum size (80% of the screen)
+                                  builder: (context, scrollController) {
+                                    return Container(
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.vertical(
+                                          top: Radius.circular(40),
                                         ),
-                                        child: Container(
-                                          child: const NewJob(),
-                                        ),
-                                      );
-                                    }));
+                                      ),
+                                      child: Container(
+                                        child: const NewJob(),
+                                      ),
+                                    );
+                                  },
+                                ),
+                              );
+                            }
                           },
                           child: ClipRRect(
                             child: Image.asset(
@@ -838,7 +888,7 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
                   child: Row(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(right: 8.0),
+                        padding: const EdgeInsets.only(right: 12.0),
                         child: Text(
                           "Service Office",
                           style: TextStyle(
@@ -859,6 +909,11 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
                               borderRadius: BorderRadius.circular(8),
                               borderSide:
                                   BorderSide(color: Colors.grey, width: 2),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8),
+                              borderSide: BorderSide(
+                                  color: Colors.grey, width: 2), // Border colo
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8),
