@@ -28,8 +28,8 @@ class NewJob extends StatelessWidget {
         ),
       )
     ];
-    return CupertinoPageScaffold(
-      child: Column(
+    return Scaffold(
+      body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Center(
@@ -96,8 +96,10 @@ class NewJob extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(height: 10),
-          FlutterSteps(
+          SizedBox(
+            height: 10,
+          ),
+          /* FlutterSteps(
             inactiveColor: Colors.grey,
             steps: basicSteps,
             activeColor: Colors.blue,
@@ -105,7 +107,7 @@ class NewJob extends StatelessWidget {
             showSubtitle: false,
             stepLineRadius: 500,
             activeStepLineColor: Colors.blue,
-          ),
+          ), */
           // Form or Content
           SizedBox(
             width: 15,

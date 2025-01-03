@@ -2,7 +2,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/rendering.dart';
-import 'package:project_code_blue/screens/OnsiteJobs/newJob.dart';
+import 'package:project_code_blue/screens/OnsiteJobs/newJobAndroid.dart';
+import 'package:project_code_blue/screens/OnsiteJobs/newJobIOS.dart';
 import 'package:provider/provider.dart';
 import '../../AppState/appState.dart';
 import 'package:project_code_blue/sidemenu/sidemenu.dart';
@@ -762,17 +763,16 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
                                 isScrollControlled:
                                     true, // Allows controlling the height
                                 isDismissible: false,
-
                                 context: context,
                                 builder: (BuildContext context) {
                                   return DraggableScrollableSheet(
                                     expand: false,
                                     initialChildSize:
-                                        0.93, // Initial height of the sheet (80% of the screen)
+                                        0.93, // Initial height of the sheet (93% of the screen)
                                     minChildSize:
-                                        0.93, // Prevent shrinking below 80% of the screen
+                                        0.93, // Allow shrinking to 50% of the screen
                                     maxChildSize:
-                                        0.93, // Prevent expansion above 80% of the screen
+                                        0.93, // Prevent expansion above 93% of the screen
                                     builder: (BuildContext context,
                                         ScrollController scrollController) {
                                       return Container(
@@ -785,18 +785,8 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
                                                 16), // Rounded top corners
                                           ),
                                         ),
-                                        child: SingleChildScrollView(
-                                          controller:
-                                              scrollController, // Attach the scroll controller
-                                          child: Column(
-                                            children: const <Widget>[
-                                              SizedBox(
-                                                  height:
-                                                      20), // Add some top padding
-                                              Text('Hello world'),
-                                            ],
-                                          ),
-                                        ),
+                                        child: NewJobAndroid(
+                                            scrollController: scrollController),
                                       );
                                     },
                                   );
