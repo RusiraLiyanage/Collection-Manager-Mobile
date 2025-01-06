@@ -38,6 +38,7 @@ dependencies:
   number_pagination: ^1.1.6
   modal_bottom_sheet: ^3.0.0
   flutter_steps: ^1.0.5
+  horizontal_stepper_flutter: ^1.0.3
 
 dev_dependencies:
   flutter_test:
