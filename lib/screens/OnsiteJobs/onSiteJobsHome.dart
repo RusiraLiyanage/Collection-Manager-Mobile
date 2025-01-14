@@ -1229,6 +1229,7 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
                   children: [
                     ListView.builder(
                       shrinkWrap: true,
+                      physics: const ClampingScrollPhysics(),
                       itemCount: paginatedJobData.length,
                       itemBuilder: (context, index) {
                         final job = paginatedJobData[index];
