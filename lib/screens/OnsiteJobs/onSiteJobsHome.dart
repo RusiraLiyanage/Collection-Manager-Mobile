@@ -2,6 +2,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/rendering.dart';
+import 'package:project_code_blue/screens/OnsiteJobs/AchievedJobsOldCard.dart';
+import 'package:project_code_blue/screens/OnsiteJobs/OnsiteJobOldCard.dart';
 import 'package:project_code_blue/screens/OnsiteJobs/newJobAndroid.dart';
 import 'package:project_code_blue/screens/OnsiteJobs/newJobIOS.dart';
 import 'package:provider/provider.dart';
@@ -602,61 +604,6 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
   Widget build(BuildContext context) {
     final appState = Provider.of<AppState>(context, listen: false);
     // Helper method for each row
-    Widget _buildInfoRow({
-      required String iconPath,
-      required String title,
-      required String value,
-      bool isBold = false,
-    }) {
-      return Padding(
-        padding: const EdgeInsets.symmetric(vertical: 6.0),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            // Left-aligned title
-            Expanded(
-              flex: 3, // Adjust the flex value to control space distribution
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  title,
-                  style: const TextStyle(
-                    color: Color(0xFF01B4D2),
-                    fontWeight: FontWeight.bold,
-                    fontSize: 14,
-                  ),
-                ),
-              ),
-            ),
-
-            // Center-aligned icon
-            Expanded(
-              flex: 1, // Adjust the flex value to control space distribution
-              child: Align(
-                alignment: Alignment.center,
-                child: Image.asset(iconPath, height: 24),
-              ),
-            ),
-
-            // Right-aligned value
-            Expanded(
-              flex: 4, // Adjust the flex value to control space distribution
-              child: Align(
-                alignment: Alignment.centerRight,
-                child: Text(
-                  value,
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 14,
-                    fontWeight: isBold ? FontWeight.bold : FontWeight.normal,
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-      );
-    }
 
     return Scaffold(
       onDrawerChanged: (isOpen) {
@@ -666,32 +613,38 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
         navigationType: "bottomNavigation",
       ),
       appBar: MyAppBar(),
-      floatingActionButton: Container(
-        height: 40.0,
-        width: 40.0,
-        child: FittedBox(
-          child: FloatingActionButton(
-            onPressed: () {
-              if (isAtBottom) {
-                // Scroll to the top
-                _scrollController.animateTo(
-                  0,
-                  duration: Duration(milliseconds: 500),
-                  curve: Curves.easeOut,
-                );
-              } else {
-                // Scroll to the bottom
-                _scrollController.animateTo(
-                  _scrollController.position.maxScrollExtent,
-                  duration: Duration(milliseconds: 500),
-                  curve: Curves.easeOut,
-                );
-              }
-            },
-            tooltip: isAtBottom ? "Scroll to Top" : "Scroll to Bottom",
-            child: Icon(
-              isAtBottom ? Icons.arrow_upward : Icons.arrow_downward,
-              size: 40,
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.only(
+          bottom: 85.0,
+          left: 3.0,
+        ),
+        child: Container(
+          height: 40.0,
+          width: 40.0,
+          child: FittedBox(
+            child: FloatingActionButton(
+              onPressed: () {
+                if (isAtBottom) {
+                  // Scroll to the top
+                  _scrollController.animateTo(
+                    0,
+                    duration: Duration(milliseconds: 500),
+                    curve: Curves.easeOut,
+                  );
+                } else {
+                  // Scroll to the bottom
+                  _scrollController.animateTo(
+                    _scrollController.position.maxScrollExtent,
+                    duration: Duration(milliseconds: 500),
+                    curve: Curves.easeOut,
+                  );
+                }
+              },
+              tooltip: isAtBottom ? "Scroll to Top" : "Scroll to Bottom",
+              child: Icon(
+                isAtBottom ? Icons.arrow_upward : Icons.arrow_downward,
+                size: 40,
+              ),
             ),
           ),
         ),
@@ -890,6 +843,20 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
                       Container(
                         width: 169,
                         height: 28,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(8),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(
+                                  0.2), // Shadow color with opacity
+                              spreadRadius: 1, // How much the shadow spreads
+                              blurRadius: 1, // How blurry the shadow is
+                              offset: Offset(
+                                  0, 0), // Offset for shadow position (x, y)
+                            ),
+                          ],
+                        ),
                         child: DropdownButtonFormField<String>(
                           value: _selectedValue,
                           decoration: InputDecoration(
@@ -897,26 +864,31 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
                                 horizontal: 8, vertical: 4),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8),
-                              borderSide:
-                                  BorderSide(color: Colors.grey, width: 2),
+                              borderSide: BorderSide(
+                                  color: Colors.transparent, width: 2),
                             ),
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8),
                               borderSide: BorderSide(
-                                  color: Colors.grey, width: 2), // Border colo
+                                  color: Colors.transparent,
+                                  width: 2), // Border colo
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8),
                               borderSide: BorderSide(
-                                  color: Colors.grey,
+                                  color: Colors.transparent,
                                   width: 2), // Border color when focused
                             ),
                             fillColor: Colors
                                 .white, // Set the background color to white
                             filled: true,
                           ),
-                          icon:
-                              Icon(Icons.arrow_drop_down, color: Colors.black),
+                          icon: Icon(
+                            Icons.arrow_drop_down_outlined,
+                            color: Color(
+                              0xFF71717A,
+                            ),
+                          ),
                           items: items
                               .map((item) => DropdownMenuItem(
                                     value: item,
@@ -962,6 +934,20 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
                       Container(
                         width: 260,
                         height: 28,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(8),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(
+                                  0.2), // Shadow color with opacity
+                              spreadRadius: 1, // How much the shadow spreads
+                              blurRadius: 1, // How blurry the shadow is
+                              offset: Offset(
+                                  0, 0), // Offset for shadow position (x, y)
+                            ),
+                          ],
+                        ),
                         child: DropdownButtonFormField<String>(
                           focusColor: Colors.white,
                           value: _selectedClient,
@@ -970,18 +956,19 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
                                 horizontal: 8, vertical: 4),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8),
-                              borderSide:
-                                  BorderSide(color: Colors.grey, width: 2),
+                              borderSide: BorderSide(
+                                  color: Colors.transparent, width: 2),
                             ),
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8),
                               borderSide: BorderSide(
-                                  color: Colors.grey, width: 2), // Border colo
+                                  color: Colors.transparent,
+                                  width: 2), // Border colo
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8),
                               borderSide: BorderSide(
-                                  color: Colors.grey,
+                                  color: Colors.transparent,
                                   width: 2), // Border color when focused
                             ),
                             fillColor: Colors
@@ -989,8 +976,12 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
                             filled: true,
                             // Enable the fill color
                           ),
-                          icon:
-                              Icon(Icons.arrow_drop_down, color: Colors.black),
+                          icon: Icon(
+                            Icons.arrow_drop_down_outlined,
+                            color: Color(
+                              0xFF71717A,
+                            ),
+                          ),
                           items: clients
                               .map((item) => DropdownMenuItem(
                                     value: item,
@@ -1036,6 +1027,20 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
                       Container(
                         width: 100,
                         height: 28,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(8),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(
+                                  0.2), // Shadow color with opacity
+                              spreadRadius: 1, // How much the shadow spreads
+                              blurRadius: 1, // How blurry the shadow is
+                              offset: Offset(
+                                  0, 0), // Offset for shadow position (x, y)
+                            ),
+                          ],
+                        ),
                         child: TextField(
                           controller: _startDateController,
                           readOnly: true,
@@ -1046,19 +1051,19 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8),
                               borderSide: BorderSide(
-                                  color: Colors.grey,
+                                  color: Colors.transparent,
                                   width: 2), // Default border with thickness
                             ),
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8),
                               borderSide: BorderSide(
-                                  color: Colors.grey,
+                                  color: Colors.transparent,
                                   width: 3), // Border color when enabled
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8),
                               borderSide: BorderSide(
-                                  color: Colors.grey,
+                                  color: Colors.transparent,
                                   width: 3), // Border color when focused
                             ),
                             fillColor: Colors.white,
@@ -1079,6 +1084,20 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
                         child: Container(
                           width: 100,
                           height: 28,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(8),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(
+                                    0.2), // Shadow color with opacity
+                                spreadRadius: 1, // How much the shadow spreads
+                                blurRadius: 1, // How blurry the shadow is
+                                offset: Offset(
+                                    0, 0), // Offset for shadow position (x, y)
+                              ),
+                            ],
+                          ),
                           child: TextField(
                             controller: _endDateController,
                             readOnly: true,
@@ -1089,19 +1108,19 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(8),
                                 borderSide: BorderSide(
-                                    color: Colors.grey,
+                                    color: Colors.transparent,
                                     width: 2), // Default border with thickness
                               ),
                               enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(8),
                                 borderSide: BorderSide(
-                                    color: Colors.grey,
+                                    color: Colors.transparent,
                                     width: 3), // Border color when enabled
                               ),
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(8),
                                 borderSide: BorderSide(
-                                    color: Colors.grey,
+                                    color: Colors.transparent,
                                     width: 3), // Border color when focused
                               ),
                               fillColor: Colors.white,
@@ -1141,6 +1160,20 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
                       Container(
                         width: 100,
                         height: 28,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(8),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(
+                                  0.2), // Shadow color with opacity
+                              spreadRadius: 1, // How much the shadow spreads
+                              blurRadius: 1, // How blurry the shadow is
+                              offset: Offset(
+                                  0, 0), // Offset for shadow position (x, y)
+                            ),
+                          ],
+                        ),
                         child: DropdownButtonFormField<String>(
                           focusColor: Colors.white,
                           value: _selectedStatus,
@@ -1149,18 +1182,19 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
                                 horizontal: 8, vertical: 4),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8),
-                              borderSide:
-                                  BorderSide(color: Colors.grey, width: 2),
+                              borderSide: BorderSide(
+                                  color: Colors.transparent, width: 2),
                             ),
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8),
                               borderSide: BorderSide(
-                                  color: Colors.grey, width: 2), // Border colo
+                                  color: Colors.transparent,
+                                  width: 2), // Border colo
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8),
                               borderSide: BorderSide(
-                                  color: Colors.grey,
+                                  color: Colors.transparent,
                                   width: 2), // Border color when focused
                             ),
                             fillColor: Colors
@@ -1168,8 +1202,12 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
                             filled: true,
                             // Enable the fill color
                           ),
-                          icon:
-                              Icon(Icons.arrow_drop_down, color: Colors.black),
+                          icon: Icon(
+                            Icons.arrow_drop_down_outlined,
+                            color: Color(
+                              0xFF71717A,
+                            ),
+                          ),
                           items: status
                               .map((item) => DropdownMenuItem(
                                     value: item,
@@ -1225,1100 +1263,757 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
               controller: _scrollController,
               child: SingleChildScrollView(
                 controller: _scrollController,
-                child: Column(
-                  children: [
-                    ListView.builder(
-                      shrinkWrap: true,
-                      physics: const ClampingScrollPhysics(),
-                      itemCount: paginatedJobData.length,
-                      itemBuilder: (context, index) {
-                        final job = paginatedJobData[index];
-                        return Center(
-                          child: Padding(
-                            padding: const EdgeInsets.only(
-                              left: 30.0,
-                              right: 45.0,
-                              bottom: 10.0,
-                            ),
-                            child: Card(
-                              elevation: 5,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15),
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 70.0),
+                  child: Column(
+                    children: [
+                      ListView.builder(
+                        padding: EdgeInsets.zero,
+                        shrinkWrap: true,
+                        physics: const ClampingScrollPhysics(),
+                        itemCount: paginatedJobData.length,
+                        itemBuilder: (context, index) {
+                          final job = paginatedJobData[index];
+                          return Center(
+                            child: Padding(
+                              padding: const EdgeInsets.only(
+                                left: 30.0,
+                                right: 45.0,
+                                bottom: 10.0,
                               ),
-                              child: Padding(
-                                padding: const EdgeInsets.only(
-                                  top: 12.0,
-                                  bottom: 12.0,
-                                  left: 18.0,
-                                  right: 25.0,
-                                ),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        // Left-aligned title
-                                        Expanded(
-                                          flex:
-                                              3, // Adjust the flex value to control space distribution
-                                          child: Align(
-                                            alignment: Alignment.centerLeft,
-                                            child: Row(
-                                              children: [
-                                                FittedBox(
-                                                  child: Image.asset(
-                                                    "assets/images/icons/threeDots.png",
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                ),
-                                                SizedBox(
-                                                  width: 10,
-                                                ),
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          top: 8.0),
-                                                  child: FittedBox(
-                                                    child: Image.asset(
-                                                      "assets/images/icons/eye_icon.png",
-                                                      fit: BoxFit.cover,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-
-                                        // Center-aligned icon
-                                        Expanded(
-                                          flex:
-                                              5, // Adjust the flex value to control space distribution
-                                          child: Align(
-                                            alignment: Alignment.center,
-                                            child: Row(
-                                              children: [
-                                                Text("Job Status"),
-                                                SizedBox(
-                                                  width: 5,
-                                                ),
-                                                Container(
-                                                  padding: const EdgeInsets
-                                                      .symmetric(
-                                                      horizontal: 3,
-                                                      vertical: 10),
-                                                  decoration: BoxDecoration(
-                                                    color: Colors.amber,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            8),
-                                                    boxShadow: [
-                                                      BoxShadow(
-                                                        color: Colors.grey
-                                                            .withOpacity(0.5),
-                                                        spreadRadius: 1,
-                                                        blurRadius: 4,
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  child: const Text(
-                                                    'Draft',
-                                                    style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-
-                                        // Right-aligned value
-                                        Expanded(
-                                          flex:
-                                              3, // Adjust the flex value to control space distribution
-                                          child: Align(
-                                            alignment: Alignment.centerRight,
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.end,
-                                              children: [
-                                                FittedBox(
-                                                  child: Image.asset(
-                                                    'assets/images/icons/document_icon.png',
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                ),
-                                                const SizedBox(
-                                                  width:
-                                                      1, // Space between document icon and the number
-                                                ),
-                                                Text(
-                                                  job["jobNumber"]!,
-                                                  style: TextStyle(
-                                                    color: Colors.black,
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 19,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    const SizedBox(height: 5),
-                                    // Content Rows
-                                    _buildInfoRow(
-                                        iconPath:
-                                            'assets/images/icons/dafault_icon.png',
-                                        title: 'Date / Time',
-                                        value: job["dateTime"]!),
-                                    _buildInfoRow(
-                                        iconPath:
-                                            'assets/images/icons/dafault_icon.png',
-                                        title: 'Client',
-                                        value: job["client"]!),
-                                    _buildInfoRow(
-                                        iconPath:
-                                            'assets/images/icons/dafault_icon.png',
-                                        title: 'Authorized Rep',
-                                        value: job["rep"]!,
-                                        isBold: false),
-                                    _buildInfoRow(
-                                        iconPath:
-                                            'assets/images/icons/dafault_icon.png',
-                                        title: 'location',
-                                        value: job["location"]!),
-                                    _buildInfoRow(
-                                        iconPath:
-                                            'assets/images/icons/dafault_icon.png',
-                                        title: 'Service',
-                                        value: job["service"]!),
-                                    _buildInfoRow(
-                                        iconPath:
-                                            'assets/images/icons/dafault_icon.png',
-                                        title: 'Callout Job',
-                                        value: job["callout"]!),
-                                  ],
-                                ),
-                              ),
+                              child: OnsiteJobOldCard(job: job),
                             ),
-                          ),
-                        );
-                      },
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                        left: 10.0,
-                        right: 70,
+                          );
+                        },
                       ),
-                      child: Align(
-                        alignment: Alignment.topLeft,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(right: 30.0),
-                              child: Text(
-                                "Show",
-                                style: TextStyle(
-                                  color: Color(0xFF005277),
-                                  fontWeight: FontWeight.bold,
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          left: 10.0,
+                          right: 70,
+                        ),
+                        child: Align(
+                          alignment: Alignment.topLeft,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(right: 30.0),
+                                child: Text(
+                                  "Show",
+                                  style: TextStyle(
+                                    color: Color(0xFF005277),
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
                               ),
-                            ),
-                            Container(
-                              width: 100,
-                              height: 28,
-                              child: DropdownButtonFormField<String>(
-                                focusColor: Colors.white,
-                                value: _selectedFilteringValue,
-                                decoration: InputDecoration(
-                                  contentPadding: const EdgeInsets.symmetric(
-                                      horizontal: 8, vertical: 4),
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(0),
-                                    borderSide: BorderSide(
-                                        color: Colors.grey, width: 2),
+                              Container(
+                                width: 100,
+                                height: 28,
+                                child: DropdownButtonFormField<String>(
+                                  focusColor: Colors.white,
+                                  value: _selectedFilteringValue,
+                                  decoration: InputDecoration(
+                                    contentPadding: const EdgeInsets.symmetric(
+                                        horizontal: 8, vertical: 4),
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(0),
+                                      borderSide: BorderSide(
+                                          color: Colors.grey, width: 2),
+                                    ),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(0),
+                                      borderSide: BorderSide(
+                                          color: Colors.grey,
+                                          width: 2), // Border colo
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(0),
+                                      borderSide: BorderSide(
+                                          color: Colors.grey,
+                                          width:
+                                              2), // Border color when focused
+                                    ),
+                                    fillColor: Colors
+                                        .white, // Set the background color to white
+                                    filled: true,
+                                    // Enable the fill color
                                   ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(0),
-                                    borderSide: BorderSide(
-                                        color: Colors.grey,
-                                        width: 2), // Border colo
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(0),
-                                    borderSide: BorderSide(
-                                        color: Colors.grey,
-                                        width: 2), // Border color when focused
-                                  ),
-                                  fillColor: Colors
-                                      .white, // Set the background color to white
-                                  filled: true,
-                                  // Enable the fill color
-                                ),
-                                icon: Icon(Icons.arrow_drop_down,
-                                    color: Colors.black),
-                                items: filteringAmounts
-                                    .map((item) => DropdownMenuItem(
-                                          value: item,
-                                          child: Text(
-                                            item,
-                                            style: TextStyle(
-                                              fontSize: 14,
-                                              color: Color(0xFF007AFF),
+                                  icon: Icon(Icons.arrow_drop_down,
+                                      color: Colors.black),
+                                  items: filteringAmounts
+                                      .map((item) => DropdownMenuItem(
+                                            value: item,
+                                            child: Text(
+                                              item,
+                                              style: TextStyle(
+                                                fontSize: 14,
+                                                color: Color(0xFF007AFF),
+                                              ),
                                             ),
-                                          ),
-                                        ))
-                                    .toList(),
-                                onChanged: (value) {
-                                  setState(() {
-                                    _selectedFilteringValue = value;
-                                    itemsPerPage = int.parse(value!);
-                                    currentPage = 1; // Reset to first page
+                                          ))
+                                      .toList(),
+                                  onChanged: (value) {
+                                    setState(() {
+                                      _selectedFilteringValue = value;
+                                      itemsPerPage = int.parse(value!);
+                                      currentPage = 1; // Reset to first page
+                                      _scrollController.animateTo(
+                                        0,
+                                        duration: Duration(milliseconds: 500),
+                                        curve: Curves.easeOut,
+                                      );
+                                    });
+                                  },
+                                ),
+                              ),
+                              const Spacer(),
+                              Container(
+                                width: 65,
+                                height: 20,
+                                child: Text(
+                                  "Navigate",
+                                  style: TextStyle(
+                                    color: Color(0xFF005277),
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              // Left Arrow
+                              GestureDetector(
+                                onTap: () {
+                                  // Handle left arrow click (e.g., navigate left)
+                                  if (currentPage > 1) {
+                                    setState(() {
+                                      currentPage--;
+                                    });
                                     _scrollController.animateTo(
                                       0,
                                       duration: Duration(milliseconds: 500),
                                       curve: Curves.easeOut,
                                     );
-                                  });
+                                  }
                                 },
-                              ),
-                            ),
-                            const Spacer(),
-                            Container(
-                              width: 65,
-                              height: 20,
-                              child: Text(
-                                "Navigate",
-                                style: TextStyle(
-                                  color: Color(0xFF005277),
-                                  fontWeight: FontWeight.bold,
+                                child: Container(
+                                  width: 28,
+                                  height: 28,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                        color: Colors.grey, width: 2),
+                                    color: Colors.white,
+                                  ),
+                                  child: Icon(
+                                    Icons.arrow_left,
+                                    color: Color(0xFF005277),
+                                    size: 20,
+                                  ),
                                 ),
                               ),
-                            ),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            // Left Arrow
-                            GestureDetector(
-                              onTap: () {
-                                // Handle left arrow click (e.g., navigate left)
-                                if (currentPage > 1) {
-                                  setState(() {
-                                    currentPage--;
-                                  });
-                                  _scrollController.animateTo(
-                                    0,
-                                    duration: Duration(milliseconds: 500),
-                                    curve: Curves.easeOut,
-                                  );
-                                }
-                              },
-                              child: Container(
-                                width: 28,
-                                height: 28,
-                                decoration: BoxDecoration(
-                                  border:
-                                      Border.all(color: Colors.grey, width: 2),
-                                  color: Colors.white,
-                                ),
-                                child: Icon(
-                                  Icons.arrow_left,
-                                  color: Color(0xFF005277),
-                                  size: 20,
-                                ),
-                              ),
-                            ),
 
-                            // Right Arrow
-                            GestureDetector(
-                              onTap: () {
-                                // Handle right arrow click (e.g., navigate right)
-                                if (currentPage < totalPages) {
-                                  setState(() {
-                                    currentPage++;
-                                  });
-                                  _scrollController.animateTo(
-                                    0,
-                                    duration: Duration(milliseconds: 500),
-                                    curve: Curves.easeOut,
-                                  );
-                                }
-                              },
-                              child: Container(
-                                width: 28,
-                                height: 28,
-                                decoration: BoxDecoration(
-                                  border:
-                                      Border.all(color: Colors.grey, width: 2),
-                                  color: Colors.white,
-                                ),
-                                child: Icon(
-                                  Icons.arrow_right,
-                                  color: Color(0xFF005277),
-                                  size: 20,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Align(
-                        alignment: Alignment.topLeft,
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 10.0),
-                          child: GestureDetector(
-                            onTap: () {
-                              setState(() {
-                                archieveJobsOpened = !archieveJobsOpened;
-                                if (!archieveJobsOpened) {
-                                  showMainJobs = true;
-                                } else {
-                                  showMainJobs = false;
-                                }
-                                if (archieveJobsOpened) {
-                                  if (_selectedFilteringValue != "5") {
-                                    String? theSelected =
-                                        _selectedFilteringValue;
+                              // Right Arrow
+                              GestureDetector(
+                                onTap: () {
+                                  // Handle right arrow click (e.g., navigate right)
+                                  if (currentPage < totalPages) {
                                     setState(() {
-                                      _selectedFilteringValue =
-                                          filteringAmounts.first;
-                                      itemsPerPage = 5;
+                                      currentPage++;
                                     });
-                                    // Calculate the target offset (80% of the scrollable extent)
-                                    print(theSelected);
-                                    if (theSelected == "10") {
-                                      final double targetOffset =
-                                          _scrollController
-                                                  .position.maxScrollExtent *
-                                              0.5;
-                                      _scrollController.animateTo(
-                                        targetOffset,
-                                        duration: Duration(milliseconds: 500),
-                                        curve: Curves.easeOut,
-                                      );
-                                    } else if (theSelected == "15") {
-                                      final double targetOffset =
-                                          _scrollController
-                                                  .position.maxScrollExtent *
-                                              0.35;
-                                      _scrollController.animateTo(
-                                        targetOffset,
-                                        duration: Duration(milliseconds: 500),
-                                        curve: Curves.easeOut,
-                                      );
-                                    }
-                                  } else {
                                     _scrollController.animateTo(
-                                      _scrollController.position.pixels +
-                                          100, // Adjust this value to scroll further down
+                                      0,
                                       duration: Duration(milliseconds: 500),
                                       curve: Curves.easeOut,
                                     );
                                   }
-                                }
-                              });
-                            },
-                            child: !archieveJobsOpened
-                                ? FittedBox(
-                                    child: Image.asset(
-                                      "assets/images/icons/showAchieve.png",
-                                      fit: BoxFit.cover,
-                                    ),
-                                  )
-                                : FittedBox(
-                                    child: Image.asset(
-                                      "assets/images/icons/hideArchieve.png",
-                                      fit: BoxFit.cover,
-                                    ),
+                                },
+                                child: Container(
+                                  width: 28,
+                                  height: 28,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                        color: Colors.grey, width: 2),
+                                    color: Colors.white,
                                   ),
+                                  child: Icon(
+                                    Icons.arrow_right,
+                                    color: Color(0xFF005277),
+                                    size: 20,
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
-                        )),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    archieveJobsOpened
-                        ? Container(
-                            width: double.infinity,
-                            color: const Color(0xFF01B4D2).withOpacity(0.2),
-                            child: Column(
-                              children: [
-                                Divider(
-                                  thickness: 2.0,
-                                  indent: 10,
-                                  endIndent: 10,
-                                  color: Color(0xFF0047B3),
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Align(
-                                  alignment: Alignment.topRight,
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(
-                                      right: 10.0,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Align(
+                          alignment: Alignment.topLeft,
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 10.0),
+                            child: GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  archieveJobsOpened = !archieveJobsOpened;
+                                  if (!archieveJobsOpened) {
+                                    showMainJobs = true;
+                                  } else {
+                                    showMainJobs = false;
+                                  }
+                                  if (archieveJobsOpened) {
+                                    if (_selectedFilteringValue != "5") {
+                                      String? theSelected =
+                                          _selectedFilteringValue;
+                                      setState(() {
+                                        _selectedFilteringValue =
+                                            filteringAmounts.first;
+                                        itemsPerPage = 5;
+                                      });
+                                      // Calculate the target offset (80% of the scrollable extent)
+                                      print(theSelected);
+                                      if (theSelected == "10") {
+                                        final double targetOffset =
+                                            _scrollController
+                                                    .position.maxScrollExtent *
+                                                0.5;
+                                        _scrollController.animateTo(
+                                          targetOffset,
+                                          duration: Duration(milliseconds: 500),
+                                          curve: Curves.easeOut,
+                                        );
+                                      } else if (theSelected == "15") {
+                                        final double targetOffset =
+                                            _scrollController
+                                                    .position.maxScrollExtent *
+                                                0.35;
+                                        _scrollController.animateTo(
+                                          targetOffset,
+                                          duration: Duration(milliseconds: 500),
+                                          curve: Curves.easeOut,
+                                        );
+                                      }
+                                    } else {
+                                      _scrollController.animateTo(
+                                        _scrollController.position.pixels +
+                                            100, // Adjust this value to scroll further down
+                                        duration: Duration(milliseconds: 500),
+                                        curve: Curves.easeOut,
+                                      );
+                                    }
+                                  }
+                                });
+                              },
+                              child: !archieveJobsOpened
+                                  ? FittedBox(
+                                      child: Image.asset(
+                                        "assets/images/icons/showAchieve.png",
+                                        fit: BoxFit.cover,
+                                      ),
+                                    )
+                                  : FittedBox(
+                                      child: Image.asset(
+                                        "assets/images/icons/hideArchieve.png",
+                                        fit: BoxFit.cover,
+                                      ),
                                     ),
-                                    child: Text(
-                                      "$displayRangeAchieved out of ${jobDataAchieved.length} achieved records",
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
+                            ),
+                          )),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      archieveJobsOpened
+                          ? Container(
+                              width: double.infinity,
+                              color: const Color(0xFF01B4D2).withOpacity(0.2),
+                              child: Column(
+                                children: [
+                                  Divider(
+                                    thickness: 2.0,
+                                    indent: 10,
+                                    endIndent: 10,
+                                    color: Color(0xFF0047B3),
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  Align(
+                                    alignment: Alignment.topRight,
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                        right: 10.0,
+                                      ),
+                                      child: Text(
+                                        "$displayRangeAchieved out of ${jobDataAchieved.length} achieved records",
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                archieveJobsOpened
-                                    ? Column(
-                                        children: [
-                                          ListView.builder(
-                                            shrinkWrap:
-                                                true, // Allow ListView to adapt to its content
-                                            physics: ClampingScrollPhysics(),
-                                            itemCount:
-                                                paginatedJobDataAchieved.length,
-                                            itemBuilder: (context, index) {
-                                              final job =
-                                                  paginatedJobDataAchieved[
-                                                      index];
-                                              return Center(
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                    left: 30.0,
-                                                    right: 45.0,
-                                                    bottom: 10.0,
-                                                  ),
-                                                  child: Card(
-                                                    elevation: 5,
-                                                    shape:
-                                                        RoundedRectangleBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              15),
-                                                    ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  archieveJobsOpened
+                                      ? Padding(
+                                          padding: const EdgeInsets.only(
+                                            bottom: 35.0,
+                                          ),
+                                          child: Column(
+                                            children: [
+                                              ListView.builder(
+                                                padding: EdgeInsets.zero,
+                                                shrinkWrap:
+                                                    true, // Allow ListView to adapt to its content
+                                                physics:
+                                                    ClampingScrollPhysics(),
+                                                itemCount:
+                                                    paginatedJobDataAchieved
+                                                        .length,
+                                                itemBuilder: (context, index) {
+                                                  final job =
+                                                      paginatedJobDataAchieved[
+                                                          index];
+                                                  return Center(
                                                     child: Padding(
                                                       padding:
                                                           const EdgeInsets.only(
-                                                        top: 12.0,
-                                                        bottom: 12.0,
-                                                        left: 18.0,
-                                                        right: 25.0,
+                                                        left: 30.0,
+                                                        right: 45.0,
+                                                        bottom: 10.0,
                                                       ),
-                                                      child: Column(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Row(
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .center,
-                                                            children: [
-                                                              // Left-aligned title
-                                                              Expanded(
-                                                                flex:
-                                                                    3, // Adjust the flex value to control space distribution
-                                                                child: Align(
-                                                                  alignment:
-                                                                      Alignment
-                                                                          .centerLeft,
-                                                                  child: Row(
-                                                                    children: [
-                                                                      FittedBox(
-                                                                        child: Image
-                                                                            .asset(
-                                                                          "assets/images/icons/threeDots.png",
-                                                                          fit: BoxFit
-                                                                              .cover,
-                                                                        ),
-                                                                      ),
-                                                                      SizedBox(
-                                                                        width:
-                                                                            10,
-                                                                      ),
-                                                                      Padding(
-                                                                        padding: const EdgeInsets
-                                                                            .only(
-                                                                            top:
-                                                                                8.0),
-                                                                        child:
-                                                                            FittedBox(
-                                                                          child:
-                                                                              Image.asset(
-                                                                            "assets/images/icons/eye_icon.png",
-                                                                            fit:
-                                                                                BoxFit.cover,
-                                                                          ),
-                                                                        ),
-                                                                      ),
-                                                                    ],
-                                                                  ),
-                                                                ),
-                                                              ),
-
-                                                              // Center-aligned icon
-                                                              Expanded(
-                                                                flex:
-                                                                    5, // Adjust the flex value to control space distribution
-                                                                child: Align(
-                                                                  alignment:
-                                                                      Alignment
-                                                                          .center,
-                                                                  child: Row(
-                                                                    children: [
-                                                                      Text(
-                                                                          "Job Status"),
-                                                                      SizedBox(
-                                                                        width:
-                                                                            5,
-                                                                      ),
-                                                                      Container(
-                                                                        padding: const EdgeInsets
-                                                                            .symmetric(
-                                                                            horizontal:
-                                                                                3,
-                                                                            vertical:
-                                                                                10),
-                                                                        decoration:
-                                                                            BoxDecoration(
-                                                                          color:
-                                                                              Colors.amber,
-                                                                          borderRadius:
-                                                                              BorderRadius.circular(8),
-                                                                          boxShadow: [
-                                                                            BoxShadow(
-                                                                              color: Colors.grey.withOpacity(0.5),
-                                                                              spreadRadius: 1,
-                                                                              blurRadius: 4,
-                                                                            ),
-                                                                          ],
-                                                                        ),
-                                                                        child:
-                                                                            const Text(
-                                                                          'Draft',
-                                                                          style:
-                                                                              TextStyle(
-                                                                            color:
-                                                                                Colors.black,
-                                                                            fontWeight:
-                                                                                FontWeight.bold,
-                                                                          ),
-                                                                        ),
-                                                                      ),
-                                                                    ],
-                                                                  ),
-                                                                ),
-                                                              ),
-
-                                                              // Right-aligned value
-                                                              Expanded(
-                                                                flex:
-                                                                    3, // Adjust the flex value to control space distribution
-                                                                child: Align(
-                                                                  alignment:
-                                                                      Alignment
-                                                                          .centerRight,
-                                                                  child: Row(
-                                                                    mainAxisAlignment:
-                                                                        MainAxisAlignment
-                                                                            .end,
-                                                                    children: [
-                                                                      FittedBox(
-                                                                        child: Image
-                                                                            .asset(
-                                                                          'assets/images/icons/document_icon.png',
-                                                                          fit: BoxFit
-                                                                              .cover,
-                                                                        ),
-                                                                      ),
-                                                                      const SizedBox(
-                                                                        width:
-                                                                            1, // Space between document icon and the number
-                                                                      ),
-                                                                      Text(
-                                                                        job["jobNumber"]!,
-                                                                        style:
-                                                                            TextStyle(
-                                                                          color:
-                                                                              Colors.black,
-                                                                          fontWeight:
-                                                                              FontWeight.bold,
-                                                                          fontSize:
-                                                                              19,
-                                                                        ),
-                                                                      ),
-                                                                    ],
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                          const SizedBox(
-                                                              height: 5),
-                                                          // Content Rows
-                                                          _buildInfoRow(
-                                                              iconPath:
-                                                                  'assets/images/icons/dafault_icon.png',
-                                                              title:
-                                                                  'Date / Time',
-                                                              value: job[
-                                                                  "dateTime"]!),
-                                                          _buildInfoRow(
-                                                              iconPath:
-                                                                  'assets/images/icons/dafault_icon.png',
-                                                              title: 'Client',
-                                                              value: job[
-                                                                  "client"]!),
-                                                          _buildInfoRow(
-                                                              iconPath:
-                                                                  'assets/images/icons/dafault_icon.png',
-                                                              title:
-                                                                  'Authorized Rep',
-                                                              value:
-                                                                  job["rep"]!,
-                                                              isBold: false),
-                                                          _buildInfoRow(
-                                                              iconPath:
-                                                                  'assets/images/icons/dafault_icon.png',
-                                                              title: 'location',
-                                                              value: job[
-                                                                  "location"]!),
-                                                          _buildInfoRow(
-                                                              iconPath:
-                                                                  'assets/images/icons/dafault_icon.png',
-                                                              title: 'Service',
-                                                              value: job[
-                                                                  "service"]!),
-                                                          _buildInfoRow(
-                                                              iconPath:
-                                                                  'assets/images/icons/dafault_icon.png',
-                                                              title:
-                                                                  'Callout Job',
-                                                              value: job[
-                                                                  "callout"]!),
-                                                        ],
-                                                      ),
+                                                      child:
+                                                          AchievedJobsOldCard(
+                                                              job: job),
                                                     ),
-                                                  ),
+                                                  );
+                                                },
+                                              ),
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                  left: 10.0,
+                                                  right: 70,
                                                 ),
-                                              );
-                                            },
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                              left: 10.0,
-                                              right: 70,
-                                            ),
-                                            child: Align(
-                                              alignment: Alignment.topLeft,
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            right: 30.0),
-                                                    child: Text(
-                                                      "Show",
-                                                      style: TextStyle(
-                                                        color:
-                                                            Color(0xFF005277),
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  Container(
-                                                    width: 100,
-                                                    height: 28,
-                                                    child:
-                                                        DropdownButtonFormField<
-                                                            String>(
-                                                      focusColor: Colors.white,
-                                                      value:
-                                                          _selectedFilteringValueAchieved,
-                                                      decoration:
-                                                          InputDecoration(
-                                                        contentPadding:
+                                                child: Align(
+                                                  alignment: Alignment.topLeft,
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      Padding(
+                                                        padding:
                                                             const EdgeInsets
-                                                                .symmetric(
-                                                                horizontal: 8,
-                                                                vertical: 4),
-                                                        border:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(0),
-                                                          borderSide:
-                                                              BorderSide(
+                                                                .only(
+                                                                right: 30.0),
+                                                        child: Text(
+                                                          "Show",
+                                                          style: TextStyle(
+                                                            color: Color(
+                                                                0xFF005277),
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      Container(
+                                                        width: 100,
+                                                        height: 28,
+                                                        child:
+                                                            DropdownButtonFormField<
+                                                                String>(
+                                                          focusColor:
+                                                              Colors.white,
+                                                          value:
+                                                              _selectedFilteringValueAchieved,
+                                                          decoration:
+                                                              InputDecoration(
+                                                            contentPadding:
+                                                                const EdgeInsets
+                                                                    .symmetric(
+                                                                    horizontal:
+                                                                        8,
+                                                                    vertical:
+                                                                        4),
+                                                            border:
+                                                                OutlineInputBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          0),
+                                                              borderSide:
+                                                                  BorderSide(
+                                                                      color: Colors
+                                                                          .grey,
+                                                                      width: 2),
+                                                            ),
+                                                            enabledBorder:
+                                                                OutlineInputBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          0),
+                                                              borderSide: BorderSide(
                                                                   color: Colors
                                                                       .grey,
-                                                                  width: 2),
-                                                        ),
-                                                        enabledBorder:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(0),
-                                                          borderSide: BorderSide(
+                                                                  width:
+                                                                      2), // Border colo
+                                                            ),
+                                                            focusedBorder:
+                                                                OutlineInputBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          0),
+                                                              borderSide: BorderSide(
+                                                                  color: Colors
+                                                                      .grey,
+                                                                  width:
+                                                                      2), // Border color when focused
+                                                            ),
+                                                            fillColor: Colors
+                                                                .white, // Set the background color to white
+                                                            filled: true,
+                                                            // Enable the fill color
+                                                          ),
+                                                          icon: Icon(
+                                                              Icons
+                                                                  .arrow_drop_down,
                                                               color:
-                                                                  Colors.grey,
-                                                              width:
-                                                                  2), // Border colo
-                                                        ),
-                                                        focusedBorder:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(0),
-                                                          borderSide: BorderSide(
-                                                              color:
-                                                                  Colors.grey,
-                                                              width:
-                                                                  2), // Border color when focused
-                                                        ),
-                                                        fillColor: Colors
-                                                            .white, // Set the background color to white
-                                                        filled: true,
-                                                        // Enable the fill color
-                                                      ),
-                                                      icon: Icon(
-                                                          Icons.arrow_drop_down,
-                                                          color: Colors.black),
-                                                      items:
-                                                          filteringAmountsArchieved
-                                                              .map((item) =>
-                                                                  DropdownMenuItem(
-                                                                    value: item,
-                                                                    child: Text(
-                                                                      item,
-                                                                      style:
-                                                                          TextStyle(
-                                                                        fontSize:
-                                                                            14,
-                                                                        color: Color(
-                                                                            0xFF007AFF),
-                                                                      ),
-                                                                    ),
-                                                                  ))
-                                                              .toList(),
-                                                      onChanged: (value) {
-                                                        setState(() {
-                                                          _selectedFilteringValueAchieved =
-                                                              value;
+                                                                  Colors.black),
+                                                          items:
+                                                              filteringAmountsArchieved
+                                                                  .map((item) =>
+                                                                      DropdownMenuItem(
+                                                                        value:
+                                                                            item,
+                                                                        child:
+                                                                            Text(
+                                                                          item,
+                                                                          style:
+                                                                              TextStyle(
+                                                                            fontSize:
+                                                                                14,
+                                                                            color:
+                                                                                Color(0xFF007AFF),
+                                                                          ),
+                                                                        ),
+                                                                      ))
+                                                                  .toList(),
+                                                          onChanged: (value) {
+                                                            setState(() {
+                                                              _selectedFilteringValueAchieved =
+                                                                  value;
 
-                                                          itemsPerPageAchieved =
-                                                              int.parse(value!);
-                                                          currentPageAchieved =
-                                                              1; // Reset to first page
-                                                          if (_selectedFilteringValueAchieved ==
-                                                              "5") {
-                                                            final double
-                                                                maxScrollExtent =
+                                                              itemsPerPageAchieved =
+                                                                  int.parse(
+                                                                      value!);
+                                                              currentPageAchieved =
+                                                                  1; // Reset to first page
+                                                              if (_selectedFilteringValueAchieved ==
+                                                                  "5") {
+                                                                final double
+                                                                    maxScrollExtent =
+                                                                    _scrollController
+                                                                        .position
+                                                                        .maxScrollExtent;
+                                                                final double
+                                                                    targetOffset =
+                                                                    maxScrollExtent *
+                                                                        0.5; // Slightly more than half (60%).
+                                                                // Use animateTo to smoothly scroll to the desired position.
                                                                 _scrollController
-                                                                    .position
-                                                                    .maxScrollExtent;
-                                                            final double
-                                                                targetOffset =
-                                                                maxScrollExtent *
-                                                                    0.5; // Slightly more than half (60%).
-                                                            // Use animateTo to smoothly scroll to the desired position.
-                                                            _scrollController
-                                                                .animateTo(
-                                                              targetOffset,
-                                                              duration: Duration(
-                                                                  milliseconds:
-                                                                      500),
-                                                              curve: Curves
-                                                                  .easeInOut,
-                                                            );
-                                                          } else if (_selectedFilteringValueAchieved ==
-                                                              "10") {
-                                                            print("10 is here");
-                                                            final double
-                                                                maxScrollExtent =
+                                                                    .animateTo(
+                                                                  targetOffset,
+                                                                  duration: Duration(
+                                                                      milliseconds:
+                                                                          500),
+                                                                  curve: Curves
+                                                                      .easeInOut,
+                                                                );
+                                                              } else if (_selectedFilteringValueAchieved ==
+                                                                  "10") {
+                                                                print(
+                                                                    "10 is here");
+                                                                final double
+                                                                    maxScrollExtent =
+                                                                    _scrollController
+                                                                        .position
+                                                                        .maxScrollExtent;
+                                                                final double
+                                                                    targetOffset =
+                                                                    maxScrollExtent *
+                                                                        0.5; // Slightly more than half (60%).
+                                                                // Use animateTo to smoothly scroll to the desired position.
                                                                 _scrollController
-                                                                    .position
-                                                                    .maxScrollExtent;
-                                                            final double
-                                                                targetOffset =
-                                                                maxScrollExtent *
-                                                                    0.5; // Slightly more than half (60%).
-                                                            // Use animateTo to smoothly scroll to the desired position.
-                                                            _scrollController
-                                                                .animateTo(
-                                                              targetOffset,
-                                                              duration: Duration(
-                                                                  milliseconds:
-                                                                      500),
-                                                              curve: Curves
-                                                                  .easeInOut,
-                                                            );
-                                                          } else if (_selectedFilteringValueAchieved ==
-                                                              "15") {
-                                                            final double
-                                                                maxScrollExtent =
+                                                                    .animateTo(
+                                                                  targetOffset,
+                                                                  duration: Duration(
+                                                                      milliseconds:
+                                                                          500),
+                                                                  curve: Curves
+                                                                      .easeInOut,
+                                                                );
+                                                              } else if (_selectedFilteringValueAchieved ==
+                                                                  "15") {
+                                                                final double
+                                                                    maxScrollExtent =
+                                                                    _scrollController
+                                                                        .position
+                                                                        .maxScrollExtent;
+                                                                final double
+                                                                    targetOffset =
+                                                                    maxScrollExtent *
+                                                                        0.55; // Slightly more than half (60%).
+                                                                // Use animateTo to smoothly scroll to the desired position.
                                                                 _scrollController
-                                                                    .position
-                                                                    .maxScrollExtent;
-                                                            final double
-                                                                targetOffset =
-                                                                maxScrollExtent *
-                                                                    0.55; // Slightly more than half (60%).
-                                                            // Use animateTo to smoothly scroll to the desired position.
-                                                            _scrollController
-                                                                .animateTo(
-                                                              targetOffset,
-                                                              duration: Duration(
-                                                                  milliseconds:
-                                                                      500),
-                                                              curve: Curves
-                                                                  .easeInOut,
-                                                            );
+                                                                    .animateTo(
+                                                                  targetOffset,
+                                                                  duration: Duration(
+                                                                      milliseconds:
+                                                                          500),
+                                                                  curve: Curves
+                                                                      .easeInOut,
+                                                                );
+                                                              }
+                                                            });
+                                                          },
+                                                        ),
+                                                      ),
+                                                      const Spacer(),
+                                                      Container(
+                                                        width: 65,
+                                                        height: 20,
+                                                        child: Text(
+                                                          "Navigate",
+                                                          style: TextStyle(
+                                                            color: Color(
+                                                                0xFF005277),
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                        width: 10,
+                                                      ),
+                                                      // Left Arrow
+                                                      GestureDetector(
+                                                        onTap: () {
+                                                          // Handle left arrow click (e.g., navigate left)
+                                                          if (currentPageAchieved >
+                                                              1) {
+                                                            setState(() {
+                                                              currentPageAchieved--;
+                                                            });
+                                                            if (_selectedFilteringValueAchieved ==
+                                                                "5") {
+                                                              final double
+                                                                  maxScrollExtent =
+                                                                  _scrollController
+                                                                      .position
+                                                                      .maxScrollExtent;
+                                                              final double
+                                                                  targetOffset =
+                                                                  maxScrollExtent *
+                                                                      0.5; // Slightly more than half (60%).
+                                                              // Use animateTo to smoothly scroll to the desired position.
+                                                              _scrollController
+                                                                  .animateTo(
+                                                                targetOffset,
+                                                                duration: Duration(
+                                                                    milliseconds:
+                                                                        500),
+                                                                curve: Curves
+                                                                    .easeInOut,
+                                                              );
+                                                            } else if (_selectedFilteringValueAchieved ==
+                                                                "10") {
+                                                              print(
+                                                                  "10 is here");
+                                                              final double
+                                                                  maxScrollExtent =
+                                                                  _scrollController
+                                                                      .position
+                                                                      .maxScrollExtent;
+                                                              final double
+                                                                  targetOffset =
+                                                                  maxScrollExtent *
+                                                                      0.5; // Slightly more than half (60%).
+                                                              // Use animateTo to smoothly scroll to the desired position.
+                                                              _scrollController
+                                                                  .animateTo(
+                                                                targetOffset,
+                                                                duration: Duration(
+                                                                    milliseconds:
+                                                                        500),
+                                                                curve: Curves
+                                                                    .easeInOut,
+                                                              );
+                                                            } else if (_selectedFilteringValueAchieved ==
+                                                                "15") {
+                                                              final double
+                                                                  maxScrollExtent =
+                                                                  _scrollController
+                                                                      .position
+                                                                      .maxScrollExtent;
+                                                              final double
+                                                                  targetOffset =
+                                                                  maxScrollExtent *
+                                                                      0.3; // Slightly more than half (60%).
+                                                              // Use animateTo to smoothly scroll to the desired position.
+                                                              _scrollController
+                                                                  .animateTo(
+                                                                targetOffset,
+                                                                duration: Duration(
+                                                                    milliseconds:
+                                                                        500),
+                                                                curve: Curves
+                                                                    .easeInOut,
+                                                              );
+                                                            }
                                                           }
-                                                        });
-                                                      },
-                                                    ),
-                                                  ),
-                                                  const Spacer(),
-                                                  Container(
-                                                    width: 65,
-                                                    height: 20,
-                                                    child: Text(
-                                                      "Navigate",
-                                                      style: TextStyle(
-                                                        color:
-                                                            Color(0xFF005277),
-                                                        fontWeight:
-                                                            FontWeight.bold,
+                                                        },
+                                                        child: Container(
+                                                          width: 28,
+                                                          height: 28,
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            border: Border.all(
+                                                                color:
+                                                                    Colors.grey,
+                                                                width: 2),
+                                                            color: Colors.white,
+                                                          ),
+                                                          child: Icon(
+                                                            Icons.arrow_left,
+                                                            color: Color(
+                                                                0xFF005277),
+                                                            size: 20,
+                                                          ),
+                                                        ),
                                                       ),
-                                                    ),
-                                                  ),
-                                                  SizedBox(
-                                                    width: 10,
-                                                  ),
-                                                  // Left Arrow
-                                                  GestureDetector(
-                                                    onTap: () {
-                                                      // Handle left arrow click (e.g., navigate left)
-                                                      if (currentPageAchieved >
-                                                          1) {
-                                                        setState(() {
-                                                          currentPageAchieved--;
-                                                        });
-                                                        if (_selectedFilteringValueAchieved ==
-                                                            "5") {
-                                                          final double
-                                                              maxScrollExtent =
-                                                              _scrollController
-                                                                  .position
-                                                                  .maxScrollExtent;
-                                                          final double
-                                                              targetOffset =
-                                                              maxScrollExtent *
-                                                                  0.5; // Slightly more than half (60%).
-                                                          // Use animateTo to smoothly scroll to the desired position.
-                                                          _scrollController
-                                                              .animateTo(
-                                                            targetOffset,
-                                                            duration: Duration(
-                                                                milliseconds:
-                                                                    500),
-                                                            curve: Curves
-                                                                .easeInOut,
-                                                          );
-                                                        } else if (_selectedFilteringValueAchieved ==
-                                                            "10") {
-                                                          print("10 is here");
-                                                          final double
-                                                              maxScrollExtent =
-                                                              _scrollController
-                                                                  .position
-                                                                  .maxScrollExtent;
-                                                          final double
-                                                              targetOffset =
-                                                              maxScrollExtent *
-                                                                  0.5; // Slightly more than half (60%).
-                                                          // Use animateTo to smoothly scroll to the desired position.
-                                                          _scrollController
-                                                              .animateTo(
-                                                            targetOffset,
-                                                            duration: Duration(
-                                                                milliseconds:
-                                                                    500),
-                                                            curve: Curves
-                                                                .easeInOut,
-                                                          );
-                                                        } else if (_selectedFilteringValueAchieved ==
-                                                            "15") {
-                                                          final double
-                                                              maxScrollExtent =
-                                                              _scrollController
-                                                                  .position
-                                                                  .maxScrollExtent;
-                                                          final double
-                                                              targetOffset =
-                                                              maxScrollExtent *
-                                                                  0.3; // Slightly more than half (60%).
-                                                          // Use animateTo to smoothly scroll to the desired position.
-                                                          _scrollController
-                                                              .animateTo(
-                                                            targetOffset,
-                                                            duration: Duration(
-                                                                milliseconds:
-                                                                    500),
-                                                            curve: Curves
-                                                                .easeInOut,
-                                                          );
-                                                        }
-                                                      }
-                                                    },
-                                                    child: Container(
-                                                      width: 28,
-                                                      height: 28,
-                                                      decoration: BoxDecoration(
-                                                        border: Border.all(
-                                                            color: Colors.grey,
-                                                            width: 2),
-                                                        color: Colors.white,
-                                                      ),
-                                                      child: Icon(
-                                                        Icons.arrow_left,
-                                                        color:
-                                                            Color(0xFF005277),
-                                                        size: 20,
-                                                      ),
-                                                    ),
-                                                  ),
 
-                                                  // Right Arrow
-                                                  GestureDetector(
-                                                    onTap: () {
-                                                      // Handle right arrow click (e.g., navigate right)
-                                                      if (currentPageAchieved <
-                                                          totalPagesAchieved) {
-                                                        setState(() {
-                                                          currentPageAchieved++;
-                                                        });
-                                                        if (_selectedFilteringValueAchieved ==
-                                                            "5") {
-                                                          print("5 is here");
-                                                          final double
-                                                              maxScrollExtent =
+                                                      // Right Arrow
+                                                      GestureDetector(
+                                                        onTap: () {
+                                                          // Handle right arrow click (e.g., navigate right)
+                                                          if (currentPageAchieved <
+                                                              totalPagesAchieved) {
+                                                            setState(() {
+                                                              currentPageAchieved++;
+                                                            });
+                                                            if (_selectedFilteringValueAchieved ==
+                                                                "5") {
+                                                              print(
+                                                                  "5 is here");
+                                                              final double
+                                                                  maxScrollExtent =
+                                                                  _scrollController
+                                                                      .position
+                                                                      .maxScrollExtent;
+                                                              final double
+                                                                  targetOffset =
+                                                                  maxScrollExtent *
+                                                                      0.5; // Slightly more than half (60%).
+                                                              // Use animateTo to smoothly scroll to the desired position.
                                                               _scrollController
-                                                                  .position
-                                                                  .maxScrollExtent;
-                                                          final double
-                                                              targetOffset =
-                                                              maxScrollExtent *
-                                                                  0.5; // Slightly more than half (60%).
-                                                          // Use animateTo to smoothly scroll to the desired position.
-                                                          _scrollController
-                                                              .animateTo(
-                                                            targetOffset,
-                                                            duration: Duration(
-                                                                milliseconds:
-                                                                    500),
-                                                            curve: Curves
-                                                                .easeInOut,
-                                                          );
-                                                        } else if (_selectedFilteringValueAchieved ==
-                                                            "10") {
-                                                          print("10 is here");
-                                                          final double
-                                                              maxScrollExtent =
+                                                                  .animateTo(
+                                                                targetOffset,
+                                                                duration: Duration(
+                                                                    milliseconds:
+                                                                        500),
+                                                                curve: Curves
+                                                                    .easeInOut,
+                                                              );
+                                                            } else if (_selectedFilteringValueAchieved ==
+                                                                "10") {
+                                                              print(
+                                                                  "10 is here");
+                                                              final double
+                                                                  maxScrollExtent =
+                                                                  _scrollController
+                                                                      .position
+                                                                      .maxScrollExtent;
+                                                              final double
+                                                                  targetOffset =
+                                                                  maxScrollExtent *
+                                                                      0.35; // Slightly more than half (60%).
+                                                              // Use animateTo to smoothly scroll to the desired position.
                                                               _scrollController
-                                                                  .position
-                                                                  .maxScrollExtent;
-                                                          final double
-                                                              targetOffset =
-                                                              maxScrollExtent *
-                                                                  0.35; // Slightly more than half (60%).
-                                                          // Use animateTo to smoothly scroll to the desired position.
-                                                          _scrollController
-                                                              .animateTo(
-                                                            targetOffset,
-                                                            duration: Duration(
-                                                                milliseconds:
-                                                                    500),
-                                                            curve: Curves
-                                                                .easeInOut,
-                                                          );
-                                                        } else if (_selectedFilteringValueAchieved ==
-                                                            "15") {
-                                                          final double
-                                                              maxScrollExtent =
+                                                                  .animateTo(
+                                                                targetOffset,
+                                                                duration: Duration(
+                                                                    milliseconds:
+                                                                        500),
+                                                                curve: Curves
+                                                                    .easeInOut,
+                                                              );
+                                                            } else if (_selectedFilteringValueAchieved ==
+                                                                "15") {
+                                                              final double
+                                                                  maxScrollExtent =
+                                                                  _scrollController
+                                                                      .position
+                                                                      .maxScrollExtent;
+                                                              final double
+                                                                  targetOffset =
+                                                                  maxScrollExtent *
+                                                                      0.3; // Slightly more than half (60%).
+                                                              // Use animateTo to smoothly scroll to the desired position.
                                                               _scrollController
-                                                                  .position
-                                                                  .maxScrollExtent;
-                                                          final double
-                                                              targetOffset =
-                                                              maxScrollExtent *
-                                                                  0.3; // Slightly more than half (60%).
-                                                          // Use animateTo to smoothly scroll to the desired position.
-                                                          _scrollController
-                                                              .animateTo(
-                                                            targetOffset,
-                                                            duration: Duration(
-                                                                milliseconds:
-                                                                    500),
-                                                            curve: Curves
-                                                                .easeInOut,
-                                                          );
-                                                        }
-                                                      }
-                                                    },
-                                                    child: Container(
-                                                      width: 28,
-                                                      height: 28,
-                                                      decoration: BoxDecoration(
-                                                        border: Border.all(
-                                                            color: Colors.grey,
-                                                            width: 2),
-                                                        color: Colors.white,
+                                                                  .animateTo(
+                                                                targetOffset,
+                                                                duration: Duration(
+                                                                    milliseconds:
+                                                                        500),
+                                                                curve: Curves
+                                                                    .easeInOut,
+                                                              );
+                                                            }
+                                                          }
+                                                        },
+                                                        child: Container(
+                                                          width: 28,
+                                                          height: 28,
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            border: Border.all(
+                                                                color:
+                                                                    Colors.grey,
+                                                                width: 2),
+                                                            color: Colors.white,
+                                                          ),
+                                                          child: Icon(
+                                                            Icons.arrow_right,
+                                                            color: Color(
+                                                                0xFF005277),
+                                                            size: 20,
+                                                          ),
+                                                        ),
                                                       ),
-                                                      child: Icon(
-                                                        Icons.arrow_right,
-                                                        color:
-                                                            Color(0xFF005277),
-                                                        size: 20,
-                                                      ),
-                                                    ),
+                                                    ],
                                                   ),
-                                                ],
+                                                ),
                                               ),
-                                            ),
+                                              SizedBox(
+                                                height: 15,
+                                              ),
+                                            ],
                                           ),
-                                          SizedBox(
-                                            height: 15,
-                                          ),
-                                        ],
-                                      )
-                                    : SizedBox(
-                                        height: 2,
-                                      ),
-                              ],
+                                        )
+                                      : SizedBox(
+                                          height: 2,
+                                        ),
+                                ],
+                              ),
+                            )
+                          : SizedBox(
+                              height: 2,
                             ),
-                          )
-                        : SizedBox(
-                            height: 2,
-                          ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),
