@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../AppState/appState.dart';
@@ -98,182 +100,214 @@ class _TabsPageState extends State<TabsPage> {
                 left: 10,
                 right: 10,
               ), // Add padding for scaling
-              child: ClipRRect(
-                borderRadius: const BorderRadius.all(
-                  Radius.circular(40),
+              child: Container(
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: Colors.blue, // Set the border color here
+                    width: 2.0, // Set the border width
+                  ),
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(16), // Set the border radius here
+                  ),
                 ),
-                child: BottomNavigationBar(
-                    landscapeLayout: BottomNavigationBarLandscapeLayout.spread,
-                    elevation: 1,
-                    type: BottomNavigationBarType.fixed,
-                    backgroundColor: const Color(0xFF01B4D2)
-                        .withOpacity(0.72), // Background with transparency
-                    items: <BottomNavigationBarItem>[
-                      BottomNavigationBarItem(
-                        icon: Image.asset(
-                          _selectedIndex == 0 && widget.firstInstance == false
-                              ? 'assets/images/bottomNavigationIcons/selectedIcons/dashboard_selected.png' // Selected image
-                              : 'assets/images/bottomNavigationIcons/unselectedIcons/dashboard_unselected.png', // Unselected image
-                          height: 38, // Increase height
-                          fit: BoxFit
-                              .contain, // Ensures the image fits within the specified size
+                child: ClipRRect(
+                  borderRadius: const BorderRadius.all(
+                    Radius.circular(16),
+                  ),
+                  child: Stack(children: [
+                    // Blurry Background Effect
+                    Positioned.fill(
+                      child: BackdropFilter(
+                        filter: ImageFilter.blur(
+                            sigmaX: 10.0, sigmaY: 10.0), // Blur effect
+                        child: Container(
+                          color: Colors.white
+                              .withOpacity(0.2), // Adjust transparency
                         ),
-                        label: '',
                       ),
-                      BottomNavigationBarItem(
-                        icon: Image.asset(
-                          _selectedIndex == 1 && widget.firstInstance == false
-                              ? 'assets/images/bottomNavigationIcons/selectedIcons/onsiteJobs_selected.png' // Selected image
-                              : 'assets/images/bottomNavigationIcons/unselectedIcons/onsiteJobs_unselected.png', // Unselected image
-                          height: 38, // Increase height
-                          fit: BoxFit
-                              .contain, // Ensures the image fits within the specified size
-                        ),
-                        label: '',
-                      ),
-                      BottomNavigationBarItem(
-                        icon: Image.asset(
-                          _selectedIndex == 2 && widget.firstInstance == false
-                              ? 'assets/images/bottomNavigationIcons/selectedIcons/clientManagement_selected.png' // Selected image
-                              : 'assets/images/bottomNavigationIcons/unselectedIcons/clientManagement_unselected.png', // Unselected image
-                          height: 38, // Increase height
-                          fit: BoxFit
-                              .contain, // Ensures the image fits within the specified size
-                        ),
-                        label: '',
-                      ),
-                      BottomNavigationBarItem(
-                        icon: Image.asset(
-                          _selectedIndex == 3 && widget.firstInstance == false
-                              ? 'assets/images/bottomNavigationIcons/selectedIcons/collectionReports_selected.png' // Selected image
-                              : 'assets/images/bottomNavigationIcons/unselectedIcons/collectionReports_unselected.png', // Unselected image
-                          height: 38, // Increase height
-                          fit: BoxFit
-                              .contain, // Ensures the image fits within the specified size
-                        ),
-                        label: '',
-                      ),
-                      BottomNavigationBarItem(
-                        icon: Image.asset(
-                          _selectedIndex == 4 && widget.firstInstance == false
-                              ? 'assets/images/bottomNavigationIcons/selectedIcons/accounting_selected.png' // Selected image
-                              : 'assets/images/bottomNavigationIcons/unselectedIcons/accounting_unselected.png', // Unselected image
-                          height: 38, // Increase height
-                          fit: BoxFit
-                              .contain, // Ensures the image fits within the specified size
-                        ),
-                        label: '',
-                      ),
-                    ],
-                    currentIndex: _selectedIndex,
-                    selectedItemColor: widget.firstInstance
-                        ? Colors.white
-                        : const Color(0xFF005277),
-                    unselectedItemColor: Colors.white,
-                    selectedLabelStyle: const TextStyle(
-                      fontSize: 13, // Increase font size for selected label
-                      fontWeight: FontWeight.bold, // Make it bold (optional)
                     ),
-                    unselectedLabelStyle: const TextStyle(
-                      fontSize: 13, // Increase font size for selected label
-                      fontWeight: FontWeight.bold, // Make it bold (optional)
-                    ),
-                    showSelectedLabels: false, // Hide selected labels
-                    showUnselectedLabels: false, // Hide unselected labels
-                    onTap: (index) {
-                      _onItemTapped(index, fromBottomNavigation: true);
-                      if (index == 0) {
-                        appState.setHome(false);
-                        appState.setDashboard(true);
-                        appState.setDashboardHome(true);
-                        appState.setTestsProcessed(false);
-                        appState.setTestSampleResults(false);
-                        appState.setOnsiteJobs(false);
-                        appState.setOnsiteApprovals(false);
-                        appState.setClientManagement(false);
-                        appState.setCollectionReports(false);
-                        appState.setAccounting(false);
-                        appState.setAccountingDashboard(false);
-                        appState.setTests(false);
-                        appState.setLicensing(false);
-                        appState.setITServices(false);
-                        appState.setInvoices(false);
-                        appState.setCollectorsCalendar(false);
-                        appState.setFAQ(false);
-                      } else if (index == 1) {
-                        appState.setHome(false);
-                        appState.setDashboard(false);
-                        appState.setDashboardHome(false);
-                        appState.setTestsProcessed(false);
-                        appState.setTestSampleResults(false);
-                        appState.setOnsiteJobs(true);
-                        appState.setOnsiteApprovals(false);
-                        appState.setClientManagement(false);
-                        appState.setCollectionReports(false);
-                        appState.setAccounting(false);
-                        appState.setAccountingDashboard(false);
-                        appState.setTests(false);
-                        appState.setLicensing(false);
-                        appState.setITServices(false);
-                        appState.setInvoices(false);
-                        appState.setCollectorsCalendar(false);
-                        appState.setFAQ(false);
-                      } else if (index == 2) {
-                        appState.setHome(false);
-                        appState.setDashboard(false);
-                        appState.setDashboardHome(false);
-                        appState.setTestsProcessed(false);
-                        appState.setTestSampleResults(false);
-                        appState.setOnsiteJobs(false);
-                        appState.setOnsiteApprovals(false);
-                        appState.setClientManagement(true);
-                        appState.setCollectionReports(false);
-                        appState.setAccounting(false);
-                        appState.setAccountingDashboard(false);
-                        appState.setTests(false);
-                        appState.setLicensing(false);
-                        appState.setITServices(false);
-                        appState.setInvoices(false);
-                        appState.setCollectorsCalendar(false);
-                        appState.setFAQ(false);
-                      } else if (index == 3) {
-                        appState.setHome(false);
-                        appState.setDashboard(false);
-                        appState.setDashboardHome(false);
-                        appState.setTestsProcessed(false);
-                        appState.setTestSampleResults(false);
-                        appState.setOnsiteJobs(false);
-                        appState.setOnsiteApprovals(false);
-                        appState.setClientManagement(false);
-                        appState.setCollectionReports(true);
-                        appState.setAccounting(false);
-                        appState.setAccountingDashboard(false);
-                        appState.setTests(false);
-                        appState.setLicensing(false);
-                        appState.setITServices(false);
-                        appState.setInvoices(false);
-                        appState.setCollectorsCalendar(false);
-                        appState.setFAQ(false);
-                      } else if (index == 4) {
-                        appState.setHome(false);
-                        appState.setDashboard(false);
-                        appState.setDashboardHome(false);
-                        appState.setTestsProcessed(false);
-                        appState.setTestSampleResults(false);
-                        appState.setOnsiteJobs(false);
-                        appState.setOnsiteApprovals(false);
-                        appState.setClientManagement(false);
-                        appState.setCollectionReports(false);
-                        appState.setAccounting(true);
-                        appState.setAccountingDashboard(true);
-                        appState.setTests(false);
-                        appState.setLicensing(false);
-                        appState.setITServices(false);
-                        appState.setInvoices(false);
-                        appState.setCollectorsCalendar(false);
-                        appState.setFAQ(false);
-                      }
-                    }),
+                    BottomNavigationBar(
+                        landscapeLayout:
+                            BottomNavigationBarLandscapeLayout.spread,
+                        elevation: 1,
+                        type: BottomNavigationBarType.fixed,
+                        backgroundColor: const Color(0xFFFFFFFF)
+                            .withOpacity(0.5), // Background with transparency
+                        items: <BottomNavigationBarItem>[
+                          BottomNavigationBarItem(
+                            icon: Image.asset(
+                              _selectedIndex == 0 &&
+                                      widget.firstInstance == false
+                                  ? 'assets/images/bottomNavigationIcons/selectedIcons/dashboard_selected.png' // Selected image
+                                  : 'assets/images/bottomNavigationIcons/unselectedIcons/dashboard_unselected.png', // Unselected image
+                              height: 38, // Increase height
+                              fit: BoxFit
+                                  .contain, // Ensures the image fits within the specified size
+                            ),
+                            label: '',
+                          ),
+                          BottomNavigationBarItem(
+                            icon: Image.asset(
+                              _selectedIndex == 1 &&
+                                      widget.firstInstance == false
+                                  ? 'assets/images/bottomNavigationIcons/selectedIcons/onsiteJobs_selected.png' // Selected image
+                                  : 'assets/images/bottomNavigationIcons/unselectedIcons/onsiteJobs_unselected.png', // Unselected image
+                              height: 38, // Increase height
+                              fit: BoxFit
+                                  .contain, // Ensures the image fits within the specified size
+                            ),
+                            label: '',
+                          ),
+                          BottomNavigationBarItem(
+                            icon: Image.asset(
+                              _selectedIndex == 2 &&
+                                      widget.firstInstance == false
+                                  ? 'assets/images/bottomNavigationIcons/selectedIcons/clientManagement_selected.png' // Selected image
+                                  : 'assets/images/bottomNavigationIcons/unselectedIcons/clientManagement_unselected.png', // Unselected image
+                              height: 38, // Increase height
+                              fit: BoxFit
+                                  .contain, // Ensures the image fits within the specified size
+                            ),
+                            label: '',
+                          ),
+                          BottomNavigationBarItem(
+                            icon: Image.asset(
+                              _selectedIndex == 3 &&
+                                      widget.firstInstance == false
+                                  ? 'assets/images/bottomNavigationIcons/selectedIcons/collectionReports_selected.png' // Selected image
+                                  : 'assets/images/bottomNavigationIcons/unselectedIcons/collectionReports_unselected.png', // Unselected image
+                              height: 38, // Increase height
+                              fit: BoxFit
+                                  .contain, // Ensures the image fits within the specified size
+                            ),
+                            label: '',
+                          ),
+                          BottomNavigationBarItem(
+                            icon: Image.asset(
+                              _selectedIndex == 4 &&
+                                      widget.firstInstance == false
+                                  ? 'assets/images/bottomNavigationIcons/selectedIcons/accounting_selected.png' // Selected image
+                                  : 'assets/images/bottomNavigationIcons/unselectedIcons/accounting_unselected.png', // Unselected image
+                              height: 38, // Increase height
+                              fit: BoxFit
+                                  .contain, // Ensures the image fits within the specified size
+                            ),
+                            label: '',
+                          ),
+                        ],
+                        currentIndex: _selectedIndex,
+                        selectedItemColor: widget.firstInstance
+                            ? Color(0xFF01B4D2)
+                            : const Color(0xFF01B4D2),
+                        unselectedItemColor: const Color(0xFF01B4D2),
+                        selectedLabelStyle: const TextStyle(
+                          fontSize: 13, // Increase font size for selected label
+                          fontWeight:
+                              FontWeight.bold, // Make it bold (optional)
+                        ),
+                        unselectedLabelStyle: const TextStyle(
+                          fontSize: 13, // Increase font size for selected label
+                          fontWeight:
+                              FontWeight.bold, // Make it bold (optional)
+                        ),
+                        showSelectedLabels: false, // Hide selected labels
+                        showUnselectedLabels: false, // Hide unselected labels
+                        onTap: (index) {
+                          _onItemTapped(index, fromBottomNavigation: true);
+                          if (index == 0) {
+                            appState.setHome(false);
+                            appState.setDashboard(true);
+                            appState.setDashboardHome(true);
+                            appState.setTestsProcessed(false);
+                            appState.setTestSampleResults(false);
+                            appState.setOnsiteJobs(false);
+                            appState.setOnsiteApprovals(false);
+                            appState.setClientManagement(false);
+                            appState.setCollectionReports(false);
+                            appState.setAccounting(false);
+                            appState.setAccountingDashboard(false);
+                            appState.setTests(false);
+                            appState.setLicensing(false);
+                            appState.setITServices(false);
+                            appState.setInvoices(false);
+                            appState.setCollectorsCalendar(false);
+                            appState.setFAQ(false);
+                          } else if (index == 1) {
+                            appState.setHome(false);
+                            appState.setDashboard(false);
+                            appState.setDashboardHome(false);
+                            appState.setTestsProcessed(false);
+                            appState.setTestSampleResults(false);
+                            appState.setOnsiteJobs(true);
+                            appState.setOnsiteApprovals(false);
+                            appState.setClientManagement(false);
+                            appState.setCollectionReports(false);
+                            appState.setAccounting(false);
+                            appState.setAccountingDashboard(false);
+                            appState.setTests(false);
+                            appState.setLicensing(false);
+                            appState.setITServices(false);
+                            appState.setInvoices(false);
+                            appState.setCollectorsCalendar(false);
+                            appState.setFAQ(false);
+                          } else if (index == 2) {
+                            appState.setHome(false);
+                            appState.setDashboard(false);
+                            appState.setDashboardHome(false);
+                            appState.setTestsProcessed(false);
+                            appState.setTestSampleResults(false);
+                            appState.setOnsiteJobs(false);
+                            appState.setOnsiteApprovals(false);
+                            appState.setClientManagement(true);
+                            appState.setCollectionReports(false);
+                            appState.setAccounting(false);
+                            appState.setAccountingDashboard(false);
+                            appState.setTests(false);
+                            appState.setLicensing(false);
+                            appState.setITServices(false);
+                            appState.setInvoices(false);
+                            appState.setCollectorsCalendar(false);
+                            appState.setFAQ(false);
+                          } else if (index == 3) {
+                            appState.setHome(false);
+                            appState.setDashboard(false);
+                            appState.setDashboardHome(false);
+                            appState.setTestsProcessed(false);
+                            appState.setTestSampleResults(false);
+                            appState.setOnsiteJobs(false);
+                            appState.setOnsiteApprovals(false);
+                            appState.setClientManagement(false);
+                            appState.setCollectionReports(true);
+                            appState.setAccounting(false);
+                            appState.setAccountingDashboard(false);
+                            appState.setTests(false);
+                            appState.setLicensing(false);
+                            appState.setITServices(false);
+                            appState.setInvoices(false);
+                            appState.setCollectorsCalendar(false);
+                            appState.setFAQ(false);
+                          } else if (index == 4) {
+                            appState.setHome(false);
+                            appState.setDashboard(false);
+                            appState.setDashboardHome(false);
+                            appState.setTestsProcessed(false);
+                            appState.setTestSampleResults(false);
+                            appState.setOnsiteJobs(false);
+                            appState.setOnsiteApprovals(false);
+                            appState.setClientManagement(false);
+                            appState.setCollectionReports(false);
+                            appState.setAccounting(true);
+                            appState.setAccountingDashboard(true);
+                            appState.setTests(false);
+                            appState.setLicensing(false);
+                            appState.setITServices(false);
+                            appState.setInvoices(false);
+                            appState.setCollectorsCalendar(false);
+                            appState.setFAQ(false);
+                          }
+                        }),
+                  ]),
+                ),
               ),
             ),
     );

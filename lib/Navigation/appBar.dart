@@ -7,13 +7,13 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       toolbarHeight: 68,
-      backgroundColor: Color(0xFF2C7796),
+      backgroundColor: Color(0xFFF2F2F2),
       foregroundColor: Colors.transparent,
       title: Text(
         "Hi Rusira",
         style: TextStyle(
           fontSize: 21.5,
-          color: Colors.white,
+          color: Colors.black,
           fontWeight: FontWeight.bold,
         ),
       ),
@@ -24,7 +24,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
             child: IconButton(
               icon: Icon(
                 Icons.menu_sharp,
-                color: Colors.white,
+                color: Colors.black,
                 size: 28,
               ),
               onPressed: () => Scaffold.of(context).openDrawer(),
@@ -37,14 +37,14 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
         IconButton(
             icon: Icon(
               Icons.notifications_active_outlined,
-              color: Colors.white,
+              color: Colors.black,
               size: 28,
             ),
             onPressed: () {}),
         IconButton(
             icon: Icon(
               Icons.account_circle_rounded,
-              color: Colors.white,
+              color: Colors.black,
               size: 40,
             ),
             onPressed: () {}),

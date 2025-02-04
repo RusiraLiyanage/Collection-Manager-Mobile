@@ -11,6 +11,8 @@ import 'package:project_code_blue/screens/Dashboard/testSampleResults.dart';
 import 'package:project_code_blue/screens/Dashboard/testsProcessed.dart';
 import 'package:project_code_blue/screens/HomeBottomApproach/homePage.dart';
 import 'package:project_code_blue/screens/OnsiteApprovals/onsiteApprovals.dart';
+import 'package:project_code_blue/screens/OnsiteJobs/onSiteJobsHomeAgreed.dart';
+import 'package:project_code_blue/screens/OnsiteJobs/onSiteJobsNewHome.dart';
 import '../screens/home.dart';
 import '../screens/Dashboard/DashboardHome.dart';
 import '../screens/OnsiteJobs/OnSiteJobsHome.dart';
@@ -45,7 +47,7 @@ class TabNavigationItem {
           title: Text("Test Sample Results"),
         ),
         TabNavigationItem(
-          page: const OnsiteJobsHome(),
+          page: const OnsiteJobsHomeAgreed(),
           icon: Icon(Icons.home),
           title: Text("Onsite Jobs"),
         ),
