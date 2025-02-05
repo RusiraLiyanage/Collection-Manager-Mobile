@@ -607,6 +607,7 @@ class _onSiteJobsHomeAgreedState extends State<OnsiteJobsHomeAgreed> {
     // Helper method for each row
 
     return Scaffold(
+      extendBodyBehindAppBar: true, // Extends body behind the AppBar
       onDrawerChanged: (isOpen) {
         appState.setDrawerState(isOpen); // Update global drawer state
       },
@@ -650,442 +651,390 @@ class _onSiteJobsHomeAgreedState extends State<OnsiteJobsHomeAgreed> {
           ),
         ),
       ),
-      body: Scrollbar(
-        thumbVisibility: true,
-        interactive: true,
-        trackVisibility: true,
-        controller: _scrollController,
-        child: SingleChildScrollView(
+      body: Stack(children: [
+        Scrollbar(
+          thumbVisibility: true,
+          interactive: true,
+          trackVisibility: true,
           controller: _scrollController,
-          child: Column(
-            children: [
-              Container(
-                width: double.infinity,
-                height: 100,
-                color: Color(0xFFD9D9D9),
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(top: 8.0, left: 8.0),
-                          child: Container(
-                            color: Color(0xFF56ACB1),
-                            width: 168,
-                            height: 42,
-                            child: Row(
-                              children: [
-                                Image.asset(
-                                    "assets/images/icons/onSiteJobs.png"),
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                    right: 10,
-                                  ),
-                                  child: Text(
-                                    "On-site Jobs",
-                                    style: TextStyle(
-                                        fontSize: 18.0,
-                                        fontWeight: FontWeight
-                                            .bold // Set the text size in logical pixels
-                                        ),
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(right: 8.0),
-                          child: InkWell(
-                            onTap: () {
-                              print("On tapped");
-                            },
-                            child: ClipRRect(
-                              child: Image.asset(
-                                  "assets/images/icons/refresh_icon.png"),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 135.0),
-                      child: Row(
+          child: SingleChildScrollView(
+            controller: _scrollController,
+            child: Column(
+              children: [
+                SizedBox(
+                  height:
+                      kToolbarHeight + MediaQuery.of(context).padding.top + 11,
+                ), // Ensures initial content starts below AppBar
+                Container(
+                  width: double.infinity,
+                  height: 100,
+                  color: Color(0xFFD9D9D9),
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
+                          Padding(
+                            padding: const EdgeInsets.only(top: 8.0, left: 8.0),
+                            child: Container(
+                              color: Color(0xFF56ACB1),
+                              width: 168,
+                              height: 42,
+                              child: Row(
+                                children: [
+                                  Image.asset(
+                                      "assets/images/icons/onSiteJobs.png"),
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                      right: 10,
+                                    ),
+                                    child: Text(
+                                      "On-site Jobs",
+                                      style: TextStyle(
+                                          fontSize: 18.0,
+                                          fontWeight: FontWeight
+                                              .bold // Set the text size in logical pixels
+                                          ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
                           Padding(
                             padding: const EdgeInsets.only(right: 8.0),
                             child: InkWell(
                               onTap: () {
-                                if (Platform.isAndroid) {
-                                  showModalBottomSheet<void>(
-                                    isScrollControlled:
-                                        true, // Allows controlling the height
-                                    isDismissible: false,
-                                    context: context,
-                                    builder: (BuildContext context) {
-                                      return DraggableScrollableSheet(
-                                        expand: false,
-                                        initialChildSize:
-                                            0.93, // Initial height of the sheet (93% of the screen)
-                                        minChildSize:
-                                            0.93, // Allow shrinking to 50% of the screen
-                                        maxChildSize:
-                                            0.93, // Prevent expansion above 93% of the screen
-                                        builder: (BuildContext context,
-                                            ScrollController scrollController) {
-                                          return Container(
-                                            width: double.infinity,
-                                            decoration: const BoxDecoration(
-                                              color: Colors
-                                                  .white, // Background color of the bottom sheet
-                                              borderRadius:
-                                                  BorderRadius.vertical(
-                                                top: Radius.circular(
-                                                    16), // Rounded top corners
-                                              ),
-                                            ),
-                                            child: NewJobAndroid(
-                                                scrollController:
-                                                    scrollController),
-                                          );
-                                        },
-                                      );
-                                    },
-                                  );
-                                } else if (Platform.isIOS) {
-                                  showCupertinoModalBottomSheet(
-                                    transitionBackgroundColor:
-                                        Colors.transparent,
-                                    enableDrag: false,
-                                    isDismissible: false,
-                                    expand: true,
-                                    context: context,
-                                    backgroundColor: Colors.transparent,
-                                    builder: (context) =>
-                                        DraggableScrollableSheet(
-                                      initialChildSize:
-                                          0.985, // Sets the initial size to 50% of the screen
-                                      minChildSize:
-                                          0.985, // Minimum size (30% of the screen)
-                                      maxChildSize:
-                                          0.985, // Maximum size (80% of the screen)
-                                      builder: (context, scrollController) {
-                                        return Container(
-                                          decoration: BoxDecoration(
-                                            color: Colors.white,
-                                            borderRadius: BorderRadius.vertical(
-                                              top: Radius.circular(40),
-                                            ),
-                                          ),
-                                          child: Container(
-                                            child: const NewJob(),
-                                          ),
-                                        );
-                                      },
-                                    ),
-                                  );
-                                }
+                                print("On tapped");
                               },
                               child: ClipRRect(
                                 child: Image.asset(
-                                    "assets/images/icons/newJob_icon.png"),
+                                    "assets/images/icons/refresh_icon.png"),
                               ),
-                            ),
-                          ),
-                          InkWell(
-                            onTap: () {
-                              print("On tapped");
-                            },
-                            child: ClipRRect(
-                              child: Image.asset(
-                                  "assets/images/icons/newCallOutJob_icon.png"),
                             ),
                           ),
                         ],
                       ),
-                    ),
-                  ],
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 135.0),
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(right: 8.0),
+                              child: InkWell(
+                                onTap: () {
+                                  if (Platform.isAndroid) {
+                                    showModalBottomSheet<void>(
+                                      isScrollControlled:
+                                          true, // Allows controlling the height
+                                      isDismissible: false,
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return DraggableScrollableSheet(
+                                          expand: false,
+                                          initialChildSize:
+                                              0.93, // Initial height of the sheet (93% of the screen)
+                                          minChildSize:
+                                              0.93, // Allow shrinking to 50% of the screen
+                                          maxChildSize:
+                                              0.93, // Prevent expansion above 93% of the screen
+                                          builder: (BuildContext context,
+                                              ScrollController
+                                                  scrollController) {
+                                            return Container(
+                                              width: double.infinity,
+                                              decoration: const BoxDecoration(
+                                                color: Colors
+                                                    .white, // Background color of the bottom sheet
+                                                borderRadius:
+                                                    BorderRadius.vertical(
+                                                  top: Radius.circular(
+                                                      16), // Rounded top corners
+                                                ),
+                                              ),
+                                              child: NewJobAndroid(
+                                                  scrollController:
+                                                      scrollController),
+                                            );
+                                          },
+                                        );
+                                      },
+                                    );
+                                  } else if (Platform.isIOS) {
+                                    showCupertinoModalBottomSheet(
+                                      transitionBackgroundColor:
+                                          Colors.transparent,
+                                      enableDrag: false,
+                                      isDismissible: false,
+                                      expand: true,
+                                      context: context,
+                                      backgroundColor: Colors.transparent,
+                                      builder: (context) =>
+                                          DraggableScrollableSheet(
+                                        initialChildSize:
+                                            0.985, // Sets the initial size to 50% of the screen
+                                        minChildSize:
+                                            0.985, // Minimum size (30% of the screen)
+                                        maxChildSize:
+                                            0.985, // Maximum size (80% of the screen)
+                                        builder: (context, scrollController) {
+                                          return Container(
+                                            decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius:
+                                                  BorderRadius.vertical(
+                                                top: Radius.circular(40),
+                                              ),
+                                            ),
+                                            child: Container(
+                                              child: const NewJob(),
+                                            ),
+                                          );
+                                        },
+                                      ),
+                                    );
+                                  }
+                                },
+                                child: ClipRRect(
+                                  child: Image.asset(
+                                      "assets/images/icons/newJob_icon.png"),
+                                ),
+                              ),
+                            ),
+                            InkWell(
+                              onTap: () {
+                                print("On tapped");
+                              },
+                              child: ClipRRect(
+                                child: Image.asset(
+                                    "assets/images/icons/newCallOutJob_icon.png"),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              Container(
-                width: double.infinity,
-                height: 170,
-                color: Color(0xFFF2F2F2).withOpacity(1),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.only(
-                        top: 10,
+                Container(
+                  width: double.infinity,
+                  height: 130,
+                  color: Color(0xFFF2F2F2).withOpacity(1),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(
+                          top: 10,
+                        ),
                       ),
-                    ),
-                    SizedBox(
-                      width: 5,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-                      child: Row(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(right: 12.0),
-                            child: Text(
-                              "Service Office",
-                              style: TextStyle(
-                                color: Color(0xFF005277),
-                                fontWeight: FontWeight.bold,
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(right: 12.0),
+                              child: Text(
+                                "Service Office",
+                                style: TextStyle(
+                                  color: Color(0xFF005277),
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                             ),
-                          ),
-                          Container(
-                            width: 169,
-                            height: 28,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(8),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black.withOpacity(
-                                      0.2), // Shadow color with opacity
-                                  spreadRadius:
-                                      1, // How much the shadow spreads
-                                  blurRadius: 1, // How blurry the shadow is
-                                  offset: Offset(0,
-                                      0), // Offset for shadow position (x, y)
-                                ),
-                              ],
-                            ),
-                            child: DropdownButtonFormField<String>(
-                              value: _selectedValue,
-                              decoration: InputDecoration(
-                                contentPadding: const EdgeInsets.symmetric(
-                                    horizontal: 8, vertical: 4),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(8),
-                                  borderSide: BorderSide(
-                                      color: Colors.transparent, width: 2),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(8),
-                                  borderSide: BorderSide(
-                                      color: Colors.transparent,
-                                      width: 2), // Border colo
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(8),
-                                  borderSide: BorderSide(
-                                      color: Colors.transparent,
-                                      width: 2), // Border color when focused
-                                ),
-                                fillColor: Colors
-                                    .white, // Set the background color to white
-                                filled: true,
+                            Container(
+                              width: 169,
+                              height: 28,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(8),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.white.withOpacity(
+                                        0.2), // Shadow color with opacity
+                                    spreadRadius:
+                                        1, // How much the shadow spreads
+                                    blurRadius: 1, // How blurry the shadow is
+                                    offset: Offset(0,
+                                        0), // Offset for shadow position (x, y)
+                                  ),
+                                ],
                               ),
-                              icon: Icon(
-                                Icons.arrow_drop_down_outlined,
-                                color: Color(
-                                  0xFF71717A,
+                              child: DropdownButtonFormField<String>(
+                                value: _selectedValue,
+                                decoration: InputDecoration(
+                                  contentPadding: const EdgeInsets.symmetric(
+                                      horizontal: 8, vertical: 4),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                    borderSide: BorderSide(
+                                        color: Colors.transparent, width: 2),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                    borderSide: BorderSide(
+                                        color: Colors.transparent,
+                                        width: 2), // Border colo
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                    borderSide: BorderSide(
+                                        color: Colors.transparent,
+                                        width: 2), // Border color when focused
+                                  ),
+                                  fillColor: Colors
+                                      .white, // Set the background color to white
+                                  filled: true,
                                 ),
-                              ),
-                              items: items
-                                  .map((item) => DropdownMenuItem(
-                                        value: item,
-                                        child: Text(
-                                          item,
-                                          style: TextStyle(
-                                            fontSize: 14,
-                                            color: Color(0xFF007AFF),
+                                icon: Icon(
+                                  Icons.arrow_drop_down_outlined,
+                                  color: Color(
+                                    0xFF71717A,
+                                  ),
+                                ),
+                                items: items
+                                    .map((item) => DropdownMenuItem(
+                                          value: item,
+                                          child: Text(
+                                            item,
+                                            style: TextStyle(
+                                              fontSize: 14,
+                                              color: Color(0xFF007AFF),
+                                            ),
                                           ),
-                                        ),
-                                      ))
-                                  .toList(),
-                              onChanged: (value) {
-                                setState(() {
-                                  _selectedValue = value;
-                                });
-                              },
+                                        ))
+                                    .toList(),
+                                onChanged: (value) {
+                                  setState(() {
+                                    _selectedValue = value;
+                                  });
+                                },
+                              ),
                             ),
-                          ),
-                          SizedBox(
-                            height: 3,
-                          ),
-                        ],
+                            SizedBox(
+                              height: 3,
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-                      child: Row(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(right: 66.0),
-                            child: Text(
-                              "Client",
-                              style: TextStyle(
-                                color: Color(0xFF005277),
-                                fontWeight: FontWeight.bold,
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(right: 66.0),
+                              child: Text(
+                                "Client",
+                                style: TextStyle(
+                                  color: Color(0xFF005277),
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                             ),
-                          ),
-                          Container(
-                            width: 260,
-                            height: 28,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(8),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black.withOpacity(
-                                      0.2), // Shadow color with opacity
-                                  spreadRadius:
-                                      1, // How much the shadow spreads
-                                  blurRadius: 1, // How blurry the shadow is
-                                  offset: Offset(0,
-                                      0), // Offset for shadow position (x, y)
-                                ),
-                              ],
-                            ),
-                            child: DropdownButtonFormField<String>(
-                              focusColor: Colors.white,
-                              value: _selectedClient,
-                              decoration: InputDecoration(
-                                contentPadding: const EdgeInsets.symmetric(
-                                    horizontal: 8, vertical: 4),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(8),
-                                  borderSide: BorderSide(
-                                      color: Colors.transparent, width: 2),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(8),
-                                  borderSide: BorderSide(
-                                      color: Colors.transparent,
-                                      width: 2), // Border colo
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(8),
-                                  borderSide: BorderSide(
-                                      color: Colors.transparent,
-                                      width: 2), // Border color when focused
-                                ),
-                                fillColor: Colors
-                                    .white, // Set the background color to white
-                                filled: true,
-                                // Enable the fill color
+                            Container(
+                              width: 260,
+                              height: 28,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(8),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.white.withOpacity(
+                                        0.2), // Shadow color with opacity
+                                    spreadRadius:
+                                        1, // How much the shadow spreads
+                                    blurRadius: 1, // How blurry the shadow is
+                                    offset: Offset(0,
+                                        0), // Offset for shadow position (x, y)
+                                  ),
+                                ],
                               ),
-                              icon: Icon(
-                                Icons.arrow_drop_down_outlined,
-                                color: Color(
-                                  0xFF71717A,
+                              child: DropdownButtonFormField<String>(
+                                focusColor: Colors.white,
+                                value: _selectedClient,
+                                decoration: InputDecoration(
+                                  contentPadding: const EdgeInsets.symmetric(
+                                      horizontal: 8, vertical: 4),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                    borderSide: BorderSide(
+                                        color: Colors.transparent, width: 2),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                    borderSide: BorderSide(
+                                        color: Colors.transparent,
+                                        width: 2), // Border colo
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                    borderSide: BorderSide(
+                                        color: Colors.transparent,
+                                        width: 2), // Border color when focused
+                                  ),
+                                  fillColor: Colors
+                                      .white, // Set the background color to white
+                                  filled: true,
+                                  // Enable the fill color
                                 ),
-                              ),
-                              items: clients
-                                  .map((item) => DropdownMenuItem(
-                                        value: item,
-                                        child: Text(
-                                          item,
-                                          style: TextStyle(
-                                            fontSize: 14,
-                                            color: Color(0xFF007AFF),
+                                icon: Icon(
+                                  Icons.arrow_drop_down_outlined,
+                                  color: Color(
+                                    0xFF71717A,
+                                  ),
+                                ),
+                                items: clients
+                                    .map((item) => DropdownMenuItem(
+                                          value: item,
+                                          child: Text(
+                                            item,
+                                            style: TextStyle(
+                                              fontSize: 14,
+                                              color: Color(0xFF007AFF),
+                                            ),
                                           ),
-                                        ),
-                                      ))
-                                  .toList(),
-                              onChanged: (value) {
-                                setState(() {
-                                  _selectedClient = value;
-                                });
-                              },
+                                        ))
+                                    .toList(),
+                                onChanged: (value) {
+                                  setState(() {
+                                    _selectedClient = value;
+                                  });
+                                },
+                              ),
                             ),
-                          ),
-                          SizedBox(
-                            height: 5,
-                          ),
-                        ],
+                            SizedBox(
+                              height: 5,
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-                      child: Row(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(right: 75.0),
-                            child: Text(
-                              "Date",
-                              style: TextStyle(
-                                color: Color(0xFF005277),
-                                fontWeight: FontWeight.bold,
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(right: 75.0),
+                              child: Text(
+                                "Date",
+                                style: TextStyle(
+                                  color: Color(0xFF005277),
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                             ),
-                          ),
-                          Container(
-                            width: 100,
-                            height: 28,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(8),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black.withOpacity(
-                                      0.2), // Shadow color with opacity
-                                  spreadRadius:
-                                      1, // How much the shadow spreads
-                                  blurRadius: 1, // How blurry the shadow is
-                                  offset: Offset(0,
-                                      0), // Offset for shadow position (x, y)
-                                ),
-                              ],
-                            ),
-                            child: TextField(
-                              controller: _startDateController,
-                              readOnly: true,
-                              onTap: () => _selectStartDate(context),
-                              decoration: InputDecoration(
-                                contentPadding: const EdgeInsets.symmetric(
-                                    horizontal: 8, vertical: 4),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(8),
-                                  borderSide: BorderSide(
-                                      color: Colors.transparent,
-                                      width:
-                                          2), // Default border with thickness
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(8),
-                                  borderSide: BorderSide(
-                                      color: Colors.transparent,
-                                      width: 3), // Border color when enabled
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(8),
-                                  borderSide: BorderSide(
-                                      color: Colors.transparent,
-                                      width: 3), // Border color when focused
-                                ),
-                                fillColor: Colors.white,
-                                filled: true,
-                                hintText: 'Start', // Placeholder text
-                                hintStyle: TextStyle(
-                                  color: Color(0xFF007AFF),
-                                ), // Style for the hint text
-                              ),
-                              style: TextStyle(
-                                fontSize: 14,
-                                color: Color(0xFF007AFF),
-                              ), // Text style for the input text
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 10.0),
-                            child: Container(
+                            Container(
                               width: 100,
                               height: 28,
                               decoration: BoxDecoration(
@@ -1093,7 +1042,7 @@ class _onSiteJobsHomeAgreedState extends State<OnsiteJobsHomeAgreed> {
                                 borderRadius: BorderRadius.circular(8),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: Colors.black.withOpacity(
+                                    color: Colors.white.withOpacity(
                                         0.2), // Shadow color with opacity
                                     spreadRadius:
                                         1, // How much the shadow spreads
@@ -1104,9 +1053,9 @@ class _onSiteJobsHomeAgreedState extends State<OnsiteJobsHomeAgreed> {
                                 ],
                               ),
                               child: TextField(
-                                controller: _endDateController,
+                                controller: _startDateController,
                                 readOnly: true,
-                                onTap: () => _selectEndDate(context),
+                                onTap: () => _selectStartDate(context),
                                 decoration: InputDecoration(
                                   contentPadding: const EdgeInsets.symmetric(
                                       horizontal: 8, vertical: 4),
@@ -1131,7 +1080,7 @@ class _onSiteJobsHomeAgreedState extends State<OnsiteJobsHomeAgreed> {
                                   ),
                                   fillColor: Colors.white,
                                   filled: true,
-                                  hintText: 'Ends', // Placeholder text
+                                  hintText: 'Start', // Placeholder text
                                   hintStyle: TextStyle(
                                     color: Color(0xFF007AFF),
                                   ), // Style for the hint text
@@ -1142,568 +1091,640 @@ class _onSiteJobsHomeAgreedState extends State<OnsiteJobsHomeAgreed> {
                                 ), // Text style for the input text
                               ),
                             ),
-                          )
-                        ],
+                            Padding(
+                              padding: const EdgeInsets.only(left: 10.0),
+                              child: Container(
+                                width: 100,
+                                height: 28,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(8),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.white.withOpacity(
+                                          0.2), // Shadow color with opacity
+                                      spreadRadius:
+                                          1, // How much the shadow spreads
+                                      blurRadius: 1, // How blurry the shadow is
+                                      offset: Offset(0,
+                                          0), // Offset for shadow position (x, y)
+                                    ),
+                                  ],
+                                ),
+                                child: TextField(
+                                  controller: _endDateController,
+                                  readOnly: true,
+                                  onTap: () => _selectEndDate(context),
+                                  decoration: InputDecoration(
+                                    contentPadding: const EdgeInsets.symmetric(
+                                        horizontal: 8, vertical: 4),
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(8),
+                                      borderSide: BorderSide(
+                                          color: Colors.transparent,
+                                          width:
+                                              2), // Default border with thickness
+                                    ),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(8),
+                                      borderSide: BorderSide(
+                                          color: Colors.transparent,
+                                          width:
+                                              3), // Border color when enabled
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(8),
+                                      borderSide: BorderSide(
+                                          color: Colors.transparent,
+                                          width:
+                                              3), // Border color when focused
+                                    ),
+                                    fillColor: Colors.white,
+                                    filled: true,
+                                    hintText: 'Ends', // Placeholder text
+                                    hintStyle: TextStyle(
+                                      color: Color(0xFF007AFF),
+                                    ), // Style for the hint text
+                                  ),
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: Color(0xFF007AFF),
+                                  ), // Text style for the input text
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-                      child: Row(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(right: 63.0),
-                            child: Text(
-                              "Status",
+                      SizedBox(
+                        height: 10,
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: Padding(
+                      padding: const EdgeInsets.only(
+                        right: 18.0,
+                        bottom: 5.0,
+                      ),
+                      child: showMainJobs
+                          ? Text(
+                              "$displayRange out of ${jobData.length} records",
                               style: TextStyle(
-                                color: Color(0xFF005277),
                                 fontWeight: FontWeight.bold,
                               ),
-                            ),
-                          ),
-                          Container(
-                            width: 100,
-                            height: 28,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(8),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black.withOpacity(
-                                      0.2), // Shadow color with opacity
-                                  spreadRadius:
-                                      1, // How much the shadow spreads
-                                  blurRadius: 1, // How blurry the shadow is
-                                  offset: Offset(0,
-                                      0), // Offset for shadow position (x, y)
-                                ),
-                              ],
-                            ),
-                            child: DropdownButtonFormField<String>(
-                              focusColor: Colors.white,
-                              value: _selectedStatus,
-                              decoration: InputDecoration(
-                                contentPadding: const EdgeInsets.symmetric(
-                                    horizontal: 8, vertical: 4),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(8),
-                                  borderSide: BorderSide(
-                                      color: Colors.transparent, width: 2),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(8),
-                                  borderSide: BorderSide(
-                                      color: Colors.transparent,
-                                      width: 2), // Border colo
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(8),
-                                  borderSide: BorderSide(
-                                      color: Colors.transparent,
-                                      width: 2), // Border color when focused
-                                ),
-                                fillColor: Colors
-                                    .white, // Set the background color to white
-                                filled: true,
-                                // Enable the fill color
-                              ),
-                              icon: Icon(
-                                Icons.arrow_drop_down_outlined,
-                                color: Color(
-                                  0xFF71717A,
-                                ),
-                              ),
-                              items: status
-                                  .map((item) => DropdownMenuItem(
-                                        value: item,
-                                        child: Text(
-                                          item,
-                                          style: TextStyle(
-                                            fontSize: 14,
-                                            color: Color(0xFF007AFF),
-                                          ),
-                                        ),
-                                      ))
-                                  .toList(),
-                              onChanged: (value) {
-                                setState(() {
-                                  _selectedStatus = value;
-                                });
-                              },
-                            ),
-                          ),
-                          SizedBox(
-                            height: 5,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
+                            )
+                          : null),
                 ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Align(
-                alignment: Alignment.centerRight,
-                child: Padding(
-                    padding: const EdgeInsets.only(
-                      right: 18.0,
-                      bottom: 5.0,
-                    ),
-                    child: showMainJobs
-                        ? Text(
-                            "$displayRange out of ${jobData.length} records",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 70.0),
+                  child: Column(
+                    children: [
+                      ListView.builder(
+                        padding: EdgeInsets.zero,
+                        shrinkWrap: true,
+                        physics: const ClampingScrollPhysics(),
+                        itemCount: paginatedJobData.length,
+                        itemBuilder: (context, index) {
+                          final job = paginatedJobData[index];
+                          return Center(
+                            child: Padding(
+                              padding: const EdgeInsets.only(
+                                left: 30.0,
+                                right: 45.0,
+                                bottom: 10.0,
+                              ),
+                              child: OnsiteJobsNewCard(job: job),
                             ),
-                          )
-                        : null),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 70.0),
-                child: Column(
-                  children: [
-                    ListView.builder(
-                      padding: EdgeInsets.zero,
-                      shrinkWrap: true,
-                      physics: const ClampingScrollPhysics(),
-                      itemCount: paginatedJobData.length,
-                      itemBuilder: (context, index) {
-                        final job = paginatedJobData[index];
-                        return Center(
-                          child: Padding(
-                            padding: const EdgeInsets.only(
-                              left: 30.0,
-                              right: 45.0,
-                              bottom: 10.0,
-                            ),
-                            child: OnsiteJobsNewCard(job: job),
-                          ),
-                        );
-                      },
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                        left: 10.0,
-                        right: 70,
+                          );
+                        },
                       ),
-                      child: Align(
-                        alignment: Alignment.topLeft,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(right: 30.0),
-                              child: Text(
-                                "Show",
-                                style: TextStyle(
-                                  color: Color(0xFF005277),
-                                  fontWeight: FontWeight.bold,
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          left: 10.0,
+                          right: 70,
+                        ),
+                        child: Align(
+                          alignment: Alignment.topLeft,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(right: 30.0),
+                                child: Text(
+                                  "Show",
+                                  style: TextStyle(
+                                    color: Color(0xFF005277),
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
                               ),
-                            ),
-                            Container(
-                              width: 100,
-                              height: 28,
-                              child: DropdownButtonFormField<String>(
-                                focusColor: Colors.white,
-                                value: _selectedFilteringValue,
-                                decoration: InputDecoration(
-                                  contentPadding: const EdgeInsets.symmetric(
-                                      horizontal: 8, vertical: 4),
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(0),
-                                    borderSide: BorderSide(
-                                        color: Colors.grey, width: 2),
+                              Container(
+                                width: 100,
+                                height: 28,
+                                child: DropdownButtonFormField<String>(
+                                  focusColor: Colors.white,
+                                  value: _selectedFilteringValue,
+                                  decoration: InputDecoration(
+                                    contentPadding: const EdgeInsets.symmetric(
+                                        horizontal: 8, vertical: 4),
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(0),
+                                      borderSide: BorderSide(
+                                          color: Colors.grey, width: 2),
+                                    ),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(0),
+                                      borderSide: BorderSide(
+                                          color: Colors.grey,
+                                          width: 2), // Border colo
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(0),
+                                      borderSide: BorderSide(
+                                          color: Colors.grey,
+                                          width:
+                                              2), // Border color when focused
+                                    ),
+                                    fillColor: Colors
+                                        .white, // Set the background color to white
+                                    filled: true,
+                                    // Enable the fill color
                                   ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(0),
-                                    borderSide: BorderSide(
-                                        color: Colors.grey,
-                                        width: 2), // Border colo
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(0),
-                                    borderSide: BorderSide(
-                                        color: Colors.grey,
-                                        width: 2), // Border color when focused
-                                  ),
-                                  fillColor: Colors
-                                      .white, // Set the background color to white
-                                  filled: true,
-                                  // Enable the fill color
-                                ),
-                                icon: Icon(Icons.arrow_drop_down,
-                                    color: Colors.black),
-                                items: filteringAmounts
-                                    .map((item) => DropdownMenuItem(
-                                          value: item,
-                                          child: Text(
-                                            item,
-                                            style: TextStyle(
-                                              fontSize: 14,
-                                              color: Color(0xFF007AFF),
+                                  icon: Icon(Icons.arrow_drop_down,
+                                      color: Colors.black),
+                                  items: filteringAmounts
+                                      .map((item) => DropdownMenuItem(
+                                            value: item,
+                                            child: Text(
+                                              item,
+                                              style: TextStyle(
+                                                fontSize: 14,
+                                                color: Color(0xFF007AFF),
+                                              ),
                                             ),
-                                          ),
-                                        ))
-                                    .toList(),
-                                onChanged: (value) {
-                                  setState(() {
-                                    _selectedFilteringValue = value;
-                                    itemsPerPage = int.parse(value!);
-                                    currentPage = 1; // Reset to first page
+                                          ))
+                                      .toList(),
+                                  onChanged: (value) {
+                                    setState(() {
+                                      _selectedFilteringValue = value;
+                                      itemsPerPage = int.parse(value!);
+                                      currentPage = 1; // Reset to first page
+                                      _scrollController.animateTo(
+                                        0,
+                                        duration: Duration(milliseconds: 500),
+                                        curve: Curves.easeOut,
+                                      );
+                                    });
+                                  },
+                                ),
+                              ),
+                              const Spacer(),
+                              Container(
+                                width: 65,
+                                height: 20,
+                                child: Text(
+                                  "Navigate",
+                                  style: TextStyle(
+                                    color: Color(0xFF005277),
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              // Left Arrow
+                              GestureDetector(
+                                onTap: () {
+                                  // Handle left arrow click (e.g., navigate left)
+                                  if (currentPage > 1) {
+                                    setState(() {
+                                      currentPage--;
+                                    });
                                     _scrollController.animateTo(
                                       0,
                                       duration: Duration(milliseconds: 500),
                                       curve: Curves.easeOut,
                                     );
-                                  });
+                                  }
                                 },
-                              ),
-                            ),
-                            const Spacer(),
-                            Container(
-                              width: 65,
-                              height: 20,
-                              child: Text(
-                                "Navigate",
-                                style: TextStyle(
-                                  color: Color(0xFF005277),
-                                  fontWeight: FontWeight.bold,
+                                child: Container(
+                                  width: 28,
+                                  height: 28,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                        color: Colors.grey, width: 2),
+                                    color: Colors.white,
+                                  ),
+                                  child: Icon(
+                                    Icons.arrow_left,
+                                    color: Color(0xFF005277),
+                                    size: 20,
+                                  ),
                                 ),
                               ),
-                            ),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            // Left Arrow
-                            GestureDetector(
-                              onTap: () {
-                                // Handle left arrow click (e.g., navigate left)
-                                if (currentPage > 1) {
-                                  setState(() {
-                                    currentPage--;
-                                  });
-                                  _scrollController.animateTo(
-                                    0,
-                                    duration: Duration(milliseconds: 500),
-                                    curve: Curves.easeOut,
-                                  );
-                                }
-                              },
-                              child: Container(
-                                width: 28,
-                                height: 28,
-                                decoration: BoxDecoration(
-                                  border:
-                                      Border.all(color: Colors.grey, width: 2),
-                                  color: Colors.white,
-                                ),
-                                child: Icon(
-                                  Icons.arrow_left,
-                                  color: Color(0xFF005277),
-                                  size: 20,
-                                ),
-                              ),
-                            ),
 
-                            // Right Arrow
-                            GestureDetector(
-                              onTap: () {
-                                // Handle right arrow click (e.g., navigate right)
-                                if (currentPage < totalPages) {
-                                  setState(() {
-                                    currentPage++;
-                                  });
-                                  _scrollController.animateTo(
-                                    0,
-                                    duration: Duration(milliseconds: 500),
-                                    curve: Curves.easeOut,
-                                  );
-                                }
-                              },
-                              child: Container(
-                                width: 28,
-                                height: 28,
-                                decoration: BoxDecoration(
-                                  border:
-                                      Border.all(color: Colors.grey, width: 2),
-                                  color: Colors.white,
-                                ),
-                                child: Icon(
-                                  Icons.arrow_right,
-                                  color: Color(0xFF005277),
-                                  size: 20,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Align(
-                        alignment: Alignment.topLeft,
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 10.0),
-                          child: GestureDetector(
-                            onTap: () {
-                              setState(() {
-                                archieveJobsOpened = !archieveJobsOpened;
-                                if (!archieveJobsOpened) {
-                                  showMainJobs = true;
-                                } else {
-                                  showMainJobs = false;
-                                }
-                                if (archieveJobsOpened) {
-                                  if (_selectedFilteringValue != "5") {
-                                    String? theSelected =
-                                        _selectedFilteringValue;
+                              // Right Arrow
+                              GestureDetector(
+                                onTap: () {
+                                  // Handle right arrow click (e.g., navigate right)
+                                  if (currentPage < totalPages) {
                                     setState(() {
-                                      _selectedFilteringValue =
-                                          filteringAmounts.first;
-                                      itemsPerPage = 5;
+                                      currentPage++;
                                     });
-                                    // Calculate the target offset (80% of the scrollable extent)
-                                    print(theSelected);
-                                    if (theSelected == "10") {
-                                      final double targetOffset =
-                                          _scrollController
-                                                  .position.maxScrollExtent *
-                                              0.5;
-                                      _scrollController.animateTo(
-                                        targetOffset,
-                                        duration: Duration(milliseconds: 500),
-                                        curve: Curves.easeOut,
-                                      );
-                                    } else if (theSelected == "15") {
-                                      final double targetOffset =
-                                          _scrollController
-                                                  .position.maxScrollExtent *
-                                              0.35;
-                                      _scrollController.animateTo(
-                                        targetOffset,
-                                        duration: Duration(milliseconds: 500),
-                                        curve: Curves.easeOut,
-                                      );
-                                    }
-                                  } else {
                                     _scrollController.animateTo(
-                                      _scrollController.position.pixels +
-                                          100, // Adjust this value to scroll further down
+                                      0,
                                       duration: Duration(milliseconds: 500),
                                       curve: Curves.easeOut,
                                     );
                                   }
-                                }
-                              });
-                            },
-                            child: !archieveJobsOpened
-                                ? FittedBox(
-                                    child: Image.asset(
-                                      "assets/images/icons/showAchieve.png",
-                                      fit: BoxFit.cover,
-                                    ),
-                                  )
-                                : FittedBox(
-                                    child: Image.asset(
-                                      "assets/images/icons/hideArchieve.png",
-                                      fit: BoxFit.cover,
-                                    ),
+                                },
+                                child: Container(
+                                  width: 28,
+                                  height: 28,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                        color: Colors.grey, width: 2),
+                                    color: Colors.white,
                                   ),
+                                  child: Icon(
+                                    Icons.arrow_right,
+                                    color: Color(0xFF005277),
+                                    size: 20,
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
-                        )),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    archieveJobsOpened
-                        ? Container(
-                            width: double.infinity,
-                            color: const Color(0xFF01B4D2).withOpacity(0.2),
-                            child: Column(
-                              children: [
-                                Divider(
-                                  thickness: 2.0,
-                                  indent: 10,
-                                  endIndent: 10,
-                                  color: Color(0xFF0047B3),
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Align(
-                                  alignment: Alignment.topRight,
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(
-                                      right: 10.0,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Align(
+                          alignment: Alignment.topLeft,
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 10.0),
+                            child: GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  archieveJobsOpened = !archieveJobsOpened;
+                                  if (!archieveJobsOpened) {
+                                    showMainJobs = true;
+                                  } else {
+                                    showMainJobs = false;
+                                  }
+                                  if (archieveJobsOpened) {
+                                    if (_selectedFilteringValue != "5") {
+                                      String? theSelected =
+                                          _selectedFilteringValue;
+                                      setState(() {
+                                        _selectedFilteringValue =
+                                            filteringAmounts.first;
+                                        itemsPerPage = 5;
+                                      });
+                                      // Calculate the target offset (80% of the scrollable extent)
+                                      print(theSelected);
+                                      if (theSelected == "10") {
+                                        final double targetOffset =
+                                            _scrollController
+                                                    .position.maxScrollExtent *
+                                                0.5;
+                                        _scrollController.animateTo(
+                                          targetOffset,
+                                          duration: Duration(milliseconds: 500),
+                                          curve: Curves.easeOut,
+                                        );
+                                      } else if (theSelected == "15") {
+                                        final double targetOffset =
+                                            _scrollController
+                                                    .position.maxScrollExtent *
+                                                0.35;
+                                        _scrollController.animateTo(
+                                          targetOffset,
+                                          duration: Duration(milliseconds: 500),
+                                          curve: Curves.easeOut,
+                                        );
+                                      }
+                                    } else {
+                                      _scrollController.animateTo(
+                                        _scrollController.position.pixels +
+                                            100, // Adjust this value to scroll further down
+                                        duration: Duration(milliseconds: 500),
+                                        curve: Curves.easeOut,
+                                      );
+                                    }
+                                  }
+                                });
+                              },
+                              child: !archieveJobsOpened
+                                  ? FittedBox(
+                                      child: Image.asset(
+                                        "assets/images/icons/showAchieve.png",
+                                        fit: BoxFit.cover,
+                                      ),
+                                    )
+                                  : FittedBox(
+                                      child: Image.asset(
+                                        "assets/images/icons/hideArchieve.png",
+                                        fit: BoxFit.cover,
+                                      ),
                                     ),
-                                    child: Text(
-                                      "$displayRangeAchieved out of ${jobDataAchieved.length} achieved records",
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
+                            ),
+                          )),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      archieveJobsOpened
+                          ? Container(
+                              width: double.infinity,
+                              color: const Color(0xFF01B4D2).withOpacity(0.2),
+                              child: Column(
+                                children: [
+                                  Divider(
+                                    thickness: 2.0,
+                                    indent: 10,
+                                    endIndent: 10,
+                                    color: Color(0xFF0047B3),
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  Align(
+                                    alignment: Alignment.topRight,
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                        right: 10.0,
+                                      ),
+                                      child: Text(
+                                        "$displayRangeAchieved out of ${jobDataAchieved.length} achieved records",
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                archieveJobsOpened
-                                    ? Padding(
-                                        padding: const EdgeInsets.only(
-                                          bottom: 35.0,
-                                        ),
-                                        child: Column(
-                                          children: [
-                                            ListView.builder(
-                                              padding: EdgeInsets.zero,
-                                              shrinkWrap:
-                                                  true, // Allow ListView to adapt to its content
-                                              physics: ClampingScrollPhysics(),
-                                              itemCount:
-                                                  paginatedJobDataAchieved
-                                                      .length,
-                                              itemBuilder: (context, index) {
-                                                final job =
-                                                    paginatedJobDataAchieved[
-                                                        index];
-                                                return Center(
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                      left: 30.0,
-                                                      right: 45.0,
-                                                      bottom: 10.0,
-                                                    ),
-                                                    child: AchievedJobsOldCard(
-                                                        job: job),
-                                                  ),
-                                                );
-                                              },
-                                            ),
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                left: 10.0,
-                                                right: 70,
-                                              ),
-                                              child: Align(
-                                                alignment: Alignment.topLeft,
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  children: [
-                                                    Padding(
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  archieveJobsOpened
+                                      ? Padding(
+                                          padding: const EdgeInsets.only(
+                                            bottom: 35.0,
+                                          ),
+                                          child: Column(
+                                            children: [
+                                              ListView.builder(
+                                                padding: EdgeInsets.zero,
+                                                shrinkWrap:
+                                                    true, // Allow ListView to adapt to its content
+                                                physics:
+                                                    ClampingScrollPhysics(),
+                                                itemCount:
+                                                    paginatedJobDataAchieved
+                                                        .length,
+                                                itemBuilder: (context, index) {
+                                                  final job =
+                                                      paginatedJobDataAchieved[
+                                                          index];
+                                                  return Center(
+                                                    child: Padding(
                                                       padding:
                                                           const EdgeInsets.only(
-                                                              right: 30.0),
-                                                      child: Text(
-                                                        "Show",
-                                                        style: TextStyle(
-                                                          color:
-                                                              Color(0xFF005277),
-                                                          fontWeight:
-                                                              FontWeight.bold,
+                                                        left: 30.0,
+                                                        right: 45.0,
+                                                        bottom: 10.0,
+                                                      ),
+                                                      child:
+                                                          AchievedJobsOldCard(
+                                                              job: job),
+                                                    ),
+                                                  );
+                                                },
+                                              ),
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                  left: 10.0,
+                                                  right: 70,
+                                                ),
+                                                child: Align(
+                                                  alignment: Alignment.topLeft,
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .only(
+                                                                right: 30.0),
+                                                        child: Text(
+                                                          "Show",
+                                                          style: TextStyle(
+                                                            color: Color(
+                                                                0xFF005277),
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                          ),
                                                         ),
                                                       ),
-                                                    ),
-                                                    Container(
-                                                      width: 100,
-                                                      height: 28,
-                                                      child:
-                                                          DropdownButtonFormField<
-                                                              String>(
-                                                        focusColor:
-                                                            Colors.white,
-                                                        value:
-                                                            _selectedFilteringValueAchieved,
-                                                        decoration:
-                                                            InputDecoration(
-                                                          contentPadding:
-                                                              const EdgeInsets
-                                                                  .symmetric(
-                                                                  horizontal: 8,
-                                                                  vertical: 4),
-                                                          border:
-                                                              OutlineInputBorder(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        0),
-                                                            borderSide:
-                                                                BorderSide(
-                                                                    color: Colors
-                                                                        .grey,
-                                                                    width: 2),
+                                                      Container(
+                                                        width: 100,
+                                                        height: 28,
+                                                        child:
+                                                            DropdownButtonFormField<
+                                                                String>(
+                                                          focusColor:
+                                                              Colors.white,
+                                                          value:
+                                                              _selectedFilteringValueAchieved,
+                                                          decoration:
+                                                              InputDecoration(
+                                                            contentPadding:
+                                                                const EdgeInsets
+                                                                    .symmetric(
+                                                                    horizontal:
+                                                                        8,
+                                                                    vertical:
+                                                                        4),
+                                                            border:
+                                                                OutlineInputBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          0),
+                                                              borderSide:
+                                                                  BorderSide(
+                                                                      color: Colors
+                                                                          .grey,
+                                                                      width: 2),
+                                                            ),
+                                                            enabledBorder:
+                                                                OutlineInputBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          0),
+                                                              borderSide: BorderSide(
+                                                                  color: Colors
+                                                                      .grey,
+                                                                  width:
+                                                                      2), // Border colo
+                                                            ),
+                                                            focusedBorder:
+                                                                OutlineInputBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          0),
+                                                              borderSide: BorderSide(
+                                                                  color: Colors
+                                                                      .grey,
+                                                                  width:
+                                                                      2), // Border color when focused
+                                                            ),
+                                                            fillColor: Colors
+                                                                .white, // Set the background color to white
+                                                            filled: true,
+                                                            // Enable the fill color
                                                           ),
-                                                          enabledBorder:
-                                                              OutlineInputBorder(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        0),
-                                                            borderSide: BorderSide(
-                                                                color:
-                                                                    Colors.grey,
-                                                                width:
-                                                                    2), // Border colo
-                                                          ),
-                                                          focusedBorder:
-                                                              OutlineInputBorder(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        0),
-                                                            borderSide: BorderSide(
-                                                                color:
-                                                                    Colors.grey,
-                                                                width:
-                                                                    2), // Border color when focused
-                                                          ),
-                                                          fillColor: Colors
-                                                              .white, // Set the background color to white
-                                                          filled: true,
-                                                          // Enable the fill color
-                                                        ),
-                                                        icon: Icon(
-                                                            Icons
-                                                                .arrow_drop_down,
-                                                            color:
-                                                                Colors.black),
-                                                        items:
-                                                            filteringAmountsArchieved
-                                                                .map((item) =>
-                                                                    DropdownMenuItem(
-                                                                      value:
+                                                          icon: Icon(
+                                                              Icons
+                                                                  .arrow_drop_down,
+                                                              color:
+                                                                  Colors.black),
+                                                          items:
+                                                              filteringAmountsArchieved
+                                                                  .map((item) =>
+                                                                      DropdownMenuItem(
+                                                                        value:
+                                                                            item,
+                                                                        child:
+                                                                            Text(
                                                                           item,
-                                                                      child:
-                                                                          Text(
-                                                                        item,
-                                                                        style:
-                                                                            TextStyle(
-                                                                          fontSize:
-                                                                              14,
-                                                                          color:
-                                                                              Color(0xFF007AFF),
+                                                                          style:
+                                                                              TextStyle(
+                                                                            fontSize:
+                                                                                14,
+                                                                            color:
+                                                                                Color(0xFF007AFF),
+                                                                          ),
                                                                         ),
-                                                                      ),
-                                                                    ))
-                                                                .toList(),
-                                                        onChanged: (value) {
-                                                          setState(() {
-                                                            _selectedFilteringValueAchieved =
-                                                                value;
+                                                                      ))
+                                                                  .toList(),
+                                                          onChanged: (value) {
+                                                            setState(() {
+                                                              _selectedFilteringValueAchieved =
+                                                                  value;
 
-                                                            itemsPerPageAchieved =
-                                                                int.parse(
-                                                                    value!);
-                                                            currentPageAchieved =
-                                                                1; // Reset to first page
+                                                              itemsPerPageAchieved =
+                                                                  int.parse(
+                                                                      value!);
+                                                              currentPageAchieved =
+                                                                  1; // Reset to first page
+                                                              if (_selectedFilteringValueAchieved ==
+                                                                  "5") {
+                                                                final double
+                                                                    maxScrollExtent =
+                                                                    _scrollController
+                                                                        .position
+                                                                        .maxScrollExtent;
+                                                                final double
+                                                                    targetOffset =
+                                                                    maxScrollExtent *
+                                                                        0.5; // Slightly more than half (60%).
+                                                                // Use animateTo to smoothly scroll to the desired position.
+                                                                _scrollController
+                                                                    .animateTo(
+                                                                  targetOffset,
+                                                                  duration: Duration(
+                                                                      milliseconds:
+                                                                          500),
+                                                                  curve: Curves
+                                                                      .easeInOut,
+                                                                );
+                                                              } else if (_selectedFilteringValueAchieved ==
+                                                                  "10") {
+                                                                print(
+                                                                    "10 is here");
+                                                                final double
+                                                                    maxScrollExtent =
+                                                                    _scrollController
+                                                                        .position
+                                                                        .maxScrollExtent;
+                                                                final double
+                                                                    targetOffset =
+                                                                    maxScrollExtent *
+                                                                        0.5; // Slightly more than half (60%).
+                                                                // Use animateTo to smoothly scroll to the desired position.
+                                                                _scrollController
+                                                                    .animateTo(
+                                                                  targetOffset,
+                                                                  duration: Duration(
+                                                                      milliseconds:
+                                                                          500),
+                                                                  curve: Curves
+                                                                      .easeInOut,
+                                                                );
+                                                              } else if (_selectedFilteringValueAchieved ==
+                                                                  "15") {
+                                                                final double
+                                                                    maxScrollExtent =
+                                                                    _scrollController
+                                                                        .position
+                                                                        .maxScrollExtent;
+                                                                final double
+                                                                    targetOffset =
+                                                                    maxScrollExtent *
+                                                                        0.55; // Slightly more than half (60%).
+                                                                // Use animateTo to smoothly scroll to the desired position.
+                                                                _scrollController
+                                                                    .animateTo(
+                                                                  targetOffset,
+                                                                  duration: Duration(
+                                                                      milliseconds:
+                                                                          500),
+                                                                  curve: Curves
+                                                                      .easeInOut,
+                                                                );
+                                                              }
+                                                            });
+                                                          },
+                                                        ),
+                                                      ),
+                                                      const Spacer(),
+                                                      Container(
+                                                        width: 65,
+                                                        height: 20,
+                                                        child: Text(
+                                                          "Navigate",
+                                                          style: TextStyle(
+                                                            color: Color(
+                                                                0xFF005277),
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                        width: 10,
+                                                      ),
+                                                      // Left Arrow
+                                                      GestureDetector(
+                                                        onTap: () {
+                                                          // Handle left arrow click (e.g., navigate left)
+                                                          if (currentPageAchieved >
+                                                              1) {
+                                                            setState(() {
+                                                              currentPageAchieved--;
+                                                            });
                                                             if (_selectedFilteringValueAchieved ==
                                                                 "5") {
                                                               final double
@@ -1758,7 +1779,7 @@ class _onSiteJobsHomeAgreedState extends State<OnsiteJobsHomeAgreed> {
                                                               final double
                                                                   targetOffset =
                                                                   maxScrollExtent *
-                                                                      0.55; // Slightly more than half (60%).
+                                                                      0.3; // Slightly more than half (60%).
                                                               // Use animateTo to smoothly scroll to the desired position.
                                                               _scrollController
                                                                   .animateTo(
@@ -1770,245 +1791,153 @@ class _onSiteJobsHomeAgreedState extends State<OnsiteJobsHomeAgreed> {
                                                                     .easeInOut,
                                                               );
                                                             }
-                                                          });
+                                                          }
                                                         },
-                                                      ),
-                                                    ),
-                                                    const Spacer(),
-                                                    Container(
-                                                      width: 65,
-                                                      height: 20,
-                                                      child: Text(
-                                                        "Navigate",
-                                                        style: TextStyle(
-                                                          color:
-                                                              Color(0xFF005277),
-                                                          fontWeight:
-                                                              FontWeight.bold,
+                                                        child: Container(
+                                                          width: 28,
+                                                          height: 28,
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            border: Border.all(
+                                                                color:
+                                                                    Colors.grey,
+                                                                width: 2),
+                                                            color: Colors.white,
+                                                          ),
+                                                          child: Icon(
+                                                            Icons.arrow_left,
+                                                            color: Color(
+                                                                0xFF005277),
+                                                            size: 20,
+                                                          ),
                                                         ),
                                                       ),
-                                                    ),
-                                                    SizedBox(
-                                                      width: 10,
-                                                    ),
-                                                    // Left Arrow
-                                                    GestureDetector(
-                                                      onTap: () {
-                                                        // Handle left arrow click (e.g., navigate left)
-                                                        if (currentPageAchieved >
-                                                            1) {
-                                                          setState(() {
-                                                            currentPageAchieved--;
-                                                          });
-                                                          if (_selectedFilteringValueAchieved ==
-                                                              "5") {
-                                                            final double
-                                                                maxScrollExtent =
-                                                                _scrollController
-                                                                    .position
-                                                                    .maxScrollExtent;
-                                                            final double
-                                                                targetOffset =
-                                                                maxScrollExtent *
-                                                                    0.5; // Slightly more than half (60%).
-                                                            // Use animateTo to smoothly scroll to the desired position.
-                                                            _scrollController
-                                                                .animateTo(
-                                                              targetOffset,
-                                                              duration: Duration(
-                                                                  milliseconds:
-                                                                      500),
-                                                              curve: Curves
-                                                                  .easeInOut,
-                                                            );
-                                                          } else if (_selectedFilteringValueAchieved ==
-                                                              "10") {
-                                                            print("10 is here");
-                                                            final double
-                                                                maxScrollExtent =
-                                                                _scrollController
-                                                                    .position
-                                                                    .maxScrollExtent;
-                                                            final double
-                                                                targetOffset =
-                                                                maxScrollExtent *
-                                                                    0.5; // Slightly more than half (60%).
-                                                            // Use animateTo to smoothly scroll to the desired position.
-                                                            _scrollController
-                                                                .animateTo(
-                                                              targetOffset,
-                                                              duration: Duration(
-                                                                  milliseconds:
-                                                                      500),
-                                                              curve: Curves
-                                                                  .easeInOut,
-                                                            );
-                                                          } else if (_selectedFilteringValueAchieved ==
-                                                              "15") {
-                                                            final double
-                                                                maxScrollExtent =
-                                                                _scrollController
-                                                                    .position
-                                                                    .maxScrollExtent;
-                                                            final double
-                                                                targetOffset =
-                                                                maxScrollExtent *
-                                                                    0.3; // Slightly more than half (60%).
-                                                            // Use animateTo to smoothly scroll to the desired position.
-                                                            _scrollController
-                                                                .animateTo(
-                                                              targetOffset,
-                                                              duration: Duration(
-                                                                  milliseconds:
-                                                                      500),
-                                                              curve: Curves
-                                                                  .easeInOut,
-                                                            );
-                                                          }
-                                                        }
-                                                      },
-                                                      child: Container(
-                                                        width: 28,
-                                                        height: 28,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          border: Border.all(
-                                                              color:
-                                                                  Colors.grey,
-                                                              width: 2),
-                                                          color: Colors.white,
-                                                        ),
-                                                        child: Icon(
-                                                          Icons.arrow_left,
-                                                          color:
-                                                              Color(0xFF005277),
-                                                          size: 20,
-                                                        ),
-                                                      ),
-                                                    ),
 
-                                                    // Right Arrow
-                                                    GestureDetector(
-                                                      onTap: () {
-                                                        // Handle right arrow click (e.g., navigate right)
-                                                        if (currentPageAchieved <
-                                                            totalPagesAchieved) {
-                                                          setState(() {
-                                                            currentPageAchieved++;
-                                                          });
-                                                          if (_selectedFilteringValueAchieved ==
-                                                              "5") {
-                                                            print("5 is here");
-                                                            final double
-                                                                maxScrollExtent =
-                                                                _scrollController
-                                                                    .position
-                                                                    .maxScrollExtent;
-                                                            final double
-                                                                targetOffset =
-                                                                maxScrollExtent *
-                                                                    0.5; // Slightly more than half (60%).
-                                                            // Use animateTo to smoothly scroll to the desired position.
-                                                            _scrollController
-                                                                .animateTo(
-                                                              targetOffset,
-                                                              duration: Duration(
-                                                                  milliseconds:
-                                                                      500),
-                                                              curve: Curves
-                                                                  .easeInOut,
-                                                            );
-                                                          } else if (_selectedFilteringValueAchieved ==
-                                                              "10") {
-                                                            print("10 is here");
-                                                            final double
-                                                                maxScrollExtent =
-                                                                _scrollController
-                                                                    .position
-                                                                    .maxScrollExtent;
-                                                            final double
-                                                                targetOffset =
-                                                                maxScrollExtent *
-                                                                    0.35; // Slightly more than half (60%).
-                                                            // Use animateTo to smoothly scroll to the desired position.
-                                                            _scrollController
-                                                                .animateTo(
-                                                              targetOffset,
-                                                              duration: Duration(
-                                                                  milliseconds:
-                                                                      500),
-                                                              curve: Curves
-                                                                  .easeInOut,
-                                                            );
-                                                          } else if (_selectedFilteringValueAchieved ==
-                                                              "15") {
-                                                            final double
-                                                                maxScrollExtent =
-                                                                _scrollController
-                                                                    .position
-                                                                    .maxScrollExtent;
-                                                            final double
-                                                                targetOffset =
-                                                                maxScrollExtent *
-                                                                    0.3; // Slightly more than half (60%).
-                                                            // Use animateTo to smoothly scroll to the desired position.
-                                                            _scrollController
-                                                                .animateTo(
-                                                              targetOffset,
-                                                              duration: Duration(
-                                                                  milliseconds:
-                                                                      500),
-                                                              curve: Curves
-                                                                  .easeInOut,
-                                                            );
+                                                      // Right Arrow
+                                                      GestureDetector(
+                                                        onTap: () {
+                                                          // Handle right arrow click (e.g., navigate right)
+                                                          if (currentPageAchieved <
+                                                              totalPagesAchieved) {
+                                                            setState(() {
+                                                              currentPageAchieved++;
+                                                            });
+                                                            if (_selectedFilteringValueAchieved ==
+                                                                "5") {
+                                                              print(
+                                                                  "5 is here");
+                                                              final double
+                                                                  maxScrollExtent =
+                                                                  _scrollController
+                                                                      .position
+                                                                      .maxScrollExtent;
+                                                              final double
+                                                                  targetOffset =
+                                                                  maxScrollExtent *
+                                                                      0.5; // Slightly more than half (60%).
+                                                              // Use animateTo to smoothly scroll to the desired position.
+                                                              _scrollController
+                                                                  .animateTo(
+                                                                targetOffset,
+                                                                duration: Duration(
+                                                                    milliseconds:
+                                                                        500),
+                                                                curve: Curves
+                                                                    .easeInOut,
+                                                              );
+                                                            } else if (_selectedFilteringValueAchieved ==
+                                                                "10") {
+                                                              print(
+                                                                  "10 is here");
+                                                              final double
+                                                                  maxScrollExtent =
+                                                                  _scrollController
+                                                                      .position
+                                                                      .maxScrollExtent;
+                                                              final double
+                                                                  targetOffset =
+                                                                  maxScrollExtent *
+                                                                      0.35; // Slightly more than half (60%).
+                                                              // Use animateTo to smoothly scroll to the desired position.
+                                                              _scrollController
+                                                                  .animateTo(
+                                                                targetOffset,
+                                                                duration: Duration(
+                                                                    milliseconds:
+                                                                        500),
+                                                                curve: Curves
+                                                                    .easeInOut,
+                                                              );
+                                                            } else if (_selectedFilteringValueAchieved ==
+                                                                "15") {
+                                                              final double
+                                                                  maxScrollExtent =
+                                                                  _scrollController
+                                                                      .position
+                                                                      .maxScrollExtent;
+                                                              final double
+                                                                  targetOffset =
+                                                                  maxScrollExtent *
+                                                                      0.3; // Slightly more than half (60%).
+                                                              // Use animateTo to smoothly scroll to the desired position.
+                                                              _scrollController
+                                                                  .animateTo(
+                                                                targetOffset,
+                                                                duration: Duration(
+                                                                    milliseconds:
+                                                                        500),
+                                                                curve: Curves
+                                                                    .easeInOut,
+                                                              );
+                                                            }
                                                           }
-                                                        }
-                                                      },
-                                                      child: Container(
-                                                        width: 28,
-                                                        height: 28,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          border: Border.all(
-                                                              color:
-                                                                  Colors.grey,
-                                                              width: 2),
-                                                          color: Colors.white,
-                                                        ),
-                                                        child: Icon(
-                                                          Icons.arrow_right,
-                                                          color:
-                                                              Color(0xFF005277),
-                                                          size: 20,
+                                                        },
+                                                        child: Container(
+                                                          width: 28,
+                                                          height: 28,
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            border: Border.all(
+                                                                color:
+                                                                    Colors.grey,
+                                                                width: 2),
+                                                            color: Colors.white,
+                                                          ),
+                                                          child: Icon(
+                                                            Icons.arrow_right,
+                                                            color: Color(
+                                                                0xFF005277),
+                                                            size: 20,
+                                                          ),
                                                         ),
                                                       ),
-                                                    ),
-                                                  ],
+                                                    ],
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-                                            SizedBox(
-                                              height: 15,
-                                            ),
-                                          ],
+                                              SizedBox(
+                                                height: 15,
+                                              ),
+                                            ],
+                                          ),
+                                        )
+                                      : SizedBox(
+                                          height: 2,
                                         ),
-                                      )
-                                    : SizedBox(
-                                        height: 2,
-                                      ),
-                              ],
+                                ],
+                              ),
+                            )
+                          : SizedBox(
+                              height: 2,
                             ),
-                          )
-                        : SizedBox(
-                            height: 2,
-                          ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
-      ),
+      ]),
     );
   }
 }
