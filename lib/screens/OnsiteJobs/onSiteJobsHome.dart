@@ -1522,7 +1522,7 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
                             ),
                           )),
                       SizedBox(
-                        height: 20,
+                        height: 30,
                       ),
                       archieveJobsOpened
                           ? Container(

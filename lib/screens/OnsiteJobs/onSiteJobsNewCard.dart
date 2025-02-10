@@ -108,7 +108,8 @@ class OnsiteJobsNewCard extends StatelessWidget {
                     Text(
                       "Rail NSW",
                       style: TextStyle(
-                        fontSize: 15,
+                        fontSize: 17,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ],

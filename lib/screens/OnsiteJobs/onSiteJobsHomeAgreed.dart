@@ -617,7 +617,7 @@ class _onSiteJobsHomeAgreedState extends State<OnsiteJobsHomeAgreed> {
       appBar: MyAppBar(),
       floatingActionButton: Padding(
         padding: const EdgeInsets.only(
-          bottom: 85.0,
+          bottom: 110.0,
           left: 3.0,
         ),
         child: Container(
@@ -1195,8 +1195,8 @@ class _onSiteJobsHomeAgreedState extends State<OnsiteJobsHomeAgreed> {
                           return Center(
                             child: Padding(
                               padding: const EdgeInsets.only(
-                                left: 30.0,
-                                right: 45.0,
+                                left: 16.0,
+                                right: 16.0,
                                 bottom: 10.0,
                               ),
                               child: OnsiteJobsNewCard(job: job),
@@ -1928,7 +1928,7 @@ class _onSiteJobsHomeAgreedState extends State<OnsiteJobsHomeAgreed> {
                               ),
                             )
                           : SizedBox(
-                              height: 2,
+                              height: 40,
                             ),
                     ],
                   ),

@@ -21,7 +21,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       AppBar(
         toolbarHeight: 68,
-        backgroundColor: Color(0xFF2C7796).withOpacity(0.52),
+        backgroundColor: Color(0xFF2C7796).withOpacity(0.58),
         foregroundColor: Colors.transparent,
         title: Text(
           "Hi Rusira",
