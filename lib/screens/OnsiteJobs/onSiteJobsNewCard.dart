@@ -25,38 +25,54 @@ class OnsiteJobsNewCard extends StatelessWidget {
               child: Text(
                 title,
                 style: const TextStyle(
-                  color: Color(0xFF01B4D2),
+                  color: Colors.black,
                   fontWeight: FontWeight.bold,
                   fontSize: 14,
                 ),
               ),
             ),
           ),
-
-          // Center-aligned icon
-          Expanded(
-            flex: 1, // Adjust the flex value to control space distribution
-            child: Align(
-              alignment: Alignment.center,
-              child: Image.asset(iconPath, height: 24),
-            ),
+          SizedBox(
+            width: 20,
           ),
-
           // Right-aligned value
-          Expanded(
-            flex: 4, // Adjust the flex value to control space distribution
-            child: Align(
-              alignment: Alignment.centerRight,
-              child: Text(
-                value,
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 14,
-                  fontWeight: isBold ? FontWeight.bold : FontWeight.normal,
-                ),
-              ),
-            ),
-          ),
+          title == "Job Status"
+              ? Padding(
+                  padding: const EdgeInsets.only(right: 95.0),
+                  child: IntrinsicWidth(
+                    child: Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      color: Colors.yellow,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 12, vertical: 3),
+                        child: Text(
+                          value,
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 14,
+                            fontWeight:
+                                isBold ? FontWeight.bold : FontWeight.normal,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                )
+              : Expanded(
+                  flex:
+                      4, // Adjust the flex value to control space distribution
+                  child: Text(
+                    value,
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 14,
+                      fontWeight: isBold ? FontWeight.bold : FontWeight.normal,
+                    ),
+                  ),
+                )
         ],
       ),
     );
@@ -84,130 +100,78 @@ class OnsiteJobsNewCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 // Left-aligned title
-                Expanded(
-                  flex:
-                      3, // Adjust the flex value to control space distribution
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Row(
-                      children: [
-                        FittedBox(
-                          child: Image.asset(
-                            "assets/images/icons/threeDots.png",
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 8.0),
-                          child: FittedBox(
-                            child: Image.asset(
-                              "assets/images/icons/eye_icon.png",
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                      ],
+                Row(
+                  children: [
+                    Text(
+                      "Rail NSW",
+                      style: TextStyle(
+                        fontSize: 15,
+                      ),
                     ),
-                  ),
-                ),
-
-                // Center-aligned icon
-                Expanded(
-                  flex:
-                      5, // Adjust the flex value to control space distribution
-                  child: Align(
-                    alignment: Alignment.center,
-                    child: Row(
-                      children: [
-                        Text("Job Status"),
-                        SizedBox(
-                          width: 5,
-                        ),
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 3, vertical: 10),
-                          decoration: BoxDecoration(
-                            color: Colors.amber,
-                            borderRadius: BorderRadius.circular(8),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey.withOpacity(0.5),
-                                spreadRadius: 1,
-                                blurRadius: 4,
-                              ),
-                            ],
-                          ),
-                          child: const Text(
-                            'Draft',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                  ],
                 ),
 
                 // Right-aligned value
-                Expanded(
-                  flex:
-                      3, // Adjust the flex value to control space distribution
-                  child: Align(
-                    alignment: Alignment.centerRight,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        FittedBox(
-                          child: Image.asset(
-                            'assets/images/icons/document_icon.png',
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        const SizedBox(
-                          width:
-                              1, // Space between document icon and the number
-                        ),
-                        Text(
-                          job["jobNumber"]!,
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 19,
-                          ),
-                        ),
-                      ],
+                Row(
+                  children: [
+                    FittedBox(
+                      child: Image.asset(
+                        "assets/images/icons/threeDots.png",
+                        fit: BoxFit.cover,
+                      ),
                     ),
-                  ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 8.0),
+                      child: FittedBox(
+                        child: Image.asset(
+                          "assets/images/icons/eye_icon.png",
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
-            const SizedBox(height: 5),
+            const SizedBox(height: 2),
+            Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
+              color: Colors.blue,
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                child: Text(
+                  "12345678",
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 10,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
             // Content Rows
+            _buildInfoRow(
+                iconPath: 'assets/images/icons/dafault_icon.png',
+                title: 'Authorized Rep',
+                value: job["rep"]!),
             _buildInfoRow(
                 iconPath: 'assets/images/icons/dafault_icon.png',
                 title: 'Date / Time',
                 value: job["dateTime"]!),
             _buildInfoRow(
                 iconPath: 'assets/images/icons/dafault_icon.png',
-                title: 'Client',
-                value: job["client"]!),
-            _buildInfoRow(
-                iconPath: 'assets/images/icons/dafault_icon.png',
-                title: 'Authorized Rep',
-                value: job["rep"]!,
+                title: 'Location',
+                value: job["location"]!,
                 isBold: false),
-            _buildInfoRow(
-                iconPath: 'assets/images/icons/dafault_icon.png',
-                title: 'location',
-                value: job["location"]!),
             _buildInfoRow(
                 iconPath: 'assets/images/icons/dafault_icon.png',
                 title: 'Service',
@@ -216,6 +180,10 @@ class OnsiteJobsNewCard extends StatelessWidget {
                 iconPath: 'assets/images/icons/dafault_icon.png',
                 title: 'Callout Job',
                 value: job["callout"]!),
+            _buildInfoRow(
+                iconPath: 'assets/images/icons/dafault_icon.png',
+                title: 'Job Status',
+                value: job["jobStatus"]!),
           ],
         ),
       ),

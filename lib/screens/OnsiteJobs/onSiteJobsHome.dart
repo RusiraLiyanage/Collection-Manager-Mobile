@@ -6,6 +6,7 @@ import 'package:project_code_blue/screens/OnsiteJobs/AchievedJobsOldCard.dart';
 import 'package:project_code_blue/screens/OnsiteJobs/OnsiteJobOldCard.dart';
 import 'package:project_code_blue/screens/OnsiteJobs/newJobAndroid.dart';
 import 'package:project_code_blue/screens/OnsiteJobs/newJobIOS.dart';
+import 'package:project_code_blue/screens/OnsiteJobs/onSiteJobsNewCard.dart';
 import 'package:provider/provider.dart';
 import '../../AppState/appState.dart';
 import 'package:project_code_blue/sidemenu/sidemenu.dart';
@@ -1281,7 +1282,7 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
                                 right: 45.0,
                                 bottom: 10.0,
                               ),
-                              child: OnsiteJobOldCard(job: job),
+                              child: OnsiteJobsNewCard(job: job),
                             ),
                           );
                         },
