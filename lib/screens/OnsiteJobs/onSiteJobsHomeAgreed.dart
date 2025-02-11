@@ -4,7 +4,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/rendering.dart';
 import 'package:project_code_blue/screens/OnsiteJobs/AchievedJobsOldCard.dart';
 import 'package:project_code_blue/screens/OnsiteJobs/OnsiteJobOldCard.dart';
+import 'package:project_code_blue/screens/OnsiteJobs/achievedJobsNewCard.dart';
 import 'package:project_code_blue/screens/OnsiteJobs/newJobAndroid.dart';
+import 'package:project_code_blue/screens/OnsiteJobs/newJobAndroid_Edited.dart';
 import 'package:project_code_blue/screens/OnsiteJobs/newJobIOS.dart';
 import 'package:project_code_blue/screens/OnsiteJobs/onSiteJobsNewCard.dart';
 import 'package:provider/provider.dart';
@@ -607,6 +609,7 @@ class _onSiteJobsHomeAgreedState extends State<OnsiteJobsHomeAgreed> {
     // Helper method for each row
 
     return Scaffold(
+      backgroundColor: Color(0xFFF2F2F2),
       extendBodyBehindAppBar: true, // Extends body behind the AppBar
       onDrawerChanged: (isOpen) {
         appState.setDrawerState(isOpen); // Update global drawer state
@@ -731,31 +734,32 @@ class _onSiteJobsHomeAgreedState extends State<OnsiteJobsHomeAgreed> {
                                       isScrollControlled:
                                           true, // Allows controlling the height
                                       isDismissible: false,
+                                      enableDrag: false,
                                       context: context,
                                       builder: (BuildContext context) {
                                         return DraggableScrollableSheet(
                                           expand: false,
                                           initialChildSize:
-                                              0.93, // Initial height of the sheet (93% of the screen)
+                                              1, // Initial height of the sheet (93% of the screen)
                                           minChildSize:
-                                              0.93, // Allow shrinking to 50% of the screen
+                                              1, // Allow shrinking to 50% of the screen
                                           maxChildSize:
-                                              0.93, // Prevent expansion above 93% of the screen
+                                              1, // Prevent expansion above 93% of the screen
                                           builder: (BuildContext context,
                                               ScrollController
                                                   scrollController) {
                                             return Container(
                                               width: double.infinity,
                                               decoration: const BoxDecoration(
-                                                color: Colors
-                                                    .white, // Background color of the bottom sheet
+                                                color: Color(
+                                                    0xFFEDEEF0), // Background color of the bottom sheet
                                                 borderRadius:
                                                     BorderRadius.vertical(
                                                   top: Radius.circular(
-                                                      16), // Rounded top corners
+                                                      0), // Rounded top corners
                                                 ),
                                               ),
-                                              child: NewJobAndroid(
+                                              child: NewJobAndroidEdited(
                                                   scrollController:
                                                       scrollController),
                                             );
@@ -1497,12 +1501,12 @@ class _onSiteJobsHomeAgreedState extends State<OnsiteJobsHomeAgreed> {
                                                     child: Padding(
                                                       padding:
                                                           const EdgeInsets.only(
-                                                        left: 30.0,
-                                                        right: 45.0,
+                                                        left: 16.0,
+                                                        right: 16.0,
                                                         bottom: 10.0,
                                                       ),
                                                       child:
-                                                          AchievedJobsOldCard(
+                                                          AchievedJobsNewCard(
                                                               job: job),
                                                     ),
                                                   );

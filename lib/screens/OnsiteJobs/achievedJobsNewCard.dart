@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
-class OnsiteJobsNewCard extends StatelessWidget {
-  const OnsiteJobsNewCard({
+class AchievedJobsNewCard extends StatelessWidget {
+  final Map<String, String> job;
+
+  const AchievedJobsNewCard({
     super.key,
     required this.job,
   });
@@ -78,14 +80,12 @@ class OnsiteJobsNewCard extends StatelessWidget {
     );
   }
 
-  final Map<String, String> job;
-
   @override
   Widget build(BuildContext context) {
     return Card(
       surfaceTintColor: Colors.white,
       color: Colors.white,
-      elevation: 0,
+      elevation: 5,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15),
       ),

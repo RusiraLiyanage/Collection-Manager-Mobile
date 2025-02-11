@@ -1065,14 +1065,19 @@ class _NewJobAndroidState extends State<NewJobAndroid> {
               onTap: () {
                 Navigator.pop(context);
               },
-              child: Align(
-                alignment: Alignment.topLeft,
-                child: SizedBox(
-                  width: 25,
-                  height: 25,
-                  child: Image.asset(
-                    "assets/images/icons/X.png",
-                    fit: BoxFit.cover,
+              child: Padding(
+                padding: const EdgeInsets.only(
+                  top: 18.0,
+                ),
+                child: Align(
+                  alignment: Alignment.topLeft,
+                  child: SizedBox(
+                    width: 25,
+                    height: 25,
+                    child: Image.asset(
+                      "assets/images/icons/X.png",
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
               ),
@@ -1091,7 +1096,7 @@ class _NewJobAndroidState extends State<NewJobAndroid> {
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
-                    color: Color(0xFF156CC9),
+                    color: Colors.black,
                   ),
                 ),
                 const SizedBox(width: 10),

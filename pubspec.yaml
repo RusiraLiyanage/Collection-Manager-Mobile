@@ -90,6 +90,7 @@ flutter:
     - assets/images/icons/hideArchieve.png
     - assets/images/icons/document_icon.png
     - assets/images/icons/dafault_icon.png
+    - assets/images/icons/dropDownIcon.png
     - assets/images/icons/X.png
     - assets/images/icons/newJobIcon.png
     - assets/images/icons/OnsiteJobs/calander_icon.png

@@ -607,6 +607,7 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
     // Helper method for each row
 
     return Scaffold(
+      backgroundColor: Color(0xFFF2F2F2),
       onDrawerChanged: (isOpen) {
         appState.setDrawerState(isOpen); // Update global drawer state
       },
