@@ -31,6 +31,9 @@ class _NewJobAndroidState extends State<NewJobAndroid> {
   final List<String> _collectionOrganisations = ['Org 1', 'Org 2', 'Org 3'];
   final List<String> _serviceOffices = ['Clinic 1', 'Clinic 2', 'Clinic 3'];
 
+  final GlobalKey<FormFieldState<String>> _serviceOfficeKey =
+      GlobalKey<FormFieldState<String>>();
+
   String? _selectedClientName;
   String? _selectedClientReference;
 
@@ -177,6 +180,7 @@ class _NewJobAndroidState extends State<NewJobAndroid> {
                   Container(
                     height: 35,
                     child: DropdownButtonFormField<String>(
+                      key: _serviceOfficeKey,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(4),
@@ -216,6 +220,8 @@ class _NewJobAndroidState extends State<NewJobAndroid> {
                         setState(() {
                           print(_selectedCollectionOrganisation);
                           _selectedServiceOffice = value;
+                          _serviceOfficeKey.currentState!
+                              .validate(); // Revalidate the field
                           //_formKeys[_currentStep].currentState?.validate();
                         });
                       },
