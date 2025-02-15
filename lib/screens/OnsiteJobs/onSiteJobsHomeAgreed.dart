@@ -670,7 +670,7 @@ class _onSiteJobsHomeAgreedState extends State<OnsiteJobsHomeAgreed> {
                 ), // Ensures initial content starts below AppBar
                 Container(
                   width: double.infinity,
-                  height: 100,
+                  height: 120,
                   color: Color(0xFFD9D9D9),
                   child: Column(
                     children: [
@@ -678,6 +678,15 @@ class _onSiteJobsHomeAgreedState extends State<OnsiteJobsHomeAgreed> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Padding(
+                            padding: const EdgeInsets.only(left: 16.0),
+                            child: Text(
+                              "Home / Onsite Jobs",
+                              style: TextStyle(
+                                fontSize: 10,
+                              ),
+                            ),
+                          ),
+                          /* Padding(
                             padding: const EdgeInsets.only(top: 8.0, left: 8.0),
                             child: Container(
                               color: Color(0xFF56ACB1),
@@ -703,16 +712,22 @@ class _onSiteJobsHomeAgreedState extends State<OnsiteJobsHomeAgreed> {
                                 ],
                               ),
                             ),
-                          ),
+                          ), */
                           Padding(
-                            padding: const EdgeInsets.only(right: 8.0),
+                            padding: const EdgeInsets.only(
+                              right: 16.0,
+                              top: 8.0,
+                            ),
                             child: InkWell(
                               onTap: () {
                                 print("On tapped");
                               },
                               child: ClipRRect(
                                 child: Image.asset(
-                                    "assets/images/icons/refresh_icon.png"),
+                                  "assets/images/icons/refreshIcon.png",
+                                  width: 24,
+                                  height: 24,
+                                ),
                               ),
                             ),
                           ),
@@ -722,9 +737,21 @@ class _onSiteJobsHomeAgreedState extends State<OnsiteJobsHomeAgreed> {
                         height: 10,
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(left: 135.0),
+                        padding: const EdgeInsets.only(
+                          left: 16.0,
+                          right: 10.0,
+                          bottom: 10.0,
+                        ),
                         child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
+                            Text(
+                              "Onsite Jobs",
+                              style: TextStyle(
+                                fontSize: 24,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                             Padding(
                               padding: const EdgeInsets.only(right: 8.0),
                               child: InkWell(
@@ -802,22 +829,39 @@ class _onSiteJobsHomeAgreedState extends State<OnsiteJobsHomeAgreed> {
                                     );
                                   }
                                 },
-                                child: ClipRRect(
-                                  child: Image.asset(
-                                      "assets/images/icons/newJob_icon.png"),
+                                child: Align(
+                                  alignment: Alignment.topRight,
+                                  child: ClipRRect(
+                                    child: Image.asset(
+                                      "assets/images/icons/newJobOpen.png",
+                                      width: 24,
+                                      height: 24,
+                                    ),
+                                  ),
                                 ),
                               ),
                             ),
-                            InkWell(
-                              onTap: () {
-                                print("On tapped");
-                              },
-                              child: ClipRRect(
-                                child: Image.asset(
-                                    "assets/images/icons/newCallOutJob_icon.png"),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          right: 18.0,
+                        ),
+                        child: Align(
+                          alignment: Alignment.centerRight,
+                          child: InkWell(
+                            onTap: () {
+                              print("On tapped");
+                            },
+                            child: ClipRRect(
+                              child: Image.asset(
+                                "assets/images/icons/newCalloutOpen.png",
+                                width: 24,
+                                height: 24,
                               ),
                             ),
-                          ],
+                          ),
                         ),
                       ),
                     ],

@@ -2105,12 +2105,15 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                const Text(
-                                  "Category 1",
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 13,
-                                    color: Colors.black,
+                                Align(
+                                  alignment: Alignment.topLeft,
+                                  child: const Text(
+                                    "Category 1",
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 13,
+                                      color: Colors.black,
+                                    ),
                                   ),
                                 ),
                                 SizedBox(

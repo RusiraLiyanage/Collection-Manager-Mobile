@@ -92,6 +92,9 @@ flutter:
     - assets/images/icons/dafault_icon.png
     - assets/images/icons/dropDownIcon.png
     - assets/images/icons/icon_calendar.png
+    - assets/images/icons/refreshIcon.png
+    - assets/images/icons/newJobOpen.png
+    - assets/images/icons/newCalloutOpen.png
     - assets/images/icons/X.png
     - assets/images/icons/newJobIcon.png
     - assets/images/icons/OnsiteJobs/calander_icon.png
