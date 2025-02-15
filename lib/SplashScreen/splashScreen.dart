@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_code_blue/tabs/tabs_page.dart';
+import 'package:flutter/services.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -13,8 +14,13 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
 
+    // Hide bottom navigation bar
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+
     // Navigate to TabsPage after 2 seconds
     Future.delayed(const Duration(seconds: 2), () {
+      // Restore bottom navigation bar when leaving splash screen
+      SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(

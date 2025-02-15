@@ -44,6 +44,15 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
   String? _selectedCollectionOrganisation;
   String? _selectedServiceOffice;
 
+  final GlobalKey<FormFieldState<String>> _collectionOrgKey =
+      GlobalKey<FormFieldState<String>>();
+  final GlobalKey<FormFieldState<String>> _serviceOfficeKey =
+      GlobalKey<FormFieldState<String>>();
+  final GlobalKey<FormFieldState<String>> _jobDateKey =
+      GlobalKey<FormFieldState<String>>();
+  final GlobalKey<FormFieldState<String>> _jobDurationKey =
+      GlobalKey<FormFieldState<String>>();
+
   // Dropdown options
   final List<String> _collectionOrganisations = ['Org 1', 'Org 2', 'Org 3'];
   final List<String> _serviceOffices = ['Clinic 1', 'Clinic 2', 'Clinic 3'];
@@ -151,6 +160,7 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                     height: 40,
                                     width: 206,
                                     child: DropdownButtonFormField<String>(
+                                      key: _collectionOrgKey,
                                       icon: Image.asset(
                                         "assets/images/icons/dropDownIcon.png", // Replace with your image path
                                         width: 16, // Adjust the size
@@ -233,6 +243,8 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                         setState(() {
                                           _selectedCollectionOrganisation =
                                               value;
+                                          _collectionOrgKey.currentState!
+                                              .validate(); // Revalidate the field
                                           /* if (_selectedCollectionOrganisation!.length < 0) {
                                 // Clear error state once a valid selection is made
                                 _formKeys[_currentStep].currentState?.validate();
@@ -271,6 +283,7 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                     height: 40,
                                     width: 206,
                                     child: DropdownButtonFormField<String>(
+                                      key: _serviceOfficeKey,
                                       icon: Image.asset(
                                         "assets/images/icons/dropDownIcon.png", // Replace with your image path
                                         width: 16, // Adjust the size
@@ -352,6 +365,8 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                       onChanged: (value) {
                                         setState(() {
                                           _selectedServiceOffice = value;
+                                          _serviceOfficeKey.currentState!
+                                              .validate();
                                           /* if (_selectedCollectionOrganisation!.length < 0) {
                                 // Clear error state once a valid selection is made
                                 _formKeys[_currentStep].currentState?.validate();
@@ -492,6 +507,7 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                       borderRadius: BorderRadius.circular(
                                           4), // Match with TextFormField's border radius
                                       child: TextFormField(
+                                        key: _jobDateKey,
                                         readOnly:
                                             true, // Prevent direct text input
                                         controller: TextEditingController(
@@ -580,6 +596,8 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                           if (selectedDate != null) {
                                             setState(() {
                                               _selectedJobDate = selectedDate;
+                                              _jobDateKey.currentState!
+                                                  .validate();
                                             });
                                           }
                                         },
@@ -757,6 +775,7 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                       borderRadius: BorderRadius.circular(
                                           4), // Match with TextFormField's border radius
                                       child: TextFormField(
+                                        key: _jobDurationKey,
                                         readOnly:
                                             true, // Prevent direct text input
                                         controller: TextEditingController(
@@ -1006,6 +1025,8 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                             setState(() {
                                               _selectedDuration =
                                                   selectedDuration;
+                                              _jobDurationKey.currentState!
+                                                  .validate();
                                             });
                                           }
                                         },
