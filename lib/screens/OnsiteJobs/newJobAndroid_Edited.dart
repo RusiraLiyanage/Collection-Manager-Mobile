@@ -2290,102 +2290,105 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
     return Scrollbar(
       trackVisibility: false,
       thumbVisibility: true,
-      child:
-          ListView(physics: const AlwaysScrollableScrollPhysics(), children: [
-        Column(
+      child: ListView(
+          physics: const AlwaysScrollableScrollPhysics(),
+          controller: widget.scrollController,
           children: [
-            Container(
-              color: Color(0xFFEDEEF0),
-              child: Column(
-                children: [
-                  const SizedBox(height: 20),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 8.0, top: 1.0),
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.only(
-                          top: 18.0,
-                        ),
-                        child: Align(
-                          alignment: Alignment.topLeft,
-                          child: SizedBox(
-                            width: 25,
-                            height: 25,
-                            child: Image.asset(
-                              "assets/images/icons/X.png",
-                              fit: BoxFit.cover,
+            Column(
+              children: [
+                Container(
+                  color: Color(0xFFEDEEF0),
+                  child: Column(
+                    children: [
+                      const SizedBox(height: 20),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 8.0, top: 1.0),
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                              top: 18.0,
                             ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  const Divider(
-                    color: Colors.black,
-                    thickness: 1.0,
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: const BorderRadius.only(
-                        bottomLeft: Radius.circular(20), // Adjust as needed
-                        bottomRight: Radius.circular(20), // Adjust as needed
-                      ),
-                    ),
-                    child: Column(
-                      children: [
-                        Center(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const Text(
-                                "New Job",
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black,
-                                ),
-                              ),
-                              const SizedBox(width: 10),
-                              SizedBox(
+                            child: Align(
+                              alignment: Alignment.topLeft,
+                              child: SizedBox(
+                                width: 25,
+                                height: 25,
                                 child: Image.asset(
-                                  "assets/images/icons/newJobIcon.png",
-                                  fit: BoxFit.contain,
+                                  "assets/images/icons/X.png",
+                                  fit: BoxFit.cover,
                                 ),
                               ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Container(
-                          width: MediaQuery.of(context).size.width *
-                              1, // 80% of screen width
-                          child: Transform.scale(
-                            scale: 0.79,
-                            child: FlutterHorizontalStepper(
-                              steps: const ["Step-1", "Step-2", "Step-3"],
-                              radius: 45,
-                              currentStep: _currentStep + 1,
-                              child: const [
-                                Text("1"),
-                                Text("2"),
-                                Text("3"),
-                              ],
                             ),
                           ),
                         ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 6,
-                  ),
-                  /*  Material(
+                      ),
+                      const Divider(
+                        color: Colors.black,
+                        thickness: 1.0,
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: const BorderRadius.only(
+                            bottomLeft: Radius.circular(20), // Adjust as needed
+                            bottomRight:
+                                Radius.circular(20), // Adjust as needed
+                          ),
+                        ),
+                        child: Column(
+                          children: [
+                            Center(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  const Text(
+                                    "New Job",
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                  const SizedBox(width: 10),
+                                  SizedBox(
+                                    child: Image.asset(
+                                      "assets/images/icons/newJobIcon.png",
+                                      fit: BoxFit.contain,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Container(
+                              width: MediaQuery.of(context).size.width *
+                                  1, // 80% of screen width
+                              child: Transform.scale(
+                                scale: 0.79,
+                                child: FlutterHorizontalStepper(
+                                  steps: const ["Step-1", "Step-2", "Step-3"],
+                                  radius: 45,
+                                  currentStep: _currentStep + 1,
+                                  child: const [
+                                    Text("1"),
+                                    Text("2"),
+                                    Text("3"),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 6,
+                      ),
+                      /*  Material(
                     child: Container(
                       color: const Color(0xFF7F8E9D),
                       width: double.infinity,
@@ -2420,51 +2423,51 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                       ),
                     ),
                   ), */
-                ],
-              ),
-            ), // Add some top padding
-            Material(
-              color: Color(0xFFEDEEF0),
-              child: Padding(
-                padding: const EdgeInsets.only(
-                  top: 3.0,
-                  bottom: 5.0,
-                  left: 0.0,
-                  right: 0.0,
-                ),
-                child: Column(
-                  children: [
-                    Scrollbar(
-                      thumbVisibility: true, // Show the scrollbar thumb
-                      trackVisibility: true,
-                      child: Form(
-                        key: _formKeys[_currentStep],
-                        child: _buildStepContent(),
-                      ),
+                    ],
+                  ),
+                ), // Add some top padding
+                Material(
+                  color: Color(0xFFEDEEF0),
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                      top: 3.0,
+                      bottom: 5.0,
+                      left: 0.0,
+                      right: 0.0,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    child: Column(
                       children: [
-                        if (_currentStep > 0)
-                          TextButton(
-                            onPressed: _prevStep,
-                            child: const Text('Back'),
+                        Scrollbar(
+                          thumbVisibility: true, // Show the scrollbar thumb
+                          trackVisibility: true,
+                          child: Form(
+                            key: _formKeys[_currentStep],
+                            child: _buildStepContent(),
                           ),
-                        ElevatedButton(
-                          onPressed: _nextStep,
-                          child: Text(_currentStep == _formKeys.length - 1
-                              ? 'Submit'
-                              : 'Next'),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            if (_currentStep > 0)
+                              TextButton(
+                                onPressed: _prevStep,
+                                child: const Text('Back'),
+                              ),
+                            ElevatedButton(
+                              onPressed: _nextStep,
+                              child: Text(_currentStep == _formKeys.length - 1
+                                  ? 'Submit'
+                                  : 'Next'),
+                            ),
+                          ],
                         ),
                       ],
                     ),
-                  ],
+                  ),
                 ),
-              ),
+              ],
             ),
-          ],
-        ),
-      ]),
+          ]),
     );
   }
 }
