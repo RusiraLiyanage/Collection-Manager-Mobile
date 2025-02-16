@@ -2272,6 +2272,12 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
     // Validate the current form
     if (formState != null && !formState.validate()) {
       // If validation fails, return or show a message (optional)
+      // Scroll to the top if validation fails
+      widget.scrollController.animateTo(
+        0, // Scroll to top
+        duration: const Duration(milliseconds: 500),
+        curve: Curves.easeInOut,
+      );
       return;
     }
 
