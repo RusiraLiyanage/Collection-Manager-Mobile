@@ -44,21 +44,27 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
   String? _selectedCollectionOrganisation;
   String? _selectedServiceOffice;
 
+  String? _selectedClientName;
+  String? _selectedClientReference;
+  String? _selectedJobReference;
+  String? _selectedTypeOfService;
+
   final GlobalKey<FormFieldState<String>> _collectionOrgKey =
       GlobalKey<FormFieldState<String>>();
   final GlobalKey<FormFieldState<String>> _serviceOfficeKey =
       GlobalKey<FormFieldState<String>>();
   final GlobalKey<FormFieldState<String>> _jobDateKey =
       GlobalKey<FormFieldState<String>>();
+  final GlobalKey<FormFieldState<String>> _startTimeKey =
+      GlobalKey<FormFieldState<String>>();
   final GlobalKey<FormFieldState<String>> _jobDurationKey =
+      GlobalKey<FormFieldState<String>>();
+  final GlobalKey<FormFieldState<String>> _numberOfDonorsKey =
       GlobalKey<FormFieldState<String>>();
 
   // Dropdown options
   final List<String> _collectionOrganisations = ['Org 1', 'Org 2', 'Org 3'];
   final List<String> _serviceOffices = ['Clinic 1', 'Clinic 2', 'Clinic 3'];
-
-  String? _selectedClientName;
-  String? _selectedClientReference;
 
   final List<String> _clientNames = ['Client A', 'Client B', 'Client C'];
   final List<String> _clientReferences = [
@@ -645,6 +651,7 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                       borderRadius: BorderRadius.circular(
                                           4), // Match with TextFormField's border radius
                                       child: TextFormField(
+                                        key: _startTimeKey,
                                         readOnly:
                                             true, // Prevent direct text input
                                         controller: TextEditingController(
@@ -728,6 +735,8 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                           if (selectedTime != null) {
                                             setState(() {
                                               _selectedTime = selectedTime;
+                                              _startTimeKey.currentState!
+                                                  .validate();
                                             });
                                           }
                                         },
@@ -1074,6 +1083,7 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                       borderRadius: BorderRadius.circular(
                                           4), // Match with TextFormField's border radius
                                       child: TextFormField(
+                                        key: _numberOfDonorsKey,
                                         controller: _donorsController,
                                         decoration: InputDecoration(
                                           fillColor: Colors.white,
@@ -1149,6 +1159,8 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                 int.tryParse(value)!;
                                             _donorsController.text =
                                                 value; // Manually update the controller text
+                                            _numberOfDonorsKey.currentState!
+                                                .validate();
                                           });
                                         },
                                         validator: (value) {
@@ -1268,14 +1280,14 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                             .text, // Ensures numeric input
                                         onChanged: (value) {
                                           setState(() {
+                                            _selectedJobReference = value;
                                             // Update the number of donors and the text controller
                                             _jobReferenceController.text =
                                                 value; // Manually update the controller text
                                           });
                                         },
                                         validator: (value) {
-                                          if (_jobReferenceController.text ==
-                                              null) {
+                                          if (_selectedJobReference == null) {
                                             return 'Please enter a valid job referenace';
                                           }
                                           return null;
@@ -1390,15 +1402,15 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                             .text, // Ensures numeric input
                                         onChanged: (value) {
                                           setState(() {
+                                            _selectedTypeOfService = value;
                                             // Update the number of donors and the text controller
                                             _typeOfServiceController.text =
                                                 value; // Manually update the controller text
                                           });
                                         },
                                         validator: (value) {
-                                          if (_typeOfServiceController.text ==
-                                              null) {
-                                            return 'Please enter a valid job referenace';
+                                          if (_selectedTypeOfService == null) {
+                                            return 'Please enter a valid type of service';
                                           }
                                           return null;
                                         },
@@ -1968,7 +1980,13 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
             ),
             child: SizedBox(
               width: double.infinity,
-              height: 772,
+              height: _testsType == TestsType.alcoholAndDrug
+                  ? 1520
+                  : _testsType == TestsType.alcoholOnly
+                      ? 870
+                      : _testsType == TestsType.DrugOnly
+                          ? 890
+                          : 0,
               child: Card(
                 surfaceTintColor: Colors.white,
                 color: Colors.white,
@@ -2009,7 +2027,7 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                       Column(
                         children: [
                           Container(
-                            height: 180,
+                            height: 160,
                             width: double.infinity,
                             decoration: BoxDecoration(
                               color: const Color(
@@ -2021,7 +2039,8 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                 Padding(
                                   padding: const EdgeInsets.only(
                                     left: 24.0,
-                                    top: 16.0,
+                                    top: 4.0,
+                                    bottom: 2.0,
                                   ),
                                   child: Row(
                                     children: [
@@ -2072,7 +2091,7 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                 Padding(
                                   padding: const EdgeInsets.only(
                                     left: 24.0,
-                                    bottom: 16.0,
+                                    bottom: 8.0,
                                   ),
                                   child: Row(
                                     children: [
@@ -2100,14 +2119,4960 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                           SizedBox(
                             height: 10,
                           ),
-                          Row(
+                          _testsType == TestsType.alcoholOnly
+                              ? Container(
+                                  child: Column(
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          // Left-aligned title
+                                          Row(
+                                            children: [
+                                              Text(
+                                                "Breath Alcohol Test Limits",
+                                                style: TextStyle(
+                                                  fontSize: 17,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                          left: 0.0,
+                                          top: 15.0,
+                                          right: 0.0,
+                                        ),
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            Align(
+                                              alignment: Alignment.topLeft,
+                                              child: const Text(
+                                                "Category 1",
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 13,
+                                                  color: Colors.black,
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: 5,
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  right: 0.0),
+                                              child: Container(
+                                                width: double.infinity,
+                                                height: 40,
+                                                child: Material(
+                                                  elevation:
+                                                      4, // Adjust this value for more or less elevation
+                                                  shadowColor: Colors.black
+                                                      .withOpacity(
+                                                          0.5), // Optional: Adjust shadow color
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          4), // Match with TextFormField's border radius
+                                                  child: TextFormField(
+                                                    controller: _siteController,
+                                                    decoration: InputDecoration(
+                                                      fillColor: Colors.white,
+                                                      filled: true,
+                                                      border:
+                                                          OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(4),
+                                                        borderSide:
+                                                            const BorderSide(
+                                                          color: Colors.white,
+                                                          width: 2,
+                                                        ),
+                                                      ),
+                                                      enabledBorder:
+                                                          OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(4),
+                                                        borderSide:
+                                                            const BorderSide(
+                                                          color: Colors.white,
+                                                          width: 2,
+                                                        ),
+                                                      ),
+                                                      focusedBorder:
+                                                          OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(4),
+                                                        borderSide:
+                                                            const BorderSide(
+                                                          color: Colors.white,
+                                                          width: 2,
+                                                        ),
+                                                      ),
+                                                      errorBorder:
+                                                          OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(4),
+                                                        borderSide:
+                                                            const BorderSide(
+                                                          color: Colors.red,
+                                                          width: 2,
+                                                        ),
+                                                      ),
+                                                      focusedErrorBorder:
+                                                          OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(4),
+                                                        borderSide:
+                                                            const BorderSide(
+                                                          color: Colors.red,
+                                                          width: 2,
+                                                        ),
+                                                      ),
+                                                      contentPadding:
+                                                          const EdgeInsets
+                                                              .symmetric(
+                                                        vertical: 5,
+                                                        horizontal: 12,
+                                                      ),
+                                                      errorStyle:
+                                                          const TextStyle(
+                                                        color: Colors.red,
+                                                        fontSize: 12,
+                                                      ),
+                                                    ),
+                                                    keyboardType: TextInputType
+                                                        .text, // Ensures numeric input
+                                                    onChanged: (value) {
+                                                      setState(() {
+                                                        // Update the number of donors and the text controller
+                                                        _siteController.text =
+                                                            value; // Manually update the controller text
+                                                      });
+                                                    },
+                                                    validator: (value) {
+                                                      if (_siteController
+                                                              .text ==
+                                                          null) {
+                                                        return 'Please enter a valid site name';
+                                                      }
+                                                      return null;
+                                                    },
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: 15,
+                                            ),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Align(
+                                                      alignment:
+                                                          Alignment.topLeft,
+                                                      child: Text(
+                                                        "Limit (g/210L)",
+                                                        style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontSize: 13,
+                                                          color: Colors.black,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 10,
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              right: 0.0),
+                                                      child: Container(
+                                                        width: 160,
+                                                        height: 40,
+                                                        child: Material(
+                                                          elevation:
+                                                              4, // Adjust this value for more or less elevation
+                                                          shadowColor: Colors
+                                                              .black
+                                                              .withOpacity(
+                                                                  0.5), // Optional: Adjust shadow color
+                                                          borderRadius:
+                                                              BorderRadius.circular(
+                                                                  4), // Match with TextFormField's border radius
+                                                          child: TextFormField(
+                                                            controller:
+                                                                _siteController,
+                                                            decoration:
+                                                                InputDecoration(
+                                                              fillColor:
+                                                                  Colors.white,
+                                                              filled: true,
+                                                              border:
+                                                                  OutlineInputBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            4),
+                                                                borderSide:
+                                                                    const BorderSide(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  width: 2,
+                                                                ),
+                                                              ),
+                                                              enabledBorder:
+                                                                  OutlineInputBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            4),
+                                                                borderSide:
+                                                                    const BorderSide(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  width: 2,
+                                                                ),
+                                                              ),
+                                                              focusedBorder:
+                                                                  OutlineInputBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            4),
+                                                                borderSide:
+                                                                    const BorderSide(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  width: 2,
+                                                                ),
+                                                              ),
+                                                              errorBorder:
+                                                                  OutlineInputBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            4),
+                                                                borderSide:
+                                                                    const BorderSide(
+                                                                  color: Colors
+                                                                      .red,
+                                                                  width: 2,
+                                                                ),
+                                                              ),
+                                                              focusedErrorBorder:
+                                                                  OutlineInputBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            4),
+                                                                borderSide:
+                                                                    const BorderSide(
+                                                                  color: Colors
+                                                                      .red,
+                                                                  width: 2,
+                                                                ),
+                                                              ),
+                                                              contentPadding:
+                                                                  const EdgeInsets
+                                                                      .symmetric(
+                                                                vertical: 5,
+                                                                horizontal: 12,
+                                                              ),
+                                                              errorStyle:
+                                                                  const TextStyle(
+                                                                color:
+                                                                    Colors.red,
+                                                                fontSize: 12,
+                                                              ),
+                                                            ),
+                                                            keyboardType:
+                                                                TextInputType
+                                                                    .text, // Ensures numeric input
+                                                            onChanged: (value) {
+                                                              setState(() {
+                                                                // Update the number of donors and the text controller
+                                                                _siteController
+                                                                        .text =
+                                                                    value; // Manually update the controller text
+                                                              });
+                                                            },
+                                                            validator: (value) {
+                                                              if (_siteController
+                                                                      .text ==
+                                                                  null) {
+                                                                return 'Please enter a valid site name';
+                                                              }
+                                                              return null;
+                                                            },
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Align(
+                                                      alignment:
+                                                          Alignment.topLeft,
+                                                      child: Text(
+                                                        "Sit Out Time (minutes)",
+                                                        style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontSize: 13,
+                                                          color: Colors.black,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 10,
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              right: 0.0),
+                                                      child: Container(
+                                                        width: 160,
+                                                        height: 40,
+                                                        child: Material(
+                                                          elevation:
+                                                              4, // Adjust this value for more or less elevation
+                                                          shadowColor: Colors
+                                                              .black
+                                                              .withOpacity(
+                                                                  0.5), // Optional: Adjust shadow color
+                                                          borderRadius:
+                                                              BorderRadius.circular(
+                                                                  4), // Match with TextFormField's border radius
+                                                          child: TextFormField(
+                                                            controller:
+                                                                _siteController,
+                                                            decoration:
+                                                                InputDecoration(
+                                                              fillColor:
+                                                                  Colors.white,
+                                                              filled: true,
+                                                              border:
+                                                                  OutlineInputBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            4),
+                                                                borderSide:
+                                                                    const BorderSide(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  width: 2,
+                                                                ),
+                                                              ),
+                                                              enabledBorder:
+                                                                  OutlineInputBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            4),
+                                                                borderSide:
+                                                                    const BorderSide(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  width: 2,
+                                                                ),
+                                                              ),
+                                                              focusedBorder:
+                                                                  OutlineInputBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            4),
+                                                                borderSide:
+                                                                    const BorderSide(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  width: 2,
+                                                                ),
+                                                              ),
+                                                              errorBorder:
+                                                                  OutlineInputBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            4),
+                                                                borderSide:
+                                                                    const BorderSide(
+                                                                  color: Colors
+                                                                      .red,
+                                                                  width: 2,
+                                                                ),
+                                                              ),
+                                                              focusedErrorBorder:
+                                                                  OutlineInputBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            4),
+                                                                borderSide:
+                                                                    const BorderSide(
+                                                                  color: Colors
+                                                                      .red,
+                                                                  width: 2,
+                                                                ),
+                                                              ),
+                                                              contentPadding:
+                                                                  const EdgeInsets
+                                                                      .symmetric(
+                                                                vertical: 5,
+                                                                horizontal: 12,
+                                                              ),
+                                                              errorStyle:
+                                                                  const TextStyle(
+                                                                color:
+                                                                    Colors.red,
+                                                                fontSize: 12,
+                                                              ),
+                                                            ),
+                                                            keyboardType:
+                                                                TextInputType
+                                                                    .text, // Ensures numeric input
+                                                            onChanged: (value) {
+                                                              setState(() {
+                                                                // Update the number of donors and the text controller
+                                                                _siteController
+                                                                        .text =
+                                                                    value; // Manually update the controller text
+                                                              });
+                                                            },
+                                                            validator: (value) {
+                                                              if (_siteController
+                                                                      .text ==
+                                                                  null) {
+                                                                return 'Please enter a valid site name';
+                                                              }
+                                                              return null;
+                                                            },
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              height: 15,
+                                            ),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: List.generate(
+                                                60, // Adjust the number of dashes
+                                                (index) => Container(
+                                                  width:
+                                                      4, // Width of each dash
+                                                  height:
+                                                      2, // Height of each dash (thickness)
+                                                  color: Colors
+                                                      .black, // Color of the dash
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: 15,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                          left: 0.0,
+                                          top: 15.0,
+                                          right: 0.0,
+                                        ),
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            Align(
+                                              alignment: Alignment.topLeft,
+                                              child: const Text(
+                                                "Category 2",
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 13,
+                                                  color: Colors.black,
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: 5,
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  right: 0.0),
+                                              child: Container(
+                                                width: double.infinity,
+                                                height: 40,
+                                                child: Material(
+                                                  elevation:
+                                                      4, // Adjust this value for more or less elevation
+                                                  shadowColor: Colors.black
+                                                      .withOpacity(
+                                                          0.5), // Optional: Adjust shadow color
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          4), // Match with TextFormField's border radius
+                                                  child: TextFormField(
+                                                    controller: _siteController,
+                                                    decoration: InputDecoration(
+                                                      fillColor: Colors.white,
+                                                      filled: true,
+                                                      border:
+                                                          OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(4),
+                                                        borderSide:
+                                                            const BorderSide(
+                                                          color: Colors.white,
+                                                          width: 2,
+                                                        ),
+                                                      ),
+                                                      enabledBorder:
+                                                          OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(4),
+                                                        borderSide:
+                                                            const BorderSide(
+                                                          color: Colors.white,
+                                                          width: 2,
+                                                        ),
+                                                      ),
+                                                      focusedBorder:
+                                                          OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(4),
+                                                        borderSide:
+                                                            const BorderSide(
+                                                          color: Colors.white,
+                                                          width: 2,
+                                                        ),
+                                                      ),
+                                                      errorBorder:
+                                                          OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(4),
+                                                        borderSide:
+                                                            const BorderSide(
+                                                          color: Colors.red,
+                                                          width: 2,
+                                                        ),
+                                                      ),
+                                                      focusedErrorBorder:
+                                                          OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(4),
+                                                        borderSide:
+                                                            const BorderSide(
+                                                          color: Colors.red,
+                                                          width: 2,
+                                                        ),
+                                                      ),
+                                                      contentPadding:
+                                                          const EdgeInsets
+                                                              .symmetric(
+                                                        vertical: 5,
+                                                        horizontal: 12,
+                                                      ),
+                                                      errorStyle:
+                                                          const TextStyle(
+                                                        color: Colors.red,
+                                                        fontSize: 12,
+                                                      ),
+                                                    ),
+                                                    keyboardType: TextInputType
+                                                        .text, // Ensures numeric input
+                                                    onChanged: (value) {
+                                                      setState(() {
+                                                        // Update the number of donors and the text controller
+                                                        _siteController.text =
+                                                            value; // Manually update the controller text
+                                                      });
+                                                    },
+                                                    validator: (value) {
+                                                      if (_siteController
+                                                              .text ==
+                                                          null) {
+                                                        return 'Please enter a valid site name';
+                                                      }
+                                                      return null;
+                                                    },
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: 15,
+                                            ),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Align(
+                                                      alignment:
+                                                          Alignment.topLeft,
+                                                      child: Text(
+                                                        "Limit (g/210L)",
+                                                        style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontSize: 13,
+                                                          color: Colors.black,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 10,
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              right: 0.0),
+                                                      child: Container(
+                                                        width: 160,
+                                                        height: 40,
+                                                        child: Material(
+                                                          elevation:
+                                                              4, // Adjust this value for more or less elevation
+                                                          shadowColor: Colors
+                                                              .black
+                                                              .withOpacity(
+                                                                  0.5), // Optional: Adjust shadow color
+                                                          borderRadius:
+                                                              BorderRadius.circular(
+                                                                  4), // Match with TextFormField's border radius
+                                                          child: TextFormField(
+                                                            controller:
+                                                                _siteController,
+                                                            decoration:
+                                                                InputDecoration(
+                                                              fillColor:
+                                                                  Colors.white,
+                                                              filled: true,
+                                                              border:
+                                                                  OutlineInputBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            4),
+                                                                borderSide:
+                                                                    const BorderSide(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  width: 2,
+                                                                ),
+                                                              ),
+                                                              enabledBorder:
+                                                                  OutlineInputBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            4),
+                                                                borderSide:
+                                                                    const BorderSide(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  width: 2,
+                                                                ),
+                                                              ),
+                                                              focusedBorder:
+                                                                  OutlineInputBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            4),
+                                                                borderSide:
+                                                                    const BorderSide(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  width: 2,
+                                                                ),
+                                                              ),
+                                                              errorBorder:
+                                                                  OutlineInputBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            4),
+                                                                borderSide:
+                                                                    const BorderSide(
+                                                                  color: Colors
+                                                                      .red,
+                                                                  width: 2,
+                                                                ),
+                                                              ),
+                                                              focusedErrorBorder:
+                                                                  OutlineInputBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            4),
+                                                                borderSide:
+                                                                    const BorderSide(
+                                                                  color: Colors
+                                                                      .red,
+                                                                  width: 2,
+                                                                ),
+                                                              ),
+                                                              contentPadding:
+                                                                  const EdgeInsets
+                                                                      .symmetric(
+                                                                vertical: 5,
+                                                                horizontal: 12,
+                                                              ),
+                                                              errorStyle:
+                                                                  const TextStyle(
+                                                                color:
+                                                                    Colors.red,
+                                                                fontSize: 12,
+                                                              ),
+                                                            ),
+                                                            keyboardType:
+                                                                TextInputType
+                                                                    .text, // Ensures numeric input
+                                                            onChanged: (value) {
+                                                              setState(() {
+                                                                // Update the number of donors and the text controller
+                                                                _siteController
+                                                                        .text =
+                                                                    value; // Manually update the controller text
+                                                              });
+                                                            },
+                                                            validator: (value) {
+                                                              if (_siteController
+                                                                      .text ==
+                                                                  null) {
+                                                                return 'Please enter a valid site name';
+                                                              }
+                                                              return null;
+                                                            },
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Align(
+                                                      alignment:
+                                                          Alignment.topLeft,
+                                                      child: Text(
+                                                        "Sit Out Time (minutes)",
+                                                        style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontSize: 13,
+                                                          color: Colors.black,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 10,
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              right: 0.0),
+                                                      child: Container(
+                                                        width: 160,
+                                                        height: 40,
+                                                        child: Material(
+                                                          elevation:
+                                                              4, // Adjust this value for more or less elevation
+                                                          shadowColor: Colors
+                                                              .black
+                                                              .withOpacity(
+                                                                  0.5), // Optional: Adjust shadow color
+                                                          borderRadius:
+                                                              BorderRadius.circular(
+                                                                  4), // Match with TextFormField's border radius
+                                                          child: TextFormField(
+                                                            controller:
+                                                                _siteController,
+                                                            decoration:
+                                                                InputDecoration(
+                                                              fillColor:
+                                                                  Colors.white,
+                                                              filled: true,
+                                                              border:
+                                                                  OutlineInputBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            4),
+                                                                borderSide:
+                                                                    const BorderSide(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  width: 2,
+                                                                ),
+                                                              ),
+                                                              enabledBorder:
+                                                                  OutlineInputBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            4),
+                                                                borderSide:
+                                                                    const BorderSide(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  width: 2,
+                                                                ),
+                                                              ),
+                                                              focusedBorder:
+                                                                  OutlineInputBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            4),
+                                                                borderSide:
+                                                                    const BorderSide(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  width: 2,
+                                                                ),
+                                                              ),
+                                                              errorBorder:
+                                                                  OutlineInputBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            4),
+                                                                borderSide:
+                                                                    const BorderSide(
+                                                                  color: Colors
+                                                                      .red,
+                                                                  width: 2,
+                                                                ),
+                                                              ),
+                                                              focusedErrorBorder:
+                                                                  OutlineInputBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            4),
+                                                                borderSide:
+                                                                    const BorderSide(
+                                                                  color: Colors
+                                                                      .red,
+                                                                  width: 2,
+                                                                ),
+                                                              ),
+                                                              contentPadding:
+                                                                  const EdgeInsets
+                                                                      .symmetric(
+                                                                vertical: 5,
+                                                                horizontal: 12,
+                                                              ),
+                                                              errorStyle:
+                                                                  const TextStyle(
+                                                                color:
+                                                                    Colors.red,
+                                                                fontSize: 12,
+                                                              ),
+                                                            ),
+                                                            keyboardType:
+                                                                TextInputType
+                                                                    .text, // Ensures numeric input
+                                                            onChanged: (value) {
+                                                              setState(() {
+                                                                // Update the number of donors and the text controller
+                                                                _siteController
+                                                                        .text =
+                                                                    value; // Manually update the controller text
+                                                              });
+                                                            },
+                                                            validator: (value) {
+                                                              if (_siteController
+                                                                      .text ==
+                                                                  null) {
+                                                                return 'Please enter a valid site name';
+                                                              }
+                                                              return null;
+                                                            },
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              height: 15,
+                                            ),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: List.generate(
+                                                60, // Adjust the number of dashes
+                                                (index) => Container(
+                                                  width:
+                                                      4, // Width of each dash
+                                                  height:
+                                                      2, // Height of each dash (thickness)
+                                                  color: Colors
+                                                      .black, // Color of the dash
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: 15,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                          left: 0.0,
+                                          top: 15.0,
+                                          right: 0.0,
+                                        ),
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            Align(
+                                              alignment: Alignment.topLeft,
+                                              child: const Text(
+                                                "Category 3",
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 13,
+                                                  color: Colors.black,
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: 5,
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  right: 0.0),
+                                              child: Container(
+                                                width: double.infinity,
+                                                height: 40,
+                                                child: Material(
+                                                  elevation:
+                                                      4, // Adjust this value for more or less elevation
+                                                  shadowColor: Colors.black
+                                                      .withOpacity(
+                                                          0.5), // Optional: Adjust shadow color
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          4), // Match with TextFormField's border radius
+                                                  child: TextFormField(
+                                                    controller: _siteController,
+                                                    decoration: InputDecoration(
+                                                      fillColor: Colors.white,
+                                                      filled: true,
+                                                      border:
+                                                          OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(4),
+                                                        borderSide:
+                                                            const BorderSide(
+                                                          color: Colors.white,
+                                                          width: 2,
+                                                        ),
+                                                      ),
+                                                      enabledBorder:
+                                                          OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(4),
+                                                        borderSide:
+                                                            const BorderSide(
+                                                          color: Colors.white,
+                                                          width: 2,
+                                                        ),
+                                                      ),
+                                                      focusedBorder:
+                                                          OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(4),
+                                                        borderSide:
+                                                            const BorderSide(
+                                                          color: Colors.white,
+                                                          width: 2,
+                                                        ),
+                                                      ),
+                                                      errorBorder:
+                                                          OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(4),
+                                                        borderSide:
+                                                            const BorderSide(
+                                                          color: Colors.red,
+                                                          width: 2,
+                                                        ),
+                                                      ),
+                                                      focusedErrorBorder:
+                                                          OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(4),
+                                                        borderSide:
+                                                            const BorderSide(
+                                                          color: Colors.red,
+                                                          width: 2,
+                                                        ),
+                                                      ),
+                                                      contentPadding:
+                                                          const EdgeInsets
+                                                              .symmetric(
+                                                        vertical: 5,
+                                                        horizontal: 12,
+                                                      ),
+                                                      errorStyle:
+                                                          const TextStyle(
+                                                        color: Colors.red,
+                                                        fontSize: 12,
+                                                      ),
+                                                    ),
+                                                    keyboardType: TextInputType
+                                                        .text, // Ensures numeric input
+                                                    onChanged: (value) {
+                                                      setState(() {
+                                                        // Update the number of donors and the text controller
+                                                        _siteController.text =
+                                                            value; // Manually update the controller text
+                                                      });
+                                                    },
+                                                    validator: (value) {
+                                                      if (_siteController
+                                                              .text ==
+                                                          null) {
+                                                        return 'Please enter a valid site name';
+                                                      }
+                                                      return null;
+                                                    },
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: 15,
+                                            ),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Align(
+                                                      alignment:
+                                                          Alignment.topLeft,
+                                                      child: Text(
+                                                        "Limit (g/210L)",
+                                                        style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontSize: 13,
+                                                          color: Colors.black,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 10,
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              right: 0.0),
+                                                      child: Container(
+                                                        width: 160,
+                                                        height: 40,
+                                                        child: Material(
+                                                          elevation:
+                                                              4, // Adjust this value for more or less elevation
+                                                          shadowColor: Colors
+                                                              .black
+                                                              .withOpacity(
+                                                                  0.5), // Optional: Adjust shadow color
+                                                          borderRadius:
+                                                              BorderRadius.circular(
+                                                                  4), // Match with TextFormField's border radius
+                                                          child: TextFormField(
+                                                            controller:
+                                                                _siteController,
+                                                            decoration:
+                                                                InputDecoration(
+                                                              fillColor:
+                                                                  Colors.white,
+                                                              filled: true,
+                                                              border:
+                                                                  OutlineInputBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            4),
+                                                                borderSide:
+                                                                    const BorderSide(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  width: 2,
+                                                                ),
+                                                              ),
+                                                              enabledBorder:
+                                                                  OutlineInputBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            4),
+                                                                borderSide:
+                                                                    const BorderSide(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  width: 2,
+                                                                ),
+                                                              ),
+                                                              focusedBorder:
+                                                                  OutlineInputBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            4),
+                                                                borderSide:
+                                                                    const BorderSide(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  width: 2,
+                                                                ),
+                                                              ),
+                                                              errorBorder:
+                                                                  OutlineInputBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            4),
+                                                                borderSide:
+                                                                    const BorderSide(
+                                                                  color: Colors
+                                                                      .red,
+                                                                  width: 2,
+                                                                ),
+                                                              ),
+                                                              focusedErrorBorder:
+                                                                  OutlineInputBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            4),
+                                                                borderSide:
+                                                                    const BorderSide(
+                                                                  color: Colors
+                                                                      .red,
+                                                                  width: 2,
+                                                                ),
+                                                              ),
+                                                              contentPadding:
+                                                                  const EdgeInsets
+                                                                      .symmetric(
+                                                                vertical: 5,
+                                                                horizontal: 12,
+                                                              ),
+                                                              errorStyle:
+                                                                  const TextStyle(
+                                                                color:
+                                                                    Colors.red,
+                                                                fontSize: 12,
+                                                              ),
+                                                            ),
+                                                            keyboardType:
+                                                                TextInputType
+                                                                    .text, // Ensures numeric input
+                                                            onChanged: (value) {
+                                                              setState(() {
+                                                                // Update the number of donors and the text controller
+                                                                _siteController
+                                                                        .text =
+                                                                    value; // Manually update the controller text
+                                                              });
+                                                            },
+                                                            validator: (value) {
+                                                              if (_siteController
+                                                                      .text ==
+                                                                  null) {
+                                                                return 'Please enter a valid site name';
+                                                              }
+                                                              return null;
+                                                            },
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Align(
+                                                      alignment:
+                                                          Alignment.topLeft,
+                                                      child: Text(
+                                                        "Sit Out Time (minutes)",
+                                                        style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontSize: 13,
+                                                          color: Colors.black,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 10,
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              right: 0.0),
+                                                      child: Container(
+                                                        width: 160,
+                                                        height: 40,
+                                                        child: Material(
+                                                          elevation:
+                                                              4, // Adjust this value for more or less elevation
+                                                          shadowColor: Colors
+                                                              .black
+                                                              .withOpacity(
+                                                                  0.5), // Optional: Adjust shadow color
+                                                          borderRadius:
+                                                              BorderRadius.circular(
+                                                                  4), // Match with TextFormField's border radius
+                                                          child: TextFormField(
+                                                            controller:
+                                                                _siteController,
+                                                            decoration:
+                                                                InputDecoration(
+                                                              fillColor:
+                                                                  Colors.white,
+                                                              filled: true,
+                                                              border:
+                                                                  OutlineInputBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            4),
+                                                                borderSide:
+                                                                    const BorderSide(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  width: 2,
+                                                                ),
+                                                              ),
+                                                              enabledBorder:
+                                                                  OutlineInputBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            4),
+                                                                borderSide:
+                                                                    const BorderSide(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  width: 2,
+                                                                ),
+                                                              ),
+                                                              focusedBorder:
+                                                                  OutlineInputBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            4),
+                                                                borderSide:
+                                                                    const BorderSide(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  width: 2,
+                                                                ),
+                                                              ),
+                                                              errorBorder:
+                                                                  OutlineInputBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            4),
+                                                                borderSide:
+                                                                    const BorderSide(
+                                                                  color: Colors
+                                                                      .red,
+                                                                  width: 2,
+                                                                ),
+                                                              ),
+                                                              focusedErrorBorder:
+                                                                  OutlineInputBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            4),
+                                                                borderSide:
+                                                                    const BorderSide(
+                                                                  color: Colors
+                                                                      .red,
+                                                                  width: 2,
+                                                                ),
+                                                              ),
+                                                              contentPadding:
+                                                                  const EdgeInsets
+                                                                      .symmetric(
+                                                                vertical: 5,
+                                                                horizontal: 12,
+                                                              ),
+                                                              errorStyle:
+                                                                  const TextStyle(
+                                                                color:
+                                                                    Colors.red,
+                                                                fontSize: 12,
+                                                              ),
+                                                            ),
+                                                            keyboardType:
+                                                                TextInputType
+                                                                    .text, // Ensures numeric input
+                                                            onChanged: (value) {
+                                                              setState(() {
+                                                                // Update the number of donors and the text controller
+                                                                _siteController
+                                                                        .text =
+                                                                    value; // Manually update the controller text
+                                                              });
+                                                            },
+                                                            validator: (value) {
+                                                              if (_siteController
+                                                                      .text ==
+                                                                  null) {
+                                                                return 'Please enter a valid site name';
+                                                              }
+                                                              return null;
+                                                            },
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              height: 15,
+                                            ),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: List.generate(
+                                                60, // Adjust the number of dashes
+                                                (index) => Container(
+                                                  width:
+                                                      4, // Width of each dash
+                                                  height:
+                                                      2, // Height of each dash (thickness)
+                                                  color: Colors
+                                                      .black, // Color of the dash
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: 15,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              : _testsType == TestsType.alcoholAndDrug
+                                  ? Container(
+                                      child: Column(
+                                        children: [
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              // Left-aligned title
+                                              Row(
+                                                children: [
+                                                  Text(
+                                                    "Breath Alcohol Test Limits",
+                                                    style: TextStyle(
+                                                      fontSize: 17,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                              left: 0.0,
+                                              top: 15.0,
+                                              right: 0.0,
+                                            ),
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              children: [
+                                                Align(
+                                                  alignment: Alignment.topLeft,
+                                                  child: const Text(
+                                                    "Category 1",
+                                                    style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize: 13,
+                                                      color: Colors.black,
+                                                    ),
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  height: 5,
+                                                ),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          right: 0.0),
+                                                  child: Container(
+                                                    width: double.infinity,
+                                                    height: 40,
+                                                    child: Material(
+                                                      elevation:
+                                                          4, // Adjust this value for more or less elevation
+                                                      shadowColor: Colors.black
+                                                          .withOpacity(
+                                                              0.5), // Optional: Adjust shadow color
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              4), // Match with TextFormField's border radius
+                                                      child: TextFormField(
+                                                        controller:
+                                                            _siteController,
+                                                        decoration:
+                                                            InputDecoration(
+                                                          fillColor:
+                                                              Colors.white,
+                                                          filled: true,
+                                                          border:
+                                                              OutlineInputBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        4),
+                                                            borderSide:
+                                                                const BorderSide(
+                                                              color:
+                                                                  Colors.white,
+                                                              width: 2,
+                                                            ),
+                                                          ),
+                                                          enabledBorder:
+                                                              OutlineInputBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        4),
+                                                            borderSide:
+                                                                const BorderSide(
+                                                              color:
+                                                                  Colors.white,
+                                                              width: 2,
+                                                            ),
+                                                          ),
+                                                          focusedBorder:
+                                                              OutlineInputBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        4),
+                                                            borderSide:
+                                                                const BorderSide(
+                                                              color:
+                                                                  Colors.white,
+                                                              width: 2,
+                                                            ),
+                                                          ),
+                                                          errorBorder:
+                                                              OutlineInputBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        4),
+                                                            borderSide:
+                                                                const BorderSide(
+                                                              color: Colors.red,
+                                                              width: 2,
+                                                            ),
+                                                          ),
+                                                          focusedErrorBorder:
+                                                              OutlineInputBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        4),
+                                                            borderSide:
+                                                                const BorderSide(
+                                                              color: Colors.red,
+                                                              width: 2,
+                                                            ),
+                                                          ),
+                                                          contentPadding:
+                                                              const EdgeInsets
+                                                                  .symmetric(
+                                                            vertical: 5,
+                                                            horizontal: 12,
+                                                          ),
+                                                          errorStyle:
+                                                              const TextStyle(
+                                                            color: Colors.red,
+                                                            fontSize: 12,
+                                                          ),
+                                                        ),
+                                                        keyboardType: TextInputType
+                                                            .text, // Ensures numeric input
+                                                        onChanged: (value) {
+                                                          setState(() {
+                                                            // Update the number of donors and the text controller
+                                                            _siteController
+                                                                    .text =
+                                                                value; // Manually update the controller text
+                                                          });
+                                                        },
+                                                        validator: (value) {
+                                                          if (_siteController
+                                                                  .text ==
+                                                              null) {
+                                                            return 'Please enter a valid site name';
+                                                          }
+                                                          return null;
+                                                        },
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  height: 15,
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    Column(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .start,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Align(
+                                                          alignment:
+                                                              Alignment.topLeft,
+                                                          child: Text(
+                                                            "Limit (g/210L)",
+                                                            style: TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              fontSize: 13,
+                                                              color:
+                                                                  Colors.black,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        SizedBox(
+                                                          height: 10,
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .only(
+                                                                  right: 0.0),
+                                                          child: Container(
+                                                            width: 160,
+                                                            height: 40,
+                                                            child: Material(
+                                                              elevation:
+                                                                  4, // Adjust this value for more or less elevation
+                                                              shadowColor: Colors
+                                                                  .black
+                                                                  .withOpacity(
+                                                                      0.5), // Optional: Adjust shadow color
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          4), // Match with TextFormField's border radius
+                                                              child:
+                                                                  TextFormField(
+                                                                controller:
+                                                                    _siteController,
+                                                                decoration:
+                                                                    InputDecoration(
+                                                                  fillColor:
+                                                                      Colors
+                                                                          .white,
+                                                                  filled: true,
+                                                                  border:
+                                                                      OutlineInputBorder(
+                                                                    borderRadius:
+                                                                        BorderRadius
+                                                                            .circular(4),
+                                                                    borderSide:
+                                                                        const BorderSide(
+                                                                      color: Colors
+                                                                          .white,
+                                                                      width: 2,
+                                                                    ),
+                                                                  ),
+                                                                  enabledBorder:
+                                                                      OutlineInputBorder(
+                                                                    borderRadius:
+                                                                        BorderRadius
+                                                                            .circular(4),
+                                                                    borderSide:
+                                                                        const BorderSide(
+                                                                      color: Colors
+                                                                          .white,
+                                                                      width: 2,
+                                                                    ),
+                                                                  ),
+                                                                  focusedBorder:
+                                                                      OutlineInputBorder(
+                                                                    borderRadius:
+                                                                        BorderRadius
+                                                                            .circular(4),
+                                                                    borderSide:
+                                                                        const BorderSide(
+                                                                      color: Colors
+                                                                          .white,
+                                                                      width: 2,
+                                                                    ),
+                                                                  ),
+                                                                  errorBorder:
+                                                                      OutlineInputBorder(
+                                                                    borderRadius:
+                                                                        BorderRadius
+                                                                            .circular(4),
+                                                                    borderSide:
+                                                                        const BorderSide(
+                                                                      color: Colors
+                                                                          .red,
+                                                                      width: 2,
+                                                                    ),
+                                                                  ),
+                                                                  focusedErrorBorder:
+                                                                      OutlineInputBorder(
+                                                                    borderRadius:
+                                                                        BorderRadius
+                                                                            .circular(4),
+                                                                    borderSide:
+                                                                        const BorderSide(
+                                                                      color: Colors
+                                                                          .red,
+                                                                      width: 2,
+                                                                    ),
+                                                                  ),
+                                                                  contentPadding:
+                                                                      const EdgeInsets
+                                                                          .symmetric(
+                                                                    vertical: 5,
+                                                                    horizontal:
+                                                                        12,
+                                                                  ),
+                                                                  errorStyle:
+                                                                      const TextStyle(
+                                                                    color: Colors
+                                                                        .red,
+                                                                    fontSize:
+                                                                        12,
+                                                                  ),
+                                                                ),
+                                                                keyboardType:
+                                                                    TextInputType
+                                                                        .text, // Ensures numeric input
+                                                                onChanged:
+                                                                    (value) {
+                                                                  setState(() {
+                                                                    // Update the number of donors and the text controller
+                                                                    _siteController
+                                                                            .text =
+                                                                        value; // Manually update the controller text
+                                                                  });
+                                                                },
+                                                                validator:
+                                                                    (value) {
+                                                                  if (_siteController
+                                                                          .text ==
+                                                                      null) {
+                                                                    return 'Please enter a valid site name';
+                                                                  }
+                                                                  return null;
+                                                                },
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    Column(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .start,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Align(
+                                                          alignment:
+                                                              Alignment.topLeft,
+                                                          child: Text(
+                                                            "Sit Out Time (minutes)",
+                                                            style: TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              fontSize: 13,
+                                                              color:
+                                                                  Colors.black,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        SizedBox(
+                                                          height: 10,
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .only(
+                                                                  right: 0.0),
+                                                          child: Container(
+                                                            width: 160,
+                                                            height: 40,
+                                                            child: Material(
+                                                              elevation:
+                                                                  4, // Adjust this value for more or less elevation
+                                                              shadowColor: Colors
+                                                                  .black
+                                                                  .withOpacity(
+                                                                      0.5), // Optional: Adjust shadow color
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          4), // Match with TextFormField's border radius
+                                                              child:
+                                                                  TextFormField(
+                                                                controller:
+                                                                    _siteController,
+                                                                decoration:
+                                                                    InputDecoration(
+                                                                  fillColor:
+                                                                      Colors
+                                                                          .white,
+                                                                  filled: true,
+                                                                  border:
+                                                                      OutlineInputBorder(
+                                                                    borderRadius:
+                                                                        BorderRadius
+                                                                            .circular(4),
+                                                                    borderSide:
+                                                                        const BorderSide(
+                                                                      color: Colors
+                                                                          .white,
+                                                                      width: 2,
+                                                                    ),
+                                                                  ),
+                                                                  enabledBorder:
+                                                                      OutlineInputBorder(
+                                                                    borderRadius:
+                                                                        BorderRadius
+                                                                            .circular(4),
+                                                                    borderSide:
+                                                                        const BorderSide(
+                                                                      color: Colors
+                                                                          .white,
+                                                                      width: 2,
+                                                                    ),
+                                                                  ),
+                                                                  focusedBorder:
+                                                                      OutlineInputBorder(
+                                                                    borderRadius:
+                                                                        BorderRadius
+                                                                            .circular(4),
+                                                                    borderSide:
+                                                                        const BorderSide(
+                                                                      color: Colors
+                                                                          .white,
+                                                                      width: 2,
+                                                                    ),
+                                                                  ),
+                                                                  errorBorder:
+                                                                      OutlineInputBorder(
+                                                                    borderRadius:
+                                                                        BorderRadius
+                                                                            .circular(4),
+                                                                    borderSide:
+                                                                        const BorderSide(
+                                                                      color: Colors
+                                                                          .red,
+                                                                      width: 2,
+                                                                    ),
+                                                                  ),
+                                                                  focusedErrorBorder:
+                                                                      OutlineInputBorder(
+                                                                    borderRadius:
+                                                                        BorderRadius
+                                                                            .circular(4),
+                                                                    borderSide:
+                                                                        const BorderSide(
+                                                                      color: Colors
+                                                                          .red,
+                                                                      width: 2,
+                                                                    ),
+                                                                  ),
+                                                                  contentPadding:
+                                                                      const EdgeInsets
+                                                                          .symmetric(
+                                                                    vertical: 5,
+                                                                    horizontal:
+                                                                        12,
+                                                                  ),
+                                                                  errorStyle:
+                                                                      const TextStyle(
+                                                                    color: Colors
+                                                                        .red,
+                                                                    fontSize:
+                                                                        12,
+                                                                  ),
+                                                                ),
+                                                                keyboardType:
+                                                                    TextInputType
+                                                                        .text, // Ensures numeric input
+                                                                onChanged:
+                                                                    (value) {
+                                                                  setState(() {
+                                                                    // Update the number of donors and the text controller
+                                                                    _siteController
+                                                                            .text =
+                                                                        value; // Manually update the controller text
+                                                                  });
+                                                                },
+                                                                validator:
+                                                                    (value) {
+                                                                  if (_siteController
+                                                                          .text ==
+                                                                      null) {
+                                                                    return 'Please enter a valid site name';
+                                                                  }
+                                                                  return null;
+                                                                },
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ],
+                                                ),
+                                                SizedBox(
+                                                  height: 15,
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: List.generate(
+                                                    60, // Adjust the number of dashes
+                                                    (index) => Container(
+                                                      width:
+                                                          4, // Width of each dash
+                                                      height:
+                                                          2, // Height of each dash (thickness)
+                                                      color: Colors
+                                                          .black, // Color of the dash
+                                                    ),
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  height: 15,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                              left: 0.0,
+                                              top: 15.0,
+                                              right: 0.0,
+                                            ),
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              children: [
+                                                Align(
+                                                  alignment: Alignment.topLeft,
+                                                  child: const Text(
+                                                    "Category 2",
+                                                    style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize: 13,
+                                                      color: Colors.black,
+                                                    ),
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  height: 5,
+                                                ),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          right: 0.0),
+                                                  child: Container(
+                                                    width: double.infinity,
+                                                    height: 40,
+                                                    child: Material(
+                                                      elevation:
+                                                          4, // Adjust this value for more or less elevation
+                                                      shadowColor: Colors.black
+                                                          .withOpacity(
+                                                              0.5), // Optional: Adjust shadow color
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              4), // Match with TextFormField's border radius
+                                                      child: TextFormField(
+                                                        controller:
+                                                            _siteController,
+                                                        decoration:
+                                                            InputDecoration(
+                                                          fillColor:
+                                                              Colors.white,
+                                                          filled: true,
+                                                          border:
+                                                              OutlineInputBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        4),
+                                                            borderSide:
+                                                                const BorderSide(
+                                                              color:
+                                                                  Colors.white,
+                                                              width: 2,
+                                                            ),
+                                                          ),
+                                                          enabledBorder:
+                                                              OutlineInputBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        4),
+                                                            borderSide:
+                                                                const BorderSide(
+                                                              color:
+                                                                  Colors.white,
+                                                              width: 2,
+                                                            ),
+                                                          ),
+                                                          focusedBorder:
+                                                              OutlineInputBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        4),
+                                                            borderSide:
+                                                                const BorderSide(
+                                                              color:
+                                                                  Colors.white,
+                                                              width: 2,
+                                                            ),
+                                                          ),
+                                                          errorBorder:
+                                                              OutlineInputBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        4),
+                                                            borderSide:
+                                                                const BorderSide(
+                                                              color: Colors.red,
+                                                              width: 2,
+                                                            ),
+                                                          ),
+                                                          focusedErrorBorder:
+                                                              OutlineInputBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        4),
+                                                            borderSide:
+                                                                const BorderSide(
+                                                              color: Colors.red,
+                                                              width: 2,
+                                                            ),
+                                                          ),
+                                                          contentPadding:
+                                                              const EdgeInsets
+                                                                  .symmetric(
+                                                            vertical: 5,
+                                                            horizontal: 12,
+                                                          ),
+                                                          errorStyle:
+                                                              const TextStyle(
+                                                            color: Colors.red,
+                                                            fontSize: 12,
+                                                          ),
+                                                        ),
+                                                        keyboardType: TextInputType
+                                                            .text, // Ensures numeric input
+                                                        onChanged: (value) {
+                                                          setState(() {
+                                                            // Update the number of donors and the text controller
+                                                            _siteController
+                                                                    .text =
+                                                                value; // Manually update the controller text
+                                                          });
+                                                        },
+                                                        validator: (value) {
+                                                          if (_siteController
+                                                                  .text ==
+                                                              null) {
+                                                            return 'Please enter a valid site name';
+                                                          }
+                                                          return null;
+                                                        },
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  height: 15,
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    Column(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .start,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Align(
+                                                          alignment:
+                                                              Alignment.topLeft,
+                                                          child: Text(
+                                                            "Limit (g/210L)",
+                                                            style: TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              fontSize: 13,
+                                                              color:
+                                                                  Colors.black,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        SizedBox(
+                                                          height: 10,
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .only(
+                                                                  right: 0.0),
+                                                          child: Container(
+                                                            width: 160,
+                                                            height: 40,
+                                                            child: Material(
+                                                              elevation:
+                                                                  4, // Adjust this value for more or less elevation
+                                                              shadowColor: Colors
+                                                                  .black
+                                                                  .withOpacity(
+                                                                      0.5), // Optional: Adjust shadow color
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          4), // Match with TextFormField's border radius
+                                                              child:
+                                                                  TextFormField(
+                                                                controller:
+                                                                    _siteController,
+                                                                decoration:
+                                                                    InputDecoration(
+                                                                  fillColor:
+                                                                      Colors
+                                                                          .white,
+                                                                  filled: true,
+                                                                  border:
+                                                                      OutlineInputBorder(
+                                                                    borderRadius:
+                                                                        BorderRadius
+                                                                            .circular(4),
+                                                                    borderSide:
+                                                                        const BorderSide(
+                                                                      color: Colors
+                                                                          .white,
+                                                                      width: 2,
+                                                                    ),
+                                                                  ),
+                                                                  enabledBorder:
+                                                                      OutlineInputBorder(
+                                                                    borderRadius:
+                                                                        BorderRadius
+                                                                            .circular(4),
+                                                                    borderSide:
+                                                                        const BorderSide(
+                                                                      color: Colors
+                                                                          .white,
+                                                                      width: 2,
+                                                                    ),
+                                                                  ),
+                                                                  focusedBorder:
+                                                                      OutlineInputBorder(
+                                                                    borderRadius:
+                                                                        BorderRadius
+                                                                            .circular(4),
+                                                                    borderSide:
+                                                                        const BorderSide(
+                                                                      color: Colors
+                                                                          .white,
+                                                                      width: 2,
+                                                                    ),
+                                                                  ),
+                                                                  errorBorder:
+                                                                      OutlineInputBorder(
+                                                                    borderRadius:
+                                                                        BorderRadius
+                                                                            .circular(4),
+                                                                    borderSide:
+                                                                        const BorderSide(
+                                                                      color: Colors
+                                                                          .red,
+                                                                      width: 2,
+                                                                    ),
+                                                                  ),
+                                                                  focusedErrorBorder:
+                                                                      OutlineInputBorder(
+                                                                    borderRadius:
+                                                                        BorderRadius
+                                                                            .circular(4),
+                                                                    borderSide:
+                                                                        const BorderSide(
+                                                                      color: Colors
+                                                                          .red,
+                                                                      width: 2,
+                                                                    ),
+                                                                  ),
+                                                                  contentPadding:
+                                                                      const EdgeInsets
+                                                                          .symmetric(
+                                                                    vertical: 5,
+                                                                    horizontal:
+                                                                        12,
+                                                                  ),
+                                                                  errorStyle:
+                                                                      const TextStyle(
+                                                                    color: Colors
+                                                                        .red,
+                                                                    fontSize:
+                                                                        12,
+                                                                  ),
+                                                                ),
+                                                                keyboardType:
+                                                                    TextInputType
+                                                                        .text, // Ensures numeric input
+                                                                onChanged:
+                                                                    (value) {
+                                                                  setState(() {
+                                                                    // Update the number of donors and the text controller
+                                                                    _siteController
+                                                                            .text =
+                                                                        value; // Manually update the controller text
+                                                                  });
+                                                                },
+                                                                validator:
+                                                                    (value) {
+                                                                  if (_siteController
+                                                                          .text ==
+                                                                      null) {
+                                                                    return 'Please enter a valid site name';
+                                                                  }
+                                                                  return null;
+                                                                },
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    Column(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .start,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Align(
+                                                          alignment:
+                                                              Alignment.topLeft,
+                                                          child: Text(
+                                                            "Sit Out Time (minutes)",
+                                                            style: TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              fontSize: 13,
+                                                              color:
+                                                                  Colors.black,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        SizedBox(
+                                                          height: 10,
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .only(
+                                                                  right: 0.0),
+                                                          child: Container(
+                                                            width: 160,
+                                                            height: 40,
+                                                            child: Material(
+                                                              elevation:
+                                                                  4, // Adjust this value for more or less elevation
+                                                              shadowColor: Colors
+                                                                  .black
+                                                                  .withOpacity(
+                                                                      0.5), // Optional: Adjust shadow color
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          4), // Match with TextFormField's border radius
+                                                              child:
+                                                                  TextFormField(
+                                                                controller:
+                                                                    _siteController,
+                                                                decoration:
+                                                                    InputDecoration(
+                                                                  fillColor:
+                                                                      Colors
+                                                                          .white,
+                                                                  filled: true,
+                                                                  border:
+                                                                      OutlineInputBorder(
+                                                                    borderRadius:
+                                                                        BorderRadius
+                                                                            .circular(4),
+                                                                    borderSide:
+                                                                        const BorderSide(
+                                                                      color: Colors
+                                                                          .white,
+                                                                      width: 2,
+                                                                    ),
+                                                                  ),
+                                                                  enabledBorder:
+                                                                      OutlineInputBorder(
+                                                                    borderRadius:
+                                                                        BorderRadius
+                                                                            .circular(4),
+                                                                    borderSide:
+                                                                        const BorderSide(
+                                                                      color: Colors
+                                                                          .white,
+                                                                      width: 2,
+                                                                    ),
+                                                                  ),
+                                                                  focusedBorder:
+                                                                      OutlineInputBorder(
+                                                                    borderRadius:
+                                                                        BorderRadius
+                                                                            .circular(4),
+                                                                    borderSide:
+                                                                        const BorderSide(
+                                                                      color: Colors
+                                                                          .white,
+                                                                      width: 2,
+                                                                    ),
+                                                                  ),
+                                                                  errorBorder:
+                                                                      OutlineInputBorder(
+                                                                    borderRadius:
+                                                                        BorderRadius
+                                                                            .circular(4),
+                                                                    borderSide:
+                                                                        const BorderSide(
+                                                                      color: Colors
+                                                                          .red,
+                                                                      width: 2,
+                                                                    ),
+                                                                  ),
+                                                                  focusedErrorBorder:
+                                                                      OutlineInputBorder(
+                                                                    borderRadius:
+                                                                        BorderRadius
+                                                                            .circular(4),
+                                                                    borderSide:
+                                                                        const BorderSide(
+                                                                      color: Colors
+                                                                          .red,
+                                                                      width: 2,
+                                                                    ),
+                                                                  ),
+                                                                  contentPadding:
+                                                                      const EdgeInsets
+                                                                          .symmetric(
+                                                                    vertical: 5,
+                                                                    horizontal:
+                                                                        12,
+                                                                  ),
+                                                                  errorStyle:
+                                                                      const TextStyle(
+                                                                    color: Colors
+                                                                        .red,
+                                                                    fontSize:
+                                                                        12,
+                                                                  ),
+                                                                ),
+                                                                keyboardType:
+                                                                    TextInputType
+                                                                        .text, // Ensures numeric input
+                                                                onChanged:
+                                                                    (value) {
+                                                                  setState(() {
+                                                                    // Update the number of donors and the text controller
+                                                                    _siteController
+                                                                            .text =
+                                                                        value; // Manually update the controller text
+                                                                  });
+                                                                },
+                                                                validator:
+                                                                    (value) {
+                                                                  if (_siteController
+                                                                          .text ==
+                                                                      null) {
+                                                                    return 'Please enter a valid site name';
+                                                                  }
+                                                                  return null;
+                                                                },
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ],
+                                                ),
+                                                SizedBox(
+                                                  height: 15,
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: List.generate(
+                                                    60, // Adjust the number of dashes
+                                                    (index) => Container(
+                                                      width:
+                                                          4, // Width of each dash
+                                                      height:
+                                                          2, // Height of each dash (thickness)
+                                                      color: Colors
+                                                          .black, // Color of the dash
+                                                    ),
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  height: 15,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                              left: 0.0,
+                                              top: 15.0,
+                                              right: 0.0,
+                                            ),
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              children: [
+                                                Align(
+                                                  alignment: Alignment.topLeft,
+                                                  child: const Text(
+                                                    "Category 3",
+                                                    style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize: 13,
+                                                      color: Colors.black,
+                                                    ),
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  height: 5,
+                                                ),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          right: 0.0),
+                                                  child: Container(
+                                                    width: double.infinity,
+                                                    height: 40,
+                                                    child: Material(
+                                                      elevation:
+                                                          4, // Adjust this value for more or less elevation
+                                                      shadowColor: Colors.black
+                                                          .withOpacity(
+                                                              0.5), // Optional: Adjust shadow color
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              4), // Match with TextFormField's border radius
+                                                      child: TextFormField(
+                                                        controller:
+                                                            _siteController,
+                                                        decoration:
+                                                            InputDecoration(
+                                                          fillColor:
+                                                              Colors.white,
+                                                          filled: true,
+                                                          border:
+                                                              OutlineInputBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        4),
+                                                            borderSide:
+                                                                const BorderSide(
+                                                              color:
+                                                                  Colors.white,
+                                                              width: 2,
+                                                            ),
+                                                          ),
+                                                          enabledBorder:
+                                                              OutlineInputBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        4),
+                                                            borderSide:
+                                                                const BorderSide(
+                                                              color:
+                                                                  Colors.white,
+                                                              width: 2,
+                                                            ),
+                                                          ),
+                                                          focusedBorder:
+                                                              OutlineInputBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        4),
+                                                            borderSide:
+                                                                const BorderSide(
+                                                              color:
+                                                                  Colors.white,
+                                                              width: 2,
+                                                            ),
+                                                          ),
+                                                          errorBorder:
+                                                              OutlineInputBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        4),
+                                                            borderSide:
+                                                                const BorderSide(
+                                                              color: Colors.red,
+                                                              width: 2,
+                                                            ),
+                                                          ),
+                                                          focusedErrorBorder:
+                                                              OutlineInputBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        4),
+                                                            borderSide:
+                                                                const BorderSide(
+                                                              color: Colors.red,
+                                                              width: 2,
+                                                            ),
+                                                          ),
+                                                          contentPadding:
+                                                              const EdgeInsets
+                                                                  .symmetric(
+                                                            vertical: 5,
+                                                            horizontal: 12,
+                                                          ),
+                                                          errorStyle:
+                                                              const TextStyle(
+                                                            color: Colors.red,
+                                                            fontSize: 12,
+                                                          ),
+                                                        ),
+                                                        keyboardType: TextInputType
+                                                            .text, // Ensures numeric input
+                                                        onChanged: (value) {
+                                                          setState(() {
+                                                            // Update the number of donors and the text controller
+                                                            _siteController
+                                                                    .text =
+                                                                value; // Manually update the controller text
+                                                          });
+                                                        },
+                                                        validator: (value) {
+                                                          if (_siteController
+                                                                  .text ==
+                                                              null) {
+                                                            return 'Please enter a valid site name';
+                                                          }
+                                                          return null;
+                                                        },
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  height: 15,
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    Column(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .start,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Align(
+                                                          alignment:
+                                                              Alignment.topLeft,
+                                                          child: Text(
+                                                            "Limit (g/210L)",
+                                                            style: TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              fontSize: 13,
+                                                              color:
+                                                                  Colors.black,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        SizedBox(
+                                                          height: 10,
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .only(
+                                                                  right: 0.0),
+                                                          child: Container(
+                                                            width: 160,
+                                                            height: 40,
+                                                            child: Material(
+                                                              elevation:
+                                                                  4, // Adjust this value for more or less elevation
+                                                              shadowColor: Colors
+                                                                  .black
+                                                                  .withOpacity(
+                                                                      0.5), // Optional: Adjust shadow color
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          4), // Match with TextFormField's border radius
+                                                              child:
+                                                                  TextFormField(
+                                                                controller:
+                                                                    _siteController,
+                                                                decoration:
+                                                                    InputDecoration(
+                                                                  fillColor:
+                                                                      Colors
+                                                                          .white,
+                                                                  filled: true,
+                                                                  border:
+                                                                      OutlineInputBorder(
+                                                                    borderRadius:
+                                                                        BorderRadius
+                                                                            .circular(4),
+                                                                    borderSide:
+                                                                        const BorderSide(
+                                                                      color: Colors
+                                                                          .white,
+                                                                      width: 2,
+                                                                    ),
+                                                                  ),
+                                                                  enabledBorder:
+                                                                      OutlineInputBorder(
+                                                                    borderRadius:
+                                                                        BorderRadius
+                                                                            .circular(4),
+                                                                    borderSide:
+                                                                        const BorderSide(
+                                                                      color: Colors
+                                                                          .white,
+                                                                      width: 2,
+                                                                    ),
+                                                                  ),
+                                                                  focusedBorder:
+                                                                      OutlineInputBorder(
+                                                                    borderRadius:
+                                                                        BorderRadius
+                                                                            .circular(4),
+                                                                    borderSide:
+                                                                        const BorderSide(
+                                                                      color: Colors
+                                                                          .white,
+                                                                      width: 2,
+                                                                    ),
+                                                                  ),
+                                                                  errorBorder:
+                                                                      OutlineInputBorder(
+                                                                    borderRadius:
+                                                                        BorderRadius
+                                                                            .circular(4),
+                                                                    borderSide:
+                                                                        const BorderSide(
+                                                                      color: Colors
+                                                                          .red,
+                                                                      width: 2,
+                                                                    ),
+                                                                  ),
+                                                                  focusedErrorBorder:
+                                                                      OutlineInputBorder(
+                                                                    borderRadius:
+                                                                        BorderRadius
+                                                                            .circular(4),
+                                                                    borderSide:
+                                                                        const BorderSide(
+                                                                      color: Colors
+                                                                          .red,
+                                                                      width: 2,
+                                                                    ),
+                                                                  ),
+                                                                  contentPadding:
+                                                                      const EdgeInsets
+                                                                          .symmetric(
+                                                                    vertical: 5,
+                                                                    horizontal:
+                                                                        12,
+                                                                  ),
+                                                                  errorStyle:
+                                                                      const TextStyle(
+                                                                    color: Colors
+                                                                        .red,
+                                                                    fontSize:
+                                                                        12,
+                                                                  ),
+                                                                ),
+                                                                keyboardType:
+                                                                    TextInputType
+                                                                        .text, // Ensures numeric input
+                                                                onChanged:
+                                                                    (value) {
+                                                                  setState(() {
+                                                                    // Update the number of donors and the text controller
+                                                                    _siteController
+                                                                            .text =
+                                                                        value; // Manually update the controller text
+                                                                  });
+                                                                },
+                                                                validator:
+                                                                    (value) {
+                                                                  if (_siteController
+                                                                          .text ==
+                                                                      null) {
+                                                                    return 'Please enter a valid site name';
+                                                                  }
+                                                                  return null;
+                                                                },
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    Column(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .start,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Align(
+                                                          alignment:
+                                                              Alignment.topLeft,
+                                                          child: Text(
+                                                            "Sit Out Time (minutes)",
+                                                            style: TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              fontSize: 13,
+                                                              color:
+                                                                  Colors.black,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        SizedBox(
+                                                          height: 10,
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .only(
+                                                                  right: 0.0),
+                                                          child: Container(
+                                                            width: 160,
+                                                            height: 40,
+                                                            child: Material(
+                                                              elevation:
+                                                                  4, // Adjust this value for more or less elevation
+                                                              shadowColor: Colors
+                                                                  .black
+                                                                  .withOpacity(
+                                                                      0.5), // Optional: Adjust shadow color
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          4), // Match with TextFormField's border radius
+                                                              child:
+                                                                  TextFormField(
+                                                                controller:
+                                                                    _siteController,
+                                                                decoration:
+                                                                    InputDecoration(
+                                                                  fillColor:
+                                                                      Colors
+                                                                          .white,
+                                                                  filled: true,
+                                                                  border:
+                                                                      OutlineInputBorder(
+                                                                    borderRadius:
+                                                                        BorderRadius
+                                                                            .circular(4),
+                                                                    borderSide:
+                                                                        const BorderSide(
+                                                                      color: Colors
+                                                                          .white,
+                                                                      width: 2,
+                                                                    ),
+                                                                  ),
+                                                                  enabledBorder:
+                                                                      OutlineInputBorder(
+                                                                    borderRadius:
+                                                                        BorderRadius
+                                                                            .circular(4),
+                                                                    borderSide:
+                                                                        const BorderSide(
+                                                                      color: Colors
+                                                                          .white,
+                                                                      width: 2,
+                                                                    ),
+                                                                  ),
+                                                                  focusedBorder:
+                                                                      OutlineInputBorder(
+                                                                    borderRadius:
+                                                                        BorderRadius
+                                                                            .circular(4),
+                                                                    borderSide:
+                                                                        const BorderSide(
+                                                                      color: Colors
+                                                                          .white,
+                                                                      width: 2,
+                                                                    ),
+                                                                  ),
+                                                                  errorBorder:
+                                                                      OutlineInputBorder(
+                                                                    borderRadius:
+                                                                        BorderRadius
+                                                                            .circular(4),
+                                                                    borderSide:
+                                                                        const BorderSide(
+                                                                      color: Colors
+                                                                          .red,
+                                                                      width: 2,
+                                                                    ),
+                                                                  ),
+                                                                  focusedErrorBorder:
+                                                                      OutlineInputBorder(
+                                                                    borderRadius:
+                                                                        BorderRadius
+                                                                            .circular(4),
+                                                                    borderSide:
+                                                                        const BorderSide(
+                                                                      color: Colors
+                                                                          .red,
+                                                                      width: 2,
+                                                                    ),
+                                                                  ),
+                                                                  contentPadding:
+                                                                      const EdgeInsets
+                                                                          .symmetric(
+                                                                    vertical: 5,
+                                                                    horizontal:
+                                                                        12,
+                                                                  ),
+                                                                  errorStyle:
+                                                                      const TextStyle(
+                                                                    color: Colors
+                                                                        .red,
+                                                                    fontSize:
+                                                                        12,
+                                                                  ),
+                                                                ),
+                                                                keyboardType:
+                                                                    TextInputType
+                                                                        .text, // Ensures numeric input
+                                                                onChanged:
+                                                                    (value) {
+                                                                  setState(() {
+                                                                    // Update the number of donors and the text controller
+                                                                    _siteController
+                                                                            .text =
+                                                                        value; // Manually update the controller text
+                                                                  });
+                                                                },
+                                                                validator:
+                                                                    (value) {
+                                                                  if (_siteController
+                                                                          .text ==
+                                                                      null) {
+                                                                    return 'Please enter a valid site name';
+                                                                  }
+                                                                  return null;
+                                                                },
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ],
+                                                ),
+                                                SizedBox(
+                                                  height: 15,
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: List.generate(
+                                                    60, // Adjust the number of dashes
+                                                    (index) => Container(
+                                                      width:
+                                                          4, // Width of each dash
+                                                      height:
+                                                          2, // Height of each dash (thickness)
+                                                      color: Colors
+                                                          .black, // Color of the dash
+                                                    ),
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  height: 15,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              // Left-aligned title
+                                              Row(
+                                                children: [
+                                                  Text(
+                                                    "Drug Test Specifications",
+                                                    style: TextStyle(
+                                                      fontSize: 17,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                              left: 0.0,
+                                              top: 15.0,
+                                              right: 0.0,
+                                            ),
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              children: [
+                                                Align(
+                                                  alignment: Alignment.topLeft,
+                                                  child: const Text(
+                                                    "Primary Drug Test",
+                                                    style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize: 13,
+                                                      color: Colors.black,
+                                                    ),
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  height: 5,
+                                                ),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          right: 0.0),
+                                                  child: Container(
+                                                    width: double.infinity,
+                                                    height: 40,
+                                                    child: Material(
+                                                      elevation:
+                                                          4, // Adjust this value for more or less elevation
+                                                      shadowColor: Colors.black
+                                                          .withOpacity(
+                                                              0.5), // Optional: Adjust shadow color
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              4), // Match with TextFormField's border radius
+                                                      child: TextFormField(
+                                                        controller:
+                                                            _siteController,
+                                                        decoration:
+                                                            InputDecoration(
+                                                          fillColor:
+                                                              Colors.white,
+                                                          filled: true,
+                                                          border:
+                                                              OutlineInputBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        4),
+                                                            borderSide:
+                                                                const BorderSide(
+                                                              color:
+                                                                  Colors.white,
+                                                              width: 2,
+                                                            ),
+                                                          ),
+                                                          enabledBorder:
+                                                              OutlineInputBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        4),
+                                                            borderSide:
+                                                                const BorderSide(
+                                                              color:
+                                                                  Colors.white,
+                                                              width: 2,
+                                                            ),
+                                                          ),
+                                                          focusedBorder:
+                                                              OutlineInputBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        4),
+                                                            borderSide:
+                                                                const BorderSide(
+                                                              color:
+                                                                  Colors.white,
+                                                              width: 2,
+                                                            ),
+                                                          ),
+                                                          errorBorder:
+                                                              OutlineInputBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        4),
+                                                            borderSide:
+                                                                const BorderSide(
+                                                              color: Colors.red,
+                                                              width: 2,
+                                                            ),
+                                                          ),
+                                                          focusedErrorBorder:
+                                                              OutlineInputBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        4),
+                                                            borderSide:
+                                                                const BorderSide(
+                                                              color: Colors.red,
+                                                              width: 2,
+                                                            ),
+                                                          ),
+                                                          contentPadding:
+                                                              const EdgeInsets
+                                                                  .symmetric(
+                                                            vertical: 5,
+                                                            horizontal: 12,
+                                                          ),
+                                                          errorStyle:
+                                                              const TextStyle(
+                                                            color: Colors.red,
+                                                            fontSize: 12,
+                                                          ),
+                                                        ),
+                                                        keyboardType: TextInputType
+                                                            .text, // Ensures numeric input
+                                                        onChanged: (value) {
+                                                          setState(() {
+                                                            // Update the number of donors and the text controller
+                                                            _siteController
+                                                                    .text =
+                                                                value; // Manually update the controller text
+                                                          });
+                                                        },
+                                                        validator: (value) {
+                                                          if (_siteController
+                                                                  .text ==
+                                                              null) {
+                                                            return 'Please enter a valid site name';
+                                                          }
+                                                          return null;
+                                                        },
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 15,
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                              left: 0.0,
+                                              top: 15.0,
+                                              right: 0.0,
+                                            ),
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              children: [
+                                                Align(
+                                                  alignment: Alignment.topLeft,
+                                                  child: const Text(
+                                                    "Select Preferred Device",
+                                                    style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize: 13,
+                                                      color: Colors.black,
+                                                    ),
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  height: 5,
+                                                ),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          right: 0.0),
+                                                  child: Container(
+                                                    width: double.infinity,
+                                                    height: 40,
+                                                    child: Material(
+                                                      elevation:
+                                                          4, // Adjust this value for more or less elevation
+                                                      shadowColor: Colors.black
+                                                          .withOpacity(
+                                                              0.5), // Optional: Adjust shadow color
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              4), // Match with TextFormField's border radius
+                                                      child: TextFormField(
+                                                        controller:
+                                                            _siteController,
+                                                        decoration:
+                                                            InputDecoration(
+                                                          fillColor:
+                                                              Colors.white,
+                                                          filled: true,
+                                                          border:
+                                                              OutlineInputBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        4),
+                                                            borderSide:
+                                                                const BorderSide(
+                                                              color:
+                                                                  Colors.white,
+                                                              width: 2,
+                                                            ),
+                                                          ),
+                                                          enabledBorder:
+                                                              OutlineInputBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        4),
+                                                            borderSide:
+                                                                const BorderSide(
+                                                              color:
+                                                                  Colors.white,
+                                                              width: 2,
+                                                            ),
+                                                          ),
+                                                          focusedBorder:
+                                                              OutlineInputBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        4),
+                                                            borderSide:
+                                                                const BorderSide(
+                                                              color:
+                                                                  Colors.white,
+                                                              width: 2,
+                                                            ),
+                                                          ),
+                                                          errorBorder:
+                                                              OutlineInputBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        4),
+                                                            borderSide:
+                                                                const BorderSide(
+                                                              color: Colors.red,
+                                                              width: 2,
+                                                            ),
+                                                          ),
+                                                          focusedErrorBorder:
+                                                              OutlineInputBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        4),
+                                                            borderSide:
+                                                                const BorderSide(
+                                                              color: Colors.red,
+                                                              width: 2,
+                                                            ),
+                                                          ),
+                                                          contentPadding:
+                                                              const EdgeInsets
+                                                                  .symmetric(
+                                                            vertical: 5,
+                                                            horizontal: 12,
+                                                          ),
+                                                          errorStyle:
+                                                              const TextStyle(
+                                                            color: Colors.red,
+                                                            fontSize: 12,
+                                                          ),
+                                                        ),
+                                                        keyboardType: TextInputType
+                                                            .text, // Ensures numeric input
+                                                        onChanged: (value) {
+                                                          setState(() {
+                                                            // Update the number of donors and the text controller
+                                                            _siteController
+                                                                    .text =
+                                                                value; // Manually update the controller text
+                                                          });
+                                                        },
+                                                        validator: (value) {
+                                                          if (_siteController
+                                                                  .text ==
+                                                              null) {
+                                                            return 'Please enter a valid site name';
+                                                          }
+                                                          return null;
+                                                        },
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 25,
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: List.generate(
+                                              60, // Adjust the number of dashes
+                                              (index) => Container(
+                                                width: 4, // Width of each dash
+                                                height:
+                                                    2, // Height of each dash (thickness)
+                                                color: Colors
+                                                    .black, // Color of the dash
+                                              ),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 15,
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                              left: 0.0,
+                                              top: 15.0,
+                                              right: 0.0,
+                                            ),
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              children: [
+                                                Align(
+                                                  alignment: Alignment.topLeft,
+                                                  child: const Text(
+                                                    "Secondary Drug Test",
+                                                    style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize: 13,
+                                                      color: Colors.black,
+                                                    ),
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  height: 5,
+                                                ),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          right: 0.0),
+                                                  child: Container(
+                                                    width: double.infinity,
+                                                    height: 40,
+                                                    child: Material(
+                                                      elevation:
+                                                          4, // Adjust this value for more or less elevation
+                                                      shadowColor: Colors.black
+                                                          .withOpacity(
+                                                              0.5), // Optional: Adjust shadow color
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              4), // Match with TextFormField's border radius
+                                                      child: TextFormField(
+                                                        controller:
+                                                            _siteController,
+                                                        decoration:
+                                                            InputDecoration(
+                                                          fillColor:
+                                                              Colors.white,
+                                                          filled: true,
+                                                          border:
+                                                              OutlineInputBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        4),
+                                                            borderSide:
+                                                                const BorderSide(
+                                                              color:
+                                                                  Colors.white,
+                                                              width: 2,
+                                                            ),
+                                                          ),
+                                                          enabledBorder:
+                                                              OutlineInputBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        4),
+                                                            borderSide:
+                                                                const BorderSide(
+                                                              color:
+                                                                  Colors.white,
+                                                              width: 2,
+                                                            ),
+                                                          ),
+                                                          focusedBorder:
+                                                              OutlineInputBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        4),
+                                                            borderSide:
+                                                                const BorderSide(
+                                                              color:
+                                                                  Colors.white,
+                                                              width: 2,
+                                                            ),
+                                                          ),
+                                                          errorBorder:
+                                                              OutlineInputBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        4),
+                                                            borderSide:
+                                                                const BorderSide(
+                                                              color: Colors.red,
+                                                              width: 2,
+                                                            ),
+                                                          ),
+                                                          focusedErrorBorder:
+                                                              OutlineInputBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        4),
+                                                            borderSide:
+                                                                const BorderSide(
+                                                              color: Colors.red,
+                                                              width: 2,
+                                                            ),
+                                                          ),
+                                                          contentPadding:
+                                                              const EdgeInsets
+                                                                  .symmetric(
+                                                            vertical: 5,
+                                                            horizontal: 12,
+                                                          ),
+                                                          errorStyle:
+                                                              const TextStyle(
+                                                            color: Colors.red,
+                                                            fontSize: 12,
+                                                          ),
+                                                        ),
+                                                        keyboardType: TextInputType
+                                                            .text, // Ensures numeric input
+                                                        onChanged: (value) {
+                                                          setState(() {
+                                                            // Update the number of donors and the text controller
+                                                            _siteController
+                                                                    .text =
+                                                                value; // Manually update the controller text
+                                                          });
+                                                        },
+                                                        validator: (value) {
+                                                          if (_siteController
+                                                                  .text ==
+                                                              null) {
+                                                            return 'Please enter a valid site name';
+                                                          }
+                                                          return null;
+                                                        },
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 15,
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                              left: 0.0,
+                                              top: 15.0,
+                                              right: 0.0,
+                                            ),
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              children: [
+                                                Align(
+                                                  alignment: Alignment.topLeft,
+                                                  child: const Text(
+                                                    "Select Preferred Device",
+                                                    style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize: 13,
+                                                      color: Colors.black,
+                                                    ),
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  height: 5,
+                                                ),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          right: 0.0),
+                                                  child: Container(
+                                                    width: double.infinity,
+                                                    height: 40,
+                                                    child: Material(
+                                                      elevation:
+                                                          4, // Adjust this value for more or less elevation
+                                                      shadowColor: Colors.black
+                                                          .withOpacity(
+                                                              0.5), // Optional: Adjust shadow color
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              4), // Match with TextFormField's border radius
+                                                      child: TextFormField(
+                                                        controller:
+                                                            _siteController,
+                                                        decoration:
+                                                            InputDecoration(
+                                                          fillColor:
+                                                              Colors.white,
+                                                          filled: true,
+                                                          border:
+                                                              OutlineInputBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        4),
+                                                            borderSide:
+                                                                const BorderSide(
+                                                              color:
+                                                                  Colors.white,
+                                                              width: 2,
+                                                            ),
+                                                          ),
+                                                          enabledBorder:
+                                                              OutlineInputBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        4),
+                                                            borderSide:
+                                                                const BorderSide(
+                                                              color:
+                                                                  Colors.white,
+                                                              width: 2,
+                                                            ),
+                                                          ),
+                                                          focusedBorder:
+                                                              OutlineInputBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        4),
+                                                            borderSide:
+                                                                const BorderSide(
+                                                              color:
+                                                                  Colors.white,
+                                                              width: 2,
+                                                            ),
+                                                          ),
+                                                          errorBorder:
+                                                              OutlineInputBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        4),
+                                                            borderSide:
+                                                                const BorderSide(
+                                                              color: Colors.red,
+                                                              width: 2,
+                                                            ),
+                                                          ),
+                                                          focusedErrorBorder:
+                                                              OutlineInputBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        4),
+                                                            borderSide:
+                                                                const BorderSide(
+                                                              color: Colors.red,
+                                                              width: 2,
+                                                            ),
+                                                          ),
+                                                          contentPadding:
+                                                              const EdgeInsets
+                                                                  .symmetric(
+                                                            vertical: 5,
+                                                            horizontal: 12,
+                                                          ),
+                                                          errorStyle:
+                                                              const TextStyle(
+                                                            color: Colors.red,
+                                                            fontSize: 12,
+                                                          ),
+                                                        ),
+                                                        keyboardType: TextInputType
+                                                            .text, // Ensures numeric input
+                                                        onChanged: (value) {
+                                                          setState(() {
+                                                            // Update the number of donors and the text controller
+                                                            _siteController
+                                                                    .text =
+                                                                value; // Manually update the controller text
+                                                          });
+                                                        },
+                                                        validator: (value) {
+                                                          if (_siteController
+                                                                  .text ==
+                                                              null) {
+                                                            return 'Please enter a valid site name';
+                                                          }
+                                                          return null;
+                                                        },
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 25,
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: List.generate(
+                                              60, // Adjust the number of dashes
+                                              (index) => Container(
+                                                width: 4, // Width of each dash
+                                                height:
+                                                    2, // Height of each dash (thickness)
+                                                color: Colors
+                                                    .black, // Color of the dash
+                                              ),
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                              left: 0.0,
+                                              top: 15.0,
+                                              right: 0.0,
+                                            ),
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              children: [
+                                                Align(
+                                                  alignment: Alignment.topLeft,
+                                                  child: const Text(
+                                                    "Teritory Drug Test",
+                                                    style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize: 13,
+                                                      color: Colors.black,
+                                                    ),
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  height: 5,
+                                                ),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          right: 0.0),
+                                                  child: Container(
+                                                    width: double.infinity,
+                                                    height: 40,
+                                                    child: Material(
+                                                      elevation:
+                                                          4, // Adjust this value for more or less elevation
+                                                      shadowColor: Colors.black
+                                                          .withOpacity(
+                                                              0.5), // Optional: Adjust shadow color
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              4), // Match with TextFormField's border radius
+                                                      child: TextFormField(
+                                                        controller:
+                                                            _siteController,
+                                                        decoration:
+                                                            InputDecoration(
+                                                          fillColor:
+                                                              Colors.white,
+                                                          filled: true,
+                                                          border:
+                                                              OutlineInputBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        4),
+                                                            borderSide:
+                                                                const BorderSide(
+                                                              color:
+                                                                  Colors.white,
+                                                              width: 2,
+                                                            ),
+                                                          ),
+                                                          enabledBorder:
+                                                              OutlineInputBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        4),
+                                                            borderSide:
+                                                                const BorderSide(
+                                                              color:
+                                                                  Colors.white,
+                                                              width: 2,
+                                                            ),
+                                                          ),
+                                                          focusedBorder:
+                                                              OutlineInputBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        4),
+                                                            borderSide:
+                                                                const BorderSide(
+                                                              color:
+                                                                  Colors.white,
+                                                              width: 2,
+                                                            ),
+                                                          ),
+                                                          errorBorder:
+                                                              OutlineInputBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        4),
+                                                            borderSide:
+                                                                const BorderSide(
+                                                              color: Colors.red,
+                                                              width: 2,
+                                                            ),
+                                                          ),
+                                                          focusedErrorBorder:
+                                                              OutlineInputBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        4),
+                                                            borderSide:
+                                                                const BorderSide(
+                                                              color: Colors.red,
+                                                              width: 2,
+                                                            ),
+                                                          ),
+                                                          contentPadding:
+                                                              const EdgeInsets
+                                                                  .symmetric(
+                                                            vertical: 5,
+                                                            horizontal: 12,
+                                                          ),
+                                                          errorStyle:
+                                                              const TextStyle(
+                                                            color: Colors.red,
+                                                            fontSize: 12,
+                                                          ),
+                                                        ),
+                                                        keyboardType: TextInputType
+                                                            .text, // Ensures numeric input
+                                                        onChanged: (value) {
+                                                          setState(() {
+                                                            // Update the number of donors and the text controller
+                                                            _siteController
+                                                                    .text =
+                                                                value; // Manually update the controller text
+                                                          });
+                                                        },
+                                                        validator: (value) {
+                                                          if (_siteController
+                                                                  .text ==
+                                                              null) {
+                                                            return 'Please enter a valid site name';
+                                                          }
+                                                          return null;
+                                                        },
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 15,
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                              left: 0.0,
+                                              top: 15.0,
+                                              right: 0.0,
+                                            ),
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              children: [
+                                                Align(
+                                                  alignment: Alignment.topLeft,
+                                                  child: const Text(
+                                                    "Select Preferred Device",
+                                                    style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize: 13,
+                                                      color: Colors.black,
+                                                    ),
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  height: 5,
+                                                ),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          right: 0.0),
+                                                  child: Container(
+                                                    width: double.infinity,
+                                                    height: 40,
+                                                    child: Material(
+                                                      elevation:
+                                                          4, // Adjust this value for more or less elevation
+                                                      shadowColor: Colors.black
+                                                          .withOpacity(
+                                                              0.5), // Optional: Adjust shadow color
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              4), // Match with TextFormField's border radius
+                                                      child: TextFormField(
+                                                        controller:
+                                                            _siteController,
+                                                        decoration:
+                                                            InputDecoration(
+                                                          fillColor:
+                                                              Colors.white,
+                                                          filled: true,
+                                                          border:
+                                                              OutlineInputBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        4),
+                                                            borderSide:
+                                                                const BorderSide(
+                                                              color:
+                                                                  Colors.white,
+                                                              width: 2,
+                                                            ),
+                                                          ),
+                                                          enabledBorder:
+                                                              OutlineInputBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        4),
+                                                            borderSide:
+                                                                const BorderSide(
+                                                              color:
+                                                                  Colors.white,
+                                                              width: 2,
+                                                            ),
+                                                          ),
+                                                          focusedBorder:
+                                                              OutlineInputBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        4),
+                                                            borderSide:
+                                                                const BorderSide(
+                                                              color:
+                                                                  Colors.white,
+                                                              width: 2,
+                                                            ),
+                                                          ),
+                                                          errorBorder:
+                                                              OutlineInputBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        4),
+                                                            borderSide:
+                                                                const BorderSide(
+                                                              color: Colors.red,
+                                                              width: 2,
+                                                            ),
+                                                          ),
+                                                          focusedErrorBorder:
+                                                              OutlineInputBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        4),
+                                                            borderSide:
+                                                                const BorderSide(
+                                                              color: Colors.red,
+                                                              width: 2,
+                                                            ),
+                                                          ),
+                                                          contentPadding:
+                                                              const EdgeInsets
+                                                                  .symmetric(
+                                                            vertical: 5,
+                                                            horizontal: 12,
+                                                          ),
+                                                          errorStyle:
+                                                              const TextStyle(
+                                                            color: Colors.red,
+                                                            fontSize: 12,
+                                                          ),
+                                                        ),
+                                                        keyboardType: TextInputType
+                                                            .text, // Ensures numeric input
+                                                        onChanged: (value) {
+                                                          setState(() {
+                                                            // Update the number of donors and the text controller
+                                                            _siteController
+                                                                    .text =
+                                                                value; // Manually update the controller text
+                                                          });
+                                                        },
+                                                        validator: (value) {
+                                                          if (_siteController
+                                                                  .text ==
+                                                              null) {
+                                                            return 'Please enter a valid site name';
+                                                          }
+                                                          return null;
+                                                        },
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 25,
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: List.generate(
+                                              60, // Adjust the number of dashes
+                                              (index) => Container(
+                                                width: 4, // Width of each dash
+                                                height:
+                                                    2, // Height of each dash (thickness)
+                                                color: Colors
+                                                    .black, // Color of the dash
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    )
+                                  : _testsType == TestsType.DrugOnly
+                                      ? Container(
+                                          child: Column(
+                                            children: [
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  // Left-aligned title
+                                                  Row(
+                                                    children: [
+                                                      Text(
+                                                        "Drug Test Specifications",
+                                                        style: TextStyle(
+                                                          fontSize: 17,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                  left: 0.0,
+                                                  top: 15.0,
+                                                  right: 0.0,
+                                                ),
+                                                child: Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  children: [
+                                                    Align(
+                                                      alignment:
+                                                          Alignment.topLeft,
+                                                      child: const Text(
+                                                        "Primary Drug Test",
+                                                        style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontSize: 13,
+                                                          color: Colors.black,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 5,
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              right: 0.0),
+                                                      child: Container(
+                                                        width: double.infinity,
+                                                        height: 40,
+                                                        child: Material(
+                                                          elevation:
+                                                              4, // Adjust this value for more or less elevation
+                                                          shadowColor: Colors
+                                                              .black
+                                                              .withOpacity(
+                                                                  0.5), // Optional: Adjust shadow color
+                                                          borderRadius:
+                                                              BorderRadius.circular(
+                                                                  4), // Match with TextFormField's border radius
+                                                          child: TextFormField(
+                                                            controller:
+                                                                _siteController,
+                                                            decoration:
+                                                                InputDecoration(
+                                                              fillColor:
+                                                                  Colors.white,
+                                                              filled: true,
+                                                              border:
+                                                                  OutlineInputBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            4),
+                                                                borderSide:
+                                                                    const BorderSide(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  width: 2,
+                                                                ),
+                                                              ),
+                                                              enabledBorder:
+                                                                  OutlineInputBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            4),
+                                                                borderSide:
+                                                                    const BorderSide(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  width: 2,
+                                                                ),
+                                                              ),
+                                                              focusedBorder:
+                                                                  OutlineInputBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            4),
+                                                                borderSide:
+                                                                    const BorderSide(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  width: 2,
+                                                                ),
+                                                              ),
+                                                              errorBorder:
+                                                                  OutlineInputBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            4),
+                                                                borderSide:
+                                                                    const BorderSide(
+                                                                  color: Colors
+                                                                      .red,
+                                                                  width: 2,
+                                                                ),
+                                                              ),
+                                                              focusedErrorBorder:
+                                                                  OutlineInputBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            4),
+                                                                borderSide:
+                                                                    const BorderSide(
+                                                                  color: Colors
+                                                                      .red,
+                                                                  width: 2,
+                                                                ),
+                                                              ),
+                                                              contentPadding:
+                                                                  const EdgeInsets
+                                                                      .symmetric(
+                                                                vertical: 5,
+                                                                horizontal: 12,
+                                                              ),
+                                                              errorStyle:
+                                                                  const TextStyle(
+                                                                color:
+                                                                    Colors.red,
+                                                                fontSize: 12,
+                                                              ),
+                                                            ),
+                                                            keyboardType:
+                                                                TextInputType
+                                                                    .text, // Ensures numeric input
+                                                            onChanged: (value) {
+                                                              setState(() {
+                                                                // Update the number of donors and the text controller
+                                                                _siteController
+                                                                        .text =
+                                                                    value; // Manually update the controller text
+                                                              });
+                                                            },
+                                                            validator: (value) {
+                                                              if (_siteController
+                                                                      .text ==
+                                                                  null) {
+                                                                return 'Please enter a valid site name';
+                                                              }
+                                                              return null;
+                                                            },
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 15,
+                                              ),
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                  left: 0.0,
+                                                  top: 15.0,
+                                                  right: 0.0,
+                                                ),
+                                                child: Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  children: [
+                                                    Align(
+                                                      alignment:
+                                                          Alignment.topLeft,
+                                                      child: const Text(
+                                                        "Select Preferred Device",
+                                                        style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontSize: 13,
+                                                          color: Colors.black,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 5,
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              right: 0.0),
+                                                      child: Container(
+                                                        width: double.infinity,
+                                                        height: 40,
+                                                        child: Material(
+                                                          elevation:
+                                                              4, // Adjust this value for more or less elevation
+                                                          shadowColor: Colors
+                                                              .black
+                                                              .withOpacity(
+                                                                  0.5), // Optional: Adjust shadow color
+                                                          borderRadius:
+                                                              BorderRadius.circular(
+                                                                  4), // Match with TextFormField's border radius
+                                                          child: TextFormField(
+                                                            controller:
+                                                                _siteController,
+                                                            decoration:
+                                                                InputDecoration(
+                                                              fillColor:
+                                                                  Colors.white,
+                                                              filled: true,
+                                                              border:
+                                                                  OutlineInputBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            4),
+                                                                borderSide:
+                                                                    const BorderSide(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  width: 2,
+                                                                ),
+                                                              ),
+                                                              enabledBorder:
+                                                                  OutlineInputBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            4),
+                                                                borderSide:
+                                                                    const BorderSide(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  width: 2,
+                                                                ),
+                                                              ),
+                                                              focusedBorder:
+                                                                  OutlineInputBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            4),
+                                                                borderSide:
+                                                                    const BorderSide(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  width: 2,
+                                                                ),
+                                                              ),
+                                                              errorBorder:
+                                                                  OutlineInputBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            4),
+                                                                borderSide:
+                                                                    const BorderSide(
+                                                                  color: Colors
+                                                                      .red,
+                                                                  width: 2,
+                                                                ),
+                                                              ),
+                                                              focusedErrorBorder:
+                                                                  OutlineInputBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            4),
+                                                                borderSide:
+                                                                    const BorderSide(
+                                                                  color: Colors
+                                                                      .red,
+                                                                  width: 2,
+                                                                ),
+                                                              ),
+                                                              contentPadding:
+                                                                  const EdgeInsets
+                                                                      .symmetric(
+                                                                vertical: 5,
+                                                                horizontal: 12,
+                                                              ),
+                                                              errorStyle:
+                                                                  const TextStyle(
+                                                                color:
+                                                                    Colors.red,
+                                                                fontSize: 12,
+                                                              ),
+                                                            ),
+                                                            keyboardType:
+                                                                TextInputType
+                                                                    .text, // Ensures numeric input
+                                                            onChanged: (value) {
+                                                              setState(() {
+                                                                // Update the number of donors and the text controller
+                                                                _siteController
+                                                                        .text =
+                                                                    value; // Manually update the controller text
+                                                              });
+                                                            },
+                                                            validator: (value) {
+                                                              if (_siteController
+                                                                      .text ==
+                                                                  null) {
+                                                                return 'Please enter a valid site name';
+                                                              }
+                                                              return null;
+                                                            },
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 25,
+                                              ),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: List.generate(
+                                                  60, // Adjust the number of dashes
+                                                  (index) => Container(
+                                                    width:
+                                                        4, // Width of each dash
+                                                    height:
+                                                        2, // Height of each dash (thickness)
+                                                    color: Colors
+                                                        .black, // Color of the dash
+                                                  ),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 15,
+                                              ),
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                  left: 0.0,
+                                                  top: 15.0,
+                                                  right: 0.0,
+                                                ),
+                                                child: Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  children: [
+                                                    Align(
+                                                      alignment:
+                                                          Alignment.topLeft,
+                                                      child: const Text(
+                                                        "Secondary Drug Test",
+                                                        style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontSize: 13,
+                                                          color: Colors.black,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 5,
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              right: 0.0),
+                                                      child: Container(
+                                                        width: double.infinity,
+                                                        height: 40,
+                                                        child: Material(
+                                                          elevation:
+                                                              4, // Adjust this value for more or less elevation
+                                                          shadowColor: Colors
+                                                              .black
+                                                              .withOpacity(
+                                                                  0.5), // Optional: Adjust shadow color
+                                                          borderRadius:
+                                                              BorderRadius.circular(
+                                                                  4), // Match with TextFormField's border radius
+                                                          child: TextFormField(
+                                                            controller:
+                                                                _siteController,
+                                                            decoration:
+                                                                InputDecoration(
+                                                              fillColor:
+                                                                  Colors.white,
+                                                              filled: true,
+                                                              border:
+                                                                  OutlineInputBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            4),
+                                                                borderSide:
+                                                                    const BorderSide(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  width: 2,
+                                                                ),
+                                                              ),
+                                                              enabledBorder:
+                                                                  OutlineInputBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            4),
+                                                                borderSide:
+                                                                    const BorderSide(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  width: 2,
+                                                                ),
+                                                              ),
+                                                              focusedBorder:
+                                                                  OutlineInputBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            4),
+                                                                borderSide:
+                                                                    const BorderSide(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  width: 2,
+                                                                ),
+                                                              ),
+                                                              errorBorder:
+                                                                  OutlineInputBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            4),
+                                                                borderSide:
+                                                                    const BorderSide(
+                                                                  color: Colors
+                                                                      .red,
+                                                                  width: 2,
+                                                                ),
+                                                              ),
+                                                              focusedErrorBorder:
+                                                                  OutlineInputBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            4),
+                                                                borderSide:
+                                                                    const BorderSide(
+                                                                  color: Colors
+                                                                      .red,
+                                                                  width: 2,
+                                                                ),
+                                                              ),
+                                                              contentPadding:
+                                                                  const EdgeInsets
+                                                                      .symmetric(
+                                                                vertical: 5,
+                                                                horizontal: 12,
+                                                              ),
+                                                              errorStyle:
+                                                                  const TextStyle(
+                                                                color:
+                                                                    Colors.red,
+                                                                fontSize: 12,
+                                                              ),
+                                                            ),
+                                                            keyboardType:
+                                                                TextInputType
+                                                                    .text, // Ensures numeric input
+                                                            onChanged: (value) {
+                                                              setState(() {
+                                                                // Update the number of donors and the text controller
+                                                                _siteController
+                                                                        .text =
+                                                                    value; // Manually update the controller text
+                                                              });
+                                                            },
+                                                            validator: (value) {
+                                                              if (_siteController
+                                                                      .text ==
+                                                                  null) {
+                                                                return 'Please enter a valid site name';
+                                                              }
+                                                              return null;
+                                                            },
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 15,
+                                              ),
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                  left: 0.0,
+                                                  top: 15.0,
+                                                  right: 0.0,
+                                                ),
+                                                child: Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  children: [
+                                                    Align(
+                                                      alignment:
+                                                          Alignment.topLeft,
+                                                      child: const Text(
+                                                        "Select Preferred Device",
+                                                        style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontSize: 13,
+                                                          color: Colors.black,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 5,
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              right: 0.0),
+                                                      child: Container(
+                                                        width: double.infinity,
+                                                        height: 40,
+                                                        child: Material(
+                                                          elevation:
+                                                              4, // Adjust this value for more or less elevation
+                                                          shadowColor: Colors
+                                                              .black
+                                                              .withOpacity(
+                                                                  0.5), // Optional: Adjust shadow color
+                                                          borderRadius:
+                                                              BorderRadius.circular(
+                                                                  4), // Match with TextFormField's border radius
+                                                          child: TextFormField(
+                                                            controller:
+                                                                _siteController,
+                                                            decoration:
+                                                                InputDecoration(
+                                                              fillColor:
+                                                                  Colors.white,
+                                                              filled: true,
+                                                              border:
+                                                                  OutlineInputBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            4),
+                                                                borderSide:
+                                                                    const BorderSide(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  width: 2,
+                                                                ),
+                                                              ),
+                                                              enabledBorder:
+                                                                  OutlineInputBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            4),
+                                                                borderSide:
+                                                                    const BorderSide(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  width: 2,
+                                                                ),
+                                                              ),
+                                                              focusedBorder:
+                                                                  OutlineInputBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            4),
+                                                                borderSide:
+                                                                    const BorderSide(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  width: 2,
+                                                                ),
+                                                              ),
+                                                              errorBorder:
+                                                                  OutlineInputBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            4),
+                                                                borderSide:
+                                                                    const BorderSide(
+                                                                  color: Colors
+                                                                      .red,
+                                                                  width: 2,
+                                                                ),
+                                                              ),
+                                                              focusedErrorBorder:
+                                                                  OutlineInputBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            4),
+                                                                borderSide:
+                                                                    const BorderSide(
+                                                                  color: Colors
+                                                                      .red,
+                                                                  width: 2,
+                                                                ),
+                                                              ),
+                                                              contentPadding:
+                                                                  const EdgeInsets
+                                                                      .symmetric(
+                                                                vertical: 5,
+                                                                horizontal: 12,
+                                                              ),
+                                                              errorStyle:
+                                                                  const TextStyle(
+                                                                color:
+                                                                    Colors.red,
+                                                                fontSize: 12,
+                                                              ),
+                                                            ),
+                                                            keyboardType:
+                                                                TextInputType
+                                                                    .text, // Ensures numeric input
+                                                            onChanged: (value) {
+                                                              setState(() {
+                                                                // Update the number of donors and the text controller
+                                                                _siteController
+                                                                        .text =
+                                                                    value; // Manually update the controller text
+                                                              });
+                                                            },
+                                                            validator: (value) {
+                                                              if (_siteController
+                                                                      .text ==
+                                                                  null) {
+                                                                return 'Please enter a valid site name';
+                                                              }
+                                                              return null;
+                                                            },
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 25,
+                                              ),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: List.generate(
+                                                  60, // Adjust the number of dashes
+                                                  (index) => Container(
+                                                    width:
+                                                        4, // Width of each dash
+                                                    height:
+                                                        2, // Height of each dash (thickness)
+                                                    color: Colors
+                                                        .black, // Color of the dash
+                                                  ),
+                                                ),
+                                              ),
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                  left: 0.0,
+                                                  top: 15.0,
+                                                  right: 0.0,
+                                                ),
+                                                child: Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  children: [
+                                                    Align(
+                                                      alignment:
+                                                          Alignment.topLeft,
+                                                      child: const Text(
+                                                        "Teritory Drug Test",
+                                                        style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontSize: 13,
+                                                          color: Colors.black,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 5,
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              right: 0.0),
+                                                      child: Container(
+                                                        width: double.infinity,
+                                                        height: 40,
+                                                        child: Material(
+                                                          elevation:
+                                                              4, // Adjust this value for more or less elevation
+                                                          shadowColor: Colors
+                                                              .black
+                                                              .withOpacity(
+                                                                  0.5), // Optional: Adjust shadow color
+                                                          borderRadius:
+                                                              BorderRadius.circular(
+                                                                  4), // Match with TextFormField's border radius
+                                                          child: TextFormField(
+                                                            controller:
+                                                                _siteController,
+                                                            decoration:
+                                                                InputDecoration(
+                                                              fillColor:
+                                                                  Colors.white,
+                                                              filled: true,
+                                                              border:
+                                                                  OutlineInputBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            4),
+                                                                borderSide:
+                                                                    const BorderSide(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  width: 2,
+                                                                ),
+                                                              ),
+                                                              enabledBorder:
+                                                                  OutlineInputBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            4),
+                                                                borderSide:
+                                                                    const BorderSide(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  width: 2,
+                                                                ),
+                                                              ),
+                                                              focusedBorder:
+                                                                  OutlineInputBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            4),
+                                                                borderSide:
+                                                                    const BorderSide(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  width: 2,
+                                                                ),
+                                                              ),
+                                                              errorBorder:
+                                                                  OutlineInputBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            4),
+                                                                borderSide:
+                                                                    const BorderSide(
+                                                                  color: Colors
+                                                                      .red,
+                                                                  width: 2,
+                                                                ),
+                                                              ),
+                                                              focusedErrorBorder:
+                                                                  OutlineInputBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            4),
+                                                                borderSide:
+                                                                    const BorderSide(
+                                                                  color: Colors
+                                                                      .red,
+                                                                  width: 2,
+                                                                ),
+                                                              ),
+                                                              contentPadding:
+                                                                  const EdgeInsets
+                                                                      .symmetric(
+                                                                vertical: 5,
+                                                                horizontal: 12,
+                                                              ),
+                                                              errorStyle:
+                                                                  const TextStyle(
+                                                                color:
+                                                                    Colors.red,
+                                                                fontSize: 12,
+                                                              ),
+                                                            ),
+                                                            keyboardType:
+                                                                TextInputType
+                                                                    .text, // Ensures numeric input
+                                                            onChanged: (value) {
+                                                              setState(() {
+                                                                // Update the number of donors and the text controller
+                                                                _siteController
+                                                                        .text =
+                                                                    value; // Manually update the controller text
+                                                              });
+                                                            },
+                                                            validator: (value) {
+                                                              if (_siteController
+                                                                      .text ==
+                                                                  null) {
+                                                                return 'Please enter a valid site name';
+                                                              }
+                                                              return null;
+                                                            },
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 15,
+                                              ),
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                  left: 0.0,
+                                                  top: 15.0,
+                                                  right: 0.0,
+                                                ),
+                                                child: Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  children: [
+                                                    Align(
+                                                      alignment:
+                                                          Alignment.topLeft,
+                                                      child: const Text(
+                                                        "Select Preferred Device",
+                                                        style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontSize: 13,
+                                                          color: Colors.black,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 5,
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              right: 0.0),
+                                                      child: Container(
+                                                        width: double.infinity,
+                                                        height: 40,
+                                                        child: Material(
+                                                          elevation:
+                                                              4, // Adjust this value for more or less elevation
+                                                          shadowColor: Colors
+                                                              .black
+                                                              .withOpacity(
+                                                                  0.5), // Optional: Adjust shadow color
+                                                          borderRadius:
+                                                              BorderRadius.circular(
+                                                                  4), // Match with TextFormField's border radius
+                                                          child: TextFormField(
+                                                            controller:
+                                                                _siteController,
+                                                            decoration:
+                                                                InputDecoration(
+                                                              fillColor:
+                                                                  Colors.white,
+                                                              filled: true,
+                                                              border:
+                                                                  OutlineInputBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            4),
+                                                                borderSide:
+                                                                    const BorderSide(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  width: 2,
+                                                                ),
+                                                              ),
+                                                              enabledBorder:
+                                                                  OutlineInputBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            4),
+                                                                borderSide:
+                                                                    const BorderSide(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  width: 2,
+                                                                ),
+                                                              ),
+                                                              focusedBorder:
+                                                                  OutlineInputBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            4),
+                                                                borderSide:
+                                                                    const BorderSide(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  width: 2,
+                                                                ),
+                                                              ),
+                                                              errorBorder:
+                                                                  OutlineInputBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            4),
+                                                                borderSide:
+                                                                    const BorderSide(
+                                                                  color: Colors
+                                                                      .red,
+                                                                  width: 2,
+                                                                ),
+                                                              ),
+                                                              focusedErrorBorder:
+                                                                  OutlineInputBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            4),
+                                                                borderSide:
+                                                                    const BorderSide(
+                                                                  color: Colors
+                                                                      .red,
+                                                                  width: 2,
+                                                                ),
+                                                              ),
+                                                              contentPadding:
+                                                                  const EdgeInsets
+                                                                      .symmetric(
+                                                                vertical: 5,
+                                                                horizontal: 12,
+                                                              ),
+                                                              errorStyle:
+                                                                  const TextStyle(
+                                                                color:
+                                                                    Colors.red,
+                                                                fontSize: 12,
+                                                              ),
+                                                            ),
+                                                            keyboardType:
+                                                                TextInputType
+                                                                    .text, // Ensures numeric input
+                                                            onChanged: (value) {
+                                                              setState(() {
+                                                                // Update the number of donors and the text controller
+                                                                _siteController
+                                                                        .text =
+                                                                    value; // Manually update the controller text
+                                                              });
+                                                            },
+                                                            validator: (value) {
+                                                              if (_siteController
+                                                                      .text ==
+                                                                  null) {
+                                                                return 'Please enter a valid site name';
+                                                              }
+                                                              return null;
+                                                            },
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 25,
+                                              ),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: List.generate(
+                                                  60, // Adjust the number of dashes
+                                                  (index) => Container(
+                                                    width:
+                                                        4, // Width of each dash
+                                                    height:
+                                                        2, // Height of each dash (thickness)
+                                                    color: Colors
+                                                        .black, // Color of the dash
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        )
+                                      : Container()
+                          /* Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               // Left-aligned title
                               Row(
                                 children: [
                                   Text(
-                                    "Breath Alcohol Test Limits",
+                                    "Drug Test Specifications",
                                     style: TextStyle(
                                       fontSize: 17,
                                       fontWeight: FontWeight.bold,
@@ -2129,7 +7094,7 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                 Align(
                                   alignment: Alignment.topLeft,
                                   child: const Text(
-                                    "Category 1",
+                                    "Primary Drug Test",
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 13,
@@ -2142,100 +7107,713 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.only(right: 0.0),
-                                  child: Material(
-                                    elevation:
-                                        4, // Adjust this value for more or less elevation
-                                    shadowColor: Colors.black.withOpacity(
-                                        0.5), // Optional: Adjust shadow color
-                                    borderRadius: BorderRadius.circular(
-                                        4), // Match with TextFormField's border radius
-                                    child: TextFormField(
-                                      controller: _siteController,
-                                      decoration: InputDecoration(
-                                        fillColor: Colors.white,
-                                        filled: true,
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(4),
-                                          borderSide: const BorderSide(
-                                            color: Colors.white,
-                                            width: 2,
+                                  child: Container(
+                                    width: double.infinity,
+                                    height: 40,
+                                    child: Material(
+                                      elevation:
+                                          4, // Adjust this value for more or less elevation
+                                      shadowColor: Colors.black.withOpacity(
+                                          0.5), // Optional: Adjust shadow color
+                                      borderRadius: BorderRadius.circular(
+                                          4), // Match with TextFormField's border radius
+                                      child: TextFormField(
+                                        controller: _siteController,
+                                        decoration: InputDecoration(
+                                          fillColor: Colors.white,
+                                          filled: true,
+                                          border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            borderSide: const BorderSide(
+                                              color: Colors.white,
+                                              width: 2,
+                                            ),
                                           ),
-                                        ),
-                                        enabledBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(4),
-                                          borderSide: const BorderSide(
-                                            color: Colors.white,
-                                            width: 2,
+                                          enabledBorder: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            borderSide: const BorderSide(
+                                              color: Colors.white,
+                                              width: 2,
+                                            ),
                                           ),
-                                        ),
-                                        focusedBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(4),
-                                          borderSide: const BorderSide(
-                                            color: Colors.white,
-                                            width: 2,
+                                          focusedBorder: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            borderSide: const BorderSide(
+                                              color: Colors.white,
+                                              width: 2,
+                                            ),
                                           ),
-                                        ),
-                                        errorBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(4),
-                                          borderSide: const BorderSide(
+                                          errorBorder: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            borderSide: const BorderSide(
+                                              color: Colors.red,
+                                              width: 2,
+                                            ),
+                                          ),
+                                          focusedErrorBorder:
+                                              OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            borderSide: const BorderSide(
+                                              color: Colors.red,
+                                              width: 2,
+                                            ),
+                                          ),
+                                          contentPadding:
+                                              const EdgeInsets.symmetric(
+                                            vertical: 5,
+                                            horizontal: 12,
+                                          ),
+                                          errorStyle: const TextStyle(
                                             color: Colors.red,
-                                            width: 2,
+                                            fontSize: 12,
                                           ),
                                         ),
-                                        focusedErrorBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(4),
-                                          borderSide: const BorderSide(
-                                            color: Colors.red,
-                                            width: 2,
-                                          ),
-                                        ),
-                                        contentPadding:
-                                            const EdgeInsets.symmetric(
-                                          vertical: 5,
-                                          horizontal: 12,
-                                        ),
-                                        errorStyle: const TextStyle(
-                                          color: Colors.red,
-                                          fontSize: 12,
-                                        ),
-                                        suffixIcon: Padding(
-                                          padding: const EdgeInsets.all(
-                                              8.0), // Adjust the padding as needed
-                                          child: Image.asset(
-                                            "assets/images/icons/icon_calendar.png", // Replace with your image path
-                                            width:
-                                                32, // Adjust the width of the image
-                                            height:
-                                                32, // Adjust the height of the image
-                                          ),
-                                        ),
+                                        keyboardType: TextInputType
+                                            .text, // Ensures numeric input
+                                        onChanged: (value) {
+                                          setState(() {
+                                            // Update the number of donors and the text controller
+                                            _siteController.text =
+                                                value; // Manually update the controller text
+                                          });
+                                        },
+                                        validator: (value) {
+                                          if (_siteController.text == null) {
+                                            return 'Please enter a valid site name';
+                                          }
+                                          return null;
+                                        },
                                       ),
-                                      keyboardType: TextInputType
-                                          .text, // Ensures numeric input
-                                      onChanged: (value) {
-                                        setState(() {
-                                          // Update the number of donors and the text controller
-                                          _siteController.text =
-                                              value; // Manually update the controller text
-                                        });
-                                      },
-                                      validator: (value) {
-                                        if (_siteController.text == null) {
-                                          return 'Please enter a valid site name';
-                                        }
-                                        return null;
-                                      },
                                     ),
                                   ),
                                 ),
                               ],
                             ),
                           ),
+                          SizedBox(
+                            height: 15,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              left: 0.0,
+                              top: 15.0,
+                              right: 0.0,
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Align(
+                                  alignment: Alignment.topLeft,
+                                  child: const Text(
+                                    "Select Preferred Device",
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 13,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 0.0),
+                                  child: Container(
+                                    width: double.infinity,
+                                    height: 40,
+                                    child: Material(
+                                      elevation:
+                                          4, // Adjust this value for more or less elevation
+                                      shadowColor: Colors.black.withOpacity(
+                                          0.5), // Optional: Adjust shadow color
+                                      borderRadius: BorderRadius.circular(
+                                          4), // Match with TextFormField's border radius
+                                      child: TextFormField(
+                                        controller: _siteController,
+                                        decoration: InputDecoration(
+                                          fillColor: Colors.white,
+                                          filled: true,
+                                          border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            borderSide: const BorderSide(
+                                              color: Colors.white,
+                                              width: 2,
+                                            ),
+                                          ),
+                                          enabledBorder: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            borderSide: const BorderSide(
+                                              color: Colors.white,
+                                              width: 2,
+                                            ),
+                                          ),
+                                          focusedBorder: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            borderSide: const BorderSide(
+                                              color: Colors.white,
+                                              width: 2,
+                                            ),
+                                          ),
+                                          errorBorder: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            borderSide: const BorderSide(
+                                              color: Colors.red,
+                                              width: 2,
+                                            ),
+                                          ),
+                                          focusedErrorBorder:
+                                              OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            borderSide: const BorderSide(
+                                              color: Colors.red,
+                                              width: 2,
+                                            ),
+                                          ),
+                                          contentPadding:
+                                              const EdgeInsets.symmetric(
+                                            vertical: 5,
+                                            horizontal: 12,
+                                          ),
+                                          errorStyle: const TextStyle(
+                                            color: Colors.red,
+                                            fontSize: 12,
+                                          ),
+                                        ),
+                                        keyboardType: TextInputType
+                                            .text, // Ensures numeric input
+                                        onChanged: (value) {
+                                          setState(() {
+                                            // Update the number of donors and the text controller
+                                            _siteController.text =
+                                                value; // Manually update the controller text
+                                          });
+                                        },
+                                        validator: (value) {
+                                          if (_siteController.text == null) {
+                                            return 'Please enter a valid site name';
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: 25,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: List.generate(
+                              60, // Adjust the number of dashes
+                              (index) => Container(
+                                width: 4, // Width of each dash
+                                height: 2, // Height of each dash (thickness)
+                                color: Colors.black, // Color of the dash
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 15,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              left: 0.0,
+                              top: 15.0,
+                              right: 0.0,
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Align(
+                                  alignment: Alignment.topLeft,
+                                  child: const Text(
+                                    "Secondary Drug Test",
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 13,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 0.0),
+                                  child: Container(
+                                    width: double.infinity,
+                                    height: 40,
+                                    child: Material(
+                                      elevation:
+                                          4, // Adjust this value for more or less elevation
+                                      shadowColor: Colors.black.withOpacity(
+                                          0.5), // Optional: Adjust shadow color
+                                      borderRadius: BorderRadius.circular(
+                                          4), // Match with TextFormField's border radius
+                                      child: TextFormField(
+                                        controller: _siteController,
+                                        decoration: InputDecoration(
+                                          fillColor: Colors.white,
+                                          filled: true,
+                                          border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            borderSide: const BorderSide(
+                                              color: Colors.white,
+                                              width: 2,
+                                            ),
+                                          ),
+                                          enabledBorder: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            borderSide: const BorderSide(
+                                              color: Colors.white,
+                                              width: 2,
+                                            ),
+                                          ),
+                                          focusedBorder: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            borderSide: const BorderSide(
+                                              color: Colors.white,
+                                              width: 2,
+                                            ),
+                                          ),
+                                          errorBorder: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            borderSide: const BorderSide(
+                                              color: Colors.red,
+                                              width: 2,
+                                            ),
+                                          ),
+                                          focusedErrorBorder:
+                                              OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            borderSide: const BorderSide(
+                                              color: Colors.red,
+                                              width: 2,
+                                            ),
+                                          ),
+                                          contentPadding:
+                                              const EdgeInsets.symmetric(
+                                            vertical: 5,
+                                            horizontal: 12,
+                                          ),
+                                          errorStyle: const TextStyle(
+                                            color: Colors.red,
+                                            fontSize: 12,
+                                          ),
+                                        ),
+                                        keyboardType: TextInputType
+                                            .text, // Ensures numeric input
+                                        onChanged: (value) {
+                                          setState(() {
+                                            // Update the number of donors and the text controller
+                                            _siteController.text =
+                                                value; // Manually update the controller text
+                                          });
+                                        },
+                                        validator: (value) {
+                                          if (_siteController.text == null) {
+                                            return 'Please enter a valid site name';
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: 15,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              left: 0.0,
+                              top: 15.0,
+                              right: 0.0,
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Align(
+                                  alignment: Alignment.topLeft,
+                                  child: const Text(
+                                    "Select Preferred Device",
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 13,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 0.0),
+                                  child: Container(
+                                    width: double.infinity,
+                                    height: 40,
+                                    child: Material(
+                                      elevation:
+                                          4, // Adjust this value for more or less elevation
+                                      shadowColor: Colors.black.withOpacity(
+                                          0.5), // Optional: Adjust shadow color
+                                      borderRadius: BorderRadius.circular(
+                                          4), // Match with TextFormField's border radius
+                                      child: TextFormField(
+                                        controller: _siteController,
+                                        decoration: InputDecoration(
+                                          fillColor: Colors.white,
+                                          filled: true,
+                                          border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            borderSide: const BorderSide(
+                                              color: Colors.white,
+                                              width: 2,
+                                            ),
+                                          ),
+                                          enabledBorder: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            borderSide: const BorderSide(
+                                              color: Colors.white,
+                                              width: 2,
+                                            ),
+                                          ),
+                                          focusedBorder: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            borderSide: const BorderSide(
+                                              color: Colors.white,
+                                              width: 2,
+                                            ),
+                                          ),
+                                          errorBorder: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            borderSide: const BorderSide(
+                                              color: Colors.red,
+                                              width: 2,
+                                            ),
+                                          ),
+                                          focusedErrorBorder:
+                                              OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            borderSide: const BorderSide(
+                                              color: Colors.red,
+                                              width: 2,
+                                            ),
+                                          ),
+                                          contentPadding:
+                                              const EdgeInsets.symmetric(
+                                            vertical: 5,
+                                            horizontal: 12,
+                                          ),
+                                          errorStyle: const TextStyle(
+                                            color: Colors.red,
+                                            fontSize: 12,
+                                          ),
+                                        ),
+                                        keyboardType: TextInputType
+                                            .text, // Ensures numeric input
+                                        onChanged: (value) {
+                                          setState(() {
+                                            // Update the number of donors and the text controller
+                                            _siteController.text =
+                                                value; // Manually update the controller text
+                                          });
+                                        },
+                                        validator: (value) {
+                                          if (_siteController.text == null) {
+                                            return 'Please enter a valid site name';
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: 25,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: List.generate(
+                              60, // Adjust the number of dashes
+                              (index) => Container(
+                                width: 4, // Width of each dash
+                                height: 2, // Height of each dash (thickness)
+                                color: Colors.black, // Color of the dash
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              left: 0.0,
+                              top: 15.0,
+                              right: 0.0,
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Align(
+                                  alignment: Alignment.topLeft,
+                                  child: const Text(
+                                    "Teritory Drug Test",
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 13,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 0.0),
+                                  child: Container(
+                                    width: double.infinity,
+                                    height: 40,
+                                    child: Material(
+                                      elevation:
+                                          4, // Adjust this value for more or less elevation
+                                      shadowColor: Colors.black.withOpacity(
+                                          0.5), // Optional: Adjust shadow color
+                                      borderRadius: BorderRadius.circular(
+                                          4), // Match with TextFormField's border radius
+                                      child: TextFormField(
+                                        controller: _siteController,
+                                        decoration: InputDecoration(
+                                          fillColor: Colors.white,
+                                          filled: true,
+                                          border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            borderSide: const BorderSide(
+                                              color: Colors.white,
+                                              width: 2,
+                                            ),
+                                          ),
+                                          enabledBorder: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            borderSide: const BorderSide(
+                                              color: Colors.white,
+                                              width: 2,
+                                            ),
+                                          ),
+                                          focusedBorder: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            borderSide: const BorderSide(
+                                              color: Colors.white,
+                                              width: 2,
+                                            ),
+                                          ),
+                                          errorBorder: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            borderSide: const BorderSide(
+                                              color: Colors.red,
+                                              width: 2,
+                                            ),
+                                          ),
+                                          focusedErrorBorder:
+                                              OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            borderSide: const BorderSide(
+                                              color: Colors.red,
+                                              width: 2,
+                                            ),
+                                          ),
+                                          contentPadding:
+                                              const EdgeInsets.symmetric(
+                                            vertical: 5,
+                                            horizontal: 12,
+                                          ),
+                                          errorStyle: const TextStyle(
+                                            color: Colors.red,
+                                            fontSize: 12,
+                                          ),
+                                        ),
+                                        keyboardType: TextInputType
+                                            .text, // Ensures numeric input
+                                        onChanged: (value) {
+                                          setState(() {
+                                            // Update the number of donors and the text controller
+                                            _siteController.text =
+                                                value; // Manually update the controller text
+                                          });
+                                        },
+                                        validator: (value) {
+                                          if (_siteController.text == null) {
+                                            return 'Please enter a valid site name';
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: 15,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              left: 0.0,
+                              top: 15.0,
+                              right: 0.0,
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Align(
+                                  alignment: Alignment.topLeft,
+                                  child: const Text(
+                                    "Select Preferred Device",
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 13,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 0.0),
+                                  child: Container(
+                                    width: double.infinity,
+                                    height: 40,
+                                    child: Material(
+                                      elevation:
+                                          4, // Adjust this value for more or less elevation
+                                      shadowColor: Colors.black.withOpacity(
+                                          0.5), // Optional: Adjust shadow color
+                                      borderRadius: BorderRadius.circular(
+                                          4), // Match with TextFormField's border radius
+                                      child: TextFormField(
+                                        controller: _siteController,
+                                        decoration: InputDecoration(
+                                          fillColor: Colors.white,
+                                          filled: true,
+                                          border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            borderSide: const BorderSide(
+                                              color: Colors.white,
+                                              width: 2,
+                                            ),
+                                          ),
+                                          enabledBorder: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            borderSide: const BorderSide(
+                                              color: Colors.white,
+                                              width: 2,
+                                            ),
+                                          ),
+                                          focusedBorder: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            borderSide: const BorderSide(
+                                              color: Colors.white,
+                                              width: 2,
+                                            ),
+                                          ),
+                                          errorBorder: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            borderSide: const BorderSide(
+                                              color: Colors.red,
+                                              width: 2,
+                                            ),
+                                          ),
+                                          focusedErrorBorder:
+                                              OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            borderSide: const BorderSide(
+                                              color: Colors.red,
+                                              width: 2,
+                                            ),
+                                          ),
+                                          contentPadding:
+                                              const EdgeInsets.symmetric(
+                                            vertical: 5,
+                                            horizontal: 12,
+                                          ),
+                                          errorStyle: const TextStyle(
+                                            color: Colors.red,
+                                            fontSize: 12,
+                                          ),
+                                        ),
+                                        keyboardType: TextInputType
+                                            .text, // Ensures numeric input
+                                        onChanged: (value) {
+                                          setState(() {
+                                            // Update the number of donors and the text controller
+                                            _siteController.text =
+                                                value; // Manually update the controller text
+                                          });
+                                        },
+                                        validator: (value) {
+                                          if (_siteController.text == null) {
+                                            return 'Please enter a valid site name';
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: 25,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: List.generate(
+                              60, // Adjust the number of dashes
+                              (index) => Container(
+                                width: 4, // Width of each dash
+                                height: 2, // Height of each dash (thickness)
+                                color: Colors.black, // Color of the dash
+                              ),
+                            ),
+                          ), */
                         ],
                       ),
                     ],
@@ -2243,6 +7821,55 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                 ),
               ),
             ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(
+              left: 26.0,
+              right: 26.0,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.red, // Color for the Back button
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                    minimumSize:
+                        Size(80, 30), // Sets a minimum width and height
+                  ),
+                  child: const Text(
+                    "Cancel",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+                ElevatedButton(
+                  onPressed: _nextStep,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blue, // Color for the Next button
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                    minimumSize: Size(80, 30),
+                  ),
+                  child: const Text(
+                    "Next",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 25,
           ),
         ]);
       case 1:
@@ -2472,7 +8099,7 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                             child: _buildStepContent(),
                           ),
                         ),
-                        Row(
+                        /* Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             if (_currentStep > 0)
@@ -2487,7 +8114,7 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                   : 'Next'),
                             ),
                           ],
-                        ),
+                        ), */
                       ],
                     ),
                   ),
