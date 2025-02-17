@@ -62,6 +62,69 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
   final GlobalKey<FormFieldState<String>> _numberOfDonorsKey =
       GlobalKey<FormFieldState<String>>();
 
+  final GlobalKey<FormFieldState<String>> _typeOfServiceKey =
+      GlobalKey<FormFieldState<String>>();
+
+  final GlobalKey<FormFieldState<String>> _jobReferenceKey =
+      GlobalKey<FormFieldState<String>>();
+
+  final GlobalKey<FormFieldState<String>> _siteKey =
+      GlobalKey<FormFieldState<String>>();
+
+  final GlobalKey<FormFieldState<String>> _siteContact1Key =
+      GlobalKey<FormFieldState<String>>();
+
+  final GlobalKey<FormFieldState<String>> _siteContact2Key =
+      GlobalKey<FormFieldState<String>>();
+
+  final GlobalKey<FormFieldState<String>> _mobileKey =
+      GlobalKey<FormFieldState<String>>();
+
+  final GlobalKey<FormFieldState<String>> _category1Key =
+      GlobalKey<FormFieldState<String>>();
+
+  final GlobalKey<FormFieldState<String>> _category1Limit210L =
+      GlobalKey<FormFieldState<String>>();
+
+  final GlobalKey<FormFieldState<String>> _category1SitoutTimeKey =
+      GlobalKey<FormFieldState<String>>();
+
+  final GlobalKey<FormFieldState<String>> _category2Key =
+      GlobalKey<FormFieldState<String>>();
+
+  final GlobalKey<FormFieldState<String>> _category2Limit210L =
+      GlobalKey<FormFieldState<String>>();
+
+  final GlobalKey<FormFieldState<String>> _category2SitoutTimeKey =
+      GlobalKey<FormFieldState<String>>();
+
+  final GlobalKey<FormFieldState<String>> _category3Key =
+      GlobalKey<FormFieldState<String>>();
+
+  final GlobalKey<FormFieldState<String>> _category3Limit210L =
+      GlobalKey<FormFieldState<String>>();
+
+  final GlobalKey<FormFieldState<String>> _category3SitoutTimeKey =
+      GlobalKey<FormFieldState<String>>();
+
+  final GlobalKey<FormFieldState<String>> _primaryTestSpecificationsKey =
+      GlobalKey<FormFieldState<String>>();
+
+  final GlobalKey<FormFieldState<String>> _selectPreferedPrimaryDeviceKey =
+      GlobalKey<FormFieldState<String>>();
+
+  final GlobalKey<FormFieldState<String>> _secondaryDrugTestKey =
+      GlobalKey<FormFieldState<String>>();
+
+  final GlobalKey<FormFieldState<String>> _selectPreferedSecondaryDeviceKey =
+      GlobalKey<FormFieldState<String>>();
+
+  final GlobalKey<FormFieldState<String>> _thirtoryDrugTestKey =
+      GlobalKey<FormFieldState<String>>();
+
+  final GlobalKey<FormFieldState<String>> _selectPreferedThirtoryDeviceKey =
+      GlobalKey<FormFieldState<String>>();
+
   // Dropdown options
   final List<String> _collectionOrganisations = ['Org 1', 'Org 2', 'Org 3'];
   final List<String> _serviceOffices = ['Clinic 1', 'Clinic 2', 'Clinic 3'];
@@ -1210,6 +1273,7 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                       borderRadius: BorderRadius.circular(
                                           4), // Match with TextFormField's border radius
                                       child: TextFormField(
+                                        key: _jobReferenceKey,
                                         controller: _jobReferenceController,
                                         decoration: InputDecoration(
                                           fillColor: Colors.white,
@@ -1284,6 +1348,8 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                             // Update the number of donors and the text controller
                                             _jobReferenceController.text =
                                                 value; // Manually update the controller text
+                                            _jobReferenceKey.currentState!
+                                                .validate();
                                           });
                                         },
                                         validator: (value) {
@@ -1332,6 +1398,7 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                       borderRadius: BorderRadius.circular(
                                           4), // Match with TextFormField's border radius
                                       child: TextFormField(
+                                        key: _typeOfServiceKey,
                                         controller: _typeOfServiceController,
                                         decoration: InputDecoration(
                                           fillColor: Colors.white,
@@ -1406,6 +1473,8 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                             // Update the number of donors and the text controller
                                             _typeOfServiceController.text =
                                                 value; // Manually update the controller text
+                                            _typeOfServiceKey.currentState!
+                                                .validate();
                                           });
                                         },
                                         validator: (value) {
@@ -1509,6 +1578,7 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                       borderRadius: BorderRadius.circular(
                                           4), // Match with TextFormField's border radius
                                       child: TextFormField(
+                                        key: _siteKey,
                                         controller: _siteController,
                                         decoration: InputDecoration(
                                           fillColor: Colors.white,
@@ -1582,6 +1652,7 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                             // Update the number of donors and the text controller
                                             _siteController.text =
                                                 value; // Manually update the controller text
+                                            _siteKey.currentState!.validate();
                                           });
                                         },
                                         validator: (value) {
@@ -1630,6 +1701,7 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                       borderRadius: BorderRadius.circular(
                                           4), // Match with TextFormField's border radius
                                       child: TextFormField(
+                                        key: _siteContact1Key,
                                         controller: _siteContact_1_Controller,
                                         decoration: InputDecoration(
                                           fillColor: Colors.white,
@@ -1703,6 +1775,8 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                             // Update the number of donors and the text controller
                                             _siteContact_1_Controller.text =
                                                 value; // Manually update the controller text
+                                            _siteContact1Key.currentState!
+                                                .validate();
                                           });
                                         },
                                         validator: (value) {
@@ -1752,6 +1826,7 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                       borderRadius: BorderRadius.circular(
                                           4), // Match with TextFormField's border radius
                                       child: TextFormField(
+                                        key: _siteContact2Key,
                                         controller: _siteContact_2_Controller,
                                         decoration: InputDecoration(
                                           fillColor: Colors.white,
@@ -1825,6 +1900,8 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                             // Update the number of donors and the text controller
                                             _siteContact_2_Controller.text =
                                                 value; // Manually update the controller text
+                                            _siteContact2Key.currentState!
+                                                .validate();
                                           });
                                         },
                                         validator: (value) {
@@ -1874,6 +1951,7 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                       borderRadius: BorderRadius.circular(
                                           4), // Match with TextFormField's border radius
                                       child: TextFormField(
+                                        key: _mobileKey,
                                         controller: _mobile_Controller,
                                         decoration: InputDecoration(
                                           fillColor: Colors.white,
@@ -1947,6 +2025,7 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                             // Update the number of donors and the text controller
                                             _mobile_Controller.text =
                                                 value; // Manually update the controller text
+                                            _mobileKey.currentState!.validate();
                                           });
                                         },
                                         validator: (value) {
@@ -2181,6 +2260,7 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                       BorderRadius.circular(
                                                           4), // Match with TextFormField's border radius
                                                   child: TextFormField(
+                                                    key: _category1Key,
                                                     controller: _siteController,
                                                     decoration: InputDecoration(
                                                       fillColor: Colors.white,
@@ -2259,6 +2339,9 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                         // Update the number of donors and the text controller
                                                         _siteController.text =
                                                             value; // Manually update the controller text
+                                                        _category1Key
+                                                            .currentState!
+                                                            .validate();
                                                       });
                                                     },
                                                     validator: (value) {
@@ -2321,6 +2404,8 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                               BorderRadius.circular(
                                                                   4), // Match with TextFormField's border radius
                                                           child: TextFormField(
+                                                            key:
+                                                                _category1Limit210L,
                                                             controller:
                                                                 _siteController,
                                                             decoration:
@@ -2415,6 +2500,9 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                                 _siteController
                                                                         .text =
                                                                     value; // Manually update the controller text
+                                                                _category1Limit210L
+                                                                    .currentState!
+                                                                    .validate();
                                                               });
                                                             },
                                                             validator: (value) {
@@ -2471,6 +2559,8 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                               BorderRadius.circular(
                                                                   4), // Match with TextFormField's border radius
                                                           child: TextFormField(
+                                                            key:
+                                                                _category1SitoutTimeKey,
                                                             controller:
                                                                 _siteController,
                                                             decoration:
@@ -2565,6 +2655,9 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                                 _siteController
                                                                         .text =
                                                                     value; // Manually update the controller text
+                                                                _category1SitoutTimeKey
+                                                                    .currentState!
+                                                                    .validate();
                                                               });
                                                             },
                                                             validator: (value) {
@@ -2648,6 +2741,7 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                       BorderRadius.circular(
                                                           4), // Match with TextFormField's border radius
                                                   child: TextFormField(
+                                                    key: _category2Key,
                                                     controller: _siteController,
                                                     decoration: InputDecoration(
                                                       fillColor: Colors.white,
@@ -2788,6 +2882,8 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                               BorderRadius.circular(
                                                                   4), // Match with TextFormField's border radius
                                                           child: TextFormField(
+                                                            key:
+                                                                _category2Limit210L,
                                                             controller:
                                                                 _siteController,
                                                             decoration:
@@ -2938,6 +3034,8 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                               BorderRadius.circular(
                                                                   4), // Match with TextFormField's border radius
                                                           child: TextFormField(
+                                                            key:
+                                                                _category2SitoutTimeKey,
                                                             controller:
                                                                 _siteController,
                                                             decoration:
@@ -3038,7 +3136,7 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                               if (_siteController
                                                                       .text ==
                                                                   null) {
-                                                                return 'Please enter a valid site name';
+                                                                return 'Please enter a valid sit out time';
                                                               }
                                                               return null;
                                                             },
@@ -3115,6 +3213,7 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                       BorderRadius.circular(
                                                           4), // Match with TextFormField's border radius
                                                   child: TextFormField(
+                                                    key: _category3Key,
                                                     controller: _siteController,
                                                     decoration: InputDecoration(
                                                       fillColor: Colors.white,
@@ -3193,13 +3292,16 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                         // Update the number of donors and the text controller
                                                         _siteController.text =
                                                             value; // Manually update the controller text
+                                                        _category3Key
+                                                            .currentState!
+                                                            .validate();
                                                       });
                                                     },
                                                     validator: (value) {
                                                       if (_siteController
                                                               .text ==
                                                           null) {
-                                                        return 'Please enter a valid site name';
+                                                        return 'Please enter a valid category name';
                                                       }
                                                       return null;
                                                     },
@@ -3255,6 +3357,8 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                               BorderRadius.circular(
                                                                   4), // Match with TextFormField's border radius
                                                           child: TextFormField(
+                                                            key:
+                                                                _category3Limit210L,
                                                             controller:
                                                                 _siteController,
                                                             decoration:
@@ -3349,6 +3453,9 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                                 _siteController
                                                                         .text =
                                                                     value; // Manually update the controller text
+                                                                _category3Limit210L
+                                                                    .currentState!
+                                                                    .validate();
                                                               });
                                                             },
                                                             validator: (value) {
@@ -3405,6 +3512,8 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                               BorderRadius.circular(
                                                                   4), // Match with TextFormField's border radius
                                                           child: TextFormField(
+                                                            key:
+                                                                _category3SitoutTimeKey,
                                                             controller:
                                                                 _siteController,
                                                             decoration:
@@ -3499,13 +3608,17 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                                 _siteController
                                                                         .text =
                                                                     value; // Manually update the controller text
+
+                                                                _category3SitoutTimeKey
+                                                                    .currentState!
+                                                                    .validate();
                                                               });
                                                             },
                                                             validator: (value) {
                                                               if (_siteController
                                                                       .text ==
                                                                   null) {
-                                                                return 'Please enter a valid site name';
+                                                                return 'Please enter a valid site out time';
                                                               }
                                                               return null;
                                                             },
@@ -5120,6 +5233,8 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                           BorderRadius.circular(
                                                               4), // Match with TextFormField's border radius
                                                       child: TextFormField(
+                                                        key:
+                                                            _primaryTestSpecificationsKey,
                                                         controller:
                                                             _siteController,
                                                         decoration:
@@ -5210,6 +5325,9 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                             _siteController
                                                                     .text =
                                                                 value; // Manually update the controller text
+                                                            _primaryTestSpecificationsKey
+                                                                .currentState!
+                                                                .validate();
                                                           });
                                                         },
                                                         validator: (value) {
@@ -5272,6 +5390,8 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                           BorderRadius.circular(
                                                               4), // Match with TextFormField's border radius
                                                       child: TextFormField(
+                                                        key:
+                                                            _selectPreferedPrimaryDeviceKey,
                                                         controller:
                                                             _siteController,
                                                         decoration:
@@ -5362,6 +5482,9 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                             _siteController
                                                                     .text =
                                                                 value; // Manually update the controller text
+                                                            _selectPreferedPrimaryDeviceKey
+                                                                .currentState!
+                                                                .validate();
                                                           });
                                                         },
                                                         validator: (value) {
@@ -5441,6 +5564,8 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                           BorderRadius.circular(
                                                               4), // Match with TextFormField's border radius
                                                       child: TextFormField(
+                                                        key:
+                                                            _secondaryDrugTestKey,
                                                         controller:
                                                             _siteController,
                                                         decoration:
@@ -5531,6 +5656,9 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                             _siteController
                                                                     .text =
                                                                 value; // Manually update the controller text
+                                                            _secondaryDrugTestKey
+                                                                .currentState!
+                                                                .validate();
                                                           });
                                                         },
                                                         validator: (value) {
@@ -5593,6 +5721,8 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                           BorderRadius.circular(
                                                               4), // Match with TextFormField's border radius
                                                       child: TextFormField(
+                                                        key:
+                                                            _selectPreferedSecondaryDeviceKey,
                                                         controller:
                                                             _siteController,
                                                         decoration:
@@ -5683,6 +5813,9 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                             _siteController
                                                                     .text =
                                                                 value; // Manually update the controller text
+                                                            _selectPreferedSecondaryDeviceKey
+                                                                .currentState!
+                                                                .validate();
                                                           });
                                                         },
                                                         validator: (value) {
@@ -5759,6 +5892,8 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                           BorderRadius.circular(
                                                               4), // Match with TextFormField's border radius
                                                       child: TextFormField(
+                                                        key:
+                                                            _thirtoryDrugTestKey,
                                                         controller:
                                                             _siteController,
                                                         decoration:
@@ -5849,6 +5984,9 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                             _siteController
                                                                     .text =
                                                                 value; // Manually update the controller text
+                                                            _thirtoryDrugTestKey
+                                                                .currentState!
+                                                                .validate();
                                                           });
                                                         },
                                                         validator: (value) {
@@ -5911,6 +6049,8 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                           BorderRadius.circular(
                                                               4), // Match with TextFormField's border radius
                                                       child: TextFormField(
+                                                        key:
+                                                            _selectPreferedThirtoryDeviceKey,
                                                         controller:
                                                             _siteController,
                                                         decoration:
@@ -6001,6 +6141,9 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                             _siteController
                                                                     .text =
                                                                 value; // Manually update the controller text
+                                                            _selectPreferedThirtoryDeviceKey
+                                                                .currentState!
+                                                                .validate();
                                                           });
                                                         },
                                                         validator: (value) {
@@ -6106,6 +6249,8 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                               BorderRadius.circular(
                                                                   4), // Match with TextFormField's border radius
                                                           child: TextFormField(
+                                                            key:
+                                                                _primaryTestSpecificationsKey,
                                                             controller:
                                                                 _siteController,
                                                             decoration:
@@ -6200,6 +6345,10 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                                 _siteController
                                                                         .text =
                                                                     value; // Manually update the controller text
+
+                                                                _primaryTestSpecificationsKey
+                                                                    .currentState!
+                                                                    .validate();
                                                               });
                                                             },
                                                             validator: (value) {
@@ -6264,6 +6413,8 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                               BorderRadius.circular(
                                                                   4), // Match with TextFormField's border radius
                                                           child: TextFormField(
+                                                            key:
+                                                                _selectPreferedPrimaryDeviceKey,
                                                             controller:
                                                                 _siteController,
                                                             decoration:
@@ -6358,6 +6509,9 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                                 _siteController
                                                                         .text =
                                                                     value; // Manually update the controller text
+                                                                _selectPreferedPrimaryDeviceKey
+                                                                    .currentState!
+                                                                    .validate();
                                                               });
                                                             },
                                                             validator: (value) {
@@ -6441,6 +6595,8 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                               BorderRadius.circular(
                                                                   4), // Match with TextFormField's border radius
                                                           child: TextFormField(
+                                                            key:
+                                                                _secondaryDrugTestKey,
                                                             controller:
                                                                 _siteController,
                                                             decoration:
@@ -6535,6 +6691,10 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                                 _siteController
                                                                         .text =
                                                                     value; // Manually update the controller text
+
+                                                                _secondaryDrugTestKey
+                                                                    .currentState!
+                                                                    .validate();
                                                               });
                                                             },
                                                             validator: (value) {
@@ -6599,6 +6759,8 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                               BorderRadius.circular(
                                                                   4), // Match with TextFormField's border radius
                                                           child: TextFormField(
+                                                            key:
+                                                                _selectPreferedSecondaryDeviceKey,
                                                             controller:
                                                                 _siteController,
                                                             decoration:
@@ -6693,6 +6855,9 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                                 _siteController
                                                                         .text =
                                                                     value; // Manually update the controller text
+                                                                _selectPreferedSecondaryDeviceKey
+                                                                    .currentState!
+                                                                    .validate();
                                                               });
                                                             },
                                                             validator: (value) {
@@ -6773,6 +6938,8 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                               BorderRadius.circular(
                                                                   4), // Match with TextFormField's border radius
                                                           child: TextFormField(
+                                                            key:
+                                                                _thirtoryDrugTestKey,
                                                             controller:
                                                                 _siteController,
                                                             decoration:
@@ -6867,6 +7034,9 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                                 _siteController
                                                                         .text =
                                                                     value; // Manually update the controller text
+                                                                _thirtoryDrugTestKey
+                                                                    .currentState!
+                                                                    .validate();
                                                               });
                                                             },
                                                             validator: (value) {
@@ -6931,6 +7101,8 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                               BorderRadius.circular(
                                                                   4), // Match with TextFormField's border radius
                                                           child: TextFormField(
+                                                            key:
+                                                                _selectPreferedThirtoryDeviceKey,
                                                             controller:
                                                                 _siteController,
                                                             decoration:
@@ -7025,6 +7197,9 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                                 _siteController
                                                                         .text =
                                                                     value; // Manually update the controller text
+                                                                _selectPreferedThirtoryDeviceKey
+                                                                    .currentState!
+                                                                    .validate();
                                                               });
                                                             },
                                                             validator: (value) {
@@ -7065,755 +7240,6 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                           ),
                                         )
                                       : Container()
-                          /* Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              // Left-aligned title
-                              Row(
-                                children: [
-                                  Text(
-                                    "Drug Test Specifications",
-                                    style: TextStyle(
-                                      fontSize: 17,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              left: 0.0,
-                              top: 15.0,
-                              right: 0.0,
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Align(
-                                  alignment: Alignment.topLeft,
-                                  child: const Text(
-                                    "Primary Drug Test",
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 13,
-                                      color: Colors.black,
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 0.0),
-                                  child: Container(
-                                    width: double.infinity,
-                                    height: 40,
-                                    child: Material(
-                                      elevation:
-                                          4, // Adjust this value for more or less elevation
-                                      shadowColor: Colors.black.withOpacity(
-                                          0.5), // Optional: Adjust shadow color
-                                      borderRadius: BorderRadius.circular(
-                                          4), // Match with TextFormField's border radius
-                                      child: TextFormField(
-                                        controller: _siteController,
-                                        decoration: InputDecoration(
-                                          fillColor: Colors.white,
-                                          filled: true,
-                                          border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.white,
-                                              width: 2,
-                                            ),
-                                          ),
-                                          enabledBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.white,
-                                              width: 2,
-                                            ),
-                                          ),
-                                          focusedBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.white,
-                                              width: 2,
-                                            ),
-                                          ),
-                                          errorBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.red,
-                                              width: 2,
-                                            ),
-                                          ),
-                                          focusedErrorBorder:
-                                              OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.red,
-                                              width: 2,
-                                            ),
-                                          ),
-                                          contentPadding:
-                                              const EdgeInsets.symmetric(
-                                            vertical: 5,
-                                            horizontal: 12,
-                                          ),
-                                          errorStyle: const TextStyle(
-                                            color: Colors.red,
-                                            fontSize: 12,
-                                          ),
-                                        ),
-                                        keyboardType: TextInputType
-                                            .text, // Ensures numeric input
-                                        onChanged: (value) {
-                                          setState(() {
-                                            // Update the number of donors and the text controller
-                                            _siteController.text =
-                                                value; // Manually update the controller text
-                                          });
-                                        },
-                                        validator: (value) {
-                                          if (_siteController.text == null) {
-                                            return 'Please enter a valid site name';
-                                          }
-                                          return null;
-                                        },
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            height: 15,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              left: 0.0,
-                              top: 15.0,
-                              right: 0.0,
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Align(
-                                  alignment: Alignment.topLeft,
-                                  child: const Text(
-                                    "Select Preferred Device",
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 13,
-                                      color: Colors.black,
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 0.0),
-                                  child: Container(
-                                    width: double.infinity,
-                                    height: 40,
-                                    child: Material(
-                                      elevation:
-                                          4, // Adjust this value for more or less elevation
-                                      shadowColor: Colors.black.withOpacity(
-                                          0.5), // Optional: Adjust shadow color
-                                      borderRadius: BorderRadius.circular(
-                                          4), // Match with TextFormField's border radius
-                                      child: TextFormField(
-                                        controller: _siteController,
-                                        decoration: InputDecoration(
-                                          fillColor: Colors.white,
-                                          filled: true,
-                                          border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.white,
-                                              width: 2,
-                                            ),
-                                          ),
-                                          enabledBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.white,
-                                              width: 2,
-                                            ),
-                                          ),
-                                          focusedBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.white,
-                                              width: 2,
-                                            ),
-                                          ),
-                                          errorBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.red,
-                                              width: 2,
-                                            ),
-                                          ),
-                                          focusedErrorBorder:
-                                              OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.red,
-                                              width: 2,
-                                            ),
-                                          ),
-                                          contentPadding:
-                                              const EdgeInsets.symmetric(
-                                            vertical: 5,
-                                            horizontal: 12,
-                                          ),
-                                          errorStyle: const TextStyle(
-                                            color: Colors.red,
-                                            fontSize: 12,
-                                          ),
-                                        ),
-                                        keyboardType: TextInputType
-                                            .text, // Ensures numeric input
-                                        onChanged: (value) {
-                                          setState(() {
-                                            // Update the number of donors and the text controller
-                                            _siteController.text =
-                                                value; // Manually update the controller text
-                                          });
-                                        },
-                                        validator: (value) {
-                                          if (_siteController.text == null) {
-                                            return 'Please enter a valid site name';
-                                          }
-                                          return null;
-                                        },
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            height: 25,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: List.generate(
-                              60, // Adjust the number of dashes
-                              (index) => Container(
-                                width: 4, // Width of each dash
-                                height: 2, // Height of each dash (thickness)
-                                color: Colors.black, // Color of the dash
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 15,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              left: 0.0,
-                              top: 15.0,
-                              right: 0.0,
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Align(
-                                  alignment: Alignment.topLeft,
-                                  child: const Text(
-                                    "Secondary Drug Test",
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 13,
-                                      color: Colors.black,
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 0.0),
-                                  child: Container(
-                                    width: double.infinity,
-                                    height: 40,
-                                    child: Material(
-                                      elevation:
-                                          4, // Adjust this value for more or less elevation
-                                      shadowColor: Colors.black.withOpacity(
-                                          0.5), // Optional: Adjust shadow color
-                                      borderRadius: BorderRadius.circular(
-                                          4), // Match with TextFormField's border radius
-                                      child: TextFormField(
-                                        controller: _siteController,
-                                        decoration: InputDecoration(
-                                          fillColor: Colors.white,
-                                          filled: true,
-                                          border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.white,
-                                              width: 2,
-                                            ),
-                                          ),
-                                          enabledBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.white,
-                                              width: 2,
-                                            ),
-                                          ),
-                                          focusedBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.white,
-                                              width: 2,
-                                            ),
-                                          ),
-                                          errorBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.red,
-                                              width: 2,
-                                            ),
-                                          ),
-                                          focusedErrorBorder:
-                                              OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.red,
-                                              width: 2,
-                                            ),
-                                          ),
-                                          contentPadding:
-                                              const EdgeInsets.symmetric(
-                                            vertical: 5,
-                                            horizontal: 12,
-                                          ),
-                                          errorStyle: const TextStyle(
-                                            color: Colors.red,
-                                            fontSize: 12,
-                                          ),
-                                        ),
-                                        keyboardType: TextInputType
-                                            .text, // Ensures numeric input
-                                        onChanged: (value) {
-                                          setState(() {
-                                            // Update the number of donors and the text controller
-                                            _siteController.text =
-                                                value; // Manually update the controller text
-                                          });
-                                        },
-                                        validator: (value) {
-                                          if (_siteController.text == null) {
-                                            return 'Please enter a valid site name';
-                                          }
-                                          return null;
-                                        },
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            height: 15,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              left: 0.0,
-                              top: 15.0,
-                              right: 0.0,
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Align(
-                                  alignment: Alignment.topLeft,
-                                  child: const Text(
-                                    "Select Preferred Device",
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 13,
-                                      color: Colors.black,
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 0.0),
-                                  child: Container(
-                                    width: double.infinity,
-                                    height: 40,
-                                    child: Material(
-                                      elevation:
-                                          4, // Adjust this value for more or less elevation
-                                      shadowColor: Colors.black.withOpacity(
-                                          0.5), // Optional: Adjust shadow color
-                                      borderRadius: BorderRadius.circular(
-                                          4), // Match with TextFormField's border radius
-                                      child: TextFormField(
-                                        controller: _siteController,
-                                        decoration: InputDecoration(
-                                          fillColor: Colors.white,
-                                          filled: true,
-                                          border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.white,
-                                              width: 2,
-                                            ),
-                                          ),
-                                          enabledBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.white,
-                                              width: 2,
-                                            ),
-                                          ),
-                                          focusedBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.white,
-                                              width: 2,
-                                            ),
-                                          ),
-                                          errorBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.red,
-                                              width: 2,
-                                            ),
-                                          ),
-                                          focusedErrorBorder:
-                                              OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.red,
-                                              width: 2,
-                                            ),
-                                          ),
-                                          contentPadding:
-                                              const EdgeInsets.symmetric(
-                                            vertical: 5,
-                                            horizontal: 12,
-                                          ),
-                                          errorStyle: const TextStyle(
-                                            color: Colors.red,
-                                            fontSize: 12,
-                                          ),
-                                        ),
-                                        keyboardType: TextInputType
-                                            .text, // Ensures numeric input
-                                        onChanged: (value) {
-                                          setState(() {
-                                            // Update the number of donors and the text controller
-                                            _siteController.text =
-                                                value; // Manually update the controller text
-                                          });
-                                        },
-                                        validator: (value) {
-                                          if (_siteController.text == null) {
-                                            return 'Please enter a valid site name';
-                                          }
-                                          return null;
-                                        },
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            height: 25,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: List.generate(
-                              60, // Adjust the number of dashes
-                              (index) => Container(
-                                width: 4, // Width of each dash
-                                height: 2, // Height of each dash (thickness)
-                                color: Colors.black, // Color of the dash
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              left: 0.0,
-                              top: 15.0,
-                              right: 0.0,
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Align(
-                                  alignment: Alignment.topLeft,
-                                  child: const Text(
-                                    "Teritory Drug Test",
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 13,
-                                      color: Colors.black,
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 0.0),
-                                  child: Container(
-                                    width: double.infinity,
-                                    height: 40,
-                                    child: Material(
-                                      elevation:
-                                          4, // Adjust this value for more or less elevation
-                                      shadowColor: Colors.black.withOpacity(
-                                          0.5), // Optional: Adjust shadow color
-                                      borderRadius: BorderRadius.circular(
-                                          4), // Match with TextFormField's border radius
-                                      child: TextFormField(
-                                        controller: _siteController,
-                                        decoration: InputDecoration(
-                                          fillColor: Colors.white,
-                                          filled: true,
-                                          border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.white,
-                                              width: 2,
-                                            ),
-                                          ),
-                                          enabledBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.white,
-                                              width: 2,
-                                            ),
-                                          ),
-                                          focusedBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.white,
-                                              width: 2,
-                                            ),
-                                          ),
-                                          errorBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.red,
-                                              width: 2,
-                                            ),
-                                          ),
-                                          focusedErrorBorder:
-                                              OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.red,
-                                              width: 2,
-                                            ),
-                                          ),
-                                          contentPadding:
-                                              const EdgeInsets.symmetric(
-                                            vertical: 5,
-                                            horizontal: 12,
-                                          ),
-                                          errorStyle: const TextStyle(
-                                            color: Colors.red,
-                                            fontSize: 12,
-                                          ),
-                                        ),
-                                        keyboardType: TextInputType
-                                            .text, // Ensures numeric input
-                                        onChanged: (value) {
-                                          setState(() {
-                                            // Update the number of donors and the text controller
-                                            _siteController.text =
-                                                value; // Manually update the controller text
-                                          });
-                                        },
-                                        validator: (value) {
-                                          if (_siteController.text == null) {
-                                            return 'Please enter a valid site name';
-                                          }
-                                          return null;
-                                        },
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            height: 15,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              left: 0.0,
-                              top: 15.0,
-                              right: 0.0,
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Align(
-                                  alignment: Alignment.topLeft,
-                                  child: const Text(
-                                    "Select Preferred Device",
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 13,
-                                      color: Colors.black,
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 0.0),
-                                  child: Container(
-                                    width: double.infinity,
-                                    height: 40,
-                                    child: Material(
-                                      elevation:
-                                          4, // Adjust this value for more or less elevation
-                                      shadowColor: Colors.black.withOpacity(
-                                          0.5), // Optional: Adjust shadow color
-                                      borderRadius: BorderRadius.circular(
-                                          4), // Match with TextFormField's border radius
-                                      child: TextFormField(
-                                        controller: _siteController,
-                                        decoration: InputDecoration(
-                                          fillColor: Colors.white,
-                                          filled: true,
-                                          border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.white,
-                                              width: 2,
-                                            ),
-                                          ),
-                                          enabledBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.white,
-                                              width: 2,
-                                            ),
-                                          ),
-                                          focusedBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.white,
-                                              width: 2,
-                                            ),
-                                          ),
-                                          errorBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.red,
-                                              width: 2,
-                                            ),
-                                          ),
-                                          focusedErrorBorder:
-                                              OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.red,
-                                              width: 2,
-                                            ),
-                                          ),
-                                          contentPadding:
-                                              const EdgeInsets.symmetric(
-                                            vertical: 5,
-                                            horizontal: 12,
-                                          ),
-                                          errorStyle: const TextStyle(
-                                            color: Colors.red,
-                                            fontSize: 12,
-                                          ),
-                                        ),
-                                        keyboardType: TextInputType
-                                            .text, // Ensures numeric input
-                                        onChanged: (value) {
-                                          setState(() {
-                                            // Update the number of donors and the text controller
-                                            _siteController.text =
-                                                value; // Manually update the controller text
-                                          });
-                                        },
-                                        validator: (value) {
-                                          if (_siteController.text == null) {
-                                            return 'Please enter a valid site name';
-                                          }
-                                          return null;
-                                        },
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            height: 25,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: List.generate(
-                              60, // Adjust the number of dashes
-                              (index) => Container(
-                                width: 4, // Width of each dash
-                                height: 2, // Height of each dash (thickness)
-                                color: Colors.black, // Color of the dash
-                              ),
-                            ),
-                          ), */
                         ],
                       ),
                     ],
