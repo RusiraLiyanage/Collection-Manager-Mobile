@@ -25,7 +25,7 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
     GlobalKey<FormState>(),
   ];
 
-  int _currentStep = 0;
+  int _currentStep = 1;
 
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
@@ -39,6 +39,73 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
   final TextEditingController _siteContact_2_Controller =
       TextEditingController();
   final TextEditingController _mobile_Controller = TextEditingController();
+
+  final TextEditingController _category1_Controller = TextEditingController();
+
+  final TextEditingController _category2Controller = TextEditingController();
+
+  final TextEditingController _category1LimitGController =
+      TextEditingController();
+
+  final TextEditingController _category1SetLimitOutTimeController =
+      TextEditingController();
+
+  final TextEditingController _category2LimitGController =
+      TextEditingController();
+
+  final TextEditingController _category2SetLimitOutTimeController =
+      TextEditingController();
+
+  final TextEditingController _siteContact_3_Controller =
+      TextEditingController();
+
+  final TextEditingController _category3SetLimitOutTimeController =
+      TextEditingController();
+
+  final TextEditingController _category3LimitGController =
+      TextEditingController();
+
+  final TextEditingController _primaryDrugTestController =
+      TextEditingController();
+
+  final TextEditingController _primaryDrugTestPreferredDeviceController =
+      TextEditingController();
+
+  final TextEditingController _secondaryDrugTestController =
+      TextEditingController();
+
+  final TextEditingController _secondaryDrugTestPreferredDeviceController =
+      TextEditingController();
+
+  final TextEditingController _thirteryDrugTestController =
+      TextEditingController();
+
+  final TextEditingController _thirteryDrugTestPreferredDeviceController =
+      TextEditingController();
+
+  final TextEditingController _additionalTestsController =
+      TextEditingController();
+
+  final TextEditingController _additioanlTestInstructionsController =
+      TextEditingController();
+
+  final TextEditingController _donorSelectionProcessController =
+      TextEditingController();
+
+  final TextEditingController _screeningAndTestingProcessController =
+      TextEditingController();
+
+  final TextEditingController _testConfirmationInstructionsController =
+      TextEditingController();
+
+  final TextEditingController _globalSiteAccessInstructionsController =
+      TextEditingController();
+
+  final TextEditingController _specificLocalSiteAccessInstructionsController =
+      TextEditingController();
+
+  final TextEditingController _specialInstructionsController =
+      TextEditingController();
 
   // Dropdown values
   String? _selectedCollectionOrganisation;
@@ -123,6 +190,31 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
       GlobalKey<FormFieldState<String>>();
 
   final GlobalKey<FormFieldState<String>> _selectPreferedThirtoryDeviceKey =
+      GlobalKey<FormFieldState<String>>();
+
+  final GlobalKey<FormFieldState<String>> _additionalTestsKey =
+      GlobalKey<FormFieldState<String>>();
+
+  final GlobalKey<FormFieldState<String>> _additioanlTestInstructionsKey =
+      GlobalKey<FormFieldState<String>>();
+
+  final GlobalKey<FormFieldState<String>> _donorSelectionProcessKey =
+      GlobalKey<FormFieldState<String>>();
+
+  final GlobalKey<FormFieldState<String>> _screeningAndTestingProcessKey =
+      GlobalKey<FormFieldState<String>>();
+
+  final GlobalKey<FormFieldState<String>> _testConfirmationInstructionsKey =
+      GlobalKey<FormFieldState<String>>();
+
+  final GlobalKey<FormFieldState<String>> _globalSiteAccessInstructionsKey =
+      GlobalKey<FormFieldState<String>>();
+
+  final GlobalKey<FormFieldState<String>>
+      _specificLocalSiteAccessInstructionsKey =
+      GlobalKey<FormFieldState<String>>();
+
+  final GlobalKey<FormFieldState<String>> _specialInstructionsKey =
       GlobalKey<FormFieldState<String>>();
 
   // Dropdown options
@@ -1227,8 +1319,8 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                           });
                                         },
                                         validator: (value) {
-                                          if (_selectedNoDonors == null ||
-                                              _selectedNoDonors! <= 0) {
+                                          print(_donorsController.text);
+                                          if (_donorsController.text == "") {
                                             return 'Please enter a valid number of donors';
                                           }
                                           return null;
@@ -1353,7 +1445,8 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                           });
                                         },
                                         validator: (value) {
-                                          if (_selectedJobReference == null) {
+                                          if (_jobReferenceController.text ==
+                                              "") {
                                             return 'Please enter a valid job referenace';
                                           }
                                           return null;
@@ -1478,7 +1571,8 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                           });
                                         },
                                         validator: (value) {
-                                          if (_selectedTypeOfService == null) {
+                                          if (_typeOfServiceController.text ==
+                                              "") {
                                             return 'Please enter a valid type of service';
                                           }
                                           return null;
@@ -1656,7 +1750,7 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                           });
                                         },
                                         validator: (value) {
-                                          if (_siteController.text == null) {
+                                          if (_siteController.text == "") {
                                             return 'Please enter a valid site name';
                                           }
                                           return null;
@@ -1781,8 +1875,8 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                         },
                                         validator: (value) {
                                           if (_siteContact_1_Controller.text ==
-                                              null) {
-                                            return 'Please enter a valid site name';
+                                              "") {
+                                            return 'Please enter a valid site contact name';
                                           }
                                           return null;
                                         },
@@ -1906,8 +2000,8 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                         },
                                         validator: (value) {
                                           if (_siteContact_2_Controller.text ==
-                                              null) {
-                                            return 'Please enter a valid site name';
+                                              "") {
+                                            return 'Please enter a valid site contact name 2';
                                           }
                                           return null;
                                         },
@@ -2029,8 +2123,10 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                           });
                                         },
                                         validator: (value) {
-                                          if (_mobile_Controller.text == null) {
-                                            return 'Please enter a valid site name';
+                                          if (_mobile_Controller.text == "" ||
+                                              !RegExp(r'^[0-9]{10}$')
+                                                  .hasMatch(value!)) {
+                                            return 'Please enter a valid mobile number';
                                           }
                                           return null;
                                         },
@@ -2261,7 +2357,8 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                           4), // Match with TextFormField's border radius
                                                   child: TextFormField(
                                                     key: _category1Key,
-                                                    controller: _siteController,
+                                                    controller:
+                                                        _category1_Controller,
                                                     decoration: InputDecoration(
                                                       fillColor: Colors.white,
                                                       filled: true,
@@ -2337,7 +2434,8 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                     onChanged: (value) {
                                                       setState(() {
                                                         // Update the number of donors and the text controller
-                                                        _siteController.text =
+                                                        _category1_Controller
+                                                                .text =
                                                             value; // Manually update the controller text
                                                         _category1Key
                                                             .currentState!
@@ -2345,10 +2443,10 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                       });
                                                     },
                                                     validator: (value) {
-                                                      if (_siteController
+                                                      if (_category1_Controller
                                                               .text ==
-                                                          null) {
-                                                        return 'Please enter a valid site name';
+                                                          "") {
+                                                        return 'Please enter a valid category 1 name';
                                                       }
                                                       return null;
                                                     },
@@ -2407,7 +2505,7 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                             key:
                                                                 _category1Limit210L,
                                                             controller:
-                                                                _siteController,
+                                                                _category1LimitGController,
                                                             decoration:
                                                                 InputDecoration(
                                                               fillColor:
@@ -2497,7 +2595,7 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                             onChanged: (value) {
                                                               setState(() {
                                                                 // Update the number of donors and the text controller
-                                                                _siteController
+                                                                _category1LimitGController
                                                                         .text =
                                                                     value; // Manually update the controller text
                                                                 _category1Limit210L
@@ -2506,10 +2604,10 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                               });
                                                             },
                                                             validator: (value) {
-                                                              if (_siteController
+                                                              if (_category1LimitGController
                                                                       .text ==
-                                                                  null) {
-                                                                return 'Please enter a valid site name';
+                                                                  "") {
+                                                                return 'Please enter a valid limit';
                                                               }
                                                               return null;
                                                             },
@@ -2562,7 +2660,7 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                             key:
                                                                 _category1SitoutTimeKey,
                                                             controller:
-                                                                _siteController,
+                                                                _category1SetLimitOutTimeController,
                                                             decoration:
                                                                 InputDecoration(
                                                               fillColor:
@@ -2652,7 +2750,7 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                             onChanged: (value) {
                                                               setState(() {
                                                                 // Update the number of donors and the text controller
-                                                                _siteController
+                                                                _category1SetLimitOutTimeController
                                                                         .text =
                                                                     value; // Manually update the controller text
                                                                 _category1SitoutTimeKey
@@ -2661,10 +2759,10 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                               });
                                                             },
                                                             validator: (value) {
-                                                              if (_siteController
+                                                              if (_category1SetLimitOutTimeController
                                                                       .text ==
-                                                                  null) {
-                                                                return 'Please enter a valid site name';
+                                                                  "") {
+                                                                return 'Please enter a valid set out time';
                                                               }
                                                               return null;
                                                             },
@@ -2742,7 +2840,8 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                           4), // Match with TextFormField's border radius
                                                   child: TextFormField(
                                                     key: _category2Key,
-                                                    controller: _siteController,
+                                                    controller:
+                                                        _category2Controller,
                                                     decoration: InputDecoration(
                                                       fillColor: Colors.white,
                                                       filled: true,
@@ -2817,16 +2916,20 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                         .text, // Ensures numeric input
                                                     onChanged: (value) {
                                                       setState(() {
+                                                        _category2Key
+                                                            .currentState!
+                                                            .validate();
                                                         // Update the number of donors and the text controller
-                                                        _siteController.text =
+                                                        _category2Controller
+                                                                .text =
                                                             value; // Manually update the controller text
                                                       });
                                                     },
                                                     validator: (value) {
-                                                      if (_siteController
+                                                      if (_category2Controller
                                                               .text ==
-                                                          null) {
-                                                        return 'Please enter a valid site name';
+                                                          "") {
+                                                        return 'Please enter a valid category 2 name';
                                                       }
                                                       return null;
                                                     },
@@ -2885,7 +2988,7 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                             key:
                                                                 _category2Limit210L,
                                                             controller:
-                                                                _siteController,
+                                                                _category2LimitGController,
                                                             decoration:
                                                                 InputDecoration(
                                                               fillColor:
@@ -2974,17 +3077,20 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                                     .text, // Ensures numeric input
                                                             onChanged: (value) {
                                                               setState(() {
+                                                                _category2Limit210L
+                                                                    .currentState!
+                                                                    .validate();
                                                                 // Update the number of donors and the text controller
-                                                                _siteController
+                                                                _category2LimitGController
                                                                         .text =
                                                                     value; // Manually update the controller text
                                                               });
                                                             },
                                                             validator: (value) {
-                                                              if (_siteController
+                                                              if (_category2LimitGController
                                                                       .text ==
-                                                                  null) {
-                                                                return 'Please enter a valid site name';
+                                                                  "") {
+                                                                return 'Please enter a valid limit';
                                                               }
                                                               return null;
                                                             },
@@ -3037,7 +3143,7 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                             key:
                                                                 _category2SitoutTimeKey,
                                                             controller:
-                                                                _siteController,
+                                                                _category2SetLimitOutTimeController,
                                                             decoration:
                                                                 InputDecoration(
                                                               fillColor:
@@ -3126,16 +3232,19 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                                     .text, // Ensures numeric input
                                                             onChanged: (value) {
                                                               setState(() {
+                                                                _category2SitoutTimeKey
+                                                                    .currentState!
+                                                                    .validate();
                                                                 // Update the number of donors and the text controller
-                                                                _siteController
+                                                                _category2SetLimitOutTimeController
                                                                         .text =
                                                                     value; // Manually update the controller text
                                                               });
                                                             },
                                                             validator: (value) {
-                                                              if (_siteController
+                                                              if (_category2SetLimitOutTimeController
                                                                       .text ==
-                                                                  null) {
+                                                                  "") {
                                                                 return 'Please enter a valid sit out time';
                                                               }
                                                               return null;
@@ -3214,7 +3323,8 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                           4), // Match with TextFormField's border radius
                                                   child: TextFormField(
                                                     key: _category3Key,
-                                                    controller: _siteController,
+                                                    controller:
+                                                        _siteContact_3_Controller,
                                                     decoration: InputDecoration(
                                                       fillColor: Colors.white,
                                                       filled: true,
@@ -3290,7 +3400,8 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                     onChanged: (value) {
                                                       setState(() {
                                                         // Update the number of donors and the text controller
-                                                        _siteController.text =
+                                                        _siteContact_3_Controller
+                                                                .text =
                                                             value; // Manually update the controller text
                                                         _category3Key
                                                             .currentState!
@@ -3298,9 +3409,9 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                       });
                                                     },
                                                     validator: (value) {
-                                                      if (_siteController
+                                                      if (_siteContact_3_Controller
                                                               .text ==
-                                                          null) {
+                                                          "") {
                                                         return 'Please enter a valid category name';
                                                       }
                                                       return null;
@@ -3360,7 +3471,7 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                             key:
                                                                 _category3Limit210L,
                                                             controller:
-                                                                _siteController,
+                                                                _category3LimitGController,
                                                             decoration:
                                                                 InputDecoration(
                                                               fillColor:
@@ -3450,7 +3561,7 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                             onChanged: (value) {
                                                               setState(() {
                                                                 // Update the number of donors and the text controller
-                                                                _siteController
+                                                                _category3LimitGController
                                                                         .text =
                                                                     value; // Manually update the controller text
                                                                 _category3Limit210L
@@ -3459,10 +3570,10 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                               });
                                                             },
                                                             validator: (value) {
-                                                              if (_siteController
+                                                              if (_category3LimitGController
                                                                       .text ==
-                                                                  null) {
-                                                                return 'Please enter a valid site name';
+                                                                  "") {
+                                                                return 'Please enter a valid limit';
                                                               }
                                                               return null;
                                                             },
@@ -3515,7 +3626,7 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                             key:
                                                                 _category3SitoutTimeKey,
                                                             controller:
-                                                                _siteController,
+                                                                _category3SetLimitOutTimeController,
                                                             decoration:
                                                                 InputDecoration(
                                                               fillColor:
@@ -3605,7 +3716,7 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                             onChanged: (value) {
                                                               setState(() {
                                                                 // Update the number of donors and the text controller
-                                                                _siteController
+                                                                _category3SetLimitOutTimeController
                                                                         .text =
                                                                     value; // Manually update the controller text
 
@@ -3615,9 +3726,9 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                               });
                                                             },
                                                             validator: (value) {
-                                                              if (_siteController
+                                                              if (_category3SetLimitOutTimeController
                                                                       .text ==
-                                                                  null) {
+                                                                  "") {
                                                                 return 'Please enter a valid site out time';
                                                               }
                                                               return null;
@@ -3726,8 +3837,9 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                           BorderRadius.circular(
                                                               4), // Match with TextFormField's border radius
                                                       child: TextFormField(
+                                                        key: _category1Key,
                                                         controller:
-                                                            _siteController,
+                                                            _category1_Controller,
                                                         decoration:
                                                             InputDecoration(
                                                           fillColor:
@@ -3812,17 +3924,20 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                             .text, // Ensures numeric input
                                                         onChanged: (value) {
                                                           setState(() {
+                                                            _category1Key
+                                                                .currentState!
+                                                                .validate();
                                                             // Update the number of donors and the text controller
-                                                            _siteController
+                                                            _category1_Controller
                                                                     .text =
                                                                 value; // Manually update the controller text
                                                           });
                                                         },
                                                         validator: (value) {
-                                                          if (_siteController
+                                                          if (_category1_Controller
                                                                   .text ==
-                                                              null) {
-                                                            return 'Please enter a valid site name';
+                                                              "") {
+                                                            return 'Please enter a valid category';
                                                           }
                                                           return null;
                                                         },
@@ -3885,8 +4000,10 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                                           4), // Match with TextFormField's border radius
                                                               child:
                                                                   TextFormField(
+                                                                key:
+                                                                    _category1Limit210L,
                                                                 controller:
-                                                                    _siteController,
+                                                                    _category1LimitGController,
                                                                 decoration:
                                                                     InputDecoration(
                                                                   fillColor:
@@ -3974,18 +4091,21 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                                 onChanged:
                                                                     (value) {
                                                                   setState(() {
+                                                                    _category1Limit210L
+                                                                        .currentState!
+                                                                        .validate();
                                                                     // Update the number of donors and the text controller
-                                                                    _siteController
+                                                                    _category1LimitGController
                                                                             .text =
                                                                         value; // Manually update the controller text
                                                                   });
                                                                 },
                                                                 validator:
                                                                     (value) {
-                                                                  if (_siteController
+                                                                  if (_category1LimitGController
                                                                           .text ==
-                                                                      null) {
-                                                                    return 'Please enter a valid site name';
+                                                                      "") {
+                                                                    return 'Please enter a valid limit';
                                                                   }
                                                                   return null;
                                                                 },
@@ -4042,8 +4162,10 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                                           4), // Match with TextFormField's border radius
                                                               child:
                                                                   TextFormField(
+                                                                key:
+                                                                    _category1SitoutTimeKey,
                                                                 controller:
-                                                                    _siteController,
+                                                                    _category1SetLimitOutTimeController,
                                                                 decoration:
                                                                     InputDecoration(
                                                                   fillColor:
@@ -4131,18 +4253,21 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                                 onChanged:
                                                                     (value) {
                                                                   setState(() {
+                                                                    _category1SitoutTimeKey
+                                                                        .currentState!
+                                                                        .validate();
                                                                     // Update the number of donors and the text controller
-                                                                    _siteController
+                                                                    _category1SetLimitOutTimeController
                                                                             .text =
                                                                         value; // Manually update the controller text
                                                                   });
                                                                 },
                                                                 validator:
                                                                     (value) {
-                                                                  if (_siteController
+                                                                  if (_category1SetLimitOutTimeController
                                                                           .text ==
-                                                                      null) {
-                                                                    return 'Please enter a valid site name';
+                                                                      "") {
+                                                                    return 'Please enter a valid set limit out time';
                                                                   }
                                                                   return null;
                                                                 },
@@ -4221,8 +4346,9 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                           BorderRadius.circular(
                                                               4), // Match with TextFormField's border radius
                                                       child: TextFormField(
+                                                        key: _category2Key,
                                                         controller:
-                                                            _siteController,
+                                                            _category2Controller,
                                                         decoration:
                                                             InputDecoration(
                                                           fillColor:
@@ -4307,17 +4433,20 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                             .text, // Ensures numeric input
                                                         onChanged: (value) {
                                                           setState(() {
+                                                            _category2Key
+                                                                .currentState!
+                                                                .validate();
                                                             // Update the number of donors and the text controller
-                                                            _siteController
+                                                            _category2Controller
                                                                     .text =
                                                                 value; // Manually update the controller text
                                                           });
                                                         },
                                                         validator: (value) {
-                                                          if (_siteController
+                                                          if (_category2Controller
                                                                   .text ==
-                                                              null) {
-                                                            return 'Please enter a valid site name';
+                                                              "") {
+                                                            return 'Please enter a valid category';
                                                           }
                                                           return null;
                                                         },
@@ -4380,8 +4509,10 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                                           4), // Match with TextFormField's border radius
                                                               child:
                                                                   TextFormField(
+                                                                key:
+                                                                    _category2Limit210L,
                                                                 controller:
-                                                                    _siteController,
+                                                                    _category2LimitGController,
                                                                 decoration:
                                                                     InputDecoration(
                                                                   fillColor:
@@ -4469,18 +4600,21 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                                 onChanged:
                                                                     (value) {
                                                                   setState(() {
+                                                                    _category2Limit210L
+                                                                        .currentState!
+                                                                        .validate();
                                                                     // Update the number of donors and the text controller
-                                                                    _siteController
+                                                                    _category2LimitGController
                                                                             .text =
                                                                         value; // Manually update the controller text
                                                                   });
                                                                 },
                                                                 validator:
                                                                     (value) {
-                                                                  if (_siteController
+                                                                  if (_category2LimitGController
                                                                           .text ==
-                                                                      null) {
-                                                                    return 'Please enter a valid site name';
+                                                                      "") {
+                                                                    return 'Please enter a valid limit';
                                                                   }
                                                                   return null;
                                                                 },
@@ -4537,8 +4671,10 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                                           4), // Match with TextFormField's border radius
                                                               child:
                                                                   TextFormField(
+                                                                key:
+                                                                    _category2SitoutTimeKey,
                                                                 controller:
-                                                                    _siteController,
+                                                                    _category2SetLimitOutTimeController,
                                                                 decoration:
                                                                     InputDecoration(
                                                                   fillColor:
@@ -4626,18 +4762,21 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                                 onChanged:
                                                                     (value) {
                                                                   setState(() {
+                                                                    _category2SitoutTimeKey
+                                                                        .currentState!
+                                                                        .validate();
                                                                     // Update the number of donors and the text controller
-                                                                    _siteController
+                                                                    _category2SetLimitOutTimeController
                                                                             .text =
                                                                         value; // Manually update the controller text
                                                                   });
                                                                 },
                                                                 validator:
                                                                     (value) {
-                                                                  if (_siteController
+                                                                  if (_category2SetLimitOutTimeController
                                                                           .text ==
-                                                                      null) {
-                                                                    return 'Please enter a valid site name';
+                                                                      "") {
+                                                                    return 'Please enter a valid sit out time';
                                                                   }
                                                                   return null;
                                                                 },
@@ -4716,8 +4855,9 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                           BorderRadius.circular(
                                                               4), // Match with TextFormField's border radius
                                                       child: TextFormField(
+                                                        key: _category3Key,
                                                         controller:
-                                                            _siteController,
+                                                            _siteContact_3_Controller,
                                                         decoration:
                                                             InputDecoration(
                                                           fillColor:
@@ -4802,17 +4942,21 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                             .text, // Ensures numeric input
                                                         onChanged: (value) {
                                                           setState(() {
+                                                            _category3Key
+                                                                .currentState!
+                                                                .validate();
+
                                                             // Update the number of donors and the text controller
-                                                            _siteController
+                                                            _siteContact_3_Controller
                                                                     .text =
                                                                 value; // Manually update the controller text
                                                           });
                                                         },
                                                         validator: (value) {
-                                                          if (_siteController
+                                                          if (_siteContact_3_Controller
                                                                   .text ==
-                                                              null) {
-                                                            return 'Please enter a valid site name';
+                                                              "") {
+                                                            return 'Please enter a valid category name';
                                                           }
                                                           return null;
                                                         },
@@ -4875,8 +5019,10 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                                           4), // Match with TextFormField's border radius
                                                               child:
                                                                   TextFormField(
+                                                                key:
+                                                                    _category3Limit210L,
                                                                 controller:
-                                                                    _siteController,
+                                                                    _category3LimitGController,
                                                                 decoration:
                                                                     InputDecoration(
                                                                   fillColor:
@@ -4964,18 +5110,21 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                                 onChanged:
                                                                     (value) {
                                                                   setState(() {
+                                                                    _category3Limit210L
+                                                                        .currentState!
+                                                                        .validate();
                                                                     // Update the number of donors and the text controller
-                                                                    _siteController
+                                                                    _category3LimitGController
                                                                             .text =
                                                                         value; // Manually update the controller text
                                                                   });
                                                                 },
                                                                 validator:
                                                                     (value) {
-                                                                  if (_siteController
+                                                                  if (_category3LimitGController
                                                                           .text ==
-                                                                      null) {
-                                                                    return 'Please enter a valid site name';
+                                                                      "") {
+                                                                    return 'Please enter a valid limit';
                                                                   }
                                                                   return null;
                                                                 },
@@ -5032,8 +5181,10 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                                           4), // Match with TextFormField's border radius
                                                               child:
                                                                   TextFormField(
+                                                                key:
+                                                                    _category3SitoutTimeKey,
                                                                 controller:
-                                                                    _siteController,
+                                                                    _category3SetLimitOutTimeController,
                                                                 decoration:
                                                                     InputDecoration(
                                                                   fillColor:
@@ -5121,18 +5272,21 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                                 onChanged:
                                                                     (value) {
                                                                   setState(() {
+                                                                    _category3SitoutTimeKey
+                                                                        .currentState!
+                                                                        .validate();
                                                                     // Update the number of donors and the text controller
-                                                                    _siteController
-                                                                            .text =
+                                                                    _category3SetLimitOutTimeController
+                                                                            .text ==
                                                                         value; // Manually update the controller text
                                                                   });
                                                                 },
                                                                 validator:
                                                                     (value) {
-                                                                  if (_siteController
+                                                                  if (_category3SetLimitOutTimeController
                                                                           .text ==
-                                                                      null) {
-                                                                    return 'Please enter a valid site name';
+                                                                      "") {
+                                                                    return 'Please enter a valid sit out time limit';
                                                                   }
                                                                   return null;
                                                                 },
@@ -5236,7 +5390,7 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                         key:
                                                             _primaryTestSpecificationsKey,
                                                         controller:
-                                                            _siteController,
+                                                            _primaryDrugTestController,
                                                         decoration:
                                                             InputDecoration(
                                                           fillColor:
@@ -5322,7 +5476,7 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                         onChanged: (value) {
                                                           setState(() {
                                                             // Update the number of donors and the text controller
-                                                            _siteController
+                                                            _primaryDrugTestController
                                                                     .text =
                                                                 value; // Manually update the controller text
                                                             _primaryTestSpecificationsKey
@@ -5331,10 +5485,10 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                           });
                                                         },
                                                         validator: (value) {
-                                                          if (_siteController
+                                                          if (_primaryDrugTestController
                                                                   .text ==
-                                                              null) {
-                                                            return 'Please enter a valid site name';
+                                                              "") {
+                                                            return 'Please enter the primary drug test name';
                                                           }
                                                           return null;
                                                         },
@@ -5393,7 +5547,7 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                         key:
                                                             _selectPreferedPrimaryDeviceKey,
                                                         controller:
-                                                            _siteController,
+                                                            _primaryDrugTestPreferredDeviceController,
                                                         decoration:
                                                             InputDecoration(
                                                           fillColor:
@@ -5479,7 +5633,7 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                         onChanged: (value) {
                                                           setState(() {
                                                             // Update the number of donors and the text controller
-                                                            _siteController
+                                                            _primaryDrugTestPreferredDeviceController
                                                                     .text =
                                                                 value; // Manually update the controller text
                                                             _selectPreferedPrimaryDeviceKey
@@ -5488,10 +5642,10 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                           });
                                                         },
                                                         validator: (value) {
-                                                          if (_siteController
+                                                          if (_primaryDrugTestPreferredDeviceController
                                                                   .text ==
-                                                              null) {
-                                                            return 'Please enter a valid site name';
+                                                              "") {
+                                                            return 'Please enter the prefered Device name';
                                                           }
                                                           return null;
                                                         },
@@ -5567,7 +5721,7 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                         key:
                                                             _secondaryDrugTestKey,
                                                         controller:
-                                                            _siteController,
+                                                            _secondaryDrugTestController,
                                                         decoration:
                                                             InputDecoration(
                                                           fillColor:
@@ -5653,7 +5807,7 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                         onChanged: (value) {
                                                           setState(() {
                                                             // Update the number of donors and the text controller
-                                                            _siteController
+                                                            _secondaryDrugTestController
                                                                     .text =
                                                                 value; // Manually update the controller text
                                                             _secondaryDrugTestKey
@@ -5662,10 +5816,10 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                           });
                                                         },
                                                         validator: (value) {
-                                                          if (_siteController
+                                                          if (_secondaryDrugTestController
                                                                   .text ==
-                                                              null) {
-                                                            return 'Please enter a valid site name';
+                                                              "") {
+                                                            return 'Please enter a valid drug test name';
                                                           }
                                                           return null;
                                                         },
@@ -5724,7 +5878,7 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                         key:
                                                             _selectPreferedSecondaryDeviceKey,
                                                         controller:
-                                                            _siteController,
+                                                            _secondaryDrugTestPreferredDeviceController,
                                                         decoration:
                                                             InputDecoration(
                                                           fillColor:
@@ -5810,7 +5964,7 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                         onChanged: (value) {
                                                           setState(() {
                                                             // Update the number of donors and the text controller
-                                                            _siteController
+                                                            _secondaryDrugTestPreferredDeviceController
                                                                     .text =
                                                                 value; // Manually update the controller text
                                                             _selectPreferedSecondaryDeviceKey
@@ -5819,10 +5973,10 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                           });
                                                         },
                                                         validator: (value) {
-                                                          if (_siteController
+                                                          if (_secondaryDrugTestPreferredDeviceController
                                                                   .text ==
-                                                              null) {
-                                                            return 'Please enter a valid site name';
+                                                              "") {
+                                                            return 'Please enter a valid device name';
                                                           }
                                                           return null;
                                                         },
@@ -5981,7 +6135,7 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                         onChanged: (value) {
                                                           setState(() {
                                                             // Update the number of donors and the text controller
-                                                            _siteController
+                                                            _thirteryDrugTestController
                                                                     .text =
                                                                 value; // Manually update the controller text
                                                             _thirtoryDrugTestKey
@@ -5990,10 +6144,10 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                           });
                                                         },
                                                         validator: (value) {
-                                                          if (_siteController
+                                                          if (_thirteryDrugTestController
                                                                   .text ==
-                                                              null) {
-                                                            return 'Please enter a valid site name';
+                                                              "") {
+                                                            return 'Please enter a valid drug test name';
                                                           }
                                                           return null;
                                                         },
@@ -6052,7 +6206,7 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                         key:
                                                             _selectPreferedThirtoryDeviceKey,
                                                         controller:
-                                                            _siteController,
+                                                            _thirteryDrugTestPreferredDeviceController,
                                                         decoration:
                                                             InputDecoration(
                                                           fillColor:
@@ -6138,7 +6292,7 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                         onChanged: (value) {
                                                           setState(() {
                                                             // Update the number of donors and the text controller
-                                                            _siteController
+                                                            _thirteryDrugTestPreferredDeviceController
                                                                     .text =
                                                                 value; // Manually update the controller text
                                                             _selectPreferedThirtoryDeviceKey
@@ -6147,10 +6301,10 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                           });
                                                         },
                                                         validator: (value) {
-                                                          if (_siteController
+                                                          if (_thirteryDrugTestPreferredDeviceController
                                                                   .text ==
-                                                              null) {
-                                                            return 'Please enter a valid site name';
+                                                              "") {
+                                                            return 'Please enter a valid preferred device';
                                                           }
                                                           return null;
                                                         },
@@ -6252,7 +6406,7 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                             key:
                                                                 _primaryTestSpecificationsKey,
                                                             controller:
-                                                                _siteController,
+                                                                _primaryDrugTestController,
                                                             decoration:
                                                                 InputDecoration(
                                                               fillColor:
@@ -6342,20 +6496,19 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                             onChanged: (value) {
                                                               setState(() {
                                                                 // Update the number of donors and the text controller
-                                                                _siteController
+                                                                _primaryDrugTestController
                                                                         .text =
                                                                     value; // Manually update the controller text
-
                                                                 _primaryTestSpecificationsKey
                                                                     .currentState!
                                                                     .validate();
                                                               });
                                                             },
                                                             validator: (value) {
-                                                              if (_siteController
+                                                              if (_primaryDrugTestController
                                                                       .text ==
-                                                                  null) {
-                                                                return 'Please enter a valid site name';
+                                                                  "") {
+                                                                return 'Please enter the primary drug test name';
                                                               }
                                                               return null;
                                                             },
@@ -6416,7 +6569,7 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                             key:
                                                                 _selectPreferedPrimaryDeviceKey,
                                                             controller:
-                                                                _siteController,
+                                                                _primaryDrugTestPreferredDeviceController,
                                                             decoration:
                                                                 InputDecoration(
                                                               fillColor:
@@ -6506,7 +6659,7 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                             onChanged: (value) {
                                                               setState(() {
                                                                 // Update the number of donors and the text controller
-                                                                _siteController
+                                                                _primaryDrugTestPreferredDeviceController
                                                                         .text =
                                                                     value; // Manually update the controller text
                                                                 _selectPreferedPrimaryDeviceKey
@@ -6515,10 +6668,10 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                               });
                                                             },
                                                             validator: (value) {
-                                                              if (_siteController
+                                                              if (_primaryDrugTestPreferredDeviceController
                                                                       .text ==
-                                                                  null) {
-                                                                return 'Please enter a valid site name';
+                                                                  "") {
+                                                                return 'Please enter the prefered Device name';
                                                               }
                                                               return null;
                                                             },
@@ -6598,7 +6751,7 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                             key:
                                                                 _secondaryDrugTestKey,
                                                             controller:
-                                                                _siteController,
+                                                                _secondaryDrugTestController,
                                                             decoration:
                                                                 InputDecoration(
                                                               fillColor:
@@ -6688,20 +6841,19 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                             onChanged: (value) {
                                                               setState(() {
                                                                 // Update the number of donors and the text controller
-                                                                _siteController
+                                                                _secondaryDrugTestController
                                                                         .text =
                                                                     value; // Manually update the controller text
-
                                                                 _secondaryDrugTestKey
                                                                     .currentState!
                                                                     .validate();
                                                               });
                                                             },
                                                             validator: (value) {
-                                                              if (_siteController
+                                                              if (_secondaryDrugTestController
                                                                       .text ==
-                                                                  null) {
-                                                                return 'Please enter a valid site name';
+                                                                  "") {
+                                                                return 'Please enter a valid drug test name';
                                                               }
                                                               return null;
                                                             },
@@ -6762,7 +6914,7 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                             key:
                                                                 _selectPreferedSecondaryDeviceKey,
                                                             controller:
-                                                                _siteController,
+                                                                _secondaryDrugTestPreferredDeviceController,
                                                             decoration:
                                                                 InputDecoration(
                                                               fillColor:
@@ -6852,7 +7004,7 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                             onChanged: (value) {
                                                               setState(() {
                                                                 // Update the number of donors and the text controller
-                                                                _siteController
+                                                                _secondaryDrugTestPreferredDeviceController
                                                                         .text =
                                                                     value; // Manually update the controller text
                                                                 _selectPreferedSecondaryDeviceKey
@@ -6861,10 +7013,10 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                               });
                                                             },
                                                             validator: (value) {
-                                                              if (_siteController
+                                                              if (_secondaryDrugTestPreferredDeviceController
                                                                       .text ==
-                                                                  null) {
-                                                                return 'Please enter a valid site name';
+                                                                  "") {
+                                                                return 'Please enter a valid device name';
                                                               }
                                                               return null;
                                                             },
@@ -7031,7 +7183,7 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                             onChanged: (value) {
                                                               setState(() {
                                                                 // Update the number of donors and the text controller
-                                                                _siteController
+                                                                _thirteryDrugTestController
                                                                         .text =
                                                                     value; // Manually update the controller text
                                                                 _thirtoryDrugTestKey
@@ -7040,10 +7192,10 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                               });
                                                             },
                                                             validator: (value) {
-                                                              if (_siteController
+                                                              if (_thirteryDrugTestController
                                                                       .text ==
-                                                                  null) {
-                                                                return 'Please enter a valid site name';
+                                                                  "") {
+                                                                return 'Please enter a valid drug test name';
                                                               }
                                                               return null;
                                                             },
@@ -7104,7 +7256,7 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                             key:
                                                                 _selectPreferedThirtoryDeviceKey,
                                                             controller:
-                                                                _siteController,
+                                                                _thirteryDrugTestPreferredDeviceController,
                                                             decoration:
                                                                 InputDecoration(
                                                               fillColor:
@@ -7194,7 +7346,7 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                             onChanged: (value) {
                                                               setState(() {
                                                                 // Update the number of donors and the text controller
-                                                                _siteController
+                                                                _thirteryDrugTestPreferredDeviceController
                                                                         .text =
                                                                     value; // Manually update the controller text
                                                                 _selectPreferedThirtoryDeviceKey
@@ -7203,10 +7355,10 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                                               });
                                                             },
                                                             validator: (value) {
-                                                              if (_siteController
+                                                              if (_thirteryDrugTestPreferredDeviceController
                                                                       .text ==
-                                                                  null) {
-                                                                return 'Please enter a valid site name';
+                                                                  "") {
+                                                                return 'Please enter a valid preferred device';
                                                               }
                                                               return null;
                                                             },
@@ -7299,19 +7451,646 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
           ),
         ]);
       case 1:
-        return TextFormField(
-          controller: _emailController,
-          decoration: const InputDecoration(labelText: 'Email'),
-          validator: (value) {
-            if (value == null || value.isEmpty) {
-              return 'Please enter your email';
-            }
-            if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
-              return 'Please enter a valid email';
-            }
-            return null;
-          },
-        );
+        return Column(children: [
+          Padding(
+            padding: const EdgeInsets.only(
+              left: 16.0,
+              right: 16.0,
+            ),
+            child: SizedBox(
+              width: double.infinity,
+              height: 1250,
+              child: Card(
+                surfaceTintColor: Colors.white,
+                color: Colors.white,
+                elevation: 0,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                    top: 12.0,
+                    bottom: 12.0,
+                    left: 16.0,
+                    right: 16.0,
+                  ),
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            // Left-aligned title
+                            Row(
+                              children: [
+                                Text(
+                                  "Additional Tests (s)",
+                                  style: TextStyle(
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 12,
+                        ),
+                        Column(children: [
+                          Padding(
+                            padding: const EdgeInsets.only(right: 0.0),
+                            child: Container(
+                              height: 88,
+                              width: double.infinity,
+                              child: Material(
+                                elevation: 4,
+                                shadowColor: Colors.black.withOpacity(0.5),
+                                borderRadius: BorderRadius.circular(4),
+                                child: TextFormField(
+                                  key: _additionalTestsKey,
+                                  controller: _additionalTestsController,
+                                  maxLines:
+                                      null, // Makes the text field expandable
+                                  minLines: 5,
+                                  decoration: InputDecoration(
+                                    hintText: 'Test (s)',
+                                    fillColor: Colors.white,
+                                    filled: true,
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(4),
+                                      borderSide: BorderSide
+                                          .none, // Removes border outline
+                                    ),
+                                    contentPadding: const EdgeInsets.symmetric(
+                                      vertical: 15,
+                                      horizontal: 12,
+                                    ),
+                                  ),
+                                  keyboardType: TextInputType.multiline,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      _additionalTestsController.text = value;
+                                      _additionalTestsKey.currentState
+                                          ?.validate();
+                                    });
+                                  },
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Please enter any test instructions';
+                                    }
+                                    return null;
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 16,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(right: 0.0),
+                            child: Container(
+                              height: 88,
+                              width: double.infinity,
+                              child: Material(
+                                elevation: 4,
+                                shadowColor: Colors.black.withOpacity(0.5),
+                                borderRadius: BorderRadius.circular(4),
+                                child: TextFormField(
+                                  key: _additioanlTestInstructionsKey,
+                                  controller:
+                                      _additioanlTestInstructionsController,
+                                  maxLines:
+                                      null, // Makes the text field expandable
+                                  minLines: 5,
+                                  decoration: InputDecoration(
+                                    hintText: 'Additional Test Instructions',
+                                    fillColor: Colors.white,
+                                    filled: true,
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(4),
+                                      borderSide: BorderSide
+                                          .none, // Removes border outline
+                                    ),
+                                    contentPadding: const EdgeInsets.symmetric(
+                                      vertical: 15,
+                                      horizontal: 12,
+                                    ),
+                                  ),
+                                  keyboardType: TextInputType.multiline,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      _additioanlTestInstructionsController
+                                          .text = value;
+                                      _additioanlTestInstructionsKey
+                                          .currentState
+                                          ?.validate();
+                                    });
+                                  },
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Please enter any additional test instructions';
+                                    }
+                                    return null;
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 16,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              // Left-aligned title
+                              Row(
+                                children: [
+                                  Text(
+                                    "Donor Selection Process",
+                                    style: TextStyle(
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 16,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(right: 0.0),
+                            child: Container(
+                              height: 88,
+                              width: double.infinity,
+                              child: Material(
+                                elevation: 4,
+                                shadowColor: Colors.black.withOpacity(0.5),
+                                borderRadius: BorderRadius.circular(4),
+                                child: TextFormField(
+                                  key: _donorSelectionProcessKey,
+                                  controller: _donorSelectionProcessController,
+                                  maxLines:
+                                      null, // Makes the text field expandable
+                                  minLines: 5,
+                                  decoration: InputDecoration(
+                                    hintText: '',
+                                    fillColor: Colors.white,
+                                    filled: true,
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(4),
+                                      borderSide: BorderSide
+                                          .none, // Removes border outline
+                                    ),
+                                    contentPadding: const EdgeInsets.symmetric(
+                                      vertical: 15,
+                                      horizontal: 12,
+                                    ),
+                                  ),
+                                  keyboardType: TextInputType.multiline,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      _donorSelectionProcessController.text =
+                                          value;
+                                      _donorSelectionProcessKey.currentState
+                                          ?.validate();
+                                    });
+                                  },
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Please enter a valid donor selection process';
+                                    }
+                                    return null;
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 16,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              // Left-aligned title
+                              Row(
+                                children: [
+                                  Text(
+                                    "Screening and Testing Process",
+                                    style: TextStyle(
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 16,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(right: 0.0),
+                            child: Container(
+                              height: 88,
+                              width: double.infinity,
+                              child: Material(
+                                elevation: 4,
+                                shadowColor: Colors.black.withOpacity(0.5),
+                                borderRadius: BorderRadius.circular(4),
+                                child: TextFormField(
+                                  key: _screeningAndTestingProcessKey,
+                                  controller:
+                                      _screeningAndTestingProcessController,
+                                  maxLines:
+                                      null, // Makes the text field expandable
+                                  minLines: 5,
+                                  decoration: InputDecoration(
+                                    hintText: '',
+                                    fillColor: Colors.white,
+                                    filled: true,
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(4),
+                                      borderSide: BorderSide
+                                          .none, // Removes border outline
+                                    ),
+                                    contentPadding: const EdgeInsets.symmetric(
+                                      vertical: 15,
+                                      horizontal: 12,
+                                    ),
+                                  ),
+                                  keyboardType: TextInputType.multiline,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      _screeningAndTestingProcessController
+                                          .text = value;
+                                      _screeningAndTestingProcessKey
+                                          .currentState
+                                          ?.validate();
+                                    });
+                                  },
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Please enter any screening and testing process';
+                                    }
+                                    return null;
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 16,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              // Left-aligned title
+                              Row(
+                                children: [
+                                  Text(
+                                    "Test Confirmation Instructions",
+                                    style: TextStyle(
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 16,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(right: 0.0),
+                            child: Container(
+                              height: 88,
+                              width: double.infinity,
+                              child: Material(
+                                elevation: 4,
+                                shadowColor: Colors.black.withOpacity(0.5),
+                                borderRadius: BorderRadius.circular(4),
+                                child: TextFormField(
+                                  key: _testConfirmationInstructionsKey,
+                                  controller:
+                                      _testConfirmationInstructionsController,
+                                  maxLines:
+                                      null, // Makes the text field expandable
+                                  minLines: 5,
+                                  decoration: InputDecoration(
+                                    hintText: '',
+                                    fillColor: Colors.white,
+                                    filled: true,
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(4),
+                                      borderSide: BorderSide
+                                          .none, // Removes border outline
+                                    ),
+                                    contentPadding: const EdgeInsets.symmetric(
+                                      vertical: 15,
+                                      horizontal: 12,
+                                    ),
+                                  ),
+                                  keyboardType: TextInputType.multiline,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      _testConfirmationInstructionsController
+                                          .text = value;
+                                      _testConfirmationInstructionsKey
+                                          .currentState
+                                          ?.validate();
+                                    });
+                                  },
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Please enter any test confirmation instructions';
+                                    }
+                                    return null;
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 16,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              // Left-aligned title
+                              Row(
+                                children: [
+                                  Text(
+                                    "Global Site Access Instructions",
+                                    style: TextStyle(
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 16,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(right: 0.0),
+                            child: Container(
+                              height: 88,
+                              width: double.infinity,
+                              child: Material(
+                                elevation: 4,
+                                shadowColor: Colors.black.withOpacity(0.5),
+                                borderRadius: BorderRadius.circular(4),
+                                child: TextFormField(
+                                  key: _globalSiteAccessInstructionsKey,
+                                  controller:
+                                      _globalSiteAccessInstructionsController,
+                                  maxLines:
+                                      null, // Makes the text field expandable
+                                  minLines: 5,
+                                  decoration: InputDecoration(
+                                    hintText: '',
+                                    fillColor: Colors.white,
+                                    filled: true,
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(4),
+                                      borderSide: BorderSide
+                                          .none, // Removes border outline
+                                    ),
+                                    contentPadding: const EdgeInsets.symmetric(
+                                      vertical: 15,
+                                      horizontal: 12,
+                                    ),
+                                  ),
+                                  keyboardType: TextInputType.multiline,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      _globalSiteAccessInstructionsController
+                                          .text = value;
+                                      _globalSiteAccessInstructionsKey
+                                          .currentState
+                                          ?.validate();
+                                    });
+                                  },
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Please enter any global site access instructions';
+                                    }
+                                    return null;
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 16,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              // Left-aligned title
+                              Row(
+                                children: [
+                                  Text(
+                                    "Specific Local Site Access Instructions",
+                                    style: TextStyle(
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 16,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(right: 0.0),
+                            child: Container(
+                              height: 88,
+                              width: double.infinity,
+                              child: Material(
+                                elevation: 4,
+                                shadowColor: Colors.black.withOpacity(0.5),
+                                borderRadius: BorderRadius.circular(4),
+                                child: TextFormField(
+                                  key: _specificLocalSiteAccessInstructionsKey,
+                                  controller:
+                                      _specificLocalSiteAccessInstructionsController,
+                                  maxLines:
+                                      null, // Makes the text field expandable
+                                  minLines: 5,
+                                  decoration: InputDecoration(
+                                    hintText: '',
+                                    fillColor: Colors.white,
+                                    filled: true,
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(4),
+                                      borderSide: BorderSide
+                                          .none, // Removes border outline
+                                    ),
+                                    contentPadding: const EdgeInsets.symmetric(
+                                      vertical: 15,
+                                      horizontal: 12,
+                                    ),
+                                  ),
+                                  keyboardType: TextInputType.multiline,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      _specificLocalSiteAccessInstructionsController
+                                          .text = value;
+                                      _specificLocalSiteAccessInstructionsKey
+                                          .currentState
+                                          ?.validate();
+                                    });
+                                  },
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Please enter specific local site access instructions';
+                                    }
+                                    return null;
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 16,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              // Left-aligned title
+                              Row(
+                                children: [
+                                  Text(
+                                    "Special Instructions",
+                                    style: TextStyle(
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 16,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(right: 0.0),
+                            child: Container(
+                              height: 88,
+                              width: double.infinity,
+                              child: Material(
+                                elevation: 4,
+                                shadowColor: Colors.black.withOpacity(0.5),
+                                borderRadius: BorderRadius.circular(4),
+                                child: TextFormField(
+                                  key: _specialInstructionsKey,
+                                  controller: _specialInstructionsController,
+                                  maxLines:
+                                      null, // Makes the text field expandable
+                                  minLines: 5,
+                                  decoration: InputDecoration(
+                                    hintText: '',
+                                    fillColor: Colors.white,
+                                    filled: true,
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(4),
+                                      borderSide: BorderSide
+                                          .none, // Removes border outline
+                                    ),
+                                    contentPadding: const EdgeInsets.symmetric(
+                                      vertical: 15,
+                                      horizontal: 12,
+                                    ),
+                                  ),
+                                  keyboardType: TextInputType.multiline,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      _specialInstructionsController.text =
+                                          value;
+                                      _specialInstructionsKey.currentState
+                                          ?.validate();
+                                    });
+                                  },
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Please enter any special instructions';
+                                    }
+                                    return null;
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 16,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              left: 1.0,
+                              right: 1.0,
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                ElevatedButton(
+                                  onPressed: _prevStep,
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: Color(
+                                        0xFF01B4D2), // Color for the Back button
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(30),
+                                    ),
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 20, vertical: 5),
+                                    minimumSize: Size(80,
+                                        30), // Sets a minimum width and height
+                                  ),
+                                  child: const Text(
+                                    "Back",
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                ),
+                                ElevatedButton(
+                                  onPressed: _nextStep,
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors
+                                        .blue, // Color for the Next button
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20),
+                                    ),
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 20, vertical: 5),
+                                    minimumSize: Size(80, 30),
+                                  ),
+                                  child: const Text(
+                                    "Next",
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: 15,
+                          ),
+                        ]),
+                      ]),
+                ),
+              ),
+            ),
+          )
+        ]);
       case 2:
         return const Center(child: Text('Ready to submit!'));
       default:
@@ -7359,6 +8138,11 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
 
   void _prevStep() {
     if (_currentStep > 0) {
+      widget.scrollController.animateTo(
+        0, // Scroll to top
+        duration: const Duration(milliseconds: 500),
+        curve: Curves.easeInOut,
+      );
       setState(() {
         _currentStep--;
       });
