@@ -94,6 +94,7 @@ flutter:
     - assets/images/icons/icon_calendar.png
     - assets/images/icons/refreshIcon.png
     - assets/images/icons/newJobOpen.png
+    - assets/images/icons/newCalloutIcon.png
     - assets/images/icons/newCalloutOpen.png
     - assets/images/icons/X.png
     - assets/images/icons/delete.png

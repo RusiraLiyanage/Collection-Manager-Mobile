@@ -118,6 +118,11 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
   final TextEditingController _authorizedRepresentativeEmailController =
       TextEditingController();
 
+  final TextEditingController _clientNameController = TextEditingController();
+
+  final TextEditingController _clientReferenceController =
+      TextEditingController();
+
   // Dropdown values
   String? _selectedCollectionOrganisation;
   String? _selectedCollectorOneAssignment;
@@ -249,6 +254,12 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
   final GlobalKey<FormFieldState<String>> _collectorTwoAssignmentKey =
       GlobalKey<FormFieldState<String>>();
 
+  final GlobalKey<FormFieldState<String>> _clientNameKey =
+      GlobalKey<FormFieldState<String>>();
+
+  final GlobalKey<FormFieldState<String>> _clientReferenceKey =
+      GlobalKey<FormFieldState<String>>();
+
   // Dropdown options
   final List<String> _collectionOrganisations = ['Org 1', 'Org 2', 'Org 3'];
   final List<String> _collectorOneAssignment = [
@@ -294,7 +305,7 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
             ),
             child: SizedBox(
               width: double.infinity,
-              height: 195,
+              height: 180,
               child: Card(
                 surfaceTintColor: Colors.white,
                 color: Colors.white,
@@ -312,7 +323,7 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Row(
+                      /*  Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           // Left-aligned title
@@ -328,7 +339,7 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                             ],
                           ),
                         ],
-                      ),
+                      ), */
                       SizedBox(
                         height: 12,
                       ),
@@ -586,6 +597,288 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                             )
                           ],
                         ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Padding(
+            padding: const EdgeInsets.only(
+              left: 16.0,
+              right: 16.0,
+            ),
+            child: SizedBox(
+              width: double.infinity,
+              height: 190,
+              child: Card(
+                surfaceTintColor: Colors.white,
+                color: Colors.white,
+                elevation: 0,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                    top: 12.0,
+                    bottom: 12.0,
+                    left: 16.0,
+                    right: 16.0,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          // Left-aligned title
+                          Row(
+                            children: [
+                              Text(
+                                "Client",
+                                style: TextStyle(
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 6,
+                      ),
+                      Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              left: 0.0,
+                              top: 15.0,
+                              right: 0.0,
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const Text(
+                                  "Client Name",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 13,
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 0.0),
+                                  child: Container(
+                                    height: 40,
+                                    width: 206,
+                                    child: Material(
+                                      elevation:
+                                          4, // Adjust this value for more or less elevation
+                                      shadowColor: Colors.black.withOpacity(
+                                          0.5), // Optional: Adjust shadow color
+                                      borderRadius: BorderRadius.circular(
+                                          4), // Match with TextFormField's border radius
+                                      child: TextFormField(
+                                        key: _clientNameKey,
+                                        controller: _clientNameController,
+                                        decoration: InputDecoration(
+                                          fillColor: Colors.white,
+                                          filled: true,
+                                          border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            borderSide: const BorderSide(
+                                              color: Colors.white,
+                                              width: 2,
+                                            ),
+                                          ),
+                                          enabledBorder: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            borderSide: const BorderSide(
+                                              color: Colors.white,
+                                              width: 2,
+                                            ),
+                                          ),
+                                          focusedBorder: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            borderSide: const BorderSide(
+                                              color: Colors.white,
+                                              width: 2,
+                                            ),
+                                          ),
+                                          errorBorder: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            borderSide: const BorderSide(
+                                              color: Colors.red,
+                                              width: 2,
+                                            ),
+                                          ),
+                                          focusedErrorBorder:
+                                              OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            borderSide: const BorderSide(
+                                              color: Colors.red,
+                                              width: 2,
+                                            ),
+                                          ),
+                                          contentPadding:
+                                              const EdgeInsets.symmetric(
+                                            vertical: 5,
+                                            horizontal: 12,
+                                          ),
+                                          errorStyle: const TextStyle(
+                                            color: Colors.red,
+                                            fontSize: 12,
+                                          ),
+                                        ),
+                                        keyboardType: TextInputType
+                                            .text, // Ensures numeric input
+                                        onChanged: (value) {
+                                          setState(() {
+                                            //_selectedJobReference = value;
+                                            // Update the number of donors and the text controller
+                                            _clientNameController.text =
+                                                value; // Manually update the controller text
+                                            _clientNameKey.currentState!
+                                                .validate();
+                                          });
+                                        },
+                                        validator: (value) {
+                                          if (_clientNameController.text ==
+                                              "") {
+                                            return 'Please enter the client name';
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              left: 0.0,
+                              top: 15.0,
+                              right: 0.0,
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const Text(
+                                  "Client Reference",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 13,
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 0.0),
+                                  child: Container(
+                                    height: 40,
+                                    width: 206,
+                                    child: Material(
+                                      elevation:
+                                          4, // Adjust this value for more or less elevation
+                                      shadowColor: Colors.black.withOpacity(
+                                          0.5), // Optional: Adjust shadow color
+                                      borderRadius: BorderRadius.circular(
+                                          4), // Match with TextFormField's border radius
+                                      child: TextFormField(
+                                        key: _clientReferenceKey,
+                                        controller: _clientReferenceController,
+                                        decoration: InputDecoration(
+                                          fillColor: Colors.white,
+                                          filled: true,
+                                          border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            borderSide: const BorderSide(
+                                              color: Colors.white,
+                                              width: 2,
+                                            ),
+                                          ),
+                                          enabledBorder: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            borderSide: const BorderSide(
+                                              color: Colors.white,
+                                              width: 2,
+                                            ),
+                                          ),
+                                          focusedBorder: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            borderSide: const BorderSide(
+                                              color: Colors.white,
+                                              width: 2,
+                                            ),
+                                          ),
+                                          errorBorder: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            borderSide: const BorderSide(
+                                              color: Colors.red,
+                                              width: 2,
+                                            ),
+                                          ),
+                                          focusedErrorBorder:
+                                              OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            borderSide: const BorderSide(
+                                              color: Colors.red,
+                                              width: 2,
+                                            ),
+                                          ),
+                                          contentPadding:
+                                              const EdgeInsets.symmetric(
+                                            vertical: 5,
+                                            horizontal: 12,
+                                          ),
+                                          errorStyle: const TextStyle(
+                                            color: Colors.red,
+                                            fontSize: 12,
+                                          ),
+                                        ),
+                                        keyboardType: TextInputType
+                                            .text, // Ensures numeric input
+                                        onChanged: (value) {
+                                          setState(() {
+                                            //_selectedJobReference = value;
+                                            // Update the number of donors and the text controller
+                                            _clientReferenceController.text =
+                                                value; // Manually update the controller text
+                                            _clientReferenceKey.currentState!
+                                                .validate();
+                                          });
+                                        },
+                                        validator: (value) {
+                                          if (_clientReferenceController.text ==
+                                              "") {
+                                            return 'Please enter the client reference';
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
