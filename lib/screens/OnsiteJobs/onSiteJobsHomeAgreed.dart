@@ -16,6 +16,7 @@ import 'package:project_code_blue/sidemenu/sidemenu.dart';
 import '../../Navigation/appBar.dart';
 import 'package:number_pagination/number_pagination.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:flutter/services.dart';
 
 class OnsiteJobsHomeAgreed extends StatefulWidget {
   const OnsiteJobsHomeAgreed({super.key});
@@ -895,7 +896,7 @@ class _onSiteJobsHomeAgreedState extends State<OnsiteJobsHomeAgreed> {
                           alignment: Alignment.centerRight,
                           child: InkWell(
                             onTap: () {
-                              if (Platform.isAndroid) {
+                              if (Platform.isAndroid || Platform.isIOS) {
                                 showModalBottomSheet<void>(
                                   isScrollControlled:
                                       true, // Allows controlling the height

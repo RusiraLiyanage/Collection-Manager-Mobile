@@ -1970,7 +1970,7 @@ class _NewCalloutJobState extends State<NewCalloutJob> {
                                     controller: _calloutInstructionsController,
                                     maxLines:
                                         null, // Makes the text field expandable
-                                    minLines: 5,
+                                    minLines: 8,
                                     decoration: InputDecoration(
                                       hintText: '',
                                       fillColor: Colors.white,
