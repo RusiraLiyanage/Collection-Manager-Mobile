@@ -9649,7 +9649,7 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   const Text(
-                                    "New Job",
+                                    "New Onsite Job",
                                     style: TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold,
