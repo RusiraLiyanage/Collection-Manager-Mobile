@@ -39,6 +39,7 @@ dependencies:
   modal_bottom_sheet: ^3.0.0
   flutter_steps: ^1.0.5
   horizontal_stepper_flutter: ^1.0.3
+  intl: ^0.20.2
 
 dev_dependencies:
   flutter_test:
@@ -94,6 +95,10 @@ flutter:
     - assets/images/icons/icon_calendar.png
     - assets/images/icons/refreshIcon.png
     - assets/images/icons/newJobOpen.png
+    - assets/images/icons/arrow_left.png
+    - assets/images/icons/arrow_right.png
+    - assets/images/icons/calendarDate.png
+    - assets/images/icons/theClock.png
     - assets/images/icons/newCalloutIcon.png
     - assets/images/icons/newCalloutOpen.png
     - assets/images/icons/X.png
