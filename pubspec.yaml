@@ -40,6 +40,7 @@ dependencies:
   flutter_steps: ^1.0.5
   horizontal_stepper_flutter: ^1.0.3
   intl: ^0.20.2
+  adaptive_action_sheet: ^2.0.4
 
 dev_dependencies:
   flutter_test:
@@ -102,6 +103,10 @@ flutter:
     - assets/images/icons/newCalloutIcon.png
     - assets/images/icons/newCalloutOpen.png
     - assets/images/icons/X.png
+    - assets/images/icons/onSiteApprovalVector.png
+    - assets/images/icons/printIcon.png
+    - assets/images/icons/siteContactSignature.png
+    - assets/images/icons/collectorSignature.png
     - assets/images/icons/delete.png
     - assets/images/icons/newJobIcon.png
     - assets/images/icons/OnsiteJobs/calander_icon.png

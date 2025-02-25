@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_code_blue/pages/collectorsModal.dart';
 
 class OnsiteJobsNewCard extends StatelessWidget {
   const OnsiteJobsNewCard({
@@ -129,10 +130,18 @@ class OnsiteJobsNewCard extends StatelessWidget {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 8.0),
-                      child: FittedBox(
-                        child: Image.asset(
-                          "assets/images/icons/eye_icon.png",
-                          fit: BoxFit.cover,
+                      child: GestureDetector(
+                        onTap: () => showDialog(
+                          context: context,
+                          barrierDismissible:
+                              false, // Prevent closing on backdrop tap
+                          builder: (context) => CollectorsModal(),
+                        ),
+                        child: FittedBox(
+                          child: Image.asset(
+                            "assets/images/icons/eye_icon.png",
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
                     ),

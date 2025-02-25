@@ -406,7 +406,7 @@ class _OnsiteApprovalsState extends State<OnsiteApprovals> {
                   ),
                   Container(
                     width: double.infinity,
-                    height: 130,
+                    height: 80,
                     color: Color(0xFFF2F2F2),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
