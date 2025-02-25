@@ -143,6 +143,8 @@ class OnsiteApprovalsNewCard extends StatelessWidget {
                                     fontSize: 18),
                               ),
                               onPressed: (_) {
+                                Navigator.pop(
+                                    context); // Close the bottom sheet
                                 showDialog(
                                   context: context,
                                   barrierDismissible:

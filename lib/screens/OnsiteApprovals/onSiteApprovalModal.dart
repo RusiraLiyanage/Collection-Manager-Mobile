@@ -26,7 +26,7 @@ class OnsiteApprovalModal extends StatelessWidget {
               width: MediaQuery.of(context).size.width * 0.93,
               height: MediaQuery.of(context).size.height * 0.8,
               padding: EdgeInsets.only(
-                right: 12,
+                right: 3,
                 top: 11,
                 bottom: 11,
                 left: 16,
@@ -135,7 +135,7 @@ class OnsiteApprovalModal extends StatelessWidget {
                                 Padding(
                                   padding: const EdgeInsets.only(
                                     bottom: 8.0,
-                                    right: 10,
+                                    right: 0,
                                   ),
                                   child: Column(
                                     crossAxisAlignment:
@@ -386,7 +386,7 @@ class OnsiteApprovalModal extends StatelessWidget {
                                       ),
                                       Container(
                                         height: 40,
-                                        width: 75,
+                                        width: 80,
                                         child: Material(
                                           elevation: 4,
                                           shadowColor:
@@ -459,7 +459,7 @@ class OnsiteApprovalModal extends StatelessWidget {
                                       ),
                                       Container(
                                         height: 40,
-                                        width: 75,
+                                        width: 80,
                                         child: Material(
                                           elevation: 4,
                                           shadowColor:
@@ -532,7 +532,7 @@ class OnsiteApprovalModal extends StatelessWidget {
                                       ),
                                       Container(
                                         height: 40,
-                                        width: 75,
+                                        width: 80,
                                         child: Material(
                                           elevation: 4,
                                           shadowColor:
@@ -942,6 +942,17 @@ class OnsiteApprovalModal extends StatelessWidget {
                                       ),
                                     ),
                                     SizedBox(height: 10),
+                                    Text(
+                                      "Signature",
+                                      style: TextStyle(
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.bold,
+                                        color: Color(0xFF7F8E9D),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 5,
+                                    ),
                                     Container(
                                       height: 135,
                                       width: 170,
