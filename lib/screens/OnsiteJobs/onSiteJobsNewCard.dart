@@ -1,5 +1,7 @@
+import 'package:adaptive_action_sheet/adaptive_action_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:project_code_blue/pages/collectorsModal.dart';
+import 'package:project_code_blue/screens/OnsiteApprovals/onSiteApprovalModal.dart';
 
 class OnsiteJobsNewCard extends StatelessWidget {
   const OnsiteJobsNewCard({
@@ -119,10 +121,61 @@ class OnsiteJobsNewCard extends StatelessWidget {
                 // Right-aligned value
                 Row(
                   children: [
-                    FittedBox(
-                      child: Image.asset(
-                        "assets/images/icons/threeDots.png",
-                        fit: BoxFit.cover,
+                    GestureDetector(
+                      onTap: () {
+                        showAdaptiveActionSheet(
+                          bottomSheetColor: Color(0xFFEEF5F6),
+                          context: context,
+                          actions: <BottomSheetAction>[
+                            BottomSheetAction(
+                              title: const Text(
+                                'Manage Job',
+                                style: TextStyle(
+                                    color: Colors.blue,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18),
+                              ),
+                              onPressed: (_) {
+                                Navigator.pop(
+                                    context); // Close the bottom sheet
+                                /* showDialog(
+                                  context: context,
+                                  barrierDismissible:
+                                      false, // Prevent closing on backdrop tap
+                                  builder: (context) => OnsiteApprovalModal(),
+                                ); */
+                              },
+                            ),
+                            BottomSheetAction(
+                              title: const Text(
+                                'Delete Job',
+                                style: TextStyle(
+                                  color: Colors.blue,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                ),
+                              ),
+                              onPressed: (_) {
+                                Navigator.pop(context);
+                              },
+                            ),
+                          ],
+                          cancelAction: CancelAction(
+                              title: const Text(
+                            'Close',
+                            style: TextStyle(
+                              color: Colors.grey,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                            ),
+                          )),
+                        );
+                      },
+                      child: FittedBox(
+                        child: Image.asset(
+                          "assets/images/icons/threeDots.png",
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                     SizedBox(
