@@ -146,65 +146,71 @@ class _NewCalloutJobState extends State<NewClient> {
                   borderRadius: BorderRadius.circular(15),
                 ),
                 child: Padding(
-                    padding: const EdgeInsets.only(
-                      top: 12.0,
-                      bottom: 12.0,
-                      left: 16.0,
-                      right: 16.0,
-                    ),
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(
-                            height: 5,
-                          ),
-                          Container(
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                              color: const Color(
-                                  0xFFE6F7FA), // Light blue background
-                              borderRadius: BorderRadius.circular(6),
-                            ),
-                            child: Column(
-                              mainAxisSize: MainAxisSize
-                                  .min, // Ensures Column takes only required space
-                              children: [
-                                Container(
-                                  color: Colors.grey[600], // Background color
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: 8, horizontal: 16), // Padding
-                                  child: Row(
-                                    children: [
-                                      Text(
-                                        '1',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                      SizedBox(width: 8),
-                                      Container(
-                                        height: 20,
-                                        width: 2,
-                                        color: Colors.white, // Vertical divider
-                                      ),
-                                      SizedBox(width: 8),
-                                      Text(
-                                        'Client Details',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ],
+                  padding: const EdgeInsets.only(
+                    top: 12.0,
+                    bottom: 12.0,
+                    left: 16.0,
+                    right: 16.0,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Container(
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          color:
+                              const Color(0xFFE6F7FA), // Light blue background
+                          borderRadius: BorderRadius.circular(6),
+                        ),
+                        child: Column(
+                          mainAxisSize: MainAxisSize
+                              .min, // Ensures Column takes only required space
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 8, horizontal: 16), // Padding
+                              decoration: BoxDecoration(
+                                color:
+                                    Colors.grey[600], // Light blue background
+                                borderRadius: BorderRadius.circular(6),
+                              ),
+                              child: Row(
+                                children: [
+                                  Text(
+                                    '1',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
-                                ),
-                              ],
+                                  SizedBox(width: 8),
+                                  Container(
+                                    height: 20,
+                                    width: 2,
+                                    color: Colors.white, // Vertical divider
+                                  ),
+                                  SizedBox(width: 8),
+                                  Text(
+                                    'Client Details',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                        ])),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ),
             ),
           ),
