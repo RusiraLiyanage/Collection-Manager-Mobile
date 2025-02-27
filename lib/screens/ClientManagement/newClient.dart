@@ -2440,6 +2440,7 @@ class _NewCalloutJobState extends State<NewClient> {
                                 width:
                                     500, // Reduced total width to make it smaller
                                 child: IconStepper(
+                                  activeStepBorderColor: Colors.transparent,
                                   lineDotRadius: 1.1,
                                   onStepReached: (index) {
                                     setState(() {
