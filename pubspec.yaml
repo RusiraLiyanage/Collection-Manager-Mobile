@@ -41,6 +41,8 @@ dependencies:
   horizontal_stepper_flutter: ^1.0.3
   intl: ^0.20.2
   adaptive_action_sheet: ^2.0.4
+  progress_stepper: ^3.1.0
+  im_stepper: ^1.0.1+1
 
 dev_dependencies:
   flutter_test:
@@ -108,6 +110,8 @@ flutter:
     - assets/images/icons/siteContactSignature.png
     - assets/images/icons/collectorSignature.png
     - assets/images/icons/delete.png
+    - assets/images/icons/searchIcon.png
+    - assets/images/icons/newClient.png
     - assets/images/icons/newJobIcon.png
     - assets/images/icons/OnsiteJobs/calander_icon.png
     - assets/images/icons/OnsiteJobs/time_icon.png

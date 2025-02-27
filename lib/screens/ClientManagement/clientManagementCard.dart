@@ -1,13 +1,13 @@
 import 'package:adaptive_action_sheet/adaptive_action_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:project_code_blue/pages/collectorsModal.dart';
+import 'package:project_code_blue/screens/OnsiteApprovals/onSiteApprovalModal.dart';
 
-class AchievedJobsNewCard extends StatelessWidget {
-  final Map<String, String> job;
-
-  const AchievedJobsNewCard({
+class ClientManagementCard extends StatelessWidget {
+  final Map<String, String> client;
+  const ClientManagementCard({
     super.key,
-    required this.job,
+    required this.client,
   });
 
   Widget _buildInfoRow({
@@ -39,44 +39,18 @@ class AchievedJobsNewCard extends StatelessWidget {
           SizedBox(
             width: 20,
           ),
-          // Right-aligned value
-          title == "Job Status"
-              ? Padding(
-                  padding: const EdgeInsets.only(right: 118.0),
-                  child: IntrinsicWidth(
-                    child: Card(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      color: Colors.yellow,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 12, vertical: 3),
-                        child: Text(
-                          value,
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 14,
-                            fontWeight:
-                                isBold ? FontWeight.bold : FontWeight.normal,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                )
-              : Expanded(
-                  flex:
-                      4, // Adjust the flex value to control space distribution
-                  child: Text(
-                    value,
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 14,
-                      fontWeight: isBold ? FontWeight.bold : FontWeight.normal,
-                    ),
-                  ),
-                )
+
+          Expanded(
+            flex: 4, // Adjust the flex value to control space distribution
+            child: Text(
+              value,
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 14,
+                fontWeight: isBold ? FontWeight.bold : FontWeight.normal,
+              ),
+            ),
+          )
         ],
       ),
     );
@@ -87,7 +61,7 @@ class AchievedJobsNewCard extends StatelessWidget {
     return Card(
       surfaceTintColor: Colors.white,
       color: Colors.white,
-      elevation: 5,
+      elevation: 0,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15),
       ),
@@ -108,7 +82,7 @@ class AchievedJobsNewCard extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      "Rail NSW",
+                      "New Castle City Council",
                       style: TextStyle(
                         fontSize: 17,
                         fontWeight: FontWeight.bold,
@@ -128,7 +102,7 @@ class AchievedJobsNewCard extends StatelessWidget {
                           actions: <BottomSheetAction>[
                             BottomSheetAction(
                               title: const Text(
-                                'Manage Job',
+                                'Manage client',
                                 style: TextStyle(
                                     color: Colors.blue,
                                     fontWeight: FontWeight.bold,
@@ -147,7 +121,7 @@ class AchievedJobsNewCard extends StatelessWidget {
                             ),
                             BottomSheetAction(
                               title: const Text(
-                                'Delete Job',
+                                'Delete client',
                                 style: TextStyle(
                                   color: Colors.blue,
                                   fontWeight: FontWeight.bold,
@@ -180,23 +154,6 @@ class AchievedJobsNewCard extends StatelessWidget {
                     SizedBox(
                       width: 10,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 8.0),
-                      child: GestureDetector(
-                        onTap: () => showDialog(
-                          context: context,
-                          barrierDismissible:
-                              false, // Prevent closing on backdrop tap
-                          builder: (context) => const CollectorsModal(),
-                        ),
-                        child: FittedBox(
-                          child: Image.asset(
-                            "assets/images/icons/eye_icon.png",
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ),
-                    ),
                   ],
                 ),
               ],
@@ -211,7 +168,7 @@ class AchievedJobsNewCard extends StatelessWidget {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                 child: Text(
-                  "12345678",
+                  client["clientReference"]!,
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: 10,
@@ -224,28 +181,20 @@ class AchievedJobsNewCard extends StatelessWidget {
             _buildInfoRow(
                 iconPath: 'assets/images/icons/dafault_icon.png',
                 title: 'Authorized Rep',
-                value: job["rep"]!),
+                value: client["authorizedRep"]!),
             _buildInfoRow(
                 iconPath: 'assets/images/icons/dafault_icon.png',
-                title: 'Date / Time',
-                value: job["dateTime"]!),
+                title: 'Mobile',
+                value: client["mobile"]!),
             _buildInfoRow(
                 iconPath: 'assets/images/icons/dafault_icon.png',
-                title: 'Location',
-                value: job["location"]!,
+                title: 'Email',
+                value: client["email"]!,
                 isBold: false),
             _buildInfoRow(
                 iconPath: 'assets/images/icons/dafault_icon.png',
-                title: 'Service',
-                value: job["service"]!),
-            _buildInfoRow(
-                iconPath: 'assets/images/icons/dafault_icon.png',
-                title: 'Callout Job',
-                value: job["callout"]!),
-            _buildInfoRow(
-                iconPath: 'assets/images/icons/dafault_icon.png',
-                title: 'Job Status',
-                value: job["jobStatus"]!),
+                title: 'Callout',
+                value: client["callout"]!),
           ],
         ),
       ),
