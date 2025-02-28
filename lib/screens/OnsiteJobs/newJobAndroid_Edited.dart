@@ -1980,7 +1980,7 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
             ),
           ),
           SizedBox(
-            height: 5,
+            height: 10,
           ),
           Padding(
             padding: const EdgeInsets.only(
@@ -2532,7 +2532,7 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
             ),
           ),
           SizedBox(
-            height: 5,
+            height: 10,
           ),
           Padding(
             padding: const EdgeInsets.only(

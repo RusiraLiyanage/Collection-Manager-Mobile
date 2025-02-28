@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:horizontal_stepper_flutter/horizontal_stepper_flutter.dart';
+import 'package:project_code_blue/screens/ClientManagement/authorizedRepresentatives.dart';
 import 'package:project_code_blue/screens/OnsiteJobs/collectorRepresentation.dart';
 import 'package:project_code_blue/screens/OnsiteJobs/onSiteJobsNewCard.dart';
 //import 'package:progress_stepper/progress_stepper.dart';
@@ -24,13 +25,17 @@ class _NewCalloutJobState extends State<NewClient> {
   TestsType? _testsType = TestsType.alcoholOnly;
   final List<GlobalKey<FormState>> _formKeys = [
     GlobalKey<FormState>(),
+    GlobalKey<FormState>(),
+    GlobalKey<FormState>(),
+    GlobalKey<FormState>(),
+    GlobalKey<FormState>(),
+    GlobalKey<FormState>(),
+    GlobalKey<FormState>(),
   ];
 
-  int _currentStep = 0;
+  int numberOfRepresentatives = 0;
 
-  int numberOfCollectors = 0;
-
-  int _currentSteP = 1; // Start from Step 1
+  int _currentStep = 0; // Start from Step 1
 
   final TextEditingController _donorsController = TextEditingController();
   final TextEditingController _jobReferenceController = TextEditingController();
@@ -39,23 +44,40 @@ class _NewCalloutJobState extends State<NewClient> {
 
   final TextEditingController _clientNameController = TextEditingController();
 
-  final TextEditingController _clientReferenceController =
-      TextEditingController();
+  final TextEditingController _clientNamEController = TextEditingController();
 
   final TextEditingController _calloutInstructionsController =
       TextEditingController();
 
+  final TextEditingController _mobile_Controller = TextEditingController();
+
+  final TextEditingController _positionController = TextEditingController();
+
+  final TextEditingController _emailController = TextEditingController();
+
+  final TextEditingController _addressLineOneController =
+      TextEditingController();
+
+  final TextEditingController _addressLineTwoController =
+      TextEditingController();
+
+  final TextEditingController _citySuburbController = TextEditingController();
+
+  final TextEditingController _stateController = TextEditingController();
+
+  final TextEditingController _postCodeController = TextEditingController();
+
   // Dropdown values
-  String? _selectedCollectionOrganisation;
+  String? _selectedClientName;
   String? _selectedSite;
   String? _selectedCollectorOneAssignment;
   String? _selectedCollectorTwoAssignment;
-  String? _selectedServiceOffice;
+  String? _selectedClientReference;
 
   String? _selectedJobReference;
   String? _selectedTypeOfService;
 
-  final GlobalKey<FormFieldState<String>> _collectionOrgKey =
+  final GlobalKey<FormFieldState<String>> _clientNameKey =
       GlobalKey<FormFieldState<String>>();
   final GlobalKey<FormFieldState<String>> _serviceOfficeKey =
       GlobalKey<FormFieldState<String>>();
@@ -83,17 +105,44 @@ class _NewCalloutJobState extends State<NewClient> {
   final GlobalKey<FormFieldState<String>> _collectorTwoAssignmentKey =
       GlobalKey<FormFieldState<String>>();
 
-  final GlobalKey<FormFieldState<String>> _clientReferenceKey =
-      GlobalKey<FormFieldState<String>>();
-
-  final GlobalKey<FormFieldState<String>> _clientNameKey =
+  final GlobalKey<FormFieldState<String>> _clientNamEKey =
       GlobalKey<FormFieldState<String>>();
 
   final GlobalKey<FormFieldState<String>> _calloutInstructionsKey =
       GlobalKey<FormFieldState<String>>();
 
+  final GlobalKey<FormFieldState<String>> _mobileKey =
+      GlobalKey<FormFieldState<String>>();
+
+  final GlobalKey<FormFieldState<String>> _positionKey =
+      GlobalKey<FormFieldState<String>>();
+
+  final GlobalKey<FormFieldState<String>> _emailKey =
+      GlobalKey<FormFieldState<String>>();
+
+  final GlobalKey<FormFieldState<String>> _addressLineOneKey =
+      GlobalKey<FormFieldState<String>>();
+
+  final GlobalKey<FormFieldState<String>> _addressLineTwoKey =
+      GlobalKey<FormFieldState<String>>();
+
+  final GlobalKey<FormFieldState<String>> _citySuburbKey =
+      GlobalKey<FormFieldState<String>>();
+
+  final GlobalKey<FormFieldState<String>> _stateKey =
+      GlobalKey<FormFieldState<String>>();
+
+  final GlobalKey<FormFieldState<String>> _postCodeKey =
+      GlobalKey<FormFieldState<String>>();
+
   // Dropdown options
-  final List<String> _collectionOrganisations = ['Org 1', 'Org 2', 'Org 3'];
+  final List<String> _theClientNames = [
+    'George Vasileski',
+    'Heath Cooper',
+    'Nam Naguyen',
+    "Jinchen Yang",
+    "SQ Park"
+  ];
   final List<String> _sites = ['Site 1', 'Site 2', 'Site 3'];
   final List<String> _collectorOneAssignment = [
     'Allocated',
@@ -105,7 +154,12 @@ class _NewCalloutJobState extends State<NewClient> {
     'Accepted',
     'Rejected'
   ];
-  final List<String> _serviceOffices = ['Clinic 1', 'Clinic 2', 'Clinic 3'];
+  final List<String> _clientReferences = [
+    'Ref12234',
+    'Ref4567',
+    'Ref7890',
+    'Ref4583'
+  ];
 
   DateTime? _selectedJobDate;
   TimeOfDay? _selectedTime;
@@ -119,10 +173,14 @@ class _NewCalloutJobState extends State<NewClient> {
 
   bool isMobileClinic = false;
 
-  void removeCollector() {
+  void removeRepresentative() {
     setState(() {
-      numberOfCollectors--; // Decrease count when a collector is deleted
+      numberOfRepresentatives--; // Decrease count when a collector is deleted
     });
+  }
+
+  bool isKeyboardVisible(BuildContext context) {
+    return MediaQuery.of(context).viewInsets.bottom > 0;
   }
 
   Widget _buildStepContent() {
@@ -266,7 +324,7 @@ class _NewCalloutJobState extends State<NewClient> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   const Text(
-                                    "Collection\nOrganisation",
+                                    "Client\nName",
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 13,
@@ -276,7 +334,7 @@ class _NewCalloutJobState extends State<NewClient> {
                                     height: 40,
                                     width: 206,
                                     child: DropdownButtonFormField<String>(
-                                      key: _collectionOrgKey,
+                                      key: _clientNameKey,
                                       icon: Image.asset(
                                         "assets/images/icons/dropDownIcon.png", // Replace with your image path
                                         width: 16, // Adjust the size
@@ -347,9 +405,9 @@ class _NewCalloutJobState extends State<NewClient> {
                                               12, // Adjust font size if needed
                                         ), // Reserve space for error messages
                                       ),
-                                      value: _selectedCollectionOrganisation,
-                                      items: _collectionOrganisations
-                                          .map((String value) {
+                                      value: _selectedClientName,
+                                      items:
+                                          _theClientNames.map((String value) {
                                         return DropdownMenuItem<String>(
                                           value: value,
                                           child: Text(value),
@@ -357,18 +415,17 @@ class _NewCalloutJobState extends State<NewClient> {
                                       }).toList(),
                                       onChanged: (value) {
                                         setState(() {
-                                          _selectedCollectionOrganisation =
-                                              value;
-                                          _collectionOrgKey.currentState!
+                                          _selectedClientName = value;
+                                          _clientNameKey.currentState!
                                               .validate(); // Revalidate the field
-                                          /* if (_selectedCollectionOrganisation!.length < 0) {
+                                          /* if (_selectedClientName!.length < 0) {
                                 // Clear error state once a valid selection is made
                                 _formKeys[_currentStep].currentState?.validate();
                               } */
                                         });
                                       },
                                       validator: (value) => value == null
-                                          ? 'Please select a collection organisation'
+                                          ? 'Please select a client Name'
                                           : null,
                                     ),
                                   ),
@@ -389,7 +446,7 @@ class _NewCalloutJobState extends State<NewClient> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   const Text(
-                                    "Service Office\n(Clinc)",
+                                    "Client\nReference",
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 13,
@@ -470,9 +527,9 @@ class _NewCalloutJobState extends State<NewClient> {
                                               12, // Adjust font size if needed
                                         ), // Reserve space for error messages
                                       ),
-                                      value: _selectedServiceOffice,
+                                      value: _selectedClientReference,
                                       items:
-                                          _serviceOffices.map((String value) {
+                                          _clientReferences.map((String value) {
                                         return DropdownMenuItem<String>(
                                           value: value,
                                           child: Text(value),
@@ -480,17 +537,17 @@ class _NewCalloutJobState extends State<NewClient> {
                                       }).toList(),
                                       onChanged: (value) {
                                         setState(() {
-                                          _selectedServiceOffice = value;
+                                          _selectedClientReference = value;
                                           _serviceOfficeKey.currentState!
                                               .validate();
-                                          /* if (_selectedCollectionOrganisation!.length < 0) {
+                                          /* if (_selectedClientName!.length < 0) {
                                 // Clear error state once a valid selection is made
                                 _formKeys[_currentStep].currentState?.validate();
                               } */
                                         });
                                       },
                                       validator: (value) => value == null
-                                          ? 'Please select a Service Office'
+                                          ? 'Please select a Client Reference'
                                           : null,
                                     ),
                                   ),
@@ -516,7 +573,6 @@ class _NewCalloutJobState extends State<NewClient> {
             ),
             child: SizedBox(
               width: double.infinity,
-              height: 190,
               child: Card(
                 surfaceTintColor: Colors.white,
                 color: Colors.white,
@@ -533,6 +589,7 @@ class _NewCalloutJobState extends State<NewClient> {
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
                     children: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -541,7 +598,7 @@ class _NewCalloutJobState extends State<NewClient> {
                           Row(
                             children: [
                               Text(
-                                "Client",
+                                "Client Contact",
                                 style: TextStyle(
                                   fontSize: 17,
                                   fontWeight: FontWeight.bold,
@@ -566,7 +623,7 @@ class _NewCalloutJobState extends State<NewClient> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 const Text(
-                                  "Client Name",
+                                  "Name",
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 13,
@@ -586,8 +643,8 @@ class _NewCalloutJobState extends State<NewClient> {
                                       borderRadius: BorderRadius.circular(
                                           4), // Match with TextFormField's border radius
                                       child: TextFormField(
-                                        key: _clientNameKey,
-                                        controller: _clientNameController,
+                                        key: _clientNamEKey,
+                                        controller: _clientNamEController,
                                         decoration: InputDecoration(
                                           fillColor: Colors.white,
                                           filled: true,
@@ -648,16 +705,16 @@ class _NewCalloutJobState extends State<NewClient> {
                                           setState(() {
                                             //_selectedJobReference = value;
                                             // Update the number of donors and the text controller
-                                            _clientNameController.text =
+                                            _clientNamEController.text =
                                                 value; // Manually update the controller text
-                                            _clientNameKey.currentState!
+                                            _clientNamEKey.currentState!
                                                 .validate();
                                           });
                                         },
                                         validator: (value) {
-                                          if (_clientNameController.text ==
+                                          if (_clientNamEController.text ==
                                               "") {
-                                            return 'Please enter the client name';
+                                            return 'Please enter a correct name';
                                           }
                                           return null;
                                         },
@@ -678,7 +735,7 @@ class _NewCalloutJobState extends State<NewClient> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 const Text(
-                                  "Client Reference",
+                                  "Mobile",
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 13,
@@ -698,8 +755,129 @@ class _NewCalloutJobState extends State<NewClient> {
                                       borderRadius: BorderRadius.circular(
                                           4), // Match with TextFormField's border radius
                                       child: TextFormField(
-                                        key: _clientReferenceKey,
-                                        controller: _clientReferenceController,
+                                        key: _mobileKey,
+                                        controller: _mobile_Controller,
+                                        decoration: InputDecoration(
+                                          fillColor: Colors.white,
+                                          filled: true,
+                                          border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            borderSide: const BorderSide(
+                                              color: Colors.white,
+                                              width: 2,
+                                            ),
+                                          ),
+                                          enabledBorder: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            borderSide: const BorderSide(
+                                              color: Colors.white,
+                                              width: 2,
+                                            ),
+                                          ),
+                                          focusedBorder: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            borderSide: const BorderSide(
+                                              color: Colors.white,
+                                              width: 2,
+                                            ),
+                                          ),
+                                          errorBorder: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            borderSide: const BorderSide(
+                                              color: Colors.red,
+                                              width: 2,
+                                            ),
+                                          ),
+                                          focusedErrorBorder:
+                                              OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            borderSide: const BorderSide(
+                                              color: Colors.red,
+                                              width: 2,
+                                            ),
+                                          ),
+                                          contentPadding:
+                                              const EdgeInsets.symmetric(
+                                            vertical: 5,
+                                            horizontal: 12,
+                                          ),
+                                          errorStyle: const TextStyle(
+                                            color: Colors.red,
+                                            fontSize: 12,
+                                          ),
+                                          /* suffixIcon: Padding(
+                                            padding: const EdgeInsets.all(
+                                                8.0), // Adjust the padding as needed
+                                            child: Image.asset(
+                                              "assets/images/icons/icon_calendar.png", // Replace with your image path
+                                              width:
+                                                  32, // Adjust the width of the image
+                                              height:
+                                                  32, // Adjust the height of the image
+                                            ),
+                                          ), */
+                                        ),
+                                        keyboardType: TextInputType
+                                            .phone, // Ensures numeric input
+                                        onChanged: (value) {
+                                          setState(() {
+                                            // Update the number of donors and the text controller
+                                            _mobile_Controller.text =
+                                                value; // Manually update the controller text
+                                            _mobileKey.currentState!.validate();
+                                          });
+                                        },
+                                        validator: (value) {
+                                          if (!RegExp(r'^[0-9]{10}$')
+                                              .hasMatch(value!)) {
+                                            return 'Please enter a valid mobile number';
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              left: 0.0,
+                              top: 15.0,
+                              right: 0.0,
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const Text(
+                                  "Position",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 13,
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 0.0),
+                                  child: Container(
+                                    height: 40,
+                                    width: 206,
+                                    child: Material(
+                                      elevation:
+                                          4, // Adjust this value for more or less elevation
+                                      shadowColor: Colors.black.withOpacity(
+                                          0.5), // Optional: Adjust shadow color
+                                      borderRadius: BorderRadius.circular(
+                                          4), // Match with TextFormField's border radius
+                                      child: TextFormField(
+                                        key: _positionKey,
+                                        controller: _positionController,
                                         decoration: InputDecoration(
                                           fillColor: Colors.white,
                                           filled: true,
@@ -760,16 +938,15 @@ class _NewCalloutJobState extends State<NewClient> {
                                           setState(() {
                                             //_selectedJobReference = value;
                                             // Update the number of donors and the text controller
-                                            _clientReferenceController.text =
+                                            _positionController.text =
                                                 value; // Manually update the controller text
-                                            _clientReferenceKey.currentState!
+                                            _positionKey.currentState!
                                                 .validate();
                                           });
                                         },
                                         validator: (value) {
-                                          if (_clientReferenceController.text ==
-                                              "") {
-                                            return 'Please enter the client reference';
+                                          if (_positionController.text == "") {
+                                            return 'Please enter a correct position';
                                           }
                                           return null;
                                         },
@@ -779,6 +956,121 @@ class _NewCalloutJobState extends State<NewClient> {
                                 ),
                               ],
                             ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              left: 0.0,
+                              top: 15.0,
+                              right: 0.0,
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const Text(
+                                  "Email",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 13,
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 0.0),
+                                  child: Container(
+                                    height: 40,
+                                    width: 206,
+                                    child: Material(
+                                      elevation:
+                                          4, // Adjust this value for more or less elevation
+                                      shadowColor: Colors.black.withOpacity(
+                                          0.5), // Optional: Adjust shadow color
+                                      borderRadius: BorderRadius.circular(
+                                          4), // Match with TextFormField's border radius
+                                      child: TextFormField(
+                                        key: _emailKey,
+                                        controller: _emailController,
+                                        decoration: InputDecoration(
+                                          fillColor: Colors.white,
+                                          filled: true,
+                                          border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            borderSide: const BorderSide(
+                                              color: Colors.white,
+                                              width: 2,
+                                            ),
+                                          ),
+                                          enabledBorder: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            borderSide: const BorderSide(
+                                              color: Colors.white,
+                                              width: 2,
+                                            ),
+                                          ),
+                                          focusedBorder: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            borderSide: const BorderSide(
+                                              color: Colors.white,
+                                              width: 2,
+                                            ),
+                                          ),
+                                          errorBorder: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            borderSide: const BorderSide(
+                                              color: Colors.red,
+                                              width: 2,
+                                            ),
+                                          ),
+                                          focusedErrorBorder:
+                                              OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            borderSide: const BorderSide(
+                                              color: Colors.red,
+                                              width: 2,
+                                            ),
+                                          ),
+                                          contentPadding:
+                                              const EdgeInsets.symmetric(
+                                            vertical: 5,
+                                            horizontal: 12,
+                                          ),
+                                          errorStyle: const TextStyle(
+                                            color: Colors.red,
+                                            fontSize: 12,
+                                          ),
+                                        ),
+                                        keyboardType: TextInputType
+                                            .text, // Ensures numeric input
+                                        onChanged: (value) {
+                                          setState(() {
+                                            //_selectedJobReference = value;
+                                            // Update the number of donors and the text controller
+                                            _emailController.text =
+                                                value; // Manually update the controller text
+                                            _emailKey.currentState!.validate();
+                                          });
+                                        },
+                                        validator: (value) {
+                                          if (!RegExp(
+                                                  r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$')
+                                              .hasMatch(value!)) {
+                                            return 'Please enter a valid email address';
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: 10,
                           ),
                         ],
                       ),
@@ -798,7 +1090,6 @@ class _NewCalloutJobState extends State<NewClient> {
             ),
             child: SizedBox(
               width: double.infinity,
-              height: 450,
               child: Card(
                 surfaceTintColor: Colors.white,
                 color: Colors.white,
@@ -815,6 +1106,7 @@ class _NewCalloutJobState extends State<NewClient> {
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
                     children: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -823,7 +1115,7 @@ class _NewCalloutJobState extends State<NewClient> {
                           Row(
                             children: [
                               Text(
-                                "Job Details",
+                                "Main Address",
                                 style: TextStyle(
                                   fontSize: 17,
                                   fontWeight: FontWeight.bold,
@@ -848,7 +1140,7 @@ class _NewCalloutJobState extends State<NewClient> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 const Text(
-                                  "Job Date *",
+                                  "Address Line 1",
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 13,
@@ -868,15 +1160,8 @@ class _NewCalloutJobState extends State<NewClient> {
                                       borderRadius: BorderRadius.circular(
                                           4), // Match with TextFormField's border radius
                                       child: TextFormField(
-                                        key: _jobDateKey,
-                                        readOnly:
-                                            true, // Prevent direct text input
-                                        controller: TextEditingController(
-                                          text: _selectedJobDate != null
-                                              ? '${_selectedJobDate!.day}/${_selectedJobDate!.month}/${_selectedJobDate!.year}' // Format the selected date
-                                              : '',
-                                        ),
-
+                                        key: _addressLineOneKey,
+                                        controller: _addressLineOneController,
                                         decoration: InputDecoration(
                                           fillColor: Colors.white,
                                           filled: true,
@@ -929,725 +1214,24 @@ class _NewCalloutJobState extends State<NewClient> {
                                           errorStyle: const TextStyle(
                                             color: Colors.red,
                                             fontSize: 12,
-                                          ),
-                                          suffixIcon: Padding(
-                                            padding: const EdgeInsets.all(
-                                                8.0), // Adjust the padding as needed
-                                            child: Image.asset(
-                                              "assets/images/icons/icon_calendar.png", // Replace with your image path
-                                              width:
-                                                  32, // Adjust the width of the image
-                                              height:
-                                                  32, // Adjust the height of the image
-                                            ),
-                                          ),
-                                        ),
-                                        onTap: () async {
-                                          // Show date picker dialog
-                                          final selectedDate =
-                                              await showDatePicker(
-                                            context: context,
-                                            initialDate: DateTime.now(),
-                                            firstDate: DateTime(
-                                                2000), // Earliest date the user can pick
-                                            lastDate: DateTime(
-                                                2100), // Latest date the user can pick
-                                          );
-
-                                          if (selectedDate != null) {
-                                            setState(() {
-                                              _selectedJobDate = selectedDate;
-                                              _jobDateKey.currentState!
-                                                  .validate();
-                                            });
-                                          }
-                                        },
-                                        validator: (value) =>
-                                            _selectedJobDate == null
-                                                ? 'Please select a job date'
-                                                : null,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            height: 5,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              left: 0.0,
-                              top: 15.0,
-                              right: 0.0,
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                const Text(
-                                  "Start Time",
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 13,
-                                    color: Colors.grey,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 0.0),
-                                  child: Container(
-                                    height: 40,
-                                    width: 206,
-                                    child: Material(
-                                      elevation:
-                                          4, // Adjust this value for more or less elevation
-                                      shadowColor: Colors.black.withOpacity(
-                                          0.5), // Optional: Adjust shadow color
-                                      borderRadius: BorderRadius.circular(
-                                          4), // Match with TextFormField's border radius
-                                      child: TextFormField(
-                                        key: _startTimeKey,
-                                        readOnly:
-                                            true, // Prevent direct text input
-                                        controller: TextEditingController(
-                                          text: _selectedTime != null
-                                              ? '${_selectedTime!.hour}:${_selectedTime!.minute.toString().padLeft(2, '0')}' // Format the selected time
-                                              : '',
-                                        ),
-                                        decoration: InputDecoration(
-                                          fillColor: Colors.white,
-                                          filled: true,
-                                          border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.white,
-                                              width: 2,
-                                            ),
-                                          ),
-                                          enabledBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.white,
-                                              width: 2,
-                                            ),
-                                          ),
-                                          focusedBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.white,
-                                              width: 2,
-                                            ),
-                                          ),
-                                          errorBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.red,
-                                              width: 2,
-                                            ),
-                                          ),
-                                          focusedErrorBorder:
-                                              OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.red,
-                                              width: 2,
-                                            ),
-                                          ),
-                                          contentPadding:
-                                              const EdgeInsets.symmetric(
-                                            vertical: 5,
-                                            horizontal: 12,
-                                          ),
-                                          errorStyle: const TextStyle(
-                                            color: Colors.red,
-                                            fontSize: 12,
-                                          ),
-                                          suffixIcon: Padding(
-                                            padding: const EdgeInsets.all(
-                                                8.0), // Adjust the padding as needed
-                                            child: Image.asset(
-                                              "assets/images/icons/icon_calendar.png", // Replace with your image path
-                                              width:
-                                                  32, // Adjust the width of the image
-                                              height:
-                                                  32, // Adjust the height of the image
-                                            ),
-                                          ),
-                                        ),
-                                        onTap: () async {
-                                          // Show time picker dialog
-                                          final selectedTime =
-                                              await showTimePicker(
-                                            context: context,
-                                            initialTime: TimeOfDay.now(),
-                                          );
-
-                                          if (selectedTime != null) {
-                                            setState(() {
-                                              _selectedTime = selectedTime;
-                                              _startTimeKey.currentState!
-                                                  .validate();
-                                            });
-                                          }
-                                        },
-                                        validator: (value) =>
-                                            _selectedTime == null
-                                                ? 'Please select a start time'
-                                                : null,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            height: 5,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              left: 0.0,
-                              top: 15.0,
-                              right: 0.0,
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                const Text(
-                                  "Duration",
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 13,
-                                    color: Colors.grey,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 0.0),
-                                  child: Container(
-                                    height: 40,
-                                    width: 206,
-                                    child: Material(
-                                      elevation:
-                                          4, // Adjust this value for more or less elevation
-                                      shadowColor: Colors.black.withOpacity(
-                                          0.5), // Optional: Adjust shadow color
-                                      borderRadius: BorderRadius.circular(
-                                          4), // Match with TextFormField's border radius
-                                      child: TextFormField(
-                                        key: _jobDurationKey,
-                                        readOnly:
-                                            true, // Prevent direct text input
-                                        controller: TextEditingController(
-                                          text: _selectedDuration != null
-                                              ? '${_selectedDuration!.inHours}:${(_selectedDuration!.inMinutes % 60).toString().padLeft(2, '0')}' // Format the selected duration
-                                              : '',
-                                        ),
-                                        decoration: InputDecoration(
-                                          fillColor: Colors.white,
-                                          filled: true,
-                                          border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.white,
-                                              width: 2,
-                                            ),
-                                          ),
-                                          enabledBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.white,
-                                              width: 2,
-                                            ),
-                                          ),
-                                          focusedBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.white,
-                                              width: 2,
-                                            ),
-                                          ),
-                                          errorBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.red,
-                                              width: 2,
-                                            ),
-                                          ),
-                                          focusedErrorBorder:
-                                              OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.red,
-                                              width: 2,
-                                            ),
-                                          ),
-                                          contentPadding:
-                                              const EdgeInsets.symmetric(
-                                            vertical: 5,
-                                            horizontal: 12,
-                                          ),
-                                          errorStyle: const TextStyle(
-                                            color: Colors.red,
-                                            fontSize: 12,
-                                          ),
-                                          suffixIcon: Padding(
-                                            padding: const EdgeInsets.all(
-                                                8.0), // Adjust the padding as needed
-                                            child: Image.asset(
-                                              "assets/images/icons/icon_calendar.png", // Replace with your image path
-                                              width:
-                                                  32, // Adjust the width of the image
-                                              height:
-                                                  32, // Adjust the height of the image
-                                            ),
-                                          ),
-                                        ),
-                                        onTap: () async {
-                                          // Show duration selection dialog
-                                          final selectedDuration =
-                                              await showDialog<Duration>(
-                                            context: context,
-                                            builder: (context) {
-                                              return AlertDialog(
-                                                title: Text(
-                                                  'Select Duration',
-                                                  style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 18,
-                                                    color: Colors
-                                                        .blueAccent, // Title text color
-                                                  ),
-                                                ),
-                                                content: Padding(
-                                                  padding: const EdgeInsets.all(
-                                                      16.0),
-                                                  child: Column(
-                                                    mainAxisSize:
-                                                        MainAxisSize.min,
-                                                    children: [
-                                                      Row(
-                                                        children: [
-                                                          Text(
-                                                            'Hours:',
-                                                            style: TextStyle(
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w600,
-                                                              fontSize: 16,
-                                                              color: Colors
-                                                                      .grey[
-                                                                  700], // Text color
-                                                            ),
-                                                          ),
-                                                          const SizedBox(
-                                                              width: 8),
-                                                          DropdownButton<int>(
-                                                            value: hours,
-                                                            items:
-                                                                List.generate(
-                                                                    24,
-                                                                    (index) {
-                                                              return DropdownMenuItem<
-                                                                  int>(
-                                                                value: index,
-                                                                child: Text(
-                                                                    '$index'),
-                                                              );
-                                                            }),
-                                                            onChanged: (value) {
-                                                              if (value !=
-                                                                  null) {
-                                                                setState(() {
-                                                                  hours = value;
-                                                                });
-                                                              }
-                                                            },
-                                                          ),
-                                                        ],
-                                                      ),
-                                                      const SizedBox(
-                                                          height: 16),
-                                                      Row(
-                                                        children: [
-                                                          Text(
-                                                            'Minutes:',
-                                                            style: TextStyle(
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w600,
-                                                              fontSize: 16,
-                                                              color: Colors
-                                                                      .grey[
-                                                                  700], // Text color
-                                                            ),
-                                                          ),
-                                                          const SizedBox(
-                                                              width: 8),
-                                                          DropdownButton<int>(
-                                                            value: minutes,
-                                                            items:
-                                                                List.generate(
-                                                                    60,
-                                                                    (index) {
-                                                              return DropdownMenuItem<
-                                                                  int>(
-                                                                value: index,
-                                                                child: Text(
-                                                                    '$index'),
-                                                              );
-                                                            }),
-                                                            onChanged: (value) {
-                                                              if (value !=
-                                                                  null) {
-                                                                setState(() {
-                                                                  minutes =
-                                                                      value;
-                                                                });
-                                                              }
-                                                            },
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                                shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          16), // Rounded corners
-                                                ),
-                                                backgroundColor: Colors
-                                                    .white, // Dialog background color
-                                                actionsPadding:
-                                                    EdgeInsets.symmetric(
-                                                        vertical: 8,
-                                                        horizontal: 16),
-                                                actions: [
-                                                  TextButton(
-                                                    onPressed: () {
-                                                      Navigator.of(context).pop(
-                                                          Duration(
-                                                              hours: hours,
-                                                              minutes:
-                                                                  minutes));
-                                                    },
-                                                    style: TextButton.styleFrom(
-                                                      foregroundColor:
-                                                          Colors.white,
-                                                      backgroundColor: Colors
-                                                          .blueAccent, // Button background color
-                                                      shape:
-                                                          RoundedRectangleBorder(
-                                                        borderRadius:
-                                                            BorderRadius.circular(
-                                                                8), // Button border radius
-                                                      ),
-                                                    ),
-                                                    child: Text(
-                                                      'OK',
-                                                      style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        fontSize: 16,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  TextButton(
-                                                    onPressed: () {
-                                                      Navigator.of(context)
-                                                          .pop();
-                                                    },
-                                                    style: TextButton.styleFrom(
-                                                      foregroundColor: Colors
-                                                          .blueAccent, // Button text color
-                                                    ),
-                                                    child: Text(
-                                                      'Cancel',
-                                                      style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        fontSize: 16,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ],
-                                              );
-                                            },
-                                          );
-
-                                          if (selectedDuration != null) {
-                                            setState(() {
-                                              _selectedDuration =
-                                                  selectedDuration;
-                                              _jobDurationKey.currentState!
-                                                  .validate();
-                                            });
-                                          }
-                                        },
-                                        validator: (value) =>
-                                            _selectedDuration == null
-                                                ? 'Please select a duration'
-                                                : null,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            height: 5,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              left: 0.0,
-                              top: 15.0,
-                              right: 0.0,
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                const Text(
-                                  "Number of\ndonors",
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 13,
-                                    color: Colors.grey,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 0.0),
-                                  child: Container(
-                                    height: 40,
-                                    width: 206,
-                                    child: Material(
-                                      elevation:
-                                          4, // Adjust this value for more or less elevation
-                                      shadowColor: Colors.black.withOpacity(
-                                          0.5), // Optional: Adjust shadow color
-                                      borderRadius: BorderRadius.circular(
-                                          4), // Match with TextFormField's border radius
-                                      child: TextFormField(
-                                        key: _numberOfDonorsKey,
-                                        controller: _donorsController,
-                                        decoration: InputDecoration(
-                                          fillColor: Colors.white,
-                                          filled: true,
-                                          border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.white,
-                                              width: 2,
-                                            ),
-                                          ),
-                                          enabledBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.white,
-                                              width: 2,
-                                            ),
-                                          ),
-                                          focusedBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.white,
-                                              width: 2,
-                                            ),
-                                          ),
-                                          errorBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.red,
-                                              width: 2,
-                                            ),
-                                          ),
-                                          focusedErrorBorder:
-                                              OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.red,
-                                              width: 2,
-                                            ),
-                                          ),
-                                          contentPadding:
-                                              const EdgeInsets.symmetric(
-                                            vertical: 5,
-                                            horizontal: 12,
-                                          ),
-                                          errorStyle: const TextStyle(
-                                            color: Colors.red,
-                                            fontSize: 12,
-                                          ),
-                                          suffixIcon: Padding(
-                                            padding: const EdgeInsets.all(
-                                                8.0), // Adjust the padding as needed
-                                            child: Image.asset(
-                                              "assets/images/icons/icon_calendar.png", // Replace with your image path
-                                              width:
-                                                  32, // Adjust the width of the image
-                                              height:
-                                                  32, // Adjust the height of the image
-                                            ),
-                                          ),
-                                        ),
-                                        keyboardType: TextInputType
-                                            .number, // Ensures numeric input
-                                        onChanged: (value) {
-                                          setState(() {
-                                            // Update the number of donors and the text controller
-                                            _selectedNoDonors =
-                                                int.tryParse(value)!;
-                                            _donorsController.text =
-                                                value; // Manually update the controller text
-                                            _numberOfDonorsKey.currentState!
-                                                .validate();
-                                          });
-                                        },
-                                        validator: (value) {
-                                          print(_donorsController.text);
-                                          if (_donorsController.text == "") {
-                                            return 'Please enter a valid number of donors';
-                                          }
-                                          return null;
-                                        },
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            height: 5,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              left: 0.0,
-                              top: 15.0,
-                              right: 0.0,
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                const Text(
-                                  "Job Reference",
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 13,
-                                    color: Colors.grey,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 0.0),
-                                  child: Container(
-                                    height: 40,
-                                    width: 206,
-                                    child: Material(
-                                      elevation:
-                                          4, // Adjust this value for more or less elevation
-                                      shadowColor: Colors.black.withOpacity(
-                                          0.5), // Optional: Adjust shadow color
-                                      borderRadius: BorderRadius.circular(
-                                          4), // Match with TextFormField's border radius
-                                      child: TextFormField(
-                                        key: _jobReferenceKey,
-                                        controller: _jobReferenceController,
-                                        decoration: InputDecoration(
-                                          fillColor: Colors.white,
-                                          filled: true,
-                                          border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.white,
-                                              width: 2,
-                                            ),
-                                          ),
-                                          enabledBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.white,
-                                              width: 2,
-                                            ),
-                                          ),
-                                          focusedBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.white,
-                                              width: 2,
-                                            ),
-                                          ),
-                                          errorBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.red,
-                                              width: 2,
-                                            ),
-                                          ),
-                                          focusedErrorBorder:
-                                              OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.red,
-                                              width: 2,
-                                            ),
-                                          ),
-                                          contentPadding:
-                                              const EdgeInsets.symmetric(
-                                            vertical: 5,
-                                            horizontal: 12,
-                                          ),
-                                          errorStyle: const TextStyle(
-                                            color: Colors.red,
-                                            fontSize: 12,
-                                          ),
-                                          suffixIcon: Padding(
-                                            padding: const EdgeInsets.all(
-                                                8.0), // Adjust the padding as needed
-                                            child: Image.asset(
-                                              "assets/images/icons/icon_calendar.png", // Replace with your image path
-                                              width:
-                                                  32, // Adjust the width of the image
-                                              height:
-                                                  32, // Adjust the height of the image
-                                            ),
                                           ),
                                         ),
                                         keyboardType: TextInputType
                                             .text, // Ensures numeric input
                                         onChanged: (value) {
                                           setState(() {
-                                            _selectedJobReference = value;
+                                            //_selectedJobReference = value;
                                             // Update the number of donors and the text controller
-                                            _jobReferenceController.text =
+                                            _addressLineOneController.text =
                                                 value; // Manually update the controller text
-                                            _jobReferenceKey.currentState!
+                                            _addressLineOneKey.currentState!
                                                 .validate();
                                           });
                                         },
                                         validator: (value) {
-                                          if (_jobReferenceController.text ==
+                                          if (_addressLineOneController.text ==
                                               "") {
-                                            return 'Please enter a valid job referenace';
+                                            return 'Please enter a address line 1';
                                           }
                                           return null;
                                         },
@@ -1657,9 +1241,6 @@ class _NewCalloutJobState extends State<NewClient> {
                                 ),
                               ],
                             ),
-                          ),
-                          SizedBox(
-                            height: 5,
                           ),
                           Padding(
                             padding: const EdgeInsets.only(
@@ -1671,7 +1252,7 @@ class _NewCalloutJobState extends State<NewClient> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 const Text(
-                                  "Type of\nService",
+                                  "Address Line 2",
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 13,
@@ -1691,8 +1272,8 @@ class _NewCalloutJobState extends State<NewClient> {
                                       borderRadius: BorderRadius.circular(
                                           4), // Match with TextFormField's border radius
                                       child: TextFormField(
-                                        key: _typeOfServiceKey,
-                                        controller: _typeOfServiceController,
+                                        key: _addressLineTwoKey,
+                                        controller: _addressLineTwoController,
                                         decoration: InputDecoration(
                                           fillColor: Colors.white,
                                           filled: true,
@@ -1746,34 +1327,23 @@ class _NewCalloutJobState extends State<NewClient> {
                                             color: Colors.red,
                                             fontSize: 12,
                                           ),
-                                          suffixIcon: Padding(
-                                            padding: const EdgeInsets.all(
-                                                8.0), // Adjust the padding as needed
-                                            child: Image.asset(
-                                              "assets/images/icons/icon_calendar.png", // Replace with your image path
-                                              width:
-                                                  32, // Adjust the width of the image
-                                              height:
-                                                  32, // Adjust the height of the image
-                                            ),
-                                          ),
                                         ),
                                         keyboardType: TextInputType
                                             .text, // Ensures numeric input
                                         onChanged: (value) {
                                           setState(() {
-                                            _selectedTypeOfService = value;
+                                            //_selectedJobReference = value;
                                             // Update the number of donors and the text controller
-                                            _typeOfServiceController.text =
+                                            _addressLineTwoController.text =
                                                 value; // Manually update the controller text
-                                            _typeOfServiceKey.currentState!
+                                            _addressLineTwoKey.currentState!
                                                 .validate();
                                           });
                                         },
                                         validator: (value) {
-                                          if (_typeOfServiceController.text ==
+                                          if (_addressLineTwoController.text ==
                                               "") {
-                                            return 'Please enter a valid type of service';
+                                            return 'Please enter a address line 2';
                                           }
                                           return null;
                                         },
@@ -1783,6 +1353,342 @@ class _NewCalloutJobState extends State<NewClient> {
                                 ),
                               ],
                             ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              left: 0.0,
+                              top: 15.0,
+                              right: 0.0,
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const Text(
+                                  "City/Suburb *",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 13,
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 0.0),
+                                  child: Container(
+                                    height: 40,
+                                    width: 206,
+                                    child: Material(
+                                      elevation:
+                                          4, // Adjust this value for more or less elevation
+                                      shadowColor: Colors.black.withOpacity(
+                                          0.5), // Optional: Adjust shadow color
+                                      borderRadius: BorderRadius.circular(
+                                          4), // Match with TextFormField's border radius
+                                      child: TextFormField(
+                                        key: _citySuburbKey,
+                                        controller: _citySuburbController,
+                                        decoration: InputDecoration(
+                                          fillColor: Colors.white,
+                                          filled: true,
+                                          border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            borderSide: const BorderSide(
+                                              color: Colors.white,
+                                              width: 2,
+                                            ),
+                                          ),
+                                          enabledBorder: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            borderSide: const BorderSide(
+                                              color: Colors.white,
+                                              width: 2,
+                                            ),
+                                          ),
+                                          focusedBorder: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            borderSide: const BorderSide(
+                                              color: Colors.white,
+                                              width: 2,
+                                            ),
+                                          ),
+                                          errorBorder: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            borderSide: const BorderSide(
+                                              color: Colors.red,
+                                              width: 2,
+                                            ),
+                                          ),
+                                          focusedErrorBorder:
+                                              OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            borderSide: const BorderSide(
+                                              color: Colors.red,
+                                              width: 2,
+                                            ),
+                                          ),
+                                          contentPadding:
+                                              const EdgeInsets.symmetric(
+                                            vertical: 5,
+                                            horizontal: 12,
+                                          ),
+                                          errorStyle: const TextStyle(
+                                            color: Colors.red,
+                                            fontSize: 12,
+                                          ),
+                                        ),
+                                        keyboardType: TextInputType
+                                            .text, // Ensures numeric input
+                                        onChanged: (value) {
+                                          setState(() {
+                                            //_selectedJobReference = value;
+                                            // Update the number of donors and the text controller
+                                            _citySuburbController.text =
+                                                value; // Manually update the controller text
+                                            _citySuburbKey.currentState!
+                                                .validate();
+                                          });
+                                        },
+                                        validator: (value) {
+                                          if (_citySuburbController.text ==
+                                              "") {
+                                            return 'Please enter the city suburb';
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              left: 0.0,
+                              top: 15.0,
+                              right: 0.0,
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const Text(
+                                  "State *",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 13,
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 0.0),
+                                  child: Container(
+                                    height: 40,
+                                    width: 140,
+                                    child: Material(
+                                      elevation:
+                                          4, // Adjust this value for more or less elevation
+                                      shadowColor: Colors.black.withOpacity(
+                                          0.5), // Optional: Adjust shadow color
+                                      borderRadius: BorderRadius.circular(
+                                          4), // Match with TextFormField's border radius
+                                      child: TextFormField(
+                                        key: _stateKey,
+                                        controller: _stateController,
+                                        decoration: InputDecoration(
+                                          fillColor: Colors.white,
+                                          filled: true,
+                                          border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            borderSide: const BorderSide(
+                                              color: Colors.white,
+                                              width: 2,
+                                            ),
+                                          ),
+                                          enabledBorder: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            borderSide: const BorderSide(
+                                              color: Colors.white,
+                                              width: 2,
+                                            ),
+                                          ),
+                                          focusedBorder: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            borderSide: const BorderSide(
+                                              color: Colors.white,
+                                              width: 2,
+                                            ),
+                                          ),
+                                          errorBorder: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            borderSide: const BorderSide(
+                                              color: Colors.red,
+                                              width: 2,
+                                            ),
+                                          ),
+                                          focusedErrorBorder:
+                                              OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            borderSide: const BorderSide(
+                                              color: Colors.red,
+                                              width: 2,
+                                            ),
+                                          ),
+                                          contentPadding:
+                                              const EdgeInsets.symmetric(
+                                            vertical: 5,
+                                            horizontal: 12,
+                                          ),
+                                          errorStyle: const TextStyle(
+                                            color: Colors.red,
+                                            fontSize: 12,
+                                          ),
+                                        ),
+                                        keyboardType: TextInputType
+                                            .text, // Ensures numeric input
+                                        onChanged: (value) {
+                                          setState(() {
+                                            //_selectedJobReference = value;
+                                            // Update the number of donors and the text controller
+                                            _stateController.text =
+                                                value; // Manually update the controller text
+                                            _stateKey.currentState!.validate();
+                                          });
+                                        },
+                                        validator: (value) {
+                                          if (_stateController.text == "") {
+                                            return 'Please enter the state name';
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              left: 0.0,
+                              top: 15.0,
+                              right: 0.0,
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const Text(
+                                  "Postcode *",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 13,
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 0.0),
+                                  child: Container(
+                                    height: 40,
+                                    width: 80,
+                                    child: Material(
+                                      elevation:
+                                          4, // Adjust this value for more or less elevation
+                                      shadowColor: Colors.black.withOpacity(
+                                          0.5), // Optional: Adjust shadow color
+                                      borderRadius: BorderRadius.circular(
+                                          4), // Match with TextFormField's border radius
+                                      child: TextFormField(
+                                        key: _postCodeKey,
+                                        controller: _postCodeController,
+                                        decoration: InputDecoration(
+                                          fillColor: Colors.white,
+                                          filled: true,
+                                          border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            borderSide: const BorderSide(
+                                              color: Colors.white,
+                                              width: 2,
+                                            ),
+                                          ),
+                                          enabledBorder: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            borderSide: const BorderSide(
+                                              color: Colors.white,
+                                              width: 2,
+                                            ),
+                                          ),
+                                          focusedBorder: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            borderSide: const BorderSide(
+                                              color: Colors.white,
+                                              width: 2,
+                                            ),
+                                          ),
+                                          errorBorder: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            borderSide: const BorderSide(
+                                              color: Colors.red,
+                                              width: 2,
+                                            ),
+                                          ),
+                                          focusedErrorBorder:
+                                              OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            borderSide: const BorderSide(
+                                              color: Colors.red,
+                                              width: 2,
+                                            ),
+                                          ),
+                                          contentPadding:
+                                              const EdgeInsets.symmetric(
+                                            vertical: 5,
+                                            horizontal: 12,
+                                          ),
+                                          errorStyle: const TextStyle(
+                                            color: Colors.red,
+                                            fontSize: 12,
+                                          ),
+                                        ),
+                                        keyboardType: TextInputType
+                                            .text, // Ensures numeric input
+                                        onChanged: (value) {
+                                          setState(() {
+                                            //_selectedJobReference = value;
+                                            // Update the number of donors and the text controller
+                                            _postCodeController.text =
+                                                value; // Manually update the controller text
+                                            _postCodeKey.currentState!
+                                                .validate();
+                                          });
+                                        },
+                                        validator: (value) {
+                                          if (_postCodeController.text == "") {
+                                            return 'Please enter a valid post code';
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: 10,
                           ),
                         ],
                       ),
@@ -1793,7 +1699,7 @@ class _NewCalloutJobState extends State<NewClient> {
             ),
           ),
           SizedBox(
-            height: 5,
+            height: 10,
           ),
           Padding(
             padding: const EdgeInsets.only(
@@ -1802,7 +1708,6 @@ class _NewCalloutJobState extends State<NewClient> {
             ),
             child: SizedBox(
               width: double.infinity,
-              height: 150,
               child: Card(
                 surfaceTintColor: Colors.white,
                 color: Colors.white,
@@ -1818,6 +1723,7 @@ class _NewCalloutJobState extends State<NewClient> {
                     right: 16.0,
                   ),
                   child: Column(
+                    mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
@@ -1827,7 +1733,7 @@ class _NewCalloutJobState extends State<NewClient> {
                           Row(
                             children: [
                               Text(
-                                "Location",
+                                "Callout Client",
                                 style: TextStyle(
                                   fontSize: 17,
                                   fontWeight: FontWeight.bold,
@@ -1840,174 +1746,6 @@ class _NewCalloutJobState extends State<NewClient> {
                       SizedBox(
                         height: 12,
                       ),
-                      Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              left: 0.0,
-                              top: 15.0,
-                              right: 0.0,
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                const Text(
-                                  "Site",
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 13,
-                                    color: Colors.grey,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 0.0),
-                                  child: Container(
-                                    height: 40,
-                                    width: 206,
-                                    child: Material(
-                                      elevation:
-                                          4, // Adjust this value for more or less elevation
-                                      shadowColor: Colors.black.withOpacity(
-                                          0.5), // Optional: Adjust shadow color
-                                      borderRadius: BorderRadius.circular(
-                                          4), // Match with TextFormField's border radius
-                                      child: DropdownButtonFormField<String>(
-                                        key: _siteKey,
-                                        icon: Image.asset(
-                                          "assets/images/icons/dropDownIcon.png", // Replace with your image path
-                                          width: 16, // Adjust the size
-                                          height: 16,
-                                        ),
-                                        elevation: 20,
-                                        decoration: InputDecoration(
-                                          fillColor: Colors.white,
-                                          filled: true,
-                                          border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.white,
-                                              width: 2, // Default border width
-                                            ),
-                                          ),
-                                          enabledBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.white,
-                                              width:
-                                                  2, // Set the border color to grey
-                                              // Set the border color to grey
-                                            ),
-                                          ),
-                                          focusedBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors
-                                                  .white, // Set the border color to grey when focused
-                                              width:
-                                                  2, // Optional: Adjust the width for better visibility
-                                            ),
-                                          ),
-                                          errorBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors
-                                                  .red, // Set the border color to grey when focused
-                                              width:
-                                                  2, // Optional: Adjust the width for better visibility
-                                            ),
-                                          ),
-                                          focusedErrorBorder:
-                                              OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors
-                                                  .red, // Set the border color to grey when focused
-                                              width:
-                                                  2, // Optional: Adjust the width for better visibility
-                                            ),
-                                          ),
-                                          contentPadding:
-                                              const EdgeInsets.symmetric(
-                                            vertical:
-                                                5, // Adjust vertical padding
-                                            horizontal:
-                                                12, // Adjust horizontal padding
-                                          ),
-                                          errorStyle: TextStyle(
-                                            color: Colors.red,
-                                            fontSize:
-                                                12, // Adjust font size if needed
-                                          ), // Reserve space for error messages
-                                        ),
-                                        value: _selectedSite,
-                                        items: _sites.map((String value) {
-                                          return DropdownMenuItem<String>(
-                                            value: value,
-                                            child: Text(value),
-                                          );
-                                        }).toList(),
-                                        onChanged: (value) {
-                                          setState(() {
-                                            _selectedSite = value;
-                                            _siteKey.currentState!
-                                                .validate(); // Revalidate the field
-                                            /* if (_selectedCollectionOrganisation!.length < 0) {
-                                // Clear error state once a valid selection is made
-                                _formKeys[_currentStep].currentState?.validate();
-                              } */
-                                          });
-                                        },
-                                        validator: (value) => value == null
-                                            ? 'Please select a site'
-                                            : null,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ),
-          SizedBox(
-            height: 5,
-          ),
-          Padding(
-            padding: const EdgeInsets.only(
-              left: 16.0,
-              right: 16.0,
-            ),
-            child: SizedBox(
-              width: double.infinity,
-              height: 310,
-              child: Card(
-                surfaceTintColor: Colors.white,
-                color: Colors.white,
-                elevation: 0,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.only(
-                    top: 12.0,
-                    bottom: 12.0,
-                    left: 16.0,
-                    right: 16.0,
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -2015,10 +1753,23 @@ class _NewCalloutJobState extends State<NewClient> {
                           Row(
                             children: [
                               Text(
-                                "Callout Instructions",
+                                "General Callout Instructions",
                                 style: TextStyle(
-                                  fontSize: 17,
+                                  fontSize: 14,
                                   fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Transform.scale(
+                                scale: 0.7,
+                                child: Switch(
+                                  activeColor: Colors.white,
+                                  activeTrackColor: Colors.black,
+                                  value: isMobileClinic,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      isMobileClinic = value;
+                                    });
+                                  },
                                 ),
                               ),
                             ],
@@ -2026,7 +1777,7 @@ class _NewCalloutJobState extends State<NewClient> {
                         ],
                       ),
                       SizedBox(
-                        height: 12,
+                        height: 10,
                       ),
                       Column(
                         children: [
@@ -2089,7 +1840,7 @@ class _NewCalloutJobState extends State<NewClient> {
                                     },
                                     validator: (value) {
                                       if (value == null || value.isEmpty) {
-                                        return 'Please enter a valid donor selection process';
+                                        return 'Please enter a valid callout instructions';
                                       }
                                       return null;
                                     },
@@ -2100,164 +1851,14 @@ class _NewCalloutJobState extends State<NewClient> {
                           ),
                         ],
                       ),
+                      SizedBox(
+                        height: MediaQuery.of(context).viewInsets.bottom > 0
+                            ? MediaQuery.of(context).viewInsets.bottom + 5
+                            : 10,
+                      ),
                     ],
                   ),
                 ),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(
-              left: 16.0,
-              right: 16.0,
-            ),
-            child: Card(
-              surfaceTintColor: Colors.white,
-              color: Colors.white,
-              elevation: 0,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(15),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.only(
-                  top: 12.0,
-                  bottom: 12.0,
-                  left: 16.0,
-                  right: 16.0,
-                ),
-                child: Column(
-                    mainAxisSize:
-                        MainAxisSize.min, // Ensures height adjusts dynamically
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          // Left-aligned title
-                          Row(
-                            children: [
-                              Text(
-                                "Assign Collectors",
-                                style: TextStyle(
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 6,
-                      ),
-                      Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              left: 0.0,
-                              top: 15.0,
-                              right: 0.0,
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Align(
-                                  alignment: Alignment.topLeft,
-                                  child: const Text(
-                                    "Number of Collectors",
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 13,
-                                      color: Color(0xFF94A3B8),
-                                    ),
-                                  ),
-                                ),
-                                Container(
-                                  width: 61,
-                                  height: 26,
-                                  decoration: BoxDecoration(
-                                    color: Colors
-                                        .transparent, // No background color
-                                    border: Border.all(
-                                      color: Color(
-                                          0x8C808080), // Border color with 55% opacity
-                                      width: 1.5, // Adjust thickness as needed
-                                    ),
-                                    borderRadius: BorderRadius.circular(
-                                        2), // Optional: rounded corners
-                                  ),
-                                  child: Align(
-                                    alignment: Alignment.center,
-                                    child: Text(numberOfCollectors.toString()),
-                                  ),
-                                ),
-                                ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: Color.fromRGBO(
-                                        26, 140, 255, 1.0), // Blue color
-                                    foregroundColor: Colors.white, // Text color
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: 8,
-                                        vertical: 1), // Adjust padding
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(
-                                          6), // Slightly rounded edges
-                                    ),
-                                    textStyle: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight:
-                                          FontWeight.w500, // Medium weight text
-                                    ),
-                                  ),
-                                  onPressed: () {
-                                    setState(() {
-                                      numberOfCollectors++;
-                                    });
-                                  },
-                                  child: Text(
-                                    "Add Collector",
-                                    style: TextStyle(
-                                      fontSize: 13,
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          ListView.builder(
-                              scrollDirection: Axis.vertical,
-                              shrinkWrap: true,
-                              itemCount: numberOfCollectors,
-                              itemBuilder: (context, index) {
-                                final List<String> _collectorNames = [
-                                  'George Poulos',
-                                  'Michelle Kirkman',
-                                  'Valerie McKenzie',
-                                  'Zac Hepburn',
-                                  'Gina Landini'
-                                ];
-                                return Column(
-                                  children: [
-                                    CollectorRepresentation(
-                                      collectorNumber: index + 1,
-                                      onDelete: removeCollector,
-                                      collectorNames: _collectorNames,
-                                    ),
-                                    SizedBox(
-                                      height: 16,
-                                    ),
-                                  ],
-                                );
-                              }),
-                          SizedBox(
-                            height: 20,
-                          ),
-                        ],
-                      ),
-                    ]),
               ),
             ),
           ),
@@ -2298,7 +1899,7 @@ class _NewCalloutJobState extends State<NewClient> {
                     minimumSize: Size(80, 30),
                   ),
                   child: const Text(
-                    "Create Callout Job",
+                    "Next",
                     style: TextStyle(color: Colors.white),
                   ),
                 ),
@@ -2309,7 +1910,690 @@ class _NewCalloutJobState extends State<NewClient> {
             height: 40,
           ),
         ]);
+      case 1:
+        return Column(children: [
+          const SizedBox(height: 8),
+          Padding(
+            padding: const EdgeInsets.only(
+              left: 16.0,
+              right: 16.0,
+            ),
+            child: SizedBox(
+              width: double.infinity,
+              height: 80,
+              child: Card(
+                surfaceTintColor: Colors.white,
+                color: Colors.white,
+                elevation: 0,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                    top: 12.0,
+                    bottom: 12.0,
+                    left: 16.0,
+                    right: 16.0,
+                  ),
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          height: 5,
+                        ),
+                        Container(
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            color: const Color(
+                                0xFFE6F7FA), // Light blue background
+                            borderRadius: BorderRadius.circular(6),
+                          ),
+                          child: Column(
+                            mainAxisSize: MainAxisSize
+                                .min, // Ensures Column takes only required space
+                            children: [
+                              Container(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 8, horizontal: 16), // Padding
+                                decoration: BoxDecoration(
+                                  color:
+                                      Colors.grey[600], // Light blue background
+                                  borderRadius: BorderRadius.circular(6),
+                                ),
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      '2',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    SizedBox(width: 8),
+                                    Container(
+                                      height: 20,
+                                      width: 2,
+                                      color: Colors.white, // Vertical divider
+                                    ),
+                                    SizedBox(width: 8),
+                                    Text(
+                                      'Authorized Representatives',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ]),
+                ),
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 8,
+          ),
+          Padding(
+            padding: const EdgeInsets.only(
+              left: 16.0,
+              right: 16.0,
+            ),
+            child: Card(
+              surfaceTintColor: Colors.white,
+              color: Colors.white,
+              elevation: 0,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.only(
+                  top: 12.0,
+                  bottom: 12.0,
+                  left: 16.0,
+                  right: 16.0,
+                ),
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          // Left-aligned title
+                          Row(
+                            children: [
+                              Text(
+                                "Authorized Representatives",
+                                style: TextStyle(
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 6,
+                      ),
+                      Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              left: 0.0,
+                              top: 15.0,
+                              right: 0.0,
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Align(
+                                  alignment: Alignment.topLeft,
+                                  child: const Text(
+                                    "Number of Representatives",
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 13,
+                                      color: Color(0xFF94A3B8),
+                                    ),
+                                  ),
+                                ),
+                                Container(
+                                  width: 61,
+                                  height: 26,
+                                  decoration: BoxDecoration(
+                                    color: Colors
+                                        .transparent, // No background color
+                                    border: Border.all(
+                                      color: Color(
+                                          0x8C808080), // Border color with 55% opacity
+                                      width: 1.5, // Adjust thickness as needed
+                                    ),
+                                    borderRadius: BorderRadius.circular(
+                                        2), // Optional: rounded corners
+                                  ),
+                                  child: Align(
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                        numberOfRepresentatives.toString()),
+                                  ),
+                                ),
+                                ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: Color.fromRGBO(
+                                        26, 140, 255, 1.0), // Blue color
+                                    foregroundColor: Colors.white, // Text color
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: 8,
+                                        vertical: 1), // Adjust padding
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(
+                                          6), // Slightly rounded edges
+                                    ),
+                                    textStyle: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight:
+                                          FontWeight.w500, // Medium weight text
+                                    ),
+                                  ),
+                                  onPressed: () {
+                                    setState(() {
+                                      numberOfRepresentatives++;
+                                    });
+                                  },
+                                  child: Text(
+                                    "Add New",
+                                    style: TextStyle(
+                                      fontSize: 13,
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          SizedBox(
+                            height: 16,
+                          ),
+                          ListView.builder(
+                            scrollDirection: Axis.vertical,
+                            shrinkWrap: true,
+                            itemCount: numberOfRepresentatives,
+                            itemBuilder: (context, index) {
+                              final List<String> _representativeNames = [
+                                'George Poulos',
+                                'Michelle Kirkman',
+                                'Valerie McKenzie',
+                                'Zac Hepburn',
+                                'Gina Landini'
+                              ];
+                              return Column(
+                                children: [
+                                  AuthorizedRepresentatives(
+                                    representativeNumber: index + 1,
+                                    onDelete: removeRepresentative,
+                                    representativeNames: _representativeNames,
+                                  ),
+                                  SizedBox(
+                                    height: 16,
+                                  ),
+                                ],
+                              );
+                            },
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                        ],
+                      ),
+                    ]),
+              ),
+            ),
+          ),
+        ]);
       case 2:
+        return Column(children: [
+          const SizedBox(height: 8),
+          Padding(
+            padding: const EdgeInsets.only(
+              left: 16.0,
+              right: 16.0,
+            ),
+            child: SizedBox(
+              width: double.infinity,
+              height: 80,
+              child: Card(
+                surfaceTintColor: Colors.white,
+                color: Colors.white,
+                elevation: 0,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                    top: 12.0,
+                    bottom: 12.0,
+                    left: 16.0,
+                    right: 16.0,
+                  ),
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          height: 5,
+                        ),
+                        Container(
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            color: const Color(
+                                0xFFE6F7FA), // Light blue background
+                            borderRadius: BorderRadius.circular(6),
+                          ),
+                          child: Column(
+                            mainAxisSize: MainAxisSize
+                                .min, // Ensures Column takes only required space
+                            children: [
+                              Container(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 8, horizontal: 16), // Padding
+                                decoration: BoxDecoration(
+                                  color:
+                                      Colors.grey[600], // Light blue background
+                                  borderRadius: BorderRadius.circular(6),
+                                ),
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      '3',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    SizedBox(width: 8),
+                                    Container(
+                                      height: 20,
+                                      width: 2,
+                                      color: Colors.white, // Vertical divider
+                                    ),
+                                    SizedBox(width: 8),
+                                    Text(
+                                      'Client Specifications',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ]),
+                ),
+              ),
+            ),
+          ),
+        ]);
+      case 3:
+        return Column(children: [
+          const SizedBox(height: 8),
+          Padding(
+            padding: const EdgeInsets.only(
+              left: 16.0,
+              right: 16.0,
+            ),
+            child: SizedBox(
+              width: double.infinity,
+              height: 80,
+              child: Card(
+                surfaceTintColor: Colors.white,
+                color: Colors.white,
+                elevation: 0,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                    top: 12.0,
+                    bottom: 12.0,
+                    left: 16.0,
+                    right: 16.0,
+                  ),
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          height: 5,
+                        ),
+                        Container(
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            color: const Color(
+                                0xFFE6F7FA), // Light blue background
+                            borderRadius: BorderRadius.circular(6),
+                          ),
+                          child: Column(
+                            mainAxisSize: MainAxisSize
+                                .min, // Ensures Column takes only required space
+                            children: [
+                              Container(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 8, horizontal: 16), // Padding
+                                decoration: BoxDecoration(
+                                  color:
+                                      Colors.grey[600], // Light blue background
+                                  borderRadius: BorderRadius.circular(6),
+                                ),
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      '4',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    SizedBox(width: 8),
+                                    Container(
+                                      height: 20,
+                                      width: 2,
+                                      color: Colors.white, // Vertical divider
+                                    ),
+                                    SizedBox(width: 8),
+                                    Text(
+                                      'Client Locations',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ]),
+                ),
+              ),
+            ),
+          ),
+        ]);
+      case 4:
+        return Column(children: [
+          const SizedBox(height: 8),
+          Padding(
+            padding: const EdgeInsets.only(
+              left: 16.0,
+              right: 16.0,
+            ),
+            child: SizedBox(
+              width: double.infinity,
+              height: 80,
+              child: Card(
+                surfaceTintColor: Colors.white,
+                color: Colors.white,
+                elevation: 0,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                    top: 12.0,
+                    bottom: 12.0,
+                    left: 16.0,
+                    right: 16.0,
+                  ),
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          height: 5,
+                        ),
+                        Container(
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            color: const Color(
+                                0xFFE6F7FA), // Light blue background
+                            borderRadius: BorderRadius.circular(6),
+                          ),
+                          child: Column(
+                            mainAxisSize: MainAxisSize
+                                .min, // Ensures Column takes only required space
+                            children: [
+                              Container(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 8, horizontal: 16), // Padding
+                                decoration: BoxDecoration(
+                                  color:
+                                      Colors.grey[600], // Light blue background
+                                  borderRadius: BorderRadius.circular(6),
+                                ),
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      '5',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    SizedBox(width: 8),
+                                    Container(
+                                      height: 20,
+                                      width: 2,
+                                      color: Colors.white, // Vertical divider
+                                    ),
+                                    SizedBox(width: 8),
+                                    Text(
+                                      'Job History',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ]),
+                ),
+              ),
+            ),
+          ),
+        ]);
+      case 5:
+        return Column(children: [
+          const SizedBox(height: 8),
+          Padding(
+            padding: const EdgeInsets.only(
+              left: 16.0,
+              right: 16.0,
+            ),
+            child: SizedBox(
+              width: double.infinity,
+              height: 80,
+              child: Card(
+                surfaceTintColor: Colors.white,
+                color: Colors.white,
+                elevation: 0,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                    top: 12.0,
+                    bottom: 12.0,
+                    left: 16.0,
+                    right: 16.0,
+                  ),
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          height: 5,
+                        ),
+                        Container(
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            color: const Color(
+                                0xFFE6F7FA), // Light blue background
+                            borderRadius: BorderRadius.circular(6),
+                          ),
+                          child: Column(
+                            mainAxisSize: MainAxisSize
+                                .min, // Ensures Column takes only required space
+                            children: [
+                              Container(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 8, horizontal: 16), // Padding
+                                decoration: BoxDecoration(
+                                  color:
+                                      Colors.grey[600], // Light blue background
+                                  borderRadius: BorderRadius.circular(6),
+                                ),
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      '6',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    SizedBox(width: 8),
+                                    Container(
+                                      height: 20,
+                                      width: 2,
+                                      color: Colors.white, // Vertical divider
+                                    ),
+                                    SizedBox(width: 8),
+                                    Text(
+                                      'Notes',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ]),
+                ),
+              ),
+            ),
+          ),
+        ]);
+      case 6:
+        return Column(children: [
+          const SizedBox(height: 8),
+          Padding(
+            padding: const EdgeInsets.only(
+              left: 16.0,
+              right: 16.0,
+            ),
+            child: SizedBox(
+              width: double.infinity,
+              height: 80,
+              child: Card(
+                surfaceTintColor: Colors.white,
+                color: Colors.white,
+                elevation: 0,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                    top: 12.0,
+                    bottom: 12.0,
+                    left: 16.0,
+                    right: 16.0,
+                  ),
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          height: 5,
+                        ),
+                        Container(
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            color: const Color(
+                                0xFFE6F7FA), // Light blue background
+                            borderRadius: BorderRadius.circular(6),
+                          ),
+                          child: Column(
+                            mainAxisSize: MainAxisSize
+                                .min, // Ensures Column takes only required space
+                            children: [
+                              Container(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 8, horizontal: 16), // Padding
+                                decoration: BoxDecoration(
+                                  color:
+                                      Colors.grey[600], // Light blue background
+                                  borderRadius: BorderRadius.circular(6),
+                                ),
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      '7',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    SizedBox(width: 8),
+                                    Container(
+                                      height: 20,
+                                      width: 2,
+                                      color: Colors.white, // Vertical divider
+                                    ),
+                                    SizedBox(width: 8),
+                                    Text(
+                                      'Reporting',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ]),
+                ),
+              ),
+            ),
+          ),
+        ]);
       default:
         return const SizedBox.shrink();
     }
@@ -2444,20 +2728,42 @@ class _NewCalloutJobState extends State<NewClient> {
                                   lineDotRadius: 1.1,
                                   onStepReached: (index) {
                                     setState(() {
-                                      _currentSteP = index;
+                                      final formState =
+                                          _formKeys[_currentStep].currentState;
+
+                                      // Validate the current form
+                                      if (formState != null &&
+                                          !formState.validate()) {
+                                        // If validation fails, return or show a message (optional)
+                                        // Scroll to the top if validation fails
+                                        widget.scrollController.animateTo(
+                                          0, // Scroll to top
+                                          duration:
+                                              const Duration(milliseconds: 500),
+                                          curve: Curves.easeInOut,
+                                        );
+                                        return;
+                                      }
+                                      _currentStep = index;
                                     });
                                   },
-                                  icons: [
+                                  icons: const [
                                     Icon(Icons.looks_one,
-                                        size: 58), // Smaller icons
-                                    Icon(Icons.looks_two, size: 68),
-                                    Icon(Icons.looks_3, size: 58),
-                                    Icon(Icons.looks_4, size: 58),
-                                    Icon(Icons.looks_5, size: 58),
-                                    Icon(Icons.looks_6, size: 58),
-                                    Icon(Icons.seven_mp, size: 58),
+                                        size: 58, color: Colors.white),
+                                    Icon(Icons.looks_two,
+                                        size: 58, color: Colors.white),
+                                    Icon(Icons.looks_3,
+                                        size: 58, color: Colors.white),
+                                    Icon(Icons.looks_4,
+                                        size: 58, color: Colors.white),
+                                    Icon(Icons.looks_5,
+                                        size: 58, color: Colors.white),
+                                    Icon(Icons.looks_6,
+                                        size: 58, color: Colors.white),
+                                    Icon(Icons.seven_mp,
+                                        size: 58, color: Colors.white),
                                   ],
-                                  activeStep: _currentSteP,
+                                  activeStep: _currentStep,
                                   activeStepColor: Color(0xFF156CC9),
                                   stepColor: Colors.grey,
                                   enableNextPreviousButtons: false,
@@ -2470,59 +2776,6 @@ class _NewCalloutJobState extends State<NewClient> {
                                 ),
                               ),
                             ),
-                            /* Container(
-                              width: MediaQuery.of(context).size.width *
-                                  1, // 80% of screen width
-                              child: Transform.scale(
-                                scale: 0.95,
-                                child: FlutterHorizontalStepper(
-                                  steps: const [
-                                    "Client\nDetails",
-                                    "Authorized\nRep",
-                                    "Client\nSpecifications",
-                                    "Client\nLocations",
-                                    "Job\nHistory",
-                                    "Notes",
-                                  ],
-                                  radius: 45,
-                                  currentStep: _currentStep + 1,
-                                  child: const [
-                                    Text("1"),
-                                    Text("2"),
-                                    Text("3"),
-                                    Text("4"),
-                                    Text("5"),
-                                    Text("6"),
-                                  ],
-                                ),
-                              ),
-                            ), */
-                            /*  ProgressStepper(
-                              width: 370,
-                              height: 20,
-                              padding: 1,
-                              currentStep: 1,
-                              bluntHead: true,
-                              bluntTail: true,
-                              color: Colors.grey,
-                              progressColor: Colors.deepPurple,
-                              labels: const <String>[
-                                '1',
-                                '2',
-                                '3',
-                                '4',
-                                '5',
-                              ],
-                              defaultTextStyle: const TextStyle(
-                                color: Colors.purple,
-                                fontWeight: FontWeight.w500,
-                              ),
-                              selectedTextStyle: const TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ), */
-
                             SizedBox(
                               height: 20,
                             ),

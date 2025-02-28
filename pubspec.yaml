@@ -105,6 +105,13 @@ flutter:
     - assets/images/icons/newCalloutIcon.png
     - assets/images/icons/newCalloutOpen.png
     - assets/images/icons/X.png
+    - assets/images/icons/1.png
+    - assets/images/icons/2.png
+    - assets/images/icons/3.png
+    - assets/images/icons/4.png
+    - assets/images/icons/5.png
+    - assets/images/icons/6.png
+    - assets/images/icons/7.png
     - assets/images/icons/onSiteApprovalVector.png
     - assets/images/icons/printIcon.png
     - assets/images/icons/siteContactSignature.png
