@@ -7,11 +7,14 @@ class CollectorRepresentation extends StatefulWidget {
 
   final int collectorNumber;
 
+  final int numberOfCollectors;
+
   const CollectorRepresentation(
       {Key? key,
       required this.onDelete,
       required this.collectorNames,
-      required this.collectorNumber})
+      required this.collectorNumber,
+      required this.numberOfCollectors})
       : super(key: key);
 
   @override
@@ -69,15 +72,20 @@ class _CollectorRepresentationState extends State<CollectorRepresentation> {
                           ),
                         ),
                       ),
-                      GestureDetector(
-                        onTap: widget
-                            .onDelete, // Call the parent's method when tapped
+                      widget.collectorNumber == widget.numberOfCollectors
+                          ? GestureDetector(
+                              onTap: widget
+                                  .onDelete, // Call the parent's method when tapped
 
-                        child: FittedBox(
-                          fit: BoxFit.contain,
-                          child: Image.asset("assets/images/icons/delete.png"),
-                        ),
-                      ),
+                              child: FittedBox(
+                                fit: BoxFit.contain,
+                                child: Image.asset(
+                                    "assets/images/icons/delete.png"),
+                              ),
+                            )
+                          : SizedBox(
+                              height: 0,
+                            ),
                     ],
                   ),
                 ),

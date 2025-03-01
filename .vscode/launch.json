@@ -20,6 +20,15 @@
             "request": "launch",
             "type": "dart",
             "flutterMode": "release"
+        },
+      
+        {
+            "name": "Flutter",
+            "request": "launch",
+            "type": "dart",
+            "deviceId": "DA916227-30E2-4DF1-BD20-2EB972228EEE"
         }
+            
+        
     ]
 }

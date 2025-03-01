@@ -7,11 +7,14 @@ class AuthorizedRepresentatives extends StatefulWidget {
 
   final int representativeNumber;
 
+  final int numberOfRepresentatives;
+
   const AuthorizedRepresentatives(
       {Key? key,
       required this.onDelete,
       required this.representativeNames,
-      required this.representativeNumber})
+      required this.representativeNumber,
+      required this.numberOfRepresentatives})
       : super(key: key);
 
   @override
@@ -79,15 +82,20 @@ class _CollectorRepresentationState extends State<AuthorizedRepresentatives> {
                           ),
                         ),
                       ),
-                      GestureDetector(
-                        onTap: widget
-                            .onDelete, // Call the parent's method when tapped
-
-                        child: FittedBox(
-                          fit: BoxFit.contain,
-                          child: Image.asset("assets/images/icons/delete.png"),
-                        ),
-                      ),
+                      widget.representativeNumber ==
+                              widget.numberOfRepresentatives
+                          ? GestureDetector(
+                              onTap: widget
+                                  .onDelete, // Call the parent's method when tapped
+                              child: FittedBox(
+                                fit: BoxFit.contain,
+                                child: Image.asset(
+                                    "assets/images/icons/delete.png"),
+                              ),
+                            )
+                          : SizedBox(
+                              height: 0,
+                            ),
                     ],
                   ),
                 ),

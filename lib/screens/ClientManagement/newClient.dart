@@ -2138,6 +2138,8 @@ class _NewCalloutJobState extends State<NewClient> {
                               return Column(
                                 children: [
                                   AuthorizedRepresentatives(
+                                    numberOfRepresentatives:
+                                        numberOfRepresentatives,
                                     representativeNumber: index + 1,
                                     onDelete: removeRepresentative,
                                     representativeNames: _representativeNames,
@@ -2728,11 +2730,11 @@ class _NewCalloutJobState extends State<NewClient> {
                                   lineDotRadius: 1.1,
                                   onStepReached: (index) {
                                     setState(() {
-                                      final formState =
-                                          _formKeys[_currentStep].currentState;
+                                      /* final formState =
+                                          _formKeys[_currentStep].currentState; */
 
                                       // Validate the current form
-                                      if (formState != null &&
+                                      /* if (formState != null &&
                                           !formState.validate()) {
                                         // If validation fails, return or show a message (optional)
                                         // Scroll to the top if validation fails
@@ -2743,7 +2745,7 @@ class _NewCalloutJobState extends State<NewClient> {
                                           curve: Curves.easeInOut,
                                         );
                                         return;
-                                      }
+                                      } */
                                       _currentStep = index;
                                     });
                                   },

@@ -9127,6 +9127,7 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                               return Column(
                                 children: [
                                   CollectorRepresentation(
+                                    numberOfCollectors: numberOfCollectors,
                                     collectorNumber: index + 1,
                                     onDelete: removeCollector,
                                     collectorNames: _collectorNames,
