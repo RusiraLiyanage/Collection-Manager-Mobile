@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 class AuthorizedRepresentatives extends StatefulWidget {
   final VoidCallback onDelete; // Callback to notify parent
 
-  final List<String> representativeNames;
-
   final int representativeNumber;
 
   final int numberOfRepresentatives;
@@ -12,7 +10,6 @@ class AuthorizedRepresentatives extends StatefulWidget {
   const AuthorizedRepresentatives(
       {Key? key,
       required this.onDelete,
-      required this.representativeNames,
       required this.representativeNumber,
       required this.numberOfRepresentatives})
       : super(key: key);

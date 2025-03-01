@@ -2128,13 +2128,6 @@ class _NewCalloutJobState extends State<NewClient> {
                             shrinkWrap: true,
                             itemCount: numberOfRepresentatives,
                             itemBuilder: (context, index) {
-                              final List<String> _representativeNames = [
-                                'George Poulos',
-                                'Michelle Kirkman',
-                                'Valerie McKenzie',
-                                'Zac Hepburn',
-                                'Gina Landini'
-                              ];
                               return Column(
                                 children: [
                                   AuthorizedRepresentatives(
@@ -2142,7 +2135,6 @@ class _NewCalloutJobState extends State<NewClient> {
                                         numberOfRepresentatives,
                                     representativeNumber: index + 1,
                                     onDelete: removeRepresentative,
-                                    representativeNames: _representativeNames,
                                   ),
                                   SizedBox(
                                     height: 16,
