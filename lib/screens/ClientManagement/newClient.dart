@@ -8708,7 +8708,7 @@ class _NewCalloutJobState extends State<NewClient> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Container(
+                      /* Container(
                         width: double.infinity,
                         height: 90,
                         decoration: BoxDecoration(
@@ -8730,129 +8730,163 @@ class _NewCalloutJobState extends State<NewClient> {
                                     ),
                                   ),
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                    right: 16.0,
-                                    top: 8.0,
-                                  ),
-                                  child: InkWell(
-                                    onTap: () {
-                                      print("On tapped");
-                                    },
-                                    child: ClipRRect(
-                                      child: Image.asset(
-                                        "assets/images/icons/refreshIcon.png",
-                                        width: 24,
-                                        height: 24,
-                                      ),
-                                    ),
-                                  ),
-                                ),
                               ],
                             ),
                             SizedBox(
                               height: 10,
                             ),
+                          ],
+                        ),
+                      ), */
+                      SizedBox(
+                        height: 8.0,
+                      ),
+                      Container(
+                        width: double.infinity,
+                        height: 85,
+                        decoration: BoxDecoration(
+                          color: Color(0xFFF2F2F2).withOpacity(1),
+                          borderRadius:
+                              BorderRadius.circular(15), // Rounded corners
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
                             Padding(
-                              padding: const EdgeInsets.only(
-                                left: 16.0,
-                                right: 10.0,
-                                bottom: 10.0,
+                              padding: EdgeInsets.only(
+                                top: 10,
                               ),
+                            ),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 16.0, right: 8.0),
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text(
-                                    "Client Locations",
-                                    style: TextStyle(
-                                      fontSize: 24,
-                                      fontWeight: FontWeight.bold,
+                                  Padding(
+                                    padding: const EdgeInsets.only(right: 45.0),
+                                    child: Text(
+                                      "Search Client Locations",
+                                      style: TextStyle(
+                                        color: Color(0xFF005277),
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(right: 8.0),
-                                    child: InkWell(
-                                      onTap: () {
-                                        if (Platform.isAndroid) {
-                                          showModalBottomSheet<void>(
-                                            isScrollControlled:
-                                                true, // Allows controlling the height
-                                            isDismissible: false,
-                                            enableDrag: false,
-                                            context: context,
-                                            builder: (BuildContext context) {
-                                              return DraggableScrollableSheet(
-                                                expand: false,
-                                                initialChildSize:
-                                                    1, // Initial height of the sheet (93% of the screen)
-                                                minChildSize:
-                                                    1, // Allow shrinking to 50% of the screen
-                                                maxChildSize:
-                                                    1, // Prevent expansion above 93% of the screen
-                                                builder: (BuildContext context,
-                                                    ScrollController
-                                                        scrollController) {
-                                                  return Container(
-                                                    width: double.infinity,
-                                                    decoration:
-                                                        const BoxDecoration(
-                                                      color: Color(
-                                                          0xFFEDEEF0), // Background color of the bottom sheet
-                                                      borderRadius:
-                                                          BorderRadius.vertical(
-                                                        top: Radius.circular(
-                                                            0), // Rounded top corners
-                                                      ),
-                                                    ),
-                                                    child: NewClient(
-                                                        scrollController:
-                                                            scrollController),
+                                  Row(
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                          right: 16.0,
+                                          top: 4.0,
+                                        ),
+                                        child: InkWell(
+                                          onTap: () {
+                                            print("On tapped");
+                                          },
+                                          child: ClipRRect(
+                                            child: Image.asset(
+                                              "assets/images/icons/refreshIcon.png",
+                                              width: 24,
+                                              height: 24,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(right: 8.0),
+                                        child: InkWell(
+                                          onTap: () {
+                                            if (Platform.isAndroid) {
+                                              showModalBottomSheet<void>(
+                                                isScrollControlled:
+                                                    true, // Allows controlling the height
+                                                isDismissible: false,
+                                                enableDrag: false,
+                                                context: context,
+                                                builder:
+                                                    (BuildContext context) {
+                                                  return DraggableScrollableSheet(
+                                                    expand: false,
+                                                    initialChildSize:
+                                                        1, // Initial height of the sheet (93% of the screen)
+                                                    minChildSize:
+                                                        1, // Allow shrinking to 50% of the screen
+                                                    maxChildSize:
+                                                        1, // Prevent expansion above 93% of the screen
+                                                    builder: (BuildContext
+                                                            context,
+                                                        ScrollController
+                                                            scrollController) {
+                                                      return Container(
+                                                        width: double.infinity,
+                                                        decoration:
+                                                            const BoxDecoration(
+                                                          color: Color(
+                                                              0xFFEDEEF0), // Background color of the bottom sheet
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .vertical(
+                                                            top: Radius.circular(
+                                                                0), // Rounded top corners
+                                                          ),
+                                                        ),
+                                                        child: NewClient(
+                                                            scrollController:
+                                                                scrollController),
+                                                      );
+                                                    },
                                                   );
                                                 },
                                               );
-                                            },
-                                          );
-                                        } else if (Platform.isIOS) {
-                                          showModalBottomSheet<void>(
-                                            isScrollControlled:
-                                                true, // Allows controlling the height
-                                            isDismissible: false,
-                                            enableDrag: false,
-                                            context: context,
-                                            builder: (BuildContext context) {
-                                              return DraggableScrollableSheet(
-                                                expand: false,
-                                                initialChildSize:
-                                                    1, // Initial height of the sheet (93% of the screen)
-                                                minChildSize:
-                                                    1, // Allow shrinking to 50% of the screen
-                                                maxChildSize:
-                                                    1, // Prevent expansion above 93% of the screen
-                                                builder: (BuildContext context,
-                                                    ScrollController
-                                                        scrollController) {
-                                                  return Container(
-                                                    width: double.infinity,
-                                                    decoration:
-                                                        const BoxDecoration(
-                                                      color: Color(
-                                                          0xFFEDEEF0), // Background color of the bottom sheet
-                                                      borderRadius:
-                                                          BorderRadius.vertical(
-                                                        top: Radius.circular(
-                                                            0), // Rounded top corners
-                                                      ),
-                                                    ),
-                                                    child: NewClient(
-                                                        scrollController:
-                                                            scrollController),
+                                            } else if (Platform.isIOS) {
+                                              showModalBottomSheet<void>(
+                                                isScrollControlled:
+                                                    true, // Allows controlling the height
+                                                isDismissible: false,
+                                                enableDrag: false,
+                                                context: context,
+                                                builder:
+                                                    (BuildContext context) {
+                                                  return DraggableScrollableSheet(
+                                                    expand: false,
+                                                    initialChildSize:
+                                                        1, // Initial height of the sheet (93% of the screen)
+                                                    minChildSize:
+                                                        1, // Allow shrinking to 50% of the screen
+                                                    maxChildSize:
+                                                        1, // Prevent expansion above 93% of the screen
+                                                    builder: (BuildContext
+                                                            context,
+                                                        ScrollController
+                                                            scrollController) {
+                                                      return Container(
+                                                        width: double.infinity,
+                                                        decoration:
+                                                            const BoxDecoration(
+                                                          color: Color(
+                                                              0xFFEDEEF0), // Background color of the bottom sheet
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .vertical(
+                                                            top: Radius.circular(
+                                                                0), // Rounded top corners
+                                                          ),
+                                                        ),
+                                                        child: NewClient(
+                                                            scrollController:
+                                                                scrollController),
+                                                      );
+                                                    },
                                                   );
                                                 },
                                               );
-                                            },
-                                          );
-                                          /* showCupertinoModalBottomSheet(
+                                              /* showCupertinoModalBottomSheet(
                                           transitionBackgroundColor:
                                               Colors.transparent,
                                           enableDrag: false,
@@ -8889,62 +8923,21 @@ class _NewCalloutJobState extends State<NewClient> {
                                             },
                                           ),
                                         ); */
-                                        }
-                                      },
-                                      child: Align(
-                                        alignment: Alignment.topRight,
-                                        child: ClipRRect(
-                                          child: Image.asset(
-                                            "assets/images/icons/newJobOpen.png",
-                                            width: 24,
-                                            height: 24,
+                                            }
+                                          },
+                                          child: Align(
+                                            alignment: Alignment.topRight,
+                                            child: ClipRRect(
+                                              child: Image.asset(
+                                                "assets/images/icons/newJobOpen.png",
+                                                width: 24,
+                                                height: 24,
+                                              ),
+                                            ),
                                           ),
                                         ),
                                       ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        height: 8.0,
-                      ),
-                      Container(
-                        width: double.infinity,
-                        height: 85,
-                        decoration: BoxDecoration(
-                          color: Color(0xFFF2F2F2).withOpacity(1),
-                          borderRadius:
-                              BorderRadius.circular(15), // Rounded corners
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.only(
-                                top: 10,
-                              ),
-                            ),
-                            SizedBox(
-                              width: 5,
-                            ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.only(left: 16.0, right: 8.0),
-                              child: Row(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(right: 45.0),
-                                    child: Text(
-                                      "Search Client Locations",
-                                      style: TextStyle(
-                                        color: Color(0xFF005277),
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
+                                    ],
                                   ),
                                 ],
                               ),
