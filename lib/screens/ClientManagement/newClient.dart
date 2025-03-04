@@ -3,8 +3,11 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:horizontal_stepper_flutter/horizontal_stepper_flutter.dart';
 import 'package:project_code_blue/screens/ClientManagement/achievedClientCard.dart';
+import 'package:project_code_blue/screens/ClientManagement/achievedLocationCard.dart';
 import 'package:project_code_blue/screens/ClientManagement/authorizedRepresentatives.dart';
+import 'package:project_code_blue/screens/ClientManagement/clientLocationCard.dart';
 import 'package:project_code_blue/screens/ClientManagement/clientManagementCard.dart';
+import 'package:project_code_blue/screens/ClientManagement/newClientLocation.dart';
 import 'package:project_code_blue/screens/OnsiteJobs/collectorRepresentation.dart';
 import 'package:project_code_blue/screens/OnsiteJobs/onSiteJobsNewCard.dart';
 //import 'package:progress_stepper/progress_stepper.dart';
@@ -56,14 +59,14 @@ class _NewCalloutJobState extends State<NewClient> {
   String get displayRange {
     int start = ((currentPage - 1) * itemsPerPage) + 1;
     int end = currentPage * itemsPerPage;
-    end = end > clientData.length ? clientData.length : end;
+    end = end > locationData.length ? locationData.length : end;
     return "$start - $end";
   }
 
   String get displayRangeAchieved {
     int start = ((currentPageAchieved - 1) * itemsPerPageAchieved) + 1;
     int end = currentPageAchieved * itemsPerPageAchieved;
-    end = end > clientDataAchieved.length ? clientDataAchieved.length : end;
+    end = end > locationDataAchieved.length ? locationDataAchieved.length : end;
     return "$start - $end";
   }
 
@@ -93,400 +96,360 @@ class _NewCalloutJobState extends State<NewClient> {
     widget.scrollController.addListener(() {
       if (widget.scrollController.position.pixels < 380) {
         setState(() {
-          showMainClients = true;
-          achieveClientsOpened = false;
+          showMainLocations = true;
+          achieveLocationsOpened = false;
         });
       }
     });
   }
 
   // Filtered jobs to display based on pagination
-  List<Map<String, String>> get paginatedClientData {
+  List<Map<String, String>> get paginatedLocationData {
     int startIndex = (currentPage - 1) * itemsPerPage;
     int endIndex = startIndex + itemsPerPage;
-    endIndex = endIndex > clientData.length ? clientData.length : endIndex;
-    return clientData.sublist(startIndex, endIndex);
+    endIndex = endIndex > locationData.length ? locationData.length : endIndex;
+    return locationData.sublist(startIndex, endIndex);
   }
 
   // Filtered achieved jobs to display based on pagination
-  List<Map<String, String>> get paginatedClientDataAchieved {
+  List<Map<String, String>> get paginatedLocationDataAchieved {
     int startIndexAchieved = (currentPageAchieved - 1) * itemsPerPageAchieved;
     int endIndexAchieved = startIndexAchieved + itemsPerPageAchieved;
-    endIndexAchieved = endIndexAchieved > clientDataAchieved.length
-        ? clientDataAchieved.length
+    endIndexAchieved = endIndexAchieved > locationDataAchieved.length
+        ? locationDataAchieved.length
         : endIndexAchieved;
-    return clientData.sublist(startIndexAchieved, endIndexAchieved);
+    return locationData.sublist(startIndexAchieved, endIndexAchieved);
   }
 
-  bool achieveClientsOpened = false;
+  bool achieveLocationsOpened = false;
 
   final List<String> status = ["Show", "Hide"];
   final List<String> filteringAmounts = ["5", "10", "15"];
   final List<String> filteringAmountsArchieved = ["5", "10", "15"];
 
-  final List<Map<String, String>> clientData = [
+  final List<Map<String, String>> locationData = [
     {
-      "clientNumber": "1",
-      "clientName": "New Castle City Council",
-      "clientReference": "abc12345678",
-      "authorizedRep": "Olvia Lopez",
+      "locationNumber": "1",
+      "locationName": "New Castle Deport",
+      "locationAddress": "6 Stewart Avenue, Newcastle West ",
+      "siteContract": "Olvia Lopez",
       "mobile": "0456 227 889",
       "email": "eeeeee@gmail.com",
-      "callout": "Yes",
     },
     {
-      "clientNumber": "2",
-      "clientName": "New Castle City Council",
-      "clientReference": "abc12345678",
-      "authorizedRep": "Olvia Lopez",
+      "locationNumber": "2",
+      "locationName": "New Castle City Council",
+      "locationAddress": "6 Stewart Avenue, Newcastle West ",
+      "siteContract": "Olvia Lopez",
       "mobile": "0456 227 889",
       "email": "eeeeee@gmail.com",
-      "callout": "Yes",
     },
     {
-      "clientNumber": "3",
-      "clientName": "New Castle City Council",
-      "clientReference": "abc12345678",
-      "authorizedRep": "Olvia Lopez",
+      "locationNumber": "3",
+      "locationName": "New Castle City Council",
+      "locationAddress": "6 Stewart Avenue, Newcastle West ",
+      "siteContract": "Olvia Lopez",
       "mobile": "0456 227 889",
       "email": "eeeeee@gmail.com",
-      "callout": "Yes",
     },
     {
-      "clientNumber": "4",
-      "clientName": "New Castle City Council",
-      "clientReference": "abc12345678",
-      "authorizedRep": "Olvia Lopez",
+      "locationNumber": "4",
+      "locationName": "New Castle City Council",
+      "locationAddress": "6 Stewart Avenue, Newcastle West ",
+      "siteContract": "Olvia Lopez",
       "mobile": "0456 227 889",
       "email": "eeeeee@gmail.com",
-      "callout": "Yes",
     },
     {
-      "clientNumber": "5",
-      "clientName": "New Castle City Council",
-      "clientReference": "abc12345678",
-      "authorizedRep": "Olvia Lopez",
+      "locationNumber": "5",
+      "locationName": "New Castle City Council",
+      "locationAddress": "6 Stewart Avenue, Newcastle West ",
+      "siteContract": "Olvia Lopez",
       "mobile": "0456 227 889",
       "email": "eeeeee@gmail.com",
-      "callout": "Yes",
     },
     {
-      "clientNumber": "6",
-      "clientName": "New Castle City Council",
-      "clientReference": "abc12345678",
-      "authorizedRep": "Olvia Lopez",
+      "locationNumber": "6",
+      "locationName": "New Castle City Council",
+      "locationAddress": "6 Stewart Avenue, Newcastle West ",
+      "siteContract": "Olvia Lopez",
       "mobile": "0456 227 889",
       "email": "eeeeee@gmail.com",
-      "callout": "Yes",
     },
     {
-      "clientNumber": "7",
-      "clientName": "New Castle City Council",
-      "clientReference": "abc12345678",
-      "authorizedRep": "Olvia Lopez",
+      "locationNumber": "7",
+      "locationName": "New Castle City Council",
+      "locationAddress": "6 Stewart Avenue, Newcastle West ",
+      "siteContract": "Olvia Lopez",
       "mobile": "0456 227 889",
       "email": "eeeeee@gmail.com",
-      "callout": "Yes",
     },
     {
-      "clientNumber": "8",
-      "clientName": "New Castle City Council",
-      "clientReference": "abc12345678",
-      "authorizedRep": "Olvia Lopez",
+      "locationNumber": "8",
+      "locationName": "New Castle City Council",
+      "locationAddress": "6 Stewart Avenue, Newcastle West ",
+      "siteContract": "Olvia Lopez",
       "mobile": "0456 227 889",
       "email": "eeeeee@gmail.com",
-      "callout": "Yes",
     },
     {
-      "clientNumber": "9",
-      "clientName": "New Castle City Council",
-      "clientReference": "abc12345678",
-      "authorizedRep": "Olvia Lopez",
+      "locationNumber": "9",
+      "locationName": "New Castle City Council",
+      "locationAddress": "6 Stewart Avenue, Newcastle West ",
+      "siteContract": "Olvia Lopez",
       "mobile": "0456 227 889",
       "email": "eeeeee@gmail.com",
-      "callout": "Yes",
     },
     {
-      "clientNumber": "10",
-      "clientName": "New Castle City Council",
-      "clientReference": "abc12345678",
-      "authorizedRep": "Olvia Lopez",
+      "locationNumber": "10",
+      "locationName": "New Castle City Council",
+      "locationAddress": "6 Stewart Avenue, Newcastle West ",
+      "siteContract": "Olvia Lopez",
       "mobile": "0456 227 889",
       "email": "eeeeee@gmail.com",
-      "callout": "Yes",
     },
     {
-      "clientNumber": "11",
-      "clientName": "New Castle City Council",
-      "clientReference": "abc12345678",
-      "authorizedRep": "Olvia Lopez",
+      "locationNumber": "11",
+      "locationName": "New Castle City Council",
+      "locationAddress": "6 Stewart Avenue, Newcastle West ",
+      "siteContract": "Olvia Lopez",
       "mobile": "0456 227 889",
       "email": "eeeeee@gmail.com",
-      "callout": "Yes",
     },
     {
-      "clientNumber": "12",
-      "clientName": "New Castle City Council",
-      "clientReference": "abc12345678",
-      "authorizedRep": "Olvia Lopez",
+      "locationNumber": "12",
+      "locationName": "New Castle City Council",
+      "locationAddress": "6 Stewart Avenue, Newcastle West ",
+      "siteContract": "Olvia Lopez",
       "mobile": "0456 227 889",
       "email": "eeeeee@gmail.com",
-      "callout": "Yes",
     },
     {
-      "clientNumber": "13",
-      "clientName": "New Castle City Council",
-      "clientReference": "abc12345678",
-      "authorizedRep": "Olvia Lopez",
+      "locationNumber": "13",
+      "locationName": "New Castle City Council",
+      "locationAddress": "6 Stewart Avenue, Newcastle West ",
+      "siteContract": "Olvia Lopez",
       "mobile": "0456 227 889",
       "email": "eeeeee@gmail.com",
-      "callout": "Yes",
     },
     {
-      "clientNumber": "14",
-      "clientName": "New Castle City Council",
-      "clientReference": "abc12345678",
-      "authorizedRep": "Olvia Lopez",
+      "locationNumber": "14",
+      "locationName": "New Castle City Council",
+      "locationAddress": "6 Stewart Avenue, Newcastle West ",
+      "siteContract": "Olvia Lopez",
       "mobile": "0456 227 889",
       "email": "eeeeee@gmail.com",
-      "callout": "Yes",
     },
     {
-      "clientNumber": "15",
-      "clientName": "New Castle City Council",
-      "clientReference": "abc12345678",
-      "authorizedRep": "Olvia Lopez",
+      "locationNumber": "15",
+      "locationName": "New Castle City Council",
+      "locationAddress": "6 Stewart Avenue, Newcastle West ",
+      "siteContract": "Olvia Lopez",
       "mobile": "0456 227 889",
       "email": "eeeeee@gmail.com",
-      "callout": "Yes",
     },
     {
-      "clientNumber": "16",
-      "clientName": "New Castle City Council",
-      "clientReference": "abc12345678",
-      "authorizedRep": "Olvia Lopez",
+      "locationNumber": "16",
+      "locationName": "New Castle City Council",
+      "locationAddress": "6 Stewart Avenue, Newcastle West ",
+      "siteContract": "Olvia Lopez",
       "mobile": "0456 227 889",
       "email": "eeeeee@gmail.com",
-      "callout": "Yes",
     },
     {
-      "clientNumber": "17",
-      "clientName": "New Castle City Council",
-      "clientReference": "abc12345678",
-      "authorizedRep": "Olvia Lopez",
+      "locationNumber": "17",
+      "locationName": "New Castle City Council",
+      "locationAddress": "6 Stewart Avenue, Newcastle West ",
+      "siteContract": "Olvia Lopez",
       "mobile": "0456 227 889",
       "email": "eeeeee@gmail.com",
-      "callout": "Yes",
     },
     {
-      "clientNumber": "18",
-      "clientName": "New Castle City Council",
-      "clientReference": "abc12345678",
-      "authorizedRep": "Olvia Lopez",
+      "locationNumber": "18",
+      "locationName": "New Castle City Council",
+      "locationAddress": "6 Stewart Avenue, Newcastle West ",
+      "siteContract": "Olvia Lopez",
       "mobile": "0456 227 889",
       "email": "eeeeee@gmail.com",
-      "callout": "Yes",
     },
     {
-      "clientNumber": "19",
-      "clientName": "New Castle City Council",
-      "clientReference": "abc12345678",
-      "authorizedRep": "Olvia Lopez",
+      "locationNumber": "19",
+      "locationName": "New Castle City Council",
+      "locationAddress": "6 Stewart Avenue, Newcastle West ",
+      "siteContract": "Olvia Lopez",
       "mobile": "0456 227 889",
       "email": "eeeeee@gmail.com",
-      "callout": "Yes",
     },
     {
-      "clientNumber": "20",
-      "clientName": "New Castle City Council",
-      "clientReference": "abc12345678",
-      "authorizedRep": "Olvia Lopez",
+      "locationNumber": "20",
+      "locationName": "New Castle City Council",
+      "locationAddress": "6 Stewart Avenue, Newcastle West ",
+      "siteContract": "Olvia Lopez",
       "mobile": "0456 227 889",
       "email": "eeeeee@gmail.com",
-      "callout": "Yes",
     },
   ];
 
-  final List<Map<String, String>> clientDataAchieved = [
+  final List<Map<String, String>> locationDataAchieved = [
     {
-      "clientNumber": "1",
-      "clientName": "New Castle City Council",
-      "clientReference": "abc12345678",
-      "authorizedRep": "Olvia Lopez",
+      "locationNumber": "1",
+      "locationName": "New Castle City Council",
+      "locationAddress": "6 Stewart Avenue, Newcastle West ",
+      "siteContract": "Olvia Lopez",
       "mobile": "0456 227 889",
       "email": "eeeeee@gmail.com",
-      "callout": "Yes",
     },
     {
-      "clientNumber": "2",
-      "clientName": "New Castle City Council",
-      "clientReference": "abc12345678",
-      "authorizedRep": "Olvia Lopez",
+      "locationNumber": "2",
+      "locationName": "New Castle City Council",
+      "locationAddress": "6 Stewart Avenue, Newcastle West ",
+      "siteContract": "Olvia Lopez",
       "mobile": "0456 227 889",
       "email": "eeeeee@gmail.com",
-      "callout": "Yes",
     },
     {
-      "clientNumber": "3",
-      "clientName": "New Castle City Council",
-      "clientReference": "abc12345678",
-      "authorizedRep": "Olvia Lopez",
+      "locationNumber": "3",
+      "locationName": "New Castle City Council",
+      "locationAddress": "6 Stewart Avenue, Newcastle West ",
+      "siteContract": "Olvia Lopez",
       "mobile": "0456 227 889",
       "email": "eeeeee@gmail.com",
-      "callout": "Yes",
     },
     {
-      "clientNumber": "4",
-      "clientName": "New Castle City Council",
-      "clientReference": "abc12345678",
-      "authorizedRep": "Olvia Lopez",
+      "locationNumber": "4",
+      "locationName": "New Castle City Council",
+      "locationAddress": "6 Stewart Avenue, Newcastle West ",
+      "siteContract": "Olvia Lopez",
       "mobile": "0456 227 889",
       "email": "eeeeee@gmail.com",
-      "callout": "Yes",
     },
     {
-      "clientNumber": "5",
-      "clientName": "New Castle City Council",
-      "clientReference": "abc12345678",
-      "authorizedRep": "Olvia Lopez",
+      "locationNumber": "5",
+      "locationName": "New Castle City Council",
+      "locationAddress": "6 Stewart Avenue, Newcastle West ",
+      "siteContract": "Olvia Lopez",
       "mobile": "0456 227 889",
       "email": "eeeeee@gmail.com",
-      "callout": "Yes",
     },
     {
-      "clientNumber": "6",
-      "clientName": "New Castle City Council",
-      "clientReference": "abc12345678",
-      "authorizedRep": "Olvia Lopez",
+      "locationNumber": "6",
+      "locationName": "New Castle City Council",
+      "locationAddress": "6 Stewart Avenue, Newcastle West ",
+      "siteContract": "Olvia Lopez",
       "mobile": "0456 227 889",
       "email": "eeeeee@gmail.com",
-      "callout": "Yes",
     },
     {
-      "clientNumber": "7",
-      "clientName": "New Castle City Council",
-      "clientReference": "abc12345678",
-      "authorizedRep": "Olvia Lopez",
+      "locationNumber": "7",
+      "locationName": "New Castle City Council",
+      "locationAddress": "6 Stewart Avenue, Newcastle West ",
+      "siteContract": "Olvia Lopez",
       "mobile": "0456 227 889",
       "email": "eeeeee@gmail.com",
-      "callout": "Yes",
     },
     {
-      "clientNumber": "8",
-      "clientName": "New Castle City Council",
-      "clientReference": "abc12345678",
-      "authorizedRep": "Olvia Lopez",
+      "locationNumber": "8",
+      "locationName": "New Castle City Council",
+      "locationAddress": "6 Stewart Avenue, Newcastle West ",
+      "siteContract": "Olvia Lopez",
       "mobile": "0456 227 889",
       "email": "eeeeee@gmail.com",
-      "callout": "Yes",
     },
     {
-      "clientNumber": "9",
-      "clientName": "New Castle City Council",
-      "clientReference": "abc12345678",
-      "authorizedRep": "Olvia Lopez",
+      "locationNumber": "9",
+      "locationName": "New Castle City Council",
+      "locationAddress": "6 Stewart Avenue, Newcastle West ",
+      "siteContract": "Olvia Lopez",
       "mobile": "0456 227 889",
       "email": "eeeeee@gmail.com",
-      "callout": "Yes",
     },
     {
-      "clientNumber": "10",
-      "clientName": "New Castle City Council",
-      "clientReference": "abc12345678",
-      "authorizedRep": "Olvia Lopez",
+      "locationNumber": "10",
+      "locationName": "New Castle City Council",
+      "locationAddress": "6 Stewart Avenue, Newcastle West ",
+      "siteContract": "Olvia Lopez",
       "mobile": "0456 227 889",
       "email": "eeeeee@gmail.com",
-      "callout": "Yes",
     },
     {
-      "clientNumber": "11",
-      "clientName": "New Castle City Council",
-      "clientReference": "abc12345678",
-      "authorizedRep": "Olvia Lopez",
+      "locationNumber": "11",
+      "locationName": "New Castle City Council",
+      "locationAddress": "6 Stewart Avenue, Newcastle West ",
+      "siteContract": "Olvia Lopez",
       "mobile": "0456 227 889",
       "email": "eeeeee@gmail.com",
-      "callout": "Yes",
     },
     {
-      "clientNumber": "12",
-      "clientName": "New Castle City Council",
-      "clientReference": "abc12345678",
-      "authorizedRep": "Olvia Lopez",
+      "locationNumber": "12",
+      "locationName": "New Castle City Council",
+      "locationAddress": "6 Stewart Avenue, Newcastle West ",
+      "siteContract": "Olvia Lopez",
       "mobile": "0456 227 889",
       "email": "eeeeee@gmail.com",
-      "callout": "Yes",
     },
     {
-      "clientNumber": "13",
-      "clientName": "New Castle City Council",
-      "clientReference": "abc12345678",
-      "authorizedRep": "Olvia Lopez",
+      "locationNumber": "13",
+      "locationName": "New Castle City Council",
+      "locationAddress": "6 Stewart Avenue, Newcastle West ",
+      "siteContract": "Olvia Lopez",
       "mobile": "0456 227 889",
       "email": "eeeeee@gmail.com",
-      "callout": "Yes",
     },
     {
-      "clientNumber": "14",
-      "clientName": "New Castle City Council",
-      "clientReference": "abc12345678",
-      "authorizedRep": "Olvia Lopez",
+      "locationNumber": "14",
+      "locationName": "New Castle City Council",
+      "locationAddress": "6 Stewart Avenue, Newcastle West ",
+      "siteContract": "Olvia Lopez",
       "mobile": "0456 227 889",
       "email": "eeeeee@gmail.com",
-      "callout": "Yes",
     },
     {
-      "clientNumber": "15",
-      "clientName": "New Castle City Council",
-      "clientReference": "abc12345678",
-      "authorizedRep": "Olvia Lopez",
+      "locationNumber": "15",
+      "locationName": "New Castle City Council",
+      "locationAddress": "6 Stewart Avenue, Newcastle West ",
+      "siteContract": "Olvia Lopez",
       "mobile": "0456 227 889",
       "email": "eeeeee@gmail.com",
-      "callout": "Yes",
     },
     {
-      "clientNumber": "16",
-      "clientName": "New Castle City Council",
-      "clientReference": "abc12345678",
-      "authorizedRep": "Olvia Lopez",
+      "locationNumber": "16",
+      "locationName": "New Castle City Council",
+      "locationAddress": "6 Stewart Avenue, Newcastle West ",
+      "siteContract": "Olvia Lopez",
       "mobile": "0456 227 889",
       "email": "eeeeee@gmail.com",
-      "callout": "Yes",
     },
     {
-      "clientNumber": "17",
-      "clientName": "New Castle City Council",
-      "clientReference": "abc12345678",
-      "authorizedRep": "Olvia Lopez",
+      "locationNumber": "17",
+      "locationName": "New Castle City Council",
+      "locationAddress": "6 Stewart Avenue, Newcastle West ",
+      "siteContract": "Olvia Lopez",
       "mobile": "0456 227 889",
       "email": "eeeeee@gmail.com",
-      "callout": "Yes",
     },
     {
-      "clientNumber": "18",
-      "clientName": "New Castle City Council",
-      "clientReference": "abc12345678",
-      "authorizedRep": "Olvia Lopez",
+      "locationNumber": "18",
+      "locationName": "New Castle City Council",
+      "locationAddress": "6 Stewart Avenue, Newcastle West ",
+      "siteContract": "Olvia Lopez",
       "mobile": "0456 227 889",
       "email": "eeeeee@gmail.com",
-      "callout": "Yes",
     },
     {
-      "clientNumber": "19",
-      "clientName": "New Castle City Council",
-      "clientReference": "abc12345678",
-      "authorizedRep": "Olvia Lopez",
+      "locationNumber": "19",
+      "locationName": "New Castle City Council",
+      "locationAddress": "6 Stewart Avenue, Newcastle West ",
+      "siteContract": "Olvia Lopez",
       "mobile": "0456 227 889",
       "email": "eeeeee@gmail.com",
-      "callout": "Yes",
     },
     {
-      "clientNumber": "20",
-      "clientName": "New Castle City Council",
-      "clientReference": "abc12345678",
-      "authorizedRep": "Olvia Lopez",
+      "locationNumber": "20",
+      "locationName": "New Castle City Council",
+      "locationAddress": "6 Stewart Avenue, Newcastle West ",
+      "siteContract": "Olvia Lopez",
       "mobile": "0456 227 889",
       "email": "eeeeee@gmail.com",
-      "callout": "Yes",
     },
   ];
 
@@ -494,7 +457,8 @@ class _NewCalloutJobState extends State<NewClient> {
 
   int _currentStep = 0; // Start from Step 1
 
-  final TextEditingController _clientSearchController = TextEditingController();
+  final TextEditingController _locationSearchController =
+      TextEditingController();
 
   final TextEditingController _donorsController = TextEditingController();
   final TextEditingController _jobReferenceController = TextEditingController();
@@ -731,10 +695,10 @@ class _NewCalloutJobState extends State<NewClient> {
   final GlobalKey<FormFieldState<String>> _specialInstructionsKey =
       GlobalKey<FormFieldState<String>>();
 
-  int get totalPages => (clientData.length / itemsPerPage).ceil();
+  int get totalPages => (locationData.length / itemsPerPage).ceil();
 
   int get totalPagesAchieved =>
-      (clientDataAchieved.length / itemsPerPageAchieved).ceil();
+      (locationDataAchieved.length / itemsPerPageAchieved).ceil();
 
   // Dropdown options
   final List<String> _theClientNames = [
@@ -773,7 +737,7 @@ class _NewCalloutJobState extends State<NewClient> {
   int minutes = 0;
 
   bool isMobileClinic = false;
-  bool showMainClients = true;
+  bool showMainLocations = true;
 
   void removeRepresentative() {
     setState(() {
@@ -787,7 +751,7 @@ class _NewCalloutJobState extends State<NewClient> {
 
   @override
   void dispose() {
-    _clientSearchController.dispose();
+    _locationSearchController.dispose();
     super.dispose();
   }
 
@@ -8836,9 +8800,8 @@ class _NewCalloutJobState extends State<NewClient> {
                                                                 0), // Rounded top corners
                                                           ),
                                                         ),
-                                                        child: NewClient(
-                                                            scrollController:
-                                                                scrollController),
+                                                        child:
+                                                            NewClientLocation(),
                                                       );
                                                     },
                                                   );
@@ -8878,9 +8841,8 @@ class _NewCalloutJobState extends State<NewClient> {
                                                                 0), // Rounded top corners
                                                           ),
                                                         ),
-                                                        child: NewClient(
-                                                            scrollController:
-                                                                scrollController),
+                                                        child:
+                                                            NewClientLocation(),
                                                       );
                                                     },
                                                   );
@@ -8966,7 +8928,7 @@ class _NewCalloutJobState extends State<NewClient> {
                                   ],
                                 ),
                                 child: TextFormField(
-                                  controller: _clientSearchController,
+                                  controller: _locationSearchController,
                                   decoration: InputDecoration(
                                     contentPadding: const EdgeInsets.symmetric(
                                         horizontal: 8, vertical: 4),
@@ -9015,7 +8977,7 @@ class _NewCalloutJobState extends State<NewClient> {
                                   ),
                                   onChanged: (value) {
                                     setState(() {
-                                      _clientSearchController.text = value;
+                                      _locationSearchController.text = value;
                                     });
                                   },
                                 ),
@@ -9041,9 +9003,9 @@ class _NewCalloutJobState extends State<NewClient> {
                   right: 18.0,
                   bottom: 5.0,
                 ),
-                child: showMainClients
+                child: showMainLocations
                     ? Text(
-                        "$displayRange out of ${clientData.length} records",
+                        "$displayRange out of ${locationData.length} records",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                         ),
@@ -9051,16 +9013,16 @@ class _NewCalloutJobState extends State<NewClient> {
                     : null),
           ),
           Padding(
-            padding: const EdgeInsets.only(bottom: 70.0),
+            padding: const EdgeInsets.only(bottom: 10.0),
             child: Column(
               children: [
                 ListView.builder(
                   padding: EdgeInsets.zero,
                   shrinkWrap: true,
                   physics: const ClampingScrollPhysics(),
-                  itemCount: paginatedClientData.length,
+                  itemCount: paginatedLocationData.length,
                   itemBuilder: (context, index) {
-                    final client = paginatedClientData[index];
+                    final location = paginatedLocationData[index];
                     return Center(
                       child: Padding(
                         padding: const EdgeInsets.only(
@@ -9068,7 +9030,7 @@ class _NewCalloutJobState extends State<NewClient> {
                           right: 16.0,
                           bottom: 10.0,
                         ),
-                        child: ClientManagementCard(client: client),
+                        child: ClientLocationCard(location: location),
                       ),
                     );
                   },
@@ -9240,13 +9202,13 @@ class _NewCalloutJobState extends State<NewClient> {
                       child: GestureDetector(
                         onTap: () {
                           setState(() {
-                            achieveClientsOpened = !achieveClientsOpened;
-                            if (!achieveClientsOpened) {
-                              showMainClients = true;
+                            achieveLocationsOpened = !achieveLocationsOpened;
+                            if (!achieveLocationsOpened) {
+                              showMainLocations = true;
                             } else {
-                              showMainClients = false;
+                              showMainLocations = false;
                             }
-                            if (achieveClientsOpened) {
+                            if (achieveLocationsOpened) {
                               if (_selectedFilteringValue != "5") {
                                 String? theSelected = _selectedFilteringValue;
                                 setState(() {
@@ -9290,7 +9252,7 @@ class _NewCalloutJobState extends State<NewClient> {
                             }
                           });
                         },
-                        child: !achieveClientsOpened
+                        child: !achieveLocationsOpened
                             ? FittedBox(
                                 child: Image.asset(
                                   "assets/images/icons/showAchieve.png",
@@ -9308,7 +9270,7 @@ class _NewCalloutJobState extends State<NewClient> {
                 SizedBox(
                   height: 10,
                 ),
-                achieveClientsOpened
+                achieveLocationsOpened
                     ? Container(
                         width: double.infinity,
                         color: const Color(0xFF01B4D2).withOpacity(0.2),
@@ -9330,7 +9292,7 @@ class _NewCalloutJobState extends State<NewClient> {
                                   right: 10.0,
                                 ),
                                 child: Text(
-                                  "$displayRangeAchieved out of ${clientDataAchieved.length} achieved records",
+                                  "$displayRangeAchieved out of ${locationDataAchieved.length} achieved records",
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                   ),
@@ -9340,7 +9302,7 @@ class _NewCalloutJobState extends State<NewClient> {
                             SizedBox(
                               height: 10,
                             ),
-                            achieveClientsOpened
+                            achieveLocationsOpened
                                 ? Padding(
                                     padding: const EdgeInsets.only(
                                       bottom: 5.0,
@@ -9353,11 +9315,12 @@ class _NewCalloutJobState extends State<NewClient> {
                                               true, // Allow ListView to adapt to its content
                                           physics:
                                               NeverScrollableScrollPhysics(),
-                                          itemCount: paginatedClientDataAchieved
-                                              .length,
+                                          itemCount:
+                                              paginatedLocationDataAchieved
+                                                  .length,
                                           itemBuilder: (context, index) {
-                                            final clientAchieved =
-                                                paginatedClientDataAchieved[
+                                            final locationAchieved =
+                                                paginatedLocationDataAchieved[
                                                     index];
                                             return Center(
                                               child: Padding(
@@ -9366,8 +9329,9 @@ class _NewCalloutJobState extends State<NewClient> {
                                                   right: 16.0,
                                                   bottom: 10.0,
                                                 ),
-                                                child: AchievedClientCard(
-                                                    client: clientAchieved),
+                                                child: AchievedLocationCard(
+                                                  location: locationAchieved,
+                                                ),
                                               ),
                                             );
                                           },

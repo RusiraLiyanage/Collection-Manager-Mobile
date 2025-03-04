@@ -1,0 +1,323 @@
+import 'package:flutter/material.dart';
+
+class NewSiteContact extends StatefulWidget {
+  final void Function(String, String) onDelete;
+
+  final int representativeNumber;
+
+  final int numberOfRepresentatives;
+
+  const NewSiteContact(
+      {Key? key,
+      required this.onDelete,
+      required this.representativeNumber,
+      required this.numberOfRepresentatives})
+      : super(key: key);
+
+  @override
+  State<NewSiteContact> createState() => _NewSiteContactState();
+}
+
+class _NewSiteContactState extends State<NewSiteContact> {
+  final GlobalKey<FormFieldState<String>> _siteContactKey =
+      GlobalKey<FormFieldState<String>>();
+
+  final GlobalKey<FormFieldState<String>> _mobileKey =
+      GlobalKey<FormFieldState<String>>();
+
+  final TextEditingController _siteContactController = TextEditingController();
+
+  final TextEditingController _mobile_Controller = TextEditingController();
+
+  bool collectorSelected = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      decoration: BoxDecoration(
+        color: const Color(0xFFE6F7FA), // Light blue background
+        borderRadius: BorderRadius.circular(6),
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(
+              left: 12.0,
+              top: 15.0,
+              right: 12.0,
+            ),
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: 8.0,
+                    bottom: 5.0,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Align(
+                        alignment: Alignment.topLeft,
+                        child: Text(
+                          "Site Contact",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: 8.0,
+                  ),
+                  child: Align(
+                    alignment: Alignment.topLeft,
+                    child: const Text(
+                      "Site Contact Name",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 13,
+                        color: Colors.grey,
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(
+                    right: 0.0,
+                    top: 5,
+                  ),
+                  child: Container(
+                    height: 40,
+                    width: double.infinity,
+                    child: Material(
+                      elevation:
+                          4, // Adjust this value for more or less elevation
+                      shadowColor: Colors.black
+                          .withOpacity(0.5), // Optional: Adjust shadow color
+                      borderRadius: BorderRadius.circular(
+                          4), // Match with TextFormField's border radius
+                      child: TextFormField(
+                        key: _siteContactKey,
+                        controller: _siteContactController,
+                        decoration: InputDecoration(
+                          fillColor: Colors.white,
+                          filled: true,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(4),
+                            borderSide: const BorderSide(
+                              color: Colors.white,
+                              width: 2,
+                            ),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(4),
+                            borderSide: const BorderSide(
+                              color: Colors.white,
+                              width: 2,
+                            ),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(4),
+                            borderSide: const BorderSide(
+                              color: Colors.white,
+                              width: 2,
+                            ),
+                          ),
+                          errorBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(4),
+                            borderSide: const BorderSide(
+                              color: Colors.red,
+                              width: 2,
+                            ),
+                          ),
+                          focusedErrorBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(4),
+                            borderSide: const BorderSide(
+                              color: Colors.red,
+                              width: 2,
+                            ),
+                          ),
+                          contentPadding: const EdgeInsets.symmetric(
+                            vertical: 5,
+                            horizontal: 12,
+                          ),
+                          errorStyle: const TextStyle(
+                            color: Colors.red,
+                            fontSize: 12,
+                          ),
+                        ),
+                        keyboardType:
+                            TextInputType.text, // Ensures numeric input
+                        onChanged: (value) {
+                          setState(() {
+                            //_selectedJobReference = value;
+                            // Update the number of donors and the text controller
+                            _siteContactController.text =
+                                value; // Manually update the controller text
+                            _siteContactKey.currentState!.validate();
+                          });
+                        },
+                        validator: (value) {
+                          if (_siteContactController.text == "") {
+                            return 'Please enter the site contact name';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: 8.0,
+                  ),
+                  child: Align(
+                    alignment: Alignment.topLeft,
+                    child: const Text(
+                      "Mobile *",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 13,
+                        color: Colors.grey,
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(
+                    right: 0.0,
+                    top: 5.0,
+                  ),
+                  child: Container(
+                    height: 40,
+                    width: double.infinity,
+                    child: Material(
+                      elevation:
+                          4, // Adjust this value for more or less elevation
+                      shadowColor: Colors.black
+                          .withOpacity(0.5), // Optional: Adjust shadow color
+                      borderRadius: BorderRadius.circular(
+                          4), // Match with TextFormField's border radius
+                      child: TextFormField(
+                        key: _mobileKey,
+                        controller: _mobile_Controller,
+                        decoration: InputDecoration(
+                          fillColor: Colors.white,
+                          filled: true,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(4),
+                            borderSide: const BorderSide(
+                              color: Colors.white,
+                              width: 2,
+                            ),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(4),
+                            borderSide: const BorderSide(
+                              color: Colors.white,
+                              width: 2,
+                            ),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(4),
+                            borderSide: const BorderSide(
+                              color: Colors.white,
+                              width: 2,
+                            ),
+                          ),
+                          errorBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(4),
+                            borderSide: const BorderSide(
+                              color: Colors.red,
+                              width: 2,
+                            ),
+                          ),
+                          focusedErrorBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(4),
+                            borderSide: const BorderSide(
+                              color: Colors.red,
+                              width: 2,
+                            ),
+                          ),
+                          contentPadding: const EdgeInsets.symmetric(
+                            vertical: 5,
+                            horizontal: 12,
+                          ),
+                          errorStyle: const TextStyle(
+                            color: Colors.red,
+                            fontSize: 12,
+                          ),
+                          /* suffixIcon: Padding(
+                                            padding: const EdgeInsets.all(
+                                                8.0), // Adjust the padding as needed
+                                            child: Image.asset(
+                                              "assets/images/icons/icon_calendar.png", // Replace with your image path
+                                              width:
+                                                  32, // Adjust the width of the image
+                                              height:
+                                                  32, // Adjust the height of the image
+                                            ),
+                                          ), */
+                        ),
+                        keyboardType:
+                            TextInputType.phone, // Ensures numeric input
+                        onChanged: (value) {
+                          setState(() {
+                            // Update the number of donors and the text controller
+                            _mobile_Controller.text =
+                                value; // Manually update the controller text
+                            _mobileKey.currentState!.validate();
+                          });
+                        },
+                        validator: (value) {
+                          if (!RegExp(r'^[0-9]{10}$').hasMatch(value!)) {
+                            return 'Please enter a valid mobile number';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 8,
+                ),
+                ElevatedButton(
+                  onPressed: () => widget.onDelete(
+                      _siteContactController.text, _mobile_Controller.text),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blue, // Color for the Next button
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                    minimumSize: Size(80, 30),
+                  ),
+                  child: const Text(
+                    "Add Site Contact",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}

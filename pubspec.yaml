@@ -112,6 +112,7 @@ flutter:
     - assets/images/icons/5.png
     - assets/images/icons/6.png
     - assets/images/icons/7.png
+    - assets/images/icons/addButton.png
     - assets/images/icons/onSiteApprovalVector.png
     - assets/images/icons/printIcon.png
     - assets/images/icons/siteContactSignature.png
