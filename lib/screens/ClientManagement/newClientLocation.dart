@@ -160,16 +160,17 @@ class _NewClientLocationState extends State<NewClientLocation> {
                               child: Align(
                                 alignment: Alignment.topRight,
                                 child: FittedBox(
-                                  fit: BoxFit.contain,
+                                  fit: BoxFit.cover,
                                   child: Image.asset(
                                       "assets/images/icons/addButton.png"),
                                 ),
                               ),
                             ),
                             SizedBox(
-                              height: 8,
+                              height: 16,
                             ),
                             ListView.builder(
+                              padding: EdgeInsets.zero,
                               key: ValueKey(contacts
                                   .length), // Ensures the list updates correctly
                               scrollDirection: Axis.vertical,
@@ -522,9 +523,6 @@ class _NewClientLocationState extends State<NewClientLocation> {
                                   ],
                                 );
                               },
-                            ),
-                            SizedBox(
-                              height: 10,
                             ),
                             addSiteContactOpened == true
                                 ? NewSiteContact(

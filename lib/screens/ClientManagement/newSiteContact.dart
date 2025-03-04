@@ -290,9 +290,6 @@ class _NewSiteContactState extends State<NewSiteContact> {
                     ),
                   ),
                 ),
-                SizedBox(
-                  height: 8,
-                ),
                 ElevatedButton(
                   onPressed: () => widget.onDelete(
                       _siteContactController.text, _mobile_Controller.text),
