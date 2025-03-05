@@ -108,6 +108,18 @@ class OnsiteJobsNewCard extends StatelessWidget {
                 // Left-aligned title
                 Row(
                   children: [
+                    Padding(
+                      padding: const EdgeInsets.only(top: 6.0),
+                      child: FittedBox(
+                        fit: BoxFit.cover,
+                        child: Image.asset(
+                          "assets/images/icons/onSiteJobsIcon.png",
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 5,
+                    ),
                     Text(
                       "Rail NSW",
                       style: TextStyle(

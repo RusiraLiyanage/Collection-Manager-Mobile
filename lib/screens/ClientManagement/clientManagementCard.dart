@@ -81,6 +81,18 @@ class ClientManagementCard extends StatelessWidget {
                 // Left-aligned title
                 Row(
                   children: [
+                    Padding(
+                      padding: const EdgeInsets.only(top: 8.0),
+                      child: FittedBox(
+                        fit: BoxFit.cover,
+                        child: Image.asset(
+                          "assets/images/icons/clientManagementIcon.png",
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
                     Text(
                       "New Castle City Council",
                       style: TextStyle(

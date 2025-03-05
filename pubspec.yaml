@@ -113,6 +113,8 @@ flutter:
     - assets/images/icons/6.png
     - assets/images/icons/7.png
     - assets/images/icons/addButton.png
+    - assets/images/icons/addDisabled.png
+    - assets/images/icons/newLocation.png
     - assets/images/icons/onSiteApprovalVector.png
     - assets/images/icons/printIcon.png
     - assets/images/icons/siteContactSignature.png
@@ -120,6 +122,9 @@ flutter:
     - assets/images/icons/delete.png
     - assets/images/icons/searchIcon.png
     - assets/images/icons/newClient.png
+    - assets/images/icons/onSiteJobsIcon.png
+    - assets/images/icons/onSiteApprovalsIcon.png
+    - assets/images/icons/clientManagementIcon.png
     - assets/images/icons/newJobIcon.png
     - assets/images/icons/OnsiteJobs/calander_icon.png
     - assets/images/icons/OnsiteJobs/time_icon.png

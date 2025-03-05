@@ -78,20 +78,56 @@ class ClientLocationCard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                // Left-aligned title
                 Row(
                   children: [
-                    Text(
-                      "${location["locationName"]}",
-                      style: TextStyle(
-                        fontSize: 17,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    FittedBox(
+                      fit: BoxFit.cover,
+                      child: Image.asset("assets/images/icons/newLocation.png"),
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            // Left-aligned title
+                            Row(
+                              children: [
+                                Text(
+                                  "${location["locationName"]}",
+                                  style: TextStyle(
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                            ),
+
+                            // Right-aligned value
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 1,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 1, vertical: 2),
+                          child: Text(
+                            location["locationAddress"]!,
+                            style: const TextStyle(
+                              color: Colors.grey,
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
-
-                // Right-aligned value
                 Row(
                   children: [
                     GestureDetector(
@@ -170,18 +206,6 @@ class ClientLocationCard extends StatelessWidget {
                   ],
                 ),
               ],
-            ),
-            const SizedBox(height: 2),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 1, vertical: 2),
-              child: Text(
-                location["locationAddress"]!,
-                style: const TextStyle(
-                  color: Colors.grey,
-                  fontSize: 14,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
             ),
             SizedBox(
               height: 8,

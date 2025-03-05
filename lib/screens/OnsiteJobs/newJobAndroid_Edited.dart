@@ -26,7 +26,7 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
     GlobalKey<FormState>(),
   ];
 
-  int _currentStep = 1;
+  int _currentStep = 0;
 
   int numberOfCollectors = 0;
 
