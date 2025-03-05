@@ -56,7 +56,14 @@ class _NewClientLocationState extends State<NewClientLocation> {
 
   final _formKey = GlobalKey<FormState>();
 
+  final ScrollController _scrollController = ScrollController();
+
+  // ✅ GlobalKey to access NewSiteContact state
+  final GlobalKey<NewSiteContactState> _newSiteContactKey =
+      GlobalKey<NewSiteContactState>();
+
   void addSiteContact(String contactName, String contact) {
+    print("yes called");
     setState(() {
       contacts.add(
         SiteContact(
@@ -82,8 +89,10 @@ class _NewClientLocationState extends State<NewClientLocation> {
   }
 
   void _nextStep() {
+    // _newSiteContactKey.currentState?.submitForm();
+    bool isValid = _newSiteContactKey.currentState?.submitForm() ?? false;
     // Validate the current form
-    if (_formKey.currentState!.validate()) {
+    if (_formKey.currentState!.validate() && isValid) {
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
@@ -100,6 +109,12 @@ class _NewClientLocationState extends State<NewClientLocation> {
         ),
       );
       return;
+    } else {
+      _scrollController.animateTo(
+        0, // Scrolls to the top
+        duration: Duration(milliseconds: 500), // Smooth animation
+        curve: Curves.easeInOut,
+      );
     }
   }
 
@@ -144,34 +159,52 @@ class _NewClientLocationState extends State<NewClientLocation> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      FittedBox(
-                        fit: BoxFit.contain,
-                        child:
-                            Image.asset("assets/images/icons/newLocation.png"),
+                      Expanded(
+                          child: Container()), // Pushes content to the center
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          FittedBox(
+                            fit: BoxFit.contain,
+                            child: Image.asset(
+                                "assets/images/icons/newLocation.png"),
+                          ),
+                          SizedBox(width: 5),
+                          Text(
+                            "New Client Location",
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Color(0xFF1C8CFF),
+                            ),
+                          ),
+                        ],
                       ),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      Text(
-                        "New Client Location",
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFF1C8CFF),
+                      Expanded(
+                        child: Align(
+                          alignment: Alignment
+                              .centerRight, // Align close button to the right
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.pop(context);
+                            },
+                            child: FittedBox(
+                              fit: BoxFit.cover,
+                              child: Icon(Icons.close, color: Colors.red),
+                            ),
+                          ),
                         ),
                       ),
                     ],
                   ),
-                  Divider(
-                    color: Color(0xFF1C8CFF),
-                  ),
+                  Divider(color: Color(0xFF1C8CFF)),
                   Expanded(
                     child: Scrollbar(
                       thickness: 3,
                       thumbVisibility: true,
                       child: SingleChildScrollView(
+                        controller: _scrollController,
                         child: Form(
                           key: _formKey,
                           child: Column(
@@ -732,6 +765,7 @@ class _NewClientLocationState extends State<NewClientLocation> {
                               ),
                               addSiteContactOpened == true
                                   ? NewSiteContact(
+                                      key: _newSiteContactKey,
                                       numberOfRepresentatives: 2,
                                       representativeNumber: 1,
                                       onCreate: addSiteContact,
