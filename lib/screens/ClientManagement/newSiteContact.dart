@@ -7,14 +7,11 @@ class NewSiteContact extends StatefulWidget {
 
   final int representativeNumber;
 
-  final int numberOfRepresentatives;
-
   const NewSiteContact({
     Key? key,
     required this.onCreate,
     required this.onClose,
     required this.representativeNumber,
-    required this.numberOfRepresentatives,
   }) : super(key: key);
 
   @override

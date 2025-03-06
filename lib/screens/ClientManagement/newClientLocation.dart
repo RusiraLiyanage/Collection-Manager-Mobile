@@ -766,7 +766,6 @@ class _NewClientLocationState extends State<NewClientLocation> {
                               addSiteContactOpened == true
                                   ? NewSiteContact(
                                       key: _newSiteContactKey,
-                                      numberOfRepresentatives: 2,
                                       representativeNumber: 1,
                                       onCreate: addSiteContact,
                                       onClose: closeSiteContact,
