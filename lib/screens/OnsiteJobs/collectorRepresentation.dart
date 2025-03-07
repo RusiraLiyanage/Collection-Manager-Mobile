@@ -181,49 +181,6 @@ class _CollectorRepresentationState extends State<CollectorRepresentation> {
                   SizedBox(
                     height: 10,
                   ),
-                  /* Padding(
-                    padding: const EdgeInsets.only(
-                      left: 8.0,
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        collectorSelected
-                            ?
-                            // Allocated Badge
-                            Container(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 10, vertical: 4),
-                                decoration: BoxDecoration(
-                                  color: Color.fromRGBO(
-                                      26, 140, 255, 1.0), // Blue background
-                                  borderRadius: BorderRadius.circular(6),
-                                ),
-                                child: Text(
-                                  widget.status,
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                              )
-                            : SizedBox(
-                                height: 0,
-                              ),
-                        SizedBox(width: 8), // Space between badge and text
-        
-                        // Date and Time
-                        Text(
-                          widget.assignedTime,
-                          style: TextStyle(
-                            color: Colors.grey.shade700,
-                            fontSize: 14,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ) */
                 ],
               ),
             ),

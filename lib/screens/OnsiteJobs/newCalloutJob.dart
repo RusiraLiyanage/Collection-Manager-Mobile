@@ -127,9 +127,16 @@ class _NewCalloutJobState extends State<NewCalloutJob> {
     });
   }
 
-  void closeSiteContact() {
+  void closeCollectorContact() {
     setState(() {
       addCollectorOpened = false;
+    });
+  }
+
+  void deleteSiteCollector(String id) {
+    setState(() {
+      collectors.removeWhere((collector) => collector.id == id);
+      numberOfCollectors--;
     });
   }
 
@@ -2394,6 +2401,7 @@ class _NewCalloutJobState extends State<NewCalloutJob> {
                               itemBuilder: (context, index) {
                                 final collector = collectors[index];
                                 return Column(
+                                  key: ValueKey(collector.id),
                                   children: [
                                     Container(
                                       height: 130,
@@ -2436,8 +2444,10 @@ class _NewCalloutJobState extends State<NewCalloutJob> {
                                                         ),
                                                       ),
                                                       GestureDetector(
-                                                        onTap:
-                                                            () {}, // Call the parent's method when tapped
+                                                        onTap: () {
+                                                          deleteSiteCollector(
+                                                              collector.id);
+                                                        }, // Call the parent's method when tapped
 
                                                         child: FittedBox(
                                                           fit: BoxFit.contain,
@@ -2565,49 +2575,38 @@ class _NewCalloutJobState extends State<NewCalloutJob> {
                                                     mainAxisAlignment:
                                                         MainAxisAlignment.start,
                                                     children: [
-                                                      collectorSelected
-                                                          ?
-                                                          // Allocated Badge
-                                                          Container(
-                                                              padding: EdgeInsets
-                                                                  .symmetric(
-                                                                      horizontal:
-                                                                          10,
-                                                                      vertical:
-                                                                          4),
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                color: Color
-                                                                    .fromRGBO(
-                                                                        26,
-                                                                        140,
-                                                                        255,
-                                                                        1.0), // Blue background
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            6),
-                                                              ),
-                                                              child: Text(
-                                                                collector
-                                                                    .status,
-                                                                style:
-                                                                    TextStyle(
-                                                                  color: Colors
-                                                                      .white,
-                                                                  fontSize: 14,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w500,
-                                                                ),
-                                                              ),
-                                                            )
-                                                          : SizedBox(
-                                                              height: 0,
-                                                            ),
+                                                      // Allocated Badge
+                                                      Container(
+                                                        padding: EdgeInsets
+                                                            .symmetric(
+                                                                horizontal: 10,
+                                                                vertical: 4),
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color: Color.fromRGBO(
+                                                              26,
+                                                              140,
+                                                              255,
+                                                              1.0), // Blue background
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(6),
+                                                        ),
+                                                        child: Text(
+                                                          collector.status,
+                                                          style: TextStyle(
+                                                            color: Colors.white,
+                                                            fontSize: 14,
+                                                            fontWeight:
+                                                                FontWeight.w500,
+                                                          ),
+                                                        ),
+                                                      ),
+
                                                       SizedBox(
-                                                          width:
-                                                              8), // Space between badge and text
+                                                        width: 8,
+                                                      ),
+                                                      // Space between badge and text
 
                                                       // Date and Time
                                                       Text(
@@ -2635,7 +2634,7 @@ class _NewCalloutJobState extends State<NewCalloutJob> {
                               }),
                           addCollectorOpened
                               ? CollectorRepresentation(
-                                  onClose: closeSiteContact,
+                                  onClose: closeCollectorContact,
                                   collectorNames: _collectorNames,
                                   onCreate: addCollector)
                               : SizedBox(
