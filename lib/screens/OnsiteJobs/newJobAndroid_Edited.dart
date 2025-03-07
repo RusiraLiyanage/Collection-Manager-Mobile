@@ -9112,7 +9112,7 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                           SizedBox(
                             height: 16,
                           ),
-                          ListView.builder(
+                          /* ListView.builder(
                             scrollDirection: Axis.vertical,
                             shrinkWrap: true,
                             itemCount: numberOfCollectors,
@@ -9138,7 +9138,7 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                 ],
                               );
                             },
-                          ),
+                          ), */
                           SizedBox(
                             height: 20,
                           ),

@@ -5,13 +5,10 @@ class NewSiteContact extends StatefulWidget {
 
   final void Function() onClose;
 
-  final int representativeNumber;
-
   const NewSiteContact({
     Key? key,
     required this.onCreate,
     required this.onClose,
-    required this.representativeNumber,
   }) : super(key: key);
 
   @override
