@@ -9271,6 +9271,7 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
     return Scrollbar(
       trackVisibility: false,
       thumbVisibility: true,
+      controller: widget.scrollController,
       child: ListView(
           physics: const AlwaysScrollableScrollPhysics(),
           controller: widget.scrollController,

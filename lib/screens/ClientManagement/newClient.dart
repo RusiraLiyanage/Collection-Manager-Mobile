@@ -10943,6 +10943,7 @@ class _NewCalloutJobState extends State<NewClient> {
     return Scrollbar(
       trackVisibility: false,
       thumbVisibility: true,
+      controller: widget.scrollController,
       child: ListView(
           physics: const AlwaysScrollableScrollPhysics(),
           controller: widget.scrollController,

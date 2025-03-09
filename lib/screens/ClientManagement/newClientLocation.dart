@@ -203,6 +203,7 @@ class _NewClientLocationState extends State<NewClientLocation> {
                     child: Scrollbar(
                       thickness: 3,
                       thumbVisibility: true,
+                      controller: _scrollController,
                       child: SingleChildScrollView(
                         controller: _scrollController,
                         child: Form(
