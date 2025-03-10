@@ -94,6 +94,7 @@ flutter:
     - assets/images/icons/hideArchieve.png
     - assets/images/icons/document_icon.png
     - assets/images/icons/dafault_icon.png
+    - assets/images/icons/profileIcon.png
     - assets/images/icons/dropDownIcon.png
     - assets/images/icons/icon_calendar.png
     - assets/images/icons/refreshIcon.png
@@ -122,6 +123,7 @@ flutter:
     - assets/images/icons/delete.png
     - assets/images/icons/searchIcon.png
     - assets/images/icons/newClient.png
+    - assets/images/icons/newNoteAdd.png
     - assets/images/icons/onSiteJobsIcon.png
     - assets/images/icons/onSiteApprovalsIcon.png
     - assets/images/icons/clientManagementIcon.png

@@ -1385,7 +1385,7 @@ class _NewClientLocationState extends State<NewClientLocation> {
                               Padding(
                                 padding: const EdgeInsets.only(right: 8.0),
                                 child: Material(
-                                  elevation: 4,
+                                  elevation: 0,
                                   shadowColor: Colors.black.withOpacity(0.5),
                                   borderRadius: BorderRadius.circular(
                                       4), // Ensures consistent rounding
