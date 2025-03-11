@@ -124,6 +124,9 @@ flutter:
     - assets/images/icons/searchIcon.png
     - assets/images/icons/newClient.png
     - assets/images/icons/newNoteAdd.png
+    - assets/images/icons/newNote.png
+    - assets/images/icons/changeLogOpened.png
+    - assets/images/icons/changeLogClosed.png
     - assets/images/icons/onSiteJobsIcon.png
     - assets/images/icons/onSiteApprovalsIcon.png
     - assets/images/icons/clientManagementIcon.png

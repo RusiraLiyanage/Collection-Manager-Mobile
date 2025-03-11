@@ -9,6 +9,7 @@ import 'package:project_code_blue/screens/ClientManagement/authrorizedRepresenta
 import 'package:project_code_blue/screens/ClientManagement/clientLocationCard.dart';
 import 'package:project_code_blue/screens/ClientManagement/clientManagementCard.dart';
 import 'package:project_code_blue/screens/ClientManagement/newClientLocation.dart';
+import 'package:project_code_blue/screens/ClientManagement/newNote.dart';
 import 'package:project_code_blue/screens/ClientManagement/noteCard.dart';
 import 'package:project_code_blue/screens/OnsiteJobs/achievedJobsNewCard.dart';
 import 'package:project_code_blue/screens/OnsiteJobs/collectorRepresentation.dart';
@@ -123,61 +124,81 @@ class _NewCalloutJobState extends State<NewClient> {
       "title": "Office Hours",
       "creator": "Jane Smith",
       "date": "26/3/24",
-      "time": "10:30 am"
+      "time": "10:30 am",
+      "subject": "Office Hours",
+      "noteText": "This is the office hours note text that we added"
     },
     {
       "title": "Holiday Season",
       "creator": "Jane Smith",
       "date": "26/3/24",
-      "time": "10:30 am"
+      "time": "10:30 am",
+      "subject": "Office Hours",
+      "noteText": "This is the office hours note text that we added"
     },
     {
       "title": "Holiday Season",
       "creator": "Jane Smith",
       "date": "26/3/24",
-      "time": "10:30 am"
+      "time": "10:30 am",
+      "subject": "Office Hours",
+      "noteText": "This is the office hours note text that we added"
     },
     {
       "title": "Office Hours",
       "creator": "Jane Smith",
       "date": "26/3/24",
-      "time": "10:30 am"
+      "time": "10:30 am",
+      "subject": "Office Hours",
+      "noteText": "This is the office hours note text that we added"
     },
     {
       "title": "Winter Season",
       "creator": "Jane Smith",
       "date": "26/3/24",
-      "time": "10:30 am"
+      "time": "10:30 am",
+      "subject": "Office Hours",
+      "noteText": "This is the office hours note text that we added"
     },
     {
       "title": "Holiday Season",
       "creator": "Jane Smith",
       "date": "26/3/24",
-      "time": "10:30 am"
+      "time": "10:30 am",
+      "subject": "Office Hours",
+      "noteText": "This is the office hours note text that we added"
     },
     {
       "title": "Holiday Season",
       "creator": "Jane Smith",
       "date": "26/3/24",
-      "time": "10:30 am"
+      "time": "10:30 am",
+      "subject": "Office Hours",
+      "noteText": "This is the office hours note text that we added"
     },
     {
       "title": "Holiday Season",
       "creator": "Jane Smith",
       "date": "26/3/24",
-      "time": "10:30 am"
+      "time": "10:30 am",
+      "subject": "Office Hours",
+      "noteText": "This is the office hours note text that we added"
     },
     {
       "title": "Holiday Season",
       "creator": "Jane Smith",
       "date": "26/3/24",
-      "time": "10:30 am"
+      "time": "10:30 am",
+      "subject": "Office Hours",
+      "noteText": "This is the office hours note text that we added"
     },
     {
       "title": "Holiday Season",
       "creator": "Jane Smith",
       "date": "26/3/24",
-      "time": "10:30 am"
+      "time": "10:30 am",
+      "subject": "Office Hours",
+      "noteText": "This is the office hours note text that we added"
     },
   ];
 
@@ -711,6 +732,7 @@ class _NewCalloutJobState extends State<NewClient> {
         setState(() {
           showMainLocations = true;
           achieveLocationsOpened = false;
+          archieveJobsOpened = false;
         });
       }
     });
@@ -11759,7 +11781,7 @@ class _NewCalloutJobState extends State<NewClient> {
                   right: 18.0,
                   bottom: 5.0,
                 ),
-                child: showMainLocations
+                child: showMainJobs
                     ? Text(
                         "$displayRange out of ${locationData.length} records",
                         style: TextStyle(
@@ -11769,7 +11791,7 @@ class _NewCalloutJobState extends State<NewClient> {
                     : null),
           ),
           Padding(
-            padding: const EdgeInsets.only(bottom: 70.0),
+            padding: const EdgeInsets.only(bottom: 5.0),
             child: Column(
               children: [
                 ListView.builder(
@@ -12776,8 +12798,10 @@ class _NewCalloutJobState extends State<NewClient> {
                                                                 0), // Rounded top corners
                                                           ),
                                                         ),
-                                                        child:
-                                                            NewClientLocation(),
+                                                        child: NewNote(
+                                                          subject: "",
+                                                          noteText: "",
+                                                        ),
                                                       );
                                                     },
                                                   );
@@ -12817,8 +12841,10 @@ class _NewCalloutJobState extends State<NewClient> {
                                                                 0), // Rounded top corners
                                                           ),
                                                         ),
-                                                        child:
-                                                            NewClientLocation(),
+                                                        child: NewNote(
+                                                          subject: "",
+                                                          noteText: "",
+                                                        ),
                                                       );
                                                     },
                                                   );
