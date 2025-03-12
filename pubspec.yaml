@@ -43,6 +43,10 @@ dependencies:
   adaptive_action_sheet: ^2.0.4
   progress_stepper: ^3.1.0
   im_stepper: ^1.0.1+1
+  file_picker: ^9.0.2
+  path_provider: ^2.1.2
+  url_launcher: ^6.3.1
+  permission_handler: ^11.4.0
 
 dev_dependencies:
   flutter_test:
@@ -126,6 +130,7 @@ flutter:
     - assets/images/icons/newNoteAdd.png
     - assets/images/icons/newNote.png
     - assets/images/icons/changeLogOpened.png
+    - assets/images/icons/uploadNew.png
     - assets/images/icons/changeLogClosed.png
     - assets/images/icons/onSiteJobsIcon.png
     - assets/images/icons/onSiteApprovalsIcon.png

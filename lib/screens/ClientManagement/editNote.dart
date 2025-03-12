@@ -130,68 +130,45 @@ class _EditNoteState extends State<EditNote> {
                   Row(
                     children: [
                       Expanded(
-                        child: Column(
-                          children: [
-                            Center(
-                              child: Row(
-                                mainAxisSize: MainAxisSize
-                                    .min, // Ensures the row takes minimal space
-                                children: [
-                                  FittedBox(
-                                    fit: BoxFit.contain,
-                                    child: Image.asset(
-                                        "assets/images/icons/newNote.png"),
-                                  ),
-                                  SizedBox(width: 5),
-                                  Text(
-                                    "Note",
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                      color: Color(0xFF1C8CFF),
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                            left: 20.0,
+                          ),
+                          child: Column(
+                            children: [
+                              Center(
+                                child: Row(
+                                  mainAxisSize: MainAxisSize
+                                      .min, // Ensures the row takes minimal space
+                                  children: [
+                                    FittedBox(
+                                      fit: BoxFit.contain,
+                                      child: Image.asset(
+                                          "assets/images/icons/newNote.png"),
                                     ),
-                                  ),
-                                ],
+                                    SizedBox(width: 5),
+                                    Text(
+                                      "Note",
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                        color: Color(0xFF1C8CFF),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                       Row(
                         children: [
                           !editableNote
-                              ? ElevatedButton(
-                                  onPressed: _editNote,
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: Color(0xFF01B4D2),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(20),
-                                    ),
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 20, vertical: 5),
-                                    minimumSize: Size(80, 30),
-                                  ),
-                                  child: const Text(
-                                    "Edit",
-                                    style: TextStyle(color: Colors.white),
-                                  ),
-                                )
-                              : ElevatedButton(
-                                  onPressed: null, // Disables the button
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: Colors.grey.shade400,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(20),
-                                    ),
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 20, vertical: 5),
-                                    minimumSize: Size(80, 30),
-                                  ),
-                                  child: const Text(
-                                    "Edit",
-                                    style: TextStyle(color: Colors.white),
-                                  ),
-                                ),
+                              ? GestureDetector(
+                                  onTap: _editNote,
+                                  child: Icon(Icons.edit, color: Colors.red))
+                              : Icon(Icons.edit, color: Colors.grey),
                           SizedBox(width: 10.0),
                           GestureDetector(
                             onTap: () {
@@ -295,16 +272,22 @@ class _EditNoteState extends State<EditNote> {
                                             enabledBorder: OutlineInputBorder(
                                               borderRadius:
                                                   BorderRadius.circular(4),
-                                              borderSide: const BorderSide(
-                                                color: Colors.white,
+                                              borderSide: BorderSide(
+                                                color: !editableNote
+                                                    ? Colors.blue
+                                                    : Colors.grey
+                                                        .withOpacity(0.3),
                                                 width: 2,
                                               ),
                                             ),
                                             focusedBorder: OutlineInputBorder(
                                               borderRadius:
                                                   BorderRadius.circular(4),
-                                              borderSide: const BorderSide(
-                                                color: Colors.white,
+                                              borderSide: BorderSide(
+                                                color: !editableNote
+                                                    ? Colors.blue
+                                                    : Colors.grey
+                                                        .withOpacity(0.3),
                                                 width: 2,
                                               ),
                                             ),
@@ -400,8 +383,10 @@ class _EditNoteState extends State<EditNote> {
                                               borderRadius:
                                                   BorderRadius.circular(4),
                                               borderSide: BorderSide(
-                                                  color: Colors.grey
-                                                      .withOpacity(0.3),
+                                                  color: !editableNote
+                                                      ? Colors.blue
+                                                      : Colors.grey
+                                                          .withOpacity(0.3),
                                                   width: 2),
                                             ),
                                             focusedBorder: OutlineInputBorder(

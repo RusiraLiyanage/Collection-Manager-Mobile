@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:horizontal_stepper_flutter/horizontal_stepper_flutter.dart';
 import 'package:project_code_blue/screens/ClientManagement/achievedClientCard.dart';
 import 'package:project_code_blue/screens/ClientManagement/achievedLocationCard.dart';
+import 'package:project_code_blue/screens/ClientManagement/attachmentCard.dart';
 import 'package:project_code_blue/screens/ClientManagement/authorizedRepresentatives.dart';
 import 'package:project_code_blue/screens/ClientManagement/authrorizedRepresentative.dart';
 import 'package:project_code_blue/screens/ClientManagement/clientLocationCard.dart';
@@ -16,6 +17,8 @@ import 'package:project_code_blue/screens/OnsiteJobs/collectorRepresentation.dar
 import 'package:project_code_blue/screens/OnsiteJobs/onSiteJobsNewCard.dart';
 //import 'package:progress_stepper/progress_stepper.dart';
 import 'package:im_stepper/stepper.dart';
+import 'package:file_picker/file_picker.dart';
+import 'package:path_provider/path_provider.dart';
 
 enum TestsType {
   alcoholOnly,
@@ -51,6 +54,8 @@ class _NewCalloutJobState extends State<NewClient> {
   ];
 
   List<AuthorizedRepresentative> representatives = List.empty(growable: true);
+
+  String? directoryPath;
 
   int currentPage = 1; // Tracks the current page
   int itemsPerPage = 5; // Default items per page
@@ -118,6 +123,114 @@ class _NewCalloutJobState extends State<NewClient> {
     "All",
     "Specific",
   ];
+
+  final List<Map<String, String>> attachments = [
+    {
+      "attachmentName": "Transcript.pdf",
+      "uploadedAt": "10 Sep 2024 | 03:01 pm",
+      "filePath": ""
+    },
+    {
+      "attachmentName": "Transcript.pdf",
+      "uploadedAt": "10 Sep 2024 | 03:01 pm",
+      "filePath": ""
+    },
+    {
+      "attachmentName": "Transcript.pdf",
+      "uploadedAt": "10 Sep 2024 | 03:01 pm",
+      "filePath": ""
+    },
+  ];
+
+  Future<void> pickFile() async {
+    print("File picker clicked");
+
+    FilePickerResult? result = await FilePicker.platform.pickFiles();
+
+    if (result != null) {
+      PlatformFile pickedFile = result.files.first;
+
+      // Convert PlatformFile to File (only if it's not web)
+      File file = File(pickedFile.path!); // Ensure the path is not null
+
+      // Get the device's directory to save the file
+      Directory appDocDir = await getApplicationDocumentsDirectory();
+      String newPath = '${appDocDir.path}/${pickedFile.name}';
+
+      // Save the file locally
+      File newFile = await file.copy(newPath);
+      print("File saved at: $newPath");
+
+      // Update UI with the new attachment
+      setState(() {
+        attachments.add({
+          "attachmentName": pickedFile.name,
+          "uploadedAt": getFormattedTime(),
+          "filePath": newPath,
+        });
+      });
+    }
+  }
+
+  String getFormattedTime() {
+    DateTime now = DateTime.now();
+
+// Convert the hour to 12-hour format
+    int hour12 = now.hour % 12;
+    hour12 = hour12 == 0 ? 12 : hour12; // Handle midnight and noon case
+
+// Determine AM/PM
+    String amPm = now.hour >= 12 ? 'pm' : 'am';
+
+    return "${now.day} ${_getMonthName(now.month)} ${now.year} | $hour12:${now.minute.toString().padLeft(2, '0')} $amPm";
+  }
+
+  String _getMonthName(int month) {
+    return [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec"
+    ][month - 1];
+  }
+
+  Future<String> saveFileLocally(File file) async {
+    // Specify the target directory for saving files on Windows (you can change this to any path on your system)
+    String targetDir =
+        "C:/Users/SADesktop1/Project Code Blue/Collection-Manager-Mobileassets"; // Update with your desired path
+
+    // Ensure the directory exists
+    await Directory(targetDir).create(recursive: true);
+
+    // Define the new file path
+    String newPath = "$targetDir/${file.uri.pathSegments.last}";
+    File savedFile = File(newPath);
+
+    // Write the file to the new location
+    await savedFile.writeAsBytes(await file.readAsBytes());
+
+    // Return the new file path
+    return newPath;
+  }
+
+  Future<void> _initDirectory() async {
+    try {
+      Directory appDir = await getApplicationDocumentsDirectory();
+      setState(() {
+        directoryPath = appDir.path;
+      });
+    } catch (e) {
+      print("Error getting directory: $e");
+    }
+  }
 
   final List<Map<String, String>> notes = [
     {
@@ -704,6 +817,7 @@ class _NewCalloutJobState extends State<NewClient> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    //_initDirectory();
     _selectedValue = items.first;
     _selectedClient = clients.first;
     //_selectedStatus = status.first;
@@ -4213,6 +4327,91 @@ class _NewCalloutJobState extends State<NewClient> {
                     ]),
               ),
             ),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Padding(
+            padding: const EdgeInsets.only(
+              left: 16.0,
+              right: 16.0,
+            ),
+            child: Card(
+                surfaceTintColor: Colors.white,
+                color: Colors.white,
+                elevation: 0,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: Padding(
+                    padding: const EdgeInsets.only(
+                      top: 12.0,
+                      bottom: 12.0,
+                      left: 16.0,
+                      right: 16.0,
+                    ),
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              // Left-aligned title
+                              Row(
+                                children: [
+                                  Text(
+                                    "Attachments",
+                                    style: TextStyle(
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 6,
+                          ),
+                          Column(children: [
+                            SizedBox(
+                              height: 10,
+                            ),
+                            GestureDetector(
+                              onTap: pickFile,
+                              child: Center(
+                                child: FittedBox(
+                                  fit: BoxFit.cover,
+                                  child: Image.asset(
+                                      "assets/images/icons/uploadNew.png"),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            ListView.builder(
+                              padding: EdgeInsets.zero,
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              itemCount: attachments.length,
+                              itemBuilder: (context, index) {
+                                final attachment = attachments[index];
+                                return Padding(
+                                  padding: const EdgeInsets.only(
+                                    left: 8.0,
+                                    right: 8.0,
+                                    bottom: 10.0,
+                                  ),
+                                  child: AttachmentCard(
+                                    attachment: attachment,
+                                  ),
+                                );
+                              },
+                            ),
+                          ]),
+                        ]))),
           ),
         ]);
       case 2:

@@ -5,6 +5,7 @@ import './AppState/appState.dart';
 import 'package:project_code_blue/tabs/tabs_page.dart';
 
 void main() {
+  //WidgetsFlutterBinding.ensureInitialized(); // Ensure plugins are initialized
   runApp(
     ChangeNotifierProvider(
       create: (_) => AppState(),
