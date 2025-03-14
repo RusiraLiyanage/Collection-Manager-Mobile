@@ -9,6 +9,7 @@ import 'package:project_code_blue/screens/ClientManagement/authorizedRepresentat
 import 'package:project_code_blue/screens/ClientManagement/authrorizedRepresentative.dart';
 import 'package:project_code_blue/screens/ClientManagement/clientLocationCard.dart';
 import 'package:project_code_blue/screens/ClientManagement/clientManagementCard.dart';
+import 'package:project_code_blue/screens/ClientManagement/contractCard.dart';
 import 'package:project_code_blue/screens/ClientManagement/newClientLocation.dart';
 import 'package:project_code_blue/screens/ClientManagement/newNote.dart';
 import 'package:project_code_blue/screens/ClientManagement/noteCard.dart';
@@ -107,6 +108,8 @@ class _NewCalloutJobState extends State<NewClient> {
 
   DateTime? _selectedEndDate;
 
+  bool contractAchieveOpened = false;
+
   final List<String> items = [
     "Newcastle City",
     "Sydney Office",
@@ -142,6 +145,23 @@ class _NewCalloutJobState extends State<NewClient> {
     },
   ];
 
+  final List<Map<String, String>> contracts = [
+    {
+      "contractName": "ContractName.pdf",
+      "uploadedAt": "10 Sep 2024 | 03:01 pm",
+      "uploadedBy": "Rusira Rusira",
+      "noteAdded": "false",
+      "contractNote": ""
+    },
+    {
+      "contractName": "ContractName.pdf",
+      "uploadedAt": "10 Sep 2024 | 03:01 pm",
+      "uploadedBy": "Rusira Rusira",
+      "noteAdded": "false",
+      "contractNote": ""
+    },
+  ];
+
   Future<void> pickFile() async {
     print("File picker clicked");
 
@@ -167,6 +187,39 @@ class _NewCalloutJobState extends State<NewClient> {
           "attachmentName": pickedFile.name,
           "uploadedAt": getFormattedTime(),
           "filePath": newPath,
+        });
+      });
+    }
+  }
+
+  Future<void> pickContract() async {
+    print("Contract picker clicked");
+
+    FilePickerResult? result = await FilePicker.platform.pickFiles();
+
+    if (result != null) {
+      PlatformFile pickedFile = result.files.first;
+
+      // Convert PlatformFile to File (only if it's not web)
+      File file = File(pickedFile.path!); // Ensure the path is not null
+
+      // Get the device's directory to save the file
+      Directory appDocDir = await getApplicationDocumentsDirectory();
+      String newPath = '${appDocDir.path}/${pickedFile.name}';
+
+      // Save the file locally
+      File newFile = await file.copy(newPath);
+      print("File saved at: $newPath");
+
+      // Update UI with the new attachment
+      setState(() {
+        contracts.add({
+          "contractName": pickedFile.name,
+          "uploadedAt": getFormattedTime(),
+          "uploadedBy": "Rusira Rusira",
+          "noteAdded": "true",
+          "contractNote":
+              "This will be the custom contract note that we will be able to see",
         });
       });
     }
@@ -236,80 +289,70 @@ class _NewCalloutJobState extends State<NewClient> {
     {
       "title": "Office Hours",
       "creator": "Jane Smith",
-      "date": "26/3/24",
-      "time": "10:30 am",
+      "uploadedAt": "10 Sep 2024 | 03:01 pm",
       "subject": "Office Hours",
       "noteText": "This is the office hours note text that we added"
     },
     {
       "title": "Holiday Season",
       "creator": "Jane Smith",
-      "date": "26/3/24",
-      "time": "10:30 am",
+      "uploadedAt": "10 Sep 2024 | 03:01 pm",
       "subject": "Office Hours",
       "noteText": "This is the office hours note text that we added"
     },
     {
       "title": "Holiday Season",
       "creator": "Jane Smith",
-      "date": "26/3/24",
-      "time": "10:30 am",
+      "uploadedAt": "10 Sep 2024 | 03:01 pm",
       "subject": "Office Hours",
       "noteText": "This is the office hours note text that we added"
     },
     {
       "title": "Office Hours",
       "creator": "Jane Smith",
-      "date": "26/3/24",
-      "time": "10:30 am",
+      "uploadedAt": "10 Sep 2024 | 03:01 pm",
       "subject": "Office Hours",
       "noteText": "This is the office hours note text that we added"
     },
     {
       "title": "Winter Season",
       "creator": "Jane Smith",
-      "date": "26/3/24",
-      "time": "10:30 am",
+      "uploadedAt": "10 Sep 2024 | 03:01 pm",
       "subject": "Office Hours",
       "noteText": "This is the office hours note text that we added"
     },
     {
       "title": "Holiday Season",
       "creator": "Jane Smith",
-      "date": "26/3/24",
-      "time": "10:30 am",
+      "uploadedAt": "10 Sep 2024 | 03:01 pm",
       "subject": "Office Hours",
       "noteText": "This is the office hours note text that we added"
     },
     {
       "title": "Holiday Season",
       "creator": "Jane Smith",
-      "date": "26/3/24",
-      "time": "10:30 am",
+      "uploadedAt": "10 Sep 2024 | 03:01 pm",
       "subject": "Office Hours",
       "noteText": "This is the office hours note text that we added"
     },
     {
       "title": "Holiday Season",
       "creator": "Jane Smith",
-      "date": "26/3/24",
-      "time": "10:30 am",
+      "uploadedAt": "10 Sep 2024 | 03:01 pm",
       "subject": "Office Hours",
       "noteText": "This is the office hours note text that we added"
     },
     {
       "title": "Holiday Season",
       "creator": "Jane Smith",
-      "date": "26/3/24",
-      "time": "10:30 am",
+      "uploadedAt": "10 Sep 2024 | 03:01 pm",
       "subject": "Office Hours",
       "noteText": "This is the office hours note text that we added"
     },
     {
       "title": "Holiday Season",
       "creator": "Jane Smith",
-      "date": "26/3/24",
-      "time": "10:30 am",
+      "uploadedAt": "10 Sep 2024 | 03:01 pm",
       "subject": "Office Hours",
       "noteText": "This is the office hours note text that we added"
     },
@@ -346,6 +389,19 @@ class _NewCalloutJobState extends State<NewClient> {
     setState(() {
       addNewOpened = false;
     });
+  }
+
+  void _prevStep() {
+    if (_currentStep > 0) {
+      widget.scrollController.animateTo(
+        0, // Scroll to top
+        duration: const Duration(milliseconds: 500),
+        curve: Curves.easeInOut,
+      );
+      setState(() {
+        _currentStep--;
+      });
+    }
   }
 
   Future<void> _selectStartDate(BuildContext context) async {
@@ -3187,6 +3243,166 @@ class _NewCalloutJobState extends State<NewClient> {
               ),
             ),
           ),
+          SizedBox(
+            height: 10,
+          ),
+          Padding(
+            padding: const EdgeInsets.only(
+              left: 16.0,
+              right: 16.0,
+            ),
+            child: Card(
+                surfaceTintColor: Colors.white,
+                color: Colors.white,
+                elevation: 0,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: Padding(
+                    padding: const EdgeInsets.only(
+                      top: 12.0,
+                      bottom: 12.0,
+                      left: 16.0,
+                      right: 16.0,
+                    ),
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              // Left-aligned title
+                              Row(
+                                children: [
+                                  Text(
+                                    "Contract",
+                                    style: TextStyle(
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 6,
+                          ),
+                          Column(children: [
+                            SizedBox(
+                              height: 10,
+                            ),
+                            GestureDetector(
+                              onTap: pickContract,
+                              child: Center(
+                                child: FittedBox(
+                                  fit: BoxFit.cover,
+                                  child: Image.asset(
+                                      "assets/images/icons/uploadNew.png"),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            ListView.builder(
+                              padding: EdgeInsets.zero,
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              itemCount: contracts.length,
+                              itemBuilder: (context, index) {
+                                final contract = contracts[index];
+                                return Padding(
+                                  padding: const EdgeInsets.only(
+                                    left: 8.0,
+                                    right: 8.0,
+                                    bottom: 10.0,
+                                  ),
+                                  child: ContractCard(
+                                    contract: contract,
+                                  ),
+                                );
+                              },
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            contractAchieveOpened
+                                ? Align(
+                                    alignment: Alignment.topLeft,
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        setState(() {
+                                          contractAchieveOpened = false;
+                                        });
+                                      },
+                                      child: FittedBox(
+                                        fit: BoxFit.contain,
+                                        child: Image.asset(
+                                            "assets/images/icons/contractAchieveOpened.png"),
+                                      ),
+                                    ),
+                                  )
+                                : Align(
+                                    alignment: Alignment.topLeft,
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        setState(() {
+                                          contractAchieveOpened = true;
+                                        });
+                                      },
+                                      child: FittedBox(
+                                        fit: BoxFit.contain,
+                                        child: Image.asset(
+                                            "assets/images/icons/contractAchieveClosed.png"),
+                                      ),
+                                    ),
+                                  ),
+                            contractAchieveOpened
+                                ? Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      SizedBox(
+                                        height: 3,
+                                      ),
+                                      Divider(
+                                        thickness: 2,
+                                        color: Colors.black,
+                                        endIndent: 10,
+                                      ),
+                                      SizedBox(
+                                        height: 5,
+                                      ),
+                                      ListView.builder(
+                                          padding: EdgeInsets.zero,
+                                          scrollDirection: Axis.vertical,
+                                          physics:
+                                              NeverScrollableScrollPhysics(),
+                                          shrinkWrap: true,
+                                          itemCount: contracts.length,
+                                          itemBuilder: (context, index) {
+                                            final contract = contracts[index];
+
+                                            return Padding(
+                                              padding: const EdgeInsets.only(
+                                                left: 8.0,
+                                                right: 8.0,
+                                                bottom: 10.0,
+                                              ),
+                                              child: ContractCard(
+                                                contract: contract,
+                                              ),
+                                            );
+                                          }),
+                                    ],
+                                  )
+                                : SizedBox(
+                                    height: 0,
+                                  ),
+                          ]),
+                        ]))),
+          ),
           Padding(
             padding: const EdgeInsets.only(
               left: 16.0,
@@ -4412,6 +4628,57 @@ class _NewCalloutJobState extends State<NewClient> {
                             ),
                           ]),
                         ]))),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Padding(
+            padding: const EdgeInsets.only(
+              left: 16.0,
+              right: 16.0,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                ElevatedButton(
+                  onPressed: _prevStep,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor:
+                        Color(0xFF01B4D2), // Color for the Back button
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                    minimumSize:
+                        Size(80, 30), // Sets a minimum width and height
+                  ),
+                  child: const Text(
+                    "Back",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+                ElevatedButton(
+                  onPressed: _nextStep,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blue, // Color for the Next button
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                    minimumSize: Size(80, 30),
+                  ),
+                  child: const Text(
+                    "Next",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 40,
           ),
         ]);
       case 2:
@@ -10251,6 +10518,57 @@ class _NewCalloutJobState extends State<NewClient> {
               ),
             ),
           ),
+          SizedBox(
+            height: 10,
+          ),
+          Padding(
+            padding: const EdgeInsets.only(
+              left: 16.0,
+              right: 16.0,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                ElevatedButton(
+                  onPressed: _prevStep,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor:
+                        Color(0xFF01B4D2), // Color for the Back button
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                    minimumSize:
+                        Size(80, 30), // Sets a minimum width and height
+                  ),
+                  child: const Text(
+                    "Back",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+                ElevatedButton(
+                  onPressed: _nextStep,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blue, // Color for the Next button
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                    minimumSize: Size(80, 30),
+                  ),
+                  child: const Text(
+                    "Next",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 40,
+          ),
         ]);
       case 3:
         return Column(children: [
@@ -11362,6 +11680,54 @@ class _NewCalloutJobState extends State<NewClient> {
                       ),
               ],
             ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(
+              left: 16.0,
+              right: 16.0,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                ElevatedButton(
+                  onPressed: _prevStep,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor:
+                        Color(0xFF01B4D2), // Color for the Back button
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                    minimumSize:
+                        Size(80, 30), // Sets a minimum width and height
+                  ),
+                  child: const Text(
+                    "Back",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+                ElevatedButton(
+                  onPressed: _nextStep,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blue, // Color for the Next button
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                    minimumSize: Size(80, 30),
+                  ),
+                  child: const Text(
+                    "Next",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 40,
           ),
         ]);
       case 4:
@@ -12717,6 +13083,54 @@ class _NewCalloutJobState extends State<NewClient> {
               ],
             ),
           ),
+          Padding(
+            padding: const EdgeInsets.only(
+              left: 16.0,
+              right: 16.0,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                ElevatedButton(
+                  onPressed: _prevStep,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor:
+                        Color(0xFF01B4D2), // Color for the Back button
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                    minimumSize:
+                        Size(80, 30), // Sets a minimum width and height
+                  ),
+                  child: const Text(
+                    "Back",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+                ElevatedButton(
+                  onPressed: _nextStep,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blue, // Color for the Next button
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                    minimumSize: Size(80, 30),
+                  ),
+                  child: const Text(
+                    "Next",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 40,
+          ),
         ]);
       case 5:
         return Column(children: [
@@ -13205,6 +13619,54 @@ class _NewCalloutJobState extends State<NewClient> {
               ),
             ),
           ),
+          Padding(
+            padding: const EdgeInsets.only(
+              left: 16.0,
+              right: 16.0,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                ElevatedButton(
+                  onPressed: _prevStep,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor:
+                        Color(0xFF01B4D2), // Color for the Back button
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                    minimumSize:
+                        Size(80, 30), // Sets a minimum width and height
+                  ),
+                  child: const Text(
+                    "Back",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+                ElevatedButton(
+                  onPressed: _nextStep,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blue, // Color for the Next button
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                    minimumSize: Size(80, 30),
+                  ),
+                  child: const Text(
+                    "Next",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 40,
+          ),
         ]);
       case 6:
         return Column(children: [
@@ -13310,6 +13772,12 @@ class _NewCalloutJobState extends State<NewClient> {
         duration: const Duration(milliseconds: 500),
         curve: Curves.easeInOut,
       );
+
+      /*  widget.scrollController.animateTo(
+        0, // Scroll to top
+        duration: const Duration(milliseconds: 500),
+        curve: Curves.easeInOut,
+      ); */
       return;
     }
 

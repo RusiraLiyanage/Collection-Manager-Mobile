@@ -170,7 +170,7 @@ class _EditNoteState extends State<EditNote> {
                                   child: Icon(Icons.edit, color: Colors.red))
                               : Icon(Icons.edit, color: Colors.grey),
                           SizedBox(width: 10.0),
-                          GestureDetector(
+                          /* GestureDetector(
                             onTap: () {
                               showDialog(
                                 context: context,
@@ -198,7 +198,7 @@ class _EditNoteState extends State<EditNote> {
                             },
                             child:
                                 Icon(Icons.delete_outline, color: Colors.red),
-                          ),
+                          ), */
                         ],
                       ),
                     ],

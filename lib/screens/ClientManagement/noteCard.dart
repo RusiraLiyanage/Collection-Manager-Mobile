@@ -13,13 +13,13 @@ class NoteCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        showDialog(
+        /* showDialog(
           context: context,
           builder: (context) => EditNote(
             subject: note['subject']!,
             noteText: note['noteText']!,
           ),
-        );
+        ); */
       },
       child: Card(
         shape: RoundedRectangleBorder(
@@ -45,7 +45,15 @@ class NoteCard extends StatelessWidget {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    "Created by  ${note["creator"]}",
+                    "Created by ${note["creator"]!}",
+                    style: const TextStyle(
+                      fontSize: 14,
+                      color: Colors.black54,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    "${note["uploadedAt"]!}",
                     style: const TextStyle(
                       fontSize: 14,
                       color: Colors.black54,
@@ -56,20 +64,61 @@ class NoteCard extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  Text(
-                    note["date"]!,
-                    style: const TextStyle(
-                      fontSize: 14,
-                      color: Colors.black54,
-                    ),
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    note["time"]!,
-                    style: const TextStyle(
-                      fontSize: 14,
-                      color: Colors.black54,
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          showDialog(
+                            context: context,
+                            builder: (context) => EditNote(
+                              subject: note['subject']!,
+                              noteText: note['noteText']!,
+                            ),
+                          );
+                        },
+                        child: FittedBox(
+                          fit: BoxFit.cover,
+                          child: Icon(
+                            Icons.edit,
+                            color: Color.fromRGBO(26, 140, 255, 1.0),
+                          ),
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                              title: const Text('Delete Note'),
+                              content:
+                                  const Text('Do you wanna delete this note ?'),
+                              actions: [
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: const Text('Yes'),
+                                ),
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: const Text('No'),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                        child: FittedBox(
+                          fit: BoxFit.cover,
+                          child: Icon(
+                            Icons.delete_outline,
+                            color: Colors.red,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
