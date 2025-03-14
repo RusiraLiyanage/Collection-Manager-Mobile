@@ -4354,14 +4354,14 @@ class _NewCalloutJobState extends State<NewClient> {
                                                                 // Update the number of donors and the text controller
                                                               });
                                                             },
-                                                            validator: (value) {
+                                                            /* validator: (value) {
                                                               if (_positionController
                                                                       .text ==
                                                                   "") {
                                                                 return 'Please enter a correct position';
                                                               }
                                                               return null;
-                                                            },
+                                                            }, */
                                                           ),
                                                         ),
                                                       ),

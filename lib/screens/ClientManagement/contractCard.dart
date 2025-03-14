@@ -48,20 +48,20 @@ class ContractCard extends StatelessWidget {
                       color: Colors.black54,
                     ),
                   ),
-                  const SizedBox(height: 10),
+                  /* SizedBox(
+                    width: double.infinity,
+                    child: Divider(
+                      thickness: 1.0,
+                      color: Colors.black,
+                    ),
+                  ), */
+                  const SizedBox(height: 3),
                   Text(
                     "Contract Note",
                     style: const TextStyle(
                       fontSize: 14,
                       color: Colors.black54,
                       fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  SizedBox(
-                    width: double.infinity,
-                    child: Divider(
-                      thickness: 2.0,
-                      color: Colors.black,
                     ),
                   ),
                   contract["noteAdded"]! == "false"

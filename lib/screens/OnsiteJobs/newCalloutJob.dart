@@ -2342,7 +2342,7 @@ class _NewCalloutJobState extends State<NewCalloutJob> {
                                         ),
                                         onPressed: () {
                                           setState(() {
-                                            numberOfCollectors++;
+                                            //numberOfCollectors++;
                                           });
                                         },
                                         child: Text(
