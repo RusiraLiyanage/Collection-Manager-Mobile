@@ -1210,14 +1210,13 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                             fontSize: 12,
                                           ),
                                           suffixIcon: Padding(
-                                            padding: const EdgeInsets.all(
-                                                8.0), // Adjust the padding as needed
-                                            child: Image.asset(
-                                              "assets/images/icons/icon_calendar.png", // Replace with your image path
-                                              width:
-                                                  32, // Adjust the width of the image
-                                              height:
-                                                  32, // Adjust the height of the image
+                                            padding: EdgeInsets.all(
+                                                5.0), // Adjust the padding as needed
+                                            child: Icon(
+                                              Icons.access_time, // Time icon
+                                              size: 22, // Adjust the icon size
+                                              color: Color(0xFF01B4D2),
+                                              // Optional: Adjust the icon color
                                             ),
                                           ),
                                         ),
@@ -1357,7 +1356,7 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                             color: Colors.red,
                                             fontSize: 12,
                                           ),
-                                          suffixIcon: Padding(
+                                          /* suffixIcon: Padding(
                                             padding: const EdgeInsets.all(
                                                 8.0), // Adjust the padding as needed
                                             child: Image.asset(
@@ -1367,7 +1366,7 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                               height:
                                                   32, // Adjust the height of the image
                                             ),
-                                          ),
+                                          ), */
                                         ),
                                         onTap: () async {
                                           // Show duration selection dialog
@@ -1680,7 +1679,7 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                             color: Colors.red,
                                             fontSize: 12,
                                           ),
-                                          suffixIcon: Padding(
+                                          /* suffixIcon: Padding(
                                             padding: const EdgeInsets.all(
                                                 8.0), // Adjust the padding as needed
                                             child: Image.asset(
@@ -1690,7 +1689,7 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                               height:
                                                   32, // Adjust the height of the image
                                             ),
-                                          ),
+                                          ), */
                                         ),
                                         keyboardType: TextInputType
                                             .number, // Ensures numeric input
@@ -1807,7 +1806,7 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                             color: Colors.red,
                                             fontSize: 12,
                                           ),
-                                          suffixIcon: Padding(
+                                          /* suffixIcon: Padding(
                                             padding: const EdgeInsets.all(
                                                 8.0), // Adjust the padding as needed
                                             child: Image.asset(
@@ -1817,7 +1816,7 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                               height:
                                                   32, // Adjust the height of the image
                                             ),
-                                          ),
+                                          ), */
                                         ),
                                         keyboardType: TextInputType
                                             .text, // Ensures numeric input
@@ -1933,7 +1932,7 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                             color: Colors.red,
                                             fontSize: 12,
                                           ),
-                                          suffixIcon: Padding(
+                                          /* suffixIcon: Padding(
                                             padding: const EdgeInsets.all(
                                                 8.0), // Adjust the padding as needed
                                             child: Image.asset(
@@ -1943,7 +1942,7 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                               height:
                                                   32, // Adjust the height of the image
                                             ),
-                                          ),
+                                          ), */
                                         ),
                                         keyboardType: TextInputType
                                             .text, // Ensures numeric input
@@ -2114,7 +2113,7 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                             color: Colors.red,
                                             fontSize: 12,
                                           ),
-                                          suffixIcon: Padding(
+                                          /* suffixIcon: Padding(
                                             padding: const EdgeInsets.all(
                                                 8.0), // Adjust the padding as needed
                                             child: Image.asset(
@@ -2124,7 +2123,7 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                               height:
                                                   32, // Adjust the height of the image
                                             ),
-                                          ),
+                                          ), */
                                         ),
                                         keyboardType: TextInputType
                                             .text, // Ensures numeric input
@@ -2237,7 +2236,7 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                             color: Colors.red,
                                             fontSize: 12,
                                           ),
-                                          suffixIcon: Padding(
+                                          /* suffixIcon: Padding(
                                             padding: const EdgeInsets.all(
                                                 8.0), // Adjust the padding as needed
                                             child: Image.asset(
@@ -2247,7 +2246,7 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                               height:
                                                   32, // Adjust the height of the image
                                             ),
-                                          ),
+                                          ), */
                                         ),
                                         keyboardType: TextInputType
                                             .text, // Ensures numeric input
@@ -2362,7 +2361,7 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                             color: Colors.red,
                                             fontSize: 12,
                                           ),
-                                          suffixIcon: Padding(
+                                          /* suffixIcon: Padding(
                                             padding: const EdgeInsets.all(
                                                 8.0), // Adjust the padding as needed
                                             child: Image.asset(
@@ -2372,7 +2371,7 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                               height:
                                                   32, // Adjust the height of the image
                                             ),
-                                          ),
+                                          ), */
                                         ),
                                         keyboardType: TextInputType
                                             .text, // Ensures numeric input
@@ -2487,7 +2486,7 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                             color: Colors.red,
                                             fontSize: 12,
                                           ),
-                                          suffixIcon: Padding(
+                                          /* suffixIcon: Padding(
                                             padding: const EdgeInsets.all(
                                                 8.0), // Adjust the padding as needed
                                             child: Image.asset(
@@ -2497,7 +2496,7 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                               height:
                                                   32, // Adjust the height of the image
                                             ),
-                                          ),
+                                          ), */
                                         ),
                                         keyboardType: TextInputType
                                             .phone, // Ensures numeric input

@@ -106,7 +106,9 @@ class _EditNoteState extends State<EditNote> {
             color: Colors.transparent,
             child: Container(
               width: MediaQuery.of(context).size.width * 0.93,
-              height: MediaQuery.of(context).size.height * 0.8,
+              height: changeLogOpened
+                  ? MediaQuery.of(context).size.height * 0.8
+                  : MediaQuery.of(context).size.height * 0.53,
               padding: EdgeInsets.only(
                 right: 15,
                 top: 11,

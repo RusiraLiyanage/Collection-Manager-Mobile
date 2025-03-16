@@ -3321,6 +3321,7 @@ class _NewCalloutJobState extends State<NewClient> {
                                   ),
                                   child: ContractCard(
                                     contract: contract,
+                                    backgroundColor: const Color(0xFFCBF5FC),
                                   ),
                                 );
                               },
@@ -3392,6 +3393,9 @@ class _NewCalloutJobState extends State<NewClient> {
                                               ),
                                               child: ContractCard(
                                                 contract: contract,
+                                                backgroundColor:
+                                                    Colors.grey[200] ??
+                                                        Colors.grey,
                                               ),
                                             );
                                           }),

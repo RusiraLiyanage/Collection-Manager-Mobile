@@ -3,7 +3,9 @@ import 'package:project_code_blue/screens/ClientManagement/addContractNote.dart'
 
 class ContractCard extends StatelessWidget {
   final Map<String, String> contract;
-  const ContractCard({super.key, required this.contract});
+  final Color backgroundColor;
+  const ContractCard(
+      {super.key, required this.contract, required this.backgroundColor});
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +13,7 @@ class ContractCard extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12), // Rounded corners
       ),
-      color: const Color(0xFFCBF5FC), // Background color
+      color: backgroundColor, // Background color
       elevation: 0, // Remove shadow to match the flat design
       child: Padding(
         padding: const EdgeInsets.all(12), // Padding inside the card

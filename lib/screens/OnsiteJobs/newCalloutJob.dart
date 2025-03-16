@@ -918,6 +918,21 @@ class _NewCalloutJobState extends State<NewCalloutJob> {
                                               await showDatePicker(
                                             context: context,
                                             initialDate: DateTime.now(),
+                                            builder: (BuildContext context,
+                                                    Widget? widget) =>
+                                                Theme(
+                                              data: ThemeData(
+                                                colorScheme: const ColorScheme
+                                                    .highContrastLight(
+                                                  primary: Color(0xFF01B4D2),
+                                                ),
+                                                datePickerTheme:
+                                                    const DatePickerThemeData(
+                                                  backgroundColor: Colors.white,
+                                                ),
+                                              ),
+                                              child: widget!,
+                                            ),
                                             firstDate: DateTime(
                                                 2000), // Earliest date the user can pick
                                             lastDate: DateTime(
@@ -1038,14 +1053,13 @@ class _NewCalloutJobState extends State<NewCalloutJob> {
                                             fontSize: 12,
                                           ),
                                           suffixIcon: Padding(
-                                            padding: const EdgeInsets.all(
-                                                8.0), // Adjust the padding as needed
-                                            child: Image.asset(
-                                              "assets/images/icons/icon_calendar.png", // Replace with your image path
-                                              width:
-                                                  32, // Adjust the width of the image
-                                              height:
-                                                  32, // Adjust the height of the image
+                                            padding: EdgeInsets.all(
+                                                5.0), // Adjust the padding as needed
+                                            child: Icon(
+                                              Icons.access_time, // Time icon
+                                              size: 22, // Adjust the icon size
+                                              color: Color(0xFF01B4D2),
+                                              // Optional: Adjust the icon color
                                             ),
                                           ),
                                         ),
@@ -1053,6 +1067,21 @@ class _NewCalloutJobState extends State<NewCalloutJob> {
                                           // Show time picker dialog
                                           final selectedTime =
                                               await showTimePicker(
+                                            builder: (BuildContext context,
+                                                    Widget? widget) =>
+                                                Theme(
+                                              data: ThemeData(
+                                                colorScheme: const ColorScheme
+                                                    .highContrastLight(
+                                                  primary: Color(0xFF01B4D2),
+                                                ),
+                                                datePickerTheme:
+                                                    const DatePickerThemeData(
+                                                  backgroundColor: Colors.white,
+                                                ),
+                                              ),
+                                              child: widget!,
+                                            ),
                                             context: context,
                                             initialTime: TimeOfDay.now(),
                                           );
@@ -1170,7 +1199,7 @@ class _NewCalloutJobState extends State<NewCalloutJob> {
                                             color: Colors.red,
                                             fontSize: 12,
                                           ),
-                                          suffixIcon: Padding(
+                                          /* suffixIcon: Padding(
                                             padding: const EdgeInsets.all(
                                                 8.0), // Adjust the padding as needed
                                             child: Image.asset(
@@ -1180,7 +1209,7 @@ class _NewCalloutJobState extends State<NewCalloutJob> {
                                               height:
                                                   32, // Adjust the height of the image
                                             ),
-                                          ),
+                                          ), */
                                         ),
                                         onTap: () async {
                                           // Show duration selection dialog
@@ -1188,169 +1217,199 @@ class _NewCalloutJobState extends State<NewCalloutJob> {
                                               await showDialog<Duration>(
                                             context: context,
                                             builder: (context) {
-                                              return AlertDialog(
-                                                title: Text(
-                                                  'Select Duration',
-                                                  style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 18,
-                                                    color: Colors
-                                                        .blueAccent, // Title text color
-                                                  ),
-                                                ),
-                                                content: Padding(
-                                                  padding: const EdgeInsets.all(
-                                                      16.0),
-                                                  child: Column(
-                                                    mainAxisSize:
-                                                        MainAxisSize.min,
-                                                    children: [
-                                                      Row(
+                                              int tempHours =
+                                                  hours; // Temporary state for the dialog
+                                              int tempMinutes = minutes;
+
+                                              return StatefulBuilder(
+                                                builder: (context, setState) {
+                                                  return AlertDialog(
+                                                    title: Text(
+                                                      'Select Duration',
+                                                      style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize: 18,
+                                                        color: Color(
+                                                            0xFF01B4D2), // Title text color
+                                                      ),
+                                                    ),
+                                                    content: Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              16.0),
+                                                      child: Column(
+                                                        mainAxisSize:
+                                                            MainAxisSize.min,
                                                         children: [
-                                                          Text(
-                                                            'Hours:',
-                                                            style: TextStyle(
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w600,
-                                                              fontSize: 16,
-                                                              color: Colors
-                                                                      .grey[
-                                                                  700], // Text color
-                                                            ),
+                                                          Row(
+                                                            children: [
+                                                              Text(
+                                                                'Hours:',
+                                                                style:
+                                                                    TextStyle(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w600,
+                                                                  fontSize: 16,
+                                                                  color: Colors
+                                                                          .grey[
+                                                                      700], // Text color
+                                                                ),
+                                                              ),
+                                                              const SizedBox(
+                                                                  width: 8),
+                                                              DropdownButton<
+                                                                  int>(
+                                                                value:
+                                                                    tempHours,
+                                                                items: List
+                                                                    .generate(
+                                                                        24,
+                                                                        (index) {
+                                                                  return DropdownMenuItem<
+                                                                      int>(
+                                                                    value:
+                                                                        index,
+                                                                    child: Text(
+                                                                        '$index'),
+                                                                  );
+                                                                }),
+                                                                onChanged:
+                                                                    (value) {
+                                                                  if (value !=
+                                                                      null) {
+                                                                    setState(
+                                                                        () {
+                                                                      tempHours =
+                                                                          value; // Update local state
+                                                                    });
+                                                                  }
+                                                                },
+                                                              ),
+                                                            ],
                                                           ),
                                                           const SizedBox(
-                                                              width: 8),
-                                                          DropdownButton<int>(
-                                                            value: hours,
-                                                            items:
-                                                                List.generate(
-                                                                    24,
-                                                                    (index) {
-                                                              return DropdownMenuItem<
+                                                              height: 16),
+                                                          Row(
+                                                            children: [
+                                                              Text(
+                                                                'Minutes:',
+                                                                style:
+                                                                    TextStyle(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w600,
+                                                                  fontSize: 16,
+                                                                  color: Colors
+                                                                          .grey[
+                                                                      700], // Text color
+                                                                ),
+                                                              ),
+                                                              const SizedBox(
+                                                                  width: 8),
+                                                              DropdownButton<
                                                                   int>(
-                                                                value: index,
-                                                                child: Text(
-                                                                    '$index'),
-                                                              );
-                                                            }),
-                                                            onChanged: (value) {
-                                                              if (value !=
-                                                                  null) {
-                                                                setState(() {
-                                                                  hours = value;
-                                                                });
-                                                              }
-                                                            },
+                                                                value:
+                                                                    tempMinutes,
+                                                                items: List
+                                                                    .generate(
+                                                                        60,
+                                                                        (index) {
+                                                                  return DropdownMenuItem<
+                                                                      int>(
+                                                                    value:
+                                                                        index,
+                                                                    child: Text(
+                                                                        '$index'),
+                                                                  );
+                                                                }),
+                                                                onChanged:
+                                                                    (value) {
+                                                                  if (value !=
+                                                                      null) {
+                                                                    setState(
+                                                                        () {
+                                                                      tempMinutes =
+                                                                          value; // Update local state
+                                                                    });
+                                                                  }
+                                                                },
+                                                              ),
+                                                            ],
                                                           ),
                                                         ],
                                                       ),
-                                                      const SizedBox(
-                                                          height: 16),
-                                                      Row(
-                                                        children: [
-                                                          Text(
-                                                            'Minutes:',
-                                                            style: TextStyle(
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w600,
-                                                              fontSize: 16,
-                                                              color: Colors
-                                                                      .grey[
-                                                                  700], // Text color
-                                                            ),
+                                                    ),
+                                                    shape:
+                                                        RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              16), // Rounded corners
+                                                    ),
+                                                    backgroundColor: Colors
+                                                        .white, // Dialog background color
+                                                    actionsPadding:
+                                                        EdgeInsets.symmetric(
+                                                            vertical: 8,
+                                                            horizontal: 16),
+                                                    actions: [
+                                                      TextButton(
+                                                        onPressed: () {
+                                                          // Update main state when OK is pressed
+                                                          hours = tempHours;
+                                                          minutes = tempMinutes;
+                                                          Navigator.of(context)
+                                                              .pop(Duration(
+                                                                  hours: hours,
+                                                                  minutes:
+                                                                      minutes));
+                                                        },
+                                                        style: TextButton
+                                                            .styleFrom(
+                                                          foregroundColor:
+                                                              Colors.white,
+                                                          backgroundColor:
+                                                              Color(0xFF01B4D2),
+                                                          shape:
+                                                              RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        8), // Button border radius
                                                           ),
-                                                          const SizedBox(
-                                                              width: 8),
-                                                          DropdownButton<int>(
-                                                            value: minutes,
-                                                            items:
-                                                                List.generate(
-                                                                    60,
-                                                                    (index) {
-                                                              return DropdownMenuItem<
-                                                                  int>(
-                                                                value: index,
-                                                                child: Text(
-                                                                    '$index'),
-                                                              );
-                                                            }),
-                                                            onChanged: (value) {
-                                                              if (value !=
-                                                                  null) {
-                                                                setState(() {
-                                                                  minutes =
-                                                                      value;
-                                                                });
-                                                              }
-                                                            },
+                                                        ),
+                                                        child: Text(
+                                                          'OK',
+                                                          style: TextStyle(
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            fontSize: 16,
                                                           ),
-                                                        ],
+                                                        ),
+                                                      ),
+                                                      TextButton(
+                                                        onPressed: () {
+                                                          Navigator.of(context)
+                                                              .pop();
+                                                        },
+                                                        style: TextButton
+                                                            .styleFrom(
+                                                          foregroundColor:
+                                                              Color(0xFF01B4D2),
+                                                        ),
+                                                        child: Text(
+                                                          'Cancel',
+                                                          style: TextStyle(
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            fontSize: 16,
+                                                          ),
+                                                        ),
                                                       ),
                                                     ],
-                                                  ),
-                                                ),
-                                                shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          16), // Rounded corners
-                                                ),
-                                                backgroundColor: Colors
-                                                    .white, // Dialog background color
-                                                actionsPadding:
-                                                    EdgeInsets.symmetric(
-                                                        vertical: 8,
-                                                        horizontal: 16),
-                                                actions: [
-                                                  TextButton(
-                                                    onPressed: () {
-                                                      Navigator.of(context).pop(
-                                                          Duration(
-                                                              hours: hours,
-                                                              minutes:
-                                                                  minutes));
-                                                    },
-                                                    style: TextButton.styleFrom(
-                                                      foregroundColor:
-                                                          Colors.white,
-                                                      backgroundColor: Colors
-                                                          .blueAccent, // Button background color
-                                                      shape:
-                                                          RoundedRectangleBorder(
-                                                        borderRadius:
-                                                            BorderRadius.circular(
-                                                                8), // Button border radius
-                                                      ),
-                                                    ),
-                                                    child: Text(
-                                                      'OK',
-                                                      style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        fontSize: 16,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  TextButton(
-                                                    onPressed: () {
-                                                      Navigator.of(context)
-                                                          .pop();
-                                                    },
-                                                    style: TextButton.styleFrom(
-                                                      foregroundColor: Colors
-                                                          .blueAccent, // Button text color
-                                                    ),
-                                                    child: Text(
-                                                      'Cancel',
-                                                      style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        fontSize: 16,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ],
+                                                  );
+                                                },
                                               );
                                             },
                                           );
@@ -1463,7 +1522,7 @@ class _NewCalloutJobState extends State<NewCalloutJob> {
                                             color: Colors.red,
                                             fontSize: 12,
                                           ),
-                                          suffixIcon: Padding(
+                                          /* suffixIcon: Padding(
                                             padding: const EdgeInsets.all(
                                                 8.0), // Adjust the padding as needed
                                             child: Image.asset(
@@ -1473,7 +1532,7 @@ class _NewCalloutJobState extends State<NewCalloutJob> {
                                               height:
                                                   32, // Adjust the height of the image
                                             ),
-                                          ),
+                                          ), */
                                         ),
                                         keyboardType: TextInputType
                                             .number, // Ensures numeric input
@@ -1590,7 +1649,7 @@ class _NewCalloutJobState extends State<NewCalloutJob> {
                                             color: Colors.red,
                                             fontSize: 12,
                                           ),
-                                          suffixIcon: Padding(
+                                          /* suffixIcon: Padding(
                                             padding: const EdgeInsets.all(
                                                 8.0), // Adjust the padding as needed
                                             child: Image.asset(
@@ -1600,7 +1659,7 @@ class _NewCalloutJobState extends State<NewCalloutJob> {
                                               height:
                                                   32, // Adjust the height of the image
                                             ),
-                                          ),
+                                          ), */
                                         ),
                                         keyboardType: TextInputType
                                             .text, // Ensures numeric input
@@ -1716,7 +1775,7 @@ class _NewCalloutJobState extends State<NewCalloutJob> {
                                             color: Colors.red,
                                             fontSize: 12,
                                           ),
-                                          suffixIcon: Padding(
+                                          /* suffixIcon: Padding(
                                             padding: const EdgeInsets.all(
                                                 8.0), // Adjust the padding as needed
                                             child: Image.asset(
@@ -1726,7 +1785,7 @@ class _NewCalloutJobState extends State<NewCalloutJob> {
                                               height:
                                                   32, // Adjust the height of the image
                                             ),
-                                          ),
+                                          ), */
                                         ),
                                         keyboardType: TextInputType
                                             .text, // Ensures numeric input
