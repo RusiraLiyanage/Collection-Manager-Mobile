@@ -246,6 +246,10 @@ class OnsiteApprovalsNewCard extends StatelessWidget {
                 iconPath: 'assets/images/icons/dafault_icon.png',
                 title: 'Approver',
                 value: approval["approver"]!),
+            _buildInfoRow(
+                iconPath: 'assets/images/icons/dafault_icon.png',
+                title: 'Location',
+                value: approval["location"]!),
             SizedBox(
               height: 10,
             ),
