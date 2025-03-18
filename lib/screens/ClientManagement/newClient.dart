@@ -56,6 +56,10 @@ class _NewCalloutJobState extends State<NewClient> {
 
   List<AuthorizedRepresentative> representatives = List.empty(growable: true);
 
+  // ✅ GlobalKey to access NewSiteContact state
+  final GlobalKey<CollectorRepresentationState> newRepresentativeState =
+      GlobalKey<CollectorRepresentationState>();
+
   String? directoryPath;
 
   int currentPage = 1; // Tracks the current page
@@ -67,6 +71,10 @@ class _NewCalloutJobState extends State<NewClient> {
   String? _selectedFilteringValue; // State variable for selected value
 
   String? _selectedFilteringValueAchieved;
+
+  bool isValid = true;
+
+  bool _hasSubmitted = false; // ✅ Added: Flag to track submission
 
   String get displayRange {
     int start = ((currentPage - 1) * itemsPerPage) + 1;
@@ -1715,100 +1723,102 @@ class _NewCalloutJobState extends State<NewClient> {
                                     height: 40,
                                     width: 206,
                                     child: DropdownButtonFormField<String>(
-                                      key: _clientNameKey,
-                                      icon: Image.asset(
-                                        "assets/images/icons/dropDownIcon.png", // Replace with your image path
-                                        width: 16, // Adjust the size
-                                        height: 16,
-                                      ),
-                                      elevation: 20,
-                                      decoration: InputDecoration(
-                                        fillColor: Colors.white,
-                                        filled: true,
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(4),
-                                          borderSide: const BorderSide(
-                                            color: Colors.white,
-                                            width: 2, // Default border width
+                                        key: _clientNameKey,
+                                        icon: Image.asset(
+                                          "assets/images/icons/dropDownIcon.png", // Replace with your image path
+                                          width: 16, // Adjust the size
+                                          height: 16,
+                                        ),
+                                        elevation: 20,
+                                        decoration: InputDecoration(
+                                          fillColor: Colors.white,
+                                          filled: true,
+                                          border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            borderSide: const BorderSide(
+                                              color: Colors.white,
+                                              width: 2, // Default border width
+                                            ),
                                           ),
-                                        ),
-                                        enabledBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(4),
-                                          borderSide: const BorderSide(
-                                            color: Colors.white,
-                                            width:
-                                                2, // Set the border color to grey
-                                            // Set the border color to grey
+                                          enabledBorder: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            borderSide: const BorderSide(
+                                              color: Colors.white,
+                                              width:
+                                                  2, // Set the border color to grey
+                                              // Set the border color to grey
+                                            ),
                                           ),
-                                        ),
-                                        focusedBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(4),
-                                          borderSide: const BorderSide(
-                                            color: Colors
-                                                .white, // Set the border color to grey when focused
-                                            width:
-                                                2, // Optional: Adjust the width for better visibility
+                                          focusedBorder: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            borderSide: const BorderSide(
+                                              color: Colors
+                                                  .white, // Set the border color to grey when focused
+                                              width:
+                                                  2, // Optional: Adjust the width for better visibility
+                                            ),
                                           ),
-                                        ),
-                                        errorBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(4),
-                                          borderSide: const BorderSide(
-                                            color: Colors
-                                                .red, // Set the border color to grey when focused
-                                            width:
-                                                2, // Optional: Adjust the width for better visibility
+                                          errorBorder: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            borderSide: const BorderSide(
+                                              color: Colors
+                                                  .red, // Set the border color to grey when focused
+                                              width:
+                                                  2, // Optional: Adjust the width for better visibility
+                                            ),
                                           ),
-                                        ),
-                                        focusedErrorBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(4),
-                                          borderSide: const BorderSide(
-                                            color: Colors
-                                                .red, // Set the border color to grey when focused
-                                            width:
-                                                2, // Optional: Adjust the width for better visibility
+                                          focusedErrorBorder:
+                                              OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            borderSide: const BorderSide(
+                                              color: Colors
+                                                  .red, // Set the border color to grey when focused
+                                              width:
+                                                  2, // Optional: Adjust the width for better visibility
+                                            ),
                                           ),
+                                          contentPadding:
+                                              const EdgeInsets.symmetric(
+                                            vertical:
+                                                5, // Adjust vertical padding
+                                            horizontal:
+                                                12, // Adjust horizontal padding
+                                          ),
+                                          errorStyle: TextStyle(
+                                            color: Colors.red,
+                                            fontSize:
+                                                12, // Adjust font size if needed
+                                          ), // Reserve space for error messages
                                         ),
-                                        contentPadding:
-                                            const EdgeInsets.symmetric(
-                                          vertical:
-                                              5, // Adjust vertical padding
-                                          horizontal:
-                                              12, // Adjust horizontal padding
-                                        ),
-                                        errorStyle: TextStyle(
-                                          color: Colors.red,
-                                          fontSize:
-                                              12, // Adjust font size if needed
-                                        ), // Reserve space for error messages
-                                      ),
-                                      value: _selectedClientName,
-                                      items:
-                                          _theClientNames.map((String value) {
-                                        return DropdownMenuItem<String>(
-                                          value: value,
-                                          child: Text(value),
-                                        );
-                                      }).toList(),
-                                      onChanged: (value) {
-                                        setState(() {
-                                          _selectedClientName = value;
-                                          _clientNameKey.currentState!
-                                              .validate(); // Revalidate the field
-                                          /* if (_selectedClientName!.length < 0) {
+                                        value: _selectedClientName,
+                                        items:
+                                            _theClientNames.map((String value) {
+                                          return DropdownMenuItem<String>(
+                                            value: value,
+                                            child: Text(value),
+                                          );
+                                        }).toList(),
+                                        onChanged: (value) {
+                                          setState(() {
+                                            _selectedClientName = value;
+                                            _clientNameKey.currentState!
+                                                .validate(); // Revalidate the field
+                                            /* if (_selectedClientName!.length < 0) {
                                 // Clear error state once a valid selection is made
                                 _formKeys[_currentStep].currentState?.validate();
                               } */
-                                        });
-                                      },
-                                      validator: (value) => value == null
-                                          ? 'Please select a client Name'
-                                          : null,
-                                    ),
+                                          });
+                                        },
+                                        validator: (value) {
+                                          value == null
+                                              ? 'Please select a client Name'
+                                              : null;
+                                        }),
                                   ),
                                 ],
                               ),
@@ -1837,100 +1847,102 @@ class _NewCalloutJobState extends State<NewClient> {
                                     height: 40,
                                     width: 206,
                                     child: DropdownButtonFormField<String>(
-                                      key: _serviceOfficeKey,
-                                      icon: Image.asset(
-                                        "assets/images/icons/dropDownIcon.png", // Replace with your image path
-                                        width: 16, // Adjust the size
-                                        height: 16,
-                                      ),
-                                      elevation: 20,
-                                      decoration: InputDecoration(
-                                        fillColor: Colors.white,
-                                        filled: true,
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(4),
-                                          borderSide: const BorderSide(
-                                            color: Colors.white,
-                                            width: 2, // Default border width
+                                        key: _serviceOfficeKey,
+                                        icon: Image.asset(
+                                          "assets/images/icons/dropDownIcon.png", // Replace with your image path
+                                          width: 16, // Adjust the size
+                                          height: 16,
+                                        ),
+                                        elevation: 20,
+                                        decoration: InputDecoration(
+                                          fillColor: Colors.white,
+                                          filled: true,
+                                          border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            borderSide: const BorderSide(
+                                              color: Colors.white,
+                                              width: 2, // Default border width
+                                            ),
                                           ),
-                                        ),
-                                        enabledBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(4),
-                                          borderSide: const BorderSide(
-                                            color: Colors.white,
-                                            width:
-                                                2, // Set the border color to grey
-                                            // Set the border color to grey
+                                          enabledBorder: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            borderSide: const BorderSide(
+                                              color: Colors.white,
+                                              width:
+                                                  2, // Set the border color to grey
+                                              // Set the border color to grey
+                                            ),
                                           ),
-                                        ),
-                                        focusedBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(4),
-                                          borderSide: const BorderSide(
-                                            color: Colors
-                                                .white, // Set the border color to grey when focused
-                                            width:
-                                                2, // Optional: Adjust the width for better visibility
+                                          focusedBorder: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            borderSide: const BorderSide(
+                                              color: Colors
+                                                  .white, // Set the border color to grey when focused
+                                              width:
+                                                  2, // Optional: Adjust the width for better visibility
+                                            ),
                                           ),
-                                        ),
-                                        errorBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(4),
-                                          borderSide: const BorderSide(
-                                            color: Colors
-                                                .red, // Set the border color to grey when focused
-                                            width:
-                                                2, // Optional: Adjust the width for better visibility
+                                          errorBorder: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            borderSide: const BorderSide(
+                                              color: Colors
+                                                  .red, // Set the border color to grey when focused
+                                              width:
+                                                  2, // Optional: Adjust the width for better visibility
+                                            ),
                                           ),
-                                        ),
-                                        focusedErrorBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(4),
-                                          borderSide: const BorderSide(
-                                            color: Colors
-                                                .red, // Set the border color to grey when focused
-                                            width:
-                                                2, // Optional: Adjust the width for better visibility
+                                          focusedErrorBorder:
+                                              OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            borderSide: const BorderSide(
+                                              color: Colors
+                                                  .red, // Set the border color to grey when focused
+                                              width:
+                                                  2, // Optional: Adjust the width for better visibility
+                                            ),
                                           ),
+                                          contentPadding:
+                                              const EdgeInsets.symmetric(
+                                            vertical:
+                                                5, // Adjust vertical padding
+                                            horizontal:
+                                                12, // Adjust horizontal padding
+                                          ),
+                                          errorStyle: TextStyle(
+                                            color: Colors.red,
+                                            fontSize:
+                                                12, // Adjust font size if needed
+                                          ), // Reserve space for error messages
                                         ),
-                                        contentPadding:
-                                            const EdgeInsets.symmetric(
-                                          vertical:
-                                              5, // Adjust vertical padding
-                                          horizontal:
-                                              12, // Adjust horizontal padding
-                                        ),
-                                        errorStyle: TextStyle(
-                                          color: Colors.red,
-                                          fontSize:
-                                              12, // Adjust font size if needed
-                                        ), // Reserve space for error messages
-                                      ),
-                                      value: _selectedClientReference,
-                                      items:
-                                          _clientReferences.map((String value) {
-                                        return DropdownMenuItem<String>(
-                                          value: value,
-                                          child: Text(value),
-                                        );
-                                      }).toList(),
-                                      onChanged: (value) {
-                                        setState(() {
-                                          _selectedClientReference = value;
-                                          _serviceOfficeKey.currentState!
-                                              .validate();
-                                          /* if (_selectedClientName!.length < 0) {
+                                        value: _selectedClientReference,
+                                        items: _clientReferences
+                                            .map((String value) {
+                                          return DropdownMenuItem<String>(
+                                            value: value,
+                                            child: Text(value),
+                                          );
+                                        }).toList(),
+                                        onChanged: (value) {
+                                          setState(() {
+                                            _selectedClientReference = value;
+                                            _serviceOfficeKey.currentState!
+                                                .validate();
+                                            /* if (_selectedClientName!.length < 0) {
                                 // Clear error state once a valid selection is made
                                 _formKeys[_currentStep].currentState?.validate();
                               } */
-                                        });
-                                      },
-                                      validator: (value) => value == null
-                                          ? 'Please select a Client Reference'
-                                          : null,
-                                    ),
+                                          });
+                                        },
+                                        validator: (value) {
+                                          value == null
+                                              ? 'Please select a Client Reference'
+                                              : null;
+                                        }),
                                   ),
                                 ],
                               ),
@@ -2214,6 +2226,8 @@ class _NewCalloutJobState extends State<NewClient> {
                                           });
                                         },
                                         validator: (value) {
+                                          if (!_hasSubmitted)
+                                            return null; // ✅ Only validate after submit
                                           if (!RegExp(r'^[0-9]{10}$')
                                               .hasMatch(value!)) {
                                             return 'Please enter a valid mobile number';
@@ -2436,6 +2450,8 @@ class _NewCalloutJobState extends State<NewClient> {
                                           });
                                         },
                                         validator: (value) {
+                                          if (!_hasSubmitted)
+                                            return null; // ✅ Only validate after submit
                                           if (!RegExp(
                                                   r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$')
                                               .hasMatch(value!)) {
@@ -4533,7 +4549,8 @@ class _NewCalloutJobState extends State<NewClient> {
                           ),
                           addNewOpened
                               ? AuthorizedRepresentatives(
-                                  key: _siteRepresentativeKey,
+                                  key:
+                                      newRepresentativeState, // ✅ Ensure this is set
                                   onCreate: addRepresentative,
                                   onClose: closeSiteContact)
                               : SizedBox(
@@ -13766,9 +13783,61 @@ class _NewCalloutJobState extends State<NewClient> {
 
   void _nextStep() {
     final formState = _formKeys[_currentStep].currentState;
+    print(formState);
+    // _newSiteContactKey.currentState?.submitForm();
+    isValid = newRepresentativeState.currentState?.submitForm() ?? false;
+    print(isValid);
 
+    setState(() {
+      _hasSubmitted = true; // ✅ Set flag to true before validation
+    });
+
+    if (!addNewOpened && _currentStep == 1) {
+      print("yeah");
+      print(!formState!.validate());
+      setState(() {
+        isValid = true;
+      });
+      widget.scrollController.animateTo(
+        0, // Scroll to top
+        duration: const Duration(milliseconds: 500),
+        curve: Curves.easeInOut,
+      );
+
+      /*  widget.scrollController.animateTo(
+        0, // Scroll to top
+        duration: const Duration(milliseconds: 500),
+        curve: Curves.easeInOut,
+      ); */
+      // Move to the next step if validation passes
+      if (_currentStep < _formKeys.length - 1) {
+        setState(() {
+          _currentStep++;
+        });
+      } else {
+        // Handle form submission
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: const Text('Success'),
+            content: const Text('Form submitted successfully!'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: const Text('OK'),
+              ),
+            ],
+          ),
+        );
+      }
+    }
     // Validate the current form
-    if (formState != null && !formState.validate()) {
+    if (formState != null &&
+        !formState.validate() &&
+        isValid &&
+        _currentStep == 1) {
       // If validation fails, return or show a message (optional)
       // Scroll to the top if validation fails
       widget.scrollController.animateTo(
@@ -13782,30 +13851,70 @@ class _NewCalloutJobState extends State<NewClient> {
         duration: const Duration(milliseconds: 500),
         curve: Curves.easeInOut,
       ); */
-      return;
-    }
+      // Move to the next step if validation passes
+      if (_currentStep < _formKeys.length - 1) {
+        setState(() {
+          _currentStep++;
+        });
+      } else {
+        // Handle form submission
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: const Text('Success'),
+            content: const Text('Form submitted successfully!'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: const Text('OK'),
+              ),
+            ],
+          ),
+        );
+      }
+    } /* else if (formState != null && !formState.validate()) {
+      widget.scrollController.animateTo(
+        0, // Scroll to top
+        duration: const Duration(milliseconds: 500),
+        curve: Curves.easeInOut,
+      );
 
-    // Move to the next step if validation passes
-    if (_currentStep < _formKeys.length - 1) {
-      setState(() {
-        _currentStep++;
-      });
-    } else {
-      // Handle form submission
-      showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: const Text('Success'),
-          content: const Text('Form submitted successfully!'),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: const Text('OK'),
-            ),
-          ],
-        ),
+      /*  widget.scrollController.animateTo(
+        0, // Scroll to top
+        duration: const Duration(milliseconds: 500),
+        curve: Curves.easeInOut,
+      ); */
+      // Move to the next step if validation passes
+      if (_currentStep < _formKeys.length - 1) {
+        setState(() {
+          _currentStep++;
+        });
+      } else {
+        // Handle form submission
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: const Text('Success'),
+            content: const Text('Form submitted successfully!'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: const Text('OK'),
+              ),
+            ],
+          ),
+        );
+      }
+    } */
+    else {
+      widget.scrollController.animateTo(
+        0, // Scrolls to the top
+        duration: Duration(milliseconds: 500), // Smooth animation
+        curve: Curves.easeInOut,
       );
     }
   }

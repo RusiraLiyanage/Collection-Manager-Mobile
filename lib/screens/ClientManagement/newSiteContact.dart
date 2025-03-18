@@ -30,7 +30,12 @@ class NewSiteContactState extends State<NewSiteContact> {
 
   bool collectorSelected = false;
 
+  bool _hasSubmitted = false; // ✅ Added: Flag to track submission
+
   void _submitForm() {
+    setState(() {
+      _hasSubmitted = true; // ✅ Set flag to true before validation
+    });
     if (_formKey.currentState!.validate()) {
       widget.onCreate(_siteContactController.text, _mobile_Controller.text);
     }
@@ -38,6 +43,9 @@ class NewSiteContactState extends State<NewSiteContact> {
 
   // ✅ Expose submitForm() for the parent to call
   bool submitForm() {
+    setState(() {
+      _hasSubmitted = true; // ✅ Set flag to true before validation
+    });
     if (_formKey.currentState!.validate()) {
       widget.onCreate(_siteContactController.text, _mobile_Controller.text);
       return true; // ✅ Return true if form is valid
@@ -196,6 +204,8 @@ class NewSiteContactState extends State<NewSiteContact> {
                               });
                             },
                             validator: (value) {
+                              if (!_hasSubmitted)
+                                return null; // ✅ Only validate after submit
                               if (_siteContactController.text == "") {
                                 return 'Please enter the site contact name';
                               }
@@ -311,6 +321,8 @@ class NewSiteContactState extends State<NewSiteContact> {
                               });
                             },
                             validator: (value) {
+                              if (!_hasSubmitted)
+                                return null; // ✅ Only validate after submit
                               if (!RegExp(r'^[0-9]{10}$').hasMatch(value!)) {
                                 return 'Please enter a valid mobile number';
                               }

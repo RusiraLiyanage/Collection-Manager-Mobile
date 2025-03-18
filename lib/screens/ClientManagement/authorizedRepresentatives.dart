@@ -13,10 +13,10 @@ class AuthorizedRepresentatives extends StatefulWidget {
 
   @override
   State<AuthorizedRepresentatives> createState() =>
-      _CollectorRepresentationState();
+      CollectorRepresentationState();
 }
 
-class _CollectorRepresentationState extends State<AuthorizedRepresentatives> {
+class CollectorRepresentationState extends State<AuthorizedRepresentatives> {
   final GlobalKey<FormFieldState<String>> _authorizedRepresentativeKey =
       GlobalKey<FormFieldState<String>>();
 
@@ -60,6 +60,9 @@ class _CollectorRepresentationState extends State<AuthorizedRepresentatives> {
 
   // ✅ Expose submitForm() for the parent to call
   bool submitForm() {
+    setState(() {
+      _hasSubmitted = true; // ✅ Set flag to true before validation
+    });
     if (_formKey.currentState!.validate()) {
       widget.onCreate(
           _authorizedRepresentativeController.text,

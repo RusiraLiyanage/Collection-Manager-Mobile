@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:horizontal_stepper_flutter/horizontal_stepper_flutter.dart';
+import 'package:project_code_blue/screens/OnsiteJobs/collector.dart';
 import 'package:project_code_blue/screens/OnsiteJobs/collectorRepresentation.dart';
 import 'package:project_code_blue/screens/OnsiteJobs/onSiteJobsNewCard.dart';
 
@@ -30,11 +31,53 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
 
   int numberOfCollectors = 0;
 
+  bool _hasSubmitted = false; // ✅ Added: Flag to track submission
+
+  bool addCollectorOpened = false;
+
+  List<Collector> collectors = List.empty(growable: true);
+
   void removeCollector() {
     setState(() {
       numberOfCollectors--; // Decrease count when a collector is deleted
     });
   }
+
+  void closeCollectorContact() {
+    setState(() {
+      addCollectorOpened = false;
+    });
+  }
+
+  void deleteSiteCollector(String id) {
+    setState(() {
+      collectors.removeWhere((collector) => collector.id == id);
+      numberOfCollectors--;
+    });
+  }
+
+  void addCollector(String collectorName, String assignedTime) {
+    print("yes called");
+    setState(() {
+      collectors.add(
+        Collector(
+          id: DateTime.now().millisecondsSinceEpoch.toString(), // Unique ID
+          collectorName: collectorName,
+          assignedTime: assignedTime,
+          status: "Assigned",
+        ),
+      );
+      addCollectorOpened = false;
+    });
+  }
+
+  final List<String> _collectorNames = [
+    'George Poulos',
+    'Michelle Kirkman',
+    'Valerie McKenzie',
+    'Zac Hepburn',
+    'Gina Landini'
+  ];
 
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
@@ -301,6 +344,8 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
   int minutes = 0;
 
   bool isMobileClinic = false;
+
+  bool collectorSelected = false;
 
   Widget _buildStepContent() {
     switch (_currentStep) {
@@ -2509,6 +2554,8 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                           });
                                         },
                                         validator: (value) {
+                                          if (!_hasSubmitted)
+                                            return null; // ✅ Only validate after submit
                                           if (!RegExp(r'^[0-9]{10}$')
                                               .hasMatch(value!)) {
                                             return 'Please enter a valid mobile number';
@@ -8743,6 +8790,8 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                           });
                                         },
                                         validator: (value) {
+                                          if (!_hasSubmitted)
+                                            return null; // ✅ Only validate after submit
                                           if (!RegExp(r'^[0-9]{10}$')
                                               .hasMatch(value!)) {
                                             return 'Please enter a valid mobile number';
@@ -8965,6 +9014,8 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                           });
                                         },
                                         validator: (value) {
+                                          if (!_hasSubmitted)
+                                            return null; // ✅ Only validate after submit
                                           if (!RegExp(
                                                   r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$')
                                               .hasMatch(value!)) {
@@ -9008,8 +9059,9 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                   right: 16.0,
                 ),
                 child: Column(
+                    mainAxisSize:
+                        MainAxisSize.min, // Ensures height adjusts dynamically
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
                     children: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -9072,72 +9124,326 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                     child: Text(numberOfCollectors.toString()),
                                   ),
                                 ),
-                                ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: Color.fromRGBO(
-                                        26, 140, 255, 1.0), // Blue color
-                                    foregroundColor: Colors.white, // Text color
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: 8,
-                                        vertical: 1), // Adjust padding
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(
-                                          6), // Slightly rounded edges
-                                    ),
-                                    textStyle: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight:
-                                          FontWeight.w500, // Medium weight text
-                                    ),
-                                  ),
-                                  onPressed: () {
-                                    setState(() {
-                                      numberOfCollectors++;
-                                    });
-                                  },
-                                  child: Text(
-                                    "Add Collector",
-                                    style: TextStyle(
-                                      fontSize: 13,
-                                    ),
-                                  ),
-                                )
+                                addCollectorOpened
+                                    ? ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor:
+                                              Colors.grey, // Blue color
+                                          foregroundColor:
+                                              Colors.white, // Text color
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 8,
+                                              vertical: 1), // Adjust padding
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(
+                                                6), // Slightly rounded edges
+                                          ),
+                                          textStyle: TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight
+                                                .w500, // Medium weight text
+                                          ),
+                                        ),
+                                        onPressed: () {
+                                          setState(() {
+                                            //numberOfCollectors++;
+                                          });
+                                        },
+                                        child: Text(
+                                          "Add Collector",
+                                          style: TextStyle(
+                                            fontSize: 13,
+                                          ),
+                                        ),
+                                      )
+                                    : ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: Color.fromRGBO(
+                                              26, 140, 255, 1.0), // Blue color
+                                          foregroundColor:
+                                              Colors.white, // Text color
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 8,
+                                              vertical: 1), // Adjust padding
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(
+                                                6), // Slightly rounded edges
+                                          ),
+                                          textStyle: TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight
+                                                .w500, // Medium weight text
+                                          ),
+                                        ),
+                                        onPressed: () {
+                                          setState(() {
+                                            numberOfCollectors++;
+                                            addCollectorOpened = true;
+                                          });
+                                        },
+                                        child: Text(
+                                          "Add Collector",
+                                          style: TextStyle(
+                                            fontSize: 13,
+                                          ),
+                                        ),
+                                      )
                               ],
                             ),
                           ),
                           SizedBox(
                             height: 10,
                           ),
-                          SizedBox(
-                            height: 16,
-                          ),
-                          /* ListView.builder(
-                            scrollDirection: Axis.vertical,
-                            shrinkWrap: true,
-                            itemCount: numberOfCollectors,
-                            itemBuilder: (context, index) {
-                              final List<String> _collectorNames = [
-                                'George Poulos',
-                                'Michelle Kirkman',
-                                'Valerie McKenzie',
-                                'Zac Hepburn',
-                                'Gina Landini'
-                              ];
-                              return Column(
-                                children: [
-                                  CollectorRepresentation(
-                                    numberOfCollectors: numberOfCollectors,
-                                    collectorNumber: index + 1,
-                                    onDelete: removeCollector,
-                                    collectorNames: _collectorNames,
-                                  ),
-                                  SizedBox(
-                                    height: 16,
-                                  ),
-                                ],
-                              );
-                            },
-                          ), */
+                          ListView.builder(
+                              padding: EdgeInsets.zero,
+                              key: ValueKey(collectors
+                                  .length), // Ensures the list updates correctly
+                              scrollDirection: Axis.vertical,
+                              physics: NeverScrollableScrollPhysics(),
+                              shrinkWrap: true,
+                              itemCount: collectors.length,
+                              itemBuilder: (context, index) {
+                                final collector = collectors[index];
+                                return Column(
+                                  key: ValueKey(collector.id),
+                                  children: [
+                                    Container(
+                                      height: 130,
+                                      width: double.infinity,
+                                      decoration: BoxDecoration(
+                                        color: const Color(
+                                            0xFFE6F7FA), // Light blue background
+                                        borderRadius: BorderRadius.circular(6),
+                                      ),
+                                      child: Column(
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                              left: 12.0,
+                                              top: 15.0,
+                                              right: 12.0,
+                                            ),
+                                            child: Column(
+                                              children: [
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                    left: 8.0,
+                                                    bottom: 5.0,
+                                                  ),
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      Align(
+                                                        alignment:
+                                                            Alignment.topLeft,
+                                                        child: Text(
+                                                          "Collector ${(index + 1)}",
+                                                          style: TextStyle(
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      GestureDetector(
+                                                        onTap: () {
+                                                          deleteSiteCollector(
+                                                              collector.id);
+                                                        }, // Call the parent's method when tapped
+
+                                                        child: FittedBox(
+                                                          fit: BoxFit.contain,
+                                                          child: Image.asset(
+                                                              "assets/images/icons/delete.png"),
+                                                        ),
+                                                      )
+                                                    ],
+                                                  ),
+                                                ),
+                                                Container(
+                                                  height: 40,
+                                                  width: 302,
+                                                  child: TextFormField(
+                                                    readOnly: true,
+                                                    initialValue:
+                                                        collector.collectorName,
+                                                    decoration: InputDecoration(
+                                                      fillColor: Colors.white,
+                                                      filled: true,
+                                                      border:
+                                                          OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(4),
+                                                        borderSide:
+                                                            const BorderSide(
+                                                          color: Colors.white,
+                                                          width:
+                                                              2, // Default border width
+                                                        ),
+                                                      ),
+                                                      enabledBorder:
+                                                          OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(4),
+                                                        borderSide:
+                                                            const BorderSide(
+                                                          color: Colors.white,
+                                                          width:
+                                                              2, // Set the border color to grey
+                                                          // Set the border color to grey
+                                                        ),
+                                                      ),
+                                                      focusedBorder:
+                                                          OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(4),
+                                                        borderSide:
+                                                            const BorderSide(
+                                                          color: Colors
+                                                              .white, // Set the border color to grey when focused
+                                                          width:
+                                                              2, // Optional: Adjust the width for better visibility
+                                                        ),
+                                                      ),
+                                                      errorBorder:
+                                                          OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(4),
+                                                        borderSide:
+                                                            const BorderSide(
+                                                          color: Colors
+                                                              .red, // Set the border color to grey when focused
+                                                          width:
+                                                              2, // Optional: Adjust the width for better visibility
+                                                        ),
+                                                      ),
+                                                      focusedErrorBorder:
+                                                          OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(4),
+                                                        borderSide:
+                                                            const BorderSide(
+                                                          color: Colors
+                                                              .red, // Set the border color to grey when focused
+                                                          width:
+                                                              2, // Optional: Adjust the width for better visibility
+                                                        ),
+                                                      ),
+                                                      contentPadding:
+                                                          const EdgeInsets
+                                                              .symmetric(
+                                                        vertical:
+                                                            5, // Adjust vertical padding
+                                                        horizontal:
+                                                            12, // Adjust horizontal padding
+                                                      ),
+                                                      errorStyle: TextStyle(
+                                                        color: Colors.red,
+                                                        fontSize:
+                                                            12, // Adjust font size if needed
+                                                      ), // Reserve space for error messages
+                                                    ),
+                                                    onChanged: (value) {
+                                                      setState(() {
+                                                        _selectedCollectorOneAssignment =
+                                                            value;
+                                                        _collectorOneAssignmentKey
+                                                            .currentState!
+                                                            .validate(); // Revalidate the field
+                                                        collectorSelected =
+                                                            true;
+                                                        /* if (_selectedCollectionOrganisation!.length < 0) {
+                                                                        // Clear error state once a valid selection is made
+                                                                        _formKeys[_currentStep].currentState?.validate();
+                                                                      } */
+                                                      });
+                                                    },
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  height: 10,
+                                                ),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                    left: 8.0,
+                                                  ),
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    children: [
+                                                      // Allocated Badge
+                                                      Container(
+                                                        padding: EdgeInsets
+                                                            .symmetric(
+                                                                horizontal: 10,
+                                                                vertical: 4),
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color: Color.fromRGBO(
+                                                              26,
+                                                              140,
+                                                              255,
+                                                              1.0), // Blue background
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(6),
+                                                        ),
+                                                        child: Text(
+                                                          collector.status,
+                                                          style: TextStyle(
+                                                            color: Colors.white,
+                                                            fontSize: 14,
+                                                            fontWeight:
+                                                                FontWeight.w500,
+                                                          ),
+                                                        ),
+                                                      ),
+
+                                                      SizedBox(
+                                                        width: 8,
+                                                      ),
+                                                      // Space between badge and text
+
+                                                      // Date and Time
+                                                      Text(
+                                                        collector.assignedTime,
+                                                        style: TextStyle(
+                                                          color: Colors
+                                                              .grey.shade700,
+                                                          fontSize: 14,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 16,
+                                    ),
+                                  ],
+                                );
+                              }),
+                          addCollectorOpened
+                              ? CollectorRepresentation(
+                                  onClose: closeCollectorContact,
+                                  collectorNames: _collectorNames,
+                                  onCreate: addCollector)
+                              : SizedBox(
+                                  height: 0,
+                                ),
                           SizedBox(
                             height: 20,
                           ),
@@ -9206,6 +9512,10 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
 
   void _nextStep() {
     final formState = _formKeys[_currentStep].currentState;
+
+    setState(() {
+      _hasSubmitted = true; // ✅ Set flag to true before validation
+    });
 
     // Validate the current form
     if (formState != null && !formState.validate()) {

@@ -2784,6 +2784,11 @@ class _NewCalloutJobState extends State<NewCalloutJob> {
       });
     } else {
       // Handle form submission
+      setState(() {
+        //collectorSelected = false;
+        addCollectorOpened = false;
+        numberOfCollectors--;
+      });
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
