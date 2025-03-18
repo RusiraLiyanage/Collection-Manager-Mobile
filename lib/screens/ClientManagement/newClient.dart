@@ -1730,6 +1730,7 @@ class _NewCalloutJobState extends State<NewClient> {
                                           height: 16,
                                         ),
                                         elevation: 20,
+                                        dropdownColor: Colors.white,
                                         decoration: InputDecoration(
                                           fillColor: Colors.white,
                                           filled: true,
@@ -1854,6 +1855,7 @@ class _NewCalloutJobState extends State<NewClient> {
                                           height: 16,
                                         ),
                                         elevation: 20,
+                                        dropdownColor: Colors.white,
                                         decoration: InputDecoration(
                                           fillColor: Colors.white,
                                           filled: true,
@@ -3345,37 +3347,45 @@ class _NewCalloutJobState extends State<NewClient> {
                             SizedBox(
                               height: 10,
                             ),
-                            contractAchieveOpened
-                                ? Align(
-                                    alignment: Alignment.topLeft,
-                                    child: GestureDetector(
-                                      onTap: () {
-                                        setState(() {
-                                          contractAchieveOpened = false;
-                                        });
-                                      },
-                                      child: FittedBox(
-                                        fit: BoxFit.contain,
-                                        child: Image.asset(
-                                            "assets/images/icons/contractAchieveOpened.png"),
-                                      ),
-                                    ),
-                                  )
-                                : Align(
-                                    alignment: Alignment.topLeft,
-                                    child: GestureDetector(
-                                      onTap: () {
-                                        setState(() {
-                                          contractAchieveOpened = true;
-                                        });
-                                      },
-                                      child: FittedBox(
-                                        fit: BoxFit.contain,
-                                        child: Image.asset(
-                                            "assets/images/icons/contractAchieveClosed.png"),
-                                      ),
-                                    ),
+                            Align(
+                              alignment: Alignment.topLeft,
+                              child: TextButton(
+                                onPressed: () {
+                                  setState(() {
+                                    contractAchieveOpened =
+                                        !contractAchieveOpened;
+                                  });
+                                },
+                                style: TextButton.styleFrom(
+                                  backgroundColor: Colors.blue.withOpacity(0.1),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8),
                                   ),
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 12, vertical: 8),
+                                ),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Text(
+                                      "Archive Contracts",
+                                      style: TextStyle(
+                                          color: Colors.blueAccent,
+                                          fontWeight: FontWeight.w600),
+                                    ),
+                                    SizedBox(
+                                        width:
+                                            8), // Spacing between text and icon
+                                    Icon(
+                                      contractAchieveOpened
+                                          ? Icons.keyboard_arrow_up
+                                          : Icons.keyboard_arrow_down,
+                                      color: Colors.blueAccent,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
                             contractAchieveOpened
                                 ? Column(
                                     mainAxisAlignment: MainAxisAlignment.start,

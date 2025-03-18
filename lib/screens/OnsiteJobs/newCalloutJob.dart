@@ -253,6 +253,7 @@ class _NewCalloutJobState extends State<NewCalloutJob> {
                                         height: 16,
                                       ),
                                       elevation: 20,
+                                      dropdownColor: Colors.white,
                                       decoration: InputDecoration(
                                         fillColor: Colors.white,
                                         filled: true,
@@ -376,6 +377,7 @@ class _NewCalloutJobState extends State<NewCalloutJob> {
                                         height: 16,
                                       ),
                                       elevation: 20,
+                                      dropdownColor: Colors.white,
                                       decoration: InputDecoration(
                                         fillColor: Colors.white,
                                         filled: true,
@@ -550,7 +552,7 @@ class _NewCalloutJobState extends State<NewCalloutJob> {
                                     width: 206,
                                     child: Material(
                                       elevation:
-                                          4, // Adjust this value for more or less elevation
+                                          0, // Adjust this value for more or less elevation
                                       shadowColor: Colors.black.withOpacity(
                                           0.5), // Optional: Adjust shadow color
                                       borderRadius: BorderRadius.circular(
@@ -572,16 +574,18 @@ class _NewCalloutJobState extends State<NewCalloutJob> {
                                           enabledBorder: OutlineInputBorder(
                                             borderRadius:
                                                 BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.white,
+                                            borderSide: BorderSide(
+                                              color:
+                                                  Colors.grey.withOpacity(0.5),
                                               width: 2,
                                             ),
                                           ),
                                           focusedBorder: OutlineInputBorder(
                                             borderRadius:
                                                 BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.white,
+                                            borderSide: BorderSide(
+                                              color:
+                                                  Colors.grey.withOpacity(0.5),
                                               width: 2,
                                             ),
                                           ),
@@ -662,7 +666,7 @@ class _NewCalloutJobState extends State<NewCalloutJob> {
                                     width: 206,
                                     child: Material(
                                       elevation:
-                                          4, // Adjust this value for more or less elevation
+                                          0, // Adjust this value for more or less elevation
                                       shadowColor: Colors.black.withOpacity(
                                           0.5), // Optional: Adjust shadow color
                                       borderRadius: BorderRadius.circular(
@@ -684,16 +688,18 @@ class _NewCalloutJobState extends State<NewCalloutJob> {
                                           enabledBorder: OutlineInputBorder(
                                             borderRadius:
                                                 BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.white,
+                                            borderSide: BorderSide(
+                                              color:
+                                                  Colors.grey.withOpacity(0.5),
                                               width: 2,
                                             ),
                                           ),
                                           focusedBorder: OutlineInputBorder(
                                             borderRadius:
                                                 BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.white,
+                                            borderSide: BorderSide(
+                                              color:
+                                                  Colors.grey.withOpacity(0.5),
                                               width: 2,
                                             ),
                                           ),
@@ -832,7 +838,7 @@ class _NewCalloutJobState extends State<NewCalloutJob> {
                                     width: 206,
                                     child: Material(
                                       elevation:
-                                          4, // Adjust this value for more or less elevation
+                                          0, // Adjust this value for more or less elevation
                                       shadowColor: Colors.black.withOpacity(
                                           0.5), // Optional: Adjust shadow color
                                       borderRadius: BorderRadius.circular(
@@ -861,16 +867,18 @@ class _NewCalloutJobState extends State<NewCalloutJob> {
                                           enabledBorder: OutlineInputBorder(
                                             borderRadius:
                                                 BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.white,
+                                            borderSide: BorderSide(
+                                              color:
+                                                  Colors.grey.withOpacity(0.5),
                                               width: 2,
                                             ),
                                           ),
                                           focusedBorder: OutlineInputBorder(
                                             borderRadius:
                                                 BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.white,
+                                            borderSide: BorderSide(
+                                              color:
+                                                  Colors.grey.withOpacity(0.5),
                                               width: 2,
                                             ),
                                           ),
@@ -985,7 +993,7 @@ class _NewCalloutJobState extends State<NewCalloutJob> {
                                     width: 206,
                                     child: Material(
                                       elevation:
-                                          4, // Adjust this value for more or less elevation
+                                          0, // Adjust this value for more or less elevation
                                       shadowColor: Colors.black.withOpacity(
                                           0.5), // Optional: Adjust shadow color
                                       borderRadius: BorderRadius.circular(
@@ -1013,16 +1021,18 @@ class _NewCalloutJobState extends State<NewCalloutJob> {
                                           enabledBorder: OutlineInputBorder(
                                             borderRadius:
                                                 BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.white,
+                                            borderSide: BorderSide(
+                                              color:
+                                                  Colors.grey.withOpacity(0.5),
                                               width: 2,
                                             ),
                                           ),
                                           focusedBorder: OutlineInputBorder(
                                             borderRadius:
                                                 BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.white,
+                                            borderSide: BorderSide(
+                                              color:
+                                                  Colors.grey.withOpacity(0.5),
                                               width: 2,
                                             ),
                                           ),
@@ -1132,7 +1142,7 @@ class _NewCalloutJobState extends State<NewCalloutJob> {
                                     width: 206,
                                     child: Material(
                                       elevation:
-                                          4, // Adjust this value for more or less elevation
+                                          0, // Adjust this value for more or less elevation
                                       shadowColor: Colors.black.withOpacity(
                                           0.5), // Optional: Adjust shadow color
                                       borderRadius: BorderRadius.circular(
@@ -1160,16 +1170,18 @@ class _NewCalloutJobState extends State<NewCalloutJob> {
                                           enabledBorder: OutlineInputBorder(
                                             borderRadius:
                                                 BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.white,
+                                            borderSide: BorderSide(
+                                              color:
+                                                  Colors.grey.withOpacity(0.5),
                                               width: 2,
                                             ),
                                           ),
                                           focusedBorder: OutlineInputBorder(
                                             borderRadius:
                                                 BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.white,
+                                            borderSide: BorderSide(
+                                              color:
+                                                  Colors.grey.withOpacity(0.5),
                                               width: 2,
                                             ),
                                           ),
@@ -1461,7 +1473,7 @@ class _NewCalloutJobState extends State<NewCalloutJob> {
                                     width: 206,
                                     child: Material(
                                       elevation:
-                                          4, // Adjust this value for more or less elevation
+                                          0, // Adjust this value for more or less elevation
                                       shadowColor: Colors.black.withOpacity(
                                           0.5), // Optional: Adjust shadow color
                                       borderRadius: BorderRadius.circular(
@@ -1483,16 +1495,18 @@ class _NewCalloutJobState extends State<NewCalloutJob> {
                                           enabledBorder: OutlineInputBorder(
                                             borderRadius:
                                                 BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.white,
+                                            borderSide: BorderSide(
+                                              color:
+                                                  Colors.grey.withOpacity(0.5),
                                               width: 2,
                                             ),
                                           ),
                                           focusedBorder: OutlineInputBorder(
                                             borderRadius:
                                                 BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.white,
+                                            borderSide: BorderSide(
+                                              color:
+                                                  Colors.grey.withOpacity(0.5),
                                               width: 2,
                                             ),
                                           ),
@@ -1588,7 +1602,7 @@ class _NewCalloutJobState extends State<NewCalloutJob> {
                                     width: 206,
                                     child: Material(
                                       elevation:
-                                          4, // Adjust this value for more or less elevation
+                                          0, // Adjust this value for more or less elevation
                                       shadowColor: Colors.black.withOpacity(
                                           0.5), // Optional: Adjust shadow color
                                       borderRadius: BorderRadius.circular(
@@ -1610,16 +1624,18 @@ class _NewCalloutJobState extends State<NewCalloutJob> {
                                           enabledBorder: OutlineInputBorder(
                                             borderRadius:
                                                 BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.white,
+                                            borderSide: BorderSide(
+                                              color:
+                                                  Colors.grey.withOpacity(0.5),
                                               width: 2,
                                             ),
                                           ),
                                           focusedBorder: OutlineInputBorder(
                                             borderRadius:
                                                 BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.white,
+                                            borderSide: BorderSide(
+                                              color:
+                                                  Colors.grey.withOpacity(0.5),
                                               width: 2,
                                             ),
                                           ),
@@ -1714,7 +1730,7 @@ class _NewCalloutJobState extends State<NewCalloutJob> {
                                     width: 206,
                                     child: Material(
                                       elevation:
-                                          4, // Adjust this value for more or less elevation
+                                          0, // Adjust this value for more or less elevation
                                       shadowColor: Colors.black.withOpacity(
                                           0.5), // Optional: Adjust shadow color
                                       borderRadius: BorderRadius.circular(
@@ -1736,16 +1752,18 @@ class _NewCalloutJobState extends State<NewCalloutJob> {
                                           enabledBorder: OutlineInputBorder(
                                             borderRadius:
                                                 BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.white,
+                                            borderSide: BorderSide(
+                                              color:
+                                                  Colors.grey.withOpacity(0.5),
                                               width: 2,
                                             ),
                                           ),
                                           focusedBorder: OutlineInputBorder(
                                             borderRadius:
                                                 BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.white,
+                                            borderSide: BorderSide(
+                                              color:
+                                                  Colors.grey.withOpacity(0.5),
                                               width: 2,
                                             ),
                                           ),
@@ -1895,7 +1913,7 @@ class _NewCalloutJobState extends State<NewCalloutJob> {
                                     width: 206,
                                     child: Material(
                                       elevation:
-                                          4, // Adjust this value for more or less elevation
+                                          0, // Adjust this value for more or less elevation
                                       shadowColor: Colors.black.withOpacity(
                                           0.5), // Optional: Adjust shadow color
                                       borderRadius: BorderRadius.circular(
@@ -1908,6 +1926,7 @@ class _NewCalloutJobState extends State<NewCalloutJob> {
                                           height: 16,
                                         ),
                                         elevation: 20,
+                                        dropdownColor: Colors.white,
                                         decoration: InputDecoration(
                                           fillColor: Colors.white,
                                           filled: true,
@@ -1922,8 +1941,9 @@ class _NewCalloutJobState extends State<NewCalloutJob> {
                                           enabledBorder: OutlineInputBorder(
                                             borderRadius:
                                                 BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.white,
+                                            borderSide: BorderSide(
+                                              color:
+                                                  Colors.grey.withOpacity(0.5),
                                               width:
                                                   2, // Set the border color to grey
                                               // Set the border color to grey
@@ -1932,9 +1952,9 @@ class _NewCalloutJobState extends State<NewCalloutJob> {
                                           focusedBorder: OutlineInputBorder(
                                             borderRadius:
                                                 BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors
-                                                  .white, // Set the border color to grey when focused
+                                            borderSide: BorderSide(
+                                              color:
+                                                  Colors.grey.withOpacity(0.5),
                                               width:
                                                   2, // Optional: Adjust the width for better visibility
                                             ),

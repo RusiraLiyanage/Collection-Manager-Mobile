@@ -518,37 +518,46 @@ class _EditNoteState extends State<EditNote> {
                                     SizedBox(
                                       height: 10,
                                     ),
-                                    changeLogOpened
-                                        ? Align(
-                                            alignment: Alignment.topLeft,
-                                            child: GestureDetector(
-                                              onTap: () {
-                                                setState(() {
-                                                  changeLogOpened = false;
-                                                });
-                                              },
-                                              child: FittedBox(
-                                                fit: BoxFit.contain,
-                                                child: Image.asset(
-                                                    "assets/images/icons/changeLogOpened.png"),
-                                              ),
-                                            ),
-                                          )
-                                        : Align(
-                                            alignment: Alignment.topLeft,
-                                            child: GestureDetector(
-                                              onTap: () {
-                                                setState(() {
-                                                  changeLogOpened = true;
-                                                });
-                                              },
-                                              child: FittedBox(
-                                                fit: BoxFit.contain,
-                                                child: Image.asset(
-                                                    "assets/images/icons/changeLogClosed.png"),
-                                              ),
-                                            ),
+                                    Align(
+                                      alignment: Alignment.topLeft,
+                                      child: TextButton(
+                                        onPressed: () {
+                                          setState(() {
+                                            changeLogOpened = !changeLogOpened;
+                                          });
+                                        },
+                                        style: TextButton.styleFrom(
+                                          backgroundColor:
+                                              Colors.blue.withOpacity(0.1),
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(8),
                                           ),
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 12, vertical: 8),
+                                        ),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            Text(
+                                              "Change Log",
+                                              style: TextStyle(
+                                                  color: Colors.blueAccent,
+                                                  fontWeight: FontWeight.w600),
+                                            ),
+                                            SizedBox(
+                                                width:
+                                                    8), // Spacing between text and icon
+                                            Icon(
+                                              changeLogOpened
+                                                  ? Icons.keyboard_arrow_up
+                                                  : Icons.keyboard_arrow_down,
+                                              color: Colors.blueAccent,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
                                     changeLogOpened
                                         ? Column(
                                             mainAxisAlignment:

@@ -418,6 +418,7 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                         height: 16,
                                       ),
                                       elevation: 20,
+                                      dropdownColor: Colors.white,
                                       decoration: InputDecoration(
                                         fillColor: Colors.white,
                                         filled: true,
@@ -541,6 +542,7 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                         height: 16,
                                       ),
                                       elevation: 20,
+                                      dropdownColor: Colors.white,
                                       decoration: InputDecoration(
                                         fillColor: Colors.white,
                                         filled: true,

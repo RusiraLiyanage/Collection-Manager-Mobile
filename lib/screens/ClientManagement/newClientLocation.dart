@@ -281,7 +281,7 @@ class _NewClientLocationState extends State<NewClientLocation> {
                                                   BorderRadius.circular(4),
                                               borderSide: BorderSide(
                                                   color: Colors.grey
-                                                      .withOpacity(0.3),
+                                                      .withOpacity(0.5),
                                                   width: 2),
                                             ),
                                             focusedBorder: OutlineInputBorder(
@@ -289,7 +289,7 @@ class _NewClientLocationState extends State<NewClientLocation> {
                                                   BorderRadius.circular(4),
                                               borderSide: BorderSide(
                                                   color: Colors.grey
-                                                      .withOpacity(0.3),
+                                                      .withOpacity(0.5),
                                                   width: 2),
                                             ),
                                             errorBorder: OutlineInputBorder(
@@ -843,7 +843,7 @@ class _NewClientLocationState extends State<NewClientLocation> {
                                                   BorderRadius.circular(4),
                                               borderSide: BorderSide(
                                                   color: Colors.grey
-                                                      .withOpacity(0.3),
+                                                      .withOpacity(0.5),
                                                   width: 2),
                                             ),
                                             focusedBorder: OutlineInputBorder(
@@ -851,7 +851,7 @@ class _NewClientLocationState extends State<NewClientLocation> {
                                                   BorderRadius.circular(4),
                                               borderSide: BorderSide(
                                                   color: Colors.grey
-                                                      .withOpacity(0.3),
+                                                      .withOpacity(0.5),
                                                   width: 2),
                                             ),
                                             errorBorder: OutlineInputBorder(
@@ -963,7 +963,7 @@ class _NewClientLocationState extends State<NewClientLocation> {
                                                   BorderRadius.circular(4),
                                               borderSide: BorderSide(
                                                   color: Colors.grey
-                                                      .withOpacity(0.3),
+                                                      .withOpacity(0.5),
                                                   width: 2),
                                             ),
                                             focusedBorder: OutlineInputBorder(
@@ -971,7 +971,7 @@ class _NewClientLocationState extends State<NewClientLocation> {
                                                   BorderRadius.circular(4),
                                               borderSide: BorderSide(
                                                   color: Colors.grey
-                                                      .withOpacity(0.3),
+                                                      .withOpacity(0.5),
                                                   width: 2),
                                             ),
                                             errorBorder: OutlineInputBorder(
@@ -1078,7 +1078,7 @@ class _NewClientLocationState extends State<NewClientLocation> {
                                                   BorderRadius.circular(4),
                                               borderSide: BorderSide(
                                                   color: Colors.grey
-                                                      .withOpacity(0.3),
+                                                      .withOpacity(0.5),
                                                   width: 2),
                                             ),
                                             focusedBorder: OutlineInputBorder(
@@ -1086,7 +1086,7 @@ class _NewClientLocationState extends State<NewClientLocation> {
                                                   BorderRadius.circular(4),
                                               borderSide: BorderSide(
                                                   color: Colors.grey
-                                                      .withOpacity(0.3),
+                                                      .withOpacity(0.5),
                                                   width: 2),
                                             ),
                                             errorBorder: OutlineInputBorder(
@@ -1192,7 +1192,7 @@ class _NewClientLocationState extends State<NewClientLocation> {
                                                   BorderRadius.circular(4),
                                               borderSide: BorderSide(
                                                   color: Colors.grey
-                                                      .withOpacity(0.3),
+                                                      .withOpacity(0.5),
                                                   width: 2),
                                             ),
                                             focusedBorder: OutlineInputBorder(
@@ -1200,7 +1200,7 @@ class _NewClientLocationState extends State<NewClientLocation> {
                                                   BorderRadius.circular(4),
                                               borderSide: BorderSide(
                                                   color: Colors.grey
-                                                      .withOpacity(0.3),
+                                                      .withOpacity(0.5),
                                                   width: 2),
                                             ),
                                             errorBorder: OutlineInputBorder(
@@ -1305,7 +1305,7 @@ class _NewClientLocationState extends State<NewClientLocation> {
                                                   BorderRadius.circular(4),
                                               borderSide: BorderSide(
                                                   color: Colors.grey
-                                                      .withOpacity(0.3),
+                                                      .withOpacity(0.5),
                                                   width: 2),
                                             ),
                                             focusedBorder: OutlineInputBorder(
@@ -1313,7 +1313,7 @@ class _NewClientLocationState extends State<NewClientLocation> {
                                                   BorderRadius.circular(4),
                                               borderSide: BorderSide(
                                                   color: Colors.grey
-                                                      .withOpacity(0.3),
+                                                      .withOpacity(0.5),
                                                   width: 2),
                                             ),
                                             errorBorder: OutlineInputBorder(
@@ -1405,13 +1405,13 @@ class _NewClientLocationState extends State<NewClientLocation> {
                                       enabledBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(4),
                                         borderSide: BorderSide(
-                                            color: Colors.grey.withOpacity(0.3),
+                                            color: Colors.grey.withOpacity(0.5),
                                             width: 2),
                                       ),
                                       focusedBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(4),
                                         borderSide: BorderSide(
-                                            color: Colors.grey.withOpacity(0.3),
+                                            color: Colors.grey.withOpacity(0.5),
                                             width: 2),
                                       ),
                                       errorBorder: OutlineInputBorder(
