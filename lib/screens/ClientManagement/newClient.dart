@@ -13785,6 +13785,230 @@ class _NewCalloutJobState extends State<NewClient> {
               ),
             ),
           ),
+          SizedBox(
+            height: 3,
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 16.0, right: 16.0),
+            child: SizedBox(
+              width: double.infinity,
+              height: 230,
+              child: Card(
+                surfaceTintColor: Colors.white,
+                color: Colors.white,
+                elevation: 0,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                    bottom: 12.0,
+                    left: 1.0,
+                    right: 1.0,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          SizedBox(height: 10),
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 8.0),
+                            child: Container(
+                              width: double.infinity,
+                              height: 70,
+                              decoration: BoxDecoration(
+                                color: Color(0xFFCBF5FC),
+                                borderRadius: BorderRadius.circular(16),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(
+                                    12.0), // Added some padding
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Image.asset(
+                                      'assets/images/icons/reportingIcon.png',
+                                      width: 40,
+                                      height: 40,
+                                    ),
+                                    const SizedBox(width: 12),
+                                    Expanded(
+                                      child: Text(
+                                        'In-Clinic Collection Report for Group Bookings',
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black,
+                                        ),
+                                        maxLines:
+                                            2, // Wraps text when it gets too long
+                                        overflow: TextOverflow
+                                            .ellipsis, // Adds "..." when overflowing
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              left: 16.0,
+                              right: 16.0,
+                              top: 10,
+                            ),
+                            child: Expanded(
+                              child: Text.rich(
+                                TextSpan(
+                                  text:
+                                      "This setting enables/disables the Batch Results Report functionality for ",
+                                  style: TextStyle(
+                                      color:
+                                          Colors.black), // Regular text style
+                                  children: [
+                                    TextSpan(
+                                      text: "In-Clinic Collection",
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors
+                                            .black, // You can change this color if needed
+                                      ),
+                                    ),
+                                    TextSpan(
+                                      text: " only.",
+                                      style: TextStyle(
+                                          color: Colors
+                                              .black), // Continue regular style
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              left: 16.0,
+                              right: 16.0,
+                              top: 10,
+                            ),
+                            child: Expanded(
+                              child: Text.rich(
+                                TextSpan(
+                                  text:
+                                      "You will find the Batch Results Report in the Collection Report menu for both In-Clinic and On-Site Collection.",
+                                  style: TextStyle(
+                                      color:
+                                          Colors.black), // Regular text style
+                                  children: [],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 16.0, right: 16.0),
+            child: SizedBox(
+              width: double.infinity,
+              height: 230,
+              child: Card(
+                surfaceTintColor: Colors.white,
+                color: Colors.white,
+                elevation: 0,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                    bottom: 12.0,
+                    left: 1.0,
+                    right: 1.0,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          SizedBox(height: 10),
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 8.0),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              left: 16.0,
+                              right: 16.0,
+                              top: 10,
+                            ),
+                            child: Row(
+                              children: [
+                                Transform.scale(
+                                  scale: 0.7,
+                                  child: Switch(
+                                    activeColor: Colors.white,
+                                    activeTrackColor: Colors.black,
+                                    value: isMobileClinic,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        isMobileClinic = value;
+                                      });
+                                    },
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Text.rich(
+                                    TextSpan(
+                                      text: "Send by Collector the end of job",
+                                      style: TextStyle(
+                                          color: Colors
+                                              .black), // Regular text style
+                                      children: [],
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              left: 24.0,
+                              right: 16.0,
+                              top: 10,
+                            ),
+                            child: Expanded(
+                              child: Text.rich(
+                                TextSpan(
+                                  text:
+                                      "This option will allow collector to send the Batch Results Report at the end of work.",
+                                  style: TextStyle(
+                                      color:
+                                          Colors.black), // Regular text style
+                                  children: [],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
         ]);
       default:
         return const SizedBox.shrink();
