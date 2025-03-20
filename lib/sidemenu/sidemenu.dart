@@ -871,6 +871,8 @@ class _SideMenuState extends State<SideMenu> {
                           ),
                           child: ExpansionTile(
                             dense: true, // Makes ListTile more compact
+                            initiallyExpanded:
+                                appState.isAccountingOpen ? true : false,
                             visualDensity: VisualDensity(vertical: -4),
                             iconColor: appState.isAccountingOpen
                                 ? const Color(0xFF01B4D2)

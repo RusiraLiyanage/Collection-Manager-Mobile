@@ -1552,6 +1552,10 @@ class _NewCalloutJobState extends State<NewClient> {
   int minutes = 0;
 
   bool isMobileClinic = false;
+  bool isReminder = false;
+  bool reportByTextMessage = false;
+  bool isReportByEmail = false;
+  bool isSendByCollector = false;
   bool showMainLocations = true;
 
   void removeRepresentative() {
@@ -13922,7 +13926,7 @@ class _NewCalloutJobState extends State<NewClient> {
             padding: const EdgeInsets.only(left: 16.0, right: 16.0),
             child: SizedBox(
               width: double.infinity,
-              height: 230,
+              height: 150,
               child: Card(
                 surfaceTintColor: Colors.white,
                 color: Colors.white,
@@ -13942,7 +13946,7 @@ class _NewCalloutJobState extends State<NewClient> {
                       Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          SizedBox(height: 10),
+                          SizedBox(height: 2),
                           Padding(
                             padding:
                                 const EdgeInsets.symmetric(horizontal: 8.0),
@@ -13959,11 +13963,11 @@ class _NewCalloutJobState extends State<NewClient> {
                                   scale: 0.7,
                                   child: Switch(
                                     activeColor: Colors.white,
-                                    activeTrackColor: Colors.black,
-                                    value: isMobileClinic,
+                                    activeTrackColor: Color(0xFF1A8CFF),
+                                    value: isSendByCollector,
                                     onChanged: (value) {
                                       setState(() {
-                                        isMobileClinic = value;
+                                        isSendByCollector = value;
                                       });
                                     },
                                   ),
@@ -14008,6 +14012,290 @@ class _NewCalloutJobState extends State<NewClient> {
                 ),
               ),
             ),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 16.0, right: 16.0),
+            child: SizedBox(
+              width: double.infinity,
+              height: 150,
+              child: Card(
+                surfaceTintColor: Colors.white,
+                color: Colors.white,
+                elevation: 0,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                    bottom: 12.0,
+                    left: 1.0,
+                    right: 1.0,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          SizedBox(height: 2),
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 8.0),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              left: 16.0,
+                              right: 16.0,
+                              top: 10,
+                            ),
+                            child: Row(
+                              children: [
+                                Transform.scale(
+                                  scale: 0.7,
+                                  child: Switch(
+                                    activeColor: Colors.white,
+                                    activeTrackColor: Color(0xFF1A8CFF),
+                                    value: isReminder,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        isReminder = value;
+                                      });
+                                    },
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Text.rich(
+                                    TextSpan(
+                                      text: "Reminder",
+                                      style: TextStyle(
+                                          color: Colors
+                                              .black), // Regular text style
+                                      children: [],
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              left: 24.0,
+                              right: 16.0,
+                              top: 10,
+                            ),
+                            child: Expanded(
+                              child: Text.rich(
+                                TextSpan(
+                                  text:
+                                      "Send a reminder after the specified time if the Collection Report hasn’t been sent following its generation.",
+                                  style: TextStyle(
+                                      color:
+                                          Colors.black), // Regular text style
+                                  children: [],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Padding(
+            padding: const EdgeInsets.only(
+              left: 16.0,
+              right: 16.0,
+            ),
+            child: SizedBox(
+              width: double.infinity,
+              child: Card(
+                surfaceTintColor: Colors.white,
+                color: Colors.white,
+                elevation: 0,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                    top: 12.0,
+                    bottom: 12.0,
+                    left: 8.0,
+                    right: 16.0,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          // Left-aligned title
+                          Row(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(left: 16.0),
+                                child: Text(
+                                  "Reporting Methods",
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 3,
+                      ),
+                      Column(
+                        children: [
+                          SizedBox(height: 2),
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 0.0),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              left: 8.0,
+                              right: 16.0,
+                              top: 10,
+                            ),
+                            child: Row(
+                              children: [
+                                Transform.scale(
+                                  scale: 0.7,
+                                  child: Switch(
+                                    activeColor: Colors.white,
+                                    activeTrackColor: Color(0xFF01B4D2),
+                                    value: isReportByEmail,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        isReportByEmail = value;
+                                      });
+                                    },
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Text.rich(
+                                    TextSpan(
+                                      text: "Email (Default)",
+                                      style: TextStyle(
+                                          color: Colors
+                                              .black), // Regular text style
+                                      children: [],
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: 2,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              left: 8.0,
+                              right: 16.0,
+                              top: 2,
+                            ),
+                            child: Row(
+                              children: [
+                                Transform.scale(
+                                  scale: 0.7,
+                                  child: Switch(
+                                    activeColor: Colors.white,
+                                    activeTrackColor: Color(0xFF1A8CFF),
+                                    value: reportByTextMessage,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        reportByTextMessage = value;
+                                      });
+                                    },
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Text.rich(
+                                    TextSpan(
+                                      text: "Mobile Text Message",
+                                      style: TextStyle(
+                                          color: Colors
+                                              .black), // Regular text style
+                                      children: [],
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Padding(
+            padding: const EdgeInsets.only(
+              left: 16.0,
+              right: 16.0,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                ElevatedButton(
+                  onPressed: _prevStep,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor:
+                        Color(0xFF01B4D2), // Color for the Back button
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                    minimumSize:
+                        Size(80, 30), // Sets a minimum width and height
+                  ),
+                  child: const Text(
+                    "Back",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+                ElevatedButton(
+                  onPressed: _nextStep,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blue, // Color for the Next button
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                    minimumSize: Size(80, 30),
+                  ),
+                  child: const Text(
+                    "Create Client",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 40,
           ),
         ]);
       default:
@@ -14071,7 +14359,7 @@ class _NewCalloutJobState extends State<NewClient> {
     if (formState != null &&
         !formState.validate() &&
         isValid &&
-        _currentStep == 1) {
+        _currentStep != 1) {
       // If validation fails, return or show a message (optional)
       // Scroll to the top if validation fails
       widget.scrollController.animateTo(
@@ -14150,6 +14438,28 @@ class _NewCalloutJobState extends State<NewClient> {
         duration: Duration(milliseconds: 500), // Smooth animation
         curve: Curves.easeInOut,
       );
+      if (_currentStep < _formKeys.length - 1) {
+        setState(() {
+          _currentStep++;
+        });
+      } else {
+        // Handle form submission
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: const Text('Success'),
+            content: const Text('Form submitted successfully!'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: const Text('OK'),
+              ),
+            ],
+          ),
+        );
+      }
     }
   }
 
