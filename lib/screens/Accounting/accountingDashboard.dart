@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:project_code_blue/screens/Accounting/invoiceCard.dart';
 import 'package:provider/provider.dart';
 import '../../AppState/appState.dart';
@@ -19,6 +20,10 @@ class _AccountingDashboardState extends State<AccountingDashboard> {
       TextEditingController(); // Controller for the text field
   DateTime? _selectedStartDate;
   DateTime? _selectedEndDate;
+  bool isMobileClinic = false;
+  String? _selectedValue;
+  String? _selectedDateRange;
+  final List<String> exports = ['PDF', 'print'];
   @override
   void dispose() {
     _startDateController.dispose();
@@ -128,6 +133,137 @@ class _AccountingDashboardState extends State<AccountingDashboard> {
     }
   }
 
+  Future<Map<String, List<Map<String, String>>>>
+      fetchGroupConsumptionItems() async {
+    await Future.delayed(Duration(seconds: 1));
+    return {
+      'Tests': [
+        {
+          'name': 'Drug & Alcohol Tests',
+          'amount': '\$1430.00',
+          'date': '2024-05-15',
+          'InClinic': '100',
+          'OnSite': '160',
+          'type': 'Donors',
+          'gst': '\$10',
+        },
+        {
+          'name': 'Requested Laboratory Tests',
+          'amount': '\$105.00',
+          'date': '2025-02-15',
+          'InClinic': '7',
+          'OnSite': '14',
+          'type': 'Digital Chain of Cutody',
+          'gst': '\$10',
+        },
+      ],
+      'Licensing (Subscriptions)': [
+        {
+          'name': 'Collection Manager',
+          'amount': '\$90.00',
+          'date': '2024-06-9',
+          'users': '10',
+          'licences': '10',
+          'gst': '\$10',
+        },
+        {
+          'name': 'Collection Manager Mobile',
+          'amount': '\$90.00',
+          'date': '2025-01-15',
+          'users': '10',
+          'licences': '10',
+          'gst': '\$10',
+        },
+        {
+          'name': 'Collect Assist',
+          'amount': '\$300.00',
+          'date': '2024-12-15',
+          'users': '10',
+          'licences': '10',
+          'gst': '\$10',
+        },
+        {
+          'name': 'Secure Assist',
+          'amount': '\$500.00',
+          'date': '2024-03-15',
+          'users': '10',
+          'licences': '10',
+          'gst': '\$10',
+        },
+        {
+          'name': 'Report Assist',
+          'amount': '\$100.00',
+          'date': '2024-06-15',
+          'users': '10',
+          'licences': '10',
+          'gst': '\$10',
+        },
+        {
+          'name': 'Work Assist',
+          'amount': '\$100.00',
+          'date': '2024-07-15',
+          'users': '10',
+          'licences': '10',
+          'gst': '\$10',
+        },
+        {
+          'name': 'Welcome Assist',
+          'amount': '\$90.00',
+          'date': '2024-05-15',
+          'users': '10',
+          'licences': '10',
+          'gst': '\$10',
+        },
+      ],
+      'IT Services (Additional Services)': [
+        {
+          'name': 'Collect Assist',
+          'amount': '\$300.00',
+          'date': '2024-07-18',
+          'gst': '\$10'
+        },
+        {
+          'name': 'Secure Assist',
+          'amount': '\$500.00',
+          'date': '2024-05-05',
+          'gst': '\$10'
+        },
+        {
+          'name': 'Report Assist',
+          'amount': '\$100.00',
+          'date': '2024-03-16',
+          'gst': '\$10'
+        },
+        {
+          'name': 'Work Assist',
+          'amount': '\$100.00',
+          'date': '2024-07-13',
+          'gst': '\$10'
+        },
+        {
+          'name': 'Welcome Assist',
+          'amount': '\$100.00',
+          'date': '2024-05-01',
+          'gst': '\$10'
+        },
+      ],
+      'Client Onboarding (Setup)': [
+        {
+          'name': 'SA Service Establishment',
+          'amount': '\$500.00',
+          'date': '2024-05-15',
+          'gst': '\$10'
+        },
+        {
+          'name': 'SA Platform Training',
+          'amount': '\$500.00',
+          'date': '2024-05-15',
+          'gst': '\$10'
+        },
+      ],
+    };
+  }
+
   final List<String> invoiceTypes = [
     "Tests",
     "Non Tests",
@@ -208,6 +344,7 @@ class _AccountingDashboardState extends State<AccountingDashboard> {
     _selectedServiceOffice = serviceOffices.first;
     _selectedClient = clients.first;
     _dateRange = dateRange.first;
+    _selectedValue = exports.first;
     super.initState();
   }
 
@@ -222,6 +359,7 @@ class _AccountingDashboardState extends State<AccountingDashboard> {
         navigationType: "bottomNavigation",
       ),
       appBar: MyAppBar(),
+      backgroundColor: Color(0xFFF2F2F2),
       body: Stack(
         children: [
           Scrollbar(
@@ -290,7 +428,7 @@ class _AccountingDashboardState extends State<AccountingDashboard> {
                   ), */
                   Container(
                     width: double.infinity,
-                    height: 190,
+                    height: 180,
                     color: Color(0xFFF2F2F2),
                     child: Column(
                       children: [
@@ -743,34 +881,521 @@ class _AccountingDashboardState extends State<AccountingDashboard> {
                             ],
                           ),
                         ),
-                        SizedBox(
-                          height: 20,
-                        ),
                       ],
                     ),
                   ),
-
-                  /* ListView.builder(
-                    padding: EdgeInsets.zero,
-                    shrinkWrap: true,
-                    physics: const ClampingScrollPhysics(),
-                    itemCount: invoicesData.length,
-                    itemBuilder: (context, index) {
-                      final invoice = invoicesData[index];
-                      return Center(
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                            left: 16.0,
-                            right: 16.0,
-                            bottom: 10.0,
+                  Container(
+                    width: double.infinity,
+                    height: 70,
+                    color: Color(0xFFEEEFEE),
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                        top: 2.0,
+                        left: 8.0,
+                        right: 8.0,
+                      ),
+                      child: Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const Text(
+                                "GST",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.blue,
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 15,
+                              ),
+                              Row(
+                                children: [
+                                  isMobileClinic
+                                      ? const Text(
+                                          "excluasive",
+                                        )
+                                      : const Text(
+                                          "excluasive",
+                                          style: TextStyle(
+                                            color:
+                                                Color.fromARGB(255, 28, 33, 39),
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                  Transform.scale(
+                                    scale: 0.7,
+                                    child: Switch(
+                                      activeColor: Colors.white,
+                                      activeTrackColor: Colors.black,
+                                      value: isMobileClinic,
+                                      onChanged: (value) {
+                                        setState(() {
+                                          isMobileClinic = value;
+                                        });
+                                      },
+                                    ),
+                                  ),
+                                  isMobileClinic
+                                      ? const Text(
+                                          "inclusive",
+                                          style: TextStyle(
+                                            color: Color.fromARGB(
+                                                255, 255, 26, 26),
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        )
+                                      : const Text(
+                                          "inclusive",
+                                        )
+                                ],
+                              ),
+                              const SizedBox(
+                                width: 15,
+                              ),
+                              const Divider(),
+                              Expanded(
+                                child: Row(
+                                  children: [
+                                    const Padding(
+                                      padding: EdgeInsets.only(right: 8.0),
+                                      child: Text(
+                                        'Export',
+                                        style: TextStyle(
+                                          color:
+                                              Color.fromARGB(255, 12, 14, 15),
+                                          fontSize: 12,
+                                        ),
+                                      ),
+                                    ),
+                                    Expanded(
+                                        child: Container(
+                                      height: 28,
+                                      width: 80,
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.circular(8),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color:
+                                                Colors.white.withOpacity(0.2),
+                                            spreadRadius: 1,
+                                            blurRadius: 1,
+                                            offset: Offset(0, 0),
+                                          ),
+                                        ],
+                                      ),
+                                      child: DropdownButtonFormField<String>(
+                                        value: _selectedValue,
+                                        isExpanded: true,
+                                        decoration: InputDecoration(
+                                          contentPadding:
+                                              const EdgeInsets.symmetric(
+                                                  horizontal: 8, vertical: 4),
+                                          border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                            borderSide: BorderSide(
+                                                color: Colors.transparent,
+                                                width: 2),
+                                          ),
+                                          enabledBorder: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                            borderSide: BorderSide(
+                                                color: Colors.transparent,
+                                                width: 2),
+                                          ),
+                                          focusedBorder: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                            borderSide: BorderSide(
+                                                color: Colors.transparent,
+                                                width: 2),
+                                          ),
+                                          fillColor: Colors.white,
+                                          filled: true,
+                                        ),
+                                        icon: const Icon(Icons.arrow_drop_down,
+                                            color: Colors.black),
+                                        items: exports
+                                            .map((item) => DropdownMenuItem(
+                                                  value: item,
+                                                  child: FittedBox(
+                                                    fit: BoxFit.scaleDown,
+                                                    child: Text(
+                                                      item,
+                                                      style: const TextStyle(
+                                                        fontSize: 14,
+                                                        color: Color.fromARGB(
+                                                            255, 27, 29, 31),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ))
+                                            .toList(),
+                                        onChanged: (value) {
+                                          setState(() {
+                                            _selectedValue = value;
+                                          });
+                                        },
+                                      ),
+                                    ))
+                                  ],
+                                ),
+                              ),
+                            ],
                           ),
-                          child: InvoiceCard(invoice: invoice),
+                          const Divider(
+                            thickness: 1,
+                            indent: 0,
+                            endIndent: 0,
+                            color: Color.fromARGB(255, 51, 171, 211),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Container(
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                        left: 16.0,
+                        right: 16.0,
+                      ),
+                      child: Card(
+                        color: Color(0xFFFFFFFF),
+                        elevation: 0,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                              left: 16.0,
+                              right: 16.0,
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const SizedBox(height: 8),
+                                const Text(
+                                  'Advanced Drug Solutions',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                const SizedBox(height: 10),
+                                _buildRow('Customer ID:', "0SAC-AU-123-456"),
+                                _buildRow('Service Office:', "ALL"),
+                                _buildRow('Client:', "ALL"),
+                                _buildRow('Currency:', "AUD \$"),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  FutureBuilder<Map<String, List<Map<String, String>>>>(
+                    future: fetchGroupConsumptionItems(),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return const CircularProgressIndicator();
+                      } else if (snapshot.hasError) {
+                        return Text("Error: ${snapshot.error}");
+                      } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                        return const Text("No Data Available");
+                      }
+
+                      final data = snapshot.data!; // 获取数据
+                      DateTime selectedStartDate =
+                          _selectedStartDate ?? DateTime.now();
+                      DateTime selectedEndDate =
+                          _selectedEndDate ?? DateTime.now();
+
+                      Map<String, List<Map<String, String>>> filteredData =
+                          data;
+                      /* data.forEach((category, items) {
+                        List<Map<String, String>> filteredItems =
+                            items.where((item) {
+                          if (item.containsKey('date')) {
+                            try {
+                              DateTime itemDate =
+                                  DateFormat("yyyy-MM-dd").parse(item['date']!);
+                              return !itemDate.isBefore(selectedStartDate) &&
+                                  !itemDate.isAfter(selectedEndDate);
+                            } catch (e) {
+                              return false;
+                            }
+                          }
+                          return false;
+                        }).toList();
+                        filteredData[category] = filteredItems; */
+                      //});
+
+                      return Padding(
+                        padding: const EdgeInsets.only(
+                          left: 1.0,
+                          right: 1.0,
+                        ),
+                        child: Card(
+                          color: Color(0xFFFFFFFF),
+                          elevation: 0,
+                          child: Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 20.0)
+                                    .copyWith(top: 32.0),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Row(
+                                  children: [
+                                    const Text(
+                                      "Summary",
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                    const SizedBox(width: 15),
+                                    Text(
+                                      "${DateFormat('dd/MM/yyyy').format(selectedStartDate)} - ${DateFormat('dd/MM/yyyy').format(selectedEndDate)} | GST ${isMobileClinic ? "inclusive" : "exclusive"}",
+                                      style: TextStyle(color: Colors.black),
+                                    ),
+                                  ],
+                                ),
+                                const Divider(
+                                  thickness: 1,
+                                  indent: 0,
+                                  endIndent: 0,
+                                  color: Colors.black,
+                                ),
+                                ...filteredData.entries.map((entry) {
+                                  final String category = entry.key;
+                                  final List<Map<String, String>> items =
+                                      entry.value;
+
+                                  if (items.isEmpty) return const SizedBox();
+
+                                  return Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Padding(
+                                            padding: EdgeInsets.symmetric(
+                                                vertical: 8.0, horizontal: 8),
+                                            child: Text(
+                                              category,
+                                              style: const TextStyle(
+                                                fontSize: 16.0,
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.black,
+                                              ),
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: EdgeInsets.symmetric(
+                                                vertical: 8.0, horizontal: 16),
+                                            child: category == "Tests"
+                                                ? Text(
+                                                    "Sub Total",
+                                                    style: const TextStyle(
+                                                      fontSize: 16.0,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      color: Colors.black,
+                                                    ),
+                                                  )
+                                                : SizedBox(
+                                                    height: 0,
+                                                  ),
+                                          ),
+                                        ],
+                                      ),
+                                      ...items.map((item) {
+                                        // **修正拼写错误 & 计算 finalAmount**
+                                        String amountStr = item['amount']
+                                                ?.replaceAll(
+                                                    RegExp(r'[^\d.]'), '') ??
+                                            '0';
+                                        double amount =
+                                            double.tryParse(amountStr) ?? 0.0;
+
+                                        String gstStr = item['gst']?.replaceAll(
+                                                RegExp(r'[^\d.]'), '') ??
+                                            '0';
+                                        double gst =
+                                            double.tryParse(gstStr) ?? 0.0;
+
+                                        double finalAmount = isMobileClinic
+                                            ? (amount - gst)
+                                            : amount;
+                                        String displayedAmount =
+                                            "\$${finalAmount.toStringAsFixed(2)}";
+
+                                        return Column(
+                                          children: [
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      vertical: 4.0,
+                                                      horizontal: 16),
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Text(
+                                                    item['name'] ?? 'Unknown',
+                                                    style: const TextStyle(
+                                                        fontSize: 15.0,
+                                                        color: Colors.black),
+                                                  ),
+                                                  Text(
+                                                    displayedAmount,
+                                                    style: const TextStyle(
+                                                        fontSize: 15.0,
+                                                        color: Colors.black),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            /* const Divider(
+                                          thickness: 1,
+                                          color: Colors.black,
+                                          height: 5,
+                                        ), */
+                                          ],
+                                        );
+                                      }).toList(),
+                                    ],
+                                  );
+                                }).toList(),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                              ],
+                            ),
+                          ),
                         ),
                       );
                     },
-                  ), */
+                  ),
+
+                  //Total Card
+                  const SizedBox(height: 10),
+                  FutureBuilder<Map<String, List<Map<String, String>>>>(
+                    future: fetchGroupConsumptionItems(),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return const CircularProgressIndicator();
+                      } else if (snapshot.hasError) {
+                        return Text("Error: ${snapshot.error}");
+                      }
+                      if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                        return const Text("No Data Available");
+                      }
+
+                      final data = snapshot.data!;
+                      DateTime selectedStartDate =
+                          _selectedStartDate ?? DateTime.now();
+                      DateTime selectedEndDate =
+                          _selectedEndDate ?? DateTime.now();
+
+                      // 🔹 过滤数据
+                      double totalAmount = 0.0;
+                      double totalGst = 0.0;
+
+                      data.forEach((category, items) {
+                        for (var item in items) {
+                          try {
+                            DateTime itemDate =
+                                DateFormat("yyyy-MM-dd").parse(item['date']!);
+                            if (!itemDate.isBefore(selectedStartDate) &&
+                                !itemDate.isAfter(selectedEndDate)) {
+                              String amountStr = item['amount']
+                                      ?.replaceAll(RegExp(r'[^\d.]'), '') ??
+                                  '0';
+                              double amount = double.tryParse(amountStr) ?? 0.0;
+
+                              String gstStr = item['gst']
+                                      ?.replaceAll(RegExp(r'[^\d.]'), '') ??
+                                  '0';
+                              double gst = double.tryParse(gstStr) ?? 0.0;
+
+                              totalAmount += amount;
+                              totalGst += gst;
+                            }
+                          } catch (e) {
+                            continue;
+                          }
+                        }
+                      });
+
+                      // 🔹 Calculate the final amount
+                      double finalAmount = isMobileClinic
+                          ? (totalAmount - totalGst)
+                          : totalAmount;
+                      String displayedAmount =
+                          "\$${finalAmount.toStringAsFixed(2)}";
+
+                      return Card(
+                        color: Color(0xFFFFFFFF),
+                        elevation: 0,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16.0)
+                              .copyWith(top: 22.0),
+                          child: Column(
+                            children: [
+                              Row(
+                                children: [
+                                  const Text(
+                                    "Total",
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                  const SizedBox(width: 25),
+                                  Text(
+                                    "${DateFormat('dd/MM/yyyy').format(selectedStartDate)} - ${DateFormat('dd/MM/yyyy').format(selectedEndDate)} | GST ${isMobileClinic ? "inclusive" : "exclusive"}",
+                                    style: TextStyle(color: Colors.black),
+                                  ),
+                                ],
+                              ),
+                              const Divider(
+                                color: Colors.black,
+                                thickness: 1,
+                                indent: 0,
+                                endIndent: 0,
+                              ),
+                              SizedBox(height: 10),
+                              Text(
+                                "\$4905.00",
+                                style: const TextStyle(
+                                    fontSize: 28,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black),
+                              ),
+                              SizedBox(width: 5),
+                              SizedBox(
+                                height: 30,
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                  ),
                   SizedBox(
-                    height: 50,
+                    height: 150,
                   ),
                 ],
               ),
@@ -780,4 +1405,35 @@ class _AccountingDashboardState extends State<AccountingDashboard> {
       ),
     );
   }
+}
+
+Widget _buildRow(String label, String value) {
+  return Padding(
+    padding: const EdgeInsets.symmetric(vertical: 4.0),
+    child: Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Expanded(
+          child: Text(
+            label,
+            style: const TextStyle(
+              fontSize: 14,
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        Expanded(
+          child: Text(
+            value,
+            style: const TextStyle(
+              fontSize: 14,
+              color: Colors.black,
+            ),
+          ),
+        ),
+      ],
+    ),
+  );
 }

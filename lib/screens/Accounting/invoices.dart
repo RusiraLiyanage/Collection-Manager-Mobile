@@ -96,7 +96,7 @@ class _InvoicesState extends State<Invoices> {
         appState.setDrawerState(isOpen);
       },
       drawer: SideMenu(navigationType: "subPartNavigation"),
-      appBar: const MyAppBar(),
+      appBar: AppBarGoBack(),
       body: Stack(
         children: [
           Scrollbar(
@@ -480,7 +480,10 @@ class _InvoicesState extends State<Invoices> {
                   ),
 
                   Padding(
-                    padding: const EdgeInsets.only(left: 16.0),
+                    padding: const EdgeInsets.only(
+                      left: 16.0,
+                      bottom: 16.0,
+                    ),
                     child: Align(
                       alignment: Alignment.topLeft,
                       child: Column(
@@ -495,7 +498,7 @@ class _InvoicesState extends State<Invoices> {
                           ),
                           SizedBox(height: 4), // Spacing between the two texts
                           Text(
-                            "Customer ID: SAC-AU-123-456",
+                            " Customer ID: SAC-AU-123-456",
                             style: TextStyle(
                               fontSize: 14,
                               color: Colors.black54,
