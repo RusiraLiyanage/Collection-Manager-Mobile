@@ -135,7 +135,7 @@ class _AccountingDashboardState extends State<AccountingDashboard> {
 
   Future<Map<String, List<Map<String, String>>>>
       fetchGroupConsumptionItems() async {
-    await Future.delayed(Duration(seconds: 1));
+    //await Future.delayed(Duration(seconds: 1));
     return {
       'Tests': [
         {
@@ -1160,10 +1160,10 @@ class _AccountingDashboardState extends State<AccountingDashboard> {
                                       ),
                                     ),
                                     const SizedBox(width: 15),
-                                    Text(
+                                    /* Text(
                                       "${DateFormat('dd/MM/yyyy').format(selectedStartDate)} - ${DateFormat('dd/MM/yyyy').format(selectedEndDate)} | GST ${isMobileClinic ? "inclusive" : "exclusive"}",
                                       style: TextStyle(color: Colors.black),
-                                    ),
+                                    ), */
                                   ],
                                 ),
                                 const Divider(

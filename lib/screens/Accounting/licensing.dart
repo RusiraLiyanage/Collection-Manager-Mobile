@@ -24,6 +24,7 @@ class _LicensingState extends State<Licensing> {
 
   void initState() {
     super.initState();
+    _selectedBillingCycle = "";
     _latestTestData = _fetchLatestTestData();
     _filteredLicensingFuture = _fetchFilteredLicensingItems();
     debugFetchData();
@@ -31,7 +32,7 @@ class _LicensingState extends State<Licensing> {
 
   Future<Map<String, List<Map<String, String>>>>
       fetchGroupConsumptionItems() async {
-    await Future.delayed(Duration(seconds: 1));
+    //await Future.delayed(Duration(seconds: 1));
     return {
       'Tests': [
         {
@@ -446,84 +447,80 @@ class _LicensingState extends State<Licensing> {
                                           ),
                                         ),
                                       ),
-                                      Expanded(
-                                        child: Container(
-                                          width: 169,
-                                          height: 28,
-                                          decoration: BoxDecoration(
-                                            color: Colors.white,
-                                            borderRadius:
-                                                BorderRadius.circular(8),
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: Colors.white
-                                                    .withOpacity(0.2),
-                                                spreadRadius: 1,
-                                                blurRadius: 1,
-                                                offset: Offset(0, 0),
-                                              ),
-                                            ],
-                                          ),
-                                          child:
-                                              DropdownButtonFormField<String>(
-                                            value: _selectedBillingCycle,
-                                            decoration: InputDecoration(
-                                              contentPadding:
-                                                  const EdgeInsets.symmetric(
-                                                      horizontal: 8,
-                                                      vertical: 4),
-                                              border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(8),
-                                                borderSide: BorderSide(
-                                                  color: Colors.transparent,
-                                                  width: 2,
-                                                ),
-                                              ),
-                                              enabledBorder: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(8),
-                                                borderSide: BorderSide(
-                                                  color: Colors.transparent,
-                                                  width: 2,
-                                                ),
-                                              ),
-                                              focusedBorder: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(8),
-                                                borderSide: BorderSide(
-                                                  color: Colors.transparent,
-                                                  width: 2,
-                                                ),
-                                              ),
-                                              fillColor: Colors.white,
-                                              filled: true,
+                                      Container(
+                                        width: 145,
+                                        height: 28,
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color:
+                                                  Colors.white.withOpacity(0.2),
+                                              spreadRadius: 1,
+                                              blurRadius: 1,
+                                              offset: Offset(0, 0),
                                             ),
-                                            icon: Icon(
-                                              Icons.arrow_drop_down_outlined,
-                                              color: Color(0xFF71717A),
+                                          ],
+                                        ),
+                                        child: DropdownButtonFormField<String>(
+                                          value: _selectedBillingCycle,
+                                          decoration: InputDecoration(
+                                            contentPadding:
+                                                const EdgeInsets.symmetric(
+                                                    horizontal: 8, vertical: 4),
+                                            border: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(8),
+                                              borderSide: BorderSide(
+                                                color: Colors.transparent,
+                                                width: 2,
+                                              ),
                                             ),
-                                            items: BillingDate.map((item) =>
-                                                DropdownMenuItem(
-                                                  value: item,
-                                                  child: Text(
-                                                    item,
-                                                    style: TextStyle(
-                                                      fontSize: 14,
-                                                      color: Color(0xFF007AFF),
-                                                    ),
-                                                  ),
-                                                )).toList(),
-                                            onChanged: (value) {
-                                              setState(() {
-                                                _selectedBillingCycle = value;
-                                                _filteredtestsFuture =
-                                                    _fetchFilteredLicensingItems();
-                                              });
-                                            },
-                                            hint: const Text(
-                                                'Select billing cycle'),
+                                            enabledBorder: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(8),
+                                              borderSide: BorderSide(
+                                                color: Colors.transparent,
+                                                width: 2,
+                                              ),
+                                            ),
+                                            focusedBorder: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(8),
+                                              borderSide: BorderSide(
+                                                color: Colors.transparent,
+                                                width: 2,
+                                              ),
+                                            ),
+                                            fillColor: Colors.white,
+                                            filled: true,
                                           ),
+                                          items: [
+                                            DropdownMenuItem(
+                                              value: _selectedBillingCycle,
+                                              child: Text(
+                                                _selectedBillingCycle ??
+                                                    'Select billing cycle',
+                                                style: TextStyle(
+                                                  fontSize: 14,
+                                                  color: Color(0xFF007AFF),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                          onChanged: null, // Disables selection
+                                          disabledHint: Text(
+                                            _selectedBillingCycle ??
+                                                'Select billing cycle',
+                                            style: TextStyle(
+                                              fontSize: 14,
+                                              color: Color(0xFF007AFF),
+                                            ),
+                                          ),
+                                          icon: SizedBox
+                                              .shrink(), // Hides the dropdown arrow
                                         ),
                                       ),
                                     ],
