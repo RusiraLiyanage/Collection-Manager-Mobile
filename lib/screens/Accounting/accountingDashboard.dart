@@ -953,7 +953,7 @@ class _AccountingDashboardState extends State<AccountingDashboard> {
                               const SizedBox(
                                 width: 15,
                               ),
-                              const Divider(),
+                              //const Divider(),
                               Expanded(
                                 child: Row(
                                   children: [
@@ -964,83 +964,91 @@ class _AccountingDashboardState extends State<AccountingDashboard> {
                                         style: TextStyle(
                                           color:
                                               Color.fromARGB(255, 12, 14, 15),
-                                          fontSize: 12,
+                                          fontSize: 14,
                                         ),
                                       ),
                                     ),
-                                    Expanded(
-                                        child: Container(
-                                      height: 28,
-                                      width: 80,
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius: BorderRadius.circular(8),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color:
-                                                Colors.white.withOpacity(0.2),
-                                            spreadRadius: 1,
-                                            blurRadius: 1,
-                                            offset: Offset(0, 0),
-                                          ),
-                                        ],
-                                      ),
-                                      child: DropdownButtonFormField<String>(
-                                        value: _selectedValue,
-                                        isExpanded: true,
-                                        decoration: InputDecoration(
-                                          contentPadding:
-                                              const EdgeInsets.symmetric(
-                                                  horizontal: 8, vertical: 4),
-                                          border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(8),
-                                            borderSide: BorderSide(
-                                                color: Colors.transparent,
-                                                width: 2),
-                                          ),
-                                          enabledBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(8),
-                                            borderSide: BorderSide(
-                                                color: Colors.transparent,
-                                                width: 2),
-                                          ),
-                                          focusedBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(8),
-                                            borderSide: BorderSide(
-                                                color: Colors.transparent,
-                                                width: 2),
-                                          ),
-                                          fillColor: Colors.white,
-                                          filled: true,
+                                    FittedBox(
+                                      fit: BoxFit.contain,
+                                      child: Image.asset(
+                                          "assets/images/icons/downloadInvoice.png"),
+                                    ),
+                                    /* Expanded(
+                                      child: Container(
+                                        height: 28,
+                                        width: 80,
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color:
+                                                  Colors.white.withOpacity(0.2),
+                                              spreadRadius: 1,
+                                              blurRadius: 1,
+                                              offset: Offset(0, 0),
+                                            ),
+                                          ],
                                         ),
-                                        icon: const Icon(Icons.arrow_drop_down,
-                                            color: Colors.black),
-                                        items: exports
-                                            .map((item) => DropdownMenuItem(
-                                                  value: item,
-                                                  child: FittedBox(
-                                                    fit: BoxFit.scaleDown,
-                                                    child: Text(
-                                                      item,
-                                                      style: const TextStyle(
-                                                        fontSize: 14,
-                                                        color: Color.fromARGB(
-                                                            255, 27, 29, 31),
+                                        child: DropdownButtonFormField<String>(
+                                          value: _selectedValue,
+                                          isExpanded: true,
+                                          decoration: InputDecoration(
+                                            contentPadding:
+                                                const EdgeInsets.symmetric(
+                                                    horizontal: 8, vertical: 4),
+                                            border: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(8),
+                                              borderSide: BorderSide(
+                                                  color: Colors.transparent,
+                                                  width: 2),
+                                            ),
+                                            enabledBorder: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(8),
+                                              borderSide: BorderSide(
+                                                  color: Colors.transparent,
+                                                  width: 2),
+                                            ),
+                                            focusedBorder: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(8),
+                                              borderSide: BorderSide(
+                                                  color: Colors.transparent,
+                                                  width: 2),
+                                            ),
+                                            fillColor: Colors.white,
+                                            filled: true,
+                                          ),
+                                          icon: const Icon(
+                                              Icons.arrow_drop_down,
+                                              color: Colors.black),
+                                          items: exports
+                                              .map((item) => DropdownMenuItem(
+                                                    value: item,
+                                                    child: FittedBox(
+                                                      fit: BoxFit.scaleDown,
+                                                      child: Text(
+                                                        item,
+                                                        style: const TextStyle(
+                                                          fontSize: 14,
+                                                          color: Color.fromARGB(
+                                                              255, 27, 29, 31),
+                                                        ),
                                                       ),
                                                     ),
-                                                  ),
-                                                ))
-                                            .toList(),
-                                        onChanged: (value) {
-                                          setState(() {
-                                            _selectedValue = value;
-                                          });
-                                        },
+                                                  ))
+                                              .toList(),
+                                          onChanged: (value) {
+                                            setState(() {
+                                              _selectedValue = value;
+                                            });
+                                          },
+                                        ),
                                       ),
-                                    ))
+                                    ) */
                                   ],
                                 ),
                               ),
@@ -1059,8 +1067,8 @@ class _AccountingDashboardState extends State<AccountingDashboard> {
                   Container(
                     child: Padding(
                       padding: const EdgeInsets.only(
-                        left: 16.0,
-                        right: 16.0,
+                        left: 8.0,
+                        right: 8.0,
                       ),
                       child: Card(
                         color: Color(0xFFFFFFFF),
@@ -1079,7 +1087,7 @@ class _AccountingDashboardState extends State<AccountingDashboard> {
                                 const Text(
                                   'Advanced Drug Solutions',
                                   style: TextStyle(
-                                    fontSize: 16,
+                                    fontSize: 18,
                                     color: Colors.black,
                                     fontWeight: FontWeight.bold,
                                   ),
@@ -1254,13 +1262,13 @@ class _AccountingDashboardState extends State<AccountingDashboard> {
                                                   Text(
                                                     item['name'] ?? 'Unknown',
                                                     style: const TextStyle(
-                                                        fontSize: 15.0,
+                                                        fontSize: 14.0,
                                                         color: Colors.black),
                                                   ),
                                                   Text(
                                                     displayedAmount,
                                                     style: const TextStyle(
-                                                        fontSize: 15.0,
+                                                        fontSize: 14.0,
                                                         color: Colors.black),
                                                   ),
                                                 ],
@@ -1366,7 +1374,10 @@ class _AccountingDashboardState extends State<AccountingDashboard> {
                                   const SizedBox(width: 25),
                                   Text(
                                     "${DateFormat('dd/MM/yyyy').format(selectedStartDate)} - ${DateFormat('dd/MM/yyyy').format(selectedEndDate)} | GST ${isMobileClinic ? "inclusive" : "exclusive"}",
-                                    style: TextStyle(color: Colors.black),
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 15,
+                                    ),
                                   ),
                                 ],
                               ),
