@@ -1371,7 +1371,7 @@ class _AccountingDashboardState extends State<AccountingDashboard> {
                                       color: Colors.black,
                                     ),
                                   ),
-                                  const SizedBox(width: 25),
+                                  const SizedBox(width: 15),
                                   Text(
                                     "${DateFormat('dd/MM/yyyy').format(selectedStartDate)} - ${DateFormat('dd/MM/yyyy').format(selectedEndDate)} | GST ${isMobileClinic ? "inclusive" : "exclusive"}",
                                     style: TextStyle(
