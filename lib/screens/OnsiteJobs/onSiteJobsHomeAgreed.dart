@@ -1059,7 +1059,7 @@ class _onSiteJobsHomeAgreedState extends State<OnsiteJobsHomeAgreed> {
                         child: Row(
                           children: [
                             Padding(
-                              padding: const EdgeInsets.only(right: 66.0),
+                              padding: const EdgeInsets.only(right: 72.0),
                               child: Text(
                                 "Client",
                                 style: TextStyle(
@@ -1153,7 +1153,7 @@ class _onSiteJobsHomeAgreedState extends State<OnsiteJobsHomeAgreed> {
                         child: Row(
                           children: [
                             Padding(
-                              padding: const EdgeInsets.only(right: 75.0),
+                              padding: const EdgeInsets.only(right: 80.0),
                               child: Text(
                                 "Date",
                                 style: TextStyle(

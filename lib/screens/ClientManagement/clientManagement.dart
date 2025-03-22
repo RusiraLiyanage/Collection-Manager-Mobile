@@ -768,7 +768,7 @@ class _ClientManagementState extends State<ClientManagement> {
                         child: Row(
                           children: [
                             Padding(
-                              padding: const EdgeInsets.only(right: 45.0),
+                              padding: const EdgeInsets.only(right: 48.0),
                               child: Text(
                                 "Show",
                                 style: TextStyle(

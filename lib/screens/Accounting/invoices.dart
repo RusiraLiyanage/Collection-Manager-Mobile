@@ -288,7 +288,7 @@ class _InvoicesState extends State<Invoices> {
                                       ),
                                     ),
                                     SizedBox(
-                                      width: 32,
+                                      width: 35,
                                     ),
                                     Container(
                                       width: 169,
@@ -392,7 +392,7 @@ class _InvoicesState extends State<Invoices> {
                                       ),
                                     ),
                                     SizedBox(
-                                      width: 50,
+                                      width: 55,
                                     ),
                                     Container(
                                       width: 169,

@@ -554,7 +554,7 @@ class _AccountingDashboardState extends State<AccountingDashboard> {
                                       ),
                                     ),
                                     SizedBox(
-                                      width: 55,
+                                      width: 59,
                                     ),
                                     Container(
                                       width: 169,
@@ -746,7 +746,7 @@ class _AccountingDashboardState extends State<AccountingDashboard> {
                           child: Row(
                             children: [
                               Padding(
-                                padding: const EdgeInsets.only(right: 75.0),
+                                padding: const EdgeInsets.only(right: 80.0),
                                 child: Text(
                                   "Date",
                                   style: TextStyle(
