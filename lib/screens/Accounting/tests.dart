@@ -29,8 +29,8 @@ class _TestsState extends State<Tests> {
   final TextEditingController _startDateController = TextEditingController();
 
   final List<String> BillingDate = [
-    "Fortnightly",
     "Monthly",
+    "Forthnightly",
   ];
 
   Future<Map<String, List<Map<String, String>>>>
@@ -292,6 +292,7 @@ class _TestsState extends State<Tests> {
     _selectedBillingCycle = "";
     _latestTestData = _fetchLatestTestData();
     _filteredtestsFuture = _fetchFilteredtestsItems();
+    _selectedBillingCycle = BillingDate.first;
     debugFetchData();
   }
 
@@ -445,7 +446,7 @@ class _TestsState extends State<Tests> {
 
                                   const SizedBox(height: 20),
 
-                                  // 第二行：Billing Cycle
+                                  // Billing Cycle
                                   Row(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
@@ -510,30 +511,29 @@ class _TestsState extends State<Tests> {
                                             fillColor: Colors.white,
                                             filled: true,
                                           ),
-                                          items: [
-                                            DropdownMenuItem(
-                                              value: _selectedBillingCycle,
-                                              child: Text(
-                                                _selectedBillingCycle ??
-                                                    'Select billing cycle',
-                                                style: TextStyle(
-                                                  fontSize: 14,
-                                                  color: Color(0xFF007AFF),
+                                          items: BillingDate.map((cycle) =>
+                                              DropdownMenuItem(
+                                                value: cycle,
+                                                child: Text(
+                                                  cycle,
+                                                  style: TextStyle(
+                                                    fontSize: 14,
+                                                    color: Color(0xFF007AFF),
+                                                  ),
                                                 ),
-                                              ),
-                                            ),
-                                          ],
-                                          onChanged: null, // Disables selection
-                                          disabledHint: Text(
-                                            _selectedBillingCycle ??
-                                                'Select billing cycle',
-                                            style: TextStyle(
-                                              fontSize: 14,
-                                              color: Color(0xFF007AFF),
-                                            ),
-                                          ),
-                                          icon: SizedBox
-                                              .shrink(), // Hides the dropdown arrow
+                                              )).toList(),
+                                          onChanged: (value) {
+                                            if (value == "Forthnightly") {
+                                              _showBillingChangeDialog(
+                                                  context, value!);
+                                            } else {
+                                              _selectedBillingCycle =
+                                                  value; // Directly update if it's not "Forthnightly"
+                                            }
+                                          },
+                                          icon: Icon(Icons.arrow_drop_down,
+                                              color: Colors
+                                                  .black), // Show dropdown arrow
                                         ),
                                       ),
                                     ],
@@ -988,6 +988,111 @@ class _TestsState extends State<Tests> {
           ),
         ),
       ]),
+    );
+  }
+
+  void _showBillingChangeDialog(BuildContext context, String newValue) {
+    showDialog(
+      context: context,
+      barrierDismissible: false, // Prevent closing by tapping outside
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: Colors.white, // Set background color to white
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+          title: Column(
+            children: [
+              Icon(Icons.error, color: Colors.red, size: 40),
+              SizedBox(height: 10),
+              Text(
+                "Changing Your Billing Cycle",
+                style: TextStyle(fontWeight: FontWeight.bold),
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
+          content: Text(
+            "You're about to update your billing cycle.\n\n"
+            "This will impact all your subscriptions. Would you like to continue?",
+            textAlign: TextAlign.center,
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                setState(() {
+                  _selectedBillingCycle = "Monthly"; // Update selection
+                });
+                Navigator.of(context).pop(); // Close dialog
+              },
+              child: Text("Cancel", style: TextStyle(color: Colors.grey)),
+            ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Color(0xFF007AFF), // Confirm button color
+              ),
+              onPressed: () {
+                _selectedBillingCycle = newValue; // Update selection
+                Navigator.of(context).pop(); // Close dialog
+                _showSuccessDialog(context, newValue); // Show success message
+              },
+              child: Text("Confirm"),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void _showSuccessDialog(BuildContext context, String billingCycle) {
+    showDialog(
+      context: context,
+      barrierDismissible: false, // Prevent closing by tapping outside
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: Colors.white,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+          title: Column(
+            children: [
+              Icon(Icons.check_circle,
+                  color: Colors.blue, size: 40), // Blue checkmark icon
+              SizedBox(height: 10),
+              Text(
+                "Your billing cycle has been successfully updated to ${billingCycle}.",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
+          content: Text(
+            "It will be effective from your next billing period.\n\n"
+            "Note: If there are any prorated charges or credits, they will be applied to your next bill.",
+            textAlign: TextAlign.center,
+            style: TextStyle(color: Colors.black),
+          ),
+          actions: [
+            Center(
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Color(0xFF007AFF),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
+                onPressed: () {
+                  Navigator.of(context).pop(); // Close dialog
+                },
+                child: Text("Close"),
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 }
