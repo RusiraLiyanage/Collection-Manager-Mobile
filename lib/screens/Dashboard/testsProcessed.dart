@@ -829,6 +829,7 @@ class _TestsProcessedState extends State<TestsProcessed> {
                 width: double.infinity,
                 height: 700,
                 child: Swiper(
+                  loop: false,
                   itemBuilder: (context, index) {
                     final image = titles[index];
                     return Container(
