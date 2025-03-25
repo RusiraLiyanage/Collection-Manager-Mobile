@@ -25,6 +25,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.1"
+  card_swiper:
+    dependency: "direct main"
+    description:
+      name: card_swiper
+      sha256: "21e52a144decbf0054e7cfed8bbe46fc89635e6c86b767eaccfe7d5aeba32528"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.1"
   characters:
     dependency: transitive
     description:
@@ -65,6 +73,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.8"
+  easy_pie_chart:
+    dependency: "direct main"
+    description:
+      name: easy_pie_chart
+      sha256: "59615f8539dc3bd094cf390f50f6fa9a525cfef9bf7fba421d01d388dfacb584"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.2"
   fake_async:
     dependency: transitive
     description:
@@ -94,6 +110,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_chartx:
+    dependency: "direct main"
+    description:
+      name: flutter_chartx
+      sha256: "15d5b00083ab55383e61db964914ef7254a8fb479f7e1de4b511c1c15d5706e0"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0-dev8"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -526,5 +550,5 @@ packages:
     source: hosted
     version: "1.1.0"
 sdks:
-  dart: ">=3.6.0 <4.0.0"
+  dart: ">=3.6.1 <4.0.0"
   flutter: ">=3.27.0"

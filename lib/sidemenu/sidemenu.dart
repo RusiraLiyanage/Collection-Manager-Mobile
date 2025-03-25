@@ -461,6 +461,8 @@ class _SideMenuState extends State<SideMenu> {
                           child: ExpansionTile(
                               dense: true, // Makes ListTile more compact
                               visualDensity: VisualDensity(vertical: -4),
+                              initiallyExpanded:
+                                  appState.isDashboardOpen ? true : false,
                               iconColor: appState.isDashboardOpen
                                   ? Color(0xFF01B4D2)
                                   : Color(0xFF1A576F),

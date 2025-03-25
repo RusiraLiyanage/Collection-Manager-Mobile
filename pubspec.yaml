@@ -47,6 +47,9 @@ dependencies:
   path_provider: ^2.1.2
   url_launcher: ^6.3.1
   permission_handler: ^11.4.0
+  easy_pie_chart: ^1.0.2
+  card_swiper: ^3.0.1
+  flutter_chartx: ^1.0.0-dev8
 
 dev_dependencies:
   flutter_test:
@@ -95,6 +98,8 @@ flutter:
     - assets/images/icons/threeDots.png
     - assets/images/icons/eye_icon.png
     - assets/images/icons/showAchieve.png
+    - assets/images/icons/navigateLeft.png
+    - assets/images/icons/navigateRight.png
     - assets/images/icons/reportingIcon.png
     - assets/images/icons/hideArchieve.png
     - assets/images/icons/document_icon.png

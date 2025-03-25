@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import '../../AppState/appState.dart';
 import 'package:project_code_blue/sidemenu/sidemenu.dart';
 import '../../Navigation/appBar.dart';
+import 'package:easy_pie_chart/easy_pie_chart.dart';
 
 class DashboardHome extends StatefulWidget {
   const DashboardHome({super.key});
@@ -13,13 +14,21 @@ class DashboardHome extends StatefulWidget {
   State<DashboardHome> createState() => _DashboardHomeState();
 }
 
+final List<Map<String, dynamic>> data = [
+  {"label": "Male", "value": 30, "color": Colors.blue.shade900},
+  {"label": "Female", "value": 17, "color": Colors.blue.shade600},
+  {"label": "X", "value": 1, "color": Colors.blue.shade400},
+];
+
 class _DashboardHomeState extends State<DashboardHome> {
   final ScrollController _scrollController = ScrollController();
   DateTime? _selectedSummaryDate;
+  String? totalTests = "90";
   bool isAtBottom = false; // Track whether the scroll is at the bottom
   TextEditingController _dashboardSummaryDateController =
       TextEditingController();
   String? _selectedLocation;
+
   @override
   void initState() {
     super.initState();
@@ -105,9 +114,46 @@ class _DashboardHomeState extends State<DashboardHome> {
     super.dispose();
   }
 
+  final List<PieData> pies = [
+    PieData(
+      value: 30,
+      color: Color(0xFF1F5890),
+    ),
+    PieData(
+      value: 31,
+      color: Color(0xFF0091D5),
+    ),
+    PieData(
+      value: 14,
+      color: Color(0xFFA5D8DD),
+    ),
+    PieData(
+      value: 15,
+      color: Color(0xFFBBEDF5),
+    ),
+    PieData(
+      value: 22,
+      color: Color(0xFFA6DEBD),
+    ),
+    PieData(
+      value: 6,
+      color: Color(0xFFA6B6DE),
+    ),
+  ];
+
+  final List<Map<String, dynamic>> testData = [
+    {'label': 'Breath Alcohol Screen', 'value': 30, 'color': Colors.blue[800]},
+    {'label': 'Urine Drug Screen', 'value': 31, 'color': Colors.blue[600]},
+    {'label': 'Oral Fluid Drug Screen', 'value': 14, 'color': Colors.blue[200]},
+    {'label': 'Urine Drug Test', 'value': 15, 'color': Colors.lightBlue[100]},
+    {'label': 'Oral Fluid Collection', 'value': 22, 'color': Colors.green[200]},
+    {'label': 'Hair Drug Test', 'value': 6, 'color': Colors.blueGrey[200]},
+  ];
+
   @override
   Widget build(BuildContext context) {
     final appState = Provider.of<AppState>(context, listen: false);
+
     return Scaffold(
       backgroundColor: Color(0xFFF2F2F2),
       extendBodyBehindAppBar: true, // Extends body behind the AppBar
@@ -326,7 +372,7 @@ class _DashboardHomeState extends State<DashboardHome> {
                                 ),
                               ),
                               Container(
-                                width: 169,
+                                width: 190,
                                 height: 28,
                                 decoration: BoxDecoration(
                                   color: Colors.white,
@@ -425,7 +471,101 @@ class _DashboardHomeState extends State<DashboardHome> {
                       ),
                     ),
                     SizedBox(
-                      height: 10,
+                      height: 30,
+                    ),
+                    EasyPieChart(
+                      key: const Key('Tests'),
+                      children: pies,
+                      showValue: false,
+                      pieType: PieType.crust,
+                      onTap: null,
+                      gap: 0,
+                      start: 0,
+                      borderWidth: 23,
+                      animateFromEnd: true,
+                      size: 130,
+                      child: Center(
+                          child: Padding(
+                        padding: const EdgeInsets.only(top: 38.0),
+                        child: Column(
+                          children: [
+                            Text(
+                              totalTests!,
+                              style: TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.bold),
+                            ),
+                            Text(
+                              "Total",
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            )
+                          ],
+                        ),
+                      )),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          SizedBox(height: 20),
+                          _buildItem(
+                            "Breath Alcohol Screen",
+                            30,
+                            Color(0xFF1F5890),
+                          ),
+                          _buildItem(
+                              "Urine Drug Screen", 31, Colors.blue.shade500),
+                          _buildItem(
+                            "Oral Fluid Drug Screen",
+                            14,
+                            Color(0xFF0091D5),
+                          ),
+                          _buildItem(
+                              "Urine Drug Test", 15, Colors.lightBlue.shade200),
+                          _buildItem(
+                            "Oral Fluid Collection",
+                            22,
+                            Color(0xFFA5D8DD),
+                          ),
+                          _buildItem(
+                            "Hair Drug Test",
+                            6,
+                            Color(0xFFA6B6DE),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: Text(
+                        "Patients",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                        ),
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: Divider(
+                        color: Colors.black,
+                        thickness: 1,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    _buildBarChart(),
+                    SizedBox(
+                      height: 150,
                     ),
                   ],
                 ),
@@ -436,4 +576,122 @@ class _DashboardHomeState extends State<DashboardHome> {
       ),
     );
   }
+}
+
+Widget _buildItem(String text, int count, Color color) {
+  return Padding(
+    padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Expanded(
+          child: Container(
+            padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
+            decoration: BoxDecoration(
+              color: color,
+              borderRadius: BorderRadius.circular(8.0),
+            ),
+            child: Text(
+              text,
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 14.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ),
+        SizedBox(width: 10),
+        Container(
+          width: 50,
+          height: 35,
+          decoration: BoxDecoration(
+            border: Border.all(color: Colors.black),
+            borderRadius: BorderRadius.circular(8.0),
+          ),
+          alignment: Alignment.center,
+          child: Text(
+            count.toString(),
+            style: TextStyle(fontSize: 14.0, fontWeight: FontWeight.bold),
+          ),
+        ),
+      ],
+    ),
+  );
+}
+
+Widget _buildBarChart() {
+  double maxValue = data
+      .map((e) => (e["value"] as num).toDouble()) // Ensure double type
+      .reduce((a, b) => a > b ? a : b);
+
+  return Padding(
+    padding: const EdgeInsets.only(
+      left: 16.0,
+      right: 16.0,
+    ),
+    child: Column(
+      children: data.map((item) {
+        return Padding(
+          padding: const EdgeInsets.symmetric(vertical: 6.0),
+          child: Row(
+            children: [
+              SizedBox(
+                width: 51, // Fixed width for label alignment
+                child: Text(
+                  item["label"],
+                  style: TextStyle(
+                    fontSize: 15.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              SizedBox(width: 10), // Space between label and bar
+              Expanded(
+                child: Stack(
+                  children: [
+                    Container(
+                      height: 22,
+                      decoration: BoxDecoration(
+                        color: Colors.grey.shade300, // Background bar
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.centerLeft, // Align bar to the left
+                      child: FractionallySizedBox(
+                        widthFactor:
+                            item["value"] / 100, // Ensures full bar is 100%
+                        child: Container(
+                          height: 22,
+                          decoration: BoxDecoration(
+                            color: item["color"],
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(width: 10),
+              Container(
+                width: 50,
+                height: 35,
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.black),
+                  borderRadius: BorderRadius.circular(6.0),
+                ),
+                alignment: Alignment.center,
+                child: Text(
+                  item["value"].toString(),
+                  style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+                ),
+              ),
+            ],
+          ),
+        );
+      }).toList(),
+    ),
+  );
 }
