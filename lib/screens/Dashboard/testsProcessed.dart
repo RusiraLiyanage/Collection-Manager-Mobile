@@ -5,6 +5,7 @@ import 'package:flutter_chartx/components/types.dart';
 import 'package:flutter_chartx/widgets/ColumnChart.dart';
 import 'package:project_code_blue/Navigation/appBar.dart';
 import 'package:project_code_blue/Navigation/appBarGoBack.dart';
+import 'package:project_code_blue/screens/Dashboard/processedTests.dart';
 import 'package:project_code_blue/sidemenu/sidemenu.dart';
 import 'package:card_swiper/card_swiper.dart';
 
@@ -31,21 +32,239 @@ class _TestsProcessedState extends State<TestsProcessed> {
 
   final List<String> colorSchemeFilter = ["Normal", "Specific", "Default"];
 
+  final List<Map<String, dynamic>> legendItems = [
+    {'color': Color(0xFF1F5890), 'text': 'Breath Alcohol Screen'},
+    {'color': Color(0xFF0091D5), 'text': 'Urine Drug Screen'},
+    {'color': Color(0xFFA5D8DD), 'text': 'Oral Fluid Drug Screen'},
+    {'color': Color(0xFFBBEDF5), 'text': 'Urine Drug Test'},
+    {'color': Color(0xFFA6DEBD), 'text': 'Oral Fluid Collection'},
+    {'color': Color(0xFFA6B6DE), 'text': 'Hair Drug Test'},
+  ];
+
   final List<String> showValues = [
     "All",
     "Specific",
+  ];
+
+  List<ProcessedTests> processedTests = [
+    ProcessedTests(
+      pies: [
+        PieData(
+          value: 19,
+          color: Color(0xFF1F5890),
+        ),
+        PieData(
+          value: 13,
+          color: Color(0xFF0091D5),
+        ),
+        PieData(
+          value: 16,
+          color: Color(0xFFA5D8DD),
+        ),
+        PieData(
+          value: 11,
+          color: Color(0xFFBBEDF5),
+        ),
+        PieData(
+          value: 8,
+          color: Color(0xFFA6DEBD),
+        ),
+        PieData(
+          value: 4,
+          color: Color(0xFFA6B6DE),
+        ),
+      ],
+      maxValue: 59,
+      datas: [
+        ChartLabeledData(
+          label: "Breath Alcohol Screen",
+          value: 19,
+          color: Color(0xFF1F5890),
+        ),
+        ChartLabeledData(
+          label: "Urine Drug Screen",
+          value: 13,
+          color: Color(0xFF0091D5),
+        ),
+        ChartLabeledData(
+          label: "Oral Fluid Drug Screen",
+          value: 16,
+          color: Color(0xFFA5D8DD),
+        ),
+        ChartLabeledData(
+          label: "Urine Drug Test",
+          value: 11,
+          color: Color(0xFFBBEDF5),
+        ),
+        ChartLabeledData(
+          label: "Oral Fluid Collection",
+          value: 8,
+          color: Color(0xFFA6DEBD),
+        ),
+        ChartLabeledData(
+          label: "Hair Drug Test",
+          value: 4,
+          color: Color(0xFFA6B6DE),
+        ),
+      ],
+      chartDate: '05/04/23',
+    ),
+    ProcessedTests(
+      pies: [
+        PieData(
+          value: 22,
+          color: Color(0xFF1F5890),
+        ),
+        PieData(
+          value: 10,
+          color: Color(0xFF0091D5),
+        ),
+        PieData(
+          value: 14,
+          color: Color(0xFFA5D8DD),
+        ),
+        PieData(
+          value: 9,
+          color: Color(0xFFBBEDF5),
+        ),
+        PieData(
+          value: 7,
+          color: Color(0xFFA6DEBD),
+        ),
+        PieData(
+          value: 5,
+          color: Color(0xFFA6B6DE),
+        ),
+      ],
+      maxValue: 67,
+      datas: [
+        ChartLabeledData(
+          label: "Breath Alcohol Screen",
+          value: 22,
+          color: Color(0xFF1F5890),
+        ),
+        ChartLabeledData(
+          label: "Urine Drug Screen",
+          value: 10,
+          color: Color(0xFF0091D5),
+        ),
+        ChartLabeledData(
+          label: "Oral Fluid Drug Screen",
+          value: 14,
+          color: Color(0xFFA5D8DD),
+        ),
+        ChartLabeledData(
+          label: "Urine Drug Test",
+          value: 9,
+          color: Color(0xFFBBEDF5),
+        ),
+        ChartLabeledData(
+          label: "Oral Fluid Collection",
+          value: 7,
+          color: Color(0xFFA6DEBD),
+        ),
+        ChartLabeledData(
+          label: "Hair Drug Test",
+          value: 5,
+          color: Color(0xFFA6B6DE),
+        ),
+      ],
+      chartDate: '06/04/23',
+    ),
+    ProcessedTests(
+      pies: [
+        PieData(
+          value: 15,
+          color: Color(0xFF1F5890),
+        ),
+        PieData(
+          value: 12,
+          color: Color(0xFF0091D5),
+        ),
+        PieData(
+          value: 18,
+          color: Color(0xFFA5D8DD),
+        ),
+        PieData(
+          value: 10,
+          color: Color(0xFFBBEDF5),
+        ),
+        PieData(
+          value: 6,
+          color: Color(0xFFA6DEBD),
+        ),
+        PieData(
+          value: 3,
+          color: Color(0xFFA6B6DE),
+        ),
+      ],
+      maxValue: 64,
+      datas: [
+        ChartLabeledData(
+          label: "Breath Alcohol Screen",
+          value: 15,
+          color: Color(0xFF1F5890),
+        ),
+        ChartLabeledData(
+          label: "Urine Drug Screen",
+          value: 12,
+          color: Color(0xFF0091D5),
+        ),
+        ChartLabeledData(
+          label: "Oral Fluid Drug Screen",
+          value: 18,
+          color: Color(0xFFA5D8DD),
+        ),
+        ChartLabeledData(
+          label: "Urine Drug Test",
+          value: 10,
+          color: Color(0xFFBBEDF5),
+        ),
+        ChartLabeledData(
+          label: "Oral Fluid Collection",
+          value: 6,
+          color: Color(0xFFA6DEBD),
+        ),
+        ChartLabeledData(
+          label: "Hair Drug Test",
+          value: 3,
+          color: Color(0xFFA6B6DE),
+        ),
+      ],
+      chartDate: '07/04/23',
+    ),
   ];
 
   String? _selectedShow;
 
   String? totalTests = "59";
 
-  final List<PieData> pies = [
+  /* final List<PieData> pies = [
     PieData(
-      value: 59,
-      color: Color(0xFF001E64),
+      value: 19,
+      color: Color(0xFF1F5890),
     ),
-  ];
+    PieData(
+      value: 13,
+      color: Color(0xFF0091D5),
+    ),
+    PieData(
+      value: 16,
+      color: Color(0xFFA5D8DD),
+    ),
+    PieData(
+      value: 11,
+      color: Color(0xFFBBEDF5),
+    ),
+    PieData(
+      value: 8,
+      color: Color(0xFFA6DEBD),
+    ),
+    PieData(
+      value: 4,
+      color: Color(0xFFA6B6DE),
+    ),
+  ]; */
 
   final List<String> titles = [
     'Flutter Swiper is awesome',
@@ -827,132 +1046,146 @@ class _TestsProcessedState extends State<TestsProcessed> {
               ),
               child: Container(
                 width: double.infinity,
-                height: 700,
+                height: 610,
                 child: Swiper(
                   loop: false,
                   itemBuilder: (context, index) {
-                    final image = titles[index];
-                    return Container(
-                      color: Colors.white,
-                      padding: EdgeInsets.only(left: 0, right: 0),
-                      child: Container(
-                        height: 500,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: Color(0xFF1A8CFF), // Blue border
-                            width: 2.0, // Border width
+                    final processedTest = processedTests[index];
+                    return Padding(
+                      padding: const EdgeInsets.only(
+                        top: 1,
+                      ),
+                      child: Card(
+                        color: Colors.white,
+                        elevation: 0,
+                        // Removed unnecessary padding
+                        child: Container(
+                          height: 500,
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: Colors.transparent, // Blue border
+                              width: 2.0, // Border width
+                            ),
                           ),
-                        ),
-                        child: Column(
-                          children: [
-                            // Spacer to push the pie chart up a bit
-                            SizedBox(
-                                height:
-                                    30), // Adjust the height to your preference
-                            Align(
-                              alignment: Alignment.center,
-                              child: EasyPieChart(
-                                animateDuration: Duration(
-                                  milliseconds: 500,
-                                ),
-                                key: const Key('Tests'),
-                                children: pies,
-                                showValue: false,
-                                pieType: PieType.crust,
-                                onTap: null,
-                                gap: 0,
-                                start: 0,
-                                borderWidth: 23,
-                                animateFromEnd: true,
-                                size: 130,
-                                child: Center(
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(top: 38.0),
-                                    child: Column(
-                                      children: [
-                                        Text(
-                                          totalTests!,
-                                          style: TextStyle(
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.bold),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Align(
+                                alignment: Alignment.center,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(top: 28.0),
+                                  child: EasyPieChart(
+                                    animateDuration:
+                                        Duration(milliseconds: 500),
+                                    key: const Key('Tests Processed'),
+                                    children: processedTest.pies,
+                                    showValue: false,
+                                    pieType: PieType.crust,
+                                    onTap: null,
+                                    gap: 0,
+                                    start: 0,
+                                    borderWidth: 23,
+                                    animateFromEnd: true,
+                                    size: 100,
+                                    child: Center(
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(
+                                            top: 25.0), // Reduced padding
+                                        child: Column(
+                                          children: [
+                                            Text(
+                                              processedTest.maxValue
+                                                  .toInt()
+                                                  .toString(),
+                                              style: TextStyle(
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                            Text(
+                                              "Total",
+                                              style: TextStyle(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ],
                                         ),
-                                        Text(
-                                          "Total",
-                                          style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                      ],
+                                      ),
                                     ),
                                   ),
                                 ),
                               ),
-                            ),
-                            SizedBox(height: 20),
-                            Container(
-                              padding: EdgeInsets.all(15),
-                              alignment: Alignment.center,
-                              child: const ColumnChart(
-                                isVisibleLabel: false,
-                                isVisibleBarText: true,
-                                isVisibleSeparatedText: false,
-                                markType: ChartMarkType.integer,
-                                maxValue: 100,
-                                separatedBorderWidth: 0,
-                                separatedLineColor: Colors.white,
-                                datas: [
-                                  ChartLabeledData(
-                                      label: "A",
-                                      value: 90,
-                                      color: Colors.deepOrange),
-                                  ChartLabeledData(
-                                      label: "B",
-                                      value: 70,
-                                      color: Colors.orange),
-                                  ChartLabeledData(
-                                      label: "C", value: 30, color: Colors.red),
-                                  ChartLabeledData(
-                                      label: "D",
-                                      value: 70,
-                                      color: Colors.blue),
-                                ],
+                              Container(
+                                padding: EdgeInsets.only(
+                                  top: 15,
+                                  left: 8.0,
+                                  right: 8.0,
+                                ), // Reduced padding
+                                alignment: Alignment.center,
+                                child: ColumnChart(
+                                  height: 230,
+                                  isVisibleLabel: false,
+                                  isVisibleBarText: true,
+                                  isVisibleSeparatedText: false,
+                                  markType: ChartMarkType.integer,
+                                  maxValue: processedTest.maxValue,
+                                  separatedBorderWidth: 0,
+                                  separatedLineColor: Colors.white,
+                                  datas: processedTest.datas,
+                                ),
                               ),
-                            ),
-                            Center(
-                              child: Text("05/04/23"),
-                            ),
-                            /* Row(
-                              mainAxisAlignment: MainAxisAlignment
-                                  .spaceBetween, // Center the arrows horizontally
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 8.0),
-                                  child: FittedBox(
-                                    fit: BoxFit.contain,
-                                    child: Image.asset(
-                                      "assets/images/icons/navigateLeft.png",
-                                    ),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              Center(
+                                child: Text(
+                                  processedTest.chartDate,
+                                  style: TextStyle(fontSize: 16),
+                                ),
+                              ),
+                              SizedBox(height: 5),
+                              Container(
+                                child: Padding(
+                                  padding: const EdgeInsets.only(
+                                    left: 16.0,
+                                  ),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: legendItems.map((item) {
+                                      return Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 4.0),
+                                        child: Row(
+                                          children: [
+                                            Container(
+                                              width: 16,
+                                              height: 16,
+                                              decoration: BoxDecoration(
+                                                color: item['color'],
+                                                borderRadius:
+                                                    BorderRadius.circular(3),
+                                              ),
+                                            ),
+                                            SizedBox(width: 8),
+                                            Text(
+                                              item['text'],
+                                              style: TextStyle(fontSize: 14),
+                                            ),
+                                          ],
+                                        ),
+                                      );
+                                    }).toList(),
                                   ),
                                 ),
-                                SizedBox(
-                                    width: 16), // Space between the two arrows
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 8.0),
-                                  child: FittedBox(
-                                    fit: BoxFit.contain,
-                                    child: Image.asset(
-                                      "assets/images/icons/navigateRight.png",
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ), */
-                            SizedBox(
-                              height: 10,
-                            ),
-                          ],
+                              ),
+                              SizedBox(
+                                height: 5,
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     );
@@ -987,10 +1220,13 @@ class _TestsProcessedState extends State<TestsProcessed> {
                     ),
                   ),
                   control: const SwiperControl(
-                      iconNext: Icons.arrow_forward_ios,
-                      iconPrevious: Icons.arrow_back_ios,
-                      color: Color(0xFF01B4D2),
-                      size: 25.0),
+                    iconNext: Icons.arrow_forward_ios,
+                    iconPrevious: Icons.arrow_back_ios,
+                    color: Color(0xFF01B4D2),
+                    size: 25.0,
+                    padding: EdgeInsets.symmetric(
+                        horizontal: 10.0), // Adds left and right padding),
+                  ),
                 ),
               ),
             ),
