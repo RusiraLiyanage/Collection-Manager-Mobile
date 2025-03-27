@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:project_code_blue/screens/Dashboard/testCollectionSummary.dart';
 import 'package:provider/provider.dart';
 import '../../AppState/appState.dart';
 import 'package:project_code_blue/screens/Accounting/invoices.dart';
@@ -417,6 +418,7 @@ class _SideMenuState extends State<SideMenu> {
                             appState.setDashboardHome(false),
                             appState.setTestsProcessed(false),
                             appState.setTestSampleResults(false),
+                            appState.setTestCollectionSummary(false),
                             appState.setOnsiteJobs(false),
                             appState.setOnsiteApprovals(false),
                             appState.setClientManagement(false),
@@ -523,6 +525,7 @@ class _SideMenuState extends State<SideMenu> {
                                     appState.setDashboardHome(true),
                                     appState.setTestsProcessed(false),
                                     appState.setTestSampleResults(false),
+                                    appState.setTestCollectionSummary(false),
                                     appState.setOnsiteJobs(false),
                                     appState.setOnsiteApprovals(false),
                                     appState.setClientManagement(false),
@@ -577,6 +580,7 @@ class _SideMenuState extends State<SideMenu> {
                                     appState.setDashboardHome(false),
                                     appState.setTestsProcessed(true),
                                     appState.setTestSampleResults(false),
+                                    appState.setTestCollectionSummary(false),
                                     appState.setOnsiteJobs(false),
                                     appState.setOnsiteApprovals(false),
                                     appState.setClientManagement(false),
@@ -630,6 +634,7 @@ class _SideMenuState extends State<SideMenu> {
                                     appState.setDashboardHome(false),
                                     appState.setTestsProcessed(false),
                                     appState.setTestSampleResults(true),
+                                    appState.setTestCollectionSummary(false),
                                     appState.setOnsiteJobs(false),
                                     appState.setOnsiteApprovals(false),
                                     appState.setClientManagement(false),
@@ -647,6 +652,60 @@ class _SideMenuState extends State<SideMenu> {
                                       MaterialPageRoute(
                                           builder: (context) =>
                                               const TestSampleResults()),
+                                    )
+                                  },
+                                ),
+                                ListTile(
+                                  contentPadding: EdgeInsets.only(left: 20),
+                                  dense: true, // Makes ListTile more compact
+                                  visualDensity: VisualDensity(vertical: -4),
+                                  leading: ImageIcon(
+                                    AssetImage(
+                                        'assets/images/icons/sectionIcon.png'), // Path to your image asset
+                                    color: appState.isTestCollectionSummaryOpen
+                                        ? const Color(0xFF01B4D2)
+                                        : const Color(
+                                            0xFF1A576F), // Optional: Adjust icon color
+                                    size: 32, // Optional: Adjust icon size
+                                  ),
+                                  title: Align(
+                                    alignment: Alignment(-1.1, 0),
+                                    child: Text(
+                                      'Test Collection Summary',
+                                      style: TextStyle(
+                                          color: appState
+                                                  .isTestCollectionSummaryOpen
+                                              ? Color(0xFF01B4D2)
+                                              : Color(0xFF1A576F),
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 16),
+                                    ),
+                                  ),
+                                  onTap: () => {
+                                    appState.setDrawerState(false),
+                                    appState.setHome(false),
+                                    appState.setDashboard(true),
+                                    appState.setDashboardHome(false),
+                                    appState.setTestsProcessed(false),
+                                    appState.setTestSampleResults(false),
+                                    appState.setTestCollectionSummary(true),
+                                    appState.setOnsiteJobs(false),
+                                    appState.setOnsiteApprovals(false),
+                                    appState.setClientManagement(false),
+                                    appState.setCollectionReports(false),
+                                    appState.setAccounting(false),
+                                    appState.setAccountingDashboard(false),
+                                    appState.setTests(false),
+                                    appState.setLicensing(false),
+                                    appState.setITServices(false),
+                                    appState.setInvoices(false),
+                                    appState.setCollectorsCalendar(false),
+                                    appState.setFAQ(false),
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const TestCollectionSummary()),
                                     )
                                   },
                                 ),
@@ -698,6 +757,7 @@ class _SideMenuState extends State<SideMenu> {
                             appState.setDashboardHome(false),
                             appState.setTestsProcessed(false),
                             appState.setTestSampleResults(false),
+                            appState.setTestCollectionSummary(false),
                             appState.setOnsiteJobs(true),
                             appState.setOnsiteApprovals(false),
                             appState.setClientManagement(false),
@@ -765,6 +825,7 @@ class _SideMenuState extends State<SideMenu> {
                             appState.setDashboardHome(false),
                             appState.setTestsProcessed(false),
                             appState.setTestSampleResults(false),
+                            appState.setTestCollectionSummary(false),
                             appState.setOnsiteJobs(false),
                             appState.setOnsiteApprovals(true),
                             appState.setClientManagement(false),
@@ -831,6 +892,7 @@ class _SideMenuState extends State<SideMenu> {
                             appState.setDashboardHome(false),
                             appState.setTestsProcessed(false),
                             appState.setTestSampleResults(false),
+                            appState.setTestCollectionSummary(false),
                             appState.setOnsiteJobs(false),
                             appState.setOnsiteApprovals(false),
                             appState.setClientManagement(true),
@@ -937,6 +999,7 @@ class _SideMenuState extends State<SideMenu> {
                                   appState.setDashboardHome(false),
                                   appState.setTestsProcessed(false),
                                   appState.setTestSampleResults(false),
+                                  appState.setTestCollectionSummary(false),
                                   appState.setOnsiteJobs(false),
                                   appState.setOnsiteApprovals(false),
                                   appState.setClientManagement(false),
@@ -990,6 +1053,7 @@ class _SideMenuState extends State<SideMenu> {
                                   appState.setDashboardHome(false),
                                   appState.setTestsProcessed(false),
                                   appState.setTestSampleResults(false),
+                                  appState.setTestCollectionSummary(false),
                                   appState.setOnsiteJobs(false),
                                   appState.setOnsiteApprovals(false),
                                   appState.setClientManagement(false),
@@ -1040,6 +1104,7 @@ class _SideMenuState extends State<SideMenu> {
                                   appState.setDashboardHome(false),
                                   appState.setTestsProcessed(false),
                                   appState.setTestSampleResults(false),
+                                  appState.setTestCollectionSummary(false),
                                   appState.setOnsiteJobs(false),
                                   appState.setOnsiteApprovals(false),
                                   appState.setClientManagement(false),
@@ -1091,6 +1156,7 @@ class _SideMenuState extends State<SideMenu> {
                                   appState.setDashboardHome(false),
                                   appState.setTestsProcessed(false),
                                   appState.setTestSampleResults(false),
+                                  appState.setTestCollectionSummary(false),
                                   appState.setOnsiteJobs(false),
                                   appState.setOnsiteApprovals(false),
                                   appState.setClientManagement(false),
@@ -1142,6 +1208,7 @@ class _SideMenuState extends State<SideMenu> {
                                   appState.setDashboardHome(false),
                                   appState.setTestsProcessed(false),
                                   appState.setTestSampleResults(false),
+                                  appState.setTestCollectionSummary(false),
                                   appState.setOnsiteJobs(false),
                                   appState.setOnsiteApprovals(false),
                                   appState.setClientManagement(false),
@@ -1210,6 +1277,7 @@ class _SideMenuState extends State<SideMenu> {
                             appState.setDashboardHome(false),
                             appState.setTestsProcessed(false),
                             appState.setTestSampleResults(false),
+                            appState.setTestCollectionSummary(false),
                             appState.setOnsiteJobs(false),
                             appState.setOnsiteApprovals(false),
                             appState.setClientManagement(false),
@@ -1276,6 +1344,7 @@ class _SideMenuState extends State<SideMenu> {
                             appState.setDashboardHome(false),
                             appState.setTestsProcessed(false),
                             appState.setTestSampleResults(false),
+                            appState.setTestCollectionSummary(false),
                             appState.setOnsiteJobs(false),
                             appState.setOnsiteApprovals(false),
                             appState.setClientManagement(false),
@@ -1346,6 +1415,7 @@ class _SideMenuState extends State<SideMenu> {
                             appState.setDashboardHome(false),
                             appState.setTestsProcessed(false),
                             appState.setTestSampleResults(false),
+                            appState.setTestCollectionSummary(false),
                             appState.setOnsiteJobs(false),
                             appState.setOnsiteApprovals(false),
                             appState.setClientManagement(false),

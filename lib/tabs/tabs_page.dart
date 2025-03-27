@@ -32,20 +32,20 @@ class _TabsPageState extends State<TabsPage> {
             _updateState(index: 1, selectedIndex: 0);
             widget.navigationMethod = "app_startup";
           } else {
-            _updateState(index: 4, selectedIndex: 1);
+            _updateState(index: 5, selectedIndex: 1);
           }
           break;
 
         case 2:
-          _updateState(index: 6, selectedIndex: 2);
+          _updateState(index: 7, selectedIndex: 2);
           break;
 
         case 3:
-          _updateState(index: 12, selectedIndex: 3);
+          _updateState(index: 13, selectedIndex: 3);
           break;
 
         case 4:
-          _updateState(index: 7, selectedIndex: 4);
+          _updateState(index: 8, selectedIndex: 4);
           break;
 
         default:

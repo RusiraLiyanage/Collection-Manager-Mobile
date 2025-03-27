@@ -8,6 +8,7 @@ class AppState extends ChangeNotifier {
   bool _isDashboardHome = false;
   bool _isTestsProcessed = false;
   bool _isTestSampleResults = false;
+  bool _isTestCollectionSummary = false;
   bool _isOnsiteJobs = false;
   bool _isOnsiteApprovals = false;
   bool _isClientManagement = false;
@@ -26,6 +27,7 @@ class AppState extends ChangeNotifier {
   bool get isDashboardHomeOpen => _isDashboardHome;
   bool get isTestsProcessedOpen => _isTestsProcessed;
   bool get isTestSampleResultsOpen => _isTestSampleResults;
+  bool get isTestCollectionSummaryOpen => _isTestCollectionSummary;
   bool get isOnsiteJobsOpen => _isOnsiteJobs;
   bool get isOnsiteApprovals => _isOnsiteApprovals;
   bool get isClientManagementOpen => _isClientManagement;
@@ -68,6 +70,11 @@ class AppState extends ChangeNotifier {
 
   void setTestSampleResults(bool isSet) {
     _isTestSampleResults = isSet;
+    notifyListeners();
+  }
+
+  void setTestCollectionSummary(bool isSet) {
+    _isTestCollectionSummary = isSet;
     notifyListeners();
   }
 

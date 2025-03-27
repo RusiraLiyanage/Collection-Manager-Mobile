@@ -7,6 +7,7 @@ import 'package:project_code_blue/screens/Accounting/tests.dart';
 import 'package:project_code_blue/screens/ClientManagement/clientManagement.dart';
 import 'package:project_code_blue/screens/CollectionReports/collectionReports.dart';
 import 'package:project_code_blue/screens/CollectorsCalendar/collectorsCalendar.dart';
+import 'package:project_code_blue/screens/Dashboard/testCollectionSummary.dart';
 import 'package:project_code_blue/screens/Dashboard/testSampleResults.dart';
 import 'package:project_code_blue/screens/Dashboard/testsProcessed.dart';
 import 'package:project_code_blue/screens/HomeBottomApproach/homePage.dart';
@@ -45,6 +46,11 @@ class TabNavigationItem {
           page: const TestSampleResults(),
           icon: Icon(Icons.dashboard),
           title: Text("Test Sample Results"),
+        ),
+        TabNavigationItem(
+          page: const TestCollectionSummary(),
+          icon: Icon(Icons.dashboard),
+          title: Text("Test Collection Summary"),
         ),
         TabNavigationItem(
           page: const OnsiteJobsHomeAgreed(),
