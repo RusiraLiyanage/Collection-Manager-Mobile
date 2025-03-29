@@ -607,53 +607,6 @@ class _TestSampleResultsState extends State<TestSampleResults> {
                               fontSize: 16,
                             ),
                           ),
-                          Row(
-                            children: [
-                              !dateRangeOrSpecific
-                                  ? Text(
-                                      "Date Range",
-                                      style: TextStyle(
-                                        color: Colors.blueAccent,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    )
-                                  : Text(
-                                      "Date Range",
-                                      style: TextStyle(
-                                        color: Colors.grey,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                              Transform.scale(
-                                scale: 0.7,
-                                child: Switch(
-                                  activeColor: Colors.white,
-                                  activeTrackColor: Colors.blueAccent,
-                                  value: dateRangeOrSpecific,
-                                  onChanged: (value) {
-                                    setState(() {
-                                      dateRangeOrSpecific = value;
-                                    });
-                                  },
-                                ),
-                              ),
-                              dateRangeOrSpecific
-                                  ? Text(
-                                      "Specific Date",
-                                      style: TextStyle(
-                                        color: Colors.blueAccent,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    )
-                                  : Text(
-                                      "Specific Date",
-                                      style: TextStyle(
-                                        color: Colors.grey,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                            ],
-                          ),
                         ],
                       ),
                     ),
@@ -665,7 +618,54 @@ class _TestSampleResultsState extends State<TestSampleResults> {
                       ),
                     ),
                     SizedBox(
-                      height: 10,
+                      height: 2,
+                    ),
+                    Row(
+                      children: [
+                        !dateRangeOrSpecific
+                            ? Text(
+                                "Date Range",
+                                style: TextStyle(
+                                  color: Colors.blueAccent,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              )
+                            : Text(
+                                "Date Range",
+                                style: TextStyle(
+                                  color: Colors.grey,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                        Transform.scale(
+                          scale: 0.7,
+                          child: Switch(
+                            activeColor: Colors.white,
+                            activeTrackColor: Color(0xFF1A8CFF),
+                            value: dateRangeOrSpecific,
+                            onChanged: (value) {
+                              setState(() {
+                                dateRangeOrSpecific = value;
+                              });
+                            },
+                          ),
+                        ),
+                        dateRangeOrSpecific
+                            ? Text(
+                                "Specific Date",
+                                style: TextStyle(
+                                  color: Colors.blueAccent,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              )
+                            : Text(
+                                "Specific Date",
+                                style: TextStyle(
+                                  color: Colors.grey,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                      ],
                     ),
                     !dateRangeOrSpecific
                         ? Container(

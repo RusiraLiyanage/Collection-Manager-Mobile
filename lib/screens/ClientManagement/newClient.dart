@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:horizontal_stepper_flutter/horizontal_stepper_flutter.dart';
 import 'package:project_code_blue/screens/ClientManagement/achievedClientCard.dart';
@@ -55,6 +56,52 @@ class _NewCalloutJobState extends State<NewClient> {
   ];
 
   List<AuthorizedRepresentative> representatives = List.empty(growable: true);
+
+  Duration selectedDuration = const Duration(hours: 1, minutes: 0);
+
+  void _showDurationPicker() {
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext context) {
+          Duration tempDuration = selectedDuration;
+
+          return Container(
+            height: 250,
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              children: [
+                const Text("Select Reminder Duration",
+                    style:
+                        TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                Expanded(
+                  child: CupertinoTimerPicker(
+                    mode: CupertinoTimerPickerMode.hm, // Hours & Minutes
+                    initialTimerDuration: selectedDuration,
+                    onTimerDurationChanged: (Duration newDuration) {
+                      tempDuration = newDuration;
+                    },
+                  ),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      selectedDuration = tempDuration;
+                    });
+                    Navigator.pop(context);
+                  },
+                  child: const Text(
+                    "Done",
+                    style: TextStyle(
+                      color: Colors.blue,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          );
+        });
+  }
 
   // ✅ GlobalKey to access NewSiteContact state
   final GlobalKey<CollectorRepresentationState> newRepresentativeState =
@@ -14077,42 +14124,45 @@ class _NewCalloutJobState extends State<NewClient> {
                                     ),
                                   ),
                                 ),
-                                Container(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 12),
-                                  height: 40,
-                                  decoration: BoxDecoration(
-                                    border:
-                                        Border.all(color: Colors.grey.shade400),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Icon(Icons.access_time,
-                                          color: Colors.grey.shade500,
-                                          size: 20),
-                                      const SizedBox(width: 6),
-                                      Text(
-                                        '1h',
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w500,
-                                          color: Colors.black,
+                                GestureDetector(
+                                  onTap: _showDurationPicker,
+                                  child: Container(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 12),
+                                    height: 40,
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                          color: Colors.grey.shade400),
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Icon(Icons.access_time,
+                                            color: Colors.grey.shade500,
+                                            size: 20),
+                                        const SizedBox(width: 6),
+                                        Text(
+                                          '${selectedDuration.inHours}h',
+                                          style: const TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w500,
+                                            color: Colors.black,
+                                          ),
                                         ),
-                                      ),
-                                      const SizedBox(width: 4),
-                                      Text(
-                                        '00m',
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w400,
-                                          color: Colors.grey.shade500,
+                                        const SizedBox(width: 4),
+                                        Text(
+                                          '${selectedDuration.inMinutes % 60}m',
+                                          style: TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w400,
+                                            color: Colors.grey.shade500,
+                                          ),
                                         ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
-                                )
+                                ),
                               ],
                             ),
                           ),

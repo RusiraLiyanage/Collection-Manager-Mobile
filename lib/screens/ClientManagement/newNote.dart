@@ -175,7 +175,7 @@ class _NewNoteState extends State<NewNote> {
                             height: 40,
                             width: double.infinity,
                             child: Material(
-                              elevation: 4,
+                              elevation: 0,
                               shadowColor: Colors.black.withOpacity(0.5),
                               borderRadius: BorderRadius.circular(4),
                               child: TextFormField(
@@ -193,17 +193,15 @@ class _NewNoteState extends State<NewNote> {
                                   ),
                                   enabledBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(4),
-                                    borderSide: const BorderSide(
-                                      color: Colors.white,
-                                      width: 2,
-                                    ),
+                                    borderSide: BorderSide(
+                                        color: Colors.grey.withOpacity(0.3),
+                                        width: 2),
                                   ),
                                   focusedBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(4),
-                                    borderSide: const BorderSide(
-                                      color: Colors.white,
-                                      width: 2,
-                                    ),
+                                    borderSide: BorderSide(
+                                        color: Colors.grey.withOpacity(0.3),
+                                        width: 2),
                                   ),
                                   errorBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(4),
