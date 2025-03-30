@@ -90,6 +90,7 @@ class NoteCard extends StatelessWidget {
                           showDialog(
                             context: context,
                             builder: (context) => AlertDialog(
+                              backgroundColor: Colors.white,
                               title: const Text('Delete Note'),
                               content:
                                   const Text('Do you wanna delete this note ?'),

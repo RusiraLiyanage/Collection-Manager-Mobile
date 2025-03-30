@@ -97,6 +97,7 @@ class _CollectorRepresentationState extends State<CollectorRepresentation> {
                         width: 16, // Adjust the size
                         height: 16,
                       ),
+                      dropdownColor: Colors.white,
                       elevation: 20,
                       decoration: InputDecoration(
                         fillColor: Colors.white,
