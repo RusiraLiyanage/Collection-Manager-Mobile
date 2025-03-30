@@ -34,6 +34,7 @@ class _TestCollectionSummaryState extends State<TestCollectionSummary> {
   void initState() {
     _selectedLocation = locationValues.first;
     _selectedTime = timeValues.first;
+    _selectedTime2 = timeValues2.first;
     // TODO: implement initState
     super.initState();
   }
@@ -1228,7 +1229,7 @@ class _TestCollectionSummaryState extends State<TestCollectionSummary> {
                                           ],
                                         ),
                                         child: DropdownButtonFormField<String>(
-                                          value: _selectedTime,
+                                          value: _selectedTime2,
                                           decoration: InputDecoration(
                                             contentPadding:
                                                 const EdgeInsets.symmetric(

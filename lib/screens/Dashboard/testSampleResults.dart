@@ -42,13 +42,14 @@ class _TestSampleResultsState extends State<TestSampleResults> {
     {'color': Color(0xFF0091D5), 'text': 'Refusal'},
   ];
 
-  DateTime? _selectedTestsProcessedStartDate;
-  DateTime? _selectedTestsProcessedEndDate;
+  DateTime? _selectedTestSampleResultsStartDate;
+  DateTime? _selectedTestSampleResultsEndDate;
   String? _selectedTheYear;
   String? _selectedTheMonth;
   String? _selectedTheDay;
-  Future<void> _selectTestProcessedStartDate(BuildContext context) async {
-    DateTime initialDate = _selectedTestsProcessedStartDate ?? DateTime.now();
+  Future<void> _selectTestSampleResultsStartDate(BuildContext context) async {
+    DateTime initialDate =
+        _selectedTestSampleResultsStartDate ?? DateTime.now();
     final DateTime? picked = await showDatePicker(
       context: context,
       initialDate: initialDate,
@@ -56,67 +57,78 @@ class _TestSampleResultsState extends State<TestSampleResults> {
       lastDate: DateTime(2101),
       builder: (BuildContext context, Widget? child) {
         return Theme(
-          data: Theme.of(context).copyWith(
-            colorScheme: ColorScheme.light(
-              primary: Colors.blue, // Header background color
-              onPrimary: Colors.white, // Header text color
-              onSurface: Colors.black, // Text color in the calendar
-              surface: Color(0xFF01B4D2), // Background color for the dialog
+          data: ThemeData(
+            colorScheme: const ColorScheme.highContrastLight(
+              primary: Color(0xFF01B4D2),
             ),
-            dialogBackgroundColor: Colors.yellow,
-            textButtonTheme: TextButtonThemeData(
-              style: TextButton.styleFrom(
-                foregroundColor:
-                    Colors.black, // Color for OK and Cancel buttons
-              ),
-            ), // Dialog background color
+            datePickerTheme: const DatePickerThemeData(
+              backgroundColor: Colors.white,
+            ),
           ),
           child: child!,
         );
       },
     );
 
-    if (picked != null && picked != _selectedTestsProcessedStartDate) {
+    if (picked != null && picked != _selectedTestSampleResultsStartDate) {
       setState(() {
-        _selectedTestsProcessedStartDate = picked;
+        _selectedTestSampleResultsStartDate = picked;
         _testProcessedStartDateController.text =
             "${picked.day}/${picked.month}/${picked.year}"; // Display the selected date
       });
     }
   }
 
-  Future<void> _selectTestProcessedEndDate(BuildContext context) async {
-    DateTime initialDate = _selectedTestsProcessedEndDate ?? DateTime.now();
+  Future<void> _selectTestSampleResultsEndDate(BuildContext context) async {
+    if (_selectedTestSampleResultsStartDate == null) {
+      // If no Start Date is selected, show an alert or prompt
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            backgroundColor: Colors.white,
+            title: const Text("Start Date Required"),
+            content: const Text(
+                "Please select a Start Date before choosing an End Date."),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(),
+                child: const Text("OK"),
+              ),
+            ],
+          );
+        },
+      );
+      return; // Exit the function if Start Date is not selected
+    }
+    DateTime initialDate = (_selectedTestSampleResultsStartDate != null)
+        ? _selectedTestSampleResultsStartDate!.add(const Duration(days: 1))
+        : DateTime(2000);
     final DateTime? picked = await showDatePicker(
       context: context,
       initialDate: initialDate,
-      firstDate: DateTime(2000),
+      firstDate: (_selectedTestSampleResultsStartDate != null)
+          ? _selectedTestSampleResultsStartDate!.add(const Duration(days: 1))
+          : DateTime(2000), // Safe null fallback
       lastDate: DateTime(2101),
       builder: (BuildContext context, Widget? child) {
         return Theme(
-          data: Theme.of(context).copyWith(
-            colorScheme: ColorScheme.light(
-              primary: Colors.blue, // Header background color
-              onPrimary: Colors.white, // Header text color
-              onSurface: Colors.black, // Text color in the calendar
-              surface: Color(0xFF01B4D2), // Background color for the dialog
+          data: ThemeData(
+            colorScheme: const ColorScheme.highContrastLight(
+              primary: Color(0xFF01B4D2),
             ),
-            dialogBackgroundColor: Colors.yellow,
-            textButtonTheme: TextButtonThemeData(
-              style: TextButton.styleFrom(
-                foregroundColor:
-                    Colors.black, // Color for OK and Cancel buttons
-              ),
-            ), // Dialog background color
+            datePickerTheme: const DatePickerThemeData(
+              backgroundColor: Colors.white,
+            ),
           ),
           child: child!,
         );
       },
     );
 
-    if (picked != null && picked != _selectedTestsProcessedEndDate) {
+    if (picked != null && picked != _selectedTestSampleResultsEndDate) {
       setState(() {
-        _selectedTestsProcessedEndDate = picked;
+        _selectedTestSampleResultsEndDate = picked;
         _testProcessedEndDateController.text =
             "${picked.day}/${picked.month}/${picked.year}"; // Display the selected date
       });
@@ -715,7 +727,7 @@ class _TestSampleResultsState extends State<TestSampleResults> {
                                                   _testProcessedStartDateController,
                                               readOnly: true,
                                               onTap: () =>
-                                                  _selectTestProcessedStartDate(
+                                                  _selectTestSampleResultsStartDate(
                                                       context),
                                               decoration: InputDecoration(
                                                 contentPadding:
@@ -817,7 +829,7 @@ class _TestSampleResultsState extends State<TestSampleResults> {
                                                   _testProcessedEndDateController,
                                               readOnly: true,
                                               onTap: () =>
-                                                  _selectTestProcessedEndDate(
+                                                  _selectTestSampleResultsEndDate(
                                                       context),
                                               decoration: InputDecoration(
                                                 contentPadding:

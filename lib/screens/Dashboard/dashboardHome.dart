@@ -79,20 +79,13 @@ class _DashboardHomeState extends State<DashboardHome> {
       lastDate: DateTime(2101),
       builder: (BuildContext context, Widget? child) {
         return Theme(
-          data: Theme.of(context).copyWith(
-            colorScheme: ColorScheme.light(
-              primary: Colors.blue, // Header background color
-              onPrimary: Colors.white, // Header text color
-              onSurface: Colors.black, // Text color in the calendar
-              surface: Color(0xFF01B4D2), // Background color for the dialog
+          data: ThemeData(
+            colorScheme: const ColorScheme.highContrastLight(
+              primary: Color(0xFF01B4D2),
             ),
-            dialogBackgroundColor: Colors.yellow,
-            textButtonTheme: TextButtonThemeData(
-              style: TextButton.styleFrom(
-                foregroundColor:
-                    Colors.black, // Color for OK and Cancel buttons
-              ),
-            ), // Dialog background color
+            datePickerTheme: const DatePickerThemeData(
+              backgroundColor: Colors.white,
+            ),
           ),
           child: child!,
         );

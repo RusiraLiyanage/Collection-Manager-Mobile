@@ -407,20 +407,13 @@ class _TestsProcessedState extends State<TestsProcessed> {
       lastDate: DateTime(2101),
       builder: (BuildContext context, Widget? child) {
         return Theme(
-          data: Theme.of(context).copyWith(
-            colorScheme: ColorScheme.light(
-              primary: Colors.blue, // Header background color
-              onPrimary: Colors.white, // Header text color
-              onSurface: Colors.black, // Text color in the calendar
-              surface: Color(0xFF01B4D2), // Background color for the dialog
+          data: ThemeData(
+            colorScheme: const ColorScheme.highContrastLight(
+              primary: Color(0xFF01B4D2),
             ),
-            dialogBackgroundColor: Colors.yellow,
-            textButtonTheme: TextButtonThemeData(
-              style: TextButton.styleFrom(
-                foregroundColor:
-                    Colors.black, // Color for OK and Cancel buttons
-              ),
-            ), // Dialog background color
+            datePickerTheme: const DatePickerThemeData(
+              backgroundColor: Colors.white,
+            ),
           ),
           child: child!,
         );
@@ -437,28 +430,46 @@ class _TestsProcessedState extends State<TestsProcessed> {
   }
 
   Future<void> _selectTestProcessedEndDate(BuildContext context) async {
-    DateTime initialDate = _selectedTestsProcessedEndDate ?? DateTime.now();
+    if (_selectedTestsProcessedStartDate == null) {
+      // If no Start Date is selected, show an alert or prompt
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            backgroundColor: Colors.white,
+            title: const Text("Start Date Required"),
+            content: const Text(
+                "Please select a Start Date before choosing an End Date."),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(),
+                child: const Text("OK"),
+              ),
+            ],
+          );
+        },
+      );
+      return; // Exit the function if Start Date is not selected
+    }
+    DateTime initialDate = (_selectedTestsProcessedStartDate != null)
+        ? _selectedTestsProcessedStartDate!.add(const Duration(days: 1))
+        : DateTime(2000);
     final DateTime? picked = await showDatePicker(
       context: context,
       initialDate: initialDate,
-      firstDate: DateTime(2000),
+      firstDate: (_selectedTestsProcessedStartDate != null)
+          ? _selectedTestsProcessedStartDate!.add(const Duration(days: 1))
+          : DateTime(2000), // Safe null fallback
       lastDate: DateTime(2101),
       builder: (BuildContext context, Widget? child) {
         return Theme(
-          data: Theme.of(context).copyWith(
-            colorScheme: ColorScheme.light(
-              primary: Colors.blue, // Header background color
-              onPrimary: Colors.white, // Header text color
-              onSurface: Colors.black, // Text color in the calendar
-              surface: Color(0xFF01B4D2), // Background color for the dialog
+          data: ThemeData(
+            colorScheme: const ColorScheme.highContrastLight(
+              primary: Color(0xFF01B4D2),
             ),
-            dialogBackgroundColor: Colors.yellow,
-            textButtonTheme: TextButtonThemeData(
-              style: TextButton.styleFrom(
-                foregroundColor:
-                    Colors.black, // Color for OK and Cancel buttons
-              ),
-            ), // Dialog background color
+            datePickerTheme: const DatePickerThemeData(
+              backgroundColor: Colors.white,
+            ),
           ),
           child: child!,
         );
@@ -595,6 +606,9 @@ class _TestsProcessedState extends State<TestsProcessed> {
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
+                              ),
+                              SizedBox(
+                                width: 5,
                               ),
                               Container(
                                 width: 190,
@@ -793,6 +807,9 @@ class _TestsProcessedState extends State<TestsProcessed> {
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
+                            ),
+                            SizedBox(
+                              width: 8,
                             ),
                             Container(
                               width: 159,
