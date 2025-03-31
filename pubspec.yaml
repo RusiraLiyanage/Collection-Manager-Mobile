@@ -118,6 +118,8 @@ flutter:
     - assets/images/icons/calendarDate.png
     - assets/images/icons/contractAchieveOpened.png
     - assets/images/icons/contractAchieveClosed.png
+    - assets/images/icons/locationIcon2.png
+    - assets/images/icons/excelExport.png
     - assets/images/icons/theClock.png
     - assets/images/icons/newCalloutIcon.png
     - assets/images/icons/newCalloutOpen.png
