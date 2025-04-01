@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_code_blue/screens/CollectionReports/collectionReportPreview.dart';
 
 class ReportingCard extends StatelessWidget {
   final Map<String, String> report;
@@ -148,8 +149,16 @@ class ReportingCard extends StatelessWidget {
                             ),
                             GestureDetector(
                               onTap: () {
-                                //String filePath = attachment["filePath"]!;
-                                // _launchPDF(filePath); // Launch the PDF
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        CollectionReportPreview(
+                                      reportID: report["reportID"]!,
+                                      currentStatus: report["sentByStatus"]!,
+                                    ),
+                                  ),
+                                );
                               },
                               child: FittedBox(
                                 fit: BoxFit.cover,

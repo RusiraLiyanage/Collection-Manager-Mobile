@@ -605,7 +605,7 @@ class _InvalidResultsReportState extends State<InvalidResultsReport> {
                   child: Align(
                     alignment: Alignment.topLeft,
                     child: Text(
-                      "Scroll Left and Right of the screen to see the hidden data",
+                      "Scroll Left and Right to see the hidden table data",
                       style: TextStyle(fontSize: 14, color: Colors.redAccent),
                     ),
                   ),
@@ -638,6 +638,12 @@ class _InvalidResultsReportState extends State<InvalidResultsReport> {
                               // Add other customizations here
                             ),
                             cardTheme: const CardTheme(color: Colors.white),
+                            dropdownMenuTheme: DropdownMenuThemeData(
+                              menuStyle: MenuStyle(
+                                backgroundColor: WidgetStateProperty.all(Colors
+                                    .white), // Set dropdown background color
+                              ),
+                            ),
                           ),
                           child: PaginatedDataTable(
                             columns: const [

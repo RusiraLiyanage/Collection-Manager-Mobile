@@ -50,6 +50,7 @@ dependencies:
   easy_pie_chart: ^1.0.2
   card_swiper: ^3.0.1
   flutter_chartx: ^1.0.0-dev8
+  syncfusion_flutter_calendar: ^29.1.35
 
 dev_dependencies:
   flutter_test:
@@ -121,6 +122,12 @@ flutter:
     - assets/images/icons/locationIcon2.png
     - assets/images/icons/excelExport.png
     - assets/images/icons/theClock.png
+    - assets/images/icons/people.png
+    - assets/images/icons/sent_by.png
+    - assets/images/icons/sent_time.png
+    - assets/images/icons/sendByCollector.png
+    - assets/images/icons/date_calendar.png
+    - assets/images/icons/download.png
     - assets/images/icons/newCalloutIcon.png
     - assets/images/icons/newCalloutOpen.png
     - assets/images/icons/testsProcessed.png
@@ -151,6 +158,8 @@ flutter:
     - assets/images/icons/onSiteApprovalsIcon.png
     - assets/images/icons/clientManagementIcon.png
     - assets/images/icons/newJobIcon.png
+    - assets/images/icons/successfullySent.png
+    - assets/images/icons/errorSendingReport.png
     - assets/images/icons/OnsiteJobs/calander_icon.png
     - assets/images/icons/OnsiteJobs/time_icon.png
     - assets/images/icons/OnsiteJobs/duration_icon.png
@@ -160,6 +169,12 @@ flutter:
     - assets/images/bottomNavigationIcons/selectedIcons/clientManagement_selected.png
     - assets/images/bottomNavigationIcons/selectedIcons/collectionReports_selected.png
     - assets/images/bottomNavigationIcons/selectedIcons/accounting_selected.png
+    - assets/images/bottomNavigationIcons/selectedIcons/dashboardTrueColor.png
+    - assets/images/bottomNavigationIcons/selectedIcons/jobsTrueColor.png
+    - assets/images/bottomNavigationIcons/selectedIcons/dashboardTrueColor.png
+    - assets/images/bottomNavigationIcons/selectedIcons/reportsTrueColor.png
+    - assets/images/bottomNavigationIcons/selectedIcons/accountingTrueColor.png
+    - assets/images/bottomNavigationIcons/selectedIcons/cmTrueColor.png
     - assets/images/bottomNavigationIcons/unselectedIcons/dashboard_unselected.png
     - assets/images/bottomNavigationIcons/unselectedIcons/onsiteJobs_unselected.png
     - assets/images/bottomNavigationIcons/unselectedIcons/clientManagement_unselected.png

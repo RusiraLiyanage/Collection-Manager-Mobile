@@ -23,60 +23,70 @@ class _CollectionReportsState extends State<CollectionReports> {
 
   final List<Map<String, String>> reports = [
     {
+      "reportID": "1",
       "title": "BBB - Mt Arthur",
       "noOfDonors": "14",
       "sentByStatus": "Send By Collector",
       "location": "Mt Arthur"
     },
     {
+      "reportID": "2",
       "title": "BBB - Mt Arthur",
       "noOfDonors": "14",
       "sentByStatus": "Send By Collector",
       "location": "Mt Arthur"
     },
     {
+      "reportID": "3",
       "title": "BBB - Mt Arthur",
       "noOfDonors": "14",
       "sentByStatus": "Successfully Sent",
       "location": "Mt Arthur"
     },
     {
+      "reportID": "4",
       "title": "BBB - Mt Arthur",
       "noOfDonors": "14",
       "sentByStatus": "Successfully Sent",
       "location": "Mt Arthur"
     },
     {
+      "reportID": "5",
       "title": "BBB - Mt Arthur",
       "noOfDonors": "14",
       "sentByStatus": "Error Sending Report",
       "location": "Mt Arthur"
     },
     {
+      "reportID": "6",
       "title": "BBB - Mt Arthur",
       "noOfDonors": "14",
       "sentByStatus": "Successfully Sent",
       "location": "Mt Arthur"
     },
     {
+      "reportID": "7",
       "title": "BBB - Mt Arthur",
       "noOfDonors": "14",
       "sentByStatus": "Error Sending Report",
       "location": "Mt Arthur"
     },
     {
+      "reportID": "8",
       "title": "BBB - Mt Arthur",
       "noOfDonors": "14",
       "sentByStatus": "Send By Collector",
       "location": "Mt Arthur"
     },
     {
+      "reportID": "9",
       "title": "BBB - Mt Arthur",
       "noOfDonors": "14",
       "sentByStatus": "Successfully Sent",
       "location": "Mt Arthur"
     },
     {
+      "reportID": "10",
       "title": "BBB - Mt Arthur",
       "noOfDonors": "14",
       "sentByStatus": "Error Sending Report",
@@ -132,8 +142,11 @@ class _CollectionReportsState extends State<CollectionReports> {
       backgroundColor: Color(0xFFF2F2F2),
       extendBodyBehindAppBar: true, // Extends body behind the AppBar
       drawer: SideMenu(
-        navigationType: "subPartNavigation",
+        navigationType: "bottomNavigation",
       ),
+      onDrawerChanged: (isOpen) {
+        appState.setDrawerState(isOpen); // Update global drawer state
+      },
       appBar: MyAppBar(),
       body: Scrollbar(
         thumbVisibility: true,

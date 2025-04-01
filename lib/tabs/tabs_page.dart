@@ -141,7 +141,7 @@ class _TabsPageState extends State<TabsPage> {
                               icon: Image.asset(
                                 _selectedIndex == 0 &&
                                         widget.firstInstance == false
-                                    ? 'assets/images/bottomNavigationIcons/selectedIcons/dashboard_selected.png' // Selected image
+                                    ? 'assets/images/bottomNavigationIcons/selectedIcons/dashboardTrueColor.png' // Selected image
                                     : 'assets/images/bottomNavigationIcons/unselectedIcons/dashboard_unselected.png', // Unselected image
                                 height: 24, // Increase height
                                 fit: BoxFit
@@ -153,7 +153,7 @@ class _TabsPageState extends State<TabsPage> {
                               icon: Image.asset(
                                 _selectedIndex == 1 &&
                                         widget.firstInstance == false
-                                    ? 'assets/images/bottomNavigationIcons/selectedIcons/onsiteJobs_selected.png' // Selected image
+                                    ? 'assets/images/bottomNavigationIcons/selectedIcons/jobsTrueColor.png' // Selected image
                                     : 'assets/images/bottomNavigationIcons/unselectedIcons/onsiteJobs_unselected.png', // Unselected image
                                 height: 28, // Increase height
                                 fit: BoxFit
@@ -167,7 +167,7 @@ class _TabsPageState extends State<TabsPage> {
                                 child: Image.asset(
                                   _selectedIndex == 2 &&
                                           widget.firstInstance == false
-                                      ? 'assets/images/bottomNavigationIcons/selectedIcons/clientManagement_selected.png' // Selected image
+                                      ? 'assets/images/bottomNavigationIcons/selectedIcons/cmTrueColor.png' // Selected image
                                       : 'assets/images/bottomNavigationIcons/unselectedIcons/clientManagement_unselected.png', // Unselected image
                                   height: 28, // Increase height
                                   fit: BoxFit
@@ -180,7 +180,7 @@ class _TabsPageState extends State<TabsPage> {
                               icon: Image.asset(
                                 _selectedIndex == 3 &&
                                         widget.firstInstance == false
-                                    ? 'assets/images/bottomNavigationIcons/selectedIcons/collectionReports_selected.png' // Selected image
+                                    ? 'assets/images/bottomNavigationIcons/selectedIcons/reportsTrueColor.png' // Selected image
                                     : 'assets/images/bottomNavigationIcons/unselectedIcons/collectionReports_unselected.png', // Unselected image
                                 height: 28, // Increase height
                                 fit: BoxFit
@@ -192,7 +192,7 @@ class _TabsPageState extends State<TabsPage> {
                               icon: Image.asset(
                                 _selectedIndex == 4 &&
                                         widget.firstInstance == false
-                                    ? 'assets/images/bottomNavigationIcons/selectedIcons/accounting_selected.png' // Selected image
+                                    ? 'assets/images/bottomNavigationIcons/selectedIcons/accountingTrueColor.png' // Selected image
                                     : 'assets/images/bottomNavigationIcons/unselectedIcons/accounting_unselected.png', // Unselected image
                                 height: 28, // Increase height
                                 fit: BoxFit
