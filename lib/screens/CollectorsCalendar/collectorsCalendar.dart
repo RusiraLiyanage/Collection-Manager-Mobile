@@ -14,13 +14,15 @@ class CollectorsCalendar extends StatefulWidget {
 }
 
 class Meeting {
-  Meeting(this.eventName, this.from, this.to, this.background, this.isAllDay);
+  Meeting(this.eventName, this.from, this.to, this.background, this.isAllDay,
+      this.reason);
 
   String eventName;
   DateTime from;
   DateTime to;
   Color background;
   bool isAllDay;
+  String reason;
 }
 
 class MeetingDataSource extends CalendarDataSource {
@@ -43,6 +45,9 @@ class MeetingDataSource extends CalendarDataSource {
   @override
   bool isAllDay(int index) => _getMeetingData(index).isAllDay;
 
+  @override
+  String getReason(int index) => _getMeetingData(index).reason;
+
   Meeting _getMeetingData(int index) {
     final dynamic meeting = appointments![index];
     return meeting as Meeting;
@@ -51,29 +56,91 @@ class MeetingDataSource extends CalendarDataSource {
 
 class _CollectorsCalendarState extends State<CollectorsCalendar> {
   final ScrollController _scrollController = ScrollController();
+  String? _selectedValue;
+  String? _selectedCollector;
   DateTime? _selectedDate;
   List<Meeting> _appointments = [];
+  final List<String> items = [
+    "All",
+    "Newcastle City",
+    "Sydney Office",
+    "Melbourne Branch",
+  ]; //
+
+  final List<String> collectors = [
+    "All",
+    "Collector 1",
+    "Collector 2",
+    "Collector 3",
+    "Collector 4",
+  ]; //
 
   List<Meeting> _getDataSource() {
     return [
-      Meeting('Team Meeting', DateTime(2025, 4, 2, 10, 0),
-          DateTime(2025, 4, 2, 11, 0), const Color(0xFF0F8644), false),
-      Meeting('Extended Meeting', DateTime(2025, 4, 2, 12, 0),
-          DateTime(2025, 4, 2, 13, 0), const Color(0xFF00B4D1), false),
-      Meeting('Project Deadline', DateTime(2025, 4, 5, 9, 0),
-          DateTime(2025, 4, 5, 10, 0), const Color(0xFFD32F2F), false),
-      Meeting('Client Call', DateTime(2025, 4, 8, 14, 0),
-          DateTime(2025, 4, 8, 15, 0), const Color(0xFF1976D2), false),
-      Meeting('Workshop', DateTime(2025, 4, 12, 13, 0),
-          DateTime(2025, 4, 12, 16, 0), const Color(0xFFFFA000), false),
-      Meeting('Conference', DateTime(2025, 4, 15, 9, 0),
-          DateTime(2025, 4, 15, 17, 0), const Color(0xFF8E24AA), false),
+      Meeting(
+          'Unavailable',
+          DateTime(2025, 4, 2, 10, 0),
+          DateTime(2025, 4, 2, 11, 0),
+          const Color(0xFFD32F2F),
+          false,
+          "Due to unforseen circumstances, my attendance will no longer be proceeding"),
+      Meeting(
+          'Unavailable',
+          DateTime(2025, 4, 2, 12, 0),
+          DateTime(2025, 4, 2, 13, 0),
+          const Color(0xFFD32F2F),
+          false,
+          "Due to unforseen circumstances, my attendance will no longer be proceeding"),
+      Meeting(
+          'Unavailable',
+          DateTime(2025, 4, 2, 12, 0),
+          DateTime(2025, 4, 2, 13, 0),
+          const Color(0xFFD32F2F),
+          false,
+          "Due to unforseen circumstances, my attendance will no longer be proceeding"),
+      Meeting(
+          'Unavailable',
+          DateTime(2025, 4, 5, 9, 0),
+          DateTime(2025, 4, 5, 10, 0),
+          const Color(0xFFD32F2F),
+          false,
+          "Due to unforseen circumstances, my attendance will no longer be proceeding"),
+      Meeting(
+          'Unavailable',
+          DateTime(2025, 4, 8, 14, 0),
+          DateTime(2025, 4, 8, 15, 0),
+          const Color(0xFFD32F2F),
+          false,
+          "Due to unforseen circumstances, my attendance will no longer be proceeding"),
+      Meeting(
+          'Leave',
+          DateTime(2025, 4, 12, 13, 0),
+          DateTime(2025, 4, 12, 16, 0),
+          const Color(0xFFEB41E4),
+          false,
+          "I am on leave as I am not doing well"),
+      Meeting(
+          'Leave',
+          DateTime(2025, 4, 15, 9, 0),
+          DateTime(2025, 4, 15, 17, 0),
+          const Color(0xFFEB41E4),
+          false,
+          "I am on leave as the babysitters in Australia are so expensive"),
+      Meeting(
+          'Leave',
+          DateTime(2025, 4, 2, 13, 0),
+          DateTime(2025, 4, 2, 14, 0),
+          const Color(0xFFEB41E4),
+          false,
+          "I am on leave as the babysitters in Australia are so expensive"),
     ];
   }
 
   void initState() {
     super.initState();
     DateTime today = DateTime.now();
+    _selectedValue = items.first;
+    _selectedCollector = collectors.first;
     _selectedDate = today;
     _appointments = _getDataSource()
         .where((meeting) =>
@@ -195,27 +262,261 @@ class _CollectorsCalendarState extends State<CollectorsCalendar> {
               /* SizedBox(
                 height: 10,
               ), */
+              Align(
+                alignment: Alignment.topLeft,
+                child: Container(
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                      left: 8.0,
+                      right: 8.0,
+                      top: 10.0,
+                    ),
+                    child: Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(right: 52.0),
+                          child: Text(
+                            "Service Office",
+                            style: TextStyle(
+                              color: Color(0xFF005277),
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        Container(
+                          width: 190,
+                          height: 28,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(8),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.white.withOpacity(
+                                    0.2), // Shadow color with opacity
+                                spreadRadius: 1, // How much the shadow spreads
+                                blurRadius: 1, // How blurry the shadow is
+                                offset: Offset(
+                                    0, 0), // Offset for shadow position (x, y)
+                              ),
+                            ],
+                          ),
+                          child: DropdownButtonFormField<String>(
+                            value: _selectedValue,
+                            decoration: InputDecoration(
+                              contentPadding: const EdgeInsets.symmetric(
+                                  horizontal: 8, vertical: 4),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8),
+                                borderSide: BorderSide(
+                                    color: Colors.transparent, width: 2),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8),
+                                borderSide: BorderSide(
+                                    color: Colors.transparent,
+                                    width: 2), // Border colo
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8),
+                                borderSide: BorderSide(
+                                    color: Colors.transparent,
+                                    width: 2), // Border color when focused
+                              ),
+                              fillColor: Colors
+                                  .white, // Set the background color to white
+                              filled: true,
+                            ),
+                            icon: Icon(
+                              Icons.arrow_drop_down_outlined,
+                              color: Color(
+                                0xFF71717A,
+                              ),
+                            ),
+                            items: items
+                                .map((item) => DropdownMenuItem(
+                                      value: item,
+                                      child: Text(
+                                        item,
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          color: Color(0xFF007AFF),
+                                        ),
+                                      ),
+                                    ))
+                                .toList(),
+                            onChanged: (value) {
+                              setState(() {
+                                _selectedValue = value;
+                              });
+                            },
+                          ),
+                        ),
+                        SizedBox(
+                          height: 3,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              Align(
+                alignment: Alignment.topLeft,
+                child: Container(
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                      left: 8.0,
+                      right: 8.0,
+                      top: 10.0,
+                    ),
+                    child: Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(right: 52.0),
+                          child: Text(
+                            "Collector",
+                            style: TextStyle(
+                              color: Color(0xFF005277),
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 35,
+                        ),
+                        Container(
+                          width: 190,
+                          height: 28,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(8),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.white.withOpacity(
+                                    0.2), // Shadow color with opacity
+                                spreadRadius: 1, // How much the shadow spreads
+                                blurRadius: 1, // How blurry the shadow is
+                                offset: Offset(
+                                    0, 0), // Offset for shadow position (x, y)
+                              ),
+                            ],
+                          ),
+                          child: DropdownButtonFormField<String>(
+                            value: _selectedCollector,
+                            decoration: InputDecoration(
+                              contentPadding: const EdgeInsets.symmetric(
+                                  horizontal: 8, vertical: 4),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8),
+                                borderSide: BorderSide(
+                                    color: Colors.transparent, width: 2),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8),
+                                borderSide: BorderSide(
+                                    color: Colors.transparent,
+                                    width: 2), // Border colo
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8),
+                                borderSide: BorderSide(
+                                    color: Colors.transparent,
+                                    width: 2), // Border color when focused
+                              ),
+                              fillColor: Colors
+                                  .white, // Set the background color to white
+                              filled: true,
+                            ),
+                            icon: Icon(
+                              Icons.arrow_drop_down_outlined,
+                              color: Color(
+                                0xFF71717A,
+                              ),
+                            ),
+                            items: collectors
+                                .map((item) => DropdownMenuItem(
+                                      value: item,
+                                      child: Text(
+                                        item,
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          color: Color(0xFF007AFF),
+                                        ),
+                                      ),
+                                    ))
+                                .toList(),
+                            onChanged: (value) {
+                              setState(() {
+                                _selectedCollector = value;
+                              });
+                            },
+                          ),
+                        ),
+                        SizedBox(
+                          height: 3,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
               Container(
                 child: SfCalendar(
+                  showTodayButton: true,
+                  firstDayOfWeek: 1,
                   showNavigationArrow: true,
                   todayHighlightColor: Color(0xFF007AFF),
                   cellBorderColor: Colors.white,
                   backgroundColor: Colors.white,
+                  headerStyle: CalendarHeaderStyle(
+                    backgroundColor: Colors.white,
+                    textStyle: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  viewHeaderStyle: ViewHeaderStyle(
+                    backgroundColor: Colors.white,
+                    dayTextStyle: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      color: Colors.black,
+                    ),
+                  ),
                   view: CalendarView.month,
+                  showDatePickerButton: true,
                   dataSource: MeetingDataSource(_getDataSource()),
                   onTap: _onCalendarTapped,
                   monthViewSettings: const MonthViewSettings(
                     appointmentDisplayMode:
                         MonthAppointmentDisplayMode.indicator,
                   ),
+                  selectionDecoration: BoxDecoration(
+                    color: Colors.blueAccent
+                        .withOpacity(0.3), // Change the color here
+                    border: Border.all(
+                        color: Colors.blue, width: 2), // Optional border
+                    borderRadius:
+                        BorderRadius.circular(5), // Optional rounded corners
+                  ),
                 ),
               ),
+
               SizedBox(
                 height: 10,
               ),
               _appointments.isNotEmpty
                   ? ListView.builder(
-                      padding: EdgeInsets.all(0),
+                      padding: EdgeInsets.only(
+                        bottom: 100,
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                      ),
                       shrinkWrap: true,
                       physics:
                           NeverScrollableScrollPhysics(), // Prevents nested scroll issues
@@ -239,7 +540,7 @@ class _CollectorsCalendarState extends State<CollectorsCalendar> {
                                 // Vertical color bar
                                 Container(
                                   width: 5,
-                                  height: 50,
+                                  height: 90,
                                   decoration: BoxDecoration(
                                     color: meeting.background,
                                     borderRadius: BorderRadius.circular(3),
@@ -260,8 +561,22 @@ class _CollectorsCalendarState extends State<CollectorsCalendar> {
                                             fontWeight: FontWeight.bold),
                                       ),
                                       SizedBox(height: 4),
+                                      Row(
+                                        children: [
+                                          Image.asset(
+                                            "assets/images/icons/newClient.png",
+                                            width: 25,
+                                            height: 25,
+                                          ),
+                                          SizedBox(
+                                            width: 5,
+                                          ),
+                                          Text("Mr. Rusira Rusira !!")
+                                        ],
+                                      ),
+                                      SizedBox(height: 4),
                                       Text(
-                                        "Reason", // Placeholder for a reason (can be replaced with real data)
+                                        meeting.reason,
                                         style: TextStyle(
                                             fontSize: 14, color: Colors.grey),
                                       ),
@@ -283,7 +598,10 @@ class _CollectorsCalendarState extends State<CollectorsCalendar> {
                                     Text(
                                       "${_formatTime(meeting.to)}",
                                       style: TextStyle(
-                                          fontSize: 14, color: Colors.grey),
+                                        fontSize: 14,
+                                        color: Colors.grey,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -293,7 +611,14 @@ class _CollectorsCalendarState extends State<CollectorsCalendar> {
                         );
                       },
                     )
-                  : const Center(child: Text("No appointments for this day.")),
+                  : Padding(
+                      padding: const EdgeInsets.only(
+                        top: 10.0,
+                      ),
+                      child: const Center(
+                        child: Text("No Unavailability or Leave this day."),
+                      ),
+                    ),
             ],
           ),
         ),

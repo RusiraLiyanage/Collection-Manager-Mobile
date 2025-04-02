@@ -115,6 +115,9 @@ flutter:
     - assets/images/icons/openInvoice.png
     - assets/images/icons/downloadInvoice.png
     - assets/images/icons/arrow_left.png
+    - assets/images/icons/collectionManagerNotifications.png
+    - assets/images/icons/notificationTile.png
+    - assets/images/icons/deleteNotification.png
     - assets/images/icons/arrow_right.png
     - assets/images/icons/calendarDate.png
     - assets/images/icons/contractAchieveOpened.png

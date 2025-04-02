@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:project_code_blue/screens/Notifications/notifications.dart';
 
 class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   const MyAppBar({super.key});
@@ -49,12 +50,18 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
         elevation: 0.0,
         actions: <Widget>[
           IconButton(
-              icon: Icon(
-                Icons.notifications_active_outlined,
-                color: Colors.white,
-                size: 28,
-              ),
-              onPressed: () {}),
+            icon: Icon(
+              Icons.notifications_active_outlined,
+              color: Colors.white,
+              size: 28,
+            ),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Notifications()),
+              );
+            },
+          ),
           IconButton(
               icon: Icon(
                 Icons.account_circle_rounded,
