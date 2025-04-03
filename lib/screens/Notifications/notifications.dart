@@ -1,5 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:project_code_blue/AppState/appState.dart';
+import 'package:provider/provider.dart';
 
 class Notifications extends StatefulWidget {
   const Notifications({super.key});
@@ -10,6 +12,7 @@ class Notifications extends StatefulWidget {
 
 class _NotificationsState extends State<Notifications> {
   final ScrollController _scrollController = ScrollController();
+
   List<String> notifications =
       List.generate(30, (index) => "My Jobs - Job Update");
 
@@ -21,6 +24,7 @@ class _NotificationsState extends State<Notifications> {
 
   @override
   Widget build(BuildContext context) {
+    final appState = Provider.of<AppState>(context, listen: true);
     return Scaffold(
       backgroundColor: const Color(0xFFF2F2F2),
       extendBodyBehindAppBar: false,
@@ -62,7 +66,10 @@ class _NotificationsState extends State<Notifications> {
                       ),
                     ),
                     TextButton(
-                      onPressed: _clearAll,
+                      onPressed: () {
+                        _clearAll();
+                        appState.setNoNotifications(0);
+                      },
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
@@ -92,60 +99,70 @@ class _NotificationsState extends State<Notifications> {
                           style: TextStyle(fontSize: 16, color: Colors.grey),
                         ),
                       )
-                    : Scrollbar(
-                        thumbVisibility: true,
-                        interactive: true,
-                        trackVisibility: true,
-                        controller: _scrollController,
-                        child: ListView.builder(
+                    : RefreshIndicator(
+                        color: Colors.blueAccent,
+                        onRefresh: () async {
+                          // Simulate a network request or data fetch
+                          await Future.delayed(const Duration(seconds: 2));
+                          setState(() {
+                            // Refresh or reload the notifications list
+                          });
+                        },
+                        child: Scrollbar(
+                          thumbVisibility: true,
+                          interactive: true,
+                          trackVisibility: true,
                           controller: _scrollController,
-                          padding: EdgeInsets.only(
-                            top: 0,
-                            right: 0,
-                            left: 0,
-                            bottom: 100,
-                          ),
-                          itemCount: notifications.length,
-                          itemBuilder: (context, index) {
-                            return Dismissible(
-                              key:
-                                  UniqueKey(), // Ensures proper widget tree updates
-                              onDismissed: (direction) {
-                                setState(() {
-                                  notifications.removeAt(index);
-                                });
-                              },
-                              background: Container(
-                                color: Colors.red,
-                                alignment: Alignment.centerRight,
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 20.0),
-                                child: const Icon(Icons.delete,
-                                    color: Colors.white),
-                              ),
-                              child: Card(
-                                color: Colors.white,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
+                          child: ListView.builder(
+                            controller: _scrollController,
+                            padding: EdgeInsets.only(
+                              top: 0,
+                              right: 0,
+                              left: 0,
+                              bottom: 100,
+                            ),
+                            itemCount: notifications.length,
+                            itemBuilder: (context, index) {
+                              return Dismissible(
+                                key:
+                                    UniqueKey(), // Ensures proper widget tree updates
+                                onDismissed: (direction) {
+                                  setState(() {
+                                    notifications.removeAt(index);
+                                  });
+                                },
+                                background: Container(
+                                  color: Colors.red,
+                                  alignment: Alignment.centerRight,
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 20.0),
+                                  child: const Icon(Icons.delete,
+                                      color: Colors.white),
                                 ),
-                                margin: const EdgeInsets.symmetric(
-                                    horizontal: 16, vertical: 8),
-                                child: ListTile(
-                                  leading: Image.asset(
-                                      "assets/images/icons/notificationTile.png",
-                                      width: 40,
-                                      height: 40),
-                                  title: Text(
-                                    notifications[index],
-                                    style: const TextStyle(
-                                        fontWeight: FontWeight.bold),
+                                child: Card(
+                                  color: Colors.white,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
                                   ),
-                                  subtitle: const Text(
-                                      "A job you have accepted has been updated. Go to My Jobs to accept changes."),
+                                  margin: const EdgeInsets.symmetric(
+                                      horizontal: 16, vertical: 8),
+                                  child: ListTile(
+                                    leading: Image.asset(
+                                        "assets/images/icons/notificationTile.png",
+                                        width: 40,
+                                        height: 40),
+                                    title: Text(
+                                      notifications[index],
+                                      style: const TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    subtitle: const Text(
+                                        "A job you have accepted has been updated. Go to My Jobs to accept changes."),
+                                  ),
                                 ),
-                              ),
-                            );
-                          },
+                              );
+                            },
+                          ),
                         ),
                       ),
               ),
