@@ -466,6 +466,10 @@ class _CollectorsCalendarState extends State<CollectorsCalendar> {
                 height: 20,
               ),
               Container(
+                padding: EdgeInsets.only(
+                  left: 16,
+                  right: 16,
+                ),
                 child: SfCalendar(
                   showTodayButton: true,
                   firstDayOfWeek: 1,

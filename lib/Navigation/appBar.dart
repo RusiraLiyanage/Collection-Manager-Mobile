@@ -1,13 +1,17 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:icon_badge/icon_badge.dart';
+import 'package:project_code_blue/AppState/appState.dart';
 import 'package:project_code_blue/screens/Notifications/notifications.dart';
+import 'package:provider/provider.dart';
 
 class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   const MyAppBar({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final appState = Provider.of<AppState>(context, listen: true);
     return Stack(children: [
       // Blurred Background
       Positioned.fill(
@@ -49,7 +53,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
         elevation: 0.0,
         actions: <Widget>[
-          IconButton(
+          /* IconButton(
             icon: Icon(
               Icons.notifications_active_outlined,
               color: Colors.white,
@@ -61,6 +65,48 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
                 MaterialPageRoute(builder: (context) => Notifications()),
               );
             },
+          ), */
+          Consumer<AppState>(
+            builder: (context, appState, child) {
+              return IconBadge(
+                icon: Icon(
+                  Icons.notifications_active_outlined,
+                  color: Colors.white,
+                  weight: 50,
+                  size: 28,
+                ),
+                itemCount: appState.noNotifications,
+                badgeColor: Colors.redAccent.withOpacity(0.6),
+                itemColor: Colors.white,
+                maxCount: 99,
+                hideZero: false,
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Notifications()),
+                  );
+                },
+              );
+            },
+            /* child: IconBadge(
+              icon: Icon(
+                Icons.notifications_active_outlined,
+                color: Colors.white,
+                weight: 50,
+                size: 28,
+              ),
+              itemCount: appState.noNotifications,
+              badgeColor: Colors.redAccent.withOpacity(0.6),
+              itemColor: Colors.white,
+              maxCount: 99,
+              hideZero: false,
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Notifications()),
+                );
+              },
+            ), */
           ),
           IconButton(
               icon: Icon(

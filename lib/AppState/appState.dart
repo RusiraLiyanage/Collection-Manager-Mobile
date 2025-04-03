@@ -22,6 +22,8 @@ class AppState extends ChangeNotifier {
   bool _isCollectorsCalendar = false;
   bool _isFaq = false;
 
+  int _noNotifications = 15;
+
   bool get isHomeOpen => _isHome;
   bool get isDashboardOpen => _isDashboard;
   bool get isDashboardHomeOpen => _isDashboardHome;
@@ -42,6 +44,8 @@ class AppState extends ChangeNotifier {
   bool get isFaqOpen => _isFaq;
 
   bool get isDrawerOpen => _isDrawerOpen;
+
+  int get noNotifications => _noNotifications;
 
   void setDrawerState(bool isOpen) {
     _isDrawerOpen = isOpen;
@@ -136,5 +140,9 @@ class AppState extends ChangeNotifier {
   void setFAQ(bool isSet) {
     _isFaq = isSet;
     notifyListeners();
+  }
+
+  void setNoNotifications(int noNoti) {
+    _noNotifications = noNoti;
   }
 }

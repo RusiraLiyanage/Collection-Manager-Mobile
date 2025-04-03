@@ -14,7 +14,14 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
-    final appState = Provider.of<AppState>(context, listen: false);
+    final appState = Provider.of<AppState>(context, listen: true);
+    /* @override
+    void initState() {
+      appState.setNoNotifications(50);
+      // TODO: implement initState
+      super.initState();
+    } */
+
     return Scaffold(
         extendBodyBehindAppBar: true,
         onDrawerChanged: (isOpen) {
