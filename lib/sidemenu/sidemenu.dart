@@ -13,7 +13,6 @@ import 'package:project_code_blue/screens/Dashboard/testSampleResults.dart';
 import 'package:project_code_blue/screens/Dashboard/testsProcessed.dart';
 import 'package:project_code_blue/screens/FAQ/faq.dart';
 import 'package:project_code_blue/screens/OnsiteApprovals/onsiteApprovals.dart';
-import 'package:project_code_blue/screens/OnsiteJobs/onSiteJobsHome.dart';
 import '../tabs/tabs_page.dart';
 
 class SideMenu extends StatefulWidget {

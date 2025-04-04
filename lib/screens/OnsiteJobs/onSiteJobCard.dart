@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:project_code_blue/pages/collectorsModal.dart';
 import 'package:project_code_blue/screens/OnsiteApprovals/onSiteApprovalModal.dart';
 
-class OnsiteJobsNewCard extends StatelessWidget {
-  const OnsiteJobsNewCard({
+class OnsiteJobCard extends StatelessWidget {
+  const OnsiteJobCard({
     super.key,
     required this.job,
   });

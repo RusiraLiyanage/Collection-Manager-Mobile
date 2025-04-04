@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:horizontal_stepper_flutter/horizontal_stepper_flutter.dart';
-import 'package:intl/intl.dart';
+
 import 'package:project_code_blue/screens/OnsiteJobs/collector.dart';
 import 'package:project_code_blue/screens/OnsiteJobs/collectorRepresentation.dart';
-import 'package:project_code_blue/screens/OnsiteJobs/onSiteJobsNewCard.dart';
 
 enum TestsType {
   alcoholOnly,

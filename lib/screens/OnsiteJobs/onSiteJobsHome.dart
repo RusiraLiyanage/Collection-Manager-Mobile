@@ -2,17 +2,15 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/rendering.dart';
-import 'package:project_code_blue/screens/OnsiteJobs/AchievedJobsOldCard.dart';
-import 'package:project_code_blue/screens/OnsiteJobs/OnsiteJobOldCard.dart';
-import 'package:project_code_blue/screens/OnsiteJobs/newJobAndroid.dart';
-import 'package:project_code_blue/screens/OnsiteJobs/newJobIOS.dart';
-import 'package:project_code_blue/screens/OnsiteJobs/onSiteJobsNewCard.dart';
+import 'package:project_code_blue/screens/OnsiteJobs/achievedJobsNewCard.dart';
+import 'package:project_code_blue/screens/OnsiteJobs/newCalloutJob.dart';
+import 'package:project_code_blue/screens/OnsiteJobs/newOnsiteJob.dart';
+import 'package:project_code_blue/screens/OnsiteJobs/onSiteJobCard.dart';
 import 'package:provider/provider.dart';
 import '../../AppState/appState.dart';
 import 'package:project_code_blue/sidemenu/sidemenu.dart';
 import '../../Navigation/appBar.dart';
-import 'package:number_pagination/number_pagination.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:flutter/services.dart';
 
 class OnsiteJobsHome extends StatefulWidget {
   const OnsiteJobsHome({super.key});
@@ -510,20 +508,13 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
       lastDate: DateTime(2101),
       builder: (BuildContext context, Widget? child) {
         return Theme(
-          data: Theme.of(context).copyWith(
-            colorScheme: ColorScheme.light(
-              primary: Colors.blue, // Header background color
-              onPrimary: Colors.white, // Header text color
-              onSurface: Colors.black, // Text color in the calendar
-              surface: Color(0xFF01B4D2), // Background color for the dialog
+          data: ThemeData(
+            colorScheme: const ColorScheme.highContrastLight(
+              primary: Color(0xFF01B4D2),
             ),
-            dialogBackgroundColor: Colors.yellow,
-            textButtonTheme: TextButtonThemeData(
-              style: TextButton.styleFrom(
-                foregroundColor:
-                    Colors.black, // Color for OK and Cancel buttons
-              ),
-            ), // Dialog background color
+            datePickerTheme: const DatePickerThemeData(
+              backgroundColor: Colors.white,
+            ),
           ),
           child: child!,
         );
@@ -546,6 +537,7 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
+            backgroundColor: Colors.white,
             title: const Text("Start Date Required"),
             content: const Text(
                 "Please select a Start Date before choosing an End Date."),
@@ -572,20 +564,13 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
       lastDate: DateTime(2101),
       builder: (BuildContext context, Widget? child) {
         return Theme(
-          data: Theme.of(context).copyWith(
-            colorScheme: ColorScheme.light(
-              primary: Colors.blue, // Header background color
-              onPrimary: Colors.white, // Header text color
-              onSurface: Colors.black, // Text color in the calendar
-              surface: Color(0xFF01B4D2), // Background color for the dialog
+          data: ThemeData(
+            colorScheme: const ColorScheme.highContrastLight(
+              primary: Color(0xFF01B4D2),
             ),
-            dialogBackgroundColor: Colors.yellow,
-            textButtonTheme: TextButtonThemeData(
-              style: TextButton.styleFrom(
-                foregroundColor:
-                    Colors.black, // Color for OK and Cancel buttons
-              ),
-            ), // Dialog background color
+            datePickerTheme: const DatePickerThemeData(
+              backgroundColor: Colors.white,
+            ),
           ),
           child: child!,
         );
@@ -608,6 +593,7 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
 
     return Scaffold(
       backgroundColor: Color(0xFFF2F2F2),
+      extendBodyBehindAppBar: true, // Extends body behind the AppBar
       onDrawerChanged: (isOpen) {
         appState.setDrawerState(isOpen); // Update global drawer state
       },
@@ -617,7 +603,7 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
       appBar: MyAppBar(),
       floatingActionButton: Padding(
         padding: const EdgeInsets.only(
-          bottom: 85.0,
+          bottom: 110.0,
           left: 3.0,
         ),
         child: Container(
@@ -651,267 +637,636 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
           ),
         ),
       ),
-      body: Column(
-        children: [
-          Container(
-            width: double.infinity,
-            height: 100,
-            color: Color(0xFFD9D9D9),
+      body: Stack(children: [
+        Scrollbar(
+          thumbVisibility: true,
+          interactive: true,
+          trackVisibility: true,
+          controller: _scrollController,
+          child: SingleChildScrollView(
+            controller: _scrollController,
             child: Column(
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(top: 8.0, left: 8.0),
-                      child: Container(
-                        color: Color(0xFF56ACB1),
-                        width: 168,
-                        height: 42,
+                SizedBox(
+                  height:
+                      kToolbarHeight + MediaQuery.of(context).padding.top + 11,
+                ), // Ensures initial content starts below AppBar
+                Container(
+                  width: double.infinity,
+                  height: 120,
+                  color: Color(0xFFD9D9D9),
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(left: 16.0),
+                            child: Text(
+                              "Home / Onsite Jobs",
+                              style: TextStyle(
+                                fontSize: 10,
+                              ),
+                            ),
+                          ),
+                          /* Padding(
+                            padding: const EdgeInsets.only(top: 8.0, left: 8.0),
+                            child: Container(
+                              color: Color(0xFF56ACB1),
+                              width: 168,
+                              height: 42,
+                              child: Row(
+                                children: [
+                                  Image.asset(
+                                      "assets/images/icons/onSiteJobs.png"),
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                      right: 10,
+                                    ),
+                                    child: Text(
+                                      "On-site Jobs",
+                                      style: TextStyle(
+                                          fontSize: 18.0,
+                                          fontWeight: FontWeight
+                                              .bold // Set the text size in logical pixels
+                                          ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ), */
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              right: 16.0,
+                              top: 8.0,
+                            ),
+                            child: InkWell(
+                              onTap: () {
+                                print("On tapped");
+                              },
+                              child: ClipRRect(
+                                child: Image.asset(
+                                  "assets/images/icons/refreshIcon.png",
+                                  width: 24,
+                                  height: 24,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          left: 16.0,
+                          right: 10.0,
+                          bottom: 10.0,
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "Onsite Jobs",
+                              style: TextStyle(
+                                fontSize: 24,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(right: 8.0),
+                              child: InkWell(
+                                onTap: () {
+                                  if (Platform.isAndroid) {
+                                    showModalBottomSheet<void>(
+                                      isScrollControlled:
+                                          true, // Allows controlling the height
+                                      isDismissible: false,
+                                      enableDrag: false,
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return DraggableScrollableSheet(
+                                          expand: false,
+                                          initialChildSize:
+                                              1, // Initial height of the sheet (93% of the screen)
+                                          minChildSize:
+                                              1, // Allow shrinking to 50% of the screen
+                                          maxChildSize:
+                                              1, // Prevent expansion above 93% of the screen
+                                          builder: (BuildContext context,
+                                              ScrollController
+                                                  scrollController) {
+                                            return Container(
+                                              width: double.infinity,
+                                              decoration: const BoxDecoration(
+                                                color: Color(
+                                                    0xFFEDEEF0), // Background color of the bottom sheet
+                                                borderRadius:
+                                                    BorderRadius.vertical(
+                                                  top: Radius.circular(
+                                                      0), // Rounded top corners
+                                                ),
+                                              ),
+                                              child: NewOnsiteJob(
+                                                  scrollController:
+                                                      scrollController),
+                                            );
+                                          },
+                                        );
+                                      },
+                                    );
+                                  } else if (Platform.isIOS) {
+                                    showModalBottomSheet<void>(
+                                      isScrollControlled:
+                                          true, // Allows controlling the height
+                                      isDismissible: false,
+                                      enableDrag: false,
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return DraggableScrollableSheet(
+                                          expand: false,
+                                          initialChildSize:
+                                              1, // Initial height of the sheet (93% of the screen)
+                                          minChildSize:
+                                              1, // Allow shrinking to 50% of the screen
+                                          maxChildSize:
+                                              1, // Prevent expansion above 93% of the screen
+                                          builder: (BuildContext context,
+                                              ScrollController
+                                                  scrollController) {
+                                            return Container(
+                                              width: double.infinity,
+                                              decoration: const BoxDecoration(
+                                                color: Color(
+                                                    0xFFEDEEF0), // Background color of the bottom sheet
+                                                borderRadius:
+                                                    BorderRadius.vertical(
+                                                  top: Radius.circular(
+                                                      0), // Rounded top corners
+                                                ),
+                                              ),
+                                              child: NewOnsiteJob(
+                                                  scrollController:
+                                                      scrollController),
+                                            );
+                                          },
+                                        );
+                                      },
+                                    );
+                                    /* showCupertinoModalBottomSheet(
+                                      transitionBackgroundColor:
+                                          Colors.transparent,
+                                      enableDrag: false,
+                                      isDismissible: false,
+                                      expand: true,
+                                      context: context,
+                                      backgroundColor: Colors.transparent,
+                                      builder: (context) =>
+                                          DraggableScrollableSheet(
+                                        initialChildSize:
+                                            1, // Sets the initial size to 100% of the screen
+                                        minChildSize:
+                                            1, // Minimum size (100% of the screen)
+                                        maxChildSize:
+                                            1, // Maximum size (100% of the screen)
+                                        builder: (context, scrollController) {
+                                          return Container(
+                                            decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius:
+                                                  BorderRadius.vertical(
+                                                top: Radius.circular(40),
+                                              ),
+                                            ),
+                                            child: Container(
+                                              child: NewJobAndroidEdited(
+                                                scrollController:
+                                                    scrollController,
+                                              ),
+
+                                              // const NewJob(),
+                                            ),
+                                          );
+                                        },
+                                      ),
+                                    ); */
+                                  }
+                                },
+                                child: Align(
+                                  alignment: Alignment.topRight,
+                                  child: ClipRRect(
+                                    child: Image.asset(
+                                      "assets/images/icons/newJobOpen.png",
+                                      width: 24,
+                                      height: 24,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          right: 18.0,
+                        ),
+                        child: Align(
+                          alignment: Alignment.centerRight,
+                          child: InkWell(
+                            onTap: () {
+                              if (Platform.isAndroid || Platform.isIOS) {
+                                showModalBottomSheet<void>(
+                                  isScrollControlled:
+                                      true, // Allows controlling the height
+                                  isDismissible: false,
+                                  enableDrag: false,
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return DraggableScrollableSheet(
+                                      expand: false,
+                                      initialChildSize:
+                                          1, // Initial height of the sheet (93% of the screen)
+                                      minChildSize:
+                                          1, // Allow shrinking to 50% of the screen
+                                      maxChildSize:
+                                          1, // Prevent expansion above 93% of the screen
+                                      builder: (BuildContext context,
+                                          ScrollController scrollController) {
+                                        return Container(
+                                          width: double.infinity,
+                                          decoration: const BoxDecoration(
+                                            color: Color(
+                                                0xFFEDEEF0), // Background color of the bottom sheet
+                                            borderRadius: BorderRadius.vertical(
+                                              top: Radius.circular(
+                                                  0), // Rounded top corners
+                                            ),
+                                          ),
+                                          child: NewCalloutJob(
+                                            scrollController: scrollController,
+                                          ),
+                                        );
+                                      },
+                                    );
+                                  },
+                                );
+                              }
+                            },
+                            child: ClipRRect(
+                              child: Image.asset(
+                                "assets/images/icons/newCalloutOpen.png",
+                                width: 24,
+                                height: 24,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  width: double.infinity,
+                  height: 130,
+                  color: Color(0xFFF2F2F2).withOpacity(1),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(
+                          top: 10,
+                        ),
+                      ),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 8.0, right: 8.0),
                         child: Row(
                           children: [
-                            Image.asset("assets/images/icons/onSiteJobs.png"),
                             Padding(
-                              padding: const EdgeInsets.only(
-                                right: 10,
-                              ),
+                              padding: const EdgeInsets.only(right: 12.0),
                               child: Text(
-                                "On-site Jobs",
+                                "Service Office",
                                 style: TextStyle(
-                                    fontSize: 18.0,
-                                    fontWeight: FontWeight
-                                        .bold // Set the text size in logical pixels
+                                  color: Color(0xFF005277),
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            Container(
+                              width: 169,
+                              height: 28,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(8),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.white.withOpacity(
+                                        0.2), // Shadow color with opacity
+                                    spreadRadius:
+                                        1, // How much the shadow spreads
+                                    blurRadius: 1, // How blurry the shadow is
+                                    offset: Offset(0,
+                                        0), // Offset for shadow position (x, y)
+                                  ),
+                                ],
+                              ),
+                              child: DropdownButtonFormField<String>(
+                                value: _selectedValue,
+                                decoration: InputDecoration(
+                                  contentPadding: const EdgeInsets.symmetric(
+                                      horizontal: 8, vertical: 4),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                    borderSide: BorderSide(
+                                        color: Colors.transparent, width: 2),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                    borderSide: BorderSide(
+                                        color: Colors.transparent,
+                                        width: 2), // Border colo
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                    borderSide: BorderSide(
+                                        color: Colors.transparent,
+                                        width: 2), // Border color when focused
+                                  ),
+                                  fillColor: Colors
+                                      .white, // Set the background color to white
+                                  filled: true,
+                                ),
+                                icon: Icon(
+                                  Icons.arrow_drop_down_outlined,
+                                  color: Color(
+                                    0xFF71717A,
+                                  ),
+                                ),
+                                items: items
+                                    .map((item) => DropdownMenuItem(
+                                          value: item,
+                                          child: Text(
+                                            item,
+                                            style: TextStyle(
+                                              fontSize: 14,
+                                              color: Color(0xFF007AFF),
+                                            ),
+                                          ),
+                                        ))
+                                    .toList(),
+                                onChanged: (value) {
+                                  setState(() {
+                                    _selectedValue = value;
+                                  });
+                                },
+                              ),
+                            ),
+                            SizedBox(
+                              height: 3,
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(right: 72.0),
+                              child: Text(
+                                "Client",
+                                style: TextStyle(
+                                  color: Color(0xFF005277),
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            Container(
+                              width: 260,
+                              height: 28,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(8),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.white.withOpacity(
+                                        0.2), // Shadow color with opacity
+                                    spreadRadius:
+                                        1, // How much the shadow spreads
+                                    blurRadius: 1, // How blurry the shadow is
+                                    offset: Offset(0,
+                                        0), // Offset for shadow position (x, y)
+                                  ),
+                                ],
+                              ),
+                              child: DropdownButtonFormField<String>(
+                                focusColor: Colors.white,
+                                value: _selectedClient,
+                                decoration: InputDecoration(
+                                  contentPadding: const EdgeInsets.symmetric(
+                                      horizontal: 8, vertical: 4),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                    borderSide: BorderSide(
+                                        color: Colors.transparent, width: 2),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                    borderSide: BorderSide(
+                                        color: Colors.transparent,
+                                        width: 2), // Border colo
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                    borderSide: BorderSide(
+                                        color: Colors.transparent,
+                                        width: 2), // Border color when focused
+                                  ),
+                                  fillColor: Colors
+                                      .white, // Set the background color to white
+                                  filled: true,
+                                  // Enable the fill color
+                                ),
+                                icon: Icon(
+                                  Icons.arrow_drop_down_outlined,
+                                  color: Color(
+                                    0xFF71717A,
+                                  ),
+                                ),
+                                items: clients
+                                    .map((item) => DropdownMenuItem(
+                                          value: item,
+                                          child: Text(
+                                            item,
+                                            style: TextStyle(
+                                              fontSize: 14,
+                                              color: Color(0xFF007AFF),
+                                            ),
+                                          ),
+                                        ))
+                                    .toList(),
+                                onChanged: (value) {
+                                  setState(() {
+                                    _selectedClient = value;
+                                  });
+                                },
+                              ),
+                            ),
+                            SizedBox(
+                              height: 5,
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(right: 80.0),
+                              child: Text(
+                                "Date",
+                                style: TextStyle(
+                                  color: Color(0xFF005277),
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            Container(
+                              width: 100,
+                              height: 28,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(8),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.white.withOpacity(
+                                        0.2), // Shadow color with opacity
+                                    spreadRadius:
+                                        1, // How much the shadow spreads
+                                    blurRadius: 1, // How blurry the shadow is
+                                    offset: Offset(0,
+                                        0), // Offset for shadow position (x, y)
+                                  ),
+                                ],
+                              ),
+                              child: TextField(
+                                controller: _startDateController,
+                                readOnly: true,
+                                onTap: () => _selectStartDate(context),
+                                decoration: InputDecoration(
+                                  contentPadding: const EdgeInsets.symmetric(
+                                      horizontal: 8, vertical: 4),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                    borderSide: BorderSide(
+                                        color: Colors.transparent,
+                                        width:
+                                            2), // Default border with thickness
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                    borderSide: BorderSide(
+                                        color: Colors.transparent,
+                                        width: 3), // Border color when enabled
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                    borderSide: BorderSide(
+                                        color: Colors.transparent,
+                                        width: 3), // Border color when focused
+                                  ),
+                                  fillColor: Colors.white,
+                                  filled: true,
+                                  hintText: 'Start', // Placeholder text
+                                  hintStyle: TextStyle(
+                                    color: Color(0xFF007AFF),
+                                  ), // Style for the hint text
+                                ),
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  color: Color(0xFF007AFF),
+                                ), // Text style for the input text
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 10.0),
+                              child: Container(
+                                width: 100,
+                                height: 28,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(8),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.white.withOpacity(
+                                          0.2), // Shadow color with opacity
+                                      spreadRadius:
+                                          1, // How much the shadow spreads
+                                      blurRadius: 1, // How blurry the shadow is
+                                      offset: Offset(0,
+                                          0), // Offset for shadow position (x, y)
                                     ),
+                                  ],
+                                ),
+                                child: TextField(
+                                  controller: _endDateController,
+                                  readOnly: true,
+                                  onTap: () => _selectEndDate(context),
+                                  decoration: InputDecoration(
+                                    contentPadding: const EdgeInsets.symmetric(
+                                        horizontal: 8, vertical: 4),
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(8),
+                                      borderSide: BorderSide(
+                                          color: Colors.transparent,
+                                          width:
+                                              2), // Default border with thickness
+                                    ),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(8),
+                                      borderSide: BorderSide(
+                                          color: Colors.transparent,
+                                          width:
+                                              3), // Border color when enabled
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(8),
+                                      borderSide: BorderSide(
+                                          color: Colors.transparent,
+                                          width:
+                                              3), // Border color when focused
+                                    ),
+                                    fillColor: Colors.white,
+                                    filled: true,
+                                    hintText: 'Ends', // Placeholder text
+                                    hintStyle: TextStyle(
+                                      color: Color(0xFF007AFF),
+                                    ), // Style for the hint text
+                                  ),
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: Color(0xFF007AFF),
+                                  ), // Text style for the input text
+                                ),
                               ),
                             )
                           ],
                         ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(right: 8.0),
-                      child: InkWell(
-                        onTap: () {
-                          print("On tapped");
-                        },
-                        child: ClipRRect(
-                          child: Image.asset(
-                              "assets/images/icons/refresh_icon.png"),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 135.0),
-                  child: Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(right: 8.0),
-                        child: InkWell(
-                          onTap: () {
-                            if (Platform.isAndroid) {
-                              showModalBottomSheet<void>(
-                                isScrollControlled:
-                                    true, // Allows controlling the height
-                                isDismissible: false,
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return DraggableScrollableSheet(
-                                    expand: false,
-                                    initialChildSize:
-                                        0.93, // Initial height of the sheet (93% of the screen)
-                                    minChildSize:
-                                        0.93, // Allow shrinking to 50% of the screen
-                                    maxChildSize:
-                                        0.93, // Prevent expansion above 93% of the screen
-                                    builder: (BuildContext context,
-                                        ScrollController scrollController) {
-                                      return Container(
-                                        width: double.infinity,
-                                        decoration: const BoxDecoration(
-                                          color: Colors
-                                              .white, // Background color of the bottom sheet
-                                          borderRadius: BorderRadius.vertical(
-                                            top: Radius.circular(
-                                                16), // Rounded top corners
-                                          ),
-                                        ),
-                                        child: NewJobAndroid(
-                                            scrollController: scrollController),
-                                      );
-                                    },
-                                  );
-                                },
-                              );
-                            } else if (Platform.isIOS) {
-                              showCupertinoModalBottomSheet(
-                                transitionBackgroundColor: Colors.transparent,
-                                enableDrag: false,
-                                isDismissible: false,
-                                expand: true,
-                                context: context,
-                                backgroundColor: Colors.transparent,
-                                builder: (context) => DraggableScrollableSheet(
-                                  initialChildSize:
-                                      0.985, // Sets the initial size to 50% of the screen
-                                  minChildSize:
-                                      0.985, // Minimum size (30% of the screen)
-                                  maxChildSize:
-                                      0.985, // Maximum size (80% of the screen)
-                                  builder: (context, scrollController) {
-                                    return Container(
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius: BorderRadius.vertical(
-                                          top: Radius.circular(40),
-                                        ),
-                                      ),
-                                      child: Container(
-                                        child: const NewJob(),
-                                      ),
-                                    );
-                                  },
-                                ),
-                              );
-                            }
-                          },
-                          child: ClipRRect(
-                            child: Image.asset(
-                                "assets/images/icons/newJob_icon.png"),
-                          ),
-                        ),
-                      ),
-                      InkWell(
-                        onTap: () {
-                          print("On tapped");
-                        },
-                        child: ClipRRect(
-                          child: Image.asset(
-                              "assets/images/icons/newCallOutJob_icon.png"),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Container(
-            width: double.infinity,
-            height: 200,
-            color: Color(0xFF01B4D2).withOpacity(0.5),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 8.0, top: 8.0),
-                  child: Text(
-                    "Filters",
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-                  child: Divider(
-                    color: Color(0xFF0047B3),
-                    thickness: 2,
-                  ),
-                ),
-                SizedBox(
-                  width: 3,
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-                  child: Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(right: 12.0),
-                        child: Text(
-                          "Service Office",
-                          style: TextStyle(
-                            color: Color(0xFF005277),
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                      Container(
-                        width: 169,
-                        height: 28,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(8),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(
-                                  0.2), // Shadow color with opacity
-                              spreadRadius: 1, // How much the shadow spreads
-                              blurRadius: 1, // How blurry the shadow is
-                              offset: Offset(
-                                  0, 0), // Offset for shadow position (x, y)
-                            ),
-                          ],
-                        ),
-                        child: DropdownButtonFormField<String>(
-                          value: _selectedValue,
-                          decoration: InputDecoration(
-                            contentPadding: const EdgeInsets.symmetric(
-                                horizontal: 8, vertical: 4),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8),
-                              borderSide: BorderSide(
-                                  color: Colors.transparent, width: 2),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8),
-                              borderSide: BorderSide(
-                                  color: Colors.transparent,
-                                  width: 2), // Border colo
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8),
-                              borderSide: BorderSide(
-                                  color: Colors.transparent,
-                                  width: 2), // Border color when focused
-                            ),
-                            fillColor: Colors
-                                .white, // Set the background color to white
-                            filled: true,
-                          ),
-                          icon: Icon(
-                            Icons.arrow_drop_down_outlined,
-                            color: Color(
-                              0xFF71717A,
-                            ),
-                          ),
-                          items: items
-                              .map((item) => DropdownMenuItem(
-                                    value: item,
-                                    child: Text(
-                                      item,
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        color: Color(0xFF007AFF),
-                                      ),
-                                    ),
-                                  ))
-                              .toList(),
-                          onChanged: (value) {
-                            setState(() {
-                              _selectedValue = value;
-                            });
-                          },
-                        ),
-                      ),
                       SizedBox(
-                        height: 3,
+                        height: 10,
                       ),
                     ],
                   ),
@@ -919,353 +1274,23 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
                 SizedBox(
                   height: 10,
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-                  child: Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(right: 66.0),
-                        child: Text(
-                          "Client",
-                          style: TextStyle(
-                            color: Color(0xFF005277),
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: Padding(
+                      padding: const EdgeInsets.only(
+                        right: 18.0,
+                        bottom: 5.0,
                       ),
-                      Container(
-                        width: 260,
-                        height: 28,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(8),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(
-                                  0.2), // Shadow color with opacity
-                              spreadRadius: 1, // How much the shadow spreads
-                              blurRadius: 1, // How blurry the shadow is
-                              offset: Offset(
-                                  0, 0), // Offset for shadow position (x, y)
-                            ),
-                          ],
-                        ),
-                        child: DropdownButtonFormField<String>(
-                          focusColor: Colors.white,
-                          value: _selectedClient,
-                          decoration: InputDecoration(
-                            contentPadding: const EdgeInsets.symmetric(
-                                horizontal: 8, vertical: 4),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8),
-                              borderSide: BorderSide(
-                                  color: Colors.transparent, width: 2),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8),
-                              borderSide: BorderSide(
-                                  color: Colors.transparent,
-                                  width: 2), // Border colo
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8),
-                              borderSide: BorderSide(
-                                  color: Colors.transparent,
-                                  width: 2), // Border color when focused
-                            ),
-                            fillColor: Colors
-                                .white, // Set the background color to white
-                            filled: true,
-                            // Enable the fill color
-                          ),
-                          icon: Icon(
-                            Icons.arrow_drop_down_outlined,
-                            color: Color(
-                              0xFF71717A,
-                            ),
-                          ),
-                          items: clients
-                              .map((item) => DropdownMenuItem(
-                                    value: item,
-                                    child: Text(
-                                      item,
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        color: Color(0xFF007AFF),
-                                      ),
-                                    ),
-                                  ))
-                              .toList(),
-                          onChanged: (value) {
-                            setState(() {
-                              _selectedClient = value;
-                            });
-                          },
-                        ),
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
+                      child: showMainJobs
+                          ? Text(
+                              "$displayRange out of ${jobData.length} records",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            )
+                          : null),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-                  child: Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(right: 75.0),
-                        child: Text(
-                          "Date",
-                          style: TextStyle(
-                            color: Color(0xFF005277),
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                      Container(
-                        width: 100,
-                        height: 28,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(8),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(
-                                  0.2), // Shadow color with opacity
-                              spreadRadius: 1, // How much the shadow spreads
-                              blurRadius: 1, // How blurry the shadow is
-                              offset: Offset(
-                                  0, 0), // Offset for shadow position (x, y)
-                            ),
-                          ],
-                        ),
-                        child: TextField(
-                          controller: _startDateController,
-                          readOnly: true,
-                          onTap: () => _selectStartDate(context),
-                          decoration: InputDecoration(
-                            contentPadding: const EdgeInsets.symmetric(
-                                horizontal: 8, vertical: 4),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8),
-                              borderSide: BorderSide(
-                                  color: Colors.transparent,
-                                  width: 2), // Default border with thickness
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8),
-                              borderSide: BorderSide(
-                                  color: Colors.transparent,
-                                  width: 3), // Border color when enabled
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8),
-                              borderSide: BorderSide(
-                                  color: Colors.transparent,
-                                  width: 3), // Border color when focused
-                            ),
-                            fillColor: Colors.white,
-                            filled: true,
-                            hintText: 'Start', // Placeholder text
-                            hintStyle: TextStyle(
-                              color: Color(0xFF007AFF),
-                            ), // Style for the hint text
-                          ),
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: Color(0xFF007AFF),
-                          ), // Text style for the input text
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 10.0),
-                        child: Container(
-                          width: 100,
-                          height: 28,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(8),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(
-                                    0.2), // Shadow color with opacity
-                                spreadRadius: 1, // How much the shadow spreads
-                                blurRadius: 1, // How blurry the shadow is
-                                offset: Offset(
-                                    0, 0), // Offset for shadow position (x, y)
-                              ),
-                            ],
-                          ),
-                          child: TextField(
-                            controller: _endDateController,
-                            readOnly: true,
-                            onTap: () => _selectEndDate(context),
-                            decoration: InputDecoration(
-                              contentPadding: const EdgeInsets.symmetric(
-                                  horizontal: 8, vertical: 4),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(8),
-                                borderSide: BorderSide(
-                                    color: Colors.transparent,
-                                    width: 2), // Default border with thickness
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(8),
-                                borderSide: BorderSide(
-                                    color: Colors.transparent,
-                                    width: 3), // Border color when enabled
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(8),
-                                borderSide: BorderSide(
-                                    color: Colors.transparent,
-                                    width: 3), // Border color when focused
-                              ),
-                              fillColor: Colors.white,
-                              filled: true,
-                              hintText: 'Ends', // Placeholder text
-                              hintStyle: TextStyle(
-                                color: Color(0xFF007AFF),
-                              ), // Style for the hint text
-                            ),
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: Color(0xFF007AFF),
-                            ), // Text style for the input text
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-                  child: Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(right: 63.0),
-                        child: Text(
-                          "Status",
-                          style: TextStyle(
-                            color: Color(0xFF005277),
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                      Container(
-                        width: 100,
-                        height: 28,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(8),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(
-                                  0.2), // Shadow color with opacity
-                              spreadRadius: 1, // How much the shadow spreads
-                              blurRadius: 1, // How blurry the shadow is
-                              offset: Offset(
-                                  0, 0), // Offset for shadow position (x, y)
-                            ),
-                          ],
-                        ),
-                        child: DropdownButtonFormField<String>(
-                          focusColor: Colors.white,
-                          value: _selectedStatus,
-                          decoration: InputDecoration(
-                            contentPadding: const EdgeInsets.symmetric(
-                                horizontal: 8, vertical: 4),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8),
-                              borderSide: BorderSide(
-                                  color: Colors.transparent, width: 2),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8),
-                              borderSide: BorderSide(
-                                  color: Colors.transparent,
-                                  width: 2), // Border colo
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8),
-                              borderSide: BorderSide(
-                                  color: Colors.transparent,
-                                  width: 2), // Border color when focused
-                            ),
-                            fillColor: Colors
-                                .white, // Set the background color to white
-                            filled: true,
-                            // Enable the fill color
-                          ),
-                          icon: Icon(
-                            Icons.arrow_drop_down_outlined,
-                            color: Color(
-                              0xFF71717A,
-                            ),
-                          ),
-                          items: status
-                              .map((item) => DropdownMenuItem(
-                                    value: item,
-                                    child: Text(
-                                      item,
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        color: Color(0xFF007AFF),
-                                      ),
-                                    ),
-                                  ))
-                              .toList(),
-                          onChanged: (value) {
-                            setState(() {
-                              _selectedStatus = value;
-                            });
-                          },
-                        ),
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Align(
-            alignment: Alignment.centerRight,
-            child: Padding(
-                padding: const EdgeInsets.only(
-                  right: 18.0,
-                  bottom: 5.0,
-                ),
-                child: showMainJobs
-                    ? Text(
-                        "$displayRange out of ${jobData.length} records",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                        ),
-                      )
-                    : null),
-          ),
-          Expanded(
-            child: Scrollbar(
-              thumbVisibility: true,
-              interactive: true,
-              trackVisibility: true,
-              controller: _scrollController,
-              child: SingleChildScrollView(
-                controller: _scrollController,
-                child: Padding(
                   padding: const EdgeInsets.only(bottom: 70.0),
                   child: Column(
                     children: [
@@ -1279,11 +1304,11 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
                           return Center(
                             child: Padding(
                               padding: const EdgeInsets.only(
-                                left: 30.0,
-                                right: 45.0,
+                                left: 16.0,
+                                right: 16.0,
                                 bottom: 10.0,
                               ),
-                              child: OnsiteJobsNewCard(job: job),
+                              child: OnsiteJobCard(job: job),
                             ),
                           );
                         },
@@ -1523,7 +1548,7 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
                             ),
                           )),
                       SizedBox(
-                        height: 30,
+                        height: 20,
                       ),
                       archieveJobsOpened
                           ? Container(
@@ -1581,12 +1606,12 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
                                                     child: Padding(
                                                       padding:
                                                           const EdgeInsets.only(
-                                                        left: 30.0,
-                                                        right: 45.0,
+                                                        left: 16.0,
+                                                        right: 16.0,
                                                         bottom: 10.0,
                                                       ),
                                                       child:
-                                                          AchievedJobsOldCard(
+                                                          AchievedJobsNewCard(
                                                               job: job),
                                                     ),
                                                   );
@@ -2012,16 +2037,16 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
                               ),
                             )
                           : SizedBox(
-                              height: 2,
+                              height: 40,
                             ),
                     ],
                   ),
                 ),
-              ),
+              ],
             ),
           ),
-        ],
-      ),
+        ),
+      ]),
     );
   }
 }

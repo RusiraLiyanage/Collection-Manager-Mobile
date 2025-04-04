@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:horizontal_stepper_flutter/horizontal_stepper_flutter.dart';
 import 'package:project_code_blue/screens/OnsiteJobs/collector.dart';
 import 'package:project_code_blue/screens/OnsiteJobs/collectorRepresentation.dart';
-import 'package:project_code_blue/screens/OnsiteJobs/onSiteJobsNewCard.dart';
 
 enum TestsType {
   alcoholOnly,
@@ -10,16 +9,16 @@ enum TestsType {
   DrugOnly,
 }
 
-class NewJobAndroidEdited extends StatefulWidget {
+class NewOnsiteJob extends StatefulWidget {
   final ScrollController scrollController;
 
-  const NewJobAndroidEdited({super.key, required this.scrollController});
+  const NewOnsiteJob({super.key, required this.scrollController});
 
   @override
-  State<NewJobAndroidEdited> createState() => _NewJobAndroidEditedState();
+  State<NewOnsiteJob> createState() => _NewOnsiteJobState();
 }
 
-class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
+class _NewOnsiteJobState extends State<NewOnsiteJob> {
   TestsType? _testsType = TestsType.alcoholOnly;
   final List<GlobalKey<FormState>> _formKeys = [
     GlobalKey<FormState>(),

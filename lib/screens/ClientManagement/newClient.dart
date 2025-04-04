@@ -2,21 +2,17 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:horizontal_stepper_flutter/horizontal_stepper_flutter.dart';
-import 'package:project_code_blue/screens/ClientManagement/achievedClientCard.dart';
 import 'package:project_code_blue/screens/ClientManagement/achievedLocationCard.dart';
 import 'package:project_code_blue/screens/ClientManagement/attachmentCard.dart';
 import 'package:project_code_blue/screens/ClientManagement/authorizedRepresentatives.dart';
 import 'package:project_code_blue/screens/ClientManagement/authrorizedRepresentative.dart';
 import 'package:project_code_blue/screens/ClientManagement/clientLocationCard.dart';
-import 'package:project_code_blue/screens/ClientManagement/clientManagementCard.dart';
 import 'package:project_code_blue/screens/ClientManagement/contractCard.dart';
 import 'package:project_code_blue/screens/ClientManagement/newClientLocation.dart';
 import 'package:project_code_blue/screens/ClientManagement/newNote.dart';
 import 'package:project_code_blue/screens/ClientManagement/noteCard.dart';
 import 'package:project_code_blue/screens/OnsiteJobs/achievedJobsNewCard.dart';
-import 'package:project_code_blue/screens/OnsiteJobs/collectorRepresentation.dart';
-import 'package:project_code_blue/screens/OnsiteJobs/onSiteJobsNewCard.dart';
+import 'package:project_code_blue/screens/OnsiteJobs/onSiteJobCard.dart';
 //import 'package:progress_stepper/progress_stepper.dart';
 import 'package:im_stepper/stepper.dart';
 import 'package:file_picker/file_picker.dart';
@@ -12457,7 +12453,7 @@ class _NewCalloutJobState extends State<NewClient> {
                           right: 16.0,
                           bottom: 10.0,
                         ),
-                        child: OnsiteJobsNewCard(job: job),
+                        child: OnsiteJobCard(job: job),
                       ),
                     );
                   },

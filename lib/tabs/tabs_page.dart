@@ -117,19 +117,20 @@ class _TabsPageState extends State<TabsPage> {
                     borderRadius: const BorderRadius.all(
                       Radius.circular(16),
                     ),
-                    child: Stack(children: [
-                      // Blurry Background Effect
-                      Positioned.fill(
-                        child: BackdropFilter(
-                          filter: ImageFilter.blur(
-                              sigmaX: 10.0, sigmaY: 10.0), // Blur effect
-                          child: Container(
-                            color: Colors.white
-                                .withOpacity(0.2), // Adjust transparency
+                    child: Stack(
+                      children: [
+                        // Blurry Background Effect
+                        Positioned.fill(
+                          child: BackdropFilter(
+                            filter: ImageFilter.blur(
+                                sigmaX: 10.0, sigmaY: 10.0), // Blur effect
+                            child: Container(
+                              color: Colors.white
+                                  .withOpacity(0.2), // Adjust transparency
+                            ),
                           ),
                         ),
-                      ),
-                      BottomNavigationBar(
+                        BottomNavigationBar(
                           landscapeLayout:
                               BottomNavigationBarLandscapeLayout.spread,
                           elevation: 1,
@@ -313,8 +314,10 @@ class _TabsPageState extends State<TabsPage> {
                               appState.setCollectorsCalendar(false);
                               appState.setFAQ(false);
                             }
-                          }),
-                    ]),
+                          },
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
