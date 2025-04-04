@@ -4,8 +4,12 @@ import 'package:project_code_blue/screens/ClientManagement/addContractNote.dart'
 class ContractCard extends StatelessWidget {
   final Map<String, String> contract;
   final Color backgroundColor;
+  final ScrollController scrollController;
   const ContractCard(
-      {super.key, required this.contract, required this.backgroundColor});
+      {super.key,
+      required this.contract,
+      required this.backgroundColor,
+      required this.scrollController});
 
   @override
   Widget build(BuildContext context) {
@@ -147,7 +151,9 @@ class ContractCard extends StatelessWidget {
                                           0), // Rounded top corners
                                     ),
                                   ),
-                                  child: AddContractNote(),
+                                  child: AddContractNote(
+                                    scrollController: scrollController,
+                                  ),
                                 );
                               },
                             );

@@ -3389,6 +3389,7 @@ class _NewCalloutJobState extends State<NewClient> {
                                   ),
                                   child: ContractCard(
                                     contract: contract,
+                                    scrollController: widget.scrollController,
                                     backgroundColor: const Color(0xFFCBF5FC),
                                   ),
                                 );
@@ -3468,6 +3469,8 @@ class _NewCalloutJobState extends State<NewClient> {
                                                 bottom: 10.0,
                                               ),
                                               child: ContractCard(
+                                                scrollController:
+                                                    widget.scrollController,
                                                 contract: contract,
                                                 backgroundColor:
                                                     Colors.grey[200] ??
@@ -10096,12 +10099,12 @@ class _NewCalloutJobState extends State<NewClient> {
                                           ?.validate();
                                     });
                                   },
-                                  validator: (value) {
+                                  /* validator: (value) {
                                     if (value == null || value.isEmpty) {
                                       return 'Please enter any test instructions';
                                     }
                                     return null;
-                                  },
+                                  }, */
                                 ),
                               ),
                             ),
@@ -10149,12 +10152,12 @@ class _NewCalloutJobState extends State<NewClient> {
                                           ?.validate();
                                     });
                                   },
-                                  validator: (value) {
+                                  /* validator: (value) {
                                     if (value == null || value.isEmpty) {
                                       return 'Please enter any additional test instructions';
                                     }
                                     return null;
-                                  },
+                                  }, */
                                 ),
                               ),
                             ),
@@ -10220,12 +10223,12 @@ class _NewCalloutJobState extends State<NewClient> {
                                           ?.validate();
                                     });
                                   },
-                                  validator: (value) {
+                                  /* validator: (value) {
                                     if (value == null || value.isEmpty) {
                                       return 'Please enter a valid donor selection process';
                                     }
                                     return null;
-                                  },
+                                  }, */
                                 ),
                               ),
                             ),
@@ -10293,12 +10296,12 @@ class _NewCalloutJobState extends State<NewClient> {
                                           ?.validate();
                                     });
                                   },
-                                  validator: (value) {
+                                  /*  validator: (value) {
                                     if (value == null || value.isEmpty) {
                                       return 'Please enter any screening and testing process';
                                     }
                                     return null;
-                                  },
+                                  }, */
                                 ),
                               ),
                             ),
@@ -10366,12 +10369,12 @@ class _NewCalloutJobState extends State<NewClient> {
                                           ?.validate();
                                     });
                                   },
-                                  validator: (value) {
+                                  /* validator: (value) {
                                     if (value == null || value.isEmpty) {
                                       return 'Please enter any test confirmation instructions';
                                     }
                                     return null;
-                                  },
+                                  }, */
                                 ),
                               ),
                             ),
@@ -10439,12 +10442,12 @@ class _NewCalloutJobState extends State<NewClient> {
                                           ?.validate();
                                     });
                                   },
-                                  validator: (value) {
+                                  /* validator: (value) {
                                     if (value == null || value.isEmpty) {
                                       return 'Please enter any global site access instructions';
                                     }
                                     return null;
-                                  },
+                                  }, */
                                 ),
                               ),
                             ),
@@ -10512,12 +10515,12 @@ class _NewCalloutJobState extends State<NewClient> {
                                           ?.validate();
                                     });
                                   },
-                                  validator: (value) {
+                                  /*  validator: (value) {
                                     if (value == null || value.isEmpty) {
                                       return 'Please enter specific local site access instructions';
                                     }
                                     return null;
-                                  },
+                                  }, */
                                 ),
                               ),
                             ),
@@ -10583,12 +10586,12 @@ class _NewCalloutJobState extends State<NewClient> {
                                           ?.validate();
                                     });
                                   },
-                                  validator: (value) {
+                                  /*  validator: (value) {
                                     if (value == null || value.isEmpty) {
                                       return 'Please enter any special instructions';
                                     }
                                     return null;
-                                  },
+                                  }, */
                                 ),
                               ),
                             ),

@@ -68,6 +68,7 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
         ),
       );
       addCollectorOpened = false;
+      numberOfCollectors++;
     });
   }
 
@@ -7881,7 +7882,7 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
             ),
           ),
           SizedBox(
-            height: 25,
+            height: 35,
           ),
         ]);
       case 1:
@@ -7969,12 +7970,12 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                           ?.validate();
                                     });
                                   },
-                                  validator: (value) {
+                                  /* validator: (value) {
                                     if (value == null || value.isEmpty) {
                                       return 'Please enter any test instructions';
                                     }
                                     return null;
-                                  },
+                                  }, */
                                 ),
                               ),
                             ),
@@ -8022,12 +8023,12 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                           ?.validate();
                                     });
                                   },
-                                  validator: (value) {
+                                  /* validator: (value) {
                                     if (value == null || value.isEmpty) {
                                       return 'Please enter any additional test instructions';
                                     }
                                     return null;
-                                  },
+                                  }, */
                                 ),
                               ),
                             ),
@@ -8093,12 +8094,12 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                           ?.validate();
                                     });
                                   },
-                                  validator: (value) {
+                                  /*  validator: (value) {
                                     if (value == null || value.isEmpty) {
                                       return 'Please enter a valid donor selection process';
                                     }
                                     return null;
-                                  },
+                                  }, */
                                 ),
                               ),
                             ),
@@ -8166,12 +8167,12 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                           ?.validate();
                                     });
                                   },
-                                  validator: (value) {
+                                  /* validator: (value) {
                                     if (value == null || value.isEmpty) {
                                       return 'Please enter any screening and testing process';
                                     }
                                     return null;
-                                  },
+                                  }, */
                                 ),
                               ),
                             ),
@@ -8239,12 +8240,12 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                           ?.validate();
                                     });
                                   },
-                                  validator: (value) {
+                                  /* validator: (value) {
                                     if (value == null || value.isEmpty) {
                                       return 'Please enter any test confirmation instructions';
                                     }
                                     return null;
-                                  },
+                                  }, */
                                 ),
                               ),
                             ),
@@ -8312,12 +8313,12 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                           ?.validate();
                                     });
                                   },
-                                  validator: (value) {
+                                  /*  validator: (value) {
                                     if (value == null || value.isEmpty) {
                                       return 'Please enter any global site access instructions';
                                     }
                                     return null;
-                                  },
+                                  }, */
                                 ),
                               ),
                             ),
@@ -8385,12 +8386,12 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                           ?.validate();
                                     });
                                   },
-                                  validator: (value) {
+                                  /* validator: (value) {
                                     if (value == null || value.isEmpty) {
                                       return 'Please enter specific local site access instructions';
                                     }
                                     return null;
-                                  },
+                                  }, */
                                 ),
                               ),
                             ),
@@ -8456,12 +8457,12 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                           ?.validate();
                                     });
                                   },
-                                  validator: (value) {
+                                  /*  validator: (value) {
                                     if (value == null || value.isEmpty) {
                                       return 'Please enter any special instructions';
                                     }
                                     return null;
-                                  },
+                                  }, */
                                 ),
                               ),
                             ),
@@ -8521,7 +8522,7 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
             ),
           ),
           SizedBox(
-            height: 25,
+            height: 35,
           ),
         ]);
       case 2:
@@ -9179,7 +9180,6 @@ class _NewJobAndroidEditedState extends State<NewJobAndroidEdited> {
                                         ),
                                         onPressed: () {
                                           setState(() {
-                                            numberOfCollectors++;
                                             addCollectorOpened = true;
                                           });
                                         },

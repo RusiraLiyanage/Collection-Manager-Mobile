@@ -3,7 +3,8 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 class AddContractNote extends StatefulWidget {
-  const AddContractNote({super.key});
+  final ScrollController scrollController;
+  const AddContractNote({super.key, required this.scrollController});
 
   @override
   State<AddContractNote> createState() => _AddContractNoteState();
@@ -35,6 +36,16 @@ class _AddContractNoteState extends State<AddContractNote> {
             TextButton(
               onPressed: () {
                 Navigator.pop(context);
+                // Scroll to the top after step change
+                WidgetsBinding.instance.addPostFrameCallback((_) {
+                  widget.scrollController.animateTo(
+                    widget.scrollController.position
+                        .maxScrollExtent, // Scroll to the bottom
+                    duration:
+                        Duration(milliseconds: 200), // Smooth scroll duration
+                    curve: Curves.easeInOut, // Smooth animation curve
+                  );
+                });
               },
               child: const Text('OK'),
             ),
