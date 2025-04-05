@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_gifs/loading_gifs.dart';
 import 'package:project_code_blue/tabs/tabs_page.dart';
@@ -59,8 +60,11 @@ class _SplashScreenState extends State<SplashScreen> {
                 fit: BoxFit.contain,
               ),
             ),
-            const SizedBox(height: 20), // Add spacing between logo and text
-
+            const SizedBox(height: 25), // Add spacing between logo and text
+            CupertinoActivityIndicator(
+              radius: 15.0,
+              color: Colors.white, // default is 10.0
+            ),
             const Spacer(), // Push the "Powered by" section to the bottom
             Center(
               child: Padding(
