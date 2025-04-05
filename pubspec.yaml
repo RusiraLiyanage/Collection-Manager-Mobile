@@ -53,6 +53,7 @@ dependencies:
   syncfusion_flutter_calendar: ^29.1.35
   icon_badge: ^1.0.0
   flutter_easy_faq: ^1.0.1
+  loading_gifs: ^0.3.0
 
 dev_dependencies:
   flutter_test:
@@ -82,6 +83,7 @@ flutter:
     - assets/images/powered-by.png
     - assets/images/icons/home.png
     - assets/images/icons/dashboard.png
+    - assets/images/icons/loading_ios.gif
     - assets/images/icons/onSiteJobs.png
     - assets/images/icons/onSiteApprovals.png
     - assets/images/icons/clientManagement.png

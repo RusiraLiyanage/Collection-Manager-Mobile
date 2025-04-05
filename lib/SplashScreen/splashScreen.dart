@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:loading_gifs/loading_gifs.dart';
 import 'package:project_code_blue/tabs/tabs_page.dart';
 import 'package:flutter/services.dart';
 
@@ -59,6 +60,7 @@ class _SplashScreenState extends State<SplashScreen> {
               ),
             ),
             const SizedBox(height: 20), // Add spacing between logo and text
+
             const Spacer(), // Push the "Powered by" section to the bottom
             Center(
               child: Padding(
