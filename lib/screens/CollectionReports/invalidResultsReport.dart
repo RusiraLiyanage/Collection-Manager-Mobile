@@ -190,7 +190,7 @@ class _InvalidResultsReportState extends State<InvalidResultsReport> {
           controller: _scrollController,
           child: SizedBox(
             height: _rowsPerPage == 5
-                ? 940
+                ? 946
                 : _rowsPerPage == 10
                     ? 1200
                     : _rowsPerPage == 15
