@@ -10,7 +10,7 @@ import 'package:project_code_blue/screens/CollectorsCalendar/collectorsCalendar.
 import 'package:project_code_blue/screens/Dashboard/testCollectionSummary.dart';
 import 'package:project_code_blue/screens/Dashboard/testSampleResults.dart';
 import 'package:project_code_blue/screens/Dashboard/testsProcessed.dart';
-import 'package:project_code_blue/screens/HomeBottomApproach/homePage.dart';
+import 'package:project_code_blue/screens/Home/homePage.dart';
 import 'package:project_code_blue/screens/OnsiteApprovals/onsiteApprovals.dart';
 import 'package:project_code_blue/screens/OnsiteJobs/onSiteJobsHome.dart';
 import '../screens/Dashboard/DashboardHome.dart';

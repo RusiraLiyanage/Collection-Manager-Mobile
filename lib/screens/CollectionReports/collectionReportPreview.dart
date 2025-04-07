@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project_code_blue/Navigation/appBarGoBack2.dart';
-import 'package:project_code_blue/screens/CollectionReports/invalidResultsReport.dart';
+import 'package:project_code_blue/Navigation/appBarCollectionReports.dart';
 import 'package:project_code_blue/sidemenu/sidemenu.dart';
 
 class CollectionReportPreview extends StatefulWidget {

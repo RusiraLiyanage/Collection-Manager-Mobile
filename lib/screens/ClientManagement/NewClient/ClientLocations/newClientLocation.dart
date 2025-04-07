@@ -1,8 +1,8 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:project_code_blue/screens/ClientManagement/newSiteContact.dart';
-import 'package:project_code_blue/screens/ClientManagement/siteContact.dart';
+import 'package:project_code_blue/screens/ClientManagement/NewClient/ClientLocations/SiteContact/newSiteContact.dart';
+import 'package:project_code_blue/screens/ClientManagement/NewClient/SiteContract/Definitions/siteContact.dart';
 
 class NewClientLocation extends StatefulWidget {
   const NewClientLocation({super.key});

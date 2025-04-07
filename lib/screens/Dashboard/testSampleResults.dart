@@ -4,10 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_chartx/components/ChartLabeledData.dart';
 import 'package:flutter_chartx/components/types.dart';
 import 'package:flutter_chartx/widgets/ColumnChart.dart';
-import 'package:project_code_blue/Navigation/appBar.dart';
 import 'package:project_code_blue/Navigation/appBarGoBack.dart';
-import 'package:project_code_blue/screens/Dashboard/processedTests.dart';
-import 'package:project_code_blue/screens/Dashboard/sampleResults.dart';
+import 'package:project_code_blue/screens/Dashboard/Definitions/sampleResults.dart';
 import 'package:project_code_blue/sidemenu/sidemenu.dart';
 
 class TestSampleResults extends StatefulWidget {

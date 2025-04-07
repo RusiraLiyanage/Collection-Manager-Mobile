@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:project_code_blue/AppState/appState.dart';
-import 'package:project_code_blue/Navigation/appBar.dart';
 import 'package:project_code_blue/Navigation/appBarGoBack.dart';
 import 'package:project_code_blue/sidemenu/sidemenu.dart';
 import 'package:provider/provider.dart';

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project_code_blue/screens/ClientManagement/addContractNote.dart';
+import 'package:project_code_blue/screens/ClientManagement/NewClient/SiteContract/addContractNote.dart';
 
 class ContractCard extends StatelessWidget {
   final Map<String, String> contract;

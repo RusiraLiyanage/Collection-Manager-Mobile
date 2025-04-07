@@ -13,8 +13,6 @@ class ITServices extends StatefulWidget {
 class _ITServicesState extends State<ITServices> {
   late Future<Map<String, String>> _latestTestData;
 
-  String? _selectedValue;
-
   String? _selectedPlan;
 
   String? _selectedBillingCycle;

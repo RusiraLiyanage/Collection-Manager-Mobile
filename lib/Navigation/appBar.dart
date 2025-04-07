@@ -11,7 +11,6 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    final appState = Provider.of<AppState>(context, listen: true);
     return Stack(children: [
       // Blurred Background
       Positioned.fill(
@@ -53,19 +52,6 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
         elevation: 0.0,
         actions: <Widget>[
-          /* IconButton(
-            icon: Icon(
-              Icons.notifications_active_outlined,
-              color: Colors.white,
-              size: 28,
-            ),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => Notifications()),
-              );
-            },
-          ), */
           Consumer<AppState>(
             builder: (context, appState, child) {
               return IconBadge(
@@ -88,25 +74,6 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
                 },
               );
             },
-            /* child: IconBadge(
-              icon: Icon(
-                Icons.notifications_active_outlined,
-                color: Colors.white,
-                weight: 50,
-                size: 28,
-              ),
-              itemCount: appState.noNotifications,
-              badgeColor: Colors.redAccent.withOpacity(0.6),
-              itemColor: Colors.white,
-              maxCount: 99,
-              hideZero: false,
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Notifications()),
-                );
-              },
-            ), */
           ),
           IconButton(
               icon: Icon(

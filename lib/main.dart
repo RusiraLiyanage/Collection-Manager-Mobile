@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:project_code_blue/SplashScreen/splashScreen.dart';
 import 'package:provider/provider.dart';
 import './AppState/appState.dart';
-import 'package:project_code_blue/tabs/tabs_page.dart';
 
 void main() {
   //WidgetsFlutterBinding.ensureInitialized(); // Ensure plugins are initialized

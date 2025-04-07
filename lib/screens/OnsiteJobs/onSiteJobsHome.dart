@@ -2,9 +2,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/rendering.dart';
-import 'package:project_code_blue/screens/OnsiteJobs/achievedJobsNewCard.dart';
-import 'package:project_code_blue/screens/OnsiteJobs/newCalloutJob.dart';
-import 'package:project_code_blue/screens/OnsiteJobs/newOnsiteJob.dart';
+import 'package:project_code_blue/screens/OnsiteJobs/achievedJobsCard.dart';
+import 'package:project_code_blue/screens/OnsiteJobs/NewCalloutJob/Main/newCalloutJob.dart';
+import 'package:project_code_blue/screens/OnsiteJobs/NewOnsiteJob/Main/newOnsiteJob.dart';
 import 'package:project_code_blue/screens/OnsiteJobs/onSiteJobCard.dart';
 import 'package:provider/provider.dart';
 import '../../AppState/appState.dart';
@@ -1610,9 +1610,8 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
                                                         right: 16.0,
                                                         bottom: 10.0,
                                                       ),
-                                                      child:
-                                                          AchievedJobsNewCard(
-                                                              job: job),
+                                                      child: AchievedJobsCard(
+                                                          job: job),
                                                     ),
                                                   );
                                                 },

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project_code_blue/Navigation/appBar.dart';
-import 'package:project_code_blue/Navigation/appBarGoBack.dart';
-import 'package:project_code_blue/Navigation/appBarGoBack2.dart';
+import 'package:project_code_blue/Navigation/appBarCollectionReports.dart';
 import 'package:project_code_blue/sidemenu/sidemenu.dart';
 
 class InvalidResultsReport extends StatefulWidget {

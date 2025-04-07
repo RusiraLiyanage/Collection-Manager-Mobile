@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:project_code_blue/screens/OnsiteJobs/collector.dart';
-import 'package:project_code_blue/screens/OnsiteJobs/collectorRepresentation.dart';
+import 'package:project_code_blue/screens/OnsiteJobs/Definitions/collector.dart';
+import 'package:project_code_blue/screens/OnsiteJobs/NewCalloutJob/collectorRepresentation.dart';
 
 enum TestsType {
   alcoholOnly,

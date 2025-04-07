@@ -2,16 +2,16 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:project_code_blue/screens/ClientManagement/achievedLocationCard.dart';
-import 'package:project_code_blue/screens/ClientManagement/attachmentCard.dart';
-import 'package:project_code_blue/screens/ClientManagement/authorizedRepresentatives.dart';
-import 'package:project_code_blue/screens/ClientManagement/authrorizedRepresentative.dart';
-import 'package:project_code_blue/screens/ClientManagement/clientLocationCard.dart';
-import 'package:project_code_blue/screens/ClientManagement/contractCard.dart';
-import 'package:project_code_blue/screens/ClientManagement/newClientLocation.dart';
-import 'package:project_code_blue/screens/ClientManagement/newNote.dart';
-import 'package:project_code_blue/screens/ClientManagement/noteCard.dart';
-import 'package:project_code_blue/screens/OnsiteJobs/achievedJobsNewCard.dart';
+import 'package:project_code_blue/screens/ClientManagement/NewClient/ClientLocations/achievedLocationCard.dart';
+import 'package:project_code_blue/screens/ClientManagement/NewClient/Attachments/attachmentCard.dart';
+import 'package:project_code_blue/screens/ClientManagement/NewClient/AuthorizedRepresentatives/authorizedRepresentatives.dart';
+import 'package:project_code_blue/screens/ClientManagement/NewClient/AuthorizedRepresentatives/Definitions/authrorizedRepresentative.dart';
+import 'package:project_code_blue/screens/ClientManagement/NewClient/ClientLocations/clientLocationCard.dart';
+import 'package:project_code_blue/screens/ClientManagement/NewClient/SiteContract/contractCard.dart';
+import 'package:project_code_blue/screens/ClientManagement/NewClient/ClientLocations/newClientLocation.dart';
+import 'package:project_code_blue/screens/ClientManagement/NewClient/Notes/newNote.dart';
+import 'package:project_code_blue/screens/ClientManagement/NewClient/Notes/noteCard.dart';
+import 'package:project_code_blue/screens/OnsiteJobs/achievedJobsCard.dart';
 import 'package:project_code_blue/screens/OnsiteJobs/onSiteJobCard.dart';
 //import 'package:progress_stepper/progress_stepper.dart';
 import 'package:im_stepper/stepper.dart';
@@ -12749,8 +12749,8 @@ class _NewCalloutJobState extends State<NewClient> {
                                                   right: 16.0,
                                                   bottom: 10.0,
                                                 ),
-                                                child: AchievedJobsNewCard(
-                                                    job: job),
+                                                child:
+                                                    AchievedJobsCard(job: job),
                                               ),
                                             );
                                           },

@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:project_code_blue/AppState/appState.dart';
 import 'package:project_code_blue/Navigation/appBar.dart';
-import 'package:project_code_blue/screens/OnsiteApprovals/onSiteApprovalsNewCard.dart';
+import 'package:project_code_blue/screens/OnsiteApprovals/onSiteApprovalsCard.dart';
 import 'package:project_code_blue/sidemenu/sidemenu.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
@@ -564,7 +564,7 @@ class _OnsiteApprovalsState extends State<OnsiteApprovals> {
                             return Padding(
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 16.0, vertical: 5.0),
-                              child: OnsiteApprovalsNewCard(approval: approval),
+                              child: OnSiteApprovalsCard(approval: approval),
                             );
                           },
                         ),

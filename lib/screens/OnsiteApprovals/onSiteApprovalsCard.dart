@@ -3,10 +3,10 @@ import 'package:project_code_blue/pages/collectorsModal.dart';
 import 'package:adaptive_action_sheet/adaptive_action_sheet.dart';
 import 'package:project_code_blue/screens/OnsiteApprovals/onSiteApprovalModal.dart';
 
-class OnsiteApprovalsNewCard extends StatelessWidget {
+class OnSiteApprovalsCard extends StatelessWidget {
   final Map<String, String> approval;
 
-  const OnsiteApprovalsNewCard({
+  const OnSiteApprovalsCard({
     super.key,
     required this.approval,
   });

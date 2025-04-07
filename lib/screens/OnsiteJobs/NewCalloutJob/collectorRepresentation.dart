@@ -26,12 +26,6 @@ class _CollectorRepresentationState extends State<CollectorRepresentation> {
 
   String? _selectedCollectorOneAssignment;
 
-  final List<String> _collectorOneAssignment = [
-    'Allocated',
-    'Accepted',
-    'Rejected'
-  ];
-
   bool collectorSelected = false;
 
   final _formKey = GlobalKey<FormState>();

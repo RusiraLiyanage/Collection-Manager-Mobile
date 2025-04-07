@@ -5,7 +5,7 @@ import 'package:flutter_chartx/components/types.dart';
 import 'package:flutter_chartx/widgets/ColumnChart.dart';
 import 'package:project_code_blue/Navigation/appBar.dart';
 import 'package:project_code_blue/Navigation/appBarGoBack.dart';
-import 'package:project_code_blue/screens/Dashboard/processedTests.dart';
+import 'package:project_code_blue/screens/Dashboard/Definitions/processedTests.dart';
 import 'package:project_code_blue/sidemenu/sidemenu.dart';
 import 'package:card_swiper/card_swiper.dart';
 

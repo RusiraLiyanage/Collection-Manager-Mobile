@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:project_code_blue/screens/ClientManagement/changeLogCard.dart';
+import 'package:project_code_blue/screens/ClientManagement/NewClient/Notes/changeLogCard.dart';
 
 class EditNote extends StatefulWidget {
   final String subject;

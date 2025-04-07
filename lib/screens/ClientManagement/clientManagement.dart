@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:project_code_blue/screens/ClientManagement/achievedClientCard.dart';
 import 'package:project_code_blue/screens/ClientManagement/clientManagementCard.dart';
-import 'package:project_code_blue/screens/ClientManagement/newClient.dart';
+import 'package:project_code_blue/screens/ClientManagement/NewClient/Main/newClient.dart';
 import 'package:provider/provider.dart';
 import '../../AppState/appState.dart';
 import 'package:project_code_blue/Navigation/appBar.dart';

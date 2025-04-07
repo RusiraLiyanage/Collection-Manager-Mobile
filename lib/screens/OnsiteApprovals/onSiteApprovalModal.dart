@@ -1166,46 +1166,12 @@ class OnsiteApprovalModal extends StatelessWidget {
                                           ),
                                         ),
                                       ),
-                                      /*  Container(
-                                        height: 40,
-                                        width: 120,
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius: BorderRadius.circular(4),
-                                          border: Border.all(
-                                              color: Color(0xFF7F8E9D), width: 1),
-                                        ),
-                                        child: Row(
-                                          children: [
-                                            Padding(
-                                              padding: const EdgeInsets.symmetric(
-                                                  horizontal: 8.0),
-                                              child: Icon(
-                                                Icons.check_box_outlined,
-                                                color: Color(0xFF7F8E9D),
-                                                size: 20,
-                                              ),
-                                            ),
-                                            Text(
-                                              "I left the site at 16:30",
-                                              style: TextStyle(
-                                                  fontSize: 13,
-                                                  color: Color(0xFF7F8E9D)),
-                                            ),
-                                          ],
-                                        ),
-                                      ), */
                                     ],
                                   ),
                                 ),
                               ],
                             ),
-                            /* _buildTextField("Date", "Mon, 17 Jun 2024"),
-                            _buildTextField("Requested Number of Donors", "20"),
-                            _buildTextField("Total Processed Donors", "23"),
-                            _buildTextField("Start Time", "9:00 am"),
-                            _buildTextField("End Time", "4:00 pm"),
-                            _buildTextField("Total Time", "7h 0m"), */
+
                             SizedBox(height: 10),
                             //_buildSignatureField("Signature"),
                             SizedBox(height: 10),
@@ -1282,45 +1248,6 @@ class OnsiteApprovalModal extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-
-  Widget _buildSignatureField(String label) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          label,
-          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-        ),
-        Container(
-          height: 100,
-          width: 161,
-          decoration: BoxDecoration(
-            color: Color(0xFFE6F7FA),
-            borderRadius: BorderRadius.circular(19),
-          ),
-          child: Padding(
-            padding: EdgeInsets.all(9.0),
-            child: Material(
-              elevation: 4,
-              shadowColor: Colors.black.withOpacity(0.5),
-              borderRadius: BorderRadius.circular(15),
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(4),
-                ),
-                child: Center(
-                  child: Icon(Icons.edit,
-                      color: Colors.grey,
-                      size: 30), // Placeholder for signature
-                ),
-              ),
-            ),
-          ),
-        ),
-      ],
     );
   }
 }

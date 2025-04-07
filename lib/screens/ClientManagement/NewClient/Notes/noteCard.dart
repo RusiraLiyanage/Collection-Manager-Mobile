@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:project_code_blue/screens/ClientManagement/editNote.dart';
-import 'package:project_code_blue/screens/ClientManagement/newNote.dart';
+import 'package:project_code_blue/screens/ClientManagement/NewClient/Notes/editNote.dart';
+import 'package:project_code_blue/screens/ClientManagement/NewClient/Notes/newNote.dart';
 
 class NoteCard extends StatelessWidget {
   final Map<String, String> note;
