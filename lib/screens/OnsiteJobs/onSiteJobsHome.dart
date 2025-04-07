@@ -669,33 +669,6 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
                               ),
                             ),
                           ),
-                          /* Padding(
-                            padding: const EdgeInsets.only(top: 8.0, left: 8.0),
-                            child: Container(
-                              color: Color(0xFF56ACB1),
-                              width: 168,
-                              height: 42,
-                              child: Row(
-                                children: [
-                                  Image.asset(
-                                      "assets/images/icons/onSiteJobs.png"),
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                      right: 10,
-                                    ),
-                                    child: Text(
-                                      "On-site Jobs",
-                                      style: TextStyle(
-                                          fontSize: 18.0,
-                                          fontWeight: FontWeight
-                                              .bold // Set the text size in logical pixels
-                                          ),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ), */
                           Padding(
                             padding: const EdgeInsets.only(
                               right: 16.0,

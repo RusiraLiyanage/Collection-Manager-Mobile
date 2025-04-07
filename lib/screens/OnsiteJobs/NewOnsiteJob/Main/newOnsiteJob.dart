@@ -32,6 +32,8 @@ class _NewOnsiteJobState extends State<NewOnsiteJob> {
 
   bool _hasSubmitted = false; // ✅ Added: Flag to track submission
 
+  bool _hasSubmitted3 = false; // ✅ Added: Flag to track submission
+
   bool addCollectorOpened = false;
 
   List<Collector> collectors = List.empty(growable: true);
@@ -350,6 +352,7 @@ class _NewOnsiteJobState extends State<NewOnsiteJob> {
   Widget _buildStepContent() {
     switch (_currentStep) {
       case 0:
+        // Step 1 of the New Onsite Job
         return Column(children: [
           const SizedBox(height: 8),
           Padding(
@@ -7885,6 +7888,7 @@ class _NewOnsiteJobState extends State<NewOnsiteJob> {
           ),
         ]);
       case 1:
+        // Step 2 of the New Onsite Job
         return Column(children: [
           Padding(
             padding: const EdgeInsets.only(
@@ -8525,6 +8529,7 @@ class _NewOnsiteJobState extends State<NewOnsiteJob> {
           ),
         ]);
       case 2:
+        // Step 3 of the New Onsite Job
         return Column(children: [
           Padding(
             padding: const EdgeInsets.only(
@@ -8679,6 +8684,8 @@ class _NewOnsiteJobState extends State<NewOnsiteJob> {
                                           });
                                         },
                                         validator: (value) {
+                                          if (!_hasSubmitted3)
+                                            return null; // ✅ Only validate after submit
                                           if (_authorizedRepresentativeController
                                                   .text ==
                                               "") {
@@ -8792,7 +8799,7 @@ class _NewOnsiteJobState extends State<NewOnsiteJob> {
                                           });
                                         },
                                         validator: (value) {
-                                          if (!_hasSubmitted)
+                                          if (!_hasSubmitted3)
                                             return null; // ✅ Only validate after submit
                                           if (!RegExp(r'^[0-9]{10}$')
                                               .hasMatch(value!)) {
@@ -8903,6 +8910,8 @@ class _NewOnsiteJobState extends State<NewOnsiteJob> {
                                           });
                                         },
                                         validator: (value) {
+                                          if (!_hasSubmitted3)
+                                            return null; // ✅ Only validate after submit
                                           if (_positionController.text == "") {
                                             return 'Please enter the position';
                                           }
@@ -9016,7 +9025,7 @@ class _NewOnsiteJobState extends State<NewOnsiteJob> {
                                           });
                                         },
                                         validator: (value) {
-                                          if (!_hasSubmitted)
+                                          if (!_hasSubmitted3)
                                             return null; // ✅ Only validate after submit
                                           if (!RegExp(
                                                   r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$')
@@ -9515,7 +9524,10 @@ class _NewOnsiteJobState extends State<NewOnsiteJob> {
     final formState = _formKeys[_currentStep].currentState;
 
     setState(() {
-      _hasSubmitted = true; // ✅ Set flag to true before validation
+      _hasSubmitted = true;
+      if (_currentStep == 2) {
+        _hasSubmitted3 = true;
+      } // ✅ Set flag to true before validation
     });
 
     // Validate the current form
@@ -9560,6 +9572,7 @@ class _NewOnsiteJobState extends State<NewOnsiteJob> {
           ],
         ),
       );
+      setState(() {});
     }
   }
 
