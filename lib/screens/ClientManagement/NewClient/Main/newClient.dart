@@ -7,6 +7,11 @@ import 'package:project_code_blue/screens/ClientManagement/NewClient/Attachments
 import 'package:project_code_blue/screens/ClientManagement/NewClient/AuthorizedRepresentatives/authorizedRepresentatives.dart';
 import 'package:project_code_blue/screens/ClientManagement/NewClient/AuthorizedRepresentatives/Definitions/authrorizedRepresentative.dart';
 import 'package:project_code_blue/screens/ClientManagement/NewClient/ClientLocations/clientLocationCard.dart';
+import 'package:project_code_blue/screens/ClientManagement/NewClient/Components/ClientDetails/TestingSpecifications/TestsAndDevices/categoryField.dart';
+import 'package:project_code_blue/screens/ClientManagement/NewClient/Components/ClientDetails/TestingSpecifications/TestsAndDevices/limitField.dart';
+import 'package:project_code_blue/screens/ClientManagement/NewClient/Components/ClientDetails/TestingSpecifications/TestsAndDevices/sitOutTimeField.dart';
+import 'package:project_code_blue/screens/ClientManagement/NewClient/Components/ClientDetails/TypeOneFields/customizedTypeOne.dart';
+import 'package:project_code_blue/screens/ClientManagement/NewClient/Components/extraInfoFormField.dart';
 import 'package:project_code_blue/screens/ClientManagement/NewClient/SiteContract/contractCard.dart';
 import 'package:project_code_blue/screens/ClientManagement/NewClient/ClientLocations/newClientLocation.dart';
 import 'package:project_code_blue/screens/ClientManagement/NewClient/Notes/newNote.dart';
@@ -17,6 +22,9 @@ import 'package:project_code_blue/screens/OnsiteJobs/onSiteJobCard.dart';
 import 'package:im_stepper/stepper.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:path_provider/path_provider.dart';
+
+import '../Components/ClientDetails/TestingSpecifications/DrugTestSpecifications/drugTestFormField.dart';
+import '../Components/ClientDetails/TestingSpecifications/DrugTestSpecifications/preferredDeviceFormField.dart';
 
 enum TestsType {
   alcoholOnly,
@@ -1404,6 +1412,9 @@ class _NewCalloutJobState extends State<NewClient> {
   final TextEditingController _clientReferenceController =
       TextEditingController();
 
+  final TextEditingController _category4LimitGController =
+      TextEditingController();
+
   // Dropdown values
   String? _selectedClientName;
   String? _selectedSite;
@@ -1542,11 +1553,43 @@ class _NewCalloutJobState extends State<NewClient> {
   final GlobalKey<FormFieldState<String>> _specialInstructionsKey =
       GlobalKey<FormFieldState<String>>();
 
+  final GlobalKey<FormFieldState<String>> _category4SitoutTimeKey =
+      GlobalKey<FormFieldState<String>>();
+
+  final TextEditingController _category5LimitGController =
+      TextEditingController();
+
   int get totalPages => (locationData.length / itemsPerPage).ceil();
 
   int get totalPagesAchieved =>
       (locationDataAchieved.length / itemsPerPageAchieved).ceil();
 
+  final GlobalKey<FormFieldState<String>> _category4Key =
+      GlobalKey<FormFieldState<String>>();
+
+  final GlobalKey<FormFieldState<String>> _category4Limit210L =
+      GlobalKey<FormFieldState<String>>();
+
+  final TextEditingController _siteContact_4_Controller =
+      TextEditingController();
+
+  final TextEditingController _category4SetLimitOutTimeController =
+      TextEditingController();
+
+  final GlobalKey<FormFieldState<String>> _category5Key =
+      GlobalKey<FormFieldState<String>>();
+
+  final TextEditingController _siteContact_5_Controller =
+      TextEditingController();
+
+  final GlobalKey<FormFieldState<String>> _category5Limit210L =
+      GlobalKey<FormFieldState<String>>();
+
+  final TextEditingController _category5SetLimitOutTimeController =
+      TextEditingController();
+
+  final GlobalKey<FormFieldState<String>> _category5SitoutTimeKey =
+      GlobalKey<FormFieldState<String>>();
   // Dropdown options
   final List<String> _theClientNames = [
     'George Vasileski',
@@ -2071,97 +2114,24 @@ class _NewCalloutJobState extends State<NewClient> {
                                     color: Colors.grey,
                                   ),
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 0.0),
-                                  child: Container(
-                                    height: 40,
-                                    width: 206,
-                                    child: Material(
-                                      elevation:
-                                          4, // Adjust this value for more or less elevation
-                                      shadowColor: Colors.black.withOpacity(
-                                          0.5), // Optional: Adjust shadow color
-                                      borderRadius: BorderRadius.circular(
-                                          4), // Match with TextFormField's border radius
-                                      child: TextFormField(
-                                        key: _clientNamEKey,
-                                        controller: _clientNamEController,
-                                        decoration: InputDecoration(
-                                          fillColor: Colors.white,
-                                          filled: true,
-                                          border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.white,
-                                              width: 2,
-                                            ),
-                                          ),
-                                          enabledBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.white,
-                                              width: 2,
-                                            ),
-                                          ),
-                                          focusedBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.white,
-                                              width: 2,
-                                            ),
-                                          ),
-                                          errorBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.red,
-                                              width: 2,
-                                            ),
-                                          ),
-                                          focusedErrorBorder:
-                                              OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.red,
-                                              width: 2,
-                                            ),
-                                          ),
-                                          contentPadding:
-                                              const EdgeInsets.symmetric(
-                                            vertical: 5,
-                                            horizontal: 12,
-                                          ),
-                                          errorStyle: const TextStyle(
-                                            color: Colors.red,
-                                            fontSize: 12,
-                                          ),
-                                        ),
-                                        keyboardType: TextInputType
-                                            .text, // Ensures numeric input
-                                        onChanged: (value) {
-                                          setState(() {
-                                            //_selectedJobReference = value;
-                                            // Update the number of donors and the text controller
-                                            _clientNamEController.text =
-                                                value; // Manually update the controller text
-                                            _clientNamEKey.currentState!
-                                                .validate();
-                                          });
-                                        },
-                                        validator: (value) {
-                                          if (_clientNamEController.text ==
-                                              "") {
-                                            return 'Please enter a correct name';
-                                          }
-                                          return null;
-                                        },
-                                      ),
-                                    ),
-                                  ),
+                                CustomizedTypeOne(
+                                  controller: _clientNamEController,
+                                  fieldKey: _clientNamEKey,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      //_selectedJobReference = value;
+                                      // Update the number of donors and the text controller
+                                      _clientNamEController.text =
+                                          value; // Manually update the controller text
+                                      _clientNamEKey.currentState!.validate();
+                                    });
+                                  },
+                                  validator: (value) {
+                                    if (_clientNamEController.text == "") {
+                                      return 'Please enter a correct name';
+                                    }
+                                    return null;
+                                  },
                                 ),
                               ],
                             ),
@@ -2306,96 +2276,24 @@ class _NewCalloutJobState extends State<NewClient> {
                                     color: Colors.grey,
                                   ),
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 0.0),
-                                  child: Container(
-                                    height: 40,
-                                    width: 206,
-                                    child: Material(
-                                      elevation:
-                                          4, // Adjust this value for more or less elevation
-                                      shadowColor: Colors.black.withOpacity(
-                                          0.5), // Optional: Adjust shadow color
-                                      borderRadius: BorderRadius.circular(
-                                          4), // Match with TextFormField's border radius
-                                      child: TextFormField(
-                                        key: _positionKey,
-                                        controller: _positionController,
-                                        decoration: InputDecoration(
-                                          fillColor: Colors.white,
-                                          filled: true,
-                                          border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.white,
-                                              width: 2,
-                                            ),
-                                          ),
-                                          enabledBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.white,
-                                              width: 2,
-                                            ),
-                                          ),
-                                          focusedBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.white,
-                                              width: 2,
-                                            ),
-                                          ),
-                                          errorBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.red,
-                                              width: 2,
-                                            ),
-                                          ),
-                                          focusedErrorBorder:
-                                              OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.red,
-                                              width: 2,
-                                            ),
-                                          ),
-                                          contentPadding:
-                                              const EdgeInsets.symmetric(
-                                            vertical: 5,
-                                            horizontal: 12,
-                                          ),
-                                          errorStyle: const TextStyle(
-                                            color: Colors.red,
-                                            fontSize: 12,
-                                          ),
-                                        ),
-                                        keyboardType: TextInputType
-                                            .text, // Ensures numeric input
-                                        onChanged: (value) {
-                                          setState(() {
-                                            //_selectedJobReference = value;
-                                            // Update the number of donors and the text controller
-                                            _positionController.text =
-                                                value; // Manually update the controller text
-                                            _positionKey.currentState!
-                                                .validate();
-                                          });
-                                        },
-                                        validator: (value) {
-                                          if (_positionController.text == "") {
-                                            return 'Please enter a correct position';
-                                          }
-                                          return null;
-                                        },
-                                      ),
-                                    ),
-                                  ),
+                                CustomizedTypeOne(
+                                  controller: _positionController,
+                                  fieldKey: _positionKey,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      //_selectedJobReference = value;
+                                      // Update the number of donors and the text controller
+                                      _positionController.text =
+                                          value; // Manually update the controller text
+                                      _positionKey.currentState!.validate();
+                                    });
+                                  },
+                                  validator: (value) {
+                                    if (_positionController.text == "") {
+                                      return 'Please enter a correct position';
+                                    }
+                                    return null;
+                                  },
                                 ),
                               ],
                             ),
@@ -2417,99 +2315,28 @@ class _NewCalloutJobState extends State<NewClient> {
                                     color: Colors.grey,
                                   ),
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 0.0),
-                                  child: Container(
-                                    height: 40,
-                                    width: 206,
-                                    child: Material(
-                                      elevation:
-                                          4, // Adjust this value for more or less elevation
-                                      shadowColor: Colors.black.withOpacity(
-                                          0.5), // Optional: Adjust shadow color
-                                      borderRadius: BorderRadius.circular(
-                                          4), // Match with TextFormField's border radius
-                                      child: TextFormField(
-                                        key: _emailKey,
-                                        controller: _emailController,
-                                        decoration: InputDecoration(
-                                          fillColor: Colors.white,
-                                          filled: true,
-                                          border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.white,
-                                              width: 2,
-                                            ),
-                                          ),
-                                          enabledBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.white,
-                                              width: 2,
-                                            ),
-                                          ),
-                                          focusedBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.white,
-                                              width: 2,
-                                            ),
-                                          ),
-                                          errorBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.red,
-                                              width: 2,
-                                            ),
-                                          ),
-                                          focusedErrorBorder:
-                                              OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.red,
-                                              width: 2,
-                                            ),
-                                          ),
-                                          contentPadding:
-                                              const EdgeInsets.symmetric(
-                                            vertical: 5,
-                                            horizontal: 12,
-                                          ),
-                                          errorStyle: const TextStyle(
-                                            color: Colors.red,
-                                            fontSize: 12,
-                                          ),
-                                        ),
-                                        keyboardType: TextInputType
-                                            .text, // Ensures numeric input
-                                        onChanged: (value) {
-                                          setState(() {
-                                            //_selectedJobReference = value;
-                                            // Update the number of donors and the text controller
-                                            _emailController.text =
-                                                value; // Manually update the controller text
-                                            _emailKey.currentState!.validate();
-                                          });
-                                        },
-                                        validator: (value) {
-                                          if (!_hasSubmitted)
-                                            return null; // ✅ Only validate after submit
-                                          if (!RegExp(
-                                                  r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$')
-                                              .hasMatch(value!)) {
-                                            return 'Please enter a valid email address';
-                                          }
-                                          return null;
-                                        },
-                                      ),
-                                    ),
-                                  ),
+                                CustomizedTypeOne(
+                                  controller: _emailController,
+                                  fieldKey: _emailKey,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      //_selectedJobReference = value;
+                                      // Update the number of donors and the text controller
+                                      _emailController.text =
+                                          value; // Manually update the controller text
+                                      _emailKey.currentState!.validate();
+                                    });
+                                  },
+                                  validator: (value) {
+                                    if (!_hasSubmitted)
+                                      return null; // ✅ Only validate after submit
+                                    if (!RegExp(
+                                            r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$')
+                                        .hasMatch(value!)) {
+                                      return 'Please enter a valid email address';
+                                    }
+                                    return null;
+                                  },
                                 ),
                               ],
                             ),
@@ -2592,97 +2419,25 @@ class _NewCalloutJobState extends State<NewClient> {
                                     color: Colors.grey,
                                   ),
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 0.0),
-                                  child: Container(
-                                    height: 40,
-                                    width: 206,
-                                    child: Material(
-                                      elevation:
-                                          4, // Adjust this value for more or less elevation
-                                      shadowColor: Colors.black.withOpacity(
-                                          0.5), // Optional: Adjust shadow color
-                                      borderRadius: BorderRadius.circular(
-                                          4), // Match with TextFormField's border radius
-                                      child: TextFormField(
-                                        key: _addressLineOneKey,
-                                        controller: _addressLineOneController,
-                                        decoration: InputDecoration(
-                                          fillColor: Colors.white,
-                                          filled: true,
-                                          border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.white,
-                                              width: 2,
-                                            ),
-                                          ),
-                                          enabledBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.white,
-                                              width: 2,
-                                            ),
-                                          ),
-                                          focusedBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.white,
-                                              width: 2,
-                                            ),
-                                          ),
-                                          errorBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.red,
-                                              width: 2,
-                                            ),
-                                          ),
-                                          focusedErrorBorder:
-                                              OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.red,
-                                              width: 2,
-                                            ),
-                                          ),
-                                          contentPadding:
-                                              const EdgeInsets.symmetric(
-                                            vertical: 5,
-                                            horizontal: 12,
-                                          ),
-                                          errorStyle: const TextStyle(
-                                            color: Colors.red,
-                                            fontSize: 12,
-                                          ),
-                                        ),
-                                        keyboardType: TextInputType
-                                            .text, // Ensures numeric input
-                                        onChanged: (value) {
-                                          setState(() {
-                                            //_selectedJobReference = value;
-                                            // Update the number of donors and the text controller
-                                            _addressLineOneController.text =
-                                                value; // Manually update the controller text
-                                            _addressLineOneKey.currentState!
-                                                .validate();
-                                          });
-                                        },
-                                        validator: (value) {
-                                          if (_addressLineOneController.text ==
-                                              "") {
-                                            return 'Please enter a address line 1';
-                                          }
-                                          return null;
-                                        },
-                                      ),
-                                    ),
-                                  ),
+                                CustomizedTypeOne(
+                                  controller: _addressLineOneController,
+                                  fieldKey: _addressLineOneKey,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      //_selectedJobReference = value;
+                                      // Update the number of donors and the text controller
+                                      _addressLineOneController.text =
+                                          value; // Manually update the controller text
+                                      _addressLineOneKey.currentState!
+                                          .validate();
+                                    });
+                                  },
+                                  validator: (value) {
+                                    if (_addressLineOneController.text == "") {
+                                      return 'Please enter a address line 1';
+                                    }
+                                    return null;
+                                  },
                                 ),
                               ],
                             ),
@@ -2704,97 +2459,25 @@ class _NewCalloutJobState extends State<NewClient> {
                                     color: Colors.grey,
                                   ),
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 0.0),
-                                  child: Container(
-                                    height: 40,
-                                    width: 206,
-                                    child: Material(
-                                      elevation:
-                                          4, // Adjust this value for more or less elevation
-                                      shadowColor: Colors.black.withOpacity(
-                                          0.5), // Optional: Adjust shadow color
-                                      borderRadius: BorderRadius.circular(
-                                          4), // Match with TextFormField's border radius
-                                      child: TextFormField(
-                                        key: _addressLineTwoKey,
-                                        controller: _addressLineTwoController,
-                                        decoration: InputDecoration(
-                                          fillColor: Colors.white,
-                                          filled: true,
-                                          border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.white,
-                                              width: 2,
-                                            ),
-                                          ),
-                                          enabledBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.white,
-                                              width: 2,
-                                            ),
-                                          ),
-                                          focusedBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.white,
-                                              width: 2,
-                                            ),
-                                          ),
-                                          errorBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.red,
-                                              width: 2,
-                                            ),
-                                          ),
-                                          focusedErrorBorder:
-                                              OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.red,
-                                              width: 2,
-                                            ),
-                                          ),
-                                          contentPadding:
-                                              const EdgeInsets.symmetric(
-                                            vertical: 5,
-                                            horizontal: 12,
-                                          ),
-                                          errorStyle: const TextStyle(
-                                            color: Colors.red,
-                                            fontSize: 12,
-                                          ),
-                                        ),
-                                        keyboardType: TextInputType
-                                            .text, // Ensures numeric input
-                                        onChanged: (value) {
-                                          setState(() {
-                                            //_selectedJobReference = value;
-                                            // Update the number of donors and the text controller
-                                            _addressLineTwoController.text =
-                                                value; // Manually update the controller text
-                                            _addressLineTwoKey.currentState!
-                                                .validate();
-                                          });
-                                        },
-                                        validator: (value) {
-                                          if (_addressLineTwoController.text ==
-                                              "") {
-                                            return 'Please enter a address line 2';
-                                          }
-                                          return null;
-                                        },
-                                      ),
-                                    ),
-                                  ),
+                                CustomizedTypeOne(
+                                  controller: _addressLineTwoController,
+                                  fieldKey: _addressLineTwoKey,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      //_selectedJobReference = value;
+                                      // Update the number of donors and the text controller
+                                      _addressLineTwoController.text =
+                                          value; // Manually update the controller text
+                                      _addressLineTwoKey.currentState!
+                                          .validate();
+                                    });
+                                  },
+                                  validator: (value) {
+                                    if (_addressLineTwoController.text == "") {
+                                      return 'Please enter a address line 2';
+                                    }
+                                    return null;
+                                  },
                                 ),
                               ],
                             ),
@@ -2816,97 +2499,24 @@ class _NewCalloutJobState extends State<NewClient> {
                                     color: Colors.grey,
                                   ),
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 0.0),
-                                  child: Container(
-                                    height: 40,
-                                    width: 206,
-                                    child: Material(
-                                      elevation:
-                                          4, // Adjust this value for more or less elevation
-                                      shadowColor: Colors.black.withOpacity(
-                                          0.5), // Optional: Adjust shadow color
-                                      borderRadius: BorderRadius.circular(
-                                          4), // Match with TextFormField's border radius
-                                      child: TextFormField(
-                                        key: _citySuburbKey,
-                                        controller: _citySuburbController,
-                                        decoration: InputDecoration(
-                                          fillColor: Colors.white,
-                                          filled: true,
-                                          border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.white,
-                                              width: 2,
-                                            ),
-                                          ),
-                                          enabledBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.white,
-                                              width: 2,
-                                            ),
-                                          ),
-                                          focusedBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.white,
-                                              width: 2,
-                                            ),
-                                          ),
-                                          errorBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.red,
-                                              width: 2,
-                                            ),
-                                          ),
-                                          focusedErrorBorder:
-                                              OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            borderSide: const BorderSide(
-                                              color: Colors.red,
-                                              width: 2,
-                                            ),
-                                          ),
-                                          contentPadding:
-                                              const EdgeInsets.symmetric(
-                                            vertical: 5,
-                                            horizontal: 12,
-                                          ),
-                                          errorStyle: const TextStyle(
-                                            color: Colors.red,
-                                            fontSize: 12,
-                                          ),
-                                        ),
-                                        keyboardType: TextInputType
-                                            .text, // Ensures numeric input
-                                        onChanged: (value) {
-                                          setState(() {
-                                            //_selectedJobReference = value;
-                                            // Update the number of donors and the text controller
-                                            _citySuburbController.text =
-                                                value; // Manually update the controller text
-                                            _citySuburbKey.currentState!
-                                                .validate();
-                                          });
-                                        },
-                                        validator: (value) {
-                                          if (_citySuburbController.text ==
-                                              "") {
-                                            return 'Please enter the city suburb';
-                                          }
-                                          return null;
-                                        },
-                                      ),
-                                    ),
-                                  ),
+                                CustomizedTypeOne(
+                                  controller: _citySuburbController,
+                                  fieldKey: _citySuburbKey,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      //_selectedJobReference = value;
+                                      // Update the number of donors and the text controller
+                                      _citySuburbController.text =
+                                          value; // Manually update the controller text
+                                      _citySuburbKey.currentState!.validate();
+                                    });
+                                  },
+                                  validator: (value) {
+                                    if (_citySuburbController.text == "") {
+                                      return 'Please enter the city suburb';
+                                    }
+                                    return null;
+                                  },
                                 ),
                               ],
                             ),
@@ -5076,116 +4686,25 @@ class _NewCalloutJobState extends State<NewClient> {
                                           SizedBox(
                                             height: 5,
                                           ),
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                right: 0.0),
-                                            child: Container(
-                                              width: double.infinity,
-                                              height: 40,
-                                              child: Material(
-                                                elevation:
-                                                    4, // Adjust this value for more or less elevation
-                                                shadowColor: Colors.black
-                                                    .withOpacity(
-                                                        0.5), // Optional: Adjust shadow color
-                                                borderRadius: BorderRadius.circular(
-                                                    4), // Match with TextFormField's border radius
-                                                child: TextFormField(
-                                                  key: _category1Key,
-                                                  controller:
-                                                      _category1_Controller,
-                                                  decoration: InputDecoration(
-                                                    fillColor: Colors.white,
-                                                    filled: true,
-                                                    border: OutlineInputBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              4),
-                                                      borderSide:
-                                                          const BorderSide(
-                                                        color: Colors.white,
-                                                        width: 2,
-                                                      ),
-                                                    ),
-                                                    enabledBorder:
-                                                        OutlineInputBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              4),
-                                                      borderSide:
-                                                          const BorderSide(
-                                                        color: Colors.white,
-                                                        width: 2,
-                                                      ),
-                                                    ),
-                                                    focusedBorder:
-                                                        OutlineInputBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              4),
-                                                      borderSide:
-                                                          const BorderSide(
-                                                        color: Colors.white,
-                                                        width: 2,
-                                                      ),
-                                                    ),
-                                                    errorBorder:
-                                                        OutlineInputBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              4),
-                                                      borderSide:
-                                                          const BorderSide(
-                                                        color: Colors.red,
-                                                        width: 2,
-                                                      ),
-                                                    ),
-                                                    focusedErrorBorder:
-                                                        OutlineInputBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              4),
-                                                      borderSide:
-                                                          const BorderSide(
-                                                        color: Colors.red,
-                                                        width: 2,
-                                                      ),
-                                                    ),
-                                                    contentPadding:
-                                                        const EdgeInsets
-                                                            .symmetric(
-                                                      vertical: 5,
-                                                      horizontal: 12,
-                                                    ),
-                                                    errorStyle: const TextStyle(
-                                                      color: Colors.red,
-                                                      fontSize: 12,
-                                                    ),
-                                                  ),
-                                                  keyboardType: TextInputType
-                                                      .text, // Ensures numeric input
-                                                  onChanged: (value) {
-                                                    setState(() {
-                                                      // Update the number of donors and the text controller
-                                                      _category1_Controller
-                                                              .text =
-                                                          value; // Manually update the controller text
-                                                      _category1Key
-                                                          .currentState!
-                                                          .validate();
-                                                    });
-                                                  },
-                                                  validator: (value) {
-                                                    if (_category1_Controller
-                                                            .text ==
-                                                        "") {
-                                                      return 'Please enter a valid category 1 name';
-                                                    }
-                                                    return null;
-                                                  },
-                                                ),
-                                              ),
-                                            ),
+                                          CategoryField(
+                                            fieldKey: _category1Key,
+                                            controller: _category1_Controller,
+                                            onChanged: (value) {
+                                              setState(() {
+                                                // Update the number of donors and the text controller
+                                                _category1_Controller.text =
+                                                    value; // Manually update the controller text
+                                                _category1Key.currentState!
+                                                    .validate();
+                                              });
+                                            },
+                                            validator: (value) {
+                                              if (_category1_Controller.text ==
+                                                  "") {
+                                                return 'Please enter a valid category 1 name';
+                                              }
+                                              return null;
+                                            },
                                           ),
                                           SizedBox(
                                             height: 15,
@@ -5216,135 +4735,30 @@ class _NewCalloutJobState extends State<NewClient> {
                                                   SizedBox(
                                                     height: 10,
                                                   ),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            right: 0.0),
-                                                    child: Container(
-                                                      width: 160,
-                                                      height: 40,
-                                                      child: Material(
-                                                        elevation:
-                                                            4, // Adjust this value for more or less elevation
-                                                        shadowColor: Colors
-                                                            .black
-                                                            .withOpacity(
-                                                                0.5), // Optional: Adjust shadow color
-                                                        borderRadius:
-                                                            BorderRadius.circular(
-                                                                4), // Match with TextFormField's border radius
-                                                        child: TextFormField(
-                                                          key:
-                                                              _category1Limit210L,
-                                                          controller:
-                                                              _category1LimitGController,
-                                                          decoration:
-                                                              InputDecoration(
-                                                            fillColor:
-                                                                Colors.white,
-                                                            filled: true,
-                                                            border:
-                                                                OutlineInputBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          4),
-                                                              borderSide:
-                                                                  const BorderSide(
-                                                                color: Colors
-                                                                    .white,
-                                                                width: 2,
-                                                              ),
-                                                            ),
-                                                            enabledBorder:
-                                                                OutlineInputBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          4),
-                                                              borderSide:
-                                                                  const BorderSide(
-                                                                color: Colors
-                                                                    .white,
-                                                                width: 2,
-                                                              ),
-                                                            ),
-                                                            focusedBorder:
-                                                                OutlineInputBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          4),
-                                                              borderSide:
-                                                                  const BorderSide(
-                                                                color: Colors
-                                                                    .white,
-                                                                width: 2,
-                                                              ),
-                                                            ),
-                                                            errorBorder:
-                                                                OutlineInputBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          4),
-                                                              borderSide:
-                                                                  const BorderSide(
-                                                                color:
-                                                                    Colors.red,
-                                                                width: 2,
-                                                              ),
-                                                            ),
-                                                            focusedErrorBorder:
-                                                                OutlineInputBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          4),
-                                                              borderSide:
-                                                                  const BorderSide(
-                                                                color:
-                                                                    Colors.red,
-                                                                width: 2,
-                                                              ),
-                                                            ),
-                                                            contentPadding:
-                                                                const EdgeInsets
-                                                                    .symmetric(
-                                                              vertical: 5,
-                                                              horizontal: 12,
-                                                            ),
-                                                            errorStyle:
-                                                                const TextStyle(
-                                                              color: Colors.red,
-                                                              fontSize: 12,
-                                                            ),
-                                                          ),
-                                                          keyboardType:
-                                                              TextInputType
-                                                                  .text, // Ensures numeric input
-                                                          onChanged: (value) {
-                                                            setState(() {
-                                                              // Update the number of donors and the text controller
-                                                              _category1LimitGController
-                                                                      .text =
-                                                                  value; // Manually update the controller text
-                                                              _category1Limit210L
-                                                                  .currentState!
-                                                                  .validate();
-                                                            });
-                                                          },
-                                                          validator: (value) {
-                                                            if (_category1LimitGController
-                                                                    .text ==
-                                                                "") {
-                                                              return 'Please enter a valid limit';
-                                                            }
-                                                            return null;
-                                                          },
-                                                        ),
-                                                      ),
-                                                    ),
+                                                  LimitField(
+                                                    fieldKey:
+                                                        _category1Limit210L,
+                                                    controller:
+                                                        _category1LimitGController,
+                                                    onChanged: (value) {
+                                                      setState(() {
+                                                        // Update the number of donors and the text controller
+                                                        _category1LimitGController
+                                                                .text =
+                                                            value; // Manually update the controller text
+                                                        _category1Limit210L
+                                                            .currentState!
+                                                            .validate();
+                                                      });
+                                                    },
+                                                    validator: (value) {
+                                                      if (_category1LimitGController
+                                                              .text ==
+                                                          "") {
+                                                        return 'Please enter a valid limit';
+                                                      }
+                                                      return null;
+                                                    },
                                                   ),
                                                 ],
                                               ),
@@ -5370,135 +4784,30 @@ class _NewCalloutJobState extends State<NewClient> {
                                                   SizedBox(
                                                     height: 10,
                                                   ),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            right: 0.0),
-                                                    child: Container(
-                                                      width: 160,
-                                                      height: 40,
-                                                      child: Material(
-                                                        elevation:
-                                                            4, // Adjust this value for more or less elevation
-                                                        shadowColor: Colors
-                                                            .black
-                                                            .withOpacity(
-                                                                0.5), // Optional: Adjust shadow color
-                                                        borderRadius:
-                                                            BorderRadius.circular(
-                                                                4), // Match with TextFormField's border radius
-                                                        child: TextFormField(
-                                                          key:
-                                                              _category1SitoutTimeKey,
-                                                          controller:
-                                                              _category1SetLimitOutTimeController,
-                                                          decoration:
-                                                              InputDecoration(
-                                                            fillColor:
-                                                                Colors.white,
-                                                            filled: true,
-                                                            border:
-                                                                OutlineInputBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          4),
-                                                              borderSide:
-                                                                  const BorderSide(
-                                                                color: Colors
-                                                                    .white,
-                                                                width: 2,
-                                                              ),
-                                                            ),
-                                                            enabledBorder:
-                                                                OutlineInputBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          4),
-                                                              borderSide:
-                                                                  const BorderSide(
-                                                                color: Colors
-                                                                    .white,
-                                                                width: 2,
-                                                              ),
-                                                            ),
-                                                            focusedBorder:
-                                                                OutlineInputBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          4),
-                                                              borderSide:
-                                                                  const BorderSide(
-                                                                color: Colors
-                                                                    .white,
-                                                                width: 2,
-                                                              ),
-                                                            ),
-                                                            errorBorder:
-                                                                OutlineInputBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          4),
-                                                              borderSide:
-                                                                  const BorderSide(
-                                                                color:
-                                                                    Colors.red,
-                                                                width: 2,
-                                                              ),
-                                                            ),
-                                                            focusedErrorBorder:
-                                                                OutlineInputBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          4),
-                                                              borderSide:
-                                                                  const BorderSide(
-                                                                color:
-                                                                    Colors.red,
-                                                                width: 2,
-                                                              ),
-                                                            ),
-                                                            contentPadding:
-                                                                const EdgeInsets
-                                                                    .symmetric(
-                                                              vertical: 5,
-                                                              horizontal: 12,
-                                                            ),
-                                                            errorStyle:
-                                                                const TextStyle(
-                                                              color: Colors.red,
-                                                              fontSize: 12,
-                                                            ),
-                                                          ),
-                                                          keyboardType:
-                                                              TextInputType
-                                                                  .text, // Ensures numeric input
-                                                          onChanged: (value) {
-                                                            setState(() {
-                                                              // Update the number of donors and the text controller
-                                                              _category1SetLimitOutTimeController
-                                                                      .text =
-                                                                  value; // Manually update the controller text
-                                                              _category1SitoutTimeKey
-                                                                  .currentState!
-                                                                  .validate();
-                                                            });
-                                                          },
-                                                          validator: (value) {
-                                                            if (_category1SetLimitOutTimeController
-                                                                    .text ==
-                                                                "") {
-                                                              return 'Please enter a valid set out time';
-                                                            }
-                                                            return null;
-                                                          },
-                                                        ),
-                                                      ),
-                                                    ),
+                                                  SitOutTimeField(
+                                                    controller:
+                                                        _category1SetLimitOutTimeController,
+                                                    fieldKey:
+                                                        _category1SitoutTimeKey,
+                                                    onChanged: (value) {
+                                                      setState(() {
+                                                        // Update the number of donors and the text controller
+                                                        _category1SetLimitOutTimeController
+                                                                .text =
+                                                            value; // Manually update the controller text
+                                                        _category1SitoutTimeKey
+                                                            .currentState!
+                                                            .validate();
+                                                      });
+                                                    },
+                                                    validator: (value) {
+                                                      if (_category1SetLimitOutTimeController
+                                                              .text ==
+                                                          "") {
+                                                        return 'Please enter a valid set out time';
+                                                      }
+                                                      return null;
+                                                    },
                                                   ),
                                                 ],
                                               ),
@@ -5551,116 +4860,25 @@ class _NewCalloutJobState extends State<NewClient> {
                                           SizedBox(
                                             height: 5,
                                           ),
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                right: 0.0),
-                                            child: Container(
-                                              width: double.infinity,
-                                              height: 40,
-                                              child: Material(
-                                                elevation:
-                                                    4, // Adjust this value for more or less elevation
-                                                shadowColor: Colors.black
-                                                    .withOpacity(
-                                                        0.5), // Optional: Adjust shadow color
-                                                borderRadius: BorderRadius.circular(
-                                                    4), // Match with TextFormField's border radius
-                                                child: TextFormField(
-                                                  key: _category2Key,
-                                                  controller:
-                                                      _category2Controller,
-                                                  decoration: InputDecoration(
-                                                    fillColor: Colors.white,
-                                                    filled: true,
-                                                    border: OutlineInputBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              4),
-                                                      borderSide:
-                                                          const BorderSide(
-                                                        color: Colors.white,
-                                                        width: 2,
-                                                      ),
-                                                    ),
-                                                    enabledBorder:
-                                                        OutlineInputBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              4),
-                                                      borderSide:
-                                                          const BorderSide(
-                                                        color: Colors.white,
-                                                        width: 2,
-                                                      ),
-                                                    ),
-                                                    focusedBorder:
-                                                        OutlineInputBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              4),
-                                                      borderSide:
-                                                          const BorderSide(
-                                                        color: Colors.white,
-                                                        width: 2,
-                                                      ),
-                                                    ),
-                                                    errorBorder:
-                                                        OutlineInputBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              4),
-                                                      borderSide:
-                                                          const BorderSide(
-                                                        color: Colors.red,
-                                                        width: 2,
-                                                      ),
-                                                    ),
-                                                    focusedErrorBorder:
-                                                        OutlineInputBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              4),
-                                                      borderSide:
-                                                          const BorderSide(
-                                                        color: Colors.red,
-                                                        width: 2,
-                                                      ),
-                                                    ),
-                                                    contentPadding:
-                                                        const EdgeInsets
-                                                            .symmetric(
-                                                      vertical: 5,
-                                                      horizontal: 12,
-                                                    ),
-                                                    errorStyle: const TextStyle(
-                                                      color: Colors.red,
-                                                      fontSize: 12,
-                                                    ),
-                                                  ),
-                                                  keyboardType: TextInputType
-                                                      .text, // Ensures numeric input
-                                                  onChanged: (value) {
-                                                    setState(() {
-                                                      _category2Key
-                                                          .currentState!
-                                                          .validate();
-                                                      // Update the number of donors and the text controller
-                                                      _category2Controller
-                                                              .text =
-                                                          value; // Manually update the controller text
-                                                    });
-                                                  },
-                                                  validator: (value) {
-                                                    if (_category2Controller
-                                                            .text ==
-                                                        "") {
-                                                      return 'Please enter a valid category 2 name';
-                                                    }
-                                                    return null;
-                                                  },
-                                                ),
-                                              ),
-                                            ),
+                                          CategoryField(
+                                            fieldKey: _category2Key,
+                                            controller: _category2Controller,
+                                            onChanged: (value) {
+                                              setState(() {
+                                                _category2Key.currentState!
+                                                    .validate();
+                                                // Update the number of donors and the text controller
+                                                _category2Controller.text =
+                                                    value; // Manually update the controller text
+                                              });
+                                            },
+                                            validator: (value) {
+                                              if (_category2Controller.text ==
+                                                  "") {
+                                                return 'Please enter a valid category 2 name';
+                                              }
+                                              return null;
+                                            },
                                           ),
                                           SizedBox(
                                             height: 15,
@@ -5691,135 +4909,30 @@ class _NewCalloutJobState extends State<NewClient> {
                                                   SizedBox(
                                                     height: 10,
                                                   ),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            right: 0.0),
-                                                    child: Container(
-                                                      width: 160,
-                                                      height: 40,
-                                                      child: Material(
-                                                        elevation:
-                                                            4, // Adjust this value for more or less elevation
-                                                        shadowColor: Colors
-                                                            .black
-                                                            .withOpacity(
-                                                                0.5), // Optional: Adjust shadow color
-                                                        borderRadius:
-                                                            BorderRadius.circular(
-                                                                4), // Match with TextFormField's border radius
-                                                        child: TextFormField(
-                                                          key:
-                                                              _category2Limit210L,
-                                                          controller:
-                                                              _category2LimitGController,
-                                                          decoration:
-                                                              InputDecoration(
-                                                            fillColor:
-                                                                Colors.white,
-                                                            filled: true,
-                                                            border:
-                                                                OutlineInputBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          4),
-                                                              borderSide:
-                                                                  const BorderSide(
-                                                                color: Colors
-                                                                    .white,
-                                                                width: 2,
-                                                              ),
-                                                            ),
-                                                            enabledBorder:
-                                                                OutlineInputBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          4),
-                                                              borderSide:
-                                                                  const BorderSide(
-                                                                color: Colors
-                                                                    .white,
-                                                                width: 2,
-                                                              ),
-                                                            ),
-                                                            focusedBorder:
-                                                                OutlineInputBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          4),
-                                                              borderSide:
-                                                                  const BorderSide(
-                                                                color: Colors
-                                                                    .white,
-                                                                width: 2,
-                                                              ),
-                                                            ),
-                                                            errorBorder:
-                                                                OutlineInputBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          4),
-                                                              borderSide:
-                                                                  const BorderSide(
-                                                                color:
-                                                                    Colors.red,
-                                                                width: 2,
-                                                              ),
-                                                            ),
-                                                            focusedErrorBorder:
-                                                                OutlineInputBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          4),
-                                                              borderSide:
-                                                                  const BorderSide(
-                                                                color:
-                                                                    Colors.red,
-                                                                width: 2,
-                                                              ),
-                                                            ),
-                                                            contentPadding:
-                                                                const EdgeInsets
-                                                                    .symmetric(
-                                                              vertical: 5,
-                                                              horizontal: 12,
-                                                            ),
-                                                            errorStyle:
-                                                                const TextStyle(
-                                                              color: Colors.red,
-                                                              fontSize: 12,
-                                                            ),
-                                                          ),
-                                                          keyboardType:
-                                                              TextInputType
-                                                                  .text, // Ensures numeric input
-                                                          onChanged: (value) {
-                                                            setState(() {
-                                                              _category2Limit210L
-                                                                  .currentState!
-                                                                  .validate();
-                                                              // Update the number of donors and the text controller
-                                                              _category2LimitGController
-                                                                      .text =
-                                                                  value; // Manually update the controller text
-                                                            });
-                                                          },
-                                                          validator: (value) {
-                                                            if (_category2LimitGController
-                                                                    .text ==
-                                                                "") {
-                                                              return 'Please enter a valid limit';
-                                                            }
-                                                            return null;
-                                                          },
-                                                        ),
-                                                      ),
-                                                    ),
+                                                  LimitField(
+                                                    fieldKey:
+                                                        _category2Limit210L,
+                                                    controller:
+                                                        _category2LimitGController,
+                                                    onChanged: (value) {
+                                                      setState(() {
+                                                        _category2Limit210L
+                                                            .currentState!
+                                                            .validate();
+                                                        // Update the number of donors and the text controller
+                                                        _category2LimitGController
+                                                                .text =
+                                                            value; // Manually update the controller text
+                                                      });
+                                                    },
+                                                    validator: (value) {
+                                                      if (_category2LimitGController
+                                                              .text ==
+                                                          "") {
+                                                        return 'Please enter a valid limit';
+                                                      }
+                                                      return null;
+                                                    },
                                                   ),
                                                 ],
                                               ),
@@ -5845,135 +4958,30 @@ class _NewCalloutJobState extends State<NewClient> {
                                                   SizedBox(
                                                     height: 10,
                                                   ),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            right: 0.0),
-                                                    child: Container(
-                                                      width: 160,
-                                                      height: 40,
-                                                      child: Material(
-                                                        elevation:
-                                                            4, // Adjust this value for more or less elevation
-                                                        shadowColor: Colors
-                                                            .black
-                                                            .withOpacity(
-                                                                0.5), // Optional: Adjust shadow color
-                                                        borderRadius:
-                                                            BorderRadius.circular(
-                                                                4), // Match with TextFormField's border radius
-                                                        child: TextFormField(
-                                                          key:
-                                                              _category2SitoutTimeKey,
-                                                          controller:
-                                                              _category2SetLimitOutTimeController,
-                                                          decoration:
-                                                              InputDecoration(
-                                                            fillColor:
-                                                                Colors.white,
-                                                            filled: true,
-                                                            border:
-                                                                OutlineInputBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          4),
-                                                              borderSide:
-                                                                  const BorderSide(
-                                                                color: Colors
-                                                                    .white,
-                                                                width: 2,
-                                                              ),
-                                                            ),
-                                                            enabledBorder:
-                                                                OutlineInputBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          4),
-                                                              borderSide:
-                                                                  const BorderSide(
-                                                                color: Colors
-                                                                    .white,
-                                                                width: 2,
-                                                              ),
-                                                            ),
-                                                            focusedBorder:
-                                                                OutlineInputBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          4),
-                                                              borderSide:
-                                                                  const BorderSide(
-                                                                color: Colors
-                                                                    .white,
-                                                                width: 2,
-                                                              ),
-                                                            ),
-                                                            errorBorder:
-                                                                OutlineInputBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          4),
-                                                              borderSide:
-                                                                  const BorderSide(
-                                                                color:
-                                                                    Colors.red,
-                                                                width: 2,
-                                                              ),
-                                                            ),
-                                                            focusedErrorBorder:
-                                                                OutlineInputBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          4),
-                                                              borderSide:
-                                                                  const BorderSide(
-                                                                color:
-                                                                    Colors.red,
-                                                                width: 2,
-                                                              ),
-                                                            ),
-                                                            contentPadding:
-                                                                const EdgeInsets
-                                                                    .symmetric(
-                                                              vertical: 5,
-                                                              horizontal: 12,
-                                                            ),
-                                                            errorStyle:
-                                                                const TextStyle(
-                                                              color: Colors.red,
-                                                              fontSize: 12,
-                                                            ),
-                                                          ),
-                                                          keyboardType:
-                                                              TextInputType
-                                                                  .text, // Ensures numeric input
-                                                          onChanged: (value) {
-                                                            setState(() {
-                                                              _category2SitoutTimeKey
-                                                                  .currentState!
-                                                                  .validate();
-                                                              // Update the number of donors and the text controller
-                                                              _category2SetLimitOutTimeController
-                                                                      .text =
-                                                                  value; // Manually update the controller text
-                                                            });
-                                                          },
-                                                          validator: (value) {
-                                                            if (_category2SetLimitOutTimeController
-                                                                    .text ==
-                                                                "") {
-                                                              return 'Please enter a valid sit out time';
-                                                            }
-                                                            return null;
-                                                          },
-                                                        ),
-                                                      ),
-                                                    ),
+                                                  SitOutTimeField(
+                                                    controller:
+                                                        _category2SetLimitOutTimeController,
+                                                    fieldKey:
+                                                        _category2SitoutTimeKey,
+                                                    onChanged: (value) {
+                                                      setState(() {
+                                                        _category2SitoutTimeKey
+                                                            .currentState!
+                                                            .validate();
+                                                        // Update the number of donors and the text controller
+                                                        _category2SetLimitOutTimeController
+                                                                .text =
+                                                            value; // Manually update the controller text
+                                                      });
+                                                    },
+                                                    validator: (value) {
+                                                      if (_category2SetLimitOutTimeController
+                                                              .text ==
+                                                          "") {
+                                                        return 'Please enter a valid sit out time';
+                                                      }
+                                                      return null;
+                                                    },
                                                   ),
                                                 ],
                                               ),
@@ -6026,116 +5034,27 @@ class _NewCalloutJobState extends State<NewClient> {
                                           SizedBox(
                                             height: 5,
                                           ),
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                right: 0.0),
-                                            child: Container(
-                                              width: double.infinity,
-                                              height: 40,
-                                              child: Material(
-                                                elevation:
-                                                    4, // Adjust this value for more or less elevation
-                                                shadowColor: Colors.black
-                                                    .withOpacity(
-                                                        0.5), // Optional: Adjust shadow color
-                                                borderRadius: BorderRadius.circular(
-                                                    4), // Match with TextFormField's border radius
-                                                child: TextFormField(
-                                                  key: _category3Key,
-                                                  controller:
-                                                      _siteContact_3_Controller,
-                                                  decoration: InputDecoration(
-                                                    fillColor: Colors.white,
-                                                    filled: true,
-                                                    border: OutlineInputBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              4),
-                                                      borderSide:
-                                                          const BorderSide(
-                                                        color: Colors.white,
-                                                        width: 2,
-                                                      ),
-                                                    ),
-                                                    enabledBorder:
-                                                        OutlineInputBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              4),
-                                                      borderSide:
-                                                          const BorderSide(
-                                                        color: Colors.white,
-                                                        width: 2,
-                                                      ),
-                                                    ),
-                                                    focusedBorder:
-                                                        OutlineInputBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              4),
-                                                      borderSide:
-                                                          const BorderSide(
-                                                        color: Colors.white,
-                                                        width: 2,
-                                                      ),
-                                                    ),
-                                                    errorBorder:
-                                                        OutlineInputBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              4),
-                                                      borderSide:
-                                                          const BorderSide(
-                                                        color: Colors.red,
-                                                        width: 2,
-                                                      ),
-                                                    ),
-                                                    focusedErrorBorder:
-                                                        OutlineInputBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              4),
-                                                      borderSide:
-                                                          const BorderSide(
-                                                        color: Colors.red,
-                                                        width: 2,
-                                                      ),
-                                                    ),
-                                                    contentPadding:
-                                                        const EdgeInsets
-                                                            .symmetric(
-                                                      vertical: 5,
-                                                      horizontal: 12,
-                                                    ),
-                                                    errorStyle: const TextStyle(
-                                                      color: Colors.red,
-                                                      fontSize: 12,
-                                                    ),
-                                                  ),
-                                                  keyboardType: TextInputType
-                                                      .text, // Ensures numeric input
-                                                  onChanged: (value) {
-                                                    setState(() {
-                                                      // Update the number of donors and the text controller
-                                                      _siteContact_3_Controller
-                                                              .text =
-                                                          value; // Manually update the controller text
-                                                      _category3Key
-                                                          .currentState!
-                                                          .validate();
-                                                    });
-                                                  },
-                                                  validator: (value) {
-                                                    if (_siteContact_3_Controller
-                                                            .text ==
-                                                        "") {
-                                                      return 'Please enter a valid category name';
-                                                    }
-                                                    return null;
-                                                  },
-                                                ),
-                                              ),
-                                            ),
+                                          CategoryField(
+                                            fieldKey: _category3Key,
+                                            controller:
+                                                _siteContact_3_Controller,
+                                            onChanged: (value) {
+                                              setState(() {
+                                                // Update the number of donors and the text controller
+                                                _siteContact_3_Controller.text =
+                                                    value; // Manually update the controller text
+                                                _category3Key.currentState!
+                                                    .validate();
+                                              });
+                                            },
+                                            validator: (value) {
+                                              if (_siteContact_3_Controller
+                                                      .text ==
+                                                  "") {
+                                                return 'Please enter a valid category name';
+                                              }
+                                              return null;
+                                            },
                                           ),
                                           SizedBox(
                                             height: 15,
@@ -6166,135 +5085,30 @@ class _NewCalloutJobState extends State<NewClient> {
                                                   SizedBox(
                                                     height: 10,
                                                   ),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            right: 0.0),
-                                                    child: Container(
-                                                      width: 160,
-                                                      height: 40,
-                                                      child: Material(
-                                                        elevation:
-                                                            4, // Adjust this value for more or less elevation
-                                                        shadowColor: Colors
-                                                            .black
-                                                            .withOpacity(
-                                                                0.5), // Optional: Adjust shadow color
-                                                        borderRadius:
-                                                            BorderRadius.circular(
-                                                                4), // Match with TextFormField's border radius
-                                                        child: TextFormField(
-                                                          key:
-                                                              _category3Limit210L,
-                                                          controller:
-                                                              _category3LimitGController,
-                                                          decoration:
-                                                              InputDecoration(
-                                                            fillColor:
-                                                                Colors.white,
-                                                            filled: true,
-                                                            border:
-                                                                OutlineInputBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          4),
-                                                              borderSide:
-                                                                  const BorderSide(
-                                                                color: Colors
-                                                                    .white,
-                                                                width: 2,
-                                                              ),
-                                                            ),
-                                                            enabledBorder:
-                                                                OutlineInputBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          4),
-                                                              borderSide:
-                                                                  const BorderSide(
-                                                                color: Colors
-                                                                    .white,
-                                                                width: 2,
-                                                              ),
-                                                            ),
-                                                            focusedBorder:
-                                                                OutlineInputBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          4),
-                                                              borderSide:
-                                                                  const BorderSide(
-                                                                color: Colors
-                                                                    .white,
-                                                                width: 2,
-                                                              ),
-                                                            ),
-                                                            errorBorder:
-                                                                OutlineInputBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          4),
-                                                              borderSide:
-                                                                  const BorderSide(
-                                                                color:
-                                                                    Colors.red,
-                                                                width: 2,
-                                                              ),
-                                                            ),
-                                                            focusedErrorBorder:
-                                                                OutlineInputBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          4),
-                                                              borderSide:
-                                                                  const BorderSide(
-                                                                color:
-                                                                    Colors.red,
-                                                                width: 2,
-                                                              ),
-                                                            ),
-                                                            contentPadding:
-                                                                const EdgeInsets
-                                                                    .symmetric(
-                                                              vertical: 5,
-                                                              horizontal: 12,
-                                                            ),
-                                                            errorStyle:
-                                                                const TextStyle(
-                                                              color: Colors.red,
-                                                              fontSize: 12,
-                                                            ),
-                                                          ),
-                                                          keyboardType:
-                                                              TextInputType
-                                                                  .text, // Ensures numeric input
-                                                          onChanged: (value) {
-                                                            setState(() {
-                                                              // Update the number of donors and the text controller
-                                                              _category3LimitGController
-                                                                      .text =
-                                                                  value; // Manually update the controller text
-                                                              _category3Limit210L
-                                                                  .currentState!
-                                                                  .validate();
-                                                            });
-                                                          },
-                                                          validator: (value) {
-                                                            if (_category3LimitGController
-                                                                    .text ==
-                                                                "") {
-                                                              return 'Please enter a valid limit';
-                                                            }
-                                                            return null;
-                                                          },
-                                                        ),
-                                                      ),
-                                                    ),
+                                                  LimitField(
+                                                    fieldKey:
+                                                        _category3Limit210L,
+                                                    controller:
+                                                        _category3LimitGController,
+                                                    onChanged: (value) {
+                                                      setState(() {
+                                                        // Update the number of donors and the text controller
+                                                        _category3LimitGController
+                                                                .text =
+                                                            value; // Manually update the controller text
+                                                        _category3Limit210L
+                                                            .currentState!
+                                                            .validate();
+                                                      });
+                                                    },
+                                                    validator: (value) {
+                                                      if (_category3LimitGController
+                                                              .text ==
+                                                          "") {
+                                                        return 'Please enter a valid limit';
+                                                      }
+                                                      return null;
+                                                    },
                                                   ),
                                                 ],
                                               ),
@@ -6320,136 +5134,391 @@ class _NewCalloutJobState extends State<NewClient> {
                                                   SizedBox(
                                                     height: 10,
                                                   ),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            right: 0.0),
-                                                    child: Container(
-                                                      width: 160,
-                                                      height: 40,
-                                                      child: Material(
-                                                        elevation:
-                                                            4, // Adjust this value for more or less elevation
-                                                        shadowColor: Colors
-                                                            .black
-                                                            .withOpacity(
-                                                                0.5), // Optional: Adjust shadow color
-                                                        borderRadius:
-                                                            BorderRadius.circular(
-                                                                4), // Match with TextFormField's border radius
-                                                        child: TextFormField(
-                                                          key:
-                                                              _category3SitoutTimeKey,
-                                                          controller:
-                                                              _category3SetLimitOutTimeController,
-                                                          decoration:
-                                                              InputDecoration(
-                                                            fillColor:
-                                                                Colors.white,
-                                                            filled: true,
-                                                            border:
-                                                                OutlineInputBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          4),
-                                                              borderSide:
-                                                                  const BorderSide(
-                                                                color: Colors
-                                                                    .white,
-                                                                width: 2,
-                                                              ),
-                                                            ),
-                                                            enabledBorder:
-                                                                OutlineInputBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          4),
-                                                              borderSide:
-                                                                  const BorderSide(
-                                                                color: Colors
-                                                                    .white,
-                                                                width: 2,
-                                                              ),
-                                                            ),
-                                                            focusedBorder:
-                                                                OutlineInputBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          4),
-                                                              borderSide:
-                                                                  const BorderSide(
-                                                                color: Colors
-                                                                    .white,
-                                                                width: 2,
-                                                              ),
-                                                            ),
-                                                            errorBorder:
-                                                                OutlineInputBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          4),
-                                                              borderSide:
-                                                                  const BorderSide(
-                                                                color:
-                                                                    Colors.red,
-                                                                width: 2,
-                                                              ),
-                                                            ),
-                                                            focusedErrorBorder:
-                                                                OutlineInputBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          4),
-                                                              borderSide:
-                                                                  const BorderSide(
-                                                                color:
-                                                                    Colors.red,
-                                                                width: 2,
-                                                              ),
-                                                            ),
-                                                            contentPadding:
-                                                                const EdgeInsets
-                                                                    .symmetric(
-                                                              vertical: 5,
-                                                              horizontal: 12,
-                                                            ),
-                                                            errorStyle:
-                                                                const TextStyle(
-                                                              color: Colors.red,
-                                                              fontSize: 12,
-                                                            ),
-                                                          ),
-                                                          keyboardType:
-                                                              TextInputType
-                                                                  .text, // Ensures numeric input
-                                                          onChanged: (value) {
-                                                            setState(() {
-                                                              // Update the number of donors and the text controller
-                                                              _category3SetLimitOutTimeController
-                                                                      .text =
-                                                                  value; // Manually update the controller text
+                                                  SitOutTimeField(
+                                                    controller:
+                                                        _category3SetLimitOutTimeController,
+                                                    fieldKey:
+                                                        _category3SitoutTimeKey,
+                                                    onChanged: (value) {
+                                                      setState(() {
+                                                        // Update the number of donors and the text controller
+                                                        _category3SetLimitOutTimeController
+                                                                .text =
+                                                            value; // Manually update the controller text
 
-                                                              _category3SitoutTimeKey
-                                                                  .currentState!
-                                                                  .validate();
-                                                            });
-                                                          },
-                                                          validator: (value) {
-                                                            if (_category3SetLimitOutTimeController
-                                                                    .text ==
-                                                                "") {
-                                                              return 'Please enter a valid site out time';
-                                                            }
-                                                            return null;
-                                                          },
-                                                        ),
+                                                        _category3SitoutTimeKey
+                                                            .currentState!
+                                                            .validate();
+                                                      });
+                                                    },
+                                                    validator: (value) {
+                                                      if (_category3SetLimitOutTimeController
+                                                              .text ==
+                                                          "") {
+                                                        return 'Please enter a valid site out time';
+                                                      }
+                                                      return null;
+                                                    },
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            height: 15,
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: List.generate(
+                                              60, // Adjust the number of dashes
+                                              (index) => Container(
+                                                width: 4, // Width of each dash
+                                                height:
+                                                    2, // Height of each dash (thickness)
+                                                color: Colors
+                                                    .black, // Color of the dash
+                                              ),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 15,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                        left: 0.0,
+                                        top: 15.0,
+                                        right: 0.0,
+                                      ),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          Align(
+                                            alignment: Alignment.topLeft,
+                                            child: const Text(
+                                              "Category 4",
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 13,
+                                                color: Colors.black,
+                                              ),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 5,
+                                          ),
+                                          CategoryField(
+                                            fieldKey: _category4Key,
+                                            controller:
+                                                _siteContact_4_Controller,
+                                            onChanged: (value) {
+                                              setState(() {
+                                                // Update the number of donors and the text controller
+                                                _siteContact_4_Controller.text =
+                                                    value; // Manually update the controller text
+                                                _category4Key.currentState!
+                                                    .validate();
+                                              });
+                                            },
+                                            validator: (value) {
+                                              if (_siteContact_4_Controller
+                                                      .text ==
+                                                  "") {
+                                                return 'Please enter a valid category name';
+                                              }
+                                              return null;
+                                            },
+                                          ),
+                                          SizedBox(
+                                            height: 15,
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Align(
+                                                    alignment:
+                                                        Alignment.topLeft,
+                                                    child: Text(
+                                                      "Limit (g/210L)",
+                                                      style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize: 13,
+                                                        color: Colors.black,
                                                       ),
                                                     ),
+                                                  ),
+                                                  SizedBox(
+                                                    height: 10,
+                                                  ),
+                                                  LimitField(
+                                                    fieldKey:
+                                                        _category4Limit210L,
+                                                    controller:
+                                                        _category4LimitGController,
+                                                    onChanged: (value) {
+                                                      setState(() {
+                                                        // Update the number of donors and the text controller
+                                                        _category4LimitGController
+                                                                .text =
+                                                            value; // Manually update the controller text
+                                                        _category4Limit210L
+                                                            .currentState!
+                                                            .validate();
+                                                      });
+                                                    },
+                                                    validator: (value) {
+                                                      if (_category4LimitGController
+                                                              .text ==
+                                                          "") {
+                                                        return 'Please enter a valid limit';
+                                                      }
+                                                      return null;
+                                                    },
+                                                  ),
+                                                ],
+                                              ),
+                                              Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Align(
+                                                    alignment:
+                                                        Alignment.topLeft,
+                                                    child: Text(
+                                                      "Sit Out Time (minutes)",
+                                                      style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize: 13,
+                                                        color: Colors.black,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    height: 10,
+                                                  ),
+                                                  SitOutTimeField(
+                                                    controller:
+                                                        _category4SetLimitOutTimeController,
+                                                    fieldKey:
+                                                        _category4SitoutTimeKey,
+                                                    onChanged: (value) {
+                                                      setState(() {
+                                                        // Update the number of donors and the text controller
+                                                        _category4SetLimitOutTimeController
+                                                                .text =
+                                                            value; // Manually update the controller text
+
+                                                        _category4SitoutTimeKey
+                                                            .currentState!
+                                                            .validate();
+                                                      });
+                                                    },
+                                                    validator: (value) {
+                                                      if (_category4SetLimitOutTimeController
+                                                              .text ==
+                                                          "") {
+                                                        return 'Please enter a valid site out time';
+                                                      }
+                                                      return null;
+                                                    },
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            height: 15,
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: List.generate(
+                                              60, // Adjust the number of dashes
+                                              (index) => Container(
+                                                width: 4, // Width of each dash
+                                                height:
+                                                    2, // Height of each dash (thickness)
+                                                color: Colors
+                                                    .black, // Color of the dash
+                                              ),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 15,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                        left: 0.0,
+                                        top: 15.0,
+                                        right: 0.0,
+                                      ),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          Align(
+                                            alignment: Alignment.topLeft,
+                                            child: const Text(
+                                              "Category 5",
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 13,
+                                                color: Colors.black,
+                                              ),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 5,
+                                          ),
+                                          CategoryField(
+                                            fieldKey: _category5Key,
+                                            controller:
+                                                _siteContact_5_Controller,
+                                            onChanged: (value) {
+                                              setState(() {
+                                                // Update the number of donors and the text controller
+                                                _siteContact_5_Controller.text =
+                                                    value; // Manually update the controller text
+                                                _category5Key.currentState!
+                                                    .validate();
+                                              });
+                                            },
+                                            validator: (value) {
+                                              if (_siteContact_5_Controller
+                                                      .text ==
+                                                  "") {
+                                                return 'Please enter a valid category name';
+                                              }
+                                              return null;
+                                            },
+                                          ),
+                                          SizedBox(
+                                            height: 15,
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Align(
+                                                    alignment:
+                                                        Alignment.topLeft,
+                                                    child: Text(
+                                                      "Limit (g/210L)",
+                                                      style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize: 13,
+                                                        color: Colors.black,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    height: 10,
+                                                  ),
+                                                  LimitField(
+                                                    fieldKey:
+                                                        _category5Limit210L,
+                                                    controller:
+                                                        _category5LimitGController,
+                                                    onChanged: (value) {
+                                                      setState(() {
+                                                        // Update the number of donors and the text controller
+                                                        _category5LimitGController
+                                                                .text =
+                                                            value; // Manually update the controller text
+                                                        _category4Limit210L
+                                                            .currentState!
+                                                            .validate();
+                                                      });
+                                                    },
+                                                    validator: (value) {
+                                                      if (_category5LimitGController
+                                                              .text ==
+                                                          "") {
+                                                        return 'Please enter a valid limit';
+                                                      }
+                                                      return null;
+                                                    },
+                                                  ),
+                                                ],
+                                              ),
+                                              Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Align(
+                                                    alignment:
+                                                        Alignment.topLeft,
+                                                    child: Text(
+                                                      "Sit Out Time (minutes)",
+                                                      style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize: 13,
+                                                        color: Colors.black,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    height: 10,
+                                                  ),
+                                                  SitOutTimeField(
+                                                    controller:
+                                                        _category5SetLimitOutTimeController,
+                                                    fieldKey:
+                                                        _category5SitoutTimeKey,
+                                                    onChanged: (value) {
+                                                      setState(() {
+                                                        // Update the number of donors and the text controller
+                                                        _category5SetLimitOutTimeController
+                                                                .text =
+                                                            value; // Manually update the controller text
+
+                                                        _category5SitoutTimeKey
+                                                            .currentState!
+                                                            .validate();
+                                                      });
+                                                    },
+                                                    validator: (value) {
+                                                      if (_category5SetLimitOutTimeController
+                                                              .text ==
+                                                          "") {
+                                                        return 'Please enter a valid site out time';
+                                                      }
+                                                      return null;
+                                                    },
                                                   ),
                                                 ],
                                               ),
@@ -6530,120 +5599,27 @@ class _NewCalloutJobState extends State<NewClient> {
                                               SizedBox(
                                                 height: 5,
                                               ),
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    right: 0.0),
-                                                child: Container(
-                                                  width: double.infinity,
-                                                  height: 40,
-                                                  child: Material(
-                                                    elevation:
-                                                        4, // Adjust this value for more or less elevation
-                                                    shadowColor: Colors.black
-                                                        .withOpacity(
-                                                            0.5), // Optional: Adjust shadow color
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            4), // Match with TextFormField's border radius
-                                                    child: TextFormField(
-                                                      key: _category1Key,
-                                                      controller:
-                                                          _category1_Controller,
-                                                      decoration:
-                                                          InputDecoration(
-                                                        fillColor: Colors.white,
-                                                        filled: true,
-                                                        border:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(4),
-                                                          borderSide:
-                                                              const BorderSide(
-                                                            color: Colors.white,
-                                                            width: 2,
-                                                          ),
-                                                        ),
-                                                        enabledBorder:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(4),
-                                                          borderSide:
-                                                              const BorderSide(
-                                                            color: Colors.white,
-                                                            width: 2,
-                                                          ),
-                                                        ),
-                                                        focusedBorder:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(4),
-                                                          borderSide:
-                                                              const BorderSide(
-                                                            color: Colors.white,
-                                                            width: 2,
-                                                          ),
-                                                        ),
-                                                        errorBorder:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(4),
-                                                          borderSide:
-                                                              const BorderSide(
-                                                            color: Colors.red,
-                                                            width: 2,
-                                                          ),
-                                                        ),
-                                                        focusedErrorBorder:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(4),
-                                                          borderSide:
-                                                              const BorderSide(
-                                                            color: Colors.red,
-                                                            width: 2,
-                                                          ),
-                                                        ),
-                                                        contentPadding:
-                                                            const EdgeInsets
-                                                                .symmetric(
-                                                          vertical: 5,
-                                                          horizontal: 12,
-                                                        ),
-                                                        errorStyle:
-                                                            const TextStyle(
-                                                          color: Colors.red,
-                                                          fontSize: 12,
-                                                        ),
-                                                      ),
-                                                      keyboardType: TextInputType
-                                                          .text, // Ensures numeric input
-                                                      onChanged: (value) {
-                                                        setState(() {
-                                                          _category1Key
-                                                              .currentState!
-                                                              .validate();
-                                                          // Update the number of donors and the text controller
-                                                          _category1_Controller
-                                                                  .text =
-                                                              value; // Manually update the controller text
-                                                        });
-                                                      },
-                                                      validator: (value) {
-                                                        if (_category1_Controller
-                                                                .text ==
-                                                            "") {
-                                                          return 'Please enter a valid category';
-                                                        }
-                                                        return null;
-                                                      },
-                                                    ),
-                                                  ),
-                                                ),
+                                              CategoryField(
+                                                fieldKey: _category1Key,
+                                                controller:
+                                                    _category1_Controller,
+                                                onChanged: (value) {
+                                                  setState(() {
+                                                    // Update the number of donors and the text controller
+                                                    _category1_Controller.text =
+                                                        value; // Manually update the controller text
+                                                    _category1Key.currentState!
+                                                        .validate();
+                                                  });
+                                                },
+                                                validator: (value) {
+                                                  if (_category1_Controller
+                                                          .text ==
+                                                      "") {
+                                                    return 'Please enter a valid category 1 name';
+                                                  }
+                                                  return null;
+                                                },
                                               ),
                                               SizedBox(
                                                 height: 15,
@@ -6676,143 +5652,30 @@ class _NewCalloutJobState extends State<NewClient> {
                                                       SizedBox(
                                                         height: 10,
                                                       ),
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .only(
-                                                                right: 0.0),
-                                                        child: Container(
-                                                          width: 160,
-                                                          height: 40,
-                                                          child: Material(
-                                                            elevation:
-                                                                4, // Adjust this value for more or less elevation
-                                                            shadowColor: Colors
-                                                                .black
-                                                                .withOpacity(
-                                                                    0.5), // Optional: Adjust shadow color
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        4), // Match with TextFormField's border radius
-                                                            child:
-                                                                TextFormField(
-                                                              key:
-                                                                  _category1Limit210L,
-                                                              controller:
-                                                                  _category1LimitGController,
-                                                              decoration:
-                                                                  InputDecoration(
-                                                                fillColor:
-                                                                    Colors
-                                                                        .white,
-                                                                filled: true,
-                                                                border:
-                                                                    OutlineInputBorder(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              4),
-                                                                  borderSide:
-                                                                      const BorderSide(
-                                                                    color: Colors
-                                                                        .white,
-                                                                    width: 2,
-                                                                  ),
-                                                                ),
-                                                                enabledBorder:
-                                                                    OutlineInputBorder(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              4),
-                                                                  borderSide:
-                                                                      const BorderSide(
-                                                                    color: Colors
-                                                                        .white,
-                                                                    width: 2,
-                                                                  ),
-                                                                ),
-                                                                focusedBorder:
-                                                                    OutlineInputBorder(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              4),
-                                                                  borderSide:
-                                                                      const BorderSide(
-                                                                    color: Colors
-                                                                        .white,
-                                                                    width: 2,
-                                                                  ),
-                                                                ),
-                                                                errorBorder:
-                                                                    OutlineInputBorder(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              4),
-                                                                  borderSide:
-                                                                      const BorderSide(
-                                                                    color: Colors
-                                                                        .red,
-                                                                    width: 2,
-                                                                  ),
-                                                                ),
-                                                                focusedErrorBorder:
-                                                                    OutlineInputBorder(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              4),
-                                                                  borderSide:
-                                                                      const BorderSide(
-                                                                    color: Colors
-                                                                        .red,
-                                                                    width: 2,
-                                                                  ),
-                                                                ),
-                                                                contentPadding:
-                                                                    const EdgeInsets
-                                                                        .symmetric(
-                                                                  vertical: 5,
-                                                                  horizontal:
-                                                                      12,
-                                                                ),
-                                                                errorStyle:
-                                                                    const TextStyle(
-                                                                  color: Colors
-                                                                      .red,
-                                                                  fontSize: 12,
-                                                                ),
-                                                              ),
-                                                              keyboardType:
-                                                                  TextInputType
-                                                                      .text, // Ensures numeric input
-                                                              onChanged:
-                                                                  (value) {
-                                                                setState(() {
-                                                                  _category1Limit210L
-                                                                      .currentState!
-                                                                      .validate();
-                                                                  // Update the number of donors and the text controller
-                                                                  _category1LimitGController
-                                                                          .text =
-                                                                      value; // Manually update the controller text
-                                                                });
-                                                              },
-                                                              validator:
-                                                                  (value) {
-                                                                if (_category1LimitGController
-                                                                        .text ==
-                                                                    "") {
-                                                                  return 'Please enter a valid limit';
-                                                                }
-                                                                return null;
-                                                              },
-                                                            ),
-                                                          ),
-                                                        ),
+                                                      LimitField(
+                                                        fieldKey:
+                                                            _category1Limit210L,
+                                                        controller:
+                                                            _category1LimitGController,
+                                                        onChanged: (value) {
+                                                          setState(() {
+                                                            // Update the number of donors and the text controller
+                                                            _category1LimitGController
+                                                                    .text =
+                                                                value; // Manually update the controller text
+                                                            _category1Limit210L
+                                                                .currentState!
+                                                                .validate();
+                                                          });
+                                                        },
+                                                        validator: (value) {
+                                                          if (_category1LimitGController
+                                                                  .text ==
+                                                              "") {
+                                                            return 'Please enter a valid limit';
+                                                          }
+                                                          return null;
+                                                        },
                                                       ),
                                                     ],
                                                   ),
@@ -6839,143 +5702,30 @@ class _NewCalloutJobState extends State<NewClient> {
                                                       SizedBox(
                                                         height: 10,
                                                       ),
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .only(
-                                                                right: 0.0),
-                                                        child: Container(
-                                                          width: 160,
-                                                          height: 40,
-                                                          child: Material(
-                                                            elevation:
-                                                                4, // Adjust this value for more or less elevation
-                                                            shadowColor: Colors
-                                                                .black
-                                                                .withOpacity(
-                                                                    0.5), // Optional: Adjust shadow color
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        4), // Match with TextFormField's border radius
-                                                            child:
-                                                                TextFormField(
-                                                              key:
-                                                                  _category1SitoutTimeKey,
-                                                              controller:
-                                                                  _category1SetLimitOutTimeController,
-                                                              decoration:
-                                                                  InputDecoration(
-                                                                fillColor:
-                                                                    Colors
-                                                                        .white,
-                                                                filled: true,
-                                                                border:
-                                                                    OutlineInputBorder(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              4),
-                                                                  borderSide:
-                                                                      const BorderSide(
-                                                                    color: Colors
-                                                                        .white,
-                                                                    width: 2,
-                                                                  ),
-                                                                ),
-                                                                enabledBorder:
-                                                                    OutlineInputBorder(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              4),
-                                                                  borderSide:
-                                                                      const BorderSide(
-                                                                    color: Colors
-                                                                        .white,
-                                                                    width: 2,
-                                                                  ),
-                                                                ),
-                                                                focusedBorder:
-                                                                    OutlineInputBorder(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              4),
-                                                                  borderSide:
-                                                                      const BorderSide(
-                                                                    color: Colors
-                                                                        .white,
-                                                                    width: 2,
-                                                                  ),
-                                                                ),
-                                                                errorBorder:
-                                                                    OutlineInputBorder(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              4),
-                                                                  borderSide:
-                                                                      const BorderSide(
-                                                                    color: Colors
-                                                                        .red,
-                                                                    width: 2,
-                                                                  ),
-                                                                ),
-                                                                focusedErrorBorder:
-                                                                    OutlineInputBorder(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              4),
-                                                                  borderSide:
-                                                                      const BorderSide(
-                                                                    color: Colors
-                                                                        .red,
-                                                                    width: 2,
-                                                                  ),
-                                                                ),
-                                                                contentPadding:
-                                                                    const EdgeInsets
-                                                                        .symmetric(
-                                                                  vertical: 5,
-                                                                  horizontal:
-                                                                      12,
-                                                                ),
-                                                                errorStyle:
-                                                                    const TextStyle(
-                                                                  color: Colors
-                                                                      .red,
-                                                                  fontSize: 12,
-                                                                ),
-                                                              ),
-                                                              keyboardType:
-                                                                  TextInputType
-                                                                      .text, // Ensures numeric input
-                                                              onChanged:
-                                                                  (value) {
-                                                                setState(() {
-                                                                  _category1SitoutTimeKey
-                                                                      .currentState!
-                                                                      .validate();
-                                                                  // Update the number of donors and the text controller
-                                                                  _category1SetLimitOutTimeController
-                                                                          .text =
-                                                                      value; // Manually update the controller text
-                                                                });
-                                                              },
-                                                              validator:
-                                                                  (value) {
-                                                                if (_category1SetLimitOutTimeController
-                                                                        .text ==
-                                                                    "") {
-                                                                  return 'Please enter a valid set limit out time';
-                                                                }
-                                                                return null;
-                                                              },
-                                                            ),
-                                                          ),
-                                                        ),
+                                                      SitOutTimeField(
+                                                        controller:
+                                                            _category1SetLimitOutTimeController,
+                                                        fieldKey:
+                                                            _category1SitoutTimeKey,
+                                                        onChanged: (value) {
+                                                          setState(() {
+                                                            // Update the number of donors and the text controller
+                                                            _category1SetLimitOutTimeController
+                                                                    .text =
+                                                                value; // Manually update the controller text
+                                                            _category1SitoutTimeKey
+                                                                .currentState!
+                                                                .validate();
+                                                          });
+                                                        },
+                                                        validator: (value) {
+                                                          if (_category1SetLimitOutTimeController
+                                                                  .text ==
+                                                              "") {
+                                                            return 'Please enter a valid set out time';
+                                                          }
+                                                          return null;
+                                                        },
                                                       ),
                                                     ],
                                                   ),
@@ -7030,120 +5780,27 @@ class _NewCalloutJobState extends State<NewClient> {
                                               SizedBox(
                                                 height: 5,
                                               ),
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    right: 0.0),
-                                                child: Container(
-                                                  width: double.infinity,
-                                                  height: 40,
-                                                  child: Material(
-                                                    elevation:
-                                                        4, // Adjust this value for more or less elevation
-                                                    shadowColor: Colors.black
-                                                        .withOpacity(
-                                                            0.5), // Optional: Adjust shadow color
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            4), // Match with TextFormField's border radius
-                                                    child: TextFormField(
-                                                      key: _category2Key,
-                                                      controller:
-                                                          _category2Controller,
-                                                      decoration:
-                                                          InputDecoration(
-                                                        fillColor: Colors.white,
-                                                        filled: true,
-                                                        border:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(4),
-                                                          borderSide:
-                                                              const BorderSide(
-                                                            color: Colors.white,
-                                                            width: 2,
-                                                          ),
-                                                        ),
-                                                        enabledBorder:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(4),
-                                                          borderSide:
-                                                              const BorderSide(
-                                                            color: Colors.white,
-                                                            width: 2,
-                                                          ),
-                                                        ),
-                                                        focusedBorder:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(4),
-                                                          borderSide:
-                                                              const BorderSide(
-                                                            color: Colors.white,
-                                                            width: 2,
-                                                          ),
-                                                        ),
-                                                        errorBorder:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(4),
-                                                          borderSide:
-                                                              const BorderSide(
-                                                            color: Colors.red,
-                                                            width: 2,
-                                                          ),
-                                                        ),
-                                                        focusedErrorBorder:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(4),
-                                                          borderSide:
-                                                              const BorderSide(
-                                                            color: Colors.red,
-                                                            width: 2,
-                                                          ),
-                                                        ),
-                                                        contentPadding:
-                                                            const EdgeInsets
-                                                                .symmetric(
-                                                          vertical: 5,
-                                                          horizontal: 12,
-                                                        ),
-                                                        errorStyle:
-                                                            const TextStyle(
-                                                          color: Colors.red,
-                                                          fontSize: 12,
-                                                        ),
-                                                      ),
-                                                      keyboardType: TextInputType
-                                                          .text, // Ensures numeric input
-                                                      onChanged: (value) {
-                                                        setState(() {
-                                                          _category2Key
-                                                              .currentState!
-                                                              .validate();
-                                                          // Update the number of donors and the text controller
-                                                          _category2Controller
-                                                                  .text =
-                                                              value; // Manually update the controller text
-                                                        });
-                                                      },
-                                                      validator: (value) {
-                                                        if (_category2Controller
-                                                                .text ==
-                                                            "") {
-                                                          return 'Please enter a valid category';
-                                                        }
-                                                        return null;
-                                                      },
-                                                    ),
-                                                  ),
-                                                ),
+                                              CategoryField(
+                                                fieldKey: _category2Key,
+                                                controller:
+                                                    _category2Controller,
+                                                onChanged: (value) {
+                                                  setState(() {
+                                                    _category2Key.currentState!
+                                                        .validate();
+                                                    // Update the number of donors and the text controller
+                                                    _category2Controller.text =
+                                                        value; // Manually update the controller text
+                                                  });
+                                                },
+                                                validator: (value) {
+                                                  if (_category2Controller
+                                                          .text ==
+                                                      "") {
+                                                    return 'Please enter a valid category 2 name';
+                                                  }
+                                                  return null;
+                                                },
                                               ),
                                               SizedBox(
                                                 height: 15,
@@ -7176,143 +5833,30 @@ class _NewCalloutJobState extends State<NewClient> {
                                                       SizedBox(
                                                         height: 10,
                                                       ),
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .only(
-                                                                right: 0.0),
-                                                        child: Container(
-                                                          width: 160,
-                                                          height: 40,
-                                                          child: Material(
-                                                            elevation:
-                                                                4, // Adjust this value for more or less elevation
-                                                            shadowColor: Colors
-                                                                .black
-                                                                .withOpacity(
-                                                                    0.5), // Optional: Adjust shadow color
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        4), // Match with TextFormField's border radius
-                                                            child:
-                                                                TextFormField(
-                                                              key:
-                                                                  _category2Limit210L,
-                                                              controller:
-                                                                  _category2LimitGController,
-                                                              decoration:
-                                                                  InputDecoration(
-                                                                fillColor:
-                                                                    Colors
-                                                                        .white,
-                                                                filled: true,
-                                                                border:
-                                                                    OutlineInputBorder(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              4),
-                                                                  borderSide:
-                                                                      const BorderSide(
-                                                                    color: Colors
-                                                                        .white,
-                                                                    width: 2,
-                                                                  ),
-                                                                ),
-                                                                enabledBorder:
-                                                                    OutlineInputBorder(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              4),
-                                                                  borderSide:
-                                                                      const BorderSide(
-                                                                    color: Colors
-                                                                        .white,
-                                                                    width: 2,
-                                                                  ),
-                                                                ),
-                                                                focusedBorder:
-                                                                    OutlineInputBorder(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              4),
-                                                                  borderSide:
-                                                                      const BorderSide(
-                                                                    color: Colors
-                                                                        .white,
-                                                                    width: 2,
-                                                                  ),
-                                                                ),
-                                                                errorBorder:
-                                                                    OutlineInputBorder(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              4),
-                                                                  borderSide:
-                                                                      const BorderSide(
-                                                                    color: Colors
-                                                                        .red,
-                                                                    width: 2,
-                                                                  ),
-                                                                ),
-                                                                focusedErrorBorder:
-                                                                    OutlineInputBorder(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              4),
-                                                                  borderSide:
-                                                                      const BorderSide(
-                                                                    color: Colors
-                                                                        .red,
-                                                                    width: 2,
-                                                                  ),
-                                                                ),
-                                                                contentPadding:
-                                                                    const EdgeInsets
-                                                                        .symmetric(
-                                                                  vertical: 5,
-                                                                  horizontal:
-                                                                      12,
-                                                                ),
-                                                                errorStyle:
-                                                                    const TextStyle(
-                                                                  color: Colors
-                                                                      .red,
-                                                                  fontSize: 12,
-                                                                ),
-                                                              ),
-                                                              keyboardType:
-                                                                  TextInputType
-                                                                      .text, // Ensures numeric input
-                                                              onChanged:
-                                                                  (value) {
-                                                                setState(() {
-                                                                  _category2Limit210L
-                                                                      .currentState!
-                                                                      .validate();
-                                                                  // Update the number of donors and the text controller
-                                                                  _category2LimitGController
-                                                                          .text =
-                                                                      value; // Manually update the controller text
-                                                                });
-                                                              },
-                                                              validator:
-                                                                  (value) {
-                                                                if (_category2LimitGController
-                                                                        .text ==
-                                                                    "") {
-                                                                  return 'Please enter a valid limit';
-                                                                }
-                                                                return null;
-                                                              },
-                                                            ),
-                                                          ),
-                                                        ),
+                                                      LimitField(
+                                                        fieldKey:
+                                                            _category2Limit210L,
+                                                        controller:
+                                                            _category2LimitGController,
+                                                        onChanged: (value) {
+                                                          setState(() {
+                                                            _category2Limit210L
+                                                                .currentState!
+                                                                .validate();
+                                                            // Update the number of donors and the text controller
+                                                            _category2LimitGController
+                                                                    .text =
+                                                                value; // Manually update the controller text
+                                                          });
+                                                        },
+                                                        validator: (value) {
+                                                          if (_category2LimitGController
+                                                                  .text ==
+                                                              "") {
+                                                            return 'Please enter a valid limit';
+                                                          }
+                                                          return null;
+                                                        },
                                                       ),
                                                     ],
                                                   ),
@@ -7339,143 +5883,30 @@ class _NewCalloutJobState extends State<NewClient> {
                                                       SizedBox(
                                                         height: 10,
                                                       ),
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .only(
-                                                                right: 0.0),
-                                                        child: Container(
-                                                          width: 160,
-                                                          height: 40,
-                                                          child: Material(
-                                                            elevation:
-                                                                4, // Adjust this value for more or less elevation
-                                                            shadowColor: Colors
-                                                                .black
-                                                                .withOpacity(
-                                                                    0.5), // Optional: Adjust shadow color
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        4), // Match with TextFormField's border radius
-                                                            child:
-                                                                TextFormField(
-                                                              key:
-                                                                  _category2SitoutTimeKey,
-                                                              controller:
-                                                                  _category2SetLimitOutTimeController,
-                                                              decoration:
-                                                                  InputDecoration(
-                                                                fillColor:
-                                                                    Colors
-                                                                        .white,
-                                                                filled: true,
-                                                                border:
-                                                                    OutlineInputBorder(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              4),
-                                                                  borderSide:
-                                                                      const BorderSide(
-                                                                    color: Colors
-                                                                        .white,
-                                                                    width: 2,
-                                                                  ),
-                                                                ),
-                                                                enabledBorder:
-                                                                    OutlineInputBorder(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              4),
-                                                                  borderSide:
-                                                                      const BorderSide(
-                                                                    color: Colors
-                                                                        .white,
-                                                                    width: 2,
-                                                                  ),
-                                                                ),
-                                                                focusedBorder:
-                                                                    OutlineInputBorder(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              4),
-                                                                  borderSide:
-                                                                      const BorderSide(
-                                                                    color: Colors
-                                                                        .white,
-                                                                    width: 2,
-                                                                  ),
-                                                                ),
-                                                                errorBorder:
-                                                                    OutlineInputBorder(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              4),
-                                                                  borderSide:
-                                                                      const BorderSide(
-                                                                    color: Colors
-                                                                        .red,
-                                                                    width: 2,
-                                                                  ),
-                                                                ),
-                                                                focusedErrorBorder:
-                                                                    OutlineInputBorder(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              4),
-                                                                  borderSide:
-                                                                      const BorderSide(
-                                                                    color: Colors
-                                                                        .red,
-                                                                    width: 2,
-                                                                  ),
-                                                                ),
-                                                                contentPadding:
-                                                                    const EdgeInsets
-                                                                        .symmetric(
-                                                                  vertical: 5,
-                                                                  horizontal:
-                                                                      12,
-                                                                ),
-                                                                errorStyle:
-                                                                    const TextStyle(
-                                                                  color: Colors
-                                                                      .red,
-                                                                  fontSize: 12,
-                                                                ),
-                                                              ),
-                                                              keyboardType:
-                                                                  TextInputType
-                                                                      .text, // Ensures numeric input
-                                                              onChanged:
-                                                                  (value) {
-                                                                setState(() {
-                                                                  _category2SitoutTimeKey
-                                                                      .currentState!
-                                                                      .validate();
-                                                                  // Update the number of donors and the text controller
-                                                                  _category2SetLimitOutTimeController
-                                                                          .text =
-                                                                      value; // Manually update the controller text
-                                                                });
-                                                              },
-                                                              validator:
-                                                                  (value) {
-                                                                if (_category2SetLimitOutTimeController
-                                                                        .text ==
-                                                                    "") {
-                                                                  return 'Please enter a valid sit out time';
-                                                                }
-                                                                return null;
-                                                              },
-                                                            ),
-                                                          ),
-                                                        ),
+                                                      SitOutTimeField(
+                                                        controller:
+                                                            _category2SetLimitOutTimeController,
+                                                        fieldKey:
+                                                            _category2SitoutTimeKey,
+                                                        onChanged: (value) {
+                                                          setState(() {
+                                                            _category2SitoutTimeKey
+                                                                .currentState!
+                                                                .validate();
+                                                            // Update the number of donors and the text controller
+                                                            _category2SetLimitOutTimeController
+                                                                    .text =
+                                                                value; // Manually update the controller text
+                                                          });
+                                                        },
+                                                        validator: (value) {
+                                                          if (_category2SetLimitOutTimeController
+                                                                  .text ==
+                                                              "") {
+                                                            return 'Please enter a valid sit out time';
+                                                          }
+                                                          return null;
+                                                        },
                                                       ),
                                                     ],
                                                   ),
@@ -7530,121 +5961,28 @@ class _NewCalloutJobState extends State<NewClient> {
                                               SizedBox(
                                                 height: 5,
                                               ),
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    right: 0.0),
-                                                child: Container(
-                                                  width: double.infinity,
-                                                  height: 40,
-                                                  child: Material(
-                                                    elevation:
-                                                        4, // Adjust this value for more or less elevation
-                                                    shadowColor: Colors.black
-                                                        .withOpacity(
-                                                            0.5), // Optional: Adjust shadow color
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            4), // Match with TextFormField's border radius
-                                                    child: TextFormField(
-                                                      key: _category3Key,
-                                                      controller:
-                                                          _siteContact_3_Controller,
-                                                      decoration:
-                                                          InputDecoration(
-                                                        fillColor: Colors.white,
-                                                        filled: true,
-                                                        border:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(4),
-                                                          borderSide:
-                                                              const BorderSide(
-                                                            color: Colors.white,
-                                                            width: 2,
-                                                          ),
-                                                        ),
-                                                        enabledBorder:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(4),
-                                                          borderSide:
-                                                              const BorderSide(
-                                                            color: Colors.white,
-                                                            width: 2,
-                                                          ),
-                                                        ),
-                                                        focusedBorder:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(4),
-                                                          borderSide:
-                                                              const BorderSide(
-                                                            color: Colors.white,
-                                                            width: 2,
-                                                          ),
-                                                        ),
-                                                        errorBorder:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(4),
-                                                          borderSide:
-                                                              const BorderSide(
-                                                            color: Colors.red,
-                                                            width: 2,
-                                                          ),
-                                                        ),
-                                                        focusedErrorBorder:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(4),
-                                                          borderSide:
-                                                              const BorderSide(
-                                                            color: Colors.red,
-                                                            width: 2,
-                                                          ),
-                                                        ),
-                                                        contentPadding:
-                                                            const EdgeInsets
-                                                                .symmetric(
-                                                          vertical: 5,
-                                                          horizontal: 12,
-                                                        ),
-                                                        errorStyle:
-                                                            const TextStyle(
-                                                          color: Colors.red,
-                                                          fontSize: 12,
-                                                        ),
-                                                      ),
-                                                      keyboardType: TextInputType
-                                                          .text, // Ensures numeric input
-                                                      onChanged: (value) {
-                                                        setState(() {
-                                                          _category3Key
-                                                              .currentState!
-                                                              .validate();
-
-                                                          // Update the number of donors and the text controller
-                                                          _siteContact_3_Controller
-                                                                  .text =
-                                                              value; // Manually update the controller text
-                                                        });
-                                                      },
-                                                      validator: (value) {
-                                                        if (_siteContact_3_Controller
-                                                                .text ==
-                                                            "") {
-                                                          return 'Please enter a valid category name';
-                                                        }
-                                                        return null;
-                                                      },
-                                                    ),
-                                                  ),
-                                                ),
+                                              CategoryField(
+                                                fieldKey: _category3Key,
+                                                controller:
+                                                    _siteContact_3_Controller,
+                                                onChanged: (value) {
+                                                  setState(() {
+                                                    // Update the number of donors and the text controller
+                                                    _siteContact_3_Controller
+                                                            .text =
+                                                        value; // Manually update the controller text
+                                                    _category3Key.currentState!
+                                                        .validate();
+                                                  });
+                                                },
+                                                validator: (value) {
+                                                  if (_siteContact_3_Controller
+                                                          .text ==
+                                                      "") {
+                                                    return 'Please enter a valid category name';
+                                                  }
+                                                  return null;
+                                                },
                                               ),
                                               SizedBox(
                                                 height: 15,
@@ -7677,143 +6015,30 @@ class _NewCalloutJobState extends State<NewClient> {
                                                       SizedBox(
                                                         height: 10,
                                                       ),
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .only(
-                                                                right: 0.0),
-                                                        child: Container(
-                                                          width: 160,
-                                                          height: 40,
-                                                          child: Material(
-                                                            elevation:
-                                                                4, // Adjust this value for more or less elevation
-                                                            shadowColor: Colors
-                                                                .black
-                                                                .withOpacity(
-                                                                    0.5), // Optional: Adjust shadow color
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        4), // Match with TextFormField's border radius
-                                                            child:
-                                                                TextFormField(
-                                                              key:
-                                                                  _category3Limit210L,
-                                                              controller:
-                                                                  _category3LimitGController,
-                                                              decoration:
-                                                                  InputDecoration(
-                                                                fillColor:
-                                                                    Colors
-                                                                        .white,
-                                                                filled: true,
-                                                                border:
-                                                                    OutlineInputBorder(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              4),
-                                                                  borderSide:
-                                                                      const BorderSide(
-                                                                    color: Colors
-                                                                        .white,
-                                                                    width: 2,
-                                                                  ),
-                                                                ),
-                                                                enabledBorder:
-                                                                    OutlineInputBorder(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              4),
-                                                                  borderSide:
-                                                                      const BorderSide(
-                                                                    color: Colors
-                                                                        .white,
-                                                                    width: 2,
-                                                                  ),
-                                                                ),
-                                                                focusedBorder:
-                                                                    OutlineInputBorder(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              4),
-                                                                  borderSide:
-                                                                      const BorderSide(
-                                                                    color: Colors
-                                                                        .white,
-                                                                    width: 2,
-                                                                  ),
-                                                                ),
-                                                                errorBorder:
-                                                                    OutlineInputBorder(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              4),
-                                                                  borderSide:
-                                                                      const BorderSide(
-                                                                    color: Colors
-                                                                        .red,
-                                                                    width: 2,
-                                                                  ),
-                                                                ),
-                                                                focusedErrorBorder:
-                                                                    OutlineInputBorder(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              4),
-                                                                  borderSide:
-                                                                      const BorderSide(
-                                                                    color: Colors
-                                                                        .red,
-                                                                    width: 2,
-                                                                  ),
-                                                                ),
-                                                                contentPadding:
-                                                                    const EdgeInsets
-                                                                        .symmetric(
-                                                                  vertical: 5,
-                                                                  horizontal:
-                                                                      12,
-                                                                ),
-                                                                errorStyle:
-                                                                    const TextStyle(
-                                                                  color: Colors
-                                                                      .red,
-                                                                  fontSize: 12,
-                                                                ),
-                                                              ),
-                                                              keyboardType:
-                                                                  TextInputType
-                                                                      .text, // Ensures numeric input
-                                                              onChanged:
-                                                                  (value) {
-                                                                setState(() {
-                                                                  _category3Limit210L
-                                                                      .currentState!
-                                                                      .validate();
-                                                                  // Update the number of donors and the text controller
-                                                                  _category3LimitGController
-                                                                          .text =
-                                                                      value; // Manually update the controller text
-                                                                });
-                                                              },
-                                                              validator:
-                                                                  (value) {
-                                                                if (_category3LimitGController
-                                                                        .text ==
-                                                                    "") {
-                                                                  return 'Please enter a valid limit';
-                                                                }
-                                                                return null;
-                                                              },
-                                                            ),
-                                                          ),
-                                                        ),
+                                                      LimitField(
+                                                        fieldKey:
+                                                            _category3Limit210L,
+                                                        controller:
+                                                            _category3LimitGController,
+                                                        onChanged: (value) {
+                                                          setState(() {
+                                                            // Update the number of donors and the text controller
+                                                            _category3LimitGController
+                                                                    .text =
+                                                                value; // Manually update the controller text
+                                                            _category3Limit210L
+                                                                .currentState!
+                                                                .validate();
+                                                          });
+                                                        },
+                                                        validator: (value) {
+                                                          if (_category3LimitGController
+                                                                  .text ==
+                                                              "") {
+                                                            return 'Please enter a valid limit';
+                                                          }
+                                                          return null;
+                                                        },
                                                       ),
                                                     ],
                                                   ),
@@ -7840,143 +6065,403 @@ class _NewCalloutJobState extends State<NewClient> {
                                                       SizedBox(
                                                         height: 10,
                                                       ),
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .only(
-                                                                right: 0.0),
-                                                        child: Container(
-                                                          width: 160,
-                                                          height: 40,
-                                                          child: Material(
-                                                            elevation:
-                                                                4, // Adjust this value for more or less elevation
-                                                            shadowColor: Colors
-                                                                .black
-                                                                .withOpacity(
-                                                                    0.5), // Optional: Adjust shadow color
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        4), // Match with TextFormField's border radius
-                                                            child:
-                                                                TextFormField(
-                                                              key:
-                                                                  _category3SitoutTimeKey,
-                                                              controller:
-                                                                  _category3SetLimitOutTimeController,
-                                                              decoration:
-                                                                  InputDecoration(
-                                                                fillColor:
-                                                                    Colors
-                                                                        .white,
-                                                                filled: true,
-                                                                border:
-                                                                    OutlineInputBorder(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              4),
-                                                                  borderSide:
-                                                                      const BorderSide(
-                                                                    color: Colors
-                                                                        .white,
-                                                                    width: 2,
-                                                                  ),
-                                                                ),
-                                                                enabledBorder:
-                                                                    OutlineInputBorder(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              4),
-                                                                  borderSide:
-                                                                      const BorderSide(
-                                                                    color: Colors
-                                                                        .white,
-                                                                    width: 2,
-                                                                  ),
-                                                                ),
-                                                                focusedBorder:
-                                                                    OutlineInputBorder(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              4),
-                                                                  borderSide:
-                                                                      const BorderSide(
-                                                                    color: Colors
-                                                                        .white,
-                                                                    width: 2,
-                                                                  ),
-                                                                ),
-                                                                errorBorder:
-                                                                    OutlineInputBorder(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              4),
-                                                                  borderSide:
-                                                                      const BorderSide(
-                                                                    color: Colors
-                                                                        .red,
-                                                                    width: 2,
-                                                                  ),
-                                                                ),
-                                                                focusedErrorBorder:
-                                                                    OutlineInputBorder(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              4),
-                                                                  borderSide:
-                                                                      const BorderSide(
-                                                                    color: Colors
-                                                                        .red,
-                                                                    width: 2,
-                                                                  ),
-                                                                ),
-                                                                contentPadding:
-                                                                    const EdgeInsets
-                                                                        .symmetric(
-                                                                  vertical: 5,
-                                                                  horizontal:
-                                                                      12,
-                                                                ),
-                                                                errorStyle:
-                                                                    const TextStyle(
-                                                                  color: Colors
-                                                                      .red,
-                                                                  fontSize: 12,
-                                                                ),
-                                                              ),
-                                                              keyboardType:
-                                                                  TextInputType
-                                                                      .text, // Ensures numeric input
-                                                              onChanged:
-                                                                  (value) {
-                                                                setState(() {
-                                                                  _category3SitoutTimeKey
-                                                                      .currentState!
-                                                                      .validate();
-                                                                  // Update the number of donors and the text controller
-                                                                  _category3SetLimitOutTimeController
-                                                                          .text ==
-                                                                      value; // Manually update the controller text
-                                                                });
-                                                              },
-                                                              validator:
-                                                                  (value) {
-                                                                if (_category3SetLimitOutTimeController
-                                                                        .text ==
-                                                                    "") {
-                                                                  return 'Please enter a valid sit out time limit';
-                                                                }
-                                                                return null;
-                                                              },
-                                                            ),
+                                                      SitOutTimeField(
+                                                        controller:
+                                                            _category3SetLimitOutTimeController,
+                                                        fieldKey:
+                                                            _category3SitoutTimeKey,
+                                                        onChanged: (value) {
+                                                          setState(() {
+                                                            // Update the number of donors and the text controller
+                                                            _category3SetLimitOutTimeController
+                                                                    .text =
+                                                                value; // Manually update the controller text
+
+                                                            _category3SitoutTimeKey
+                                                                .currentState!
+                                                                .validate();
+                                                          });
+                                                        },
+                                                        validator: (value) {
+                                                          if (_category3SetLimitOutTimeController
+                                                                  .text ==
+                                                              "") {
+                                                            return 'Please enter a valid site out time';
+                                                          }
+                                                          return null;
+                                                        },
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
+                                              SizedBox(
+                                                height: 15,
+                                              ),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: List.generate(
+                                                  60, // Adjust the number of dashes
+                                                  (index) => Container(
+                                                    width:
+                                                        4, // Width of each dash
+                                                    height:
+                                                        2, // Height of each dash (thickness)
+                                                    color: Colors
+                                                        .black, // Color of the dash
+                                                  ),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 15,
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                            left: 0.0,
+                                            top: 15.0,
+                                            right: 0.0,
+                                          ),
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: [
+                                              Align(
+                                                alignment: Alignment.topLeft,
+                                                child: const Text(
+                                                  "Category 4",
+                                                  style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 13,
+                                                    color: Colors.black,
+                                                  ),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 5,
+                                              ),
+                                              CategoryField(
+                                                fieldKey: _category4Key,
+                                                controller:
+                                                    _siteContact_4_Controller,
+                                                onChanged: (value) {
+                                                  setState(() {
+                                                    // Update the number of donors and the text controller
+                                                    _siteContact_4_Controller
+                                                            .text =
+                                                        value; // Manually update the controller text
+                                                    _category4Key.currentState!
+                                                        .validate();
+                                                  });
+                                                },
+                                                validator: (value) {
+                                                  if (_siteContact_4_Controller
+                                                          .text ==
+                                                      "") {
+                                                    return 'Please enter a valid category name';
+                                                  }
+                                                  return null;
+                                                },
+                                              ),
+                                              SizedBox(
+                                                height: 15,
+                                              ),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Align(
+                                                        alignment:
+                                                            Alignment.topLeft,
+                                                        child: Text(
+                                                          "Limit (g/210L)",
+                                                          style: TextStyle(
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            fontSize: 13,
+                                                            color: Colors.black,
                                                           ),
                                                         ),
+                                                      ),
+                                                      SizedBox(
+                                                        height: 10,
+                                                      ),
+                                                      LimitField(
+                                                        fieldKey:
+                                                            _category4Limit210L,
+                                                        controller:
+                                                            _category4LimitGController,
+                                                        onChanged: (value) {
+                                                          setState(() {
+                                                            // Update the number of donors and the text controller
+                                                            _category4LimitGController
+                                                                    .text =
+                                                                value; // Manually update the controller text
+                                                            _category4Limit210L
+                                                                .currentState!
+                                                                .validate();
+                                                          });
+                                                        },
+                                                        validator: (value) {
+                                                          if (_category4LimitGController
+                                                                  .text ==
+                                                              "") {
+                                                            return 'Please enter a valid limit';
+                                                          }
+                                                          return null;
+                                                        },
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Align(
+                                                        alignment:
+                                                            Alignment.topLeft,
+                                                        child: Text(
+                                                          "Sit Out Time (minutes)",
+                                                          style: TextStyle(
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            fontSize: 13,
+                                                            color: Colors.black,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                        height: 10,
+                                                      ),
+                                                      SitOutTimeField(
+                                                        controller:
+                                                            _category4SetLimitOutTimeController,
+                                                        fieldKey:
+                                                            _category4SitoutTimeKey,
+                                                        onChanged: (value) {
+                                                          setState(() {
+                                                            // Update the number of donors and the text controller
+                                                            _category4SetLimitOutTimeController
+                                                                    .text =
+                                                                value; // Manually update the controller text
+
+                                                            _category4SitoutTimeKey
+                                                                .currentState!
+                                                                .validate();
+                                                          });
+                                                        },
+                                                        validator: (value) {
+                                                          if (_category4SetLimitOutTimeController
+                                                                  .text ==
+                                                              "") {
+                                                            return 'Please enter a valid site out time';
+                                                          }
+                                                          return null;
+                                                        },
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
+                                              SizedBox(
+                                                height: 15,
+                                              ),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: List.generate(
+                                                  60, // Adjust the number of dashes
+                                                  (index) => Container(
+                                                    width:
+                                                        4, // Width of each dash
+                                                    height:
+                                                        2, // Height of each dash (thickness)
+                                                    color: Colors
+                                                        .black, // Color of the dash
+                                                  ),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 15,
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                            left: 0.0,
+                                            top: 15.0,
+                                            right: 0.0,
+                                          ),
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: [
+                                              Align(
+                                                alignment: Alignment.topLeft,
+                                                child: const Text(
+                                                  "Category 5",
+                                                  style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 13,
+                                                    color: Colors.black,
+                                                  ),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 5,
+                                              ),
+                                              CategoryField(
+                                                fieldKey: _category5Key,
+                                                controller:
+                                                    _siteContact_5_Controller,
+                                                onChanged: (value) {
+                                                  setState(() {
+                                                    // Update the number of donors and the text controller
+                                                    _siteContact_5_Controller
+                                                            .text =
+                                                        value; // Manually update the controller text
+                                                    _category5Key.currentState!
+                                                        .validate();
+                                                  });
+                                                },
+                                                validator: (value) {
+                                                  if (_siteContact_5_Controller
+                                                          .text ==
+                                                      "") {
+                                                    return 'Please enter a valid category name';
+                                                  }
+                                                  return null;
+                                                },
+                                              ),
+                                              SizedBox(
+                                                height: 15,
+                                              ),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Align(
+                                                        alignment:
+                                                            Alignment.topLeft,
+                                                        child: Text(
+                                                          "Limit (g/210L)",
+                                                          style: TextStyle(
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            fontSize: 13,
+                                                            color: Colors.black,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                        height: 10,
+                                                      ),
+                                                      LimitField(
+                                                        fieldKey:
+                                                            _category5Limit210L,
+                                                        controller:
+                                                            _category5LimitGController,
+                                                        onChanged: (value) {
+                                                          setState(() {
+                                                            // Update the number of donors and the text controller
+                                                            _category5LimitGController
+                                                                    .text =
+                                                                value; // Manually update the controller text
+                                                            _category4Limit210L
+                                                                .currentState!
+                                                                .validate();
+                                                          });
+                                                        },
+                                                        validator: (value) {
+                                                          if (_category5LimitGController
+                                                                  .text ==
+                                                              "") {
+                                                            return 'Please enter a valid limit';
+                                                          }
+                                                          return null;
+                                                        },
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Align(
+                                                        alignment:
+                                                            Alignment.topLeft,
+                                                        child: Text(
+                                                          "Sit Out Time (minutes)",
+                                                          style: TextStyle(
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            fontSize: 13,
+                                                            color: Colors.black,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                        height: 10,
+                                                      ),
+                                                      SitOutTimeField(
+                                                        controller:
+                                                            _category5SetLimitOutTimeController,
+                                                        fieldKey:
+                                                            _category5SitoutTimeKey,
+                                                        onChanged: (value) {
+                                                          setState(() {
+                                                            // Update the number of donors and the text controller
+                                                            _category5SetLimitOutTimeController
+                                                                    .text =
+                                                                value; // Manually update the controller text
+
+                                                            _category5SitoutTimeKey
+                                                                .currentState!
+                                                                .validate();
+                                                          });
+                                                        },
+                                                        validator: (value) {
+                                                          if (_category5SetLimitOutTimeController
+                                                                  .text ==
+                                                              "") {
+                                                            return 'Please enter a valid site out time';
+                                                          }
+                                                          return null;
+                                                        },
                                                       ),
                                                     ],
                                                   ),
@@ -8052,121 +6537,30 @@ class _NewCalloutJobState extends State<NewClient> {
                                               SizedBox(
                                                 height: 5,
                                               ),
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    right: 0.0),
-                                                child: Container(
-                                                  width: double.infinity,
-                                                  height: 40,
-                                                  child: Material(
-                                                    elevation:
-                                                        4, // Adjust this value for more or less elevation
-                                                    shadowColor: Colors.black
-                                                        .withOpacity(
-                                                            0.5), // Optional: Adjust shadow color
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            4), // Match with TextFormField's border radius
-                                                    child: TextFormField(
-                                                      key:
-                                                          _primaryTestSpecificationsKey,
-                                                      controller:
-                                                          _primaryDrugTestController,
-                                                      decoration:
-                                                          InputDecoration(
-                                                        fillColor: Colors.white,
-                                                        filled: true,
-                                                        border:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(4),
-                                                          borderSide:
-                                                              const BorderSide(
-                                                            color: Colors.white,
-                                                            width: 2,
-                                                          ),
-                                                        ),
-                                                        enabledBorder:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(4),
-                                                          borderSide:
-                                                              const BorderSide(
-                                                            color: Colors.white,
-                                                            width: 2,
-                                                          ),
-                                                        ),
-                                                        focusedBorder:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(4),
-                                                          borderSide:
-                                                              const BorderSide(
-                                                            color: Colors.white,
-                                                            width: 2,
-                                                          ),
-                                                        ),
-                                                        errorBorder:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(4),
-                                                          borderSide:
-                                                              const BorderSide(
-                                                            color: Colors.red,
-                                                            width: 2,
-                                                          ),
-                                                        ),
-                                                        focusedErrorBorder:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(4),
-                                                          borderSide:
-                                                              const BorderSide(
-                                                            color: Colors.red,
-                                                            width: 2,
-                                                          ),
-                                                        ),
-                                                        contentPadding:
-                                                            const EdgeInsets
-                                                                .symmetric(
-                                                          vertical: 5,
-                                                          horizontal: 12,
-                                                        ),
-                                                        errorStyle:
-                                                            const TextStyle(
-                                                          color: Colors.red,
-                                                          fontSize: 12,
-                                                        ),
-                                                      ),
-                                                      keyboardType: TextInputType
-                                                          .text, // Ensures numeric input
-                                                      onChanged: (value) {
-                                                        setState(() {
-                                                          // Update the number of donors and the text controller
-                                                          _primaryDrugTestController
-                                                                  .text =
-                                                              value; // Manually update the controller text
-                                                          _primaryTestSpecificationsKey
-                                                              .currentState!
-                                                              .validate();
-                                                        });
-                                                      },
-                                                      validator: (value) {
-                                                        if (_primaryDrugTestController
-                                                                .text ==
-                                                            "") {
-                                                          return 'Please enter the primary drug test name';
-                                                        }
-                                                        return null;
-                                                      },
-                                                    ),
-                                                  ),
-                                                ),
+                                              DrugTestFormField(
+                                                fieldKey:
+                                                    _primaryTestSpecificationsKey,
+                                                controller:
+                                                    _primaryDrugTestController,
+                                                onChanged: (value) {
+                                                  setState(() {
+                                                    // Update the number of donors and the text controller
+                                                    _primaryDrugTestController
+                                                            .text =
+                                                        value; // Manually update the controller text
+                                                    _primaryTestSpecificationsKey
+                                                        .currentState!
+                                                        .validate();
+                                                  });
+                                                },
+                                                validator: (value) {
+                                                  if (_primaryDrugTestController
+                                                          .text ==
+                                                      "") {
+                                                    return 'Please enter the primary drug test name';
+                                                  }
+                                                  return null;
+                                                },
                                               ),
                                             ],
                                           ),
@@ -8198,121 +6592,30 @@ class _NewCalloutJobState extends State<NewClient> {
                                               SizedBox(
                                                 height: 5,
                                               ),
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    right: 0.0),
-                                                child: Container(
-                                                  width: double.infinity,
-                                                  height: 40,
-                                                  child: Material(
-                                                    elevation:
-                                                        4, // Adjust this value for more or less elevation
-                                                    shadowColor: Colors.black
-                                                        .withOpacity(
-                                                            0.5), // Optional: Adjust shadow color
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            4), // Match with TextFormField's border radius
-                                                    child: TextFormField(
-                                                      key:
-                                                          _selectPreferedPrimaryDeviceKey,
-                                                      controller:
-                                                          _primaryDrugTestPreferredDeviceController,
-                                                      decoration:
-                                                          InputDecoration(
-                                                        fillColor: Colors.white,
-                                                        filled: true,
-                                                        border:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(4),
-                                                          borderSide:
-                                                              const BorderSide(
-                                                            color: Colors.white,
-                                                            width: 2,
-                                                          ),
-                                                        ),
-                                                        enabledBorder:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(4),
-                                                          borderSide:
-                                                              const BorderSide(
-                                                            color: Colors.white,
-                                                            width: 2,
-                                                          ),
-                                                        ),
-                                                        focusedBorder:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(4),
-                                                          borderSide:
-                                                              const BorderSide(
-                                                            color: Colors.white,
-                                                            width: 2,
-                                                          ),
-                                                        ),
-                                                        errorBorder:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(4),
-                                                          borderSide:
-                                                              const BorderSide(
-                                                            color: Colors.red,
-                                                            width: 2,
-                                                          ),
-                                                        ),
-                                                        focusedErrorBorder:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(4),
-                                                          borderSide:
-                                                              const BorderSide(
-                                                            color: Colors.red,
-                                                            width: 2,
-                                                          ),
-                                                        ),
-                                                        contentPadding:
-                                                            const EdgeInsets
-                                                                .symmetric(
-                                                          vertical: 5,
-                                                          horizontal: 12,
-                                                        ),
-                                                        errorStyle:
-                                                            const TextStyle(
-                                                          color: Colors.red,
-                                                          fontSize: 12,
-                                                        ),
-                                                      ),
-                                                      keyboardType: TextInputType
-                                                          .text, // Ensures numeric input
-                                                      onChanged: (value) {
-                                                        setState(() {
-                                                          // Update the number of donors and the text controller
-                                                          _primaryDrugTestPreferredDeviceController
-                                                                  .text =
-                                                              value; // Manually update the controller text
-                                                          _selectPreferedPrimaryDeviceKey
-                                                              .currentState!
-                                                              .validate();
-                                                        });
-                                                      },
-                                                      validator: (value) {
-                                                        if (_primaryDrugTestPreferredDeviceController
-                                                                .text ==
-                                                            "") {
-                                                          return 'Please enter the prefered Device name';
-                                                        }
-                                                        return null;
-                                                      },
-                                                    ),
-                                                  ),
-                                                ),
+                                              PreferredDeviceFormField(
+                                                fieldKey:
+                                                    _selectPreferedPrimaryDeviceKey,
+                                                controller:
+                                                    _primaryDrugTestPreferredDeviceController,
+                                                onChanged: (value) {
+                                                  setState(() {
+                                                    // Update the number of donors and the text controller
+                                                    _primaryDrugTestPreferredDeviceController
+                                                            .text =
+                                                        value; // Manually update the controller text
+                                                    _selectPreferedPrimaryDeviceKey
+                                                        .currentState!
+                                                        .validate();
+                                                  });
+                                                },
+                                                validator: (value) {
+                                                  if (_primaryDrugTestPreferredDeviceController
+                                                          .text ==
+                                                      "") {
+                                                    return 'Please enter the prefered Device name';
+                                                  }
+                                                  return null;
+                                                },
                                               ),
                                             ],
                                           ),
@@ -8361,121 +6664,29 @@ class _NewCalloutJobState extends State<NewClient> {
                                               SizedBox(
                                                 height: 5,
                                               ),
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    right: 0.0),
-                                                child: Container(
-                                                  width: double.infinity,
-                                                  height: 40,
-                                                  child: Material(
-                                                    elevation:
-                                                        4, // Adjust this value for more or less elevation
-                                                    shadowColor: Colors.black
-                                                        .withOpacity(
-                                                            0.5), // Optional: Adjust shadow color
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            4), // Match with TextFormField's border radius
-                                                    child: TextFormField(
-                                                      key:
-                                                          _secondaryDrugTestKey,
-                                                      controller:
-                                                          _secondaryDrugTestController,
-                                                      decoration:
-                                                          InputDecoration(
-                                                        fillColor: Colors.white,
-                                                        filled: true,
-                                                        border:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(4),
-                                                          borderSide:
-                                                              const BorderSide(
-                                                            color: Colors.white,
-                                                            width: 2,
-                                                          ),
-                                                        ),
-                                                        enabledBorder:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(4),
-                                                          borderSide:
-                                                              const BorderSide(
-                                                            color: Colors.white,
-                                                            width: 2,
-                                                          ),
-                                                        ),
-                                                        focusedBorder:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(4),
-                                                          borderSide:
-                                                              const BorderSide(
-                                                            color: Colors.white,
-                                                            width: 2,
-                                                          ),
-                                                        ),
-                                                        errorBorder:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(4),
-                                                          borderSide:
-                                                              const BorderSide(
-                                                            color: Colors.red,
-                                                            width: 2,
-                                                          ),
-                                                        ),
-                                                        focusedErrorBorder:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(4),
-                                                          borderSide:
-                                                              const BorderSide(
-                                                            color: Colors.red,
-                                                            width: 2,
-                                                          ),
-                                                        ),
-                                                        contentPadding:
-                                                            const EdgeInsets
-                                                                .symmetric(
-                                                          vertical: 5,
-                                                          horizontal: 12,
-                                                        ),
-                                                        errorStyle:
-                                                            const TextStyle(
-                                                          color: Colors.red,
-                                                          fontSize: 12,
-                                                        ),
-                                                      ),
-                                                      keyboardType: TextInputType
-                                                          .text, // Ensures numeric input
-                                                      onChanged: (value) {
-                                                        setState(() {
-                                                          // Update the number of donors and the text controller
-                                                          _secondaryDrugTestController
-                                                                  .text =
-                                                              value; // Manually update the controller text
-                                                          _secondaryDrugTestKey
-                                                              .currentState!
-                                                              .validate();
-                                                        });
-                                                      },
-                                                      validator: (value) {
-                                                        if (_secondaryDrugTestController
-                                                                .text ==
-                                                            "") {
-                                                          return 'Please enter a valid drug test name';
-                                                        }
-                                                        return null;
-                                                      },
-                                                    ),
-                                                  ),
-                                                ),
+                                              DrugTestFormField(
+                                                fieldKey: _secondaryDrugTestKey,
+                                                controller:
+                                                    _secondaryDrugTestController,
+                                                onChanged: (value) {
+                                                  setState(() {
+                                                    // Update the number of donors and the text controller
+                                                    _secondaryDrugTestController
+                                                            .text =
+                                                        value; // Manually update the controller text
+                                                    _secondaryDrugTestKey
+                                                        .currentState!
+                                                        .validate();
+                                                  });
+                                                },
+                                                validator: (value) {
+                                                  if (_secondaryDrugTestController
+                                                          .text ==
+                                                      "") {
+                                                    return 'Please enter a valid drug test name';
+                                                  }
+                                                  return null;
+                                                },
                                               ),
                                             ],
                                           ),
@@ -8507,121 +6718,30 @@ class _NewCalloutJobState extends State<NewClient> {
                                               SizedBox(
                                                 height: 5,
                                               ),
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    right: 0.0),
-                                                child: Container(
-                                                  width: double.infinity,
-                                                  height: 40,
-                                                  child: Material(
-                                                    elevation:
-                                                        4, // Adjust this value for more or less elevation
-                                                    shadowColor: Colors.black
-                                                        .withOpacity(
-                                                            0.5), // Optional: Adjust shadow color
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            4), // Match with TextFormField's border radius
-                                                    child: TextFormField(
-                                                      key:
-                                                          _selectPreferedSecondaryDeviceKey,
-                                                      controller:
-                                                          _secondaryDrugTestPreferredDeviceController,
-                                                      decoration:
-                                                          InputDecoration(
-                                                        fillColor: Colors.white,
-                                                        filled: true,
-                                                        border:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(4),
-                                                          borderSide:
-                                                              const BorderSide(
-                                                            color: Colors.white,
-                                                            width: 2,
-                                                          ),
-                                                        ),
-                                                        enabledBorder:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(4),
-                                                          borderSide:
-                                                              const BorderSide(
-                                                            color: Colors.white,
-                                                            width: 2,
-                                                          ),
-                                                        ),
-                                                        focusedBorder:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(4),
-                                                          borderSide:
-                                                              const BorderSide(
-                                                            color: Colors.white,
-                                                            width: 2,
-                                                          ),
-                                                        ),
-                                                        errorBorder:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(4),
-                                                          borderSide:
-                                                              const BorderSide(
-                                                            color: Colors.red,
-                                                            width: 2,
-                                                          ),
-                                                        ),
-                                                        focusedErrorBorder:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(4),
-                                                          borderSide:
-                                                              const BorderSide(
-                                                            color: Colors.red,
-                                                            width: 2,
-                                                          ),
-                                                        ),
-                                                        contentPadding:
-                                                            const EdgeInsets
-                                                                .symmetric(
-                                                          vertical: 5,
-                                                          horizontal: 12,
-                                                        ),
-                                                        errorStyle:
-                                                            const TextStyle(
-                                                          color: Colors.red,
-                                                          fontSize: 12,
-                                                        ),
-                                                      ),
-                                                      keyboardType: TextInputType
-                                                          .text, // Ensures numeric input
-                                                      onChanged: (value) {
-                                                        setState(() {
-                                                          // Update the number of donors and the text controller
-                                                          _secondaryDrugTestPreferredDeviceController
-                                                                  .text =
-                                                              value; // Manually update the controller text
-                                                          _selectPreferedSecondaryDeviceKey
-                                                              .currentState!
-                                                              .validate();
-                                                        });
-                                                      },
-                                                      validator: (value) {
-                                                        if (_secondaryDrugTestPreferredDeviceController
-                                                                .text ==
-                                                            "") {
-                                                          return 'Please enter a valid device name';
-                                                        }
-                                                        return null;
-                                                      },
-                                                    ),
-                                                  ),
-                                                ),
+                                              PreferredDeviceFormField(
+                                                fieldKey:
+                                                    _selectPreferedSecondaryDeviceKey,
+                                                controller:
+                                                    _secondaryDrugTestPreferredDeviceController,
+                                                onChanged: (value) {
+                                                  setState(() {
+                                                    // Update the number of donors and the text controller
+                                                    _secondaryDrugTestPreferredDeviceController
+                                                            .text =
+                                                        value; // Manually update the controller text
+                                                    _selectPreferedSecondaryDeviceKey
+                                                        .currentState!
+                                                        .validate();
+                                                  });
+                                                },
+                                                validator: (value) {
+                                                  if (_secondaryDrugTestPreferredDeviceController
+                                                          .text ==
+                                                      "") {
+                                                    return 'Please enter a valid device name';
+                                                  }
+                                                  return null;
+                                                },
                                               ),
                                             ],
                                           ),
@@ -8667,120 +6787,29 @@ class _NewCalloutJobState extends State<NewClient> {
                                               SizedBox(
                                                 height: 5,
                                               ),
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    right: 0.0),
-                                                child: Container(
-                                                  width: double.infinity,
-                                                  height: 40,
-                                                  child: Material(
-                                                    elevation:
-                                                        4, // Adjust this value for more or less elevation
-                                                    shadowColor: Colors.black
-                                                        .withOpacity(
-                                                            0.5), // Optional: Adjust shadow color
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            4), // Match with TextFormField's border radius
-                                                    child: TextFormField(
-                                                      key: _thirtoryDrugTestKey,
-                                                      controller:
-                                                          _thirteryDrugTestController,
-                                                      decoration:
-                                                          InputDecoration(
-                                                        fillColor: Colors.white,
-                                                        filled: true,
-                                                        border:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(4),
-                                                          borderSide:
-                                                              const BorderSide(
-                                                            color: Colors.white,
-                                                            width: 2,
-                                                          ),
-                                                        ),
-                                                        enabledBorder:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(4),
-                                                          borderSide:
-                                                              const BorderSide(
-                                                            color: Colors.white,
-                                                            width: 2,
-                                                          ),
-                                                        ),
-                                                        focusedBorder:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(4),
-                                                          borderSide:
-                                                              const BorderSide(
-                                                            color: Colors.white,
-                                                            width: 2,
-                                                          ),
-                                                        ),
-                                                        errorBorder:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(4),
-                                                          borderSide:
-                                                              const BorderSide(
-                                                            color: Colors.red,
-                                                            width: 2,
-                                                          ),
-                                                        ),
-                                                        focusedErrorBorder:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(4),
-                                                          borderSide:
-                                                              const BorderSide(
-                                                            color: Colors.red,
-                                                            width: 2,
-                                                          ),
-                                                        ),
-                                                        contentPadding:
-                                                            const EdgeInsets
-                                                                .symmetric(
-                                                          vertical: 5,
-                                                          horizontal: 12,
-                                                        ),
-                                                        errorStyle:
-                                                            const TextStyle(
-                                                          color: Colors.red,
-                                                          fontSize: 12,
-                                                        ),
-                                                      ),
-                                                      keyboardType: TextInputType
-                                                          .text, // Ensures numeric input
-                                                      onChanged: (value) {
-                                                        setState(() {
-                                                          // Update the number of donors and the text controller
-                                                          _thirteryDrugTestController
-                                                                  .text =
-                                                              value; // Manually update the controller text
-                                                          _thirtoryDrugTestKey
-                                                              .currentState!
-                                                              .validate();
-                                                        });
-                                                      },
-                                                      validator: (value) {
-                                                        if (_thirteryDrugTestController
-                                                                .text ==
-                                                            "") {
-                                                          return 'Please enter a valid drug test name';
-                                                        }
-                                                        return null;
-                                                      },
-                                                    ),
-                                                  ),
-                                                ),
+                                              DrugTestFormField(
+                                                fieldKey: _thirtoryDrugTestKey,
+                                                controller:
+                                                    _thirteryDrugTestController,
+                                                onChanged: (value) {
+                                                  setState(() {
+                                                    // Update the number of donors and the text controller
+                                                    _thirteryDrugTestController
+                                                            .text =
+                                                        value; // Manually update the controller text
+                                                    _thirtoryDrugTestKey
+                                                        .currentState!
+                                                        .validate();
+                                                  });
+                                                },
+                                                validator: (value) {
+                                                  if (_thirteryDrugTestController
+                                                          .text ==
+                                                      "") {
+                                                    return 'Please enter a valid drug test name';
+                                                  }
+                                                  return null;
+                                                },
                                               ),
                                             ],
                                           ),
@@ -8812,121 +6841,30 @@ class _NewCalloutJobState extends State<NewClient> {
                                               SizedBox(
                                                 height: 5,
                                               ),
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    right: 0.0),
-                                                child: Container(
-                                                  width: double.infinity,
-                                                  height: 40,
-                                                  child: Material(
-                                                    elevation:
-                                                        4, // Adjust this value for more or less elevation
-                                                    shadowColor: Colors.black
-                                                        .withOpacity(
-                                                            0.5), // Optional: Adjust shadow color
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            4), // Match with TextFormField's border radius
-                                                    child: TextFormField(
-                                                      key:
-                                                          _selectPreferedThirtoryDeviceKey,
-                                                      controller:
-                                                          _thirteryDrugTestPreferredDeviceController,
-                                                      decoration:
-                                                          InputDecoration(
-                                                        fillColor: Colors.white,
-                                                        filled: true,
-                                                        border:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(4),
-                                                          borderSide:
-                                                              const BorderSide(
-                                                            color: Colors.white,
-                                                            width: 2,
-                                                          ),
-                                                        ),
-                                                        enabledBorder:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(4),
-                                                          borderSide:
-                                                              const BorderSide(
-                                                            color: Colors.white,
-                                                            width: 2,
-                                                          ),
-                                                        ),
-                                                        focusedBorder:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(4),
-                                                          borderSide:
-                                                              const BorderSide(
-                                                            color: Colors.white,
-                                                            width: 2,
-                                                          ),
-                                                        ),
-                                                        errorBorder:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(4),
-                                                          borderSide:
-                                                              const BorderSide(
-                                                            color: Colors.red,
-                                                            width: 2,
-                                                          ),
-                                                        ),
-                                                        focusedErrorBorder:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(4),
-                                                          borderSide:
-                                                              const BorderSide(
-                                                            color: Colors.red,
-                                                            width: 2,
-                                                          ),
-                                                        ),
-                                                        contentPadding:
-                                                            const EdgeInsets
-                                                                .symmetric(
-                                                          vertical: 5,
-                                                          horizontal: 12,
-                                                        ),
-                                                        errorStyle:
-                                                            const TextStyle(
-                                                          color: Colors.red,
-                                                          fontSize: 12,
-                                                        ),
-                                                      ),
-                                                      keyboardType: TextInputType
-                                                          .text, // Ensures numeric input
-                                                      onChanged: (value) {
-                                                        setState(() {
-                                                          // Update the number of donors and the text controller
-                                                          _thirteryDrugTestPreferredDeviceController
-                                                                  .text =
-                                                              value; // Manually update the controller text
-                                                          _selectPreferedThirtoryDeviceKey
-                                                              .currentState!
-                                                              .validate();
-                                                        });
-                                                      },
-                                                      validator: (value) {
-                                                        if (_thirteryDrugTestPreferredDeviceController
-                                                                .text ==
-                                                            "") {
-                                                          return 'Please enter a valid preferred device';
-                                                        }
-                                                        return null;
-                                                      },
-                                                    ),
-                                                  ),
-                                                ),
+                                              PreferredDeviceFormField(
+                                                fieldKey:
+                                                    _selectPreferedThirtoryDeviceKey,
+                                                controller:
+                                                    _thirteryDrugTestPreferredDeviceController,
+                                                onChanged: (value) {
+                                                  setState(() {
+                                                    // Update the number of donors and the text controller
+                                                    _thirteryDrugTestPreferredDeviceController
+                                                            .text =
+                                                        value; // Manually update the controller text
+                                                    _selectPreferedThirtoryDeviceKey
+                                                        .currentState!
+                                                        .validate();
+                                                  });
+                                                },
+                                                validator: (value) {
+                                                  if (_thirteryDrugTestPreferredDeviceController
+                                                          .text ==
+                                                      "") {
+                                                    return 'Please enter a valid preferred device';
+                                                  }
+                                                  return null;
+                                                },
                                               ),
                                             ],
                                           ),
@@ -9001,135 +6939,30 @@ class _NewCalloutJobState extends State<NewClient> {
                                                   SizedBox(
                                                     height: 5,
                                                   ),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            right: 0.0),
-                                                    child: Container(
-                                                      width: double.infinity,
-                                                      height: 40,
-                                                      child: Material(
-                                                        elevation:
-                                                            4, // Adjust this value for more or less elevation
-                                                        shadowColor: Colors
-                                                            .black
-                                                            .withOpacity(
-                                                                0.5), // Optional: Adjust shadow color
-                                                        borderRadius:
-                                                            BorderRadius.circular(
-                                                                4), // Match with TextFormField's border radius
-                                                        child: TextFormField(
-                                                          key:
-                                                              _primaryTestSpecificationsKey,
-                                                          controller:
-                                                              _primaryDrugTestController,
-                                                          decoration:
-                                                              InputDecoration(
-                                                            fillColor:
-                                                                Colors.white,
-                                                            filled: true,
-                                                            border:
-                                                                OutlineInputBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          4),
-                                                              borderSide:
-                                                                  const BorderSide(
-                                                                color: Colors
-                                                                    .white,
-                                                                width: 2,
-                                                              ),
-                                                            ),
-                                                            enabledBorder:
-                                                                OutlineInputBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          4),
-                                                              borderSide:
-                                                                  const BorderSide(
-                                                                color: Colors
-                                                                    .white,
-                                                                width: 2,
-                                                              ),
-                                                            ),
-                                                            focusedBorder:
-                                                                OutlineInputBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          4),
-                                                              borderSide:
-                                                                  const BorderSide(
-                                                                color: Colors
-                                                                    .white,
-                                                                width: 2,
-                                                              ),
-                                                            ),
-                                                            errorBorder:
-                                                                OutlineInputBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          4),
-                                                              borderSide:
-                                                                  const BorderSide(
-                                                                color:
-                                                                    Colors.red,
-                                                                width: 2,
-                                                              ),
-                                                            ),
-                                                            focusedErrorBorder:
-                                                                OutlineInputBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          4),
-                                                              borderSide:
-                                                                  const BorderSide(
-                                                                color:
-                                                                    Colors.red,
-                                                                width: 2,
-                                                              ),
-                                                            ),
-                                                            contentPadding:
-                                                                const EdgeInsets
-                                                                    .symmetric(
-                                                              vertical: 5,
-                                                              horizontal: 12,
-                                                            ),
-                                                            errorStyle:
-                                                                const TextStyle(
-                                                              color: Colors.red,
-                                                              fontSize: 12,
-                                                            ),
-                                                          ),
-                                                          keyboardType:
-                                                              TextInputType
-                                                                  .text, // Ensures numeric input
-                                                          onChanged: (value) {
-                                                            setState(() {
-                                                              // Update the number of donors and the text controller
-                                                              _primaryDrugTestController
-                                                                      .text =
-                                                                  value; // Manually update the controller text
-                                                              _primaryTestSpecificationsKey
-                                                                  .currentState!
-                                                                  .validate();
-                                                            });
-                                                          },
-                                                          validator: (value) {
-                                                            if (_primaryDrugTestController
-                                                                    .text ==
-                                                                "") {
-                                                              return 'Please enter the primary drug test name';
-                                                            }
-                                                            return null;
-                                                          },
-                                                        ),
-                                                      ),
-                                                    ),
+                                                  DrugTestFormField(
+                                                    fieldKey:
+                                                        _primaryTestSpecificationsKey,
+                                                    controller:
+                                                        _primaryDrugTestController,
+                                                    onChanged: (value) {
+                                                      setState(() {
+                                                        // Update the number of donors and the text controller
+                                                        _primaryDrugTestController
+                                                                .text =
+                                                            value; // Manually update the controller text
+                                                        _primaryTestSpecificationsKey
+                                                            .currentState!
+                                                            .validate();
+                                                      });
+                                                    },
+                                                    validator: (value) {
+                                                      if (_primaryDrugTestController
+                                                              .text ==
+                                                          "") {
+                                                        return 'Please enter the primary drug test name';
+                                                      }
+                                                      return null;
+                                                    },
                                                   ),
                                                 ],
                                               ),
@@ -9163,135 +6996,30 @@ class _NewCalloutJobState extends State<NewClient> {
                                                   SizedBox(
                                                     height: 5,
                                                   ),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            right: 0.0),
-                                                    child: Container(
-                                                      width: double.infinity,
-                                                      height: 40,
-                                                      child: Material(
-                                                        elevation:
-                                                            4, // Adjust this value for more or less elevation
-                                                        shadowColor: Colors
-                                                            .black
-                                                            .withOpacity(
-                                                                0.5), // Optional: Adjust shadow color
-                                                        borderRadius:
-                                                            BorderRadius.circular(
-                                                                4), // Match with TextFormField's border radius
-                                                        child: TextFormField(
-                                                          key:
-                                                              _selectPreferedPrimaryDeviceKey,
-                                                          controller:
-                                                              _primaryDrugTestPreferredDeviceController,
-                                                          decoration:
-                                                              InputDecoration(
-                                                            fillColor:
-                                                                Colors.white,
-                                                            filled: true,
-                                                            border:
-                                                                OutlineInputBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          4),
-                                                              borderSide:
-                                                                  const BorderSide(
-                                                                color: Colors
-                                                                    .white,
-                                                                width: 2,
-                                                              ),
-                                                            ),
-                                                            enabledBorder:
-                                                                OutlineInputBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          4),
-                                                              borderSide:
-                                                                  const BorderSide(
-                                                                color: Colors
-                                                                    .white,
-                                                                width: 2,
-                                                              ),
-                                                            ),
-                                                            focusedBorder:
-                                                                OutlineInputBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          4),
-                                                              borderSide:
-                                                                  const BorderSide(
-                                                                color: Colors
-                                                                    .white,
-                                                                width: 2,
-                                                              ),
-                                                            ),
-                                                            errorBorder:
-                                                                OutlineInputBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          4),
-                                                              borderSide:
-                                                                  const BorderSide(
-                                                                color:
-                                                                    Colors.red,
-                                                                width: 2,
-                                                              ),
-                                                            ),
-                                                            focusedErrorBorder:
-                                                                OutlineInputBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          4),
-                                                              borderSide:
-                                                                  const BorderSide(
-                                                                color:
-                                                                    Colors.red,
-                                                                width: 2,
-                                                              ),
-                                                            ),
-                                                            contentPadding:
-                                                                const EdgeInsets
-                                                                    .symmetric(
-                                                              vertical: 5,
-                                                              horizontal: 12,
-                                                            ),
-                                                            errorStyle:
-                                                                const TextStyle(
-                                                              color: Colors.red,
-                                                              fontSize: 12,
-                                                            ),
-                                                          ),
-                                                          keyboardType:
-                                                              TextInputType
-                                                                  .text, // Ensures numeric input
-                                                          onChanged: (value) {
-                                                            setState(() {
-                                                              // Update the number of donors and the text controller
-                                                              _primaryDrugTestPreferredDeviceController
-                                                                      .text =
-                                                                  value; // Manually update the controller text
-                                                              _selectPreferedPrimaryDeviceKey
-                                                                  .currentState!
-                                                                  .validate();
-                                                            });
-                                                          },
-                                                          validator: (value) {
-                                                            if (_primaryDrugTestPreferredDeviceController
-                                                                    .text ==
-                                                                "") {
-                                                              return 'Please enter the prefered Device name';
-                                                            }
-                                                            return null;
-                                                          },
-                                                        ),
-                                                      ),
-                                                    ),
+                                                  PreferredDeviceFormField(
+                                                    fieldKey:
+                                                        _selectPreferedPrimaryDeviceKey,
+                                                    controller:
+                                                        _primaryDrugTestPreferredDeviceController,
+                                                    onChanged: (value) {
+                                                      setState(() {
+                                                        // Update the number of donors and the text controller
+                                                        _primaryDrugTestPreferredDeviceController
+                                                                .text =
+                                                            value; // Manually update the controller text
+                                                        _selectPreferedPrimaryDeviceKey
+                                                            .currentState!
+                                                            .validate();
+                                                      });
+                                                    },
+                                                    validator: (value) {
+                                                      if (_primaryDrugTestPreferredDeviceController
+                                                              .text ==
+                                                          "") {
+                                                        return 'Please enter the prefered Device name';
+                                                      }
+                                                      return null;
+                                                    },
                                                   ),
                                                 ],
                                               ),
@@ -9344,135 +7072,30 @@ class _NewCalloutJobState extends State<NewClient> {
                                                   SizedBox(
                                                     height: 5,
                                                   ),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            right: 0.0),
-                                                    child: Container(
-                                                      width: double.infinity,
-                                                      height: 40,
-                                                      child: Material(
-                                                        elevation:
-                                                            4, // Adjust this value for more or less elevation
-                                                        shadowColor: Colors
-                                                            .black
-                                                            .withOpacity(
-                                                                0.5), // Optional: Adjust shadow color
-                                                        borderRadius:
-                                                            BorderRadius.circular(
-                                                                4), // Match with TextFormField's border radius
-                                                        child: TextFormField(
-                                                          key:
-                                                              _secondaryDrugTestKey,
-                                                          controller:
-                                                              _secondaryDrugTestController,
-                                                          decoration:
-                                                              InputDecoration(
-                                                            fillColor:
-                                                                Colors.white,
-                                                            filled: true,
-                                                            border:
-                                                                OutlineInputBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          4),
-                                                              borderSide:
-                                                                  const BorderSide(
-                                                                color: Colors
-                                                                    .white,
-                                                                width: 2,
-                                                              ),
-                                                            ),
-                                                            enabledBorder:
-                                                                OutlineInputBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          4),
-                                                              borderSide:
-                                                                  const BorderSide(
-                                                                color: Colors
-                                                                    .white,
-                                                                width: 2,
-                                                              ),
-                                                            ),
-                                                            focusedBorder:
-                                                                OutlineInputBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          4),
-                                                              borderSide:
-                                                                  const BorderSide(
-                                                                color: Colors
-                                                                    .white,
-                                                                width: 2,
-                                                              ),
-                                                            ),
-                                                            errorBorder:
-                                                                OutlineInputBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          4),
-                                                              borderSide:
-                                                                  const BorderSide(
-                                                                color:
-                                                                    Colors.red,
-                                                                width: 2,
-                                                              ),
-                                                            ),
-                                                            focusedErrorBorder:
-                                                                OutlineInputBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          4),
-                                                              borderSide:
-                                                                  const BorderSide(
-                                                                color:
-                                                                    Colors.red,
-                                                                width: 2,
-                                                              ),
-                                                            ),
-                                                            contentPadding:
-                                                                const EdgeInsets
-                                                                    .symmetric(
-                                                              vertical: 5,
-                                                              horizontal: 12,
-                                                            ),
-                                                            errorStyle:
-                                                                const TextStyle(
-                                                              color: Colors.red,
-                                                              fontSize: 12,
-                                                            ),
-                                                          ),
-                                                          keyboardType:
-                                                              TextInputType
-                                                                  .text, // Ensures numeric input
-                                                          onChanged: (value) {
-                                                            setState(() {
-                                                              // Update the number of donors and the text controller
-                                                              _secondaryDrugTestController
-                                                                      .text =
-                                                                  value; // Manually update the controller text
-                                                              _secondaryDrugTestKey
-                                                                  .currentState!
-                                                                  .validate();
-                                                            });
-                                                          },
-                                                          validator: (value) {
-                                                            if (_secondaryDrugTestController
-                                                                    .text ==
-                                                                "") {
-                                                              return 'Please enter a valid drug test name';
-                                                            }
-                                                            return null;
-                                                          },
-                                                        ),
-                                                      ),
-                                                    ),
+                                                  DrugTestFormField(
+                                                    fieldKey:
+                                                        _secondaryDrugTestKey,
+                                                    controller:
+                                                        _secondaryDrugTestController,
+                                                    onChanged: (value) {
+                                                      setState(() {
+                                                        // Update the number of donors and the text controller
+                                                        _secondaryDrugTestController
+                                                                .text =
+                                                            value; // Manually update the controller text
+                                                        _secondaryDrugTestKey
+                                                            .currentState!
+                                                            .validate();
+                                                      });
+                                                    },
+                                                    validator: (value) {
+                                                      if (_secondaryDrugTestController
+                                                              .text ==
+                                                          "") {
+                                                        return 'Please enter a valid drug test name';
+                                                      }
+                                                      return null;
+                                                    },
                                                   ),
                                                 ],
                                               ),
@@ -9506,135 +7129,30 @@ class _NewCalloutJobState extends State<NewClient> {
                                                   SizedBox(
                                                     height: 5,
                                                   ),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            right: 0.0),
-                                                    child: Container(
-                                                      width: double.infinity,
-                                                      height: 40,
-                                                      child: Material(
-                                                        elevation:
-                                                            4, // Adjust this value for more or less elevation
-                                                        shadowColor: Colors
-                                                            .black
-                                                            .withOpacity(
-                                                                0.5), // Optional: Adjust shadow color
-                                                        borderRadius:
-                                                            BorderRadius.circular(
-                                                                4), // Match with TextFormField's border radius
-                                                        child: TextFormField(
-                                                          key:
-                                                              _selectPreferedSecondaryDeviceKey,
-                                                          controller:
-                                                              _secondaryDrugTestPreferredDeviceController,
-                                                          decoration:
-                                                              InputDecoration(
-                                                            fillColor:
-                                                                Colors.white,
-                                                            filled: true,
-                                                            border:
-                                                                OutlineInputBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          4),
-                                                              borderSide:
-                                                                  const BorderSide(
-                                                                color: Colors
-                                                                    .white,
-                                                                width: 2,
-                                                              ),
-                                                            ),
-                                                            enabledBorder:
-                                                                OutlineInputBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          4),
-                                                              borderSide:
-                                                                  const BorderSide(
-                                                                color: Colors
-                                                                    .white,
-                                                                width: 2,
-                                                              ),
-                                                            ),
-                                                            focusedBorder:
-                                                                OutlineInputBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          4),
-                                                              borderSide:
-                                                                  const BorderSide(
-                                                                color: Colors
-                                                                    .white,
-                                                                width: 2,
-                                                              ),
-                                                            ),
-                                                            errorBorder:
-                                                                OutlineInputBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          4),
-                                                              borderSide:
-                                                                  const BorderSide(
-                                                                color:
-                                                                    Colors.red,
-                                                                width: 2,
-                                                              ),
-                                                            ),
-                                                            focusedErrorBorder:
-                                                                OutlineInputBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          4),
-                                                              borderSide:
-                                                                  const BorderSide(
-                                                                color:
-                                                                    Colors.red,
-                                                                width: 2,
-                                                              ),
-                                                            ),
-                                                            contentPadding:
-                                                                const EdgeInsets
-                                                                    .symmetric(
-                                                              vertical: 5,
-                                                              horizontal: 12,
-                                                            ),
-                                                            errorStyle:
-                                                                const TextStyle(
-                                                              color: Colors.red,
-                                                              fontSize: 12,
-                                                            ),
-                                                          ),
-                                                          keyboardType:
-                                                              TextInputType
-                                                                  .text, // Ensures numeric input
-                                                          onChanged: (value) {
-                                                            setState(() {
-                                                              // Update the number of donors and the text controller
-                                                              _secondaryDrugTestPreferredDeviceController
-                                                                      .text =
-                                                                  value; // Manually update the controller text
-                                                              _selectPreferedSecondaryDeviceKey
-                                                                  .currentState!
-                                                                  .validate();
-                                                            });
-                                                          },
-                                                          validator: (value) {
-                                                            if (_secondaryDrugTestPreferredDeviceController
-                                                                    .text ==
-                                                                "") {
-                                                              return 'Please enter a valid device name';
-                                                            }
-                                                            return null;
-                                                          },
-                                                        ),
-                                                      ),
-                                                    ),
+                                                  PreferredDeviceFormField(
+                                                    fieldKey:
+                                                        _selectPreferedSecondaryDeviceKey,
+                                                    controller:
+                                                        _secondaryDrugTestPreferredDeviceController,
+                                                    onChanged: (value) {
+                                                      setState(() {
+                                                        // Update the number of donors and the text controller
+                                                        _secondaryDrugTestPreferredDeviceController
+                                                                .text =
+                                                            value; // Manually update the controller text
+                                                        _selectPreferedSecondaryDeviceKey
+                                                            .currentState!
+                                                            .validate();
+                                                      });
+                                                    },
+                                                    validator: (value) {
+                                                      if (_secondaryDrugTestPreferredDeviceController
+                                                              .text ==
+                                                          "") {
+                                                        return 'Please enter a valid device name';
+                                                      }
+                                                      return null;
+                                                    },
                                                   ),
                                                 ],
                                               ),
@@ -9684,135 +7202,30 @@ class _NewCalloutJobState extends State<NewClient> {
                                                   SizedBox(
                                                     height: 5,
                                                   ),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            right: 0.0),
-                                                    child: Container(
-                                                      width: double.infinity,
-                                                      height: 40,
-                                                      child: Material(
-                                                        elevation:
-                                                            4, // Adjust this value for more or less elevation
-                                                        shadowColor: Colors
-                                                            .black
-                                                            .withOpacity(
-                                                                0.5), // Optional: Adjust shadow color
-                                                        borderRadius:
-                                                            BorderRadius.circular(
-                                                                4), // Match with TextFormField's border radius
-                                                        child: TextFormField(
-                                                          key:
-                                                              _thirtoryDrugTestKey,
-                                                          controller:
-                                                              _thirteryDrugTestController,
-                                                          decoration:
-                                                              InputDecoration(
-                                                            fillColor:
-                                                                Colors.white,
-                                                            filled: true,
-                                                            border:
-                                                                OutlineInputBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          4),
-                                                              borderSide:
-                                                                  const BorderSide(
-                                                                color: Colors
-                                                                    .white,
-                                                                width: 2,
-                                                              ),
-                                                            ),
-                                                            enabledBorder:
-                                                                OutlineInputBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          4),
-                                                              borderSide:
-                                                                  const BorderSide(
-                                                                color: Colors
-                                                                    .white,
-                                                                width: 2,
-                                                              ),
-                                                            ),
-                                                            focusedBorder:
-                                                                OutlineInputBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          4),
-                                                              borderSide:
-                                                                  const BorderSide(
-                                                                color: Colors
-                                                                    .white,
-                                                                width: 2,
-                                                              ),
-                                                            ),
-                                                            errorBorder:
-                                                                OutlineInputBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          4),
-                                                              borderSide:
-                                                                  const BorderSide(
-                                                                color:
-                                                                    Colors.red,
-                                                                width: 2,
-                                                              ),
-                                                            ),
-                                                            focusedErrorBorder:
-                                                                OutlineInputBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          4),
-                                                              borderSide:
-                                                                  const BorderSide(
-                                                                color:
-                                                                    Colors.red,
-                                                                width: 2,
-                                                              ),
-                                                            ),
-                                                            contentPadding:
-                                                                const EdgeInsets
-                                                                    .symmetric(
-                                                              vertical: 5,
-                                                              horizontal: 12,
-                                                            ),
-                                                            errorStyle:
-                                                                const TextStyle(
-                                                              color: Colors.red,
-                                                              fontSize: 12,
-                                                            ),
-                                                          ),
-                                                          keyboardType:
-                                                              TextInputType
-                                                                  .text, // Ensures numeric input
-                                                          onChanged: (value) {
-                                                            setState(() {
-                                                              // Update the number of donors and the text controller
-                                                              _thirteryDrugTestController
-                                                                      .text =
-                                                                  value; // Manually update the controller text
-                                                              _thirtoryDrugTestKey
-                                                                  .currentState!
-                                                                  .validate();
-                                                            });
-                                                          },
-                                                          validator: (value) {
-                                                            if (_thirteryDrugTestController
-                                                                    .text ==
-                                                                "") {
-                                                              return 'Please enter a valid drug test name';
-                                                            }
-                                                            return null;
-                                                          },
-                                                        ),
-                                                      ),
-                                                    ),
+                                                  DrugTestFormField(
+                                                    fieldKey:
+                                                        _thirtoryDrugTestKey,
+                                                    controller:
+                                                        _thirteryDrugTestController,
+                                                    onChanged: (value) {
+                                                      setState(() {
+                                                        // Update the number of donors and the text controller
+                                                        _thirteryDrugTestController
+                                                                .text =
+                                                            value; // Manually update the controller text
+                                                        _thirtoryDrugTestKey
+                                                            .currentState!
+                                                            .validate();
+                                                      });
+                                                    },
+                                                    validator: (value) {
+                                                      if (_thirteryDrugTestController
+                                                              .text ==
+                                                          "") {
+                                                        return 'Please enter a valid drug test name';
+                                                      }
+                                                      return null;
+                                                    },
                                                   ),
                                                 ],
                                               ),
@@ -9846,135 +7259,30 @@ class _NewCalloutJobState extends State<NewClient> {
                                                   SizedBox(
                                                     height: 5,
                                                   ),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            right: 0.0),
-                                                    child: Container(
-                                                      width: double.infinity,
-                                                      height: 40,
-                                                      child: Material(
-                                                        elevation:
-                                                            4, // Adjust this value for more or less elevation
-                                                        shadowColor: Colors
-                                                            .black
-                                                            .withOpacity(
-                                                                0.5), // Optional: Adjust shadow color
-                                                        borderRadius:
-                                                            BorderRadius.circular(
-                                                                4), // Match with TextFormField's border radius
-                                                        child: TextFormField(
-                                                          key:
-                                                              _selectPreferedThirtoryDeviceKey,
-                                                          controller:
-                                                              _thirteryDrugTestPreferredDeviceController,
-                                                          decoration:
-                                                              InputDecoration(
-                                                            fillColor:
-                                                                Colors.white,
-                                                            filled: true,
-                                                            border:
-                                                                OutlineInputBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          4),
-                                                              borderSide:
-                                                                  const BorderSide(
-                                                                color: Colors
-                                                                    .white,
-                                                                width: 2,
-                                                              ),
-                                                            ),
-                                                            enabledBorder:
-                                                                OutlineInputBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          4),
-                                                              borderSide:
-                                                                  const BorderSide(
-                                                                color: Colors
-                                                                    .white,
-                                                                width: 2,
-                                                              ),
-                                                            ),
-                                                            focusedBorder:
-                                                                OutlineInputBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          4),
-                                                              borderSide:
-                                                                  const BorderSide(
-                                                                color: Colors
-                                                                    .white,
-                                                                width: 2,
-                                                              ),
-                                                            ),
-                                                            errorBorder:
-                                                                OutlineInputBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          4),
-                                                              borderSide:
-                                                                  const BorderSide(
-                                                                color:
-                                                                    Colors.red,
-                                                                width: 2,
-                                                              ),
-                                                            ),
-                                                            focusedErrorBorder:
-                                                                OutlineInputBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          4),
-                                                              borderSide:
-                                                                  const BorderSide(
-                                                                color:
-                                                                    Colors.red,
-                                                                width: 2,
-                                                              ),
-                                                            ),
-                                                            contentPadding:
-                                                                const EdgeInsets
-                                                                    .symmetric(
-                                                              vertical: 5,
-                                                              horizontal: 12,
-                                                            ),
-                                                            errorStyle:
-                                                                const TextStyle(
-                                                              color: Colors.red,
-                                                              fontSize: 12,
-                                                            ),
-                                                          ),
-                                                          keyboardType:
-                                                              TextInputType
-                                                                  .text, // Ensures numeric input
-                                                          onChanged: (value) {
-                                                            setState(() {
-                                                              // Update the number of donors and the text controller
-                                                              _thirteryDrugTestPreferredDeviceController
-                                                                      .text =
-                                                                  value; // Manually update the controller text
-                                                              _selectPreferedThirtoryDeviceKey
-                                                                  .currentState!
-                                                                  .validate();
-                                                            });
-                                                          },
-                                                          validator: (value) {
-                                                            if (_thirteryDrugTestPreferredDeviceController
-                                                                    .text ==
-                                                                "") {
-                                                              return 'Please enter a valid preferred device';
-                                                            }
-                                                            return null;
-                                                          },
-                                                        ),
-                                                      ),
-                                                    ),
+                                                  PreferredDeviceFormField(
+                                                    fieldKey:
+                                                        _selectPreferedThirtoryDeviceKey,
+                                                    controller:
+                                                        _thirteryDrugTestPreferredDeviceController,
+                                                    onChanged: (value) {
+                                                      setState(() {
+                                                        // Update the number of donors and the text controller
+                                                        _thirteryDrugTestPreferredDeviceController
+                                                                .text =
+                                                            value; // Manually update the controller text
+                                                        _selectPreferedThirtoryDeviceKey
+                                                            .currentState!
+                                                            .validate();
+                                                      });
+                                                    },
+                                                    validator: (value) {
+                                                      if (_thirteryDrugTestPreferredDeviceController
+                                                              .text ==
+                                                          "") {
+                                                        return 'Please enter a valid preferred device';
+                                                      }
+                                                      return null;
+                                                    },
                                                   ),
                                                 ],
                                               ),
@@ -10181,53 +7489,16 @@ class _NewCalloutJobState extends State<NewClient> {
                           SizedBox(
                             height: 16,
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(right: 0.0),
-                            child: Container(
-                              height: 88,
-                              width: double.infinity,
-                              child: Material(
-                                elevation: 4,
-                                shadowColor: Colors.black.withOpacity(0.5),
-                                borderRadius: BorderRadius.circular(4),
-                                child: TextFormField(
-                                  key: _donorSelectionProcessKey,
-                                  controller: _donorSelectionProcessController,
-                                  maxLines:
-                                      null, // Makes the text field expandable
-                                  minLines: 5,
-                                  decoration: InputDecoration(
-                                    hintText: '',
-                                    fillColor: Colors.white,
-                                    filled: true,
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(4),
-                                      borderSide: BorderSide
-                                          .none, // Removes border outline
-                                    ),
-                                    contentPadding: const EdgeInsets.symmetric(
-                                      vertical: 15,
-                                      horizontal: 12,
-                                    ),
-                                  ),
-                                  keyboardType: TextInputType.multiline,
-                                  onChanged: (value) {
-                                    setState(() {
-                                      _donorSelectionProcessController.text =
-                                          value;
-                                      _donorSelectionProcessKey.currentState
-                                          ?.validate();
-                                    });
-                                  },
-                                  /* validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return 'Please enter a valid donor selection process';
-                                    }
-                                    return null;
-                                  }, */
-                                ),
-                              ),
-                            ),
+                          ExtraInfoFormField(
+                            fieldKey: _donorSelectionProcessKey,
+                            controller: _donorSelectionProcessController,
+                            onChanged: (value) {
+                              setState(() {
+                                _donorSelectionProcessController.text = value;
+                                _donorSelectionProcessKey.currentState
+                                    ?.validate();
+                              });
+                            },
                           ),
                           SizedBox(
                             height: 16,
@@ -10252,55 +7523,17 @@ class _NewCalloutJobState extends State<NewClient> {
                           SizedBox(
                             height: 16,
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(right: 0.0),
-                            child: Container(
-                              height: 88,
-                              width: double.infinity,
-                              child: Material(
-                                elevation: 4,
-                                shadowColor: Colors.black.withOpacity(0.5),
-                                borderRadius: BorderRadius.circular(4),
-                                child: TextFormField(
-                                  key: _screeningAndTestingProcessKey,
-                                  controller:
-                                      _screeningAndTestingProcessController,
-                                  maxLines:
-                                      null, // Makes the text field expandable
-                                  minLines: 5,
-                                  decoration: InputDecoration(
-                                    hintText: '',
-                                    fillColor: Colors.white,
-                                    filled: true,
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(4),
-                                      borderSide: BorderSide
-                                          .none, // Removes border outline
-                                    ),
-                                    contentPadding: const EdgeInsets.symmetric(
-                                      vertical: 15,
-                                      horizontal: 12,
-                                    ),
-                                  ),
-                                  keyboardType: TextInputType.multiline,
-                                  onChanged: (value) {
-                                    setState(() {
-                                      _screeningAndTestingProcessController
-                                          .text = value;
-                                      _screeningAndTestingProcessKey
-                                          .currentState
-                                          ?.validate();
-                                    });
-                                  },
-                                  /*  validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return 'Please enter any screening and testing process';
-                                    }
-                                    return null;
-                                  }, */
-                                ),
-                              ),
-                            ),
+                          ExtraInfoFormField(
+                            fieldKey: _screeningAndTestingProcessKey,
+                            controller: _screeningAndTestingProcessController,
+                            onChanged: (value) {
+                              setState(() {
+                                _screeningAndTestingProcessController.text =
+                                    value;
+                                _screeningAndTestingProcessKey.currentState
+                                    ?.validate();
+                              });
+                            },
                           ),
                           SizedBox(
                             height: 16,
@@ -10325,55 +7558,17 @@ class _NewCalloutJobState extends State<NewClient> {
                           SizedBox(
                             height: 16,
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(right: 0.0),
-                            child: Container(
-                              height: 88,
-                              width: double.infinity,
-                              child: Material(
-                                elevation: 4,
-                                shadowColor: Colors.black.withOpacity(0.5),
-                                borderRadius: BorderRadius.circular(4),
-                                child: TextFormField(
-                                  key: _testConfirmationInstructionsKey,
-                                  controller:
-                                      _testConfirmationInstructionsController,
-                                  maxLines:
-                                      null, // Makes the text field expandable
-                                  minLines: 5,
-                                  decoration: InputDecoration(
-                                    hintText: '',
-                                    fillColor: Colors.white,
-                                    filled: true,
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(4),
-                                      borderSide: BorderSide
-                                          .none, // Removes border outline
-                                    ),
-                                    contentPadding: const EdgeInsets.symmetric(
-                                      vertical: 15,
-                                      horizontal: 12,
-                                    ),
-                                  ),
-                                  keyboardType: TextInputType.multiline,
-                                  onChanged: (value) {
-                                    setState(() {
-                                      _testConfirmationInstructionsController
-                                          .text = value;
-                                      _testConfirmationInstructionsKey
-                                          .currentState
-                                          ?.validate();
-                                    });
-                                  },
-                                  /* validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return 'Please enter any test confirmation instructions';
-                                    }
-                                    return null;
-                                  }, */
-                                ),
-                              ),
-                            ),
+                          ExtraInfoFormField(
+                            fieldKey: _testConfirmationInstructionsKey,
+                            controller: _testConfirmationInstructionsController,
+                            onChanged: (value) {
+                              setState(() {
+                                _testConfirmationInstructionsController.text =
+                                    value;
+                                _testConfirmationInstructionsKey.currentState
+                                    ?.validate();
+                              });
+                            },
                           ),
                           SizedBox(
                             height: 16,
@@ -10398,55 +7593,17 @@ class _NewCalloutJobState extends State<NewClient> {
                           SizedBox(
                             height: 16,
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(right: 0.0),
-                            child: Container(
-                              height: 88,
-                              width: double.infinity,
-                              child: Material(
-                                elevation: 4,
-                                shadowColor: Colors.black.withOpacity(0.5),
-                                borderRadius: BorderRadius.circular(4),
-                                child: TextFormField(
-                                  key: _globalSiteAccessInstructionsKey,
-                                  controller:
-                                      _globalSiteAccessInstructionsController,
-                                  maxLines:
-                                      null, // Makes the text field expandable
-                                  minLines: 5,
-                                  decoration: InputDecoration(
-                                    hintText: '',
-                                    fillColor: Colors.white,
-                                    filled: true,
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(4),
-                                      borderSide: BorderSide
-                                          .none, // Removes border outline
-                                    ),
-                                    contentPadding: const EdgeInsets.symmetric(
-                                      vertical: 15,
-                                      horizontal: 12,
-                                    ),
-                                  ),
-                                  keyboardType: TextInputType.multiline,
-                                  onChanged: (value) {
-                                    setState(() {
-                                      _globalSiteAccessInstructionsController
-                                          .text = value;
-                                      _globalSiteAccessInstructionsKey
-                                          .currentState
-                                          ?.validate();
-                                    });
-                                  },
-                                  /* validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return 'Please enter any global site access instructions';
-                                    }
-                                    return null;
-                                  }, */
-                                ),
-                              ),
-                            ),
+                          ExtraInfoFormField(
+                            fieldKey: _globalSiteAccessInstructionsKey,
+                            controller: _globalSiteAccessInstructionsController,
+                            onChanged: (value) {
+                              setState(() {
+                                _globalSiteAccessInstructionsController.text =
+                                    value;
+                                _globalSiteAccessInstructionsKey.currentState
+                                    ?.validate();
+                              });
+                            },
                           ),
                           SizedBox(
                             height: 16,
@@ -10471,55 +7628,19 @@ class _NewCalloutJobState extends State<NewClient> {
                           SizedBox(
                             height: 16,
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(right: 0.0),
-                            child: Container(
-                              height: 88,
-                              width: double.infinity,
-                              child: Material(
-                                elevation: 4,
-                                shadowColor: Colors.black.withOpacity(0.5),
-                                borderRadius: BorderRadius.circular(4),
-                                child: TextFormField(
-                                  key: _specificLocalSiteAccessInstructionsKey,
-                                  controller:
-                                      _specificLocalSiteAccessInstructionsController,
-                                  maxLines:
-                                      null, // Makes the text field expandable
-                                  minLines: 5,
-                                  decoration: InputDecoration(
-                                    hintText: '',
-                                    fillColor: Colors.white,
-                                    filled: true,
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(4),
-                                      borderSide: BorderSide
-                                          .none, // Removes border outline
-                                    ),
-                                    contentPadding: const EdgeInsets.symmetric(
-                                      vertical: 15,
-                                      horizontal: 12,
-                                    ),
-                                  ),
-                                  keyboardType: TextInputType.multiline,
-                                  onChanged: (value) {
-                                    setState(() {
-                                      _specificLocalSiteAccessInstructionsController
-                                          .text = value;
-                                      _specificLocalSiteAccessInstructionsKey
-                                          .currentState
-                                          ?.validate();
-                                    });
-                                  },
-                                  /*  validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return 'Please enter specific local site access instructions';
-                                    }
-                                    return null;
-                                  }, */
-                                ),
-                              ),
-                            ),
+                          ExtraInfoFormField(
+                            fieldKey: _specificLocalSiteAccessInstructionsKey,
+                            controller:
+                                _specificLocalSiteAccessInstructionsController,
+                            onChanged: (value) {
+                              setState(() {
+                                _specificLocalSiteAccessInstructionsController
+                                    .text = value;
+                                _specificLocalSiteAccessInstructionsKey
+                                    .currentState
+                                    ?.validate();
+                              });
+                            },
                           ),
                           SizedBox(
                             height: 16,
@@ -10544,53 +7665,16 @@ class _NewCalloutJobState extends State<NewClient> {
                           SizedBox(
                             height: 16,
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(right: 0.0),
-                            child: Container(
-                              height: 88,
-                              width: double.infinity,
-                              child: Material(
-                                elevation: 4,
-                                shadowColor: Colors.black.withOpacity(0.5),
-                                borderRadius: BorderRadius.circular(4),
-                                child: TextFormField(
-                                  key: _specialInstructionsKey,
-                                  controller: _specialInstructionsController,
-                                  maxLines:
-                                      null, // Makes the text field expandable
-                                  minLines: 5,
-                                  decoration: InputDecoration(
-                                    hintText: '',
-                                    fillColor: Colors.white,
-                                    filled: true,
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(4),
-                                      borderSide: BorderSide
-                                          .none, // Removes border outline
-                                    ),
-                                    contentPadding: const EdgeInsets.symmetric(
-                                      vertical: 15,
-                                      horizontal: 12,
-                                    ),
-                                  ),
-                                  keyboardType: TextInputType.multiline,
-                                  onChanged: (value) {
-                                    setState(() {
-                                      _specialInstructionsController.text =
-                                          value;
-                                      _specialInstructionsKey.currentState
-                                          ?.validate();
-                                    });
-                                  },
-                                  /*  validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return 'Please enter any special instructions';
-                                    }
-                                    return null;
-                                  }, */
-                                ),
-                              ),
-                            ),
+                          ExtraInfoFormField(
+                            fieldKey: _specialInstructionsKey,
+                            controller: _specialInstructionsController,
+                            onChanged: (value) {
+                              setState(() {
+                                _specialInstructionsController.text = value;
+                                _specialInstructionsKey.currentState
+                                    ?.validate();
+                              });
+                            },
                           ),
                         ]),
                       ]),
