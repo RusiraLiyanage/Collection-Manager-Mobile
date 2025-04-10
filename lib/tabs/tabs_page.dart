@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:project_code_blue/ColorSchemas/AppColors.dart';
 import 'package:provider/provider.dart';
 import '../AppState/appState.dart';
 import '../tabs/bottom_tabs.dart';
@@ -105,7 +106,7 @@ class _TabsPageState extends State<TabsPage> {
                   height: 70,
                   decoration: BoxDecoration(
                     border: Border.all(
-                      color: Color(0xFF01B4D2)
+                      color: AppColors.bottomNavigationBorder
                           .withOpacity(0.52), // Set the border color here
                       width: 2.0, // Set the border width
                     ),
@@ -204,9 +205,9 @@ class _TabsPageState extends State<TabsPage> {
                           ],
                           currentIndex: _selectedIndex,
                           selectedItemColor: widget.firstInstance
-                              ? Color(0xFF01B4D2)
-                              : const Color(0xFF01B4D2),
-                          unselectedItemColor: const Color(0xFF01B4D2),
+                              ? AppColors.bottomNavigationBorder
+                              : AppColors.bottomNavigationBorder,
+                          unselectedItemColor: AppColors.bottomNavigationBorder,
                           selectedLabelStyle: const TextStyle(
                             fontSize:
                                 13, // Increase font size for selected label

@@ -1,5 +1,6 @@
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
+import 'package:project_code_blue/ColorSchemas/AppColors.dart';
 import 'package:project_code_blue/Navigation/appBar.dart';
 import 'package:project_code_blue/sidemenu/sidemenu.dart';
 
@@ -437,7 +438,7 @@ class _ITServicesState extends State<ITServices> {
                       Container(
                         width: double.infinity,
                         height: 120,
-                        color: Color(0xFFD9D9D9),
+                        color: AppColors.headerColor,
                         child: Column(
                           children: [
                             Row(

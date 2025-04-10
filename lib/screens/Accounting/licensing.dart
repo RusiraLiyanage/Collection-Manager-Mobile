@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:project_code_blue/ColorSchemas/AppColors.dart';
 import 'package:project_code_blue/Navigation/appBarGoBack.dart';
 import 'package:project_code_blue/sidemenu/sidemenu.dart';
 
@@ -291,7 +292,7 @@ class _LicensingState extends State<Licensing> {
         navigationType: "subPartNavigation",
       ),
       appBar: AppBarGoBack(),
-      backgroundColor: Color(0xFFF2F2F2),
+      backgroundColor: AppColors.appWideBackground,
       body: Stack(children: [
         Scrollbar(
           thumbVisibility: true,
@@ -310,7 +311,7 @@ class _LicensingState extends State<Licensing> {
                       Container(
                         width: double.infinity,
                         height: 120,
-                        color: Color(0xFFD9D9D9),
+                        color: AppColors.headerColor,
                         child: Column(
                           children: [
                             Row(

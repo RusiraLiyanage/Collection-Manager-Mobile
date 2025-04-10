@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:project_code_blue/ColorSchemas/AppColors.dart';
 import 'package:provider/provider.dart';
 import '../../AppState/appState.dart';
 import 'package:project_code_blue/sidemenu/sidemenu.dart';
@@ -148,7 +149,7 @@ class _DashboardHomeState extends State<DashboardHome> {
     final appState = Provider.of<AppState>(context, listen: false);
 
     return Scaffold(
-      backgroundColor: Color(0xFFF2F2F2),
+      backgroundColor: AppColors.appWideBackground,
       extendBodyBehindAppBar: true, // Extends body behind the AppBar
       onDrawerChanged: (isOpen) {
         appState.setDrawerState(isOpen); // Update global drawer state
@@ -171,7 +172,7 @@ class _DashboardHomeState extends State<DashboardHome> {
             Container(
               width: double.infinity,
               height: 120,
-              color: Color(0xFFD9D9D9),
+              color: AppColors.headerColor,
               child: Column(
                 children: [
                   Row(

@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:icon_badge/icon_badge.dart';
 import 'package:project_code_blue/AppState/appState.dart';
+import 'package:project_code_blue/ColorSchemas/AppColors.dart';
 import 'package:project_code_blue/screens/Notifications/notifications.dart';
 import 'package:provider/provider.dart';
 
@@ -25,7 +26,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       AppBar(
         toolbarHeight: 68,
-        backgroundColor: Color(0xFF2C7796).withOpacity(0.58),
+        backgroundColor: AppColors.primary.withOpacity(0.58),
         foregroundColor: Colors.transparent,
         title: Text(
           "Hi Rusira",

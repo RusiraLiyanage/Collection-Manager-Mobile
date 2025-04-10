@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easy_faq/flutter_easy_faq.dart';
 import 'package:project_code_blue/AppState/appState.dart';
+import 'package:project_code_blue/ColorSchemas/AppColors.dart';
 import 'package:project_code_blue/Navigation/appBar.dart';
 import 'package:project_code_blue/sidemenu/sidemenu.dart';
 import 'package:provider/provider.dart';
@@ -75,7 +76,7 @@ class _FAQState extends State<FAQ> {
   Widget build(BuildContext context) {
     final appState = Provider.of<AppState>(context, listen: false);
     return Scaffold(
-      backgroundColor: Color(0xFFF2F2F2),
+      backgroundColor: AppColors.appWideBackground,
       extendBodyBehindAppBar: true, // Extends body behind the AppBar
       drawer: SideMenu(
         navigationType: "sideNavigation",
@@ -100,7 +101,7 @@ class _FAQState extends State<FAQ> {
               Container(
                 width: double.infinity,
                 height: 120,
-                color: Color(0xFFD9D9D9),
+                color: AppColors.headerColor,
                 child: Column(
                   children: [
                     Row(

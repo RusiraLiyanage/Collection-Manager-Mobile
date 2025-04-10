@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:project_code_blue/ColorSchemas/AppColors.dart';
 import 'package:project_code_blue/screens/ClientManagement/NewClient/ClientLocations/achievedLocationCard.dart';
 import 'package:project_code_blue/screens/ClientManagement/NewClient/Attachments/attachmentCard.dart';
 import 'package:project_code_blue/screens/ClientManagement/NewClient/AuthorizedRepresentatives/authorizedRepresentatives.dart';
@@ -7696,7 +7697,7 @@ class _NewCalloutJobState extends State<NewClient> {
                         width: double.infinity,
                         height: 85,
                         decoration: BoxDecoration(
-                          color: Color(0xFFF2F2F2).withOpacity(1),
+                          color: AppColors.appWideBackground.withOpacity(1),
                           borderRadius:
                               BorderRadius.circular(15), // Rounded corners
                         ),
@@ -8856,7 +8857,7 @@ class _NewCalloutJobState extends State<NewClient> {
                         width: double.infinity,
                         height: 220,
                         decoration: BoxDecoration(
-                          color: Color(0xFFF2F2F2).withOpacity(1),
+                          color: AppColors.appWideBackground.withOpacity(1),
                           borderRadius:
                               BorderRadius.circular(15), // Rounded corners
                         ),
@@ -10330,7 +10331,7 @@ class _NewCalloutJobState extends State<NewClient> {
                         width: double.infinity,
                         height: 85,
                         decoration: BoxDecoration(
-                          color: Color(0xFFF2F2F2).withOpacity(1),
+                          color: AppColors.appWideBackground.withOpacity(1),
                           borderRadius:
                               BorderRadius.circular(15), // Rounded corners
                         ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:project_code_blue/ColorSchemas/AppColors.dart';
 import 'package:provider/provider.dart';
 import '../../AppState/appState.dart';
 import 'package:project_code_blue/Navigation/appBar.dart';
@@ -345,7 +346,7 @@ class _AccountingDashboardState extends State<AccountingDashboard> {
         navigationType: "bottomNavigation",
       ),
       appBar: MyAppBar(),
-      backgroundColor: Color(0xFFF2F2F2),
+      backgroundColor: AppColors.appWideBackground,
       body: Stack(
         children: [
           Scrollbar(
@@ -362,7 +363,7 @@ class _AccountingDashboardState extends State<AccountingDashboard> {
                   Container(
                     width: double.infinity,
                     height: 120,
-                    color: Color(0xFFD9D9D9),
+                    color: AppColors.headerColor,
                     child: Column(
                       children: [
                         Row(
@@ -415,7 +416,7 @@ class _AccountingDashboardState extends State<AccountingDashboard> {
                   Container(
                     width: double.infinity,
                     height: 180,
-                    color: Color(0xFFF2F2F2),
+                    color: AppColors.appWideBackground,
                     child: Column(
                       children: [
                         SizedBox(

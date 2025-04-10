@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:project_code_blue/ColorSchemas/AppColors.dart';
 
 class AppBarGoBack2 extends StatelessWidget implements PreferredSizeWidget {
   const AppBarGoBack2({super.key});
@@ -32,7 +33,7 @@ class AppBarGoBack2 extends StatelessWidget implements PreferredSizeWidget {
           ),
           AppBar(
             toolbarHeight: 68,
-            backgroundColor: Color(0xFF2C7796).withOpacity(0.58),
+            backgroundColor: AppColors.primary.withOpacity(0.58),
             foregroundColor: Colors.transparent,
             title: Text(
               "Hi Rusira",

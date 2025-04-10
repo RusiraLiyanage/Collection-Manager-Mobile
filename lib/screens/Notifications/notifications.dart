@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:project_code_blue/AppState/appState.dart';
+import 'package:project_code_blue/ColorSchemas/AppColors.dart';
 import 'package:provider/provider.dart';
 
 class Notifications extends StatefulWidget {
@@ -26,11 +27,11 @@ class _NotificationsState extends State<Notifications> {
   Widget build(BuildContext context) {
     final appState = Provider.of<AppState>(context, listen: true);
     return Scaffold(
-      backgroundColor: const Color(0xFFF2F2F2),
+      backgroundColor: AppColors.appWideBackground,
       extendBodyBehindAppBar: false,
       appBar: AppBar(
         toolbarHeight: 82,
-        backgroundColor: const Color(0xFF2C7796).withOpacity(0.9),
+        backgroundColor: AppColors.primary.withOpacity(0.9),
         centerTitle: true,
         title: Image.asset(
             "assets/images/icons/collectionManagerNotifications.png"),
@@ -62,7 +63,7 @@ class _NotificationsState extends State<Notifications> {
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
-                        color: Color(0xFF2C7796),
+                        color: AppColors.primary,
                       ),
                     ),
                     TextButton(

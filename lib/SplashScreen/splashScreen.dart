@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_gifs/loading_gifs.dart';
+import 'package:project_code_blue/ColorSchemas/AppColors.dart';
 import 'package:project_code_blue/tabs/tabs_page.dart';
 import 'package:flutter/services.dart';
 
@@ -46,7 +47,7 @@ class _SplashScreenState extends State<SplashScreen> {
         ),
       ),
       body: Container(
-        color: const Color(0xFF2C7796), // Background color
+        color: AppColors.primary, // Background color
         width: double.infinity, // Ensures the container takes full width
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,

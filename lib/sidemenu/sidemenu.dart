@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:project_code_blue/ColorSchemas/AppColors.dart';
 import 'package:project_code_blue/screens/Dashboard/testCollectionSummary.dart';
 import 'package:provider/provider.dart';
 import '../../AppState/appState.dart';
@@ -75,7 +76,7 @@ class _SideMenuState extends State<SideMenu> {
                               'assets/images/collectionManagerLogo.png'),
                         ),
                         decoration: BoxDecoration(
-                          color: Color(0xFF2C7796),
+                          color: AppColors.primary,
                         ),
                       ),
                     ),
@@ -89,7 +90,7 @@ class _SideMenuState extends State<SideMenu> {
                             AssetImage(
                                 'assets/images/icons/home.png'), // Path to your image asset
                             color: appState.isHomeOpen
-                                ? Color(0xFF01B4D2)
+                                ? AppColors.sideMenuSelected
                                 : Color(
                                     0xFF1A576F), // Optional: Adjust icon color
                             size: 32, // Optional: Adjust icon size
@@ -100,8 +101,8 @@ class _SideMenuState extends State<SideMenu> {
                               'Home',
                               style: TextStyle(
                                   color: appState.isHomeOpen
-                                      ? Color(0xFF01B4D2)
-                                      : Color(0xFF1A576F),
+                                      ? AppColors.sideMenuSelected
+                                      : AppColors.sideMenuUnSelected,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 16),
                             ),
@@ -161,16 +162,16 @@ class _SideMenuState extends State<SideMenu> {
                               initiallyExpanded:
                                   appState.isDashboardOpen ? true : false,
                               iconColor: appState.isDashboardOpen
-                                  ? Color(0xFF01B4D2)
-                                  : Color(0xFF1A576F),
+                                  ? AppColors.sideMenuSelected
+                                  : AppColors.sideMenuUnSelected,
                               collapsedIconColor: appState.isDashboardOpen
-                                  ? Color(0xFF01B4D2)
-                                  : Color(0xFF1A576F),
+                                  ? AppColors.sideMenuSelected
+                                  : AppColors.sideMenuUnSelected,
                               leading: ImageIcon(
                                 AssetImage(
                                     'assets/images/icons/dashboard.png'), // Path to your image asset
                                 color: appState.isDashboardOpen
-                                    ? const Color(0xFF01B4D2)
+                                    ? AppColors.sideMenuSelected
                                     : const Color(
                                         0xFF1A576F), // Optional: Adjust icon color
                                 size: 32, // Optional: Adjust icon size
@@ -181,8 +182,8 @@ class _SideMenuState extends State<SideMenu> {
                                   'Dashboard',
                                   style: TextStyle(
                                       color: appState.isDashboardOpen
-                                          ? Color(0xFF01B4D2)
-                                          : Color(0xFF1A576F),
+                                          ? AppColors.sideMenuSelected
+                                          : AppColors.sideMenuUnSelected,
                                       fontWeight: FontWeight.bold,
                                       fontSize: 16),
                                 ),
@@ -196,7 +197,7 @@ class _SideMenuState extends State<SideMenu> {
                                     AssetImage(
                                         'assets/images/icons/sectionIcon.png'), // Path to your image asset
                                     color: appState.isDashboardHomeOpen
-                                        ? const Color(0xFF01B4D2)
+                                        ? AppColors.sideMenuSelected
                                         : const Color(
                                             0xFF1A576F), // Optional: Adjust icon color
                                     size: 32, // Optional: Adjust icon size
@@ -207,8 +208,8 @@ class _SideMenuState extends State<SideMenu> {
                                       'Dashboard Home',
                                       style: TextStyle(
                                           color: appState.isDashboardHomeOpen
-                                              ? Color(0xFF01B4D2)
-                                              : Color(0xFF1A576F),
+                                              ? AppColors.sideMenuSelected
+                                              : AppColors.sideMenuUnSelected,
                                           fontWeight: FontWeight.bold,
                                           fontSize: 16),
                                     ),
@@ -251,7 +252,7 @@ class _SideMenuState extends State<SideMenu> {
                                     AssetImage(
                                         'assets/images/icons/sectionIcon.png'), // Path to your image asset
                                     color: appState.isTestsProcessedOpen
-                                        ? const Color(0xFF01B4D2)
+                                        ? AppColors.sideMenuSelected
                                         : const Color(
                                             0xFF1A576F), // Optional: Adjust icon color
                                     size: 32, // Optional: Adjust icon size
@@ -262,8 +263,8 @@ class _SideMenuState extends State<SideMenu> {
                                       'Tests Processed',
                                       style: TextStyle(
                                           color: appState.isTestsProcessedOpen
-                                              ? Color(0xFF01B4D2)
-                                              : Color(0xFF1A576F),
+                                              ? AppColors.sideMenuSelected
+                                              : AppColors.sideMenuUnSelected,
                                           fontWeight: FontWeight.bold,
                                           fontSize: 16),
                                     ),
@@ -304,7 +305,7 @@ class _SideMenuState extends State<SideMenu> {
                                     AssetImage(
                                         'assets/images/icons/sectionIcon.png'), // Path to your image asset
                                     color: appState.isTestSampleResultsOpen
-                                        ? const Color(0xFF01B4D2)
+                                        ? AppColors.sideMenuSelected
                                         : const Color(
                                             0xFF1A576F), // Optional: Adjust icon color
                                     size: 32, // Optional: Adjust icon size
@@ -314,10 +315,10 @@ class _SideMenuState extends State<SideMenu> {
                                     child: Text(
                                       'Test Sample Results',
                                       style: TextStyle(
-                                          color:
-                                              appState.isTestSampleResultsOpen
-                                                  ? Color(0xFF01B4D2)
-                                                  : Color(0xFF1A576F),
+                                          color: appState
+                                                  .isTestSampleResultsOpen
+                                              ? AppColors.sideMenuSelected
+                                              : AppColors.sideMenuUnSelected,
                                           fontWeight: FontWeight.bold,
                                           fontSize: 16),
                                     ),
@@ -358,7 +359,7 @@ class _SideMenuState extends State<SideMenu> {
                                     AssetImage(
                                         'assets/images/icons/sectionIcon.png'), // Path to your image asset
                                     color: appState.isTestCollectionSummaryOpen
-                                        ? const Color(0xFF01B4D2)
+                                        ? AppColors.sideMenuSelected
                                         : const Color(
                                             0xFF1A576F), // Optional: Adjust icon color
                                     size: 32, // Optional: Adjust icon size
@@ -370,8 +371,8 @@ class _SideMenuState extends State<SideMenu> {
                                       style: TextStyle(
                                           color: appState
                                                   .isTestCollectionSummaryOpen
-                                              ? Color(0xFF01B4D2)
-                                              : Color(0xFF1A576F),
+                                              ? AppColors.sideMenuSelected
+                                              : AppColors.sideMenuUnSelected,
                                           fontWeight: FontWeight.bold,
                                           fontSize: 16),
                                     ),
@@ -428,9 +429,9 @@ class _SideMenuState extends State<SideMenu> {
                             AssetImage(
                                 'assets/images/icons/onSiteJobs.png'), // Path to your image asset
                             color: appState.isOnsiteJobsOpen
-                                ? const Color(0xFF01B4D2)
-                                : const Color(
-                                    0xFF1A576F), // Optional: Adjust icon color
+                                ? AppColors.sideMenuSelected
+                                : AppColors
+                                    .sectionIconUnselected, // Optional: Adjust icon color
                             size: 32, // Optional: Adjust icon size
                           ),
                           title: Align(
@@ -439,8 +440,8 @@ class _SideMenuState extends State<SideMenu> {
                               'On-Site Jobs',
                               style: TextStyle(
                                   color: appState.isOnsiteJobsOpen
-                                      ? Color(0xFF01B4D2)
-                                      : Color(0xFF1A576F),
+                                      ? AppColors.sideMenuSelected
+                                      : AppColors.sideMenuUnSelected,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 16),
                             ),
@@ -497,9 +498,9 @@ class _SideMenuState extends State<SideMenu> {
                             AssetImage(
                                 'assets/images/icons/onSiteApprovals.png'), // Path to your image asset
                             color: appState.isOnsiteApprovals
-                                ? const Color(0xFF01B4D2)
-                                : const Color(
-                                    0xFF1A576F), // Optional: Adjust icon color
+                                ? AppColors.sideMenuSelected
+                                : AppColors
+                                    .sectionIconUnselected, // Optional: Adjust icon color
                             size: 32, // Optional: Adjust icon size
                           ),
                           title: Align(
@@ -508,8 +509,8 @@ class _SideMenuState extends State<SideMenu> {
                               'On-Site Approvals',
                               style: TextStyle(
                                   color: appState.isOnsiteApprovals
-                                      ? Color(0xFF01B4D2)
-                                      : Color(0xFF1A576F),
+                                      ? AppColors.sideMenuSelected
+                                      : AppColors.sideMenuUnSelected,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 16),
                             ),
@@ -563,9 +564,9 @@ class _SideMenuState extends State<SideMenu> {
                             AssetImage(
                                 'assets/images/icons/clientManagement.png'), // Path to your image asset
                             color: appState.isClientManagementOpen
-                                ? const Color(0xFF01B4D2)
-                                : const Color(
-                                    0xFF1A576F), // Optional: Adjust icon color
+                                ? AppColors.sideMenuSelected
+                                : AppColors
+                                    .sectionIconUnselected, // Optional: Adjust icon color
                             size: 32, // Optional: Adjust icon size
                           ),
                           title: Align(
@@ -574,8 +575,8 @@ class _SideMenuState extends State<SideMenu> {
                               'Client Management',
                               style: TextStyle(
                                   color: appState.isClientManagementOpen
-                                      ? const Color(0xFF01B4D2)
-                                      : const Color(0xFF1A576F),
+                                      ? AppColors.sideMenuSelected
+                                      : AppColors.sideMenuUnSelected,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 16),
                             ),
@@ -634,16 +635,16 @@ class _SideMenuState extends State<SideMenu> {
                                 appState.isAccountingOpen ? true : false,
                             visualDensity: VisualDensity(vertical: -4),
                             iconColor: appState.isAccountingOpen
-                                ? const Color(0xFF01B4D2)
-                                : const Color(0xFF1A576F),
+                                ? AppColors.sideMenuSelected
+                                : AppColors.sideMenuUnSelected,
                             collapsedIconColor: appState.isAccountingOpen
-                                ? Color(0xFF01B4D2)
-                                : Color(0xFF1A576F),
+                                ? AppColors.sideMenuSelected
+                                : AppColors.sideMenuUnSelected,
                             leading: ImageIcon(
                               AssetImage(
                                   'assets/images/icons/accounting.png'), // Path to your image asset
                               color: appState.isAccountingOpen
-                                  ? const Color(0xFF01B4D2)
+                                  ? AppColors.sideMenuSelected
                                   : const Color(
                                       0xFF1A576F), // Optional: Adjust icon color
                               size: 32, // Optional: Adjust icon size
@@ -654,8 +655,8 @@ class _SideMenuState extends State<SideMenu> {
                                 'Accounting',
                                 style: TextStyle(
                                     color: appState.isAccountingOpen
-                                        ? const Color(0xFF01B4D2)
-                                        : const Color(0xFF1A576F),
+                                        ? AppColors.sideMenuSelected
+                                        : AppColors.sideMenuUnSelected,
                                     fontWeight: FontWeight.bold,
                                     fontSize: 16),
                               ),
@@ -669,9 +670,9 @@ class _SideMenuState extends State<SideMenu> {
                                   AssetImage(
                                       'assets/images/icons/sectionIcon.png'), // Path to your image asset
                                   color: appState.isAccountingDashboardOpen
-                                      ? const Color(0xFF01B4D2)
-                                      : const Color(
-                                          0xFF1A576F), // Optional: Adjust icon color
+                                      ? AppColors.sideMenuSelected
+                                      : AppColors
+                                          .sideMenuUnSelected, // Optional: Adjust icon color
                                   size: 32, // Optional: Adjust icon size
                                 ),
                                 title: Align(
@@ -681,8 +682,8 @@ class _SideMenuState extends State<SideMenu> {
                                     style: TextStyle(
                                         color:
                                             appState.isAccountingDashboardOpen
-                                                ? const Color(0xFF01B4D2)
-                                                : const Color(0xFF1A576F),
+                                                ? AppColors.sideMenuSelected
+                                                : AppColors.sideMenuUnSelected,
                                         fontWeight: FontWeight.bold,
                                         fontSize: 16),
                                   ),
@@ -724,9 +725,9 @@ class _SideMenuState extends State<SideMenu> {
                                   AssetImage(
                                       'assets/images/icons/sectionIcon.png'), // Path to your image asset
                                   color: appState.isTestsOpen
-                                      ? const Color(0xFF01B4D2)
-                                      : const Color(
-                                          0xFF1A576F), // Optional: Adjust icon color
+                                      ? AppColors.sideMenuSelected
+                                      : AppColors
+                                          .sideMenuUnSelected, // Optional: Adjust icon color
                                   size: 32, // Optional: Adjust icon size
                                 ),
                                 title: Align(
@@ -735,8 +736,8 @@ class _SideMenuState extends State<SideMenu> {
                                     ' Tests',
                                     style: TextStyle(
                                         color: appState.isTestsOpen
-                                            ? const Color(0xFF01B4D2)
-                                            : const Color(0xFF1A576F),
+                                            ? AppColors.sideMenuSelected
+                                            : AppColors.sideMenuUnSelected,
                                         fontWeight: FontWeight.bold,
                                         fontSize: 16),
                                   ),
@@ -776,9 +777,9 @@ class _SideMenuState extends State<SideMenu> {
                                   AssetImage(
                                       'assets/images/icons/sectionIcon.png'), // Path to your image asset
                                   color: appState.isLicensingOpen
-                                      ? const Color(0xFF01B4D2)
-                                      : const Color(
-                                          0xFF1A576F), // Optional: Adjust icon color
+                                      ? AppColors.sideMenuSelected
+                                      : AppColors
+                                          .sideMenuUnSelected, // Optional: Adjust icon color
                                   size: 32, // Optional: Adjust icon size
                                 ),
                                 title: Align(
@@ -787,8 +788,8 @@ class _SideMenuState extends State<SideMenu> {
                                     ' Licensing',
                                     style: TextStyle(
                                         color: appState.isLicensingOpen
-                                            ? const Color(0xFF01B4D2)
-                                            : const Color(0xFF1A576F),
+                                            ? AppColors.sideMenuSelected
+                                            : AppColors.sideMenuUnSelected,
                                         fontWeight: FontWeight.bold,
                                         fontSize: 16),
                                   ),
@@ -828,9 +829,9 @@ class _SideMenuState extends State<SideMenu> {
                                   AssetImage(
                                       'assets/images/icons/sectionIcon.png'), // Path to your image asset
                                   color: itServices
-                                      ? const Color(0xFF01B4D2)
-                                      : const Color(
-                                          0xFF1A576F), // Optional: Adjust icon color
+                                      ? AppColors.sideMenuSelected
+                                      : AppColors
+                                          .sideMenuUnSelected, // Optional: Adjust icon color
                                   size: 32, // Optional: Adjust icon size
                                 ),
                                 title: Align(
@@ -839,8 +840,8 @@ class _SideMenuState extends State<SideMenu> {
                                     ' IT Services',
                                     style: TextStyle(
                                         color: appState.isITServicesOpen
-                                            ? const Color(0xFF01B4D2)
-                                            : const Color(0xFF1A576F),
+                                            ? AppColors.sideMenuSelected
+                                            : AppColors.sideMenuUnSelected,
                                         fontWeight: FontWeight.bold,
                                         fontSize: 16),
                                   ),
@@ -880,9 +881,9 @@ class _SideMenuState extends State<SideMenu> {
                                   AssetImage(
                                       'assets/images/icons/sectionIcon.png'), // Path to your image asset
                                   color: appState.isInvoicesOpen
-                                      ? const Color(0xFF01B4D2)
-                                      : const Color(
-                                          0xFF1A576F), // Optional: Adjust icon color
+                                      ? AppColors.sideMenuSelected
+                                      : AppColors
+                                          .sideMenuUnSelected, // Optional: Adjust icon color
                                   size: 32, // Optional: Adjust icon size
                                 ),
                                 title: Align(
@@ -891,8 +892,8 @@ class _SideMenuState extends State<SideMenu> {
                                     ' Invoices',
                                     style: TextStyle(
                                         color: appState.isInvoicesOpen
-                                            ? const Color(0xFF01B4D2)
-                                            : const Color(0xFF1A576F),
+                                            ? AppColors.sideMenuSelected
+                                            : AppColors.sideMenuUnSelected,
                                         fontWeight: FontWeight.bold,
                                         fontSize: 16),
                                   ),
@@ -948,9 +949,9 @@ class _SideMenuState extends State<SideMenu> {
                             AssetImage(
                                 'assets/images/icons/collectionReports.png'), // Path to your image asset
                             color: appState.isCollectionReportsOpen
-                                ? const Color(0xFF01B4D2)
-                                : const Color(
-                                    0xFF1A576F), // Optional: Adjust icon color
+                                ? AppColors.sideMenuSelected
+                                : AppColors
+                                    .sectionIconUnselected, // Optional: Adjust icon color
                             size: 32, // Optional: Adjust icon size
                           ),
                           title: Align(
@@ -959,8 +960,8 @@ class _SideMenuState extends State<SideMenu> {
                               'Collection Reports',
                               style: TextStyle(
                                   color: appState.isCollectionReportsOpen
-                                      ? const Color(0xFF01B4D2)
-                                      : const Color(0xFF1A576F),
+                                      ? AppColors.sideMenuSelected
+                                      : AppColors.sideMenuUnSelected,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 16),
                             ),
@@ -1016,9 +1017,9 @@ class _SideMenuState extends State<SideMenu> {
                             AssetImage(
                                 'assets/images/icons/calendar.png'), // Path to your image asset
                             color: appState.isCollectorsCalendarOpen
-                                ? const Color(0xFF01B4D2)
-                                : const Color(
-                                    0xFF1A576F), // Optional: Adjust icon color
+                                ? AppColors.sideMenuSelected
+                                : AppColors
+                                    .sectionIconUnselected, // Optional: Adjust icon color
                             size: 32, // Optional: Adjust icon size
                           ),
                           title: Align(
@@ -1027,8 +1028,8 @@ class _SideMenuState extends State<SideMenu> {
                               'Collector\'s Calendar',
                               style: TextStyle(
                                   color: appState.isCollectorsCalendarOpen
-                                      ? const Color(0xFF01B4D2)
-                                      : const Color(0xFF1A576F),
+                                      ? AppColors.sideMenuSelected
+                                      : AppColors.sideMenuUnSelected,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 16),
                             ),
@@ -1086,9 +1087,9 @@ class _SideMenuState extends State<SideMenu> {
                               ),
                               // Path to your image asset
                               color: appState.isFaqOpen
-                                  ? const Color(0xFF01B4D2)
-                                  : const Color(
-                                      0xFF1A576F), // Optional: Adjust icon color
+                                  ? AppColors.sideMenuSelected
+                                  : AppColors
+                                      .sectionIconUnselected, // Optional: Adjust icon color
                               size: 22, // Optional: Adjust icon size
                             ),
                           ),
@@ -1098,8 +1099,8 @@ class _SideMenuState extends State<SideMenu> {
                               '   FAQ',
                               style: TextStyle(
                                   color: appState.isFaqOpen
-                                      ? const Color(0xFF01B4D2)
-                                      : const Color(0xFF1A576F),
+                                      ? AppColors.sideMenuSelected
+                                      : AppColors.sideMenuUnSelected,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 16),
                             ),

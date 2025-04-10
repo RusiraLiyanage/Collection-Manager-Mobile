@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_code_blue/AppState/appState.dart';
+import 'package:project_code_blue/ColorSchemas/AppColors.dart';
 import 'package:project_code_blue/Navigation/appBar.dart';
 import 'package:project_code_blue/screens/CollectorsCalendar/collectorsCalendar.dart';
 import 'package:project_code_blue/screens/FAQ/faq.dart';
@@ -31,7 +32,7 @@ class _HomePageState extends State<HomePage> {
       body: Stack(
         children: [
           Container(
-            color: Color(0xFF2C7796),
+            color: AppColors.primary,
             width: double.infinity,
             height: 165,
             child: Padding(

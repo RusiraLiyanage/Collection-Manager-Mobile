@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:project_code_blue/ColorSchemas/AppColors.dart';
 import 'package:project_code_blue/screens/ClientManagement/achievedClientCard.dart';
 import 'package:project_code_blue/screens/ClientManagement/clientManagementCard.dart';
 import 'package:project_code_blue/screens/ClientManagement/NewClient/Main/newClient.dart';
@@ -495,7 +496,7 @@ class _ClientManagementState extends State<ClientManagement> {
   Widget build(BuildContext context) {
     final appState = Provider.of<AppState>(context, listen: false);
     return Scaffold(
-      backgroundColor: Color(0xFFF2F2F2),
+      backgroundColor: AppColors.appWideBackground,
       extendBodyBehindAppBar: true, // Extends body behind the AppBar
       onDrawerChanged: (isOpen) {
         appState.setDrawerState(isOpen); // Update global drawer state
@@ -514,6 +515,7 @@ class _ClientManagementState extends State<ClientManagement> {
           width: 40.0,
           child: FittedBox(
             child: FloatingActionButton(
+              backgroundColor: AppColors.sideMenuSelected.withOpacity(0.6),
               onPressed: () {
                 if (isAtBottom) {
                   // Scroll to the top
@@ -557,7 +559,7 @@ class _ClientManagementState extends State<ClientManagement> {
                 Container(
                   width: double.infinity,
                   height: 120,
-                  color: Color(0xFFD9D9D9),
+                  color: AppColors.headerColor,
                   child: Column(
                     children: [
                       Row(
@@ -751,7 +753,7 @@ class _ClientManagementState extends State<ClientManagement> {
                 Container(
                   width: double.infinity,
                   height: 100,
-                  color: Color(0xFFF2F2F2).withOpacity(1),
+                  color: AppColors.appWideBackground.withOpacity(1),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

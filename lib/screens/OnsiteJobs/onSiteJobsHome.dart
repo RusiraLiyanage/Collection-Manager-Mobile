@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/rendering.dart';
+import 'package:project_code_blue/ColorSchemas/AppColors.dart';
 import 'package:project_code_blue/screens/OnsiteJobs/achievedJobsCard.dart';
 import 'package:project_code_blue/screens/OnsiteJobs/NewCalloutJob/Main/newCalloutJob.dart';
 import 'package:project_code_blue/screens/OnsiteJobs/NewOnsiteJob/Main/newOnsiteJob.dart';
@@ -592,7 +593,7 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
     // Helper method for each row
 
     return Scaffold(
-      backgroundColor: Color(0xFFF2F2F2),
+      backgroundColor: AppColors.appWideBackground,
       extendBodyBehindAppBar: true, // Extends body behind the AppBar
       onDrawerChanged: (isOpen) {
         appState.setDrawerState(isOpen); // Update global drawer state
@@ -611,6 +612,7 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
           width: 40.0,
           child: FittedBox(
             child: FloatingActionButton(
+              backgroundColor: AppColors.sideMenuSelected.withOpacity(0.6),
               onPressed: () {
                 if (isAtBottom) {
                   // Scroll to the top
@@ -654,7 +656,7 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
                 Container(
                   width: double.infinity,
                   height: 120,
-                  color: Color(0xFFD9D9D9),
+                  color: AppColors.headerColor,
                   child: Column(
                     children: [
                       Row(
@@ -904,7 +906,7 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
                 Container(
                   width: double.infinity,
                   height: 130,
-                  color: Color(0xFFF2F2F2).withOpacity(1),
+                  color: AppColors.appWideBackground.withOpacity(1),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

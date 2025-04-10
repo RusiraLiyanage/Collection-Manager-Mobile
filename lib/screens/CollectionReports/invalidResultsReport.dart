@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_code_blue/ColorSchemas/AppColors.dart';
 import 'package:project_code_blue/Navigation/appBarCollectionReports.dart';
 import 'package:project_code_blue/sidemenu/sidemenu.dart';
 
@@ -173,7 +174,7 @@ class _InvalidResultsReportState extends State<InvalidResultsReport> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFF2F2F2),
+      backgroundColor: AppColors.appWideBackground,
       extendBodyBehindAppBar: true, // Extends body behind the AppBar
       drawer: SideMenu(
         navigationType: "subPartNavigation",
@@ -203,7 +204,7 @@ class _InvalidResultsReportState extends State<InvalidResultsReport> {
                 Container(
                   width: double.infinity,
                   height: 120,
-                  color: Color(0xFFD9D9D9),
+                  color: AppColors.headerColor,
                   child: Column(
                     children: [
                       Row(
@@ -282,7 +283,7 @@ class _InvalidResultsReportState extends State<InvalidResultsReport> {
                 Container(
                   width: double.infinity,
                   height: 65,
-                  color: Color(0xFFF2F2F2),
+                  color: AppColors.appWideBackground,
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: Row(
@@ -372,7 +373,7 @@ class _InvalidResultsReportState extends State<InvalidResultsReport> {
                 Container(
                   width: double.infinity,
                   height: 45,
-                  color: Color(0xFFF2F2F2),
+                  color: AppColors.appWideBackground,
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: Row(

@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:project_code_blue/AppState/appState.dart';
+import 'package:project_code_blue/ColorSchemas/AppColors.dart';
 import 'package:project_code_blue/Navigation/appBar.dart';
 import 'package:project_code_blue/screens/OnsiteApprovals/onSiteApprovalsCard.dart';
 import 'package:project_code_blue/sidemenu/sidemenu.dart';
@@ -311,7 +312,7 @@ class _OnsiteApprovalsState extends State<OnsiteApprovals> {
   Widget build(BuildContext context) {
     final appState = Provider.of<AppState>(context, listen: false);
     return Scaffold(
-      backgroundColor: Color(0xFFF2F2F2),
+      backgroundColor: AppColors.appWideBackground,
       extendBodyBehindAppBar: true,
       onDrawerChanged: (isOpen) {
         appState.setDrawerState(isOpen);
@@ -368,7 +369,7 @@ class _OnsiteApprovalsState extends State<OnsiteApprovals> {
                   Container(
                     width: double.infinity,
                     height: 120,
-                    color: Color(0xFFD9D9D9),
+                    color: AppColors.headerColor,
                     child: Column(
                       children: [
                         Row(
@@ -418,7 +419,7 @@ class _OnsiteApprovalsState extends State<OnsiteApprovals> {
                   Container(
                     width: double.infinity,
                     height: 80,
-                    color: Color(0xFFF2F2F2),
+                    color: AppColors.appWideBackground,
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: Row(

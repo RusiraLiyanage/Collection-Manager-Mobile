@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_chartx/components/ChartLabeledData.dart';
 import 'package:flutter_chartx/components/types.dart';
 import 'package:flutter_chartx/widgets/ColumnChart.dart';
+import 'package:project_code_blue/ColorSchemas/AppColors.dart';
 import 'package:project_code_blue/Navigation/appBar.dart';
 import 'package:project_code_blue/Navigation/appBarGoBack.dart';
 import 'package:project_code_blue/screens/Dashboard/Definitions/processedTests.dart';
@@ -497,7 +498,7 @@ class _TestsProcessedState extends State<TestsProcessed> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFF2F2F2),
+      backgroundColor: AppColors.appWideBackground,
       extendBodyBehindAppBar: true, // Extends body behind the AppBar
       drawer: SideMenu(
         navigationType: "subPartNavigation",
@@ -517,7 +518,7 @@ class _TestsProcessedState extends State<TestsProcessed> {
             Container(
               width: double.infinity,
               height: 120,
-              color: Color(0xFFD9D9D9),
+              color: AppColors.headerColor,
               child: Column(
                 children: [
                   Row(
