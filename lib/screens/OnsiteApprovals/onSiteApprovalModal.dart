@@ -130,7 +130,7 @@ class OnsiteApprovalModal extends StatelessWidget {
                               height: 5,
                             ),
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Padding(
                                   padding: const EdgeInsets.only(
@@ -214,7 +214,7 @@ class OnsiteApprovalModal extends StatelessWidget {
                                     crossAxisAlignment: CrossAxisAlignment.end,
                                     children: [
                                       Text(
-                                        "Requested Number of Donors",
+                                        "Requested No. of Donors",
                                         style: TextStyle(
                                           fontSize: 13,
                                           fontWeight: FontWeight.bold,

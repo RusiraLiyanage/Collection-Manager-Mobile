@@ -196,23 +196,6 @@ class _NewCalloutJobState extends State<NewCalloutJob> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      /* Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          // Left-aligned title
-                          Row(
-                            children: [
-                              Text(
-                                "Client",
-                                style: TextStyle(
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ), */
                       SizedBox(
                         height: 12,
                       ),
@@ -1384,17 +1367,6 @@ class _NewCalloutJobState extends State<NewCalloutJob> {
                                             color: Colors.red,
                                             fontSize: 12,
                                           ),
-                                          /* suffixIcon: Padding(
-                                            padding: const EdgeInsets.all(
-                                                8.0), // Adjust the padding as needed
-                                            child: Image.asset(
-                                              "assets/images/icons/icon_calendar.png", // Replace with your image path
-                                              width:
-                                                  32, // Adjust the width of the image
-                                              height:
-                                                  32, // Adjust the height of the image
-                                            ),
-                                          ), */
                                         ),
                                         keyboardType: TextInputType
                                             .number, // Ensures numeric input
