@@ -1,7 +1,6 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:project_code_blue/ColorSchemas/AppColors.dart';
+import 'package:project_code_blue/screens/Dashboard/Data/dashBoardHomeData.dart';
 import 'package:provider/provider.dart';
 import '../../AppState/appState.dart';
 import 'package:project_code_blue/sidemenu/sidemenu.dart';
@@ -15,11 +14,7 @@ class DashboardHome extends StatefulWidget {
   State<DashboardHome> createState() => _DashboardHomeState();
 }
 
-final List<Map<String, dynamic>> data = [
-  {"label": "Male", "value": 30, "color": Colors.blue.shade900},
-  {"label": "Female", "value": 17, "color": Colors.blue.shade600},
-  {"label": "X", "value": 1, "color": Colors.blue.shade400},
-];
+final List<Map<String, dynamic>> data = Dashboardhomedata().homeMainData;
 
 class _DashboardHomeState extends State<DashboardHome> {
   final ScrollController _scrollController = ScrollController();
@@ -108,41 +103,16 @@ class _DashboardHomeState extends State<DashboardHome> {
     super.dispose();
   }
 
-  final List<PieData> pies = [
-    PieData(
-      value: 30,
-      color: Color(0xFF1F5890),
-    ),
-    PieData(
-      value: 31,
-      color: Color(0xFF0091D5),
-    ),
-    PieData(
-      value: 14,
-      color: Color(0xFFA5D8DD),
-    ),
-    PieData(
-      value: 15,
-      color: Color(0xFFBBEDF5),
-    ),
-    PieData(
-      value: 22,
-      color: Color(0xFFA6DEBD),
-    ),
-    PieData(
-      value: 6,
-      color: Color(0xFFA6B6DE),
-    ),
-  ];
+  final List<PieData> pies = Dashboardhomedata().mainPieData;
 
-  final List<Map<String, dynamic>> testData = [
+  /* final List<Map<String, dynamic>> testData = [
     {'label': 'Breath Alcohol Screen', 'value': 30, 'color': Colors.blue[800]},
     {'label': 'Urine Drug Screen', 'value': 31, 'color': Colors.blue[600]},
     {'label': 'Oral Fluid Drug Screen', 'value': 14, 'color': Colors.blue[200]},
     {'label': 'Urine Drug Test', 'value': 15, 'color': Colors.lightBlue[100]},
     {'label': 'Oral Fluid Collection', 'value': 22, 'color': Colors.green[200]},
     {'label': 'Hair Drug Test', 'value': 6, 'color': Colors.blueGrey[200]},
-  ];
+  ]; */
 
   @override
   Widget build(BuildContext context) {

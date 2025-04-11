@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:project_code_blue/AppState/appState.dart';
 import 'package:project_code_blue/ColorSchemas/AppColors.dart';
 import 'package:project_code_blue/Navigation/appBarGoBack.dart';
+import 'package:project_code_blue/screens/Accounting/Data/invoicesData.dart';
 import 'package:project_code_blue/screens/Accounting/invoiceCard.dart';
 import 'package:project_code_blue/sidemenu/sidemenu.dart';
 import 'package:provider/provider.dart';
@@ -35,48 +36,7 @@ class _InvoicesState extends State<Invoices> {
   String? _selectedYear;
   bool isAtBottom = false;
 
-  final List<Map<String, String>> invoicesData = [
-    {
-      "invoiceNumber": "1",
-      "status": "NotPaid",
-      "dateTime": "1st August 2024",
-      "invoiceReference": "SAT24-123456",
-      "plan": "Monthly",
-      "amount": "\$3500",
-    },
-    {
-      "invoiceNumber": "2",
-      "status": "NotPaid",
-      "dateTime": "1st August 2024",
-      "invoiceReference": "SAT24-123456",
-      "plan": "Monthly",
-      "amount": "\$3500",
-    },
-    {
-      "invoiceNumber": "3",
-      "status": "NotPaid",
-      "dateTime": "1st August 2024",
-      "invoiceReference": "SAT24-123456",
-      "plan": "Monthly",
-      "amount": "\$3500",
-    },
-    {
-      "invoiceNumber": "4",
-      "status": "NotPaid",
-      "dateTime": "1st August 2024",
-      "invoiceReference": "SAT24-123456",
-      "plan": "Monthly",
-      "amount": "\$3500",
-    },
-    {
-      "invoiceNumber": "5",
-      "status": "NotPaid",
-      "dateTime": "1st August 2024",
-      "invoiceReference": "SAT24-123456",
-      "plan": "Monthly",
-      "amount": "\$3500",
-    },
-  ];
+  final List<Map<String, String>> invoicesData = InvoicesData().invoicesData;
 
   @override
   void initState() {

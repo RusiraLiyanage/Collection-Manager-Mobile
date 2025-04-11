@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:project_code_blue/AppState/appState.dart';
 import 'package:project_code_blue/ColorSchemas/AppColors.dart';
 import 'package:project_code_blue/Navigation/appBar.dart';
+import 'package:project_code_blue/screens/CollectorsCalendar/Data/calendarData.dart';
 import 'package:project_code_blue/sidemenu/sidemenu.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
@@ -77,64 +78,7 @@ class _CollectorsCalendarState extends State<CollectorsCalendar> {
   ]; //
 
   List<Meeting> _getDataSource() {
-    return [
-      Meeting(
-          'Unavailable',
-          DateTime(2025, 4, 2, 10, 0),
-          DateTime(2025, 4, 2, 11, 0),
-          const Color(0xFFD32F2F),
-          false,
-          "Due to unforseen circumstances, my attendance will no longer be proceeding"),
-      Meeting(
-          'Unavailable',
-          DateTime(2025, 4, 2, 12, 0),
-          DateTime(2025, 4, 2, 13, 0),
-          const Color(0xFFD32F2F),
-          false,
-          "Due to unforseen circumstances, my attendance will no longer be proceeding"),
-      Meeting(
-          'Unavailable',
-          DateTime(2025, 4, 2, 12, 0),
-          DateTime(2025, 4, 2, 13, 0),
-          const Color(0xFFD32F2F),
-          false,
-          "Due to unforseen circumstances, my attendance will no longer be proceeding"),
-      Meeting(
-          'Unavailable',
-          DateTime(2025, 4, 5, 9, 0),
-          DateTime(2025, 4, 5, 10, 0),
-          const Color(0xFFD32F2F),
-          false,
-          "Due to unforseen circumstances, my attendance will no longer be proceeding"),
-      Meeting(
-          'Unavailable',
-          DateTime(2025, 4, 8, 14, 0),
-          DateTime(2025, 4, 8, 15, 0),
-          const Color(0xFFD32F2F),
-          false,
-          "Due to unforseen circumstances, my attendance will no longer be proceeding"),
-      Meeting(
-          'Leave',
-          DateTime(2025, 4, 12, 13, 0),
-          DateTime(2025, 4, 12, 16, 0),
-          const Color(0xFFEB41E4),
-          false,
-          "I am on leave as I am not doing well"),
-      Meeting(
-          'Leave',
-          DateTime(2025, 4, 15, 9, 0),
-          DateTime(2025, 4, 15, 17, 0),
-          const Color(0xFFEB41E4),
-          false,
-          "I am on leave as the babysitters in Australia are so expensive"),
-      Meeting(
-          'Leave',
-          DateTime(2025, 4, 2, 13, 0),
-          DateTime(2025, 4, 2, 14, 0),
-          const Color(0xFFEB41E4),
-          false,
-          "I am on leave as the babysitters in Australia are so expensive"),
-    ];
+    return CalendarData().calendarData;
   }
 
   void initState() {

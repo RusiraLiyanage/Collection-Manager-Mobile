@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:loading_gifs/loading_gifs.dart';
 import 'package:project_code_blue/ColorSchemas/AppColors.dart';
 import 'package:project_code_blue/tabs/tabs_page.dart';
 import 'package:flutter/services.dart';

@@ -3,6 +3,7 @@ import 'package:flutter_easy_faq/flutter_easy_faq.dart';
 import 'package:project_code_blue/AppState/appState.dart';
 import 'package:project_code_blue/ColorSchemas/AppColors.dart';
 import 'package:project_code_blue/Navigation/appBar.dart';
+import 'package:project_code_blue/screens/FAQ/Data/faqData.dart';
 import 'package:project_code_blue/sidemenu/sidemenu.dart';
 import 'package:provider/provider.dart';
 
@@ -24,53 +25,7 @@ class _FAQState extends State<FAQ> {
   final ScrollController _scrollController = ScrollController();
   final TextEditingController _faqSearchController = TextEditingController();
 
-  List<Map<String, dynamic>> faqData = [
-    {
-      "platform": "Collection Manager",
-      "subjects": [
-        {
-          "subject": "Subject A",
-          "faqs": [
-            {
-              "question": "How to use feature X?",
-              "answer": "You can use feature X by ..."
-            },
-            {
-              "question": "Where to find setting Y?",
-              "answer": "You can find setting Y in ..."
-            }
-          ]
-        },
-        {
-          "subject": "Subject B",
-          "faqs": [
-            {
-              "question": "What is the latest update?",
-              "answer": "The latest update includes ..."
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "platform": "Work Assist",
-      "subjects": [
-        {
-          "subject": "Subject C",
-          "faqs": [
-            {
-              "question": "How to enable dark mode?",
-              "answer": "Go to settings and enable dark mode."
-            },
-            {
-              "question": "Can I use offline mode?",
-              "answer": "Yes, you can enable offline mode under ..."
-            }
-          ]
-        }
-      ]
-    }
-  ];
+  List<Map<String, dynamic>> faqData = FaqData().FAQsAndAnswers;
 
   @override
   Widget build(BuildContext context) {

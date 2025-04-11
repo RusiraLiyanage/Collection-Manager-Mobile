@@ -1,7 +1,6 @@
 import 'package:adaptive_action_sheet/adaptive_action_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:project_code_blue/pages/collectorsModal.dart';
-import 'package:project_code_blue/screens/OnsiteApprovals/onSiteApprovalModal.dart';
 
 class OnsiteJobCard extends StatelessWidget {
   const OnsiteJobCard({
