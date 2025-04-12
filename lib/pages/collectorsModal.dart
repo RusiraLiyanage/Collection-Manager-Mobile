@@ -61,11 +61,11 @@ class CollectorsModal extends StatelessWidget {
                     thickness: 2,
                   ),
                   SizedBox(height: 8),
-                  _collectorItem("George Poulos"),
-                  _collectorItem("Michelle Kirkman"),
-                  _collectorItem("Valerie McKenzie"),
-                  _collectorItem("Zac Hepburn"),
-                  _collectorItem("Gina Landini", color: Colors.red),
+                  _collectorItem("George Poulos", "Allocated"),
+                  _collectorItem("Michelle Kirkman", "Accepted"),
+                  _collectorItem("Valerie McKenzie", "Accepted"),
+                  _collectorItem("Zac Hepburn", "Accepted"),
+                  _collectorItem("Gina Landini", "Rejected"),
                 ],
               ),
             ),
@@ -75,19 +75,51 @@ class CollectorsModal extends StatelessWidget {
     );
   }
 
-  Widget _collectorItem(String name, {Color color = Colors.black}) {
+  Widget _collectorItem(String name, String value,
+      {Color color = Colors.black}) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4),
-      child: Align(
-        alignment: Alignment.centerLeft,
-        child: Text(
-          name,
-          style: TextStyle(
-            fontSize: 18,
-            color: color,
-            fontWeight: FontWeight.w500,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              name,
+              style: TextStyle(
+                fontSize: 18,
+                color: color,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
           ),
-        ),
+          IntrinsicWidth(
+            child: Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
+              color: value == "Rejected"
+                  ? Color(0xFFFF0A0A)
+                  : value == "Accepted"
+                      ? Color(0xFF5CD22B)
+                      : value == "Allocated"
+                          ? Color(0xFF1A8CFF)
+                          : Colors.black,
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 3),
+                child: Text(
+                  value,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

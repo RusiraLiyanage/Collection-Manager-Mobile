@@ -83,6 +83,7 @@ class AttachmentCard extends StatelessWidget {
                         showDialog(
                           context: context,
                           builder: (context) => AlertDialog(
+                            backgroundColor: Colors.white,
                             title: const Text('Delete Attachment'),
                             content: const Text(
                                 'Do you wanna delete this attachment ?'),

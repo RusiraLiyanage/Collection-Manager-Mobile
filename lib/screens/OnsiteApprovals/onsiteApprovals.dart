@@ -125,6 +125,7 @@ class _OnsiteApprovalsState extends State<OnsiteApprovals> {
           width: 40.0,
           child: FittedBox(
             child: FloatingActionButton(
+              backgroundColor: AppColors.sideMenuSelected.withOpacity(0.6),
               onPressed: () {
                 if (isAtBottom) {
                   _scrollController.animateTo(

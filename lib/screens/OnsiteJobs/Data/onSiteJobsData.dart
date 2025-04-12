@@ -12,7 +12,7 @@ class OnsiteJobsData {
     },
     {
       "jobNumber": "2",
-      "jobStatus": "Draft",
+      "jobStatus": "In Progress",
       "dateTime": "30 Apr 2025 10:00",
       "client": "Rail NSW",
       "rep": "John Roberts",

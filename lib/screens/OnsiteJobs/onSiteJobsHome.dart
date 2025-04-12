@@ -110,6 +110,7 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
 
   @override
   void initState() {
+    print("yes onsite jobs called");
     super.initState();
     _selectedValue = items.first;
     _selectedClient = clients.first;

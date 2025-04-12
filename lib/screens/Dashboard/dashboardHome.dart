@@ -27,6 +27,7 @@ class _DashboardHomeState extends State<DashboardHome> {
 
   @override
   void initState() {
+    print("Dashboard home called");
     super.initState();
     //_selectedLocation = locationFilter.first;
     //_selectedClient = clients.first;

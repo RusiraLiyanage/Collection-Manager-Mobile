@@ -39,24 +39,40 @@ class OnsiteJobCard extends StatelessWidget {
           ),
           // Right-aligned value
           title == "Job Status"
-              ? Padding(
-                  padding: const EdgeInsets.only(right: 118.0),
-                  child: IntrinsicWidth(
-                    child: Card(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      color: Colors.yellow,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 12, vertical: 3),
-                        child: Text(
-                          value,
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 14,
-                            fontWeight:
-                                isBold ? FontWeight.bold : FontWeight.normal,
+              ? Expanded(
+                  flex:
+                      4, // Adjust the flex value to control space distribution
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 0.0),
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Card(
+                        margin: EdgeInsets.zero, // Remove default margin
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        color: value == "Draft"
+                            ? Colors.yellow
+                            : value == "Complete"
+                                ? Color(0xFF005277)
+                                : value == "Cancelled"
+                                    ? Color(0xFFFF0A0A)
+                                    : value == "Planned"
+                                        ? Color(0xFF1A8CFF)
+                                        : value == "In Progress"
+                                            ? Color(0xFF5CD22B)
+                                            : Colors.black,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 12, vertical: 3),
+                          child: Text(
+                            value,
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 14,
+                              fontWeight:
+                                  isBold ? FontWeight.bold : FontWeight.normal,
+                            ),
                           ),
                         ),
                       ),
