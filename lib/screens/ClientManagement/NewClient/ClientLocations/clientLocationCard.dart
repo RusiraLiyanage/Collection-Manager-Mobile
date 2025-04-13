@@ -1,7 +1,5 @@
 import 'package:adaptive_action_sheet/adaptive_action_sheet.dart';
 import 'package:flutter/material.dart';
-import 'package:project_code_blue/pages/collectorsModal.dart';
-import 'package:project_code_blue/screens/OnsiteApprovals/onSiteApprovalModal.dart';
 
 class ClientLocationCard extends StatelessWidget {
   final Map<String, String> location;
