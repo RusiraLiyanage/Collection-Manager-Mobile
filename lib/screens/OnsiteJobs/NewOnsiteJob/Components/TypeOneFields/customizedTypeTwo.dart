@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
 
-class CustomizedTypeOne extends StatelessWidget {
+class CustomizedTypeTwo extends StatelessWidget {
   final TextEditingController controller;
   final GlobalKey<FormFieldState> fieldKey;
   final void Function(String)? onChanged;
   final String? Function(String?)? validator;
   final double width;
   final double height;
-
-  const CustomizedTypeOne({
+  final bool? readOnly;
+  const CustomizedTypeTwo({
     required this.controller,
     required this.fieldKey,
     this.onChanged,
     this.validator,
     required this.width,
     required this.height,
+    this.readOnly,
     super.key,
   });
 
@@ -33,6 +34,7 @@ class CustomizedTypeOne extends StatelessWidget {
               4), // Match with TextFormField's border radius
           child: TextFormField(
               key: fieldKey,
+              readOnly: readOnly!,
               controller: controller,
               decoration: InputDecoration(
                 fillColor: Colors.white,

@@ -54,6 +54,7 @@ dependencies:
   icon_badge: ^1.0.0
   flutter_easy_faq: ^1.0.1
   loading_gifs: ^0.3.0
+  flutter_typeahead: ^4.0.0
 
 dev_dependencies:
   flutter_test:
@@ -78,124 +79,13 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/images/mainPicture.jpg
-    - assets/images/collectionManagerLogo.png
-    - assets/images/powered-by.png
-    - assets/images/icons/home.png
-    - assets/images/icons/dashboard.png
-    - assets/images/icons/loading_ios.gif
-    - assets/images/icons/onSiteJobs.png
-    - assets/images/icons/onSiteApprovals.png
-    - assets/images/icons/clientManagement.png
-    - assets/images/icons/accounting.png
-    - assets/images/icons/collectionReports.png
-    - assets/images/icons/calendar.png
-    - assets/images/icons/faq.png
-    - assets/images/icons/sectionIcon.png
-    - assets/images/icons/faq.png
-    - assets/images/icons/splash_icon.png
-    - assets/images/icons/poweredBy_SA_splash.png
-    - assets/images/icons/splash_icon_double.png
-    - assets/images/icons/Powered by 2.png
-    - assets/images/icons/refresh_icon.png
-    - assets/images/icons/newJob_icon.png
-    - assets/images/icons/newCallOutJob_icon.png
-    - assets/images/icons/threeDots.png
-    - assets/images/icons/eye_icon.png
-    - assets/images/icons/showAchieve.png
-    - assets/images/icons/navigateLeft.png
-    - assets/images/icons/navigateRight.png
-    - assets/images/icons/reportingIcon.png
-    - assets/images/icons/hideArchieve.png
-    - assets/images/icons/document_icon.png
-    - assets/images/icons/dafault_icon.png
-    - assets/images/icons/profileIcon.png
-    - assets/images/icons/locationIcon.png
-    - assets/images/icons/print.png
-    - assets/images/icons/dropDownIcon.png
-    - assets/images/icons/icon_calendar.png
-    - assets/images/icons/refreshIcon.png
-    - assets/images/icons/newJobOpen.png
-    - assets/images/icons/openInvoice.png
-    - assets/images/icons/downloadInvoice.png
-    - assets/images/icons/arrow_left.png
-    - assets/images/icons/collectionManagerNotifications.png
-    - assets/images/icons/notificationTile.png
-    - assets/images/icons/deleteNotification.png
-    - assets/images/icons/arrow_right.png
-    - assets/images/icons/calendarDate.png
-    - assets/images/icons/contractAchieveOpened.png
-    - assets/images/icons/contractAchieveClosed.png
-    - assets/images/icons/locationIcon2.png
-    - assets/images/icons/excelExport.png
-    - assets/images/icons/theClock.png
-    - assets/images/icons/people.png
-    - assets/images/icons/sent_by.png
-    - assets/images/icons/sent_time.png
-    - assets/images/icons/sendByCollector.png
-    - assets/images/icons/date_calendar.png
-    - assets/images/icons/download.png
-    - assets/images/icons/newCalloutIcon.png
-    - assets/images/icons/newCalloutOpen.png
-    - assets/images/icons/testsProcessed.png
-    - assets/images/icons/FAQPage.png
-    - assets/images/icons/X.png
-    - assets/images/icons/1.png
-    - assets/images/icons/2.png
-    - assets/images/icons/3.png
-    - assets/images/icons/4.png
-    - assets/images/icons/5.png
-    - assets/images/icons/6.png
-    - assets/images/icons/7.png
-    - assets/images/icons/addButton.png
-    - assets/images/icons/addDisabled.png
-    - assets/images/icons/newLocation.png
-    - assets/images/icons/onSiteApprovalVector.png
-    - assets/images/icons/printIcon.png
-    - assets/images/icons/siteContactSignature.png
-    - assets/images/icons/collectorSignature.png
-    - assets/images/icons/delete.png
-    - assets/images/icons/searchIcon.png
-    - assets/images/icons/newClient.png
-    - assets/images/icons/newNoteAdd.png
-    - assets/images/icons/newNote.png
-    - assets/images/icons/changeLogOpened.png
-    - assets/images/icons/uploadNew.png
-    - assets/images/icons/changeLogClosed.png
-    - assets/images/icons/onSiteJobsIcon.png
-    - assets/images/icons/onSiteApprovalsIcon.png
-    - assets/images/icons/clientManagementIcon.png
-    - assets/images/icons/newJobIcon.png
-    - assets/images/icons/successfullySent.png
-    - assets/images/icons/errorSendingReport.png
-    - assets/images/icons/OnsiteJobs/calander_icon.png
-    - assets/images/icons/OnsiteJobs/time_icon.png
-    - assets/images/icons/OnsiteJobs/duration_icon.png
-    - assets/images/backgrounds/home-page-background.jpg
-    - assets/images/bottomNavigationIcons/selectedIcons/dashboard_selected.png
-    - assets/images/bottomNavigationIcons/selectedIcons/onsiteJobs_selected.png
-    - assets/images/bottomNavigationIcons/selectedIcons/clientManagement_selected.png
-    - assets/images/bottomNavigationIcons/selectedIcons/collectionReports_selected.png
-    - assets/images/bottomNavigationIcons/selectedIcons/accounting_selected.png
-    - assets/images/bottomNavigationIcons/selectedIcons/dashboardTrueColor.png
-    - assets/images/bottomNavigationIcons/selectedIcons/jobsTrueColor.png
-    - assets/images/bottomNavigationIcons/selectedIcons/dashboardTrueColor.png
-    - assets/images/bottomNavigationIcons/selectedIcons/reportsTrueColor.png
-    - assets/images/bottomNavigationIcons/selectedIcons/accountingTrueColor.png
-    - assets/images/bottomNavigationIcons/selectedIcons/cmTrueColor.png
-    - assets/images/bottomNavigationIcons/unselectedIcons/dashboard_unselected.png
-    - assets/images/bottomNavigationIcons/unselectedIcons/onsiteJobs_unselected.png
-    - assets/images/bottomNavigationIcons/unselectedIcons/clientManagement_unselected.png
-    - assets/images/bottomNavigationIcons/unselectedIcons/collectionReports_unselected.png
-    - assets/images/bottomNavigationIcons/unselectedIcons/accounting_unselected.png
-    - assets/images/welcomeBackIcons/welcomeBack_dashboard.png
-    - assets/images/welcomeBackIcons/welcomeBack_onSiteJobs.png
-    - assets/images/welcomeBackIcons/welcomeBack_onSiteApprovals.png
-    - assets/images/welcomeBackIcons/welcomeBack_clientManagement.png
-    - assets/images/welcomeBackIcons/welcomeBack_accounting.png
-    - assets/images/welcomeBackIcons/welcomeBack_collectionReports.png
-    - assets/images/welcomeBackIcons/welcomeBack_collectorsCalendar.png
-    - assets/images/welcomeBackIcons/welcomeBack_faq.png
+    - assets/images
+    - assets/
+    - assets/images/icons
+    - assets/images/backgrounds
+    - assets/images/bottomNavigationIcons
+    - assets/images/welcomeBackIcons
+    
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 

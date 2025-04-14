@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+enum AppScreenEnums { itService, homepage, dashboard }
+
 class AppState extends ChangeNotifier {
   bool _isDrawerOpen = false;
 
@@ -22,7 +24,9 @@ class AppState extends ChangeNotifier {
   bool _isCollectorsCalendar = false;
   bool _isFaq = false;
 
-  int _noNotifications = 15;
+  AppScreenEnums currentScreen = AppScreenEnums.homepage;
+
+  int _noNotifications = 30;
 
   bool get isHomeOpen => _isHome;
   bool get isDashboardOpen => _isDashboard;
@@ -50,6 +54,11 @@ class AppState extends ChangeNotifier {
   void setDrawerState(bool isOpen) {
     _isDrawerOpen = isOpen;
     notifyListeners(); // Notify all listeners about the state change
+  }
+
+  void setCurrentScreen(AppScreenEnums screen) {
+    currentScreen = screen;
+    notifyListeners();
   }
 
   void setHome(bool isSet) {
@@ -144,5 +153,6 @@ class AppState extends ChangeNotifier {
 
   void setNoNotifications(int noNoti) {
     _noNotifications = noNoti;
+    notifyListeners();
   }
 }
