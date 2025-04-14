@@ -156,7 +156,8 @@ class _ClientManagementState extends State<ClientManagement> {
           width: 40.0,
           child: FittedBox(
             child: FloatingActionButton(
-              backgroundColor: AppColors.sideMenuSelected.withOpacity(0.6),
+              backgroundColor:
+                  AppColors.floatingActionBarColor.withOpacity(0.6),
               onPressed: () {
                 if (isAtBottom) {
                   // Scroll to the top

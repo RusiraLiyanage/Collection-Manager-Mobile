@@ -8,4 +8,5 @@ class AppColors {
   static const Color sectionIconUnselected = Color(0xFF1A576F);
   static const Color headerColor = Color(0xFFD9D9D9);
   static const Color appWideBackground = Color(0xFFF2F2F2);
+  static const Color floatingActionBarColor = Color(0xFF01B4D2);
 }
