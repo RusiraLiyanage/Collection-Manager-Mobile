@@ -54,11 +54,11 @@ class OnsiteJobCard extends StatelessWidget {
                         color: value == "Draft"
                             ? Colors.yellow
                             : value == "Complete"
-                                ? Color(0xFF005277)
+                                ? Color(0xFF005277).withOpacity(0.5)
                                 : value == "Cancelled"
-                                    ? Color(0xFFFF0A0A)
+                                    ? Color(0xFFFF0A0A).withOpacity(0.5)
                                     : value == "Planned"
-                                        ? Color(0xFF1A8CFF)
+                                        ? Color(0xFF1A8CFF).withOpacity(0.7)
                                         : value == "In Progress"
                                             ? Color(0xFF5CD22B)
                                             : Colors.black,
@@ -150,53 +150,209 @@ class OnsiteJobCard extends StatelessWidget {
                   children: [
                     GestureDetector(
                       onTap: () {
-                        showAdaptiveActionSheet(
-                          bottomSheetColor: Color(0xFFEEF5F6),
-                          context: context,
-                          actions: <BottomSheetAction>[
-                            BottomSheetAction(
-                              title: const Text(
-                                'Manage Job',
-                                style: TextStyle(
+                        if (job["jobStatus"] == "Draft") {
+                          showAdaptiveActionSheet(
+                            bottomSheetColor: Color(0xFFEEF5F6),
+                            context: context,
+                            actions: <BottomSheetAction>[
+                              BottomSheetAction(
+                                title: const Text(
+                                  'Manage Job',
+                                  style: TextStyle(
+                                      color: Colors.blue,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18),
+                                ),
+                                onPressed: (_) {
+                                  Navigator.pop(
+                                      context); // Close the bottom sheet
+                                },
+                              ),
+                              BottomSheetAction(
+                                title: const Text(
+                                  'Delete Job',
+                                  style: TextStyle(
                                     color: Colors.blue,
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 18),
+                                    fontSize: 18,
+                                  ),
+                                ),
+                                onPressed: (_) {
+                                  Navigator.pop(context);
+                                },
                               ),
-                              onPressed: (_) {
-                                Navigator.pop(
-                                    context); // Close the bottom sheet
-                                /* showDialog(
-                                  context: context,
-                                  barrierDismissible:
-                                      false, // Prevent closing on backdrop tap
-                                  builder: (context) => OnsiteApprovalModal(),
-                                ); */
-                              },
-                            ),
-                            BottomSheetAction(
+                            ],
+                            cancelAction: CancelAction(
                               title: const Text(
-                                'Delete Job',
+                                'Close',
                                 style: TextStyle(
-                                  color: Colors.blue,
+                                  color: Colors.grey,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 18,
                                 ),
                               ),
-                              onPressed: (_) {
-                                Navigator.pop(context);
-                              },
                             ),
-                          ],
-                          cancelAction: CancelAction(
+                          );
+                        } else if (job["jobStatus"] == "In Progress") {
+                          showAdaptiveActionSheet(
+                            bottomSheetColor: Color(0xFFEEF5F6),
+                            context: context,
+                            actions: <BottomSheetAction>[
+                              BottomSheetAction(
+                                title: const Text(
+                                  'View Details',
+                                  style: TextStyle(
+                                      color: Colors.blue,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18),
+                                ),
+                                onPressed: (_) {
+                                  Navigator.pop(
+                                      context); // Close the bottom sheet
+                                },
+                              ),
+                            ],
+                            cancelAction: CancelAction(
                               title: const Text(
-                            'Close',
-                            style: TextStyle(
-                              color: Colors.grey,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
+                                'Close',
+                                style: TextStyle(
+                                  color: Colors.grey,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                ),
+                              ),
                             ),
-                          )),
-                        );
+                          );
+                        } else if (job["jobStatus"] == "Planned") {
+                          showAdaptiveActionSheet(
+                            bottomSheetColor: Color(0xFFEEF5F6),
+                            context: context,
+                            actions: <BottomSheetAction>[
+                              BottomSheetAction(
+                                title: const Text(
+                                  'Manage Job',
+                                  style: TextStyle(
+                                      color: Colors.blue,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18),
+                                ),
+                                onPressed: (_) {
+                                  Navigator.pop(
+                                      context); // Close the bottom sheet
+                                },
+                              ),
+                            ],
+                            cancelAction: CancelAction(
+                              title: const Text(
+                                'Close',
+                                style: TextStyle(
+                                  color: Colors.grey,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                ),
+                              ),
+                            ),
+                          );
+                        } else if (job["jobStatus"] == "Complete") {
+                          showAdaptiveActionSheet(
+                            bottomSheetColor: Color(0xFFEEF5F6),
+                            context: context,
+                            actions: <BottomSheetAction>[
+                              BottomSheetAction(
+                                title: const Text(
+                                  'View Details',
+                                  style: TextStyle(
+                                      color: Colors.blue,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18),
+                                ),
+                                onPressed: (_) {
+                                  Navigator.pop(
+                                      context); // Close the bottom sheet
+                                },
+                              ),
+                              BottomSheetAction(
+                                title: const Text(
+                                  'View Collection Report',
+                                  style: TextStyle(
+                                      color: Colors.blue,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18),
+                                ),
+                                onPressed: (_) {
+                                  Navigator.pop(
+                                      context); // Close the bottom sheet
+                                },
+                              ),
+                            ],
+                            cancelAction: CancelAction(
+                              title: const Text(
+                                'Close',
+                                style: TextStyle(
+                                  color: Colors.grey,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                ),
+                              ),
+                            ),
+                          );
+                        } else if (job["jobStatus"] == "Cancelled") {
+                          showAdaptiveActionSheet(
+                            bottomSheetColor: Color(0xFFEEF5F6),
+                            context: context,
+                            actions: <BottomSheetAction>[
+                              BottomSheetAction(
+                                title: const Text(
+                                  'View Details',
+                                  style: TextStyle(
+                                      color: Colors.blue,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18),
+                                ),
+                                onPressed: (_) {
+                                  Navigator.pop(
+                                      context); // Close the bottom sheet
+                                },
+                              ),
+                              BottomSheetAction(
+                                title: const Text(
+                                  'Restore Job',
+                                  style: TextStyle(
+                                      color: Colors.blue,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18),
+                                ),
+                                onPressed: (_) {
+                                  Navigator.pop(
+                                      context); // Close the bottom sheet
+                                },
+                              ),
+                              BottomSheetAction(
+                                title: const Text(
+                                  'Delete Job',
+                                  style: TextStyle(
+                                      color: Colors.blue,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18),
+                                ),
+                                onPressed: (_) {
+                                  Navigator.pop(
+                                      context); // Close the bottom sheet
+                                },
+                              ),
+                            ],
+                            cancelAction: CancelAction(
+                              title: const Text(
+                                'Cancel',
+                                style: TextStyle(
+                                  color: Colors.grey,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                ),
+                              ),
+                            ),
+                          );
+                        }
                       },
                       child: FittedBox(
                         child: Image.asset(

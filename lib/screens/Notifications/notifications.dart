@@ -26,6 +26,7 @@ class _NotificationsState extends State<Notifications> {
   @override
   Widget build(BuildContext context) {
     final appState = Provider.of<AppState>(context, listen: true);
+    appState.setNoNotifications(notifications.length);
     return Scaffold(
       backgroundColor: AppColors.appWideBackground,
       extendBodyBehindAppBar: false,
@@ -130,6 +131,8 @@ class _NotificationsState extends State<Notifications> {
                                 onDismissed: (direction) {
                                   setState(() {
                                     notifications.removeAt(index);
+                                    appState.setNoNotifications(
+                                        notifications.length - 1);
                                   });
                                 },
                                 background: Container(

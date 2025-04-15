@@ -22,7 +22,7 @@ class OnsiteJobsData {
     },
     {
       "jobNumber": "3",
-      "jobStatus": "Draft",
+      "jobStatus": "Complete",
       "dateTime": "30 Apr 2025 10:00",
       "client": "Rail NSW",
       "rep": "John Roberts",
@@ -32,7 +32,7 @@ class OnsiteJobsData {
     },
     {
       "jobNumber": "4",
-      "jobStatus": "Draft",
+      "jobStatus": "Planned",
       "dateTime": "30 Apr 2025 10:00",
       "client": "Rail NSW",
       "rep": "John Roberts",
@@ -42,7 +42,7 @@ class OnsiteJobsData {
     },
     {
       "jobNumber": "5",
-      "jobStatus": "Draft",
+      "jobStatus": "Cancelled",
       "dateTime": "30 Apr 2025 10:00",
       "client": "Rail NSW",
       "rep": "John Roberts",

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
 
 import 'package:project_code_blue/screens/OnsiteJobs/Definitions/collector.dart';
 import 'package:project_code_blue/screens/OnsiteJobs/NewCalloutJob/collectorRepresentation.dart';
+import 'package:project_code_blue/screens/OnsiteJobs/NewOnsiteJob/Components/TypeOneFields/customizedTypeTwo.dart';
 
 import '../../NewOnsiteJob/Components/TypeOneFields/customizedTypeOne.dart';
 
@@ -44,7 +46,7 @@ class _NewCalloutJobState extends State<NewCalloutJob> {
       TextEditingController();
 
   // Dropdown values
-  String? _selectedCollectionOrganisation;
+  String? _selectedCollectionOrganisation = "collec456";
   String? _selectedSite;
   String? _selectedCollectorOneAssignment;
   String? _selectedCollectorTwoAssignment;
@@ -52,6 +54,8 @@ class _NewCalloutJobState extends State<NewCalloutJob> {
 
   String? _selectedJobReference;
   String? _selectedTypeOfService;
+
+  String? _selectedClientName;
 
   final GlobalKey<FormFieldState<String>> _collectionOrgKey =
       GlobalKey<FormFieldState<String>>();
@@ -104,6 +108,14 @@ class _NewCalloutJobState extends State<NewCalloutJob> {
     'Rejected'
   ];
   final List<String> _serviceOffices = ['Clinic 1', 'Clinic 2', 'Clinic 3'];
+
+  final Map<String, String> _clientData = {
+    'Client A': 'Ref-001',
+    'Client B': 'Ref-002',
+    'Client C': 'Ref-003',
+  };
+
+  List<String> get _clientNames => _clientData.keys.toList();
 
   DateTime? _selectedJobDate;
   TimeOfDay? _selectedTime;
@@ -229,15 +241,8 @@ class _NewCalloutJobState extends State<NewCalloutJob> {
                                   Container(
                                     height: 40,
                                     width: 206,
-                                    child: DropdownButtonFormField<String>(
+                                    child: TextFormField(
                                       key: _collectionOrgKey,
-                                      icon: Image.asset(
-                                        "assets/images/icons/dropDownIcon.png", // Replace with your image path
-                                        width: 16, // Adjust the size
-                                        height: 16,
-                                      ),
-                                      elevation: 20,
-                                      dropdownColor: Colors.white,
                                       decoration: InputDecoration(
                                         fillColor: Colors.white,
                                         filled: true,
@@ -302,29 +307,8 @@ class _NewCalloutJobState extends State<NewCalloutJob> {
                                               12, // Adjust font size if needed
                                         ), // Reserve space for error messages
                                       ),
-                                      value: _selectedCollectionOrganisation,
-                                      items: _collectionOrganisations
-                                          .map((String value) {
-                                        return DropdownMenuItem<String>(
-                                          value: value,
-                                          child: Text(value),
-                                        );
-                                      }).toList(),
-                                      onChanged: (value) {
-                                        setState(() {
-                                          _selectedCollectionOrganisation =
-                                              value;
-                                          _collectionOrgKey.currentState!
-                                              .validate(); // Revalidate the field
-                                          /* if (_selectedCollectionOrganisation!.length < 0) {
-                                // Clear error state once a valid selection is made
-                                _formKeys[_currentStep].currentState?.validate();
-                              } */
-                                        });
-                                      },
-                                      validator: (value) => value == null
-                                          ? 'Please select a collection organisation'
-                                          : null,
+                                      initialValue:
+                                          _selectedCollectionOrganisation,
                                     ),
                                   ),
                                 ],
@@ -529,26 +513,125 @@ class _NewCalloutJobState extends State<NewCalloutJob> {
                                     color: Colors.grey,
                                   ),
                                 ),
-                                CustomizedTypeOne(
-                                  fieldKey: _clientNameKey,
-                                  controller: _clientNameController,
-                                  width: 206,
-                                  height: 40,
-                                  onChanged: (value) {
-                                    setState(() {
-                                      //_selectedJobReference = value;
-                                      // Update the number of donors and the text controller
-                                      _clientNameController.text =
-                                          value; // Manually update the controller text
-                                      _clientNameKey.currentState!.validate();
-                                    });
-                                  },
-                                  validator: (value) {
-                                    if (_clientNameController.text == "") {
-                                      return 'Please enter the client name';
-                                    }
-                                    return null;
-                                  },
+                                Material(
+                                  elevation:
+                                      4, // Adjust this value for more or less elevation
+                                  shadowColor: Colors.black.withOpacity(
+                                      0.5), // Optional: Adjust shadow color
+                                  borderRadius: BorderRadius.circular(
+                                      4), // Match with TextFormField's border
+                                  child: Container(
+                                    height: 40,
+                                    width: 206,
+                                    child: TypeAheadFormField<String>(
+                                      key: _clientNameKey,
+                                      textFieldConfiguration:
+                                          TextFieldConfiguration(
+                                        controller: _clientNameController,
+                                        decoration: InputDecoration(
+                                          fillColor: Colors.white,
+                                          filled: true,
+                                          border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            borderSide: const BorderSide(
+                                              color: Colors.white,
+                                              width: 2,
+                                            ),
+                                          ),
+                                          enabledBorder: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            borderSide: const BorderSide(
+                                              color: Colors.white,
+                                              width: 2,
+                                            ),
+                                          ),
+                                          focusedBorder: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            borderSide: const BorderSide(
+                                              color: Colors.white,
+                                              width: 2,
+                                            ),
+                                          ),
+                                          errorBorder: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            borderSide: const BorderSide(
+                                              color: Colors.red,
+                                              width: 2,
+                                            ),
+                                          ),
+                                          focusedErrorBorder:
+                                              OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            borderSide: const BorderSide(
+                                              color: Colors.red,
+                                              width: 2,
+                                            ),
+                                          ),
+                                          contentPadding:
+                                              const EdgeInsets.symmetric(
+                                            vertical: 5,
+                                            horizontal: 12,
+                                          ),
+                                          errorStyle: const TextStyle(
+                                            color: Colors.red,
+                                            fontSize: 12,
+                                          ),
+                                          hintText:
+                                              'Select or type client name',
+                                        ),
+                                      ),
+                                      suggestionsCallback: (pattern) {
+                                        return _clientNames
+                                            .where((name) => name
+                                                .toLowerCase()
+                                                .contains(
+                                                    pattern.toLowerCase()))
+                                            .toList();
+                                      },
+                                      itemBuilder: (context, suggestion) {
+                                        return Container(
+                                          color: Colors
+                                              .white, // 👈 white background per item
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 10, horizontal: 12),
+                                          child: Text(
+                                            suggestion,
+                                            style: TextStyle(
+                                              fontSize: 16,
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                      onSuggestionSelected: (suggestion) {
+                                        _clientNameController.text = suggestion;
+                                        _clientReferenceController.text =
+                                            _clientData[suggestion] ?? '';
+                                        _clientReferenceKey.currentState
+                                            ?.validate();
+                                      },
+                                      suggestionsBoxDecoration:
+                                          SuggestionsBoxDecoration(
+                                        color: Colors
+                                            .white, // 👈 entire dropdown box background is white
+                                        elevation: 4,
+                                        borderRadius: BorderRadius.circular(4),
+                                      ),
+                                      validator: (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return 'Please select a Client Name';
+                                        }
+                                        return null;
+                                      },
+                                      onSaved: (value) {
+                                        _selectedClientName = value;
+                                      },
+                                    ),
+                                  ),
                                 ),
                               ],
                             ),
@@ -570,14 +653,14 @@ class _NewCalloutJobState extends State<NewCalloutJob> {
                                     color: Colors.grey,
                                   ),
                                 ),
-                                CustomizedTypeOne(
+                                CustomizedTypeTwo(
                                   fieldKey: _clientReferenceKey,
                                   controller: _clientReferenceController,
                                   width: 206,
                                   height: 40,
+                                  readOnly: true,
                                   onChanged: (value) {
                                     setState(() {
-                                      //_selectedJobReference = value;
                                       // Update the number of donors and the text controller
                                       _clientReferenceController.text =
                                           value; // Manually update the controller text
