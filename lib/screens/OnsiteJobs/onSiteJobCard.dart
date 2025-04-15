@@ -1,6 +1,9 @@
 import 'package:adaptive_action_sheet/adaptive_action_sheet.dart';
 import 'package:flutter/material.dart';
+import 'package:project_code_blue/screens/OnsiteJobs/widgets/cancelJobConfirmationModal.dart';
 import 'package:project_code_blue/screens/OnsiteJobs/widgets/collectorsModal.dart';
+import 'package:project_code_blue/screens/OnsiteJobs/widgets/deleteJobConfirmationModal.dart';
+import 'package:project_code_blue/screens/OnsiteJobs/widgets/restoreJobConfirmationModal.dart';
 
 class OnsiteJobCard extends StatelessWidget {
   const OnsiteJobCard({
@@ -178,7 +181,17 @@ class OnsiteJobCard extends StatelessWidget {
                                   ),
                                 ),
                                 onPressed: (_) {
-                                  Navigator.pop(context);
+                                  Navigator.pop(
+                                      context); // First close the Bottom Sheet
+                                  Future.delayed(Duration(milliseconds: 200),
+                                      () {
+                                    showDialog(
+                                      context: context,
+                                      barrierDismissible: true,
+                                      builder: (BuildContext context) =>
+                                          const DeleteJobConfirmationModal(),
+                                    );
+                                  });
                                 },
                               ),
                             ],
@@ -239,6 +252,30 @@ class OnsiteJobCard extends StatelessWidget {
                                 onPressed: (_) {
                                   Navigator.pop(
                                       context); // Close the bottom sheet
+                                },
+                              ),
+                              BottomSheetAction(
+                                title: const Text(
+                                  'Cancel Job',
+                                  style: TextStyle(
+                                      color: Colors.blue,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18),
+                                ),
+                                onPressed: (_) {
+                                  Navigator.pop(
+                                      context); // Close bottom sheet first
+                                  Future.delayed(
+                                    Duration(milliseconds: 200),
+                                    () {
+                                      showDialog(
+                                        context: context,
+                                        barrierDismissible: true,
+                                        builder: (BuildContext context) =>
+                                            const CancelJobConfirmationModal(),
+                                      );
+                                    },
+                                  );
                                 },
                               ),
                             ],
@@ -324,7 +361,18 @@ class OnsiteJobCard extends StatelessWidget {
                                 ),
                                 onPressed: (_) {
                                   Navigator.pop(
-                                      context); // Close the bottom sheet
+                                      context); // Close bottom sheet first
+                                  Future.delayed(
+                                    Duration(milliseconds: 200),
+                                    () {
+                                      showDialog(
+                                        context: context,
+                                        barrierDismissible: true,
+                                        builder: (BuildContext context) =>
+                                            const RestoreJobConfirmationModal(),
+                                      );
+                                    },
+                                  );
                                 },
                               ),
                               BottomSheetAction(
@@ -337,13 +385,24 @@ class OnsiteJobCard extends StatelessWidget {
                                 ),
                                 onPressed: (_) {
                                   Navigator.pop(
-                                      context); // Close the bottom sheet
+                                      context); // Close bottom sheet first
+                                  Future.delayed(
+                                    Duration(milliseconds: 200),
+                                    () {
+                                      showDialog(
+                                        context: context,
+                                        barrierDismissible: true,
+                                        builder: (BuildContext context) =>
+                                            const DeleteJobConfirmationModal(),
+                                      );
+                                    },
+                                  );
                                 },
                               ),
                             ],
                             cancelAction: CancelAction(
                               title: const Text(
-                                'Cancel',
+                                'Close',
                                 style: TextStyle(
                                   color: Colors.grey,
                                   fontWeight: FontWeight.bold,
