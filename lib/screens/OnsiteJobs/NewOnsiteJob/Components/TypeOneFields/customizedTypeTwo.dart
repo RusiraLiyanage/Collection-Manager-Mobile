@@ -33,6 +33,10 @@ class CustomizedTypeTwo extends StatelessWidget {
           borderRadius: BorderRadius.circular(
               4), // Match with TextFormField's border radius
           child: TextFormField(
+              style: TextStyle(
+                color: Colors.grey,
+                fontWeight: FontWeight.bold,
+              ),
               key: fieldKey,
               readOnly: readOnly!,
               controller: controller,
