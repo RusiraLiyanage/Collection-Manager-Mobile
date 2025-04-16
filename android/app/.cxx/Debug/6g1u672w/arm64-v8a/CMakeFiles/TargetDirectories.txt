@@ -1,0 +1,2 @@
+/Users/rusiraliyanage/Flutter Development/Collection Manager Updated/Collection-Manager-Mobile/android/app/.cxx/Debug/6g1u672w/arm64-v8a/CMakeFiles/edit_cache.dir
+/Users/rusiraliyanage/Flutter Development/Collection Manager Updated/Collection-Manager-Mobile/android/app/.cxx/Debug/6g1u672w/arm64-v8a/CMakeFiles/rebuild_cache.dir

@@ -10476,19 +10476,33 @@ class _NewCalloutJobState extends State<NewClient> {
                                               );
                                             }
                                           },
-                                          child: Align(
-                                            alignment: Alignment.topRight,
-                                            child: ClipRRect(
-                                              child: FittedBox(
-                                                fit: BoxFit.contain,
-                                                child: Image.asset(
-                                                  "assets/images/icons/newNoteAdd.png",
-                                                  width: 24,
-                                                  height: 24,
+                                          child: Platform.isIOS
+                                              ? Align(
+                                                  alignment: Alignment.topRight,
+                                                  child: ClipRRect(
+                                                    child: FittedBox(
+                                                      fit: BoxFit.contain,
+                                                      child: Image.asset(
+                                                        "assets/images/icons/newNoteAdd.png",
+                                                        width: 24,
+                                                        height: 24,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                )
+                                              : Align(
+                                                  alignment: Alignment.topRight,
+                                                  child: ClipRRect(
+                                                    child: FittedBox(
+                                                      fit: BoxFit.contain,
+                                                      child: Image.asset(
+                                                        "assets/images/icons/NewNoteAdd.png",
+                                                        width: 24,
+                                                        height: 24,
+                                                      ),
+                                                    ),
+                                                  ),
                                                 ),
-                                              ),
-                                            ),
-                                          ),
                                         ),
                                       ),
                                     ],

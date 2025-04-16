@@ -54,7 +54,7 @@ dependencies:
   icon_badge: ^1.0.0
   flutter_easy_faq: ^1.0.1
   loading_gifs: ^0.3.0
-  flutter_typeahead: ^4.0.0
+  #flutter_typeahead: ^4.0.0
   dropdown_search: ^5.0.6
 
 dev_dependencies:
@@ -85,7 +85,10 @@ flutter:
     - assets/images/icons/
     - assets/images/backgrounds/
     - assets/images/bottomNavigationIcons/
+    - assets/images/bottomNavigationIcons/selectedIcons/
+    - assets/images/bottomNavigationIcons/unselectedIcons/
     - assets/images/welcomeBackIcons/
+    - assets/images/icons/NewNoteAdd.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

@@ -2,8 +2,6 @@ import 'dart:io';
 
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_typeahead/flutter_typeahead.dart';
-
 import 'package:project_code_blue/screens/OnsiteJobs/Definitions/collector.dart';
 import 'package:project_code_blue/screens/OnsiteJobs/NewCalloutJob/collectorRepresentation.dart';
 import 'package:project_code_blue/screens/OnsiteJobs/NewOnsiteJob/Components/TypeOneFields/customizedTypeTwo.dart';
@@ -530,118 +528,100 @@ class _NewCalloutJobState extends State<NewCalloutJob> {
                                 ),
                                 Platform.isIOS
                                     ? Material(
-                                        elevation:
-                                            4, // Adjust this value for more or less elevation
-                                        shadowColor: Colors.black.withOpacity(
-                                            0.5), // Optional: Adjust shadow color
-                                        borderRadius: BorderRadius.circular(
-                                            4), // Match with TextFormField's border
+                                        elevation: 4,
+                                        shadowColor:
+                                            Colors.black.withOpacity(0.5),
+                                        borderRadius: BorderRadius.circular(4),
                                         child: Container(
                                           height: 40,
                                           width: 206,
-                                          child: TypeAheadFormField<String>(
+                                          color: Colors.white,
+                                          padding: const EdgeInsets.symmetric(
+                                            horizontal: 0,
+                                          ),
+                                          alignment: Alignment.center,
+                                          child: DropdownSearch<String>(
                                             key: _clientNameKey,
-                                            textFieldConfiguration:
-                                                TextFieldConfiguration(
-                                              controller: _clientNameController,
-                                              decoration: InputDecoration(
-                                                fillColor: Colors.white,
+                                            items: _clientNames,
+                                            selectedItem: _clientNameController
+                                                    .text.isNotEmpty
+                                                ? _clientNameController.text
+                                                : null,
+                                            popupProps: PopupProps.menu(
+                                              showSearchBox: true,
+                                              fit: FlexFit.tight,
+                                              searchFieldProps: TextFieldProps(
+                                                decoration: InputDecoration(
+                                                  hintText:
+                                                      "Search Client Name",
+                                                  border: OutlineInputBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            4),
+                                                    borderSide:
+                                                        const BorderSide(
+                                                            color:
+                                                                Colors.white),
+                                                  ),
+                                                  contentPadding:
+                                                      const EdgeInsets
+                                                          .symmetric(
+                                                          vertical: 5,
+                                                          horizontal: 12),
+                                                ),
+                                              ),
+                                              menuProps: const MenuProps(
+                                                backgroundColor: Colors.white,
+                                                elevation: 4,
+                                              ),
+                                            ),
+                                            dropdownDecoratorProps:
+                                                DropDownDecoratorProps(
+                                              baseStyle: const TextStyle(
+                                                fontSize:
+                                                    16, // 👈 This controls the selected item's font size
+                                                color: Colors.black,
+                                              ),
+                                              dropdownSearchDecoration:
+                                                  InputDecoration(
                                                 filled: true,
+                                                fillColor: Colors.white,
+                                                hintText: 'Type client name',
                                                 border: OutlineInputBorder(
                                                   borderRadius:
                                                       BorderRadius.circular(4),
                                                   borderSide: const BorderSide(
-                                                    color: Colors.white,
-                                                    width: 2,
-                                                  ),
+                                                      color: Colors.white,
+                                                      width: 2),
                                                 ),
                                                 enabledBorder:
                                                     OutlineInputBorder(
                                                   borderRadius:
                                                       BorderRadius.circular(4),
                                                   borderSide: const BorderSide(
-                                                    color: Colors.white,
-                                                    width: 2,
-                                                  ),
+                                                      color: Colors.white,
+                                                      width: 2),
                                                 ),
                                                 focusedBorder:
                                                     OutlineInputBorder(
                                                   borderRadius:
                                                       BorderRadius.circular(4),
                                                   borderSide: const BorderSide(
-                                                    color: Colors.white,
-                                                    width: 2,
-                                                  ),
+                                                      color: Colors.white,
+                                                      width: 2),
                                                 ),
                                                 errorBorder: OutlineInputBorder(
                                                   borderRadius:
                                                       BorderRadius.circular(4),
                                                   borderSide: const BorderSide(
-                                                    color: Colors.red,
-                                                    width: 2,
-                                                  ),
-                                                ),
-                                                focusedErrorBorder:
-                                                    OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(4),
-                                                  borderSide: const BorderSide(
-                                                    color: Colors.red,
-                                                    width: 2,
-                                                  ),
+                                                      color: Colors.red,
+                                                      width: 2),
                                                 ),
                                                 contentPadding:
                                                     const EdgeInsets.symmetric(
-                                                  vertical: 5,
-                                                  horizontal: 12,
-                                                ),
-                                                errorStyle: const TextStyle(
-                                                  color: Colors.red,
-                                                  fontSize: 12,
-                                                ),
-                                                hintText:
-                                                    'Select or type client name',
-                                              ),
-                                            ),
-                                            suggestionsCallback: (pattern) {
-                                              return _clientNames
-                                                  .where((name) => name
-                                                      .toLowerCase()
-                                                      .contains(pattern
-                                                          .toLowerCase()))
-                                                  .toList();
-                                            },
-                                            itemBuilder: (context, suggestion) {
-                                              return Container(
-                                                color: Colors
-                                                    .white, // 👈 white background per item
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        vertical: 10,
+                                                        vertical: 5,
                                                         horizontal: 12),
-                                                child: Text(
-                                                  suggestion,
-                                                  style: TextStyle(
-                                                    fontSize: 16,
-                                                  ),
-                                                ),
-                                              );
-                                            },
-                                            onSuggestionSelected: (suggestion) {
-                                              _clientNameController.text =
-                                                  suggestion;
-                                              _clientReferenceController.text =
-                                                  _clientData[suggestion] ?? '';
-                                              _clientReferenceKey.currentState
-                                                  ?.validate();
-                                            },
-                                            suggestionsBoxDecoration:
-                                                SuggestionsBoxDecoration(
-                                              color: Colors
-                                                  .white, // 👈 entire dropdown box background is white
-                                              elevation: 4,
-                                              borderRadius:
-                                                  BorderRadius.circular(4),
+                                              ),
                                             ),
                                             validator: (value) {
                                               if (value == null ||
@@ -650,7 +630,18 @@ class _NewCalloutJobState extends State<NewCalloutJob> {
                                               }
                                               return null;
                                             },
-                                            onSaved: (value) {
+                                            onChanged: (String? newValue) {
+                                              if (newValue != null) {
+                                                _clientNameController.text =
+                                                    newValue;
+                                                _clientReferenceController
+                                                        .text =
+                                                    _clientData[newValue] ?? '';
+                                                _clientReferenceKey.currentState
+                                                    ?.validate();
+                                              }
+                                            },
+                                            onSaved: (String? value) {
                                               _selectedClientName = value;
                                             },
                                           ),
@@ -666,7 +657,7 @@ class _NewCalloutJobState extends State<NewCalloutJob> {
                                           width: 206,
                                           color: Colors.white,
                                           padding: const EdgeInsets.symmetric(
-                                              horizontal: 8),
+                                              horizontal: 0),
                                           alignment: Alignment.center,
                                           child: DropdownSearch<String>(
                                             key: _clientNameKey,
