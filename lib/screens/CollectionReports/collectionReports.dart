@@ -289,7 +289,7 @@ class _CollectionReportsState extends State<CollectionReports> {
                       Padding(
                         padding: const EdgeInsets.only(right: 54.0),
                         child: Text(
-                          "Location",
+                          "Service Office",
                           style: TextStyle(
                             color: Color(0xFF005277),
                             fontWeight: FontWeight.bold,
@@ -297,7 +297,7 @@ class _CollectionReportsState extends State<CollectionReports> {
                         ),
                       ),
                       SizedBox(
-                        width: 68,
+                        width: 28,
                       ),
                       Container(
                         width: 190,

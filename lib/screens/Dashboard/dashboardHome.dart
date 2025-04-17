@@ -329,7 +329,7 @@ class _DashboardHomeState extends State<DashboardHome> {
                               Padding(
                                 padding: const EdgeInsets.only(right: 52.0),
                                 child: Text(
-                                  "Location",
+                                  "Service Office",
                                   style: TextStyle(
                                     color: Color(0xFF005277),
                                     fontWeight: FontWeight.bold,

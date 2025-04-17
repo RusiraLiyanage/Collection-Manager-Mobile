@@ -153,7 +153,7 @@ class _CollectorsCalendarState extends State<CollectorsCalendar> {
                         Padding(
                           padding: const EdgeInsets.only(left: 16.0),
                           child: Text(
-                            "Home / Collectors Calendar",
+                            "Home / Collectors Availability",
                             style: TextStyle(
                               fontSize: 10,
                             ),
@@ -192,7 +192,7 @@ class _CollectorsCalendarState extends State<CollectorsCalendar> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            "Collectors Calendar",
+                            "Collectors Availability",
                             style: TextStyle(
                               fontSize: 24,
                               fontWeight: FontWeight.bold,
@@ -204,9 +204,7 @@ class _CollectorsCalendarState extends State<CollectorsCalendar> {
                   ],
                 ),
               ),
-              /* SizedBox(
-                height: 10,
-              ), */
+
               Align(
                 alignment: Alignment.topLeft,
                 child: Container(
