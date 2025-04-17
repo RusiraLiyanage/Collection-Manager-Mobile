@@ -137,7 +137,7 @@ class InvoiceCard extends StatelessWidget {
                           bottomSheetColor: Color(0xFFEEF5F6),
                           context: context,
                           actions: <BottomSheetAction>[
-                            BottomSheetAction(
+                            /* BottomSheetAction(
                               title: const Text(
                                 'Manage Job',
                                 style: TextStyle(
@@ -168,7 +168,7 @@ class InvoiceCard extends StatelessWidget {
                               onPressed: (_) {
                                 Navigator.pop(context);
                               },
-                            ),
+                            ), */
                           ],
                           cancelAction: CancelAction(
                               title: const Text(

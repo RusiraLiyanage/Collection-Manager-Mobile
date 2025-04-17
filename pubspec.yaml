@@ -89,6 +89,7 @@ flutter:
     - assets/images/bottomNavigationIcons/unselectedIcons/
     - assets/images/welcomeBackIcons/
     - assets/images/icons/NewNoteAdd.png
+    - assets/images/icons/addDisabled.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
