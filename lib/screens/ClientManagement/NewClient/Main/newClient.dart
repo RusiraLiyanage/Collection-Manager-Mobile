@@ -43,10 +43,10 @@ class NewClient extends StatefulWidget {
   const NewClient({super.key, required this.scrollController});
 
   @override
-  State<NewClient> createState() => _NewCalloutJobState();
+  State<NewClient> createState() => _NewClientJobState();
 }
 
-class _NewCalloutJobState extends State<NewClient> {
+class _NewClientJobState extends State<NewClient> {
   TestsType? _testsType = TestsType.alcoholOnly;
   ClientSpec? _clientSpecType = ClientSpec.inHouse;
   final List<GlobalKey<FormState>> _formKeys = [
@@ -931,6 +931,8 @@ class _NewCalloutJobState extends State<NewClient> {
 
     bool isAtBottom = false; // Track whether the scroll is at the bottom
 
+    _clientReferenceController.text = "ref1234";
+
     // Add listener to monitor scroll changes
     widget.scrollController.addListener(() {
       // Check if the scroll position is at the bottom
@@ -1803,15 +1805,8 @@ class _NewCalloutJobState extends State<NewClient> {
                                   Container(
                                     height: 40,
                                     width: 206,
-                                    child: DropdownButtonFormField<String>(
+                                    child: TextFormField(
                                       key: _clientNameKey,
-                                      icon: Image.asset(
-                                        "assets/images/icons/dropDownIcon.png", // Replace with your image path
-                                        width: 16, // Adjust the size
-                                        height: 16,
-                                      ),
-                                      elevation: 20,
-                                      dropdownColor: Colors.white,
                                       decoration: InputDecoration(
                                         fillColor: Colors.white,
                                         filled: true,
@@ -1876,14 +1871,7 @@ class _NewCalloutJobState extends State<NewClient> {
                                               12, // Adjust font size if needed
                                         ), // Reserve space for error messages
                                       ),
-                                      value: _selectedClientName,
-                                      items:
-                                          _theClientNames.map((String value) {
-                                        return DropdownMenuItem<String>(
-                                          value: value,
-                                          child: Text(value),
-                                        );
-                                      }).toList(),
+                                      controller: _clientNameController,
                                       onChanged: (value) {
                                         setState(() {
                                           _selectedClientName = value;
@@ -1891,11 +1879,6 @@ class _NewCalloutJobState extends State<NewClient> {
                                               value!; // ✅ Update controller text
                                           _clientNameKey.currentState!
                                               .validate(); // ✅ Revalidate the field
-                                          // Revalidate the field
-                                          /* if (_selectedClientName!.length < 0) {
-                                // Clear error state once a valid selection is made
-                                _formKeys[_currentStep].currentState?.validate();
-                              } */
                                         });
                                       },
                                       validator: (value) {
@@ -1932,15 +1915,13 @@ class _NewCalloutJobState extends State<NewClient> {
                                   Container(
                                     height: 40,
                                     width: 206,
-                                    child: DropdownButtonFormField<String>(
+                                    child: TextFormField(
                                       key: _clientReferenceKey,
-                                      icon: Image.asset(
-                                        "assets/images/icons/dropDownIcon.png", // Replace with your image path
-                                        width: 16, // Adjust the size
-                                        height: 16,
+                                      readOnly: true,
+                                      style: TextStyle(
+                                        color: Colors.grey,
+                                        fontWeight: FontWeight.bold,
                                       ),
-                                      elevation: 20,
-                                      dropdownColor: Colors.white,
                                       decoration: InputDecoration(
                                         fillColor: Colors.white,
                                         filled: true,
@@ -2005,14 +1986,7 @@ class _NewCalloutJobState extends State<NewClient> {
                                               12, // Adjust font size if needed
                                         ), // Reserve space for error messages
                                       ),
-                                      value: _selectedClientReference,
-                                      items:
-                                          _clientReferences.map((String value) {
-                                        return DropdownMenuItem<String>(
-                                          value: value,
-                                          child: Text(value),
-                                        );
-                                      }).toList(),
+                                      controller: _clientReferenceController,
                                       onChanged: (value) {
                                         setState(() {
                                           _selectedClientReference = value;
@@ -2020,10 +1994,6 @@ class _NewCalloutJobState extends State<NewClient> {
                                               value!; // ✅ Update controller text
                                           _clientReferenceKey.currentState!
                                               .validate();
-                                          /* if (_selectedClientName!.length < 0) {
-                                // Clear error state once a valid selection is made
-                                _formKeys[_currentStep].currentState?.validate();
-                              } */
                                         });
                                       },
                                       validator: (value) {
@@ -2906,11 +2876,6 @@ class _NewCalloutJobState extends State<NewClient> {
                           ),
                         ],
                       ),
-                      SizedBox(
-                        height: MediaQuery.of(context).viewInsets.bottom > 0
-                            ? MediaQuery.of(context).viewInsets.bottom + 5
-                            : 10,
-                      ),
                     ],
                   ),
                 ),
@@ -3138,6 +3103,11 @@ class _NewCalloutJobState extends State<NewClient> {
           ),
           SizedBox(
             height: 40,
+          ),
+          SizedBox(
+            height: MediaQuery.of(context).viewInsets.bottom > 0
+                ? MediaQuery.of(context).viewInsets.bottom + 5
+                : 10,
           ),
         ]);
       case 1:

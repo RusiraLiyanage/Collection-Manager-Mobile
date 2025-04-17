@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:project_code_blue/ColorSchemas/AppColors.dart';
 import 'package:project_code_blue/screens/Dashboard/Data/dashBoardHomeData.dart';
@@ -250,6 +252,9 @@ class _DashboardHomeState extends State<DashboardHome> {
                                   ),
                                 ),
                               ),
+                              Platform.isIOS
+                                  ? SizedBox(width: 40)
+                                  : SizedBox(width: 0),
                               Container(
                                 width: 190,
                                 height: 28,
