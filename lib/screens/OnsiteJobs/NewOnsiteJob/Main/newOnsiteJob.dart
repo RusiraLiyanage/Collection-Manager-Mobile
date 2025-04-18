@@ -5939,6 +5939,11 @@ class _NewOnsiteJobState extends State<NewOnsiteJob> {
           SizedBox(
             height: 35,
           ),
+          SizedBox(
+            height: MediaQuery.of(context).viewInsets.bottom > 0
+                ? MediaQuery.of(context).viewInsets.bottom + 5
+                : 10,
+          ),
         ]);
       case 2:
         // Step 3 of the New Onsite Job

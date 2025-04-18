@@ -4187,6 +4187,11 @@ class _NewClientJobState extends State<NewClient> {
           SizedBox(
             height: 40,
           ),
+          SizedBox(
+            height: MediaQuery.of(context).viewInsets.bottom > 0
+                ? MediaQuery.of(context).viewInsets.bottom + 5
+                : 10,
+          ),
         ]);
       case 2:
         return Column(children: [
@@ -7550,6 +7555,11 @@ class _NewClientJobState extends State<NewClient> {
           SizedBox(
             height: 40,
           ),
+          SizedBox(
+            height: MediaQuery.of(context).viewInsets.bottom > 0
+                ? MediaQuery.of(context).viewInsets.bottom + 5
+                : 10,
+          ),
         ]);
       case 3:
         return Column(children: [
@@ -8709,6 +8719,11 @@ class _NewClientJobState extends State<NewClient> {
           ),
           SizedBox(
             height: 40,
+          ),
+          SizedBox(
+            height: MediaQuery.of(context).viewInsets.bottom > 0
+                ? MediaQuery.of(context).viewInsets.bottom + 5
+                : 10,
           ),
         ]);
       case 4:
@@ -10112,6 +10127,11 @@ class _NewClientJobState extends State<NewClient> {
           SizedBox(
             height: 40,
           ),
+          SizedBox(
+            height: MediaQuery.of(context).viewInsets.bottom > 0
+                ? MediaQuery.of(context).viewInsets.bottom + 5
+                : 10,
+          ),
         ]);
       case 5:
         return Column(children: [
@@ -10661,6 +10681,11 @@ class _NewClientJobState extends State<NewClient> {
           ),
           SizedBox(
             height: 40,
+          ),
+          SizedBox(
+            height: MediaQuery.of(context).viewInsets.bottom > 0
+                ? MediaQuery.of(context).viewInsets.bottom + 5
+                : 10,
           ),
         ]);
       case 6:
@@ -11318,47 +11343,6 @@ class _NewClientJobState extends State<NewClient> {
       _hasSubmitted = true; // ✅ Set flag to true before validation
     });
 
-    /* if (!addNewOpened && _currentStep == 1) {
-      print("yeah");
-      print(!formState!.validate());
-      setState(() {
-        isValid = true;
-      });
-      widget.scrollController.animateTo(
-        0, // Scroll to top
-        duration: const Duration(milliseconds: 500),
-        curve: Curves.easeInOut,
-      );
-
-      /*  widget.scrollController.animateTo(
-        0, // Scroll to top
-        duration: const Duration(milliseconds: 500),
-        curve: Curves.easeInOut,
-      ); */
-      // Move to the next step if validation passes
-      if (_currentStep < _formKeys.length - 1) {
-        setState(() {
-          _currentStep++;
-        });
-      } else {
-        // Handle form submission
-        showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
-            title: const Text('Success'),
-            content: const Text('Form submitted successfully!'),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: const Text('OK'),
-              ),
-            ],
-          ),
-        );
-      }
-    } */
     // Validate the current form
     if (formState != null && !formState.validate()) {
       // If validation fails, return or show a message (optional)
@@ -11431,78 +11415,6 @@ class _NewClientJobState extends State<NewClient> {
         );
       }
     }
-
-    /*  widget.scrollController.animateTo(
-        0, // Scroll to top
-        duration: const Duration(milliseconds: 500),
-        curve: Curves.easeInOut,
-      ); */
-    // Move to the next step if validation passes
-    /* else if (formState != null && !formState.validate()) {
-      widget.scrollController.animateTo(
-        0, // Scroll to top
-        duration: const Duration(milliseconds: 500),
-        curve: Curves.easeInOut,
-      );
-
-      /*  widget.scrollController.animateTo(
-        0, // Scroll to top
-        duration: const Duration(milliseconds: 500),
-        curve: Curves.easeInOut,
-      ); */
-      // Move to the next step if validation passes
-      if (_currentStep < _formKeys.length - 1) {
-        setState(() {
-          _currentStep++;
-        });
-      } else {
-        // Handle form submission
-        showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
-            title: const Text('Success'),
-            content: const Text('Form submitted successfully!'),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: const Text('OK'),
-              ),
-            ],
-          ),
-        );
-      }
-    } */
-    /* else {
-      widget.scrollController.animateTo(
-        0, // Scrolls to the top
-        duration: Duration(milliseconds: 500), // Smooth animation
-        curve: Curves.easeInOut,
-      );
-      if (_currentStep < _formKeys.length - 1) {
-        setState(() {
-          _currentStep++;
-        });
-      } else {
-        // Handle form submission
-        showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
-            title: const Text('Success'),
-            content: const Text('Form submitted successfully!'),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: const Text('OK'),
-              ),
-            ],
-          ),
-        );
-      }
-    } */
   }
 
   @override
