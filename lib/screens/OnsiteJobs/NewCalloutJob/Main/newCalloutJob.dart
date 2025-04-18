@@ -2394,7 +2394,7 @@ class _NewCalloutJobState extends State<NewCalloutJob> {
                                         horizontal: 12,
                                       ),
                                     ),
-                                    keyboardType: TextInputType.multiline,
+                                    keyboardType: TextInputType.text,
                                     onChanged: (value) {
                                       setState(() {
                                         _calloutInstructionsController.text =
@@ -3041,6 +3041,11 @@ class _NewCalloutJobState extends State<NewCalloutJob> {
           ),
           SizedBox(
             height: 40,
+          ),
+          SizedBox(
+            height: MediaQuery.of(context).viewInsets.bottom > 0
+                ? MediaQuery.of(context).viewInsets.bottom + 5
+                : 10,
           ),
         ]);
       case 2:
