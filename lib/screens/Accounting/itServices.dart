@@ -29,7 +29,7 @@ class _ITServicesState extends State<ITServices> {
   ];
 
   Future<Map<String, String>> _fetchUserData() async {
-    await Future.delayed(const Duration(seconds: 1));
+    //await Future.delayed(const Duration(seconds: 1));
     return {
       'customerId': 'SAO.AU.123-456',
       'serviceOffice': 'ALL',
@@ -152,7 +152,7 @@ class _ITServicesState extends State<ITServices> {
 
   Future<Map<String, List<Map<String, String>>>>
       fetchGroupConsumptionItems() async {
-    await Future.delayed(Duration(seconds: 1));
+    //await Future.delayed(Duration(seconds: 1));
     return ITServicesData().itServicesData;
   }
 

@@ -56,6 +56,10 @@ dependencies:
   loading_gifs: ^0.3.0
   #flutter_typeahead: ^4.0.0
   dropdown_search: ^5.0.6
+  dio: ^5.8.0+1
+  pretty_dio_logger: ^1.4.0
+  loader_overlay: ^5.0.0
+  flutter_spinkit: ^5.2.1
 
 dev_dependencies:
   flutter_test:
@@ -90,6 +94,7 @@ flutter:
     - assets/images/welcomeBackIcons/
     - assets/images/icons/NewNoteAdd.png
     - assets/images/icons/addDisabled.png
+    - assets/mockData/OnsiteJobs/onSiteJobs.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

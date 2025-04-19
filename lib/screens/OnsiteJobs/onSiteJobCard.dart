@@ -99,7 +99,7 @@ class OnsiteJobCard extends StatelessWidget {
     );
   }
 
-  final Map<String, String> job;
+  final Map<String, dynamic> job;
 
   @override
   Widget build(BuildContext context) {

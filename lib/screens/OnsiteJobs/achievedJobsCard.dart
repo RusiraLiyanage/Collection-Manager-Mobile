@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:project_code_blue/screens/OnsiteJobs/widgets/collectorsModal.dart';
 
 class AchievedJobsCard extends StatelessWidget {
-  final Map<String, String> job;
+  final Map<String, dynamic> job;
 
   const AchievedJobsCard({
     super.key,

@@ -761,6 +761,10 @@ class _ClientManagementState extends State<ClientManagement> {
                                 ),
                               ),
 
+                              SizedBox(
+                                width: 10,
+                              ),
+
                               // Right Arrow
                               GestureDetector(
                                 onTap: () {

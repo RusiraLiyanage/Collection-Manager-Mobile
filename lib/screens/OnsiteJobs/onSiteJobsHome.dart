@@ -2,7 +2,11 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/rendering.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 import 'package:project_code_blue/ColorSchemas/AppColors.dart';
+import 'package:project_code_blue/screens/OnsiteJobs/Controller/Feature/jobs_notifier.dart';
+import 'package:project_code_blue/screens/OnsiteJobs/Controller/Feature/utils/dialogs.dart';
+import 'package:project_code_blue/screens/OnsiteJobs/Controller/Feature/utils/enums.dart';
 import 'package:project_code_blue/screens/OnsiteJobs/Data/onSiteJobsData.dart';
 import 'package:project_code_blue/screens/OnsiteJobs/achievedJobsCard.dart';
 import 'package:project_code_blue/screens/OnsiteJobs/NewCalloutJob/Main/newCalloutJob.dart';
@@ -51,7 +55,7 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
   int itemsPerPageAchieved = 5; // Default items per page
 
   // Filtered jobs to display based on pagination
-  List<Map<String, String>> get paginatedJobData {
+  List<Map<String, dynamic>> get paginatedJobData {
     int startIndex = (currentPage - 1) * itemsPerPage;
     int endIndex = startIndex + itemsPerPage;
     endIndex = endIndex > jobData.length ? jobData.length : endIndex;
@@ -59,7 +63,7 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
   }
 
   // Filtered achieved jobs to display based on pagination
-  List<Map<String, String>> get paginatedJobDataAchieved {
+  List<Map<String, dynamic>> get paginatedJobDataAchieved {
     int startIndexAchieved = (currentPageAchieved - 1) * itemsPerPageAchieved;
     int endIndexAchieved = startIndexAchieved + itemsPerPageAchieved;
     endIndexAchieved = endIndexAchieved > jobDataAchieved.length
@@ -73,7 +77,7 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
   final List<String> status = ["Show", "Hide"];
   final List<String> filteringAmounts = ["5", "10", "15"];
   final List<String> filteringAmountsArchieved = ["5", "10", "15"];
-  final List<Map<String, String>> jobData = OnsiteJobsData().onSiteJobsData;
+  List<Map<String, dynamic>> jobData = [];
 
   int get totalPagesAchieved =>
       (jobDataAchieved.length / itemsPerPageAchieved).ceil();
@@ -93,6 +97,8 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
 
   bool archieveJobsOpened = false;
   bool showMainJobs = true;
+
+  var isVisible = true;
 
   String get displayRange {
     int start = ((currentPage - 1) * itemsPerPage) + 1;
@@ -118,6 +124,19 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
     _selectedFilteringValue = filteringAmounts.first;
     _selectedFilteringValueAchieved = filteringAmountsArchieved.first;
     // Initialize selected value
+
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      final jobsState = Provider.of<JobsNotifier>(context, listen: false);
+      context.loaderOverlay.show();
+      isVisible = context.loaderOverlay.visible;
+      final jobs = await jobsState.getJobs(); // <-- Fetch data here
+
+      setState(() {
+        jobData = jobs.map((job) => job.toJson()).toList();
+        context.loaderOverlay.hide();
+        isVisible = context.loaderOverlay.visible;
+      });
+    });
 
     // Add listener to monitor scroll changes
     _scrollController.addListener(() {
@@ -442,43 +461,6 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
                                         );
                                       },
                                     );
-                                    /* showCupertinoModalBottomSheet(
-                                      transitionBackgroundColor:
-                                          Colors.transparent,
-                                      enableDrag: false,
-                                      isDismissible: false,
-                                      expand: true,
-                                      context: context,
-                                      backgroundColor: Colors.transparent,
-                                      builder: (context) =>
-                                          DraggableScrollableSheet(
-                                        initialChildSize:
-                                            1, // Sets the initial size to 100% of the screen
-                                        minChildSize:
-                                            1, // Minimum size (100% of the screen)
-                                        maxChildSize:
-                                            1, // Maximum size (100% of the screen)
-                                        builder: (context, scrollController) {
-                                          return Container(
-                                            decoration: BoxDecoration(
-                                              color: Colors.white,
-                                              borderRadius:
-                                                  BorderRadius.vertical(
-                                                top: Radius.circular(40),
-                                              ),
-                                            ),
-                                            child: Container(
-                                              child: NewJobAndroidEdited(
-                                                scrollController:
-                                                    scrollController,
-                                              ),
-
-                                              // const NewJob(),
-                                            ),
-                                          );
-                                        },
-                                      ),
-                                    ); */
                                   }
                                 },
                                 child: Align(
@@ -917,757 +899,808 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
                             )
                           : null),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 70.0),
-                  child: Column(
-                    children: [
-                      ListView.builder(
-                        padding: EdgeInsets.zero,
-                        shrinkWrap: true,
-                        physics: const ClampingScrollPhysics(),
-                        itemCount: paginatedJobData.length,
-                        itemBuilder: (context, index) {
-                          final job = paginatedJobData[index];
-                          return Center(
-                            child: Padding(
-                              padding: const EdgeInsets.only(
-                                left: 16.0,
-                                right: 16.0,
-                                bottom: 10.0,
-                              ),
-                              child: OnsiteJobCard(job: job),
-                            ),
-                          );
-                        },
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                          left: 10.0,
-                          right: 70,
-                        ),
-                        child: Align(
-                          alignment: Alignment.topLeft,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(right: 30.0),
-                                child: Text(
-                                  "Show",
-                                  style: TextStyle(
-                                    color: Color(0xFF005277),
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                width: 100,
-                                height: 28,
-                                child: DropdownButtonFormField<String>(
-                                  focusColor: Colors.white,
-                                  value: _selectedFilteringValue,
-                                  decoration: InputDecoration(
-                                    contentPadding: const EdgeInsets.symmetric(
-                                        horizontal: 8, vertical: 4),
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(0),
-                                      borderSide: BorderSide(
-                                          color: Colors.grey, width: 2),
-                                    ),
-                                    enabledBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(0),
-                                      borderSide: BorderSide(
-                                          color: Colors.grey,
-                                          width: 2), // Border colo
-                                    ),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(0),
-                                      borderSide: BorderSide(
-                                          color: Colors.grey,
-                                          width:
-                                              2), // Border color when focused
-                                    ),
-                                    fillColor: Colors
-                                        .white, // Set the background color to white
-                                    filled: true,
-                                    // Enable the fill color
-                                  ),
-                                  icon: Icon(Icons.arrow_drop_down,
-                                      color: Colors.black),
-                                  items: filteringAmounts
-                                      .map((item) => DropdownMenuItem(
-                                            value: item,
-                                            child: Text(
-                                              item,
-                                              style: TextStyle(
-                                                fontSize: 14,
-                                                color: Color(0xFF007AFF),
-                                              ),
-                                            ),
-                                          ))
-                                      .toList(),
-                                  onChanged: (value) {
-                                    setState(() {
-                                      _selectedFilteringValue = value;
-                                      itemsPerPage = int.parse(value!);
-                                      currentPage = 1; // Reset to first page
-                                      _scrollController.animateTo(
-                                        0,
-                                        duration: Duration(milliseconds: 500),
-                                        curve: Curves.easeOut,
+                !isVisible
+                    ? Padding(
+                        padding: const EdgeInsets.only(bottom: 70.0),
+                        child: Column(
+                          children: [
+                            Consumer<JobsNotifier>(
+                              builder: (context, jobsNotifier, child) {
+                                if (jobsNotifier.uiState == UiState.loading) {
+                                  print('yes loading called');
+                                  /* return const Center(
+                                child: CircularProgressIndicator()); */
+                                }
+                                if (jobsNotifier.uiState == UiState.error) {
+                                  DialogHelper.showError(
+                                    context: context,
+                                    title: "Jobs",
+                                    message: jobsNotifier.errorMessage ??
+                                        "An error occurred",
+                                  );
+                                  return const SizedBox
+                                      .shrink(); // Return an empty widget
+                                }
+                                if (jobsNotifier.uiState == UiState.success) {
+                                  return ListView.builder(
+                                    padding: EdgeInsets.zero,
+                                    shrinkWrap: true,
+                                    physics: const ClampingScrollPhysics(),
+                                    itemCount: paginatedJobData.length,
+                                    itemBuilder: (context, index) {
+                                      final job = paginatedJobData[index];
+                                      return Center(
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(
+                                            left: 16.0,
+                                            right: 16.0,
+                                            bottom: 10.0,
+                                          ),
+                                          child: OnsiteJobCard(job: job),
+                                        ),
                                       );
-                                    });
-                                  },
-                                ),
-                              ),
-                              const Spacer(),
-                              Container(
-                                width: 65,
-                                height: 20,
-                                child: Text(
-                                  "Navigate",
-                                  style: TextStyle(
-                                    color: Color(0xFF005277),
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              // Left Arrow
-                              GestureDetector(
-                                onTap: () {
-                                  // Handle left arrow click (e.g., navigate left)
-                                  if (currentPage > 1) {
-                                    setState(() {
-                                      currentPage--;
-                                    });
-                                    _scrollController.animateTo(
-                                      0,
-                                      duration: Duration(milliseconds: 500),
-                                      curve: Curves.easeOut,
-                                    );
-                                  }
-                                },
-                                child: Container(
-                                  width: 28,
-                                  height: 28,
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                        color: Colors.grey, width: 2),
-                                    color: Colors.white,
-                                  ),
-                                  child: Icon(
-                                    Icons.arrow_left,
-                                    color: Color(0xFF005277),
-                                    size: 20,
-                                  ),
-                                ),
-                              ),
-
-                              // Right Arrow
-                              GestureDetector(
-                                onTap: () {
-                                  // Handle right arrow click (e.g., navigate right)
-                                  if (currentPage < totalPages) {
-                                    setState(() {
-                                      currentPage++;
-                                    });
-                                    _scrollController.animateTo(
-                                      0,
-                                      duration: Duration(milliseconds: 500),
-                                      curve: Curves.easeOut,
-                                    );
-                                  }
-                                },
-                                child: Container(
-                                  width: 28,
-                                  height: 28,
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                        color: Colors.grey, width: 2),
-                                    color: Colors.white,
-                                  ),
-                                  child: Icon(
-                                    Icons.arrow_right,
-                                    color: Color(0xFF005277),
-                                    size: 20,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Align(
-                          alignment: Alignment.topLeft,
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 10.0),
-                            child: GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  archieveJobsOpened = !archieveJobsOpened;
-                                  if (!archieveJobsOpened) {
-                                    showMainJobs = true;
-                                  } else {
-                                    showMainJobs = false;
-                                  }
-                                  if (archieveJobsOpened) {
-                                    if (_selectedFilteringValue != "5") {
-                                      String? theSelected =
-                                          _selectedFilteringValue;
-                                      setState(() {
-                                        _selectedFilteringValue =
-                                            filteringAmounts.first;
-                                        itemsPerPage = 5;
-                                      });
-                                      // Calculate the target offset (80% of the scrollable extent)
-                                      print(theSelected);
-                                      if (theSelected == "10") {
-                                        final double targetOffset =
-                                            _scrollController
-                                                    .position.maxScrollExtent *
-                                                0.5;
-                                        _scrollController.animateTo(
-                                          targetOffset,
-                                          duration: Duration(milliseconds: 500),
-                                          curve: Curves.easeOut,
-                                        );
-                                      } else if (theSelected == "15") {
-                                        final double targetOffset =
-                                            _scrollController
-                                                    .position.maxScrollExtent *
-                                                0.35;
-                                        _scrollController.animateTo(
-                                          targetOffset,
-                                          duration: Duration(milliseconds: 500),
-                                          curve: Curves.easeOut,
-                                        );
-                                      }
-                                    } else {
-                                      _scrollController.animateTo(
-                                        _scrollController.position.pixels +
-                                            100, // Adjust this value to scroll further down
-                                        duration: Duration(milliseconds: 500),
-                                        curve: Curves.easeOut,
-                                      );
-                                    }
-                                  }
-                                });
+                                    },
+                                  );
+                                }
+                                return const SizedBox
+                                    .shrink(); // Default return statement
                               },
-                              child: !archieveJobsOpened
-                                  ? FittedBox(
-                                      child: Image.asset(
-                                        "assets/images/icons/showAchieve.png",
-                                        fit: BoxFit.cover,
-                                      ),
-                                    )
-                                  : FittedBox(
-                                      child: Image.asset(
-                                        "assets/images/icons/hideArchieve.png",
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
                             ),
-                          )),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      archieveJobsOpened
-                          ? Container(
-                              width: double.infinity,
-                              color: const Color(0xFF01B4D2).withOpacity(0.2),
-                              child: Column(
-                                children: [
-                                  Divider(
-                                    thickness: 2.0,
-                                    indent: 10,
-                                    endIndent: 10,
-                                    color: Color(0xFF0047B3),
-                                  ),
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                  Align(
-                                    alignment: Alignment.topRight,
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(
-                                        right: 10.0,
-                                      ),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                left: 10.0,
+                                right: 70,
+                              ),
+                              child: Align(
+                                alignment: Alignment.topLeft,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.only(right: 30.0),
                                       child: Text(
-                                        "$displayRangeAchieved out of ${jobDataAchieved.length} achieved records",
+                                        "Show",
                                         style: TextStyle(
+                                          color: Color(0xFF005277),
                                           fontWeight: FontWeight.bold,
                                         ),
                                       ),
                                     ),
-                                  ),
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                  archieveJobsOpened
-                                      ? Padding(
-                                          padding: const EdgeInsets.only(
-                                            bottom: 35.0,
+                                    Container(
+                                      width: 100,
+                                      height: 28,
+                                      child: DropdownButtonFormField<String>(
+                                        focusColor: Colors.white,
+                                        value: _selectedFilteringValue,
+                                        decoration: InputDecoration(
+                                          contentPadding:
+                                              const EdgeInsets.symmetric(
+                                                  horizontal: 8, vertical: 4),
+                                          border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(0),
+                                            borderSide: BorderSide(
+                                                color: Colors.grey, width: 2),
                                           ),
-                                          child: Column(
-                                            children: [
-                                              ListView.builder(
-                                                padding: EdgeInsets.zero,
-                                                shrinkWrap:
-                                                    true, // Allow ListView to adapt to its content
-                                                physics:
-                                                    ClampingScrollPhysics(),
-                                                itemCount:
-                                                    paginatedJobDataAchieved
-                                                        .length,
-                                                itemBuilder: (context, index) {
-                                                  final job =
-                                                      paginatedJobDataAchieved[
-                                                          index];
-                                                  return Center(
-                                                    child: Padding(
+                                          enabledBorder: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(0),
+                                            borderSide: BorderSide(
+                                                color: Colors.grey,
+                                                width: 2), // Border colo
+                                          ),
+                                          focusedBorder: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(0),
+                                            borderSide: BorderSide(
+                                                color: Colors.grey,
+                                                width:
+                                                    2), // Border color when focused
+                                          ),
+                                          fillColor: Colors
+                                              .white, // Set the background color to white
+                                          filled: true,
+                                          // Enable the fill color
+                                        ),
+                                        icon: Icon(Icons.arrow_drop_down,
+                                            color: Colors.black),
+                                        items: filteringAmounts
+                                            .map((item) => DropdownMenuItem(
+                                                  value: item,
+                                                  child: Text(
+                                                    item,
+                                                    style: TextStyle(
+                                                      fontSize: 14,
+                                                      color: Color(0xFF007AFF),
+                                                    ),
+                                                  ),
+                                                ))
+                                            .toList(),
+                                        onChanged: (value) {
+                                          setState(() {
+                                            _selectedFilteringValue = value;
+                                            itemsPerPage = int.parse(value!);
+                                            currentPage =
+                                                1; // Reset to first page
+                                            _scrollController.animateTo(
+                                              0,
+                                              duration:
+                                                  Duration(milliseconds: 500),
+                                              curve: Curves.easeOut,
+                                            );
+                                          });
+                                        },
+                                      ),
+                                    ),
+                                    const Spacer(),
+                                    Container(
+                                      width: 65,
+                                      height: 20,
+                                      child: Text(
+                                        "Navigate",
+                                        style: TextStyle(
+                                          color: Color(0xFF005277),
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    // Left Arrow
+                                    GestureDetector(
+                                      onTap: () {
+                                        // Handle left arrow click (e.g., navigate left)
+                                        if (currentPage > 1) {
+                                          setState(() {
+                                            currentPage--;
+                                          });
+                                          _scrollController.animateTo(
+                                            0,
+                                            duration:
+                                                Duration(milliseconds: 500),
+                                            curve: Curves.easeOut,
+                                          );
+                                        }
+                                      },
+                                      child: Container(
+                                        width: 28,
+                                        height: 28,
+                                        decoration: BoxDecoration(
+                                          border: Border.all(
+                                              color: Colors.grey, width: 2),
+                                          color: Colors.white,
+                                        ),
+                                        child: Icon(
+                                          Icons.arrow_left,
+                                          color: Color(0xFF005277),
+                                          size: 20,
+                                        ),
+                                      ),
+                                    ),
+
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+
+                                    // Right Arrow
+                                    GestureDetector(
+                                      onTap: () {
+                                        // Handle right arrow click (e.g., navigate right)
+                                        if (currentPage < totalPages) {
+                                          setState(() {
+                                            currentPage++;
+                                          });
+                                          _scrollController.animateTo(
+                                            0,
+                                            duration:
+                                                Duration(milliseconds: 500),
+                                            curve: Curves.easeOut,
+                                          );
+                                        }
+                                      },
+                                      child: Container(
+                                        width: 28,
+                                        height: 28,
+                                        decoration: BoxDecoration(
+                                          border: Border.all(
+                                              color: Colors.grey, width: 2),
+                                          color: Colors.white,
+                                        ),
+                                        child: Icon(
+                                          Icons.arrow_right,
+                                          color: Color(0xFF005277),
+                                          size: 20,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            Align(
+                                alignment: Alignment.topLeft,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(left: 10.0),
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        archieveJobsOpened =
+                                            !archieveJobsOpened;
+                                        if (!archieveJobsOpened) {
+                                          showMainJobs = true;
+                                        } else {
+                                          showMainJobs = false;
+                                        }
+                                        if (archieveJobsOpened) {
+                                          if (_selectedFilteringValue != "5") {
+                                            String? theSelected =
+                                                _selectedFilteringValue;
+                                            setState(() {
+                                              _selectedFilteringValue =
+                                                  filteringAmounts.first;
+                                              itemsPerPage = 5;
+                                            });
+                                            // Calculate the target offset (80% of the scrollable extent)
+                                            print(theSelected);
+                                            if (theSelected == "10") {
+                                              final double targetOffset =
+                                                  _scrollController.position
+                                                          .maxScrollExtent *
+                                                      0.5;
+                                              _scrollController.animateTo(
+                                                targetOffset,
+                                                duration:
+                                                    Duration(milliseconds: 500),
+                                                curve: Curves.easeOut,
+                                              );
+                                            } else if (theSelected == "15") {
+                                              final double targetOffset =
+                                                  _scrollController.position
+                                                          .maxScrollExtent *
+                                                      0.35;
+                                              _scrollController.animateTo(
+                                                targetOffset,
+                                                duration:
+                                                    Duration(milliseconds: 500),
+                                                curve: Curves.easeOut,
+                                              );
+                                            }
+                                          } else {
+                                            _scrollController.animateTo(
+                                              _scrollController
+                                                      .position.pixels +
+                                                  100, // Adjust this value to scroll further down
+                                              duration:
+                                                  Duration(milliseconds: 500),
+                                              curve: Curves.easeOut,
+                                            );
+                                          }
+                                        }
+                                      });
+                                    },
+                                    child: !archieveJobsOpened
+                                        ? FittedBox(
+                                            child: Image.asset(
+                                              "assets/images/icons/showAchieve.png",
+                                              fit: BoxFit.cover,
+                                            ),
+                                          )
+                                        : FittedBox(
+                                            child: Image.asset(
+                                              "assets/images/icons/hideArchieve.png",
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
+                                  ),
+                                )),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            archieveJobsOpened
+                                ? Container(
+                                    width: double.infinity,
+                                    color: const Color(0xFF01B4D2)
+                                        .withOpacity(0.2),
+                                    child: Column(
+                                      children: [
+                                        Divider(
+                                          thickness: 2.0,
+                                          indent: 10,
+                                          endIndent: 10,
+                                          color: Color(0xFF0047B3),
+                                        ),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        Align(
+                                          alignment: Alignment.topRight,
+                                          child: Padding(
+                                            padding: const EdgeInsets.only(
+                                              right: 10.0,
+                                            ),
+                                            child: Text(
+                                              "$displayRangeAchieved out of ${jobDataAchieved.length} achieved records",
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        archieveJobsOpened
+                                            ? Padding(
+                                                padding: const EdgeInsets.only(
+                                                  bottom: 35.0,
+                                                ),
+                                                child: Column(
+                                                  children: [
+                                                    ListView.builder(
+                                                      padding: EdgeInsets.zero,
+                                                      shrinkWrap:
+                                                          true, // Allow ListView to adapt to its content
+                                                      physics:
+                                                          ClampingScrollPhysics(),
+                                                      itemCount:
+                                                          paginatedJobDataAchieved
+                                                              .length,
+                                                      itemBuilder:
+                                                          (context, index) {
+                                                        final job =
+                                                            paginatedJobDataAchieved[
+                                                                index];
+                                                        return Center(
+                                                          child: Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .only(
+                                                              left: 16.0,
+                                                              right: 16.0,
+                                                              bottom: 10.0,
+                                                            ),
+                                                            child:
+                                                                AchievedJobsCard(
+                                                                    job: job),
+                                                          ),
+                                                        );
+                                                      },
+                                                    ),
+                                                    Padding(
                                                       padding:
                                                           const EdgeInsets.only(
-                                                        left: 16.0,
-                                                        right: 16.0,
-                                                        bottom: 10.0,
+                                                        left: 10.0,
+                                                        right: 70,
                                                       ),
-                                                      child: AchievedJobsCard(
-                                                          job: job),
-                                                    ),
-                                                  );
-                                                },
-                                              ),
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                  left: 10.0,
-                                                  right: 70,
-                                                ),
-                                                child: Align(
-                                                  alignment: Alignment.topLeft,
-                                                  child: Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                    children: [
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .only(
-                                                                right: 30.0),
-                                                        child: Text(
-                                                          "Show",
-                                                          style: TextStyle(
-                                                            color: Color(
-                                                                0xFF005277),
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      Container(
-                                                        width: 100,
-                                                        height: 28,
-                                                        child:
-                                                            DropdownButtonFormField<
-                                                                String>(
-                                                          focusColor:
-                                                              Colors.white,
-                                                          value:
-                                                              _selectedFilteringValueAchieved,
-                                                          decoration:
-                                                              InputDecoration(
-                                                            contentPadding:
-                                                                const EdgeInsets
-                                                                    .symmetric(
-                                                                    horizontal:
-                                                                        8,
-                                                                    vertical:
-                                                                        4),
-                                                            border:
-                                                                OutlineInputBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          0),
-                                                              borderSide:
-                                                                  BorderSide(
+                                                      child: Align(
+                                                        alignment:
+                                                            Alignment.topLeft,
+                                                        child: Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          children: [
+                                                            Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                      .only(
+                                                                      right:
+                                                                          30.0),
+                                                              child: Text(
+                                                                "Show",
+                                                                style:
+                                                                    TextStyle(
+                                                                  color: Color(
+                                                                      0xFF005277),
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                ),
+                                                              ),
+                                                            ),
+                                                            Container(
+                                                              width: 100,
+                                                              height: 28,
+                                                              child:
+                                                                  DropdownButtonFormField<
+                                                                      String>(
+                                                                focusColor:
+                                                                    Colors
+                                                                        .white,
+                                                                value:
+                                                                    _selectedFilteringValueAchieved,
+                                                                decoration:
+                                                                    InputDecoration(
+                                                                  contentPadding: const EdgeInsets
+                                                                      .symmetric(
+                                                                      horizontal:
+                                                                          8,
+                                                                      vertical:
+                                                                          4),
+                                                                  border:
+                                                                      OutlineInputBorder(
+                                                                    borderRadius:
+                                                                        BorderRadius
+                                                                            .circular(0),
+                                                                    borderSide: BorderSide(
+                                                                        color: Colors
+                                                                            .grey,
+                                                                        width:
+                                                                            2),
+                                                                  ),
+                                                                  enabledBorder:
+                                                                      OutlineInputBorder(
+                                                                    borderRadius:
+                                                                        BorderRadius
+                                                                            .circular(0),
+                                                                    borderSide: BorderSide(
+                                                                        color: Colors
+                                                                            .grey,
+                                                                        width:
+                                                                            2), // Border colo
+                                                                  ),
+                                                                  focusedBorder:
+                                                                      OutlineInputBorder(
+                                                                    borderRadius:
+                                                                        BorderRadius
+                                                                            .circular(0),
+                                                                    borderSide: BorderSide(
+                                                                        color: Colors
+                                                                            .grey,
+                                                                        width:
+                                                                            2), // Border color when focused
+                                                                  ),
+                                                                  fillColor: Colors
+                                                                      .white, // Set the background color to white
+                                                                  filled: true,
+                                                                  // Enable the fill color
+                                                                ),
+                                                                icon: Icon(
+                                                                    Icons
+                                                                        .arrow_drop_down,
+                                                                    color: Colors
+                                                                        .black),
+                                                                items:
+                                                                    filteringAmountsArchieved
+                                                                        .map((item) =>
+                                                                            DropdownMenuItem(
+                                                                              value: item,
+                                                                              child: Text(
+                                                                                item,
+                                                                                style: TextStyle(
+                                                                                  fontSize: 14,
+                                                                                  color: Color(0xFF007AFF),
+                                                                                ),
+                                                                              ),
+                                                                            ))
+                                                                        .toList(),
+                                                                onChanged:
+                                                                    (value) {
+                                                                  setState(() {
+                                                                    _selectedFilteringValueAchieved =
+                                                                        value;
+
+                                                                    itemsPerPageAchieved =
+                                                                        int.parse(
+                                                                            value!);
+                                                                    currentPageAchieved =
+                                                                        1; // Reset to first page
+                                                                    if (_selectedFilteringValueAchieved ==
+                                                                        "5") {
+                                                                      final double
+                                                                          maxScrollExtent =
+                                                                          _scrollController
+                                                                              .position
+                                                                              .maxScrollExtent;
+                                                                      final double
+                                                                          targetOffset =
+                                                                          maxScrollExtent *
+                                                                              0.5; // Slightly more than half (60%).
+                                                                      // Use animateTo to smoothly scroll to the desired position.
+                                                                      _scrollController
+                                                                          .animateTo(
+                                                                        targetOffset,
+                                                                        duration:
+                                                                            Duration(milliseconds: 500),
+                                                                        curve: Curves
+                                                                            .easeInOut,
+                                                                      );
+                                                                    } else if (_selectedFilteringValueAchieved ==
+                                                                        "10") {
+                                                                      print(
+                                                                          "10 is here");
+                                                                      final double
+                                                                          maxScrollExtent =
+                                                                          _scrollController
+                                                                              .position
+                                                                              .maxScrollExtent;
+                                                                      final double
+                                                                          targetOffset =
+                                                                          maxScrollExtent *
+                                                                              0.5; // Slightly more than half (60%).
+                                                                      // Use animateTo to smoothly scroll to the desired position.
+                                                                      _scrollController
+                                                                          .animateTo(
+                                                                        targetOffset,
+                                                                        duration:
+                                                                            Duration(milliseconds: 500),
+                                                                        curve: Curves
+                                                                            .easeInOut,
+                                                                      );
+                                                                    } else if (_selectedFilteringValueAchieved ==
+                                                                        "15") {
+                                                                      final double
+                                                                          maxScrollExtent =
+                                                                          _scrollController
+                                                                              .position
+                                                                              .maxScrollExtent;
+                                                                      final double
+                                                                          targetOffset =
+                                                                          maxScrollExtent *
+                                                                              0.55; // Slightly more than half (60%).
+                                                                      // Use animateTo to smoothly scroll to the desired position.
+                                                                      _scrollController
+                                                                          .animateTo(
+                                                                        targetOffset,
+                                                                        duration:
+                                                                            Duration(milliseconds: 500),
+                                                                        curve: Curves
+                                                                            .easeInOut,
+                                                                      );
+                                                                    }
+                                                                  });
+                                                                },
+                                                              ),
+                                                            ),
+                                                            const Spacer(),
+                                                            Container(
+                                                              width: 65,
+                                                              height: 20,
+                                                              child: Text(
+                                                                "Navigate",
+                                                                style:
+                                                                    TextStyle(
+                                                                  color: Color(
+                                                                      0xFF005277),
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                ),
+                                                              ),
+                                                            ),
+                                                            SizedBox(
+                                                              width: 10,
+                                                            ),
+                                                            // Left Arrow
+                                                            GestureDetector(
+                                                              onTap: () {
+                                                                // Handle left arrow click (e.g., navigate left)
+                                                                if (currentPageAchieved >
+                                                                    1) {
+                                                                  setState(() {
+                                                                    currentPageAchieved--;
+                                                                  });
+                                                                  if (_selectedFilteringValueAchieved ==
+                                                                      "5") {
+                                                                    final double
+                                                                        maxScrollExtent =
+                                                                        _scrollController
+                                                                            .position
+                                                                            .maxScrollExtent;
+                                                                    final double
+                                                                        targetOffset =
+                                                                        maxScrollExtent *
+                                                                            0.5; // Slightly more than half (60%).
+                                                                    // Use animateTo to smoothly scroll to the desired position.
+                                                                    _scrollController
+                                                                        .animateTo(
+                                                                      targetOffset,
+                                                                      duration: Duration(
+                                                                          milliseconds:
+                                                                              500),
+                                                                      curve: Curves
+                                                                          .easeInOut,
+                                                                    );
+                                                                  } else if (_selectedFilteringValueAchieved ==
+                                                                      "10") {
+                                                                    print(
+                                                                        "10 is here");
+                                                                    final double
+                                                                        maxScrollExtent =
+                                                                        _scrollController
+                                                                            .position
+                                                                            .maxScrollExtent;
+                                                                    final double
+                                                                        targetOffset =
+                                                                        maxScrollExtent *
+                                                                            0.5; // Slightly more than half (60%).
+                                                                    // Use animateTo to smoothly scroll to the desired position.
+                                                                    _scrollController
+                                                                        .animateTo(
+                                                                      targetOffset,
+                                                                      duration: Duration(
+                                                                          milliseconds:
+                                                                              500),
+                                                                      curve: Curves
+                                                                          .easeInOut,
+                                                                    );
+                                                                  } else if (_selectedFilteringValueAchieved ==
+                                                                      "15") {
+                                                                    final double
+                                                                        maxScrollExtent =
+                                                                        _scrollController
+                                                                            .position
+                                                                            .maxScrollExtent;
+                                                                    final double
+                                                                        targetOffset =
+                                                                        maxScrollExtent *
+                                                                            0.3; // Slightly more than half (60%).
+                                                                    // Use animateTo to smoothly scroll to the desired position.
+                                                                    _scrollController
+                                                                        .animateTo(
+                                                                      targetOffset,
+                                                                      duration: Duration(
+                                                                          milliseconds:
+                                                                              500),
+                                                                      curve: Curves
+                                                                          .easeInOut,
+                                                                    );
+                                                                  }
+                                                                }
+                                                              },
+                                                              child: Container(
+                                                                width: 28,
+                                                                height: 28,
+                                                                decoration:
+                                                                    BoxDecoration(
+                                                                  border: Border.all(
                                                                       color: Colors
                                                                           .grey,
                                                                       width: 2),
-                                                            ),
-                                                            enabledBorder:
-                                                                OutlineInputBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          0),
-                                                              borderSide: BorderSide(
                                                                   color: Colors
-                                                                      .grey,
-                                                                  width:
-                                                                      2), // Border colo
+                                                                      .white,
+                                                                ),
+                                                                child: Icon(
+                                                                  Icons
+                                                                      .arrow_left,
+                                                                  color: Color(
+                                                                      0xFF005277),
+                                                                  size: 20,
+                                                                ),
+                                                              ),
                                                             ),
-                                                            focusedBorder:
-                                                                OutlineInputBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          0),
-                                                              borderSide: BorderSide(
+
+                                                            // Right Arrow
+                                                            GestureDetector(
+                                                              onTap: () {
+                                                                // Handle right arrow click (e.g., navigate right)
+                                                                if (currentPageAchieved <
+                                                                    totalPagesAchieved) {
+                                                                  setState(() {
+                                                                    currentPageAchieved++;
+                                                                  });
+                                                                  if (_selectedFilteringValueAchieved ==
+                                                                      "5") {
+                                                                    print(
+                                                                        "5 is here");
+                                                                    final double
+                                                                        maxScrollExtent =
+                                                                        _scrollController
+                                                                            .position
+                                                                            .maxScrollExtent;
+                                                                    final double
+                                                                        targetOffset =
+                                                                        maxScrollExtent *
+                                                                            0.5; // Slightly more than half (60%).
+                                                                    // Use animateTo to smoothly scroll to the desired position.
+                                                                    _scrollController
+                                                                        .animateTo(
+                                                                      targetOffset,
+                                                                      duration: Duration(
+                                                                          milliseconds:
+                                                                              500),
+                                                                      curve: Curves
+                                                                          .easeInOut,
+                                                                    );
+                                                                  } else if (_selectedFilteringValueAchieved ==
+                                                                      "10") {
+                                                                    print(
+                                                                        "10 is here");
+                                                                    final double
+                                                                        maxScrollExtent =
+                                                                        _scrollController
+                                                                            .position
+                                                                            .maxScrollExtent;
+                                                                    final double
+                                                                        targetOffset =
+                                                                        maxScrollExtent *
+                                                                            0.35; // Slightly more than half (60%).
+                                                                    // Use animateTo to smoothly scroll to the desired position.
+                                                                    _scrollController
+                                                                        .animateTo(
+                                                                      targetOffset,
+                                                                      duration: Duration(
+                                                                          milliseconds:
+                                                                              500),
+                                                                      curve: Curves
+                                                                          .easeInOut,
+                                                                    );
+                                                                  } else if (_selectedFilteringValueAchieved ==
+                                                                      "15") {
+                                                                    final double
+                                                                        maxScrollExtent =
+                                                                        _scrollController
+                                                                            .position
+                                                                            .maxScrollExtent;
+                                                                    final double
+                                                                        targetOffset =
+                                                                        maxScrollExtent *
+                                                                            0.3; // Slightly more than half (60%).
+                                                                    // Use animateTo to smoothly scroll to the desired position.
+                                                                    _scrollController
+                                                                        .animateTo(
+                                                                      targetOffset,
+                                                                      duration: Duration(
+                                                                          milliseconds:
+                                                                              500),
+                                                                      curve: Curves
+                                                                          .easeInOut,
+                                                                    );
+                                                                  }
+                                                                }
+                                                              },
+                                                              child: Container(
+                                                                width: 28,
+                                                                height: 28,
+                                                                decoration:
+                                                                    BoxDecoration(
+                                                                  border: Border.all(
+                                                                      color: Colors
+                                                                          .grey,
+                                                                      width: 2),
                                                                   color: Colors
-                                                                      .grey,
-                                                                  width:
-                                                                      2), // Border color when focused
+                                                                      .white,
+                                                                ),
+                                                                child: Icon(
+                                                                  Icons
+                                                                      .arrow_right,
+                                                                  color: Color(
+                                                                      0xFF005277),
+                                                                  size: 20,
+                                                                ),
+                                                              ),
                                                             ),
-                                                            fillColor: Colors
-                                                                .white, // Set the background color to white
-                                                            filled: true,
-                                                            // Enable the fill color
-                                                          ),
-                                                          icon: Icon(
-                                                              Icons
-                                                                  .arrow_drop_down,
-                                                              color:
-                                                                  Colors.black),
-                                                          items:
-                                                              filteringAmountsArchieved
-                                                                  .map((item) =>
-                                                                      DropdownMenuItem(
-                                                                        value:
-                                                                            item,
-                                                                        child:
-                                                                            Text(
-                                                                          item,
-                                                                          style:
-                                                                              TextStyle(
-                                                                            fontSize:
-                                                                                14,
-                                                                            color:
-                                                                                Color(0xFF007AFF),
-                                                                          ),
-                                                                        ),
-                                                                      ))
-                                                                  .toList(),
-                                                          onChanged: (value) {
-                                                            setState(() {
-                                                              _selectedFilteringValueAchieved =
-                                                                  value;
-
-                                                              itemsPerPageAchieved =
-                                                                  int.parse(
-                                                                      value!);
-                                                              currentPageAchieved =
-                                                                  1; // Reset to first page
-                                                              if (_selectedFilteringValueAchieved ==
-                                                                  "5") {
-                                                                final double
-                                                                    maxScrollExtent =
-                                                                    _scrollController
-                                                                        .position
-                                                                        .maxScrollExtent;
-                                                                final double
-                                                                    targetOffset =
-                                                                    maxScrollExtent *
-                                                                        0.5; // Slightly more than half (60%).
-                                                                // Use animateTo to smoothly scroll to the desired position.
-                                                                _scrollController
-                                                                    .animateTo(
-                                                                  targetOffset,
-                                                                  duration: Duration(
-                                                                      milliseconds:
-                                                                          500),
-                                                                  curve: Curves
-                                                                      .easeInOut,
-                                                                );
-                                                              } else if (_selectedFilteringValueAchieved ==
-                                                                  "10") {
-                                                                print(
-                                                                    "10 is here");
-                                                                final double
-                                                                    maxScrollExtent =
-                                                                    _scrollController
-                                                                        .position
-                                                                        .maxScrollExtent;
-                                                                final double
-                                                                    targetOffset =
-                                                                    maxScrollExtent *
-                                                                        0.5; // Slightly more than half (60%).
-                                                                // Use animateTo to smoothly scroll to the desired position.
-                                                                _scrollController
-                                                                    .animateTo(
-                                                                  targetOffset,
-                                                                  duration: Duration(
-                                                                      milliseconds:
-                                                                          500),
-                                                                  curve: Curves
-                                                                      .easeInOut,
-                                                                );
-                                                              } else if (_selectedFilteringValueAchieved ==
-                                                                  "15") {
-                                                                final double
-                                                                    maxScrollExtent =
-                                                                    _scrollController
-                                                                        .position
-                                                                        .maxScrollExtent;
-                                                                final double
-                                                                    targetOffset =
-                                                                    maxScrollExtent *
-                                                                        0.55; // Slightly more than half (60%).
-                                                                // Use animateTo to smoothly scroll to the desired position.
-                                                                _scrollController
-                                                                    .animateTo(
-                                                                  targetOffset,
-                                                                  duration: Duration(
-                                                                      milliseconds:
-                                                                          500),
-                                                                  curve: Curves
-                                                                      .easeInOut,
-                                                                );
-                                                              }
-                                                            });
-                                                          },
+                                                          ],
                                                         ),
                                                       ),
-                                                      const Spacer(),
-                                                      Container(
-                                                        width: 65,
-                                                        height: 20,
-                                                        child: Text(
-                                                          "Navigate",
-                                                          style: TextStyle(
-                                                            color: Color(
-                                                                0xFF005277),
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      SizedBox(
-                                                        width: 10,
-                                                      ),
-                                                      // Left Arrow
-                                                      GestureDetector(
-                                                        onTap: () {
-                                                          // Handle left arrow click (e.g., navigate left)
-                                                          if (currentPageAchieved >
-                                                              1) {
-                                                            setState(() {
-                                                              currentPageAchieved--;
-                                                            });
-                                                            if (_selectedFilteringValueAchieved ==
-                                                                "5") {
-                                                              final double
-                                                                  maxScrollExtent =
-                                                                  _scrollController
-                                                                      .position
-                                                                      .maxScrollExtent;
-                                                              final double
-                                                                  targetOffset =
-                                                                  maxScrollExtent *
-                                                                      0.5; // Slightly more than half (60%).
-                                                              // Use animateTo to smoothly scroll to the desired position.
-                                                              _scrollController
-                                                                  .animateTo(
-                                                                targetOffset,
-                                                                duration: Duration(
-                                                                    milliseconds:
-                                                                        500),
-                                                                curve: Curves
-                                                                    .easeInOut,
-                                                              );
-                                                            } else if (_selectedFilteringValueAchieved ==
-                                                                "10") {
-                                                              print(
-                                                                  "10 is here");
-                                                              final double
-                                                                  maxScrollExtent =
-                                                                  _scrollController
-                                                                      .position
-                                                                      .maxScrollExtent;
-                                                              final double
-                                                                  targetOffset =
-                                                                  maxScrollExtent *
-                                                                      0.5; // Slightly more than half (60%).
-                                                              // Use animateTo to smoothly scroll to the desired position.
-                                                              _scrollController
-                                                                  .animateTo(
-                                                                targetOffset,
-                                                                duration: Duration(
-                                                                    milliseconds:
-                                                                        500),
-                                                                curve: Curves
-                                                                    .easeInOut,
-                                                              );
-                                                            } else if (_selectedFilteringValueAchieved ==
-                                                                "15") {
-                                                              final double
-                                                                  maxScrollExtent =
-                                                                  _scrollController
-                                                                      .position
-                                                                      .maxScrollExtent;
-                                                              final double
-                                                                  targetOffset =
-                                                                  maxScrollExtent *
-                                                                      0.3; // Slightly more than half (60%).
-                                                              // Use animateTo to smoothly scroll to the desired position.
-                                                              _scrollController
-                                                                  .animateTo(
-                                                                targetOffset,
-                                                                duration: Duration(
-                                                                    milliseconds:
-                                                                        500),
-                                                                curve: Curves
-                                                                    .easeInOut,
-                                                              );
-                                                            }
-                                                          }
-                                                        },
-                                                        child: Container(
-                                                          width: 28,
-                                                          height: 28,
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            border: Border.all(
-                                                                color:
-                                                                    Colors.grey,
-                                                                width: 2),
-                                                            color: Colors.white,
-                                                          ),
-                                                          child: Icon(
-                                                            Icons.arrow_left,
-                                                            color: Color(
-                                                                0xFF005277),
-                                                            size: 20,
-                                                          ),
-                                                        ),
-                                                      ),
-
-                                                      // Right Arrow
-                                                      GestureDetector(
-                                                        onTap: () {
-                                                          // Handle right arrow click (e.g., navigate right)
-                                                          if (currentPageAchieved <
-                                                              totalPagesAchieved) {
-                                                            setState(() {
-                                                              currentPageAchieved++;
-                                                            });
-                                                            if (_selectedFilteringValueAchieved ==
-                                                                "5") {
-                                                              print(
-                                                                  "5 is here");
-                                                              final double
-                                                                  maxScrollExtent =
-                                                                  _scrollController
-                                                                      .position
-                                                                      .maxScrollExtent;
-                                                              final double
-                                                                  targetOffset =
-                                                                  maxScrollExtent *
-                                                                      0.5; // Slightly more than half (60%).
-                                                              // Use animateTo to smoothly scroll to the desired position.
-                                                              _scrollController
-                                                                  .animateTo(
-                                                                targetOffset,
-                                                                duration: Duration(
-                                                                    milliseconds:
-                                                                        500),
-                                                                curve: Curves
-                                                                    .easeInOut,
-                                                              );
-                                                            } else if (_selectedFilteringValueAchieved ==
-                                                                "10") {
-                                                              print(
-                                                                  "10 is here");
-                                                              final double
-                                                                  maxScrollExtent =
-                                                                  _scrollController
-                                                                      .position
-                                                                      .maxScrollExtent;
-                                                              final double
-                                                                  targetOffset =
-                                                                  maxScrollExtent *
-                                                                      0.35; // Slightly more than half (60%).
-                                                              // Use animateTo to smoothly scroll to the desired position.
-                                                              _scrollController
-                                                                  .animateTo(
-                                                                targetOffset,
-                                                                duration: Duration(
-                                                                    milliseconds:
-                                                                        500),
-                                                                curve: Curves
-                                                                    .easeInOut,
-                                                              );
-                                                            } else if (_selectedFilteringValueAchieved ==
-                                                                "15") {
-                                                              final double
-                                                                  maxScrollExtent =
-                                                                  _scrollController
-                                                                      .position
-                                                                      .maxScrollExtent;
-                                                              final double
-                                                                  targetOffset =
-                                                                  maxScrollExtent *
-                                                                      0.3; // Slightly more than half (60%).
-                                                              // Use animateTo to smoothly scroll to the desired position.
-                                                              _scrollController
-                                                                  .animateTo(
-                                                                targetOffset,
-                                                                duration: Duration(
-                                                                    milliseconds:
-                                                                        500),
-                                                                curve: Curves
-                                                                    .easeInOut,
-                                                              );
-                                                            }
-                                                          }
-                                                        },
-                                                        child: Container(
-                                                          width: 28,
-                                                          height: 28,
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            border: Border.all(
-                                                                color:
-                                                                    Colors.grey,
-                                                                width: 2),
-                                                            color: Colors.white,
-                                                          ),
-                                                          child: Icon(
-                                                            Icons.arrow_right,
-                                                            color: Color(
-                                                                0xFF005277),
-                                                            size: 20,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 15,
+                                                    ),
+                                                  ],
                                                 ),
+                                              )
+                                            : SizedBox(
+                                                height: 2,
                                               ),
-                                              SizedBox(
-                                                height: 15,
-                                              ),
-                                            ],
-                                          ),
-                                        )
-                                      : SizedBox(
-                                          height: 2,
-                                        ),
-                                ],
-                              ),
-                            )
-                          : SizedBox(
-                              height: 40,
-                            ),
-                    ],
-                  ),
-                ),
+                                      ],
+                                    ),
+                                  )
+                                : SizedBox(
+                                    height: 40,
+                                  ),
+                          ],
+                        ),
+                      )
+                    : SizedBox(
+                        height: 0,
+                      ),
               ],
             ),
           ),

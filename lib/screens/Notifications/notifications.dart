@@ -105,7 +105,7 @@ class _NotificationsState extends State<Notifications> {
                         color: Colors.blueAccent,
                         onRefresh: () async {
                           // Simulate a network request or data fetch
-                          await Future.delayed(const Duration(seconds: 2));
+                          //await Future.delayed(const Duration(seconds: 2));
                           setState(() {
                             // Refresh or reload the notifications list
                           });
