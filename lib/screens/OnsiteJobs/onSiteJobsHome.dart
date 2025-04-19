@@ -126,16 +126,19 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
     // Initialize selected value
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      final jobsState = Provider.of<JobsNotifier>(context, listen: false);
-      context.loaderOverlay.show();
-      isVisible = context.loaderOverlay.visible;
-      final jobs = await jobsState.getJobs(); // <-- Fetch data here
-
-      setState(() {
-        jobData = jobs.map((job) => job.toJson()).toList();
-        context.loaderOverlay.hide();
+      final appState = Provider.of<AppState>(context, listen: false);
+      if (appState.isOnsiteJobsOpen) {
+        final jobsState = Provider.of<JobsNotifier>(context, listen: false);
+        context.loaderOverlay.show();
         isVisible = context.loaderOverlay.visible;
-      });
+        final jobs = await jobsState.getJobs(); // <-- Fetch data here
+
+        setState(() {
+          jobData = jobs.map((job) => job.toJson()).toList();
+          context.loaderOverlay.hide();
+          isVisible = context.loaderOverlay.visible;
+        });
+      }
     });
 
     // Add listener to monitor scroll changes

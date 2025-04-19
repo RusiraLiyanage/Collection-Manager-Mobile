@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:project_code_blue/ColorSchemas/AppColors.dart';
 import 'package:project_code_blue/SplashScreen/splashScreen.dart';
 import 'package:project_code_blue/screens/OnsiteJobs/Controller/Feature/jobs_api.dart';
 import 'package:project_code_blue/screens/OnsiteJobs/Controller/Feature/jobs_notifier.dart';
@@ -22,18 +23,23 @@ void main() {
         ),
       ],
       child: GlobalLoaderOverlay(
-        overlayColor: Colors.grey.withOpacity(0.5),
+        overlayColor: Colors.black.withOpacity(0.2),
         useDefaultLoading: false,
         overlayWidgetBuilder: (_) {
           //ignored progress for the moment
 
           return Center(
-              child: SizedBox(
-            width: 80, // Set your desired size
-            height: 80,
-            child: CupertinoActivityIndicator(
-              radius: 15.0,
-              color: Colors.grey, // default is 10.0
+              child: Padding(
+            padding: const EdgeInsets.only(
+              top: 145.0,
+            ),
+            child: SizedBox(
+              width: 30, // Set your desired size
+              height: 30,
+              child: CupertinoActivityIndicator(
+                radius: 20.0,
+                color: AppColors.primary, // default is 10.0
+              ),
             ),
           ));
         },

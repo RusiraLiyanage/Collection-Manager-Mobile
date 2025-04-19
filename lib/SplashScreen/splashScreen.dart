@@ -60,11 +60,11 @@ class _SplashScreenState extends State<SplashScreen> {
                 fit: BoxFit.contain,
               ),
             ),
-            const SizedBox(height: 25), // Add spacing between logo and text
-            /* CupertinoActivityIndicator(
+            const SizedBox(height: 25),
+            CupertinoActivityIndicator(
               radius: 15.0,
               color: Colors.white, // default is 10.0
-            ), */
+            ),
             const Spacer(), // Push the "Powered by" section to the bottom
             Center(
               child: Padding(
