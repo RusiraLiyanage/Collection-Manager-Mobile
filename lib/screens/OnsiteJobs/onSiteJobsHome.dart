@@ -886,22 +886,26 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
                 SizedBox(
                   height: 10,
                 ),
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: Padding(
-                      padding: const EdgeInsets.only(
-                        right: 18.0,
-                        bottom: 5.0,
+                !isVisible
+                    ? Align(
+                        alignment: Alignment.centerRight,
+                        child: Padding(
+                            padding: const EdgeInsets.only(
+                              right: 18.0,
+                              bottom: 5.0,
+                            ),
+                            child: showMainJobs
+                                ? Text(
+                                    "$displayRange out of ${jobData.length} records",
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  )
+                                : null),
+                      )
+                    : SizedBox(
+                        height: 0,
                       ),
-                      child: showMainJobs
-                          ? Text(
-                              "$displayRange out of ${jobData.length} records",
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                              ),
-                            )
-                          : null),
-                ),
                 !isVisible
                     ? Padding(
                         padding: const EdgeInsets.only(bottom: 70.0),

@@ -371,7 +371,9 @@ class AchievedJobsCard extends StatelessWidget {
                           context: context,
                           barrierDismissible:
                               false, // Prevent closing on backdrop tap
-                          builder: (context) => const CollectorsModal(),
+                          builder: (context) => const CollectorsModal(
+                            collectors: [],
+                          ),
                         ),
                         child: FittedBox(
                           child: Image.asset(

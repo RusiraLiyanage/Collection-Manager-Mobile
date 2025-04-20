@@ -1,207 +1,2865 @@
-  {
-    "status": "success",
-    "data": [
-      {
-        "jobNumber": "1",
-        "jobStatus": "In Progress",
-        "dateTime": "30 Apr 2025 10:00",
-        "client": "Rail NSW",
-        "rep": "John De Diablo",
-        "location": "Parramatta",
-        "service": "Random Testing",
-        "callout": "Callout"
-      },
-      {
-        "jobNumber": "2",
-        "jobStatus": "Draft",
-        "dateTime": "30 Apr 2025 10:00",
-        "client": "Rail NSW",
-        "rep": "John Roberts",
-        "location": "Parramatta",
-        "service": "Random Testing",
-        "callout": "Callout"
-      },
-      {
-        "jobNumber": "3",
-        "jobStatus": "Complete",
-        "dateTime": "30 Apr 2025 10:00",
-        "client": "Rail NSW",
-        "rep": "John Roberts",
-        "location": "Parramatta",
-        "service": "Random Testing",
-        "callout": "Non Callout"
-      },
-      {
-        "jobNumber": "4",
-        "jobStatus": "Planned",
-        "dateTime": "30 Apr 2025 10:00",
-        "client": "Rail NSW",
-        "rep": "John Roberts",
-        "location": "Parramatta",
-        "service": "Random Testing",
-        "callout": "Non Callout"
-      },
-      {
-        "jobNumber": "5",
-        "jobStatus": "Cancelled",
-        "dateTime": "30 Apr 2025 10:00",
-        "client": "Rail NSW",
-        "rep": "John Roberts",
-        "location": "Parramatta",
-        "service": "Random Testing",
-        "callout": "Non Callout"
-      },
-      {
-        "jobNumber": "6",
-        "jobStatus": "Draft",
-        "dateTime": "30 Apr 2025 10:00",
-        "client": "Rail NSW",
-        "rep": "John Roberts",
-        "location": "Parramatta",
-        "service": "Random Testing",
-        "callout": "Non Callout"
-      },
-      {
-        "jobNumber": "7",
-        "jobStatus": "Draft",
-        "dateTime": "30 Apr 2025 10:00",
-        "client": "Rail NSW",
-        "rep": "John Roberts",
-        "location": "Parramatta",
-        "service": "Random Testing",
-        "callout": "Non Callout"
-      },
-      {
-        "jobNumber": "8",
-        "jobStatus": "Draft",
-        "dateTime": "30 Apr 2025 10:00",
-        "client": "Rail NSW",
-        "rep": "John Roberts",
-        "location": "Parramatta",
-        "service": "Random Testing",
-        "callout": "Non Callout"
-      },
-      {
-        "jobNumber": "9",
-        "jobStatus": "Draft",
-        "dateTime": "30 Apr 2025 10:00",
-        "client": "Rail NSW",
-        "rep": "John Roberts",
-        "location": "Parramatta",
-        "service": "Random Testing",
-        "callout": "Non Callout"
-      },
-      {
-        "jobNumber": "10",
-        "jobStatus": "Draft",
-        "dateTime": "30 Apr 2025 10:00",
-        "client": "Rail NSW",
-        "rep": "John Roberts",
-        "location": "Parramatta",
-        "service": "Random Testing",
-        "callout": "Non Callout"
-      },
-      {
-        "jobNumber": "11",
-        "jobStatus": "Draft",
-        "dateTime": "30 Apr 2025 10:00",
-        "client": "Rail NSW",
-        "rep": "John Roberts",
-        "location": "Parramatta",
-        "service": "Random Testing",
-        "callout": "Callout"
-      },
-      {
-        "jobNumber": "12",
-        "jobStatus": "Draft",
-        "dateTime": "30 Apr 2025 10:00",
-        "client": "Rail NSW",
-        "rep": "John Roberts",
-        "location": "Parramatta",
-        "service": "Random Testing",
-        "callout": "Callout"
-      },
-      {
-        "jobNumber": "13",
-        "jobStatus": "Draft",
-        "dateTime": "30 Apr 2025 10:00",
-        "client": "Rail NSW",
-        "rep": "John Roberts",
-        "location": "Parramatta",
-        "service": "Random Testing",
-        "callout": "Non Callout"
-      },
-      {
-        "jobNumber": "14",
-        "jobStatus": "Draft",
-        "dateTime": "30 Apr 2025 10:00",
-        "client": "Rail NSW",
-        "rep": "John Roberts",
-        "location": "Parramatta",
-        "service": "Random Testing",
-        "callout": "Non Callout"
-      },
-      {
-        "jobNumber": "15",
-        "jobStatus": "Draft",
-        "dateTime": "30 Apr 2025 10:00",
-        "client": "Rail NSW",
-        "rep": "John Roberts",
-        "location": "Parramatta",
-        "service": "Random Testing",
-        "callout": "Non Callout"
-      },
-      {
-        "jobNumber": "16",
-        "jobStatus": "Draft",
-        "dateTime": "30 Apr 2025 10:00",
-        "client": "Rail NSW",
-        "rep": "John Roberts",
-        "location": "Parramatta",
-        "service": "Random Testing",
-        "callout": "Non Callout"
-      },
-      {
-        "jobNumber": "17",
-        "jobStatus": "Draft",
-        "dateTime": "30 Apr 2025 10:00",
-        "client": "Rail NSW",
-        "rep": "John Roberts",
-        "location": "Parramatta",
-        "service": "Random Testing",
-        "callout": "Non Callout"
-      },
-      {
-        "jobNumber": "18",
-        "jobStatus": "Draft",
-        "dateTime": "30 Apr 2025 10:00",
-        "client": "Rail NSW",
-        "rep": "John Roberts",
-        "location": "Parramatta",
-        "service": "Random Testing",
-        "callout": "Non Callout"
-      },
-      {
-        "jobNumber": "19",
-        "jobStatus": "Draft",
-        "dateTime": "30 Apr 2025 10:00",
-        "client": "Rail NSW",
-        "rep": "John Roberts",
-        "location": "Parramatta",
-        "service": "Random Testing",
-        "callout": "Non Callout"
-      },
-      {
-        "jobNumber": "20",
-        "jobStatus": "Draft",
-        "dateTime": "30 Apr 2025 10:00",
-        "client": "Rail NSW",
-        "rep": "John Roberts",
-        "location": "Parramatta",
-        "service": "Random Testing",
-        "callout": "Non Callout"
+{
+  "status": "success",
+  "data": [
+    {
+      "jobNumber": "1",
+      "jobStatus": "In Progress",
+      "dateTime": "30 Apr 2025 10:00",
+      "client": "Rail NSW",
+      "rep": "John De Diablo",
+      "location": "Parramatta",
+      "service": "Random Testing",
+      "callout": "No",
+      "collectors": [
+        {
+          "collectorName": "George Poulos",
+          "collectorStatus": "Allocated"
+        },
+        {
+          "collectorName": "Michelle Kirkman",
+          "collectorStatus": "Accepted"
+        },
+        {
+          "collectorName": "Valerie McKenzie",
+          "collectorStatus": "Accepted"
+        },
+        {
+          "collectorName": "Zac Hepburn",
+          "collectorStatus": "Accepted"
+        },
+        {
+          "collectorName": "Gina Landini",
+          "collectorStatus": "Rejected"
+        }
+      ],
+      "bookingInfo": {
+        "organisationInfo": {
+          "collectionOrganisation": "collection0123",
+          "serviceOffice": ["Sydney", "Melbourne", "Paramatta"]
+        },
+        "jobDetails": {
+          "jobType": "In Clinic",
+          "jobDate": "20/04/2025",
+          "startTime": "11:09",
+          "duration": "0:10",
+          "noOfDonors": "6",
+          "jobReference": "jo1234",
+          "typeOfService": "service 123"
+        },
+        "clientInfo": {
+          "clientDetails": [
+            {
+              "clientName": "Client A",
+              "clientReference": "ref123"
+            },
+            {
+              "clientName": "Client B",
+              "clientReference": "ref456"
+            },
+            {
+              "clientName": "Client C",
+              "clientReference": "ref789"
+            }
+          ],
+          "locationDetails": [
+            {
+              "siteName": "Site 1",
+              "siteContacts": [
+                {
+                  "siteContactName": "Alice",
+                  "siteContactMobile": "0418549596"
+                },
+                {
+                  "siteContactName": "Bob",
+                  "siteContactMobile": "0418549596"
+                }
+              ]
+            },
+            {
+              "siteName": "Site 2",
+              "siteContacts": [
+                {
+                  "siteContactName": "Charlie",
+                  "siteContactMobile": "0418549596"
+                },
+                {
+                  "siteContactName": "Diana",
+                  "siteContactMobile": "0418549596"
+                }
+              ]
+            },
+            {
+              "siteName": "Site 3",
+              "siteContacts": [
+                {
+                  "siteContactName": "Eva",
+                  "siteContactMobile": "0418549596"
+                }
+              ]
+            }
+          ],
+          "testsAndDevices": {
+            "testType": "Drug Test Only",
+            "drugTestSpecifications": {
+              "primaryDrugTest": {
+                "drugTestName": "Drug Test 123",
+                "selectPreferedDevice": "Device 123"
+              },
+              "secondaryDrugTest": {
+                "drugTestName": "Drug Test 456",
+                "selectPreferedDevice": "Device 456"
+              },
+              "teritoryDrugTest": {
+                "drugTestName": "Drug Test 789",
+                "selectPreferedDevice": "Device 789"
+              }
+            }
+          },
+          "extraInfo": {
+            "additionalTests": "this is the additional test information",
+            "furtherInfo": "this is the further test information",
+            "donorSelectionProcess": "",
+            "screeningAndTestingProcess": "",
+            "testConfirmationInstructions": "",
+            "globalSiteAccessInstructions": "",
+            "specificLocalSiteAccessInstructions": "",
+            "specificInsturctions": ""
+          },
+          "authorizedRepresentative": {
+            "representativeName": "rusira123",
+            "representativeMobile": "0418549586",
+            "representativePosition": "position123",
+            "email": "rusira.senath@gmail.com"
+          },
+          "assignCollectors": [
+            {
+              "collectorName": "Micheal Kikrinam",
+              "assignedDateTime": "11:44 AM | 20 Apr 2025"
+            },
+            {
+              "collectorName": "George Poulas",
+              "assignedDateTime": "11:40 AM | 20 Apr 2025"
+            }
+          ]
+        }
       }
-    ]
-  }
-  
-    
+    },
+    {
+      "jobNumber": "2",
+      "jobStatus": "Draft",
+      "dateTime": "30 Apr 2025 10:00",
+      "client": "Rail NSW",
+      "rep": "John Roberts",
+      "location": "Parramatta",
+      "service": "Random Testing",
+      "callout": "Callout",
+      "collectors": [
+        {
+          "collectorName": "George Poulos",
+          "collectorStatus": "Allocated"
+        },
+        {
+          "collectorName": "Michelle Kirkman",
+          "collectorStatus": "Accepted"
+        },
+        {
+          "collectorName": "Valerie McKenzie",
+          "collectorStatus": "Accepted"
+        },
+        {
+          "collectorName": "Zac Hepburn",
+          "collectorStatus": "Accepted"
+        },
+        {
+          "collectorName": "Gina Landini",
+          "collectorStatus": "Rejected"
+        }
+      ],
+      "bookingInfo": {
+        "organisationInfo": {
+          "collectionOrganisation": "collection0123",
+          "serviceOffice": ["Sydney", "Melbourne", "Paramatta"]
+        },
+        "jobDetails": {
+          "jobType": "In Clinic",
+          "jobDate": "20/04/2025",
+          "startTime": "11:09",
+          "duration": "0:10",
+          "noOfDonors": "6",
+          "jobReference": "jo1234",
+          "typeOfService": "service 123"
+        },
+        "clientInfo": {
+          "clientDetails": [
+            {
+              "clientName": "Client A",
+              "clientReference": "ref123"
+            },
+            {
+              "clientName": "Client B",
+              "clientReference": "ref456"
+            },
+            {
+              "clientName": "Client C",
+              "clientReference": "ref789"
+            }
+          ],
+          "locationDetails": [
+            {
+              "siteName": "Site 1",
+              "siteContacts": [
+                {
+                  "siteContactName": "Alice",
+                  "siteContactMobile": "0418549596"
+                },
+                {
+                  "siteContactName": "Bob",
+                  "siteContactMobile": "0418549596"
+                }
+              ]
+            },
+            {
+              "siteName": "Site 2",
+              "siteContacts": [
+                {
+                  "siteContactName": "Charlie",
+                  "siteContactMobile": "0418549596"
+                },
+                {
+                  "siteContactName": "Diana",
+                  "siteContactMobile": "0418549596"
+                }
+              ]
+            },
+            {
+              "siteName": "Site 3",
+              "siteContacts": [
+                {
+                  "siteContactName": "Eva",
+                  "siteContactMobile": "0418549596"
+                }
+              ]
+            }
+          ],
+          "testsAndDevices": {
+            "testType": "Drug Test Only",
+            "drugTestSpecifications": {
+              "primaryDrugTest": {
+                "drugTestName": "Drug Test 123",
+                "selectPreferedDevice": "Device 123"
+              },
+              "secondaryDrugTest": {
+                "drugTestName": "Drug Test 456",
+                "selectPreferedDevice": "Device 456"
+              },
+              "teritoryDrugTest": {
+                "drugTestName": "Drug Test 789",
+                "selectPreferedDevice": "Device 789"
+              }
+            }
+          },
+          "extraInfo": {
+            "additionalTests": "this is the additional test information",
+            "furtherInfo": "this is the further test information",
+            "donorSelectionProcess": "",
+            "screeningAndTestingProcess": "",
+            "testConfirmationInstructions": "",
+            "globalSiteAccessInstructions": "",
+            "specificLocalSiteAccessInstructions": "",
+            "specificInsturctions": ""
+          },
+          "authorizedRepresentative": {
+            "representativeName": "rusira123",
+            "representativeMobile": "0418549586",
+            "representativePosition": "position123",
+            "email": "rusira.senath@gmail.com"
+          },
+          "assignCollectors": [
+            {
+              "collectorName": "Micheal Kikrinam",
+              "assignedDateTime": "11:44 AM | 20 Apr 2025"
+            },
+            {
+              "collectorName": "George Poulas",
+              "assignedDateTime": "11:40 AM | 20 Apr 2025"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "jobNumber": "3",
+      "jobStatus": "Complete",
+      "dateTime": "30 Apr 2025 10:00",
+      "client": "Rail NSW",
+      "rep": "John Roberts",
+      "location": "Parramatta",
+      "service": "Random Testing",
+      "callout": "Non Callout",
+      "collectors": [
+        {
+          "collectorName": "George Poulos",
+          "collectorStatus": "Allocated"
+        },
+        {
+          "collectorName": "Michelle Kirkman",
+          "collectorStatus": "Accepted"
+        },
+        {
+          "collectorName": "Valerie McKenzie",
+          "collectorStatus": "Accepted"
+        },
+        {
+          "collectorName": "Zac Hepburn",
+          "collectorStatus": "Accepted"
+        },
+        {
+          "collectorName": "Gina Landini",
+          "collectorStatus": "Rejected"
+        }
+      ],
+      "bookingInfo": {
+        "organisationInfo": {
+          "collectionOrganisation": "collection0123",
+          "serviceOffice": ["Sydney", "Melbourne", "Paramatta"]
+        },
+        "jobDetails": {
+          "jobType": "In Clinic",
+          "jobDate": "20/04/2025",
+          "startTime": "11:09",
+          "duration": "0:10",
+          "noOfDonors": "6",
+          "jobReference": "jo1234",
+          "typeOfService": "service 123"
+        },
+        "clientInfo": {
+          "clientDetails": [
+            {
+              "clientName": "Client A",
+              "clientReference": "ref123"
+            },
+            {
+              "clientName": "Client B",
+              "clientReference": "ref456"
+            },
+            {
+              "clientName": "Client C",
+              "clientReference": "ref789"
+            }
+          ],
+          "locationDetails": [
+            {
+              "siteName": "Site 1",
+              "siteContacts": [
+                {
+                  "siteContactName": "Alice",
+                  "siteContactMobile": "0418549596"
+                },
+                {
+                  "siteContactName": "Bob",
+                  "siteContactMobile": "0418549596"
+                }
+              ]
+            },
+            {
+              "siteName": "Site 2",
+              "siteContacts": [
+                {
+                  "siteContactName": "Charlie",
+                  "siteContactMobile": "0418549596"
+                },
+                {
+                  "siteContactName": "Diana",
+                  "siteContactMobile": "0418549596"
+                }
+              ]
+            },
+            {
+              "siteName": "Site 3",
+              "siteContacts": [
+                {
+                  "siteContactName": "Eva",
+                  "siteContactMobile": "0418549596"
+                }
+              ]
+            }
+          ],
+          "testsAndDevices": {
+            "testType": "Drug Test Only",
+            "drugTestSpecifications": {
+              "primaryDrugTest": {
+                "drugTestName": "Drug Test 123",
+                "selectPreferedDevice": "Device 123"
+              },
+              "secondaryDrugTest": {
+                "drugTestName": "Drug Test 456",
+                "selectPreferedDevice": "Device 456"
+              },
+              "teritoryDrugTest": {
+                "drugTestName": "Drug Test 789",
+                "selectPreferedDevice": "Device 789"
+              }
+            }
+          },
+          "extraInfo": {
+            "additionalTests": "this is the additional test information",
+            "furtherInfo": "this is the further test information",
+            "donorSelectionProcess": "",
+            "screeningAndTestingProcess": "",
+            "testConfirmationInstructions": "",
+            "globalSiteAccessInstructions": "",
+            "specificLocalSiteAccessInstructions": "",
+            "specificInsturctions": ""
+          },
+          "authorizedRepresentative": {
+            "representativeName": "rusira123",
+            "representativeMobile": "0418549586",
+            "representativePosition": "position123",
+            "email": "rusira.senath@gmail.com"
+          },
+          "assignCollectors": [
+            {
+              "collectorName": "Micheal Kikrinam",
+              "assignedDateTime": "11:44 AM | 20 Apr 2025"
+            },
+            {
+              "collectorName": "George Poulas",
+              "assignedDateTime": "11:40 AM | 20 Apr 2025"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "jobNumber": "4",
+      "jobStatus": "Planned",
+      "dateTime": "30 Apr 2025 10:00",
+      "client": "Rail NSW",
+      "rep": "John Roberts",
+      "location": "Parramatta",
+      "service": "Random Testing",
+      "callout": "Non Callout",
+      "collectors": [
+        {
+          "collectorName": "George Poulos",
+          "collectorStatus": "Allocated"
+        },
+        {
+          "collectorName": "Michelle Kirkman",
+          "collectorStatus": "Accepted"
+        },
+        {
+          "collectorName": "Valerie McKenzie",
+          "collectorStatus": "Accepted"
+        },
+        {
+          "collectorName": "Zac Hepburn",
+          "collectorStatus": "Accepted"
+        },
+        {
+          "collectorName": "Gina Landini",
+          "collectorStatus": "Rejected"
+        }
+      ],
+      "bookingInfo": {
+        "organisationInfo": {
+          "collectionOrganisation": "collection0123",
+          "serviceOffice": ["Sydney", "Melbourne", "Paramatta"]
+        },
+        "jobDetails": {
+          "jobType": "In Clinic",
+          "jobDate": "20/04/2025",
+          "startTime": "11:09",
+          "duration": "0:10",
+          "noOfDonors": "6",
+          "jobReference": "jo1234",
+          "typeOfService": "service 123"
+        },
+        "clientInfo": {
+          "clientDetails": [
+            {
+              "clientName": "Client A",
+              "clientReference": "ref123"
+            },
+            {
+              "clientName": "Client B",
+              "clientReference": "ref456"
+            },
+            {
+              "clientName": "Client C",
+              "clientReference": "ref789"
+            }
+          ],
+          "locationDetails": [
+            {
+              "siteName": "Site 1",
+              "siteContacts": [
+                {
+                  "siteContactName": "Alice",
+                  "siteContactMobile": "0418549596"
+                },
+                {
+                  "siteContactName": "Bob",
+                  "siteContactMobile": "0418549596"
+                }
+              ]
+            },
+            {
+              "siteName": "Site 2",
+              "siteContacts": [
+                {
+                  "siteContactName": "Charlie",
+                  "siteContactMobile": "0418549596"
+                },
+                {
+                  "siteContactName": "Diana",
+                  "siteContactMobile": "0418549596"
+                }
+              ]
+            },
+            {
+              "siteName": "Site 3",
+              "siteContacts": [
+                {
+                  "siteContactName": "Eva",
+                  "siteContactMobile": "0418549596"
+                }
+              ]
+            }
+          ],
+          "testsAndDevices": {
+            "testType": "Drug Test Only",
+            "drugTestSpecifications": {
+              "primaryDrugTest": {
+                "drugTestName": "Drug Test 123",
+                "selectPreferedDevice": "Device 123"
+              },
+              "secondaryDrugTest": {
+                "drugTestName": "Drug Test 456",
+                "selectPreferedDevice": "Device 456"
+              },
+              "teritoryDrugTest": {
+                "drugTestName": "Drug Test 789",
+                "selectPreferedDevice": "Device 789"
+              }
+            }
+          },
+          "extraInfo": {
+            "additionalTests": "this is the additional test information",
+            "furtherInfo": "this is the further test information",
+            "donorSelectionProcess": "",
+            "screeningAndTestingProcess": "",
+            "testConfirmationInstructions": "",
+            "globalSiteAccessInstructions": "",
+            "specificLocalSiteAccessInstructions": "",
+            "specificInsturctions": ""
+          },
+          "authorizedRepresentative": {
+            "representativeName": "rusira123",
+            "representativeMobile": "0418549586",
+            "representativePosition": "position123",
+            "email": "rusira.senath@gmail.com"
+          },
+          "assignCollectors": [
+            {
+              "collectorName": "Micheal Kikrinam",
+              "assignedDateTime": "11:44 AM | 20 Apr 2025"
+            },
+            {
+              "collectorName": "George Poulas",
+              "assignedDateTime": "11:40 AM | 20 Apr 2025"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "jobNumber": "5",
+      "jobStatus": "Cancelled",
+      "dateTime": "30 Apr 2025 10:00",
+      "client": "Rail NSW",
+      "rep": "John Roberts",
+      "location": "Parramatta",
+      "service": "Random Testing",
+      "callout": "Non Callout",
+      "collectors": [
+        {
+          "collectorName": "George Poulos",
+          "collectorStatus": "Allocated"
+        },
+        {
+          "collectorName": "Michelle Kirkman",
+          "collectorStatus": "Accepted"
+        },
+        {
+          "collectorName": "Valerie McKenzie",
+          "collectorStatus": "Accepted"
+        },
+        {
+          "collectorName": "Zac Hepburn",
+          "collectorStatus": "Accepted"
+        },
+        {
+          "collectorName": "Gina Landini",
+          "collectorStatus": "Rejected"
+        }
+      ],
+      "bookingInfo": {
+        "organisationInfo": {
+          "collectionOrganisation": "collection0123",
+          "serviceOffice": ["Sydney", "Melbourne", "Paramatta"]
+        },
+        "jobDetails": {
+          "jobType": "In Clinic",
+          "jobDate": "20/04/2025",
+          "startTime": "11:09",
+          "duration": "0:10",
+          "noOfDonors": "6",
+          "jobReference": "jo1234",
+          "typeOfService": "service 123"
+        },
+        "clientInfo": {
+          "clientDetails": [
+            {
+              "clientName": "Client A",
+              "clientReference": "ref123"
+            },
+            {
+              "clientName": "Client B",
+              "clientReference": "ref456"
+            },
+            {
+              "clientName": "Client C",
+              "clientReference": "ref789"
+            }
+          ],
+          "locationDetails": [
+            {
+              "siteName": "Site 1",
+              "siteContacts": [
+                {
+                  "siteContactName": "Alice",
+                  "siteContactMobile": "0418549596"
+                },
+                {
+                  "siteContactName": "Bob",
+                  "siteContactMobile": "0418549596"
+                }
+              ]
+            },
+            {
+              "siteName": "Site 2",
+              "siteContacts": [
+                {
+                  "siteContactName": "Charlie",
+                  "siteContactMobile": "0418549596"
+                },
+                {
+                  "siteContactName": "Diana",
+                  "siteContactMobile": "0418549596"
+                }
+              ]
+            },
+            {
+              "siteName": "Site 3",
+              "siteContacts": [
+                {
+                  "siteContactName": "Eva",
+                  "siteContactMobile": "0418549596"
+                }
+              ]
+            }
+          ],
+          "testsAndDevices": {
+            "testType": "Drug Test Only",
+            "drugTestSpecifications": {
+              "primaryDrugTest": {
+                "drugTestName": "Drug Test 123",
+                "selectPreferedDevice": "Device 123"
+              },
+              "secondaryDrugTest": {
+                "drugTestName": "Drug Test 456",
+                "selectPreferedDevice": "Device 456"
+              },
+              "teritoryDrugTest": {
+                "drugTestName": "Drug Test 789",
+                "selectPreferedDevice": "Device 789"
+              }
+            }
+          },
+          "extraInfo": {
+            "additionalTests": "this is the additional test information",
+            "furtherInfo": "this is the further test information",
+            "donorSelectionProcess": "",
+            "screeningAndTestingProcess": "",
+            "testConfirmationInstructions": "",
+            "globalSiteAccessInstructions": "",
+            "specificLocalSiteAccessInstructions": "",
+            "specificInsturctions": ""
+          },
+          "authorizedRepresentative": {
+            "representativeName": "rusira123",
+            "representativeMobile": "0418549586",
+            "representativePosition": "position123",
+            "email": "rusira.senath@gmail.com"
+          },
+          "assignCollectors": [
+            {
+              "collectorName": "Micheal Kikrinam",
+              "assignedDateTime": "11:44 AM | 20 Apr 2025"
+            },
+            {
+              "collectorName": "George Poulas",
+              "assignedDateTime": "11:40 AM | 20 Apr 2025"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "jobNumber": "6",
+      "jobStatus": "Draft",
+      "dateTime": "30 Apr 2025 10:00",
+      "client": "Rail NSW",
+      "rep": "John Roberts",
+      "location": "Parramatta",
+      "service": "Random Testing",
+      "callout": "Non Callout",
+      "collectors": [
+        {
+          "collectorName": "George Poulos",
+          "collectorStatus": "Allocated"
+        },
+        {
+          "collectorName": "Michelle Kirkman",
+          "collectorStatus": "Accepted"
+        },
+        {
+          "collectorName": "Valerie McKenzie",
+          "collectorStatus": "Accepted"
+        },
+        {
+          "collectorName": "Zac Hepburn",
+          "collectorStatus": "Accepted"
+        },
+        {
+          "collectorName": "Gina Landini",
+          "collectorStatus": "Rejected"
+        }
+      ],
+      "bookingInfo": {
+        "organisationInfo": {
+          "collectionOrganisation": "collection0123",
+          "serviceOffice": ["Sydney", "Melbourne", "Paramatta"]
+        },
+        "jobDetails": {
+          "jobType": "In Clinic",
+          "jobDate": "20/04/2025",
+          "startTime": "11:09",
+          "duration": "0:10",
+          "noOfDonors": "6",
+          "jobReference": "jo1234",
+          "typeOfService": "service 123"
+        },
+        "clientInfo": {
+          "clientDetails": [
+            {
+              "clientName": "Client A",
+              "clientReference": "ref123"
+            },
+            {
+              "clientName": "Client B",
+              "clientReference": "ref456"
+            },
+            {
+              "clientName": "Client C",
+              "clientReference": "ref789"
+            }
+          ],
+          "locationDetails": [
+            {
+              "siteName": "Site 1",
+              "siteContacts": [
+                {
+                  "siteContactName": "Alice",
+                  "siteContactMobile": "0418549596"
+                },
+                {
+                  "siteContactName": "Bob",
+                  "siteContactMobile": "0418549596"
+                }
+              ]
+            },
+            {
+              "siteName": "Site 2",
+              "siteContacts": [
+                {
+                  "siteContactName": "Charlie",
+                  "siteContactMobile": "0418549596"
+                },
+                {
+                  "siteContactName": "Diana",
+                  "siteContactMobile": "0418549596"
+                }
+              ]
+            },
+            {
+              "siteName": "Site 3",
+              "siteContacts": [
+                {
+                  "siteContactName": "Eva",
+                  "siteContactMobile": "0418549596"
+                }
+              ]
+            }
+          ],
+          "testsAndDevices": {
+            "testType": "Drug Test Only",
+            "drugTestSpecifications": {
+              "primaryDrugTest": {
+                "drugTestName": "Drug Test 123",
+                "selectPreferedDevice": "Device 123"
+              },
+              "secondaryDrugTest": {
+                "drugTestName": "Drug Test 456",
+                "selectPreferedDevice": "Device 456"
+              },
+              "teritoryDrugTest": {
+                "drugTestName": "Drug Test 789",
+                "selectPreferedDevice": "Device 789"
+              }
+            }
+          },
+          "extraInfo": {
+            "additionalTests": "this is the additional test information",
+            "furtherInfo": "this is the further test information",
+            "donorSelectionProcess": "",
+            "screeningAndTestingProcess": "",
+            "testConfirmationInstructions": "",
+            "globalSiteAccessInstructions": "",
+            "specificLocalSiteAccessInstructions": "",
+            "specificInsturctions": ""
+          },
+          "authorizedRepresentative": {
+            "representativeName": "rusira123",
+            "representativeMobile": "0418549586",
+            "representativePosition": "position123",
+            "email": "rusira.senath@gmail.com"
+          },
+          "assignCollectors": [
+            {
+              "collectorName": "Micheal Kikrinam",
+              "assignedDateTime": "11:44 AM | 20 Apr 2025"
+            },
+            {
+              "collectorName": "George Poulas",
+              "assignedDateTime": "11:40 AM | 20 Apr 2025"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "jobNumber": "7",
+      "jobStatus": "Draft",
+      "dateTime": "30 Apr 2025 10:00",
+      "client": "Rail NSW",
+      "rep": "John Roberts",
+      "location": "Parramatta",
+      "service": "Random Testing",
+      "callout": "Non Callout",
+      "collectors": [
+        {
+          "collectorName": "George Poulos",
+          "collectorStatus": "Allocated"
+        },
+        {
+          "collectorName": "Michelle Kirkman",
+          "collectorStatus": "Accepted"
+        },
+        {
+          "collectorName": "Valerie McKenzie",
+          "collectorStatus": "Accepted"
+        },
+        {
+          "collectorName": "Zac Hepburn",
+          "collectorStatus": "Accepted"
+        },
+        {
+          "collectorName": "Gina Landini",
+          "collectorStatus": "Rejected"
+        }
+      ],
+      "bookingInfo": {
+        "organisationInfo": {
+          "collectionOrganisation": "collection0123",
+          "serviceOffice": ["Sydney", "Melbourne", "Paramatta"]
+        },
+        "jobDetails": {
+          "jobType": "In Clinic",
+          "jobDate": "20/04/2025",
+          "startTime": "11:09",
+          "duration": "0:10",
+          "noOfDonors": "6",
+          "jobReference": "jo1234",
+          "typeOfService": "service 123"
+        },
+        "clientInfo": {
+          "clientDetails": [
+            {
+              "clientName": "Client A",
+              "clientReference": "ref123"
+            },
+            {
+              "clientName": "Client B",
+              "clientReference": "ref456"
+            },
+            {
+              "clientName": "Client C",
+              "clientReference": "ref789"
+            }
+          ],
+          "locationDetails": [
+            {
+              "siteName": "Site 1",
+              "siteContacts": [
+                {
+                  "siteContactName": "Alice",
+                  "siteContactMobile": "0418549596"
+                },
+                {
+                  "siteContactName": "Bob",
+                  "siteContactMobile": "0418549596"
+                }
+              ]
+            },
+            {
+              "siteName": "Site 2",
+              "siteContacts": [
+                {
+                  "siteContactName": "Charlie",
+                  "siteContactMobile": "0418549596"
+                },
+                {
+                  "siteContactName": "Diana",
+                  "siteContactMobile": "0418549596"
+                }
+              ]
+            },
+            {
+              "siteName": "Site 3",
+              "siteContacts": [
+                {
+                  "siteContactName": "Eva",
+                  "siteContactMobile": "0418549596"
+                }
+              ]
+            }
+          ],
+          "testsAndDevices": {
+            "testType": "Drug Test Only",
+            "drugTestSpecifications": {
+              "primaryDrugTest": {
+                "drugTestName": "Drug Test 123",
+                "selectPreferedDevice": "Device 123"
+              },
+              "secondaryDrugTest": {
+                "drugTestName": "Drug Test 456",
+                "selectPreferedDevice": "Device 456"
+              },
+              "teritoryDrugTest": {
+                "drugTestName": "Drug Test 789",
+                "selectPreferedDevice": "Device 789"
+              }
+            }
+          },
+          "extraInfo": {
+            "additionalTests": "this is the additional test information",
+            "furtherInfo": "this is the further test information",
+            "donorSelectionProcess": "",
+            "screeningAndTestingProcess": "",
+            "testConfirmationInstructions": "",
+            "globalSiteAccessInstructions": "",
+            "specificLocalSiteAccessInstructions": "",
+            "specificInsturctions": ""
+          },
+          "authorizedRepresentative": {
+            "representativeName": "rusira123",
+            "representativeMobile": "0418549586",
+            "representativePosition": "position123",
+            "email": "rusira.senath@gmail.com"
+          },
+          "assignCollectors": [
+            {
+              "collectorName": "Micheal Kikrinam",
+              "assignedDateTime": "11:44 AM | 20 Apr 2025"
+            },
+            {
+              "collectorName": "George Poulas",
+              "assignedDateTime": "11:40 AM | 20 Apr 2025"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "jobNumber": "8",
+      "jobStatus": "Draft",
+      "dateTime": "30 Apr 2025 10:00",
+      "client": "Rail NSW",
+      "rep": "John Roberts",
+      "location": "Parramatta",
+      "service": "Random Testing",
+      "callout": "Non Callout",
+      "collectors": [
+        {
+          "collectorName": "George Poulos",
+          "collectorStatus": "Allocated"
+        },
+        {
+          "collectorName": "Michelle Kirkman",
+          "collectorStatus": "Accepted"
+        },
+        {
+          "collectorName": "Valerie McKenzie",
+          "collectorStatus": "Accepted"
+        },
+        {
+          "collectorName": "Zac Hepburn",
+          "collectorStatus": "Accepted"
+        },
+        {
+          "collectorName": "Gina Landini",
+          "collectorStatus": "Rejected"
+        }
+      ],
+      "bookingInfo": {
+        "organisationInfo": {
+          "collectionOrganisation": "collection0123",
+          "serviceOffice": ["Sydney", "Melbourne", "Paramatta"]
+        },
+        "jobDetails": {
+          "jobType": "In Clinic",
+          "jobDate": "20/04/2025",
+          "startTime": "11:09",
+          "duration": "0:10",
+          "noOfDonors": "6",
+          "jobReference": "jo1234",
+          "typeOfService": "service 123"
+        },
+        "clientInfo": {
+          "clientDetails": [
+            {
+              "clientName": "Client A",
+              "clientReference": "ref123"
+            },
+            {
+              "clientName": "Client B",
+              "clientReference": "ref456"
+            },
+            {
+              "clientName": "Client C",
+              "clientReference": "ref789"
+            }
+          ],
+          "locationDetails": [
+            {
+              "siteName": "Site 1",
+              "siteContacts": [
+                {
+                  "siteContactName": "Alice",
+                  "siteContactMobile": "0418549596"
+                },
+                {
+                  "siteContactName": "Bob",
+                  "siteContactMobile": "0418549596"
+                }
+              ]
+            },
+            {
+              "siteName": "Site 2",
+              "siteContacts": [
+                {
+                  "siteContactName": "Charlie",
+                  "siteContactMobile": "0418549596"
+                },
+                {
+                  "siteContactName": "Diana",
+                  "siteContactMobile": "0418549596"
+                }
+              ]
+            },
+            {
+              "siteName": "Site 3",
+              "siteContacts": [
+                {
+                  "siteContactName": "Eva",
+                  "siteContactMobile": "0418549596"
+                }
+              ]
+            }
+          ],
+          "testsAndDevices": {
+            "testType": "Drug Test Only",
+            "drugTestSpecifications": {
+              "primaryDrugTest": {
+                "drugTestName": "Drug Test 123",
+                "selectPreferedDevice": "Device 123"
+              },
+              "secondaryDrugTest": {
+                "drugTestName": "Drug Test 456",
+                "selectPreferedDevice": "Device 456"
+              },
+              "teritoryDrugTest": {
+                "drugTestName": "Drug Test 789",
+                "selectPreferedDevice": "Device 789"
+              }
+            }
+          },
+          "extraInfo": {
+            "additionalTests": "this is the additional test information",
+            "furtherInfo": "this is the further test information",
+            "donorSelectionProcess": "",
+            "screeningAndTestingProcess": "",
+            "testConfirmationInstructions": "",
+            "globalSiteAccessInstructions": "",
+            "specificLocalSiteAccessInstructions": "",
+            "specificInsturctions": ""
+          },
+          "authorizedRepresentative": {
+            "representativeName": "rusira123",
+            "representativeMobile": "0418549586",
+            "representativePosition": "position123",
+            "email": "rusira.senath@gmail.com"
+          },
+          "assignCollectors": [
+            {
+              "collectorName": "Micheal Kikrinam",
+              "assignedDateTime": "11:44 AM | 20 Apr 2025"
+            },
+            {
+              "collectorName": "George Poulas",
+              "assignedDateTime": "11:40 AM | 20 Apr 2025"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "jobNumber": "9",
+      "jobStatus": "Draft",
+      "dateTime": "30 Apr 2025 10:00",
+      "client": "Rail NSW",
+      "rep": "John Roberts",
+      "location": "Parramatta",
+      "service": "Random Testing",
+      "callout": "Non Callout",
+      "collectors": [
+        {
+          "collectorName": "George Poulos",
+          "collectorStatus": "Allocated"
+        },
+        {
+          "collectorName": "Michelle Kirkman",
+          "collectorStatus": "Accepted"
+        },
+        {
+          "collectorName": "Valerie McKenzie",
+          "collectorStatus": "Accepted"
+        },
+        {
+          "collectorName": "Zac Hepburn",
+          "collectorStatus": "Accepted"
+        },
+        {
+          "collectorName": "Gina Landini",
+          "collectorStatus": "Rejected"
+        }
+      ],
+      "bookingInfo": {
+        "organisationInfo": {
+          "collectionOrganisation": "collection0123",
+          "serviceOffice": ["Sydney", "Melbourne", "Paramatta"]
+        },
+        "jobDetails": {
+          "jobType": "In Clinic",
+          "jobDate": "20/04/2025",
+          "startTime": "11:09",
+          "duration": "0:10",
+          "noOfDonors": "6",
+          "jobReference": "jo1234",
+          "typeOfService": "service 123"
+        },
+        "clientInfo": {
+          "clientDetails": [
+            {
+              "clientName": "Client A",
+              "clientReference": "ref123"
+            },
+            {
+              "clientName": "Client B",
+              "clientReference": "ref456"
+            },
+            {
+              "clientName": "Client C",
+              "clientReference": "ref789"
+            }
+          ],
+          "locationDetails": [
+            {
+              "siteName": "Site 1",
+              "siteContacts": [
+                {
+                  "siteContactName": "Alice",
+                  "siteContactMobile": "0418549596"
+                },
+                {
+                  "siteContactName": "Bob",
+                  "siteContactMobile": "0418549596"
+                }
+              ]
+            },
+            {
+              "siteName": "Site 2",
+              "siteContacts": [
+                {
+                  "siteContactName": "Charlie",
+                  "siteContactMobile": "0418549596"
+                },
+                {
+                  "siteContactName": "Diana",
+                  "siteContactMobile": "0418549596"
+                }
+              ]
+            },
+            {
+              "siteName": "Site 3",
+              "siteContacts": [
+                {
+                  "siteContactName": "Eva",
+                  "siteContactMobile": "0418549596"
+                }
+              ]
+            }
+          ],
+          "testsAndDevices": {
+            "testType": "Drug Test Only",
+            "drugTestSpecifications": {
+              "primaryDrugTest": {
+                "drugTestName": "Drug Test 123",
+                "selectPreferedDevice": "Device 123"
+              },
+              "secondaryDrugTest": {
+                "drugTestName": "Drug Test 456",
+                "selectPreferedDevice": "Device 456"
+              },
+              "teritoryDrugTest": {
+                "drugTestName": "Drug Test 789",
+                "selectPreferedDevice": "Device 789"
+              }
+            }
+          },
+          "extraInfo": {
+            "additionalTests": "this is the additional test information",
+            "furtherInfo": "this is the further test information",
+            "donorSelectionProcess": "",
+            "screeningAndTestingProcess": "",
+            "testConfirmationInstructions": "",
+            "globalSiteAccessInstructions": "",
+            "specificLocalSiteAccessInstructions": "",
+            "specificInsturctions": ""
+          },
+          "authorizedRepresentative": {
+            "representativeName": "rusira123",
+            "representativeMobile": "0418549586",
+            "representativePosition": "position123",
+            "email": "rusira.senath@gmail.com"
+          },
+          "assignCollectors": [
+            {
+              "collectorName": "Micheal Kikrinam",
+              "assignedDateTime": "11:44 AM | 20 Apr 2025"
+            },
+            {
+              "collectorName": "George Poulas",
+              "assignedDateTime": "11:40 AM | 20 Apr 2025"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "jobNumber": "10",
+      "jobStatus": "Draft",
+      "dateTime": "30 Apr 2025 10:00",
+      "client": "Rail NSW",
+      "rep": "John Roberts",
+      "location": "Parramatta",
+      "service": "Random Testing",
+      "callout": "Non Callout",
+      "collectors": [
+        {
+          "collectorName": "George Poulos",
+          "collectorStatus": "Allocated"
+        },
+        {
+          "collectorName": "Michelle Kirkman",
+          "collectorStatus": "Accepted"
+        },
+        {
+          "collectorName": "Valerie McKenzie",
+          "collectorStatus": "Accepted"
+        },
+        {
+          "collectorName": "Zac Hepburn",
+          "collectorStatus": "Accepted"
+        },
+        {
+          "collectorName": "Gina Landini",
+          "collectorStatus": "Rejected"
+        }
+      ],
+      "bookingInfo": {
+        "organisationInfo": {
+          "collectionOrganisation": "collection0123",
+          "serviceOffice": ["Sydney", "Melbourne", "Paramatta"]
+        },
+        "jobDetails": {
+          "jobType": "In Clinic",
+          "jobDate": "20/04/2025",
+          "startTime": "11:09",
+          "duration": "0:10",
+          "noOfDonors": "6",
+          "jobReference": "jo1234",
+          "typeOfService": "service 123"
+        },
+        "clientInfo": {
+          "clientDetails": [
+            {
+              "clientName": "Client A",
+              "clientReference": "ref123"
+            },
+            {
+              "clientName": "Client B",
+              "clientReference": "ref456"
+            },
+            {
+              "clientName": "Client C",
+              "clientReference": "ref789"
+            }
+          ],
+          "locationDetails": [
+            {
+              "siteName": "Site 1",
+              "siteContacts": [
+                {
+                  "siteContactName": "Alice",
+                  "siteContactMobile": "0418549596"
+                },
+                {
+                  "siteContactName": "Bob",
+                  "siteContactMobile": "0418549596"
+                }
+              ]
+            },
+            {
+              "siteName": "Site 2",
+              "siteContacts": [
+                {
+                  "siteContactName": "Charlie",
+                  "siteContactMobile": "0418549596"
+                },
+                {
+                  "siteContactName": "Diana",
+                  "siteContactMobile": "0418549596"
+                }
+              ]
+            },
+            {
+              "siteName": "Site 3",
+              "siteContacts": [
+                {
+                  "siteContactName": "Eva",
+                  "siteContactMobile": "0418549596"
+                }
+              ]
+            }
+          ],
+          "testsAndDevices": {
+            "testType": "Drug Test Only",
+            "drugTestSpecifications": {
+              "primaryDrugTest": {
+                "drugTestName": "Drug Test 123",
+                "selectPreferedDevice": "Device 123"
+              },
+              "secondaryDrugTest": {
+                "drugTestName": "Drug Test 456",
+                "selectPreferedDevice": "Device 456"
+              },
+              "teritoryDrugTest": {
+                "drugTestName": "Drug Test 789",
+                "selectPreferedDevice": "Device 789"
+              }
+            }
+          },
+          "extraInfo": {
+            "additionalTests": "this is the additional test information",
+            "furtherInfo": "this is the further test information",
+            "donorSelectionProcess": "",
+            "screeningAndTestingProcess": "",
+            "testConfirmationInstructions": "",
+            "globalSiteAccessInstructions": "",
+            "specificLocalSiteAccessInstructions": "",
+            "specificInsturctions": ""
+          },
+          "authorizedRepresentative": {
+            "representativeName": "rusira123",
+            "representativeMobile": "0418549586",
+            "representativePosition": "position123",
+            "email": "rusira.senath@gmail.com"
+          },
+          "assignCollectors": [
+            {
+              "collectorName": "Micheal Kikrinam",
+              "assignedDateTime": "11:44 AM | 20 Apr 2025"
+            },
+            {
+              "collectorName": "George Poulas",
+              "assignedDateTime": "11:40 AM | 20 Apr 2025"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "jobNumber": "11",
+      "jobStatus": "Draft",
+      "dateTime": "30 Apr 2025 10:00",
+      "client": "Rail NSW",
+      "rep": "John Roberts",
+      "location": "Parramatta",
+      "service": "Random Testing",
+      "callout": "Callout",
+      "collectors": [
+        {
+          "collectorName": "George Poulos",
+          "collectorStatus": "Allocated"
+        },
+        {
+          "collectorName": "Michelle Kirkman",
+          "collectorStatus": "Accepted"
+        },
+        {
+          "collectorName": "Valerie McKenzie",
+          "collectorStatus": "Accepted"
+        },
+        {
+          "collectorName": "Zac Hepburn",
+          "collectorStatus": "Accepted"
+        },
+        {
+          "collectorName": "Gina Landini",
+          "collectorStatus": "Rejected"
+        }
+      ],
+      "bookingInfo": {
+        "organisationInfo": {
+          "collectionOrganisation": "collection0123",
+          "serviceOffice": ["Sydney", "Melbourne", "Paramatta"]
+        },
+        "jobDetails": {
+          "jobType": "In Clinic",
+          "jobDate": "20/04/2025",
+          "startTime": "11:09",
+          "duration": "0:10",
+          "noOfDonors": "6",
+          "jobReference": "jo1234",
+          "typeOfService": "service 123"
+        },
+        "clientInfo": {
+          "clientDetails": [
+            {
+              "clientName": "Client A",
+              "clientReference": "ref123"
+            },
+            {
+              "clientName": "Client B",
+              "clientReference": "ref456"
+            },
+            {
+              "clientName": "Client C",
+              "clientReference": "ref789"
+            }
+          ],
+          "locationDetails": [
+            {
+              "siteName": "Site 1",
+              "siteContacts": [
+                {
+                  "siteContactName": "Alice",
+                  "siteContactMobile": "0418549596"
+                },
+                {
+                  "siteContactName": "Bob",
+                  "siteContactMobile": "0418549596"
+                }
+              ]
+            },
+            {
+              "siteName": "Site 2",
+              "siteContacts": [
+                {
+                  "siteContactName": "Charlie",
+                  "siteContactMobile": "0418549596"
+                },
+                {
+                  "siteContactName": "Diana",
+                  "siteContactMobile": "0418549596"
+                }
+              ]
+            },
+            {
+              "siteName": "Site 3",
+              "siteContacts": [
+                {
+                  "siteContactName": "Eva",
+                  "siteContactMobile": "0418549596"
+                }
+              ]
+            }
+          ],
+          "testsAndDevices": {
+            "testType": "Drug Test Only",
+            "drugTestSpecifications": {
+              "primaryDrugTest": {
+                "drugTestName": "Drug Test 123",
+                "selectPreferedDevice": "Device 123"
+              },
+              "secondaryDrugTest": {
+                "drugTestName": "Drug Test 456",
+                "selectPreferedDevice": "Device 456"
+              },
+              "teritoryDrugTest": {
+                "drugTestName": "Drug Test 789",
+                "selectPreferedDevice": "Device 789"
+              }
+            }
+          },
+          "extraInfo": {
+            "additionalTests": "this is the additional test information",
+            "furtherInfo": "this is the further test information",
+            "donorSelectionProcess": "",
+            "screeningAndTestingProcess": "",
+            "testConfirmationInstructions": "",
+            "globalSiteAccessInstructions": "",
+            "specificLocalSiteAccessInstructions": "",
+            "specificInsturctions": ""
+          },
+          "authorizedRepresentative": {
+            "representativeName": "rusira123",
+            "representativeMobile": "0418549586",
+            "representativePosition": "position123",
+            "email": "rusira.senath@gmail.com"
+          },
+          "assignCollectors": [
+            {
+              "collectorName": "Micheal Kikrinam",
+              "assignedDateTime": "11:44 AM | 20 Apr 2025"
+            },
+            {
+              "collectorName": "George Poulas",
+              "assignedDateTime": "11:40 AM | 20 Apr 2025"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "jobNumber": "12",
+      "jobStatus": "Draft",
+      "dateTime": "30 Apr 2025 10:00",
+      "client": "Rail NSW",
+      "rep": "John Roberts",
+      "location": "Parramatta",
+      "service": "Random Testing",
+      "callout": "Callout",
+      "collectors": [
+        {
+          "collectorName": "George Poulos",
+          "collectorStatus": "Allocated"
+        },
+        {
+          "collectorName": "Michelle Kirkman",
+          "collectorStatus": "Accepted"
+        },
+        {
+          "collectorName": "Valerie McKenzie",
+          "collectorStatus": "Accepted"
+        },
+        {
+          "collectorName": "Zac Hepburn",
+          "collectorStatus": "Accepted"
+        },
+        {
+          "collectorName": "Gina Landini",
+          "collectorStatus": "Rejected"
+        }
+      ],
+      "bookingInfo": {
+        "organisationInfo": {
+          "collectionOrganisation": "collection0123",
+          "serviceOffice": ["Sydney", "Melbourne", "Paramatta"]
+        },
+        "jobDetails": {
+          "jobType": "In Clinic",
+          "jobDate": "20/04/2025",
+          "startTime": "11:09",
+          "duration": "0:10",
+          "noOfDonors": "6",
+          "jobReference": "jo1234",
+          "typeOfService": "service 123"
+        },
+        "clientInfo": {
+          "clientDetails": [
+            {
+              "clientName": "Client A",
+              "clientReference": "ref123"
+            },
+            {
+              "clientName": "Client B",
+              "clientReference": "ref456"
+            },
+            {
+              "clientName": "Client C",
+              "clientReference": "ref789"
+            }
+          ],
+          "locationDetails": [
+            {
+              "siteName": "Site 1",
+              "siteContacts": [
+                {
+                  "siteContactName": "Alice",
+                  "siteContactMobile": "0418549596"
+                },
+                {
+                  "siteContactName": "Bob",
+                  "siteContactMobile": "0418549596"
+                }
+              ]
+            },
+            {
+              "siteName": "Site 2",
+              "siteContacts": [
+                {
+                  "siteContactName": "Charlie",
+                  "siteContactMobile": "0418549596"
+                },
+                {
+                  "siteContactName": "Diana",
+                  "siteContactMobile": "0418549596"
+                }
+              ]
+            },
+            {
+              "siteName": "Site 3",
+              "siteContacts": [
+                {
+                  "siteContactName": "Eva",
+                  "siteContactMobile": "0418549596"
+                }
+              ]
+            }
+          ],
+          "testsAndDevices": {
+            "testType": "Drug Test Only",
+            "drugTestSpecifications": {
+              "primaryDrugTest": {
+                "drugTestName": "Drug Test 123",
+                "selectPreferedDevice": "Device 123"
+              },
+              "secondaryDrugTest": {
+                "drugTestName": "Drug Test 456",
+                "selectPreferedDevice": "Device 456"
+              },
+              "teritoryDrugTest": {
+                "drugTestName": "Drug Test 789",
+                "selectPreferedDevice": "Device 789"
+              }
+            }
+          },
+          "extraInfo": {
+            "additionalTests": "this is the additional test information",
+            "furtherInfo": "this is the further test information",
+            "donorSelectionProcess": "",
+            "screeningAndTestingProcess": "",
+            "testConfirmationInstructions": "",
+            "globalSiteAccessInstructions": "",
+            "specificLocalSiteAccessInstructions": "",
+            "specificInsturctions": ""
+          },
+          "authorizedRepresentative": {
+            "representativeName": "rusira123",
+            "representativeMobile": "0418549586",
+            "representativePosition": "position123",
+            "email": "rusira.senath@gmail.com"
+          },
+          "assignCollectors": [
+            {
+              "collectorName": "Micheal Kikrinam",
+              "assignedDateTime": "11:44 AM | 20 Apr 2025"
+            },
+            {
+              "collectorName": "George Poulas",
+              "assignedDateTime": "11:40 AM | 20 Apr 2025"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "jobNumber": "13",
+      "jobStatus": "Draft",
+      "dateTime": "30 Apr 2025 10:00",
+      "client": "Rail NSW",
+      "rep": "John Roberts",
+      "location": "Parramatta",
+      "service": "Random Testing",
+      "callout": "Non Callout",
+      "collectors": [
+        {
+          "collectorName": "George Poulos",
+          "collectorStatus": "Allocated"
+        },
+        {
+          "collectorName": "Michelle Kirkman",
+          "collectorStatus": "Accepted"
+        },
+        {
+          "collectorName": "Valerie McKenzie",
+          "collectorStatus": "Accepted"
+        },
+        {
+          "collectorName": "Zac Hepburn",
+          "collectorStatus": "Accepted"
+        },
+        {
+          "collectorName": "Gina Landini",
+          "collectorStatus": "Rejected"
+        }
+      ],
+      "bookingInfo": {
+        "organisationInfo": {
+          "collectionOrganisation": "collection0123",
+          "serviceOffice": ["Sydney", "Melbourne", "Paramatta"]
+        },
+        "jobDetails": {
+          "jobType": "In Clinic",
+          "jobDate": "20/04/2025",
+          "startTime": "11:09",
+          "duration": "0:10",
+          "noOfDonors": "6",
+          "jobReference": "jo1234",
+          "typeOfService": "service 123"
+        },
+        "clientInfo": {
+          "clientDetails": [
+            {
+              "clientName": "Client A",
+              "clientReference": "ref123"
+            },
+            {
+              "clientName": "Client B",
+              "clientReference": "ref456"
+            },
+            {
+              "clientName": "Client C",
+              "clientReference": "ref789"
+            }
+          ],
+          "locationDetails": [
+            {
+              "siteName": "Site 1",
+              "siteContacts": [
+                {
+                  "siteContactName": "Alice",
+                  "siteContactMobile": "0418549596"
+                },
+                {
+                  "siteContactName": "Bob",
+                  "siteContactMobile": "0418549596"
+                }
+              ]
+            },
+            {
+              "siteName": "Site 2",
+              "siteContacts": [
+                {
+                  "siteContactName": "Charlie",
+                  "siteContactMobile": "0418549596"
+                },
+                {
+                  "siteContactName": "Diana",
+                  "siteContactMobile": "0418549596"
+                }
+              ]
+            },
+            {
+              "siteName": "Site 3",
+              "siteContacts": [
+                {
+                  "siteContactName": "Eva",
+                  "siteContactMobile": "0418549596"
+                }
+              ]
+            }
+          ],
+          "testsAndDevices": {
+            "testType": "Drug Test Only",
+            "drugTestSpecifications": {
+              "primaryDrugTest": {
+                "drugTestName": "Drug Test 123",
+                "selectPreferedDevice": "Device 123"
+              },
+              "secondaryDrugTest": {
+                "drugTestName": "Drug Test 456",
+                "selectPreferedDevice": "Device 456"
+              },
+              "teritoryDrugTest": {
+                "drugTestName": "Drug Test 789",
+                "selectPreferedDevice": "Device 789"
+              }
+            }
+          },
+          "extraInfo": {
+            "additionalTests": "this is the additional test information",
+            "furtherInfo": "this is the further test information",
+            "donorSelectionProcess": "",
+            "screeningAndTestingProcess": "",
+            "testConfirmationInstructions": "",
+            "globalSiteAccessInstructions": "",
+            "specificLocalSiteAccessInstructions": "",
+            "specificInsturctions": ""
+          },
+          "authorizedRepresentative": {
+            "representativeName": "rusira123",
+            "representativeMobile": "0418549586",
+            "representativePosition": "position123",
+            "email": "rusira.senath@gmail.com"
+          },
+          "assignCollectors": [
+            {
+              "collectorName": "Micheal Kikrinam",
+              "assignedDateTime": "11:44 AM | 20 Apr 2025"
+            },
+            {
+              "collectorName": "George Poulas",
+              "assignedDateTime": "11:40 AM | 20 Apr 2025"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "jobNumber": "14",
+      "jobStatus": "Draft",
+      "dateTime": "30 Apr 2025 10:00",
+      "client": "Rail NSW",
+      "rep": "John Roberts",
+      "location": "Parramatta",
+      "service": "Random Testing",
+      "callout": "Non Callout",
+      "collectors": [
+        {
+          "collectorName": "George Poulos",
+          "collectorStatus": "Allocated"
+        },
+        {
+          "collectorName": "Michelle Kirkman",
+          "collectorStatus": "Accepted"
+        },
+        {
+          "collectorName": "Valerie McKenzie",
+          "collectorStatus": "Accepted"
+        },
+        {
+          "collectorName": "Zac Hepburn",
+          "collectorStatus": "Accepted"
+        },
+        {
+          "collectorName": "Gina Landini",
+          "collectorStatus": "Rejected"
+        }
+      ],
+      "bookingInfo": {
+        "organisationInfo": {
+          "collectionOrganisation": "collection0123",
+          "serviceOffice": ["Sydney", "Melbourne", "Paramatta"]
+        },
+        "jobDetails": {
+          "jobType": "In Clinic",
+          "jobDate": "20/04/2025",
+          "startTime": "11:09",
+          "duration": "0:10",
+          "noOfDonors": "6",
+          "jobReference": "jo1234",
+          "typeOfService": "service 123"
+        },
+        "clientInfo": {
+          "clientDetails": [
+            {
+              "clientName": "Client A",
+              "clientReference": "ref123"
+            },
+            {
+              "clientName": "Client B",
+              "clientReference": "ref456"
+            },
+            {
+              "clientName": "Client C",
+              "clientReference": "ref789"
+            }
+          ],
+          "locationDetails": [
+            {
+              "siteName": "Site 1",
+              "siteContacts": [
+                {
+                  "siteContactName": "Alice",
+                  "siteContactMobile": "0418549596"
+                },
+                {
+                  "siteContactName": "Bob",
+                  "siteContactMobile": "0418549596"
+                }
+              ]
+            },
+            {
+              "siteName": "Site 2",
+              "siteContacts": [
+                {
+                  "siteContactName": "Charlie",
+                  "siteContactMobile": "0418549596"
+                },
+                {
+                  "siteContactName": "Diana",
+                  "siteContactMobile": "0418549596"
+                }
+              ]
+            },
+            {
+              "siteName": "Site 3",
+              "siteContacts": [
+                {
+                  "siteContactName": "Eva",
+                  "siteContactMobile": "0418549596"
+                }
+              ]
+            }
+          ],
+          "testsAndDevices": {
+            "testType": "Drug Test Only",
+            "drugTestSpecifications": {
+              "primaryDrugTest": {
+                "drugTestName": "Drug Test 123",
+                "selectPreferedDevice": "Device 123"
+              },
+              "secondaryDrugTest": {
+                "drugTestName": "Drug Test 456",
+                "selectPreferedDevice": "Device 456"
+              },
+              "teritoryDrugTest": {
+                "drugTestName": "Drug Test 789",
+                "selectPreferedDevice": "Device 789"
+              }
+            }
+          },
+          "extraInfo": {
+            "additionalTests": "this is the additional test information",
+            "furtherInfo": "this is the further test information",
+            "donorSelectionProcess": "",
+            "screeningAndTestingProcess": "",
+            "testConfirmationInstructions": "",
+            "globalSiteAccessInstructions": "",
+            "specificLocalSiteAccessInstructions": "",
+            "specificInsturctions": ""
+          },
+          "authorizedRepresentative": {
+            "representativeName": "rusira123",
+            "representativeMobile": "0418549586",
+            "representativePosition": "position123",
+            "email": "rusira.senath@gmail.com"
+          },
+          "assignCollectors": [
+            {
+              "collectorName": "Micheal Kikrinam",
+              "assignedDateTime": "11:44 AM | 20 Apr 2025"
+            },
+            {
+              "collectorName": "George Poulas",
+              "assignedDateTime": "11:40 AM | 20 Apr 2025"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "jobNumber": "15",
+      "jobStatus": "Draft",
+      "dateTime": "30 Apr 2025 10:00",
+      "client": "Rail NSW",
+      "rep": "John Roberts",
+      "location": "Parramatta",
+      "service": "Random Testing",
+      "callout": "Non Callout",
+      "collectors": [
+        {
+          "collectorName": "George Poulos",
+          "collectorStatus": "Allocated"
+        },
+        {
+          "collectorName": "Michelle Kirkman",
+          "collectorStatus": "Accepted"
+        },
+        {
+          "collectorName": "Valerie McKenzie",
+          "collectorStatus": "Accepted"
+        },
+        {
+          "collectorName": "Zac Hepburn",
+          "collectorStatus": "Accepted"
+        },
+        {
+          "collectorName": "Gina Landini",
+          "collectorStatus": "Rejected"
+        }
+      ],
+      "bookingInfo": {
+        "organisationInfo": {
+          "collectionOrganisation": "collection0123",
+          "serviceOffice": ["Sydney", "Melbourne", "Paramatta"]
+        },
+        "jobDetails": {
+          "jobType": "In Clinic",
+          "jobDate": "20/04/2025",
+          "startTime": "11:09",
+          "duration": "0:10",
+          "noOfDonors": "6",
+          "jobReference": "jo1234",
+          "typeOfService": "service 123"
+        },
+        "clientInfo": {
+          "clientDetails": [
+            {
+              "clientName": "Client A",
+              "clientReference": "ref123"
+            },
+            {
+              "clientName": "Client B",
+              "clientReference": "ref456"
+            },
+            {
+              "clientName": "Client C",
+              "clientReference": "ref789"
+            }
+          ],
+          "locationDetails": [
+            {
+              "siteName": "Site 1",
+              "siteContacts": [
+                {
+                  "siteContactName": "Alice",
+                  "siteContactMobile": "0418549596"
+                },
+                {
+                  "siteContactName": "Bob",
+                  "siteContactMobile": "0418549596"
+                }
+              ]
+            },
+            {
+              "siteName": "Site 2",
+              "siteContacts": [
+                {
+                  "siteContactName": "Charlie",
+                  "siteContactMobile": "0418549596"
+                },
+                {
+                  "siteContactName": "Diana",
+                  "siteContactMobile": "0418549596"
+                }
+              ]
+            },
+            {
+              "siteName": "Site 3",
+              "siteContacts": [
+                {
+                  "siteContactName": "Eva",
+                  "siteContactMobile": "0418549596"
+                }
+              ]
+            }
+          ],
+          "testsAndDevices": {
+            "testType": "Drug Test Only",
+            "drugTestSpecifications": {
+              "primaryDrugTest": {
+                "drugTestName": "Drug Test 123",
+                "selectPreferedDevice": "Device 123"
+              },
+              "secondaryDrugTest": {
+                "drugTestName": "Drug Test 456",
+                "selectPreferedDevice": "Device 456"
+              },
+              "teritoryDrugTest": {
+                "drugTestName": "Drug Test 789",
+                "selectPreferedDevice": "Device 789"
+              }
+            }
+          },
+          "extraInfo": {
+            "additionalTests": "this is the additional test information",
+            "furtherInfo": "this is the further test information",
+            "donorSelectionProcess": "",
+            "screeningAndTestingProcess": "",
+            "testConfirmationInstructions": "",
+            "globalSiteAccessInstructions": "",
+            "specificLocalSiteAccessInstructions": "",
+            "specificInsturctions": ""
+          },
+          "authorizedRepresentative": {
+            "representativeName": "rusira123",
+            "representativeMobile": "0418549586",
+            "representativePosition": "position123",
+            "email": "rusira.senath@gmail.com"
+          },
+          "assignCollectors": [
+            {
+              "collectorName": "Micheal Kikrinam",
+              "assignedDateTime": "11:44 AM | 20 Apr 2025"
+            },
+            {
+              "collectorName": "George Poulas",
+              "assignedDateTime": "11:40 AM | 20 Apr 2025"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "jobNumber": "16",
+      "jobStatus": "Draft",
+      "dateTime": "30 Apr 2025 10:00",
+      "client": "Rail NSW",
+      "rep": "John Roberts",
+      "location": "Parramatta",
+      "service": "Random Testing",
+      "callout": "Non Callout",
+      "collectors": [
+        {
+          "collectorName": "George Poulos",
+          "collectorStatus": "Allocated"
+        },
+        {
+          "collectorName": "Michelle Kirkman",
+          "collectorStatus": "Accepted"
+        },
+        {
+          "collectorName": "Valerie McKenzie",
+          "collectorStatus": "Accepted"
+        },
+        {
+          "collectorName": "Zac Hepburn",
+          "collectorStatus": "Accepted"
+        },
+        {
+          "collectorName": "Gina Landini",
+          "collectorStatus": "Rejected"
+        }
+      ],
+      "bookingInfo": {
+        "organisationInfo": {
+          "collectionOrganisation": "collection0123",
+          "serviceOffice": ["Sydney", "Melbourne", "Paramatta"]
+        },
+        "jobDetails": {
+          "jobType": "In Clinic",
+          "jobDate": "20/04/2025",
+          "startTime": "11:09",
+          "duration": "0:10",
+          "noOfDonors": "6",
+          "jobReference": "jo1234",
+          "typeOfService": "service 123"
+        },
+        "clientInfo": {
+          "clientDetails": [
+            {
+              "clientName": "Client A",
+              "clientReference": "ref123"
+            },
+            {
+              "clientName": "Client B",
+              "clientReference": "ref456"
+            },
+            {
+              "clientName": "Client C",
+              "clientReference": "ref789"
+            }
+          ],
+          "locationDetails": [
+            {
+              "siteName": "Site 1",
+              "siteContacts": [
+                {
+                  "siteContactName": "Alice",
+                  "siteContactMobile": "0418549596"
+                },
+                {
+                  "siteContactName": "Bob",
+                  "siteContactMobile": "0418549596"
+                }
+              ]
+            },
+            {
+              "siteName": "Site 2",
+              "siteContacts": [
+                {
+                  "siteContactName": "Charlie",
+                  "siteContactMobile": "0418549596"
+                },
+                {
+                  "siteContactName": "Diana",
+                  "siteContactMobile": "0418549596"
+                }
+              ]
+            },
+            {
+              "siteName": "Site 3",
+              "siteContacts": [
+                {
+                  "siteContactName": "Eva",
+                  "siteContactMobile": "0418549596"
+                }
+              ]
+            }
+          ],
+          "testsAndDevices": {
+            "testType": "Drug Test Only",
+            "drugTestSpecifications": {
+              "primaryDrugTest": {
+                "drugTestName": "Drug Test 123",
+                "selectPreferedDevice": "Device 123"
+              },
+              "secondaryDrugTest": {
+                "drugTestName": "Drug Test 456",
+                "selectPreferedDevice": "Device 456"
+              },
+              "teritoryDrugTest": {
+                "drugTestName": "Drug Test 789",
+                "selectPreferedDevice": "Device 789"
+              }
+            }
+          },
+          "extraInfo": {
+            "additionalTests": "this is the additional test information",
+            "furtherInfo": "this is the further test information",
+            "donorSelectionProcess": "",
+            "screeningAndTestingProcess": "",
+            "testConfirmationInstructions": "",
+            "globalSiteAccessInstructions": "",
+            "specificLocalSiteAccessInstructions": "",
+            "specificInsturctions": ""
+          },
+          "authorizedRepresentative": {
+            "representativeName": "rusira123",
+            "representativeMobile": "0418549586",
+            "representativePosition": "position123",
+            "email": "rusira.senath@gmail.com"
+          },
+          "assignCollectors": [
+            {
+              "collectorName": "Micheal Kikrinam",
+              "assignedDateTime": "11:44 AM | 20 Apr 2025"
+            },
+            {
+              "collectorName": "George Poulas",
+              "assignedDateTime": "11:40 AM | 20 Apr 2025"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "jobNumber": "17",
+      "jobStatus": "Draft",
+      "dateTime": "30 Apr 2025 10:00",
+      "client": "Rail NSW",
+      "rep": "John Roberts",
+      "location": "Parramatta",
+      "service": "Random Testing",
+      "callout": "Non Callout",
+      "collectors": [
+        {
+          "collectorName": "George Poulos",
+          "collectorStatus": "Allocated"
+        },
+        {
+          "collectorName": "Michelle Kirkman",
+          "collectorStatus": "Accepted"
+        },
+        {
+          "collectorName": "Valerie McKenzie",
+          "collectorStatus": "Accepted"
+        },
+        {
+          "collectorName": "Zac Hepburn",
+          "collectorStatus": "Accepted"
+        },
+        {
+          "collectorName": "Gina Landini",
+          "collectorStatus": "Rejected"
+        }
+      ],
+      "bookingInfo": {
+        "organisationInfo": {
+          "collectionOrganisation": "collection0123",
+          "serviceOffice": ["Sydney", "Melbourne", "Paramatta"]
+        },
+        "jobDetails": {
+          "jobType": "In Clinic",
+          "jobDate": "20/04/2025",
+          "startTime": "11:09",
+          "duration": "0:10",
+          "noOfDonors": "6",
+          "jobReference": "jo1234",
+          "typeOfService": "service 123"
+        },
+        "clientInfo": {
+          "clientDetails": [
+            {
+              "clientName": "Client A",
+              "clientReference": "ref123"
+            },
+            {
+              "clientName": "Client B",
+              "clientReference": "ref456"
+            },
+            {
+              "clientName": "Client C",
+              "clientReference": "ref789"
+            }
+          ],
+          "locationDetails": [
+            {
+              "siteName": "Site 1",
+              "siteContacts": [
+                {
+                  "siteContactName": "Alice",
+                  "siteContactMobile": "0418549596"
+                },
+                {
+                  "siteContactName": "Bob",
+                  "siteContactMobile": "0418549596"
+                }
+              ]
+            },
+            {
+              "siteName": "Site 2",
+              "siteContacts": [
+                {
+                  "siteContactName": "Charlie",
+                  "siteContactMobile": "0418549596"
+                },
+                {
+                  "siteContactName": "Diana",
+                  "siteContactMobile": "0418549596"
+                }
+              ]
+            },
+            {
+              "siteName": "Site 3",
+              "siteContacts": [
+                {
+                  "siteContactName": "Eva",
+                  "siteContactMobile": "0418549596"
+                }
+              ]
+            }
+          ],
+          "testsAndDevices": {
+            "testType": "Drug Test Only",
+            "drugTestSpecifications": {
+              "primaryDrugTest": {
+                "drugTestName": "Drug Test 123",
+                "selectPreferedDevice": "Device 123"
+              },
+              "secondaryDrugTest": {
+                "drugTestName": "Drug Test 456",
+                "selectPreferedDevice": "Device 456"
+              },
+              "teritoryDrugTest": {
+                "drugTestName": "Drug Test 789",
+                "selectPreferedDevice": "Device 789"
+              }
+            }
+          },
+          "extraInfo": {
+            "additionalTests": "this is the additional test information",
+            "furtherInfo": "this is the further test information",
+            "donorSelectionProcess": "",
+            "screeningAndTestingProcess": "",
+            "testConfirmationInstructions": "",
+            "globalSiteAccessInstructions": "",
+            "specificLocalSiteAccessInstructions": "",
+            "specificInsturctions": ""
+          },
+          "authorizedRepresentative": {
+            "representativeName": "rusira123",
+            "representativeMobile": "0418549586",
+            "representativePosition": "position123",
+            "email": "rusira.senath@gmail.com"
+          },
+          "assignCollectors": [
+            {
+              "collectorName": "Micheal Kikrinam",
+              "assignedDateTime": "11:44 AM | 20 Apr 2025"
+            },
+            {
+              "collectorName": "George Poulas",
+              "assignedDateTime": "11:40 AM | 20 Apr 2025"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "jobNumber": "18",
+      "jobStatus": "Draft",
+      "dateTime": "30 Apr 2025 10:00",
+      "client": "Rail NSW",
+      "rep": "John Roberts",
+      "location": "Parramatta",
+      "service": "Random Testing",
+      "callout": "Non Callout",
+      "collectors": [
+        {
+          "collectorName": "George Poulos",
+          "collectorStatus": "Allocated"
+        },
+        {
+          "collectorName": "Michelle Kirkman",
+          "collectorStatus": "Accepted"
+        },
+        {
+          "collectorName": "Valerie McKenzie",
+          "collectorStatus": "Accepted"
+        },
+        {
+          "collectorName": "Zac Hepburn",
+          "collectorStatus": "Accepted"
+        },
+        {
+          "collectorName": "Gina Landini",
+          "collectorStatus": "Rejected"
+        }
+      ],
+      "bookingInfo": {
+        "organisationInfo": {
+          "collectionOrganisation": "collection0123",
+          "serviceOffice": ["Sydney", "Melbourne", "Paramatta"]
+        },
+        "jobDetails": {
+          "jobType": "In Clinic",
+          "jobDate": "20/04/2025",
+          "startTime": "11:09",
+          "duration": "0:10",
+          "noOfDonors": "6",
+          "jobReference": "jo1234",
+          "typeOfService": "service 123"
+        },
+        "clientInfo": {
+          "clientDetails": [
+            {
+              "clientName": "Client A",
+              "clientReference": "ref123"
+            },
+            {
+              "clientName": "Client B",
+              "clientReference": "ref456"
+            },
+            {
+              "clientName": "Client C",
+              "clientReference": "ref789"
+            }
+          ],
+          "locationDetails": [
+            {
+              "siteName": "Site 1",
+              "siteContacts": [
+                {
+                  "siteContactName": "Alice",
+                  "siteContactMobile": "0418549596"
+                },
+                {
+                  "siteContactName": "Bob",
+                  "siteContactMobile": "0418549596"
+                }
+              ]
+            },
+            {
+              "siteName": "Site 2",
+              "siteContacts": [
+                {
+                  "siteContactName": "Charlie",
+                  "siteContactMobile": "0418549596"
+                },
+                {
+                  "siteContactName": "Diana",
+                  "siteContactMobile": "0418549596"
+                }
+              ]
+            },
+            {
+              "siteName": "Site 3",
+              "siteContacts": [
+                {
+                  "siteContactName": "Eva",
+                  "siteContactMobile": "0418549596"
+                }
+              ]
+            }
+          ],
+          "testsAndDevices": {
+            "testType": "Drug Test Only",
+            "drugTestSpecifications": {
+              "primaryDrugTest": {
+                "drugTestName": "Drug Test 123",
+                "selectPreferedDevice": "Device 123"
+              },
+              "secondaryDrugTest": {
+                "drugTestName": "Drug Test 456",
+                "selectPreferedDevice": "Device 456"
+              },
+              "teritoryDrugTest": {
+                "drugTestName": "Drug Test 789",
+                "selectPreferedDevice": "Device 789"
+              }
+            }
+          },
+          "extraInfo": {
+            "additionalTests": "this is the additional test information",
+            "furtherInfo": "this is the further test information",
+            "donorSelectionProcess": "",
+            "screeningAndTestingProcess": "",
+            "testConfirmationInstructions": "",
+            "globalSiteAccessInstructions": "",
+            "specificLocalSiteAccessInstructions": "",
+            "specificInsturctions": ""
+          },
+          "authorizedRepresentative": {
+            "representativeName": "rusira123",
+            "representativeMobile": "0418549586",
+            "representativePosition": "position123",
+            "email": "rusira.senath@gmail.com"
+          },
+          "assignCollectors": [
+            {
+              "collectorName": "Micheal Kikrinam",
+              "assignedDateTime": "11:44 AM | 20 Apr 2025"
+            },
+            {
+              "collectorName": "George Poulas",
+              "assignedDateTime": "11:40 AM | 20 Apr 2025"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "jobNumber": "19",
+      "jobStatus": "Draft",
+      "dateTime": "30 Apr 2025 10:00",
+      "client": "Rail NSW",
+      "rep": "John Roberts",
+      "location": "Parramatta",
+      "service": "Random Testing",
+      "callout": "Non Callout",
+      "collectors": [
+        {
+          "collectorName": "George Poulos",
+          "collectorStatus": "Allocated"
+        },
+        {
+          "collectorName": "Michelle Kirkman",
+          "collectorStatus": "Accepted"
+        },
+        {
+          "collectorName": "Valerie McKenzie",
+          "collectorStatus": "Accepted"
+        },
+        {
+          "collectorName": "Zac Hepburn",
+          "collectorStatus": "Accepted"
+        },
+        {
+          "collectorName": "Gina Landini",
+          "collectorStatus": "Rejected"
+        }
+      ],
+      "bookingInfo": {
+        "organisationInfo": {
+          "collectionOrganisation": "collection0123",
+          "serviceOffice": ["Sydney", "Melbourne", "Paramatta"]
+        },
+        "jobDetails": {
+          "jobType": "In Clinic",
+          "jobDate": "20/04/2025",
+          "startTime": "11:09",
+          "duration": "0:10",
+          "noOfDonors": "6",
+          "jobReference": "jo1234",
+          "typeOfService": "service 123"
+        },
+        "clientInfo": {
+          "clientDetails": [
+            {
+              "clientName": "Client A",
+              "clientReference": "ref123"
+            },
+            {
+              "clientName": "Client B",
+              "clientReference": "ref456"
+            },
+            {
+              "clientName": "Client C",
+              "clientReference": "ref789"
+            }
+          ],
+          "locationDetails": [
+            {
+              "siteName": "Site 1",
+              "siteContacts": [
+                {
+                  "siteContactName": "Alice",
+                  "siteContactMobile": "0418549596"
+                },
+                {
+                  "siteContactName": "Bob",
+                  "siteContactMobile": "0418549596"
+                }
+              ]
+            },
+            {
+              "siteName": "Site 2",
+              "siteContacts": [
+                {
+                  "siteContactName": "Charlie",
+                  "siteContactMobile": "0418549596"
+                },
+                {
+                  "siteContactName": "Diana",
+                  "siteContactMobile": "0418549596"
+                }
+              ]
+            },
+            {
+              "siteName": "Site 3",
+              "siteContacts": [
+                {
+                  "siteContactName": "Eva",
+                  "siteContactMobile": "0418549596"
+                }
+              ]
+            }
+          ],
+          "testsAndDevices": {
+            "testType": "Drug Test Only",
+            "drugTestSpecifications": {
+              "primaryDrugTest": {
+                "drugTestName": "Drug Test 123",
+                "selectPreferedDevice": "Device 123"
+              },
+              "secondaryDrugTest": {
+                "drugTestName": "Drug Test 456",
+                "selectPreferedDevice": "Device 456"
+              },
+              "teritoryDrugTest": {
+                "drugTestName": "Drug Test 789",
+                "selectPreferedDevice": "Device 789"
+              }
+            }
+          },
+          "extraInfo": {
+            "additionalTests": "this is the additional test information",
+            "furtherInfo": "this is the further test information",
+            "donorSelectionProcess": "",
+            "screeningAndTestingProcess": "",
+            "testConfirmationInstructions": "",
+            "globalSiteAccessInstructions": "",
+            "specificLocalSiteAccessInstructions": "",
+            "specificInsturctions": ""
+          },
+          "authorizedRepresentative": {
+            "representativeName": "rusira123",
+            "representativeMobile": "0418549586",
+            "representativePosition": "position123",
+            "email": "rusira.senath@gmail.com"
+          },
+          "assignCollectors": [
+            {
+              "collectorName": "Micheal Kikrinam",
+              "assignedDateTime": "11:44 AM | 20 Apr 2025"
+            },
+            {
+              "collectorName": "George Poulas",
+              "assignedDateTime": "11:40 AM | 20 Apr 2025"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "jobNumber": "20",
+      "jobStatus": "Draft",
+      "dateTime": "30 Apr 2025 10:00",
+      "client": "Rail NSW",
+      "rep": "John Roberts",
+      "location": "Parramatta",
+      "service": "Random Testing",
+      "callout": "Non Callout",
+      "collectors": [
+        {
+          "collectorName": "George Poulos",
+          "collectorStatus": "Allocated"
+        },
+        {
+          "collectorName": "Michelle Kirkman",
+          "collectorStatus": "Accepted"
+        },
+        {
+          "collectorName": "Valerie McKenzie",
+          "collectorStatus": "Accepted"
+        },
+        {
+          "collectorName": "Zac Hepburn",
+          "collectorStatus": "Accepted"
+        },
+        {
+          "collectorName": "Gina Landini",
+          "collectorStatus": "Accepted"
+        }
+      ],
+      "bookingInfo": {
+        "organisationInfo": {
+          "collectionOrganisation": "collection0123",
+          "serviceOffice": ["Sydney", "Melbourne", "Paramatta"]
+        },
+        "jobDetails": {
+          "jobType": "In Clinic",
+          "jobDate": "20/04/2025",
+          "startTime": "11:09",
+          "duration": "0:10",
+          "noOfDonors": "6",
+          "jobReference": "jo1234",
+          "typeOfService": "service 123"
+        },
+        "clientInfo": {
+          "clientDetails": [
+            {
+              "clientName": "Client A",
+              "clientReference": "ref123"
+            },
+            {
+              "clientName": "Client B",
+              "clientReference": "ref456"
+            },
+            {
+              "clientName": "Client C",
+              "clientReference": "ref789"
+            }
+          ],
+          "locationDetails": [
+            {
+              "siteName": "Site 1",
+              "siteContacts": [
+                {
+                  "siteContactName": "Alice",
+                  "siteContactMobile": "0418549596"
+                },
+                {
+                  "siteContactName": "Bob",
+                  "siteContactMobile": "0418549596"
+                }
+              ]
+            },
+            {
+              "siteName": "Site 2",
+              "siteContacts": [
+                {
+                  "siteContactName": "Charlie",
+                  "siteContactMobile": "0418549596"
+                },
+                {
+                  "siteContactName": "Diana",
+                  "siteContactMobile": "0418549596"
+                }
+              ]
+            },
+            {
+              "siteName": "Site 3",
+              "siteContacts": [
+                {
+                  "siteContactName": "Eva",
+                  "siteContactMobile": "0418549596"
+                }
+              ]
+            }
+          ],
+          "testsAndDevices": {
+            "testType": "Drug Test Only",
+            "drugTestSpecifications": {
+              "primaryDrugTest": {
+                "drugTestName": "Drug Test 123",
+                "selectPreferedDevice": "Device 123"
+              },
+              "secondaryDrugTest": {
+                "drugTestName": "Drug Test 456",
+                "selectPreferedDevice": "Device 456"
+              },
+              "teritoryDrugTest": {
+                "drugTestName": "Drug Test 789",
+                "selectPreferedDevice": "Device 789"
+              }
+            }
+          },
+          "extraInfo": {
+            "additionalTests": "this is the additional test information",
+            "furtherInfo": "this is the further test information",
+            "donorSelectionProcess": "",
+            "screeningAndTestingProcess": "",
+            "testConfirmationInstructions": "",
+            "globalSiteAccessInstructions": "",
+            "specificLocalSiteAccessInstructions": "",
+            "specificInsturctions": ""
+          },
+          "authorizedRepresentative": {
+            "representativeName": "rusira123",
+            "representativeMobile": "0418549586",
+            "representativePosition": "position123",
+            "email": "rusira.senath@gmail.com"
+          },
+          "assignCollectors": [
+            {
+              "collectorName": "Micheal Kikrinam",
+              "assignedDateTime": "11:44 AM | 20 Apr 2025"
+            },
+            {
+              "collectorName": "George Poulas",
+              "assignedDateTime": "11:40 AM | 20 Apr 2025"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

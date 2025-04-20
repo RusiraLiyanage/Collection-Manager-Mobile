@@ -200,7 +200,9 @@ class InvoiceCard extends StatelessWidget {
                           context: context,
                           barrierDismissible:
                               false, // Prevent closing on backdrop tap
-                          builder: (context) => CollectorsModal(),
+                          builder: (context) => CollectorsModal(
+                            collectors: [],
+                          ),
                         ),
                         child: FittedBox(
                           child: Image.asset(

@@ -3,7 +3,8 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 class CollectorsModal extends StatelessWidget {
-  const CollectorsModal({super.key});
+  final List<dynamic> collectors;
+  const CollectorsModal({super.key, required this.collectors});
 
   @override
   Widget build(BuildContext context) {
@@ -61,11 +62,9 @@ class CollectorsModal extends StatelessWidget {
                     thickness: 2,
                   ),
                   SizedBox(height: 8),
-                  _collectorItem("George Poulos", "Allocated"),
-                  _collectorItem("Michelle Kirkman", "Accepted"),
-                  _collectorItem("Valerie McKenzie", "Accepted"),
-                  _collectorItem("Zac Hepburn", "Accepted"),
-                  _collectorItem("Gina Landini", "Rejected"),
+                  ...collectors.map((collector) => _collectorItem(
+                      collector['collectorName']!,
+                      collector['collectorStatus']!)),
                 ],
               ),
             ),

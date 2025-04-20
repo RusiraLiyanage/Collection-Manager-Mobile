@@ -23,7 +23,7 @@ void main() {
         ),
       ],
       child: GlobalLoaderOverlay(
-        overlayColor: Colors.black.withOpacity(0.2),
+        overlayColor: Colors.black.withOpacity(0.30),
         useDefaultLoading: false,
         overlayWidgetBuilder: (_) {
           //ignored progress for the moment
