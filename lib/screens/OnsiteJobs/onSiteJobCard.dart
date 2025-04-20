@@ -168,6 +168,7 @@ class OnsiteJobCard extends StatelessWidget {
                                       fontSize: 18),
                                 ),
                                 onPressed: (_) {
+                                  Navigator.pop(context);
                                   showModalBottomSheet<void>(
                                     isScrollControlled:
                                         true, // Allows controlling the height
@@ -213,6 +214,7 @@ class OnsiteJobCard extends StatelessWidget {
                                   ); */
                                     },
                                   );
+                                  // Close the bottom sheet
                                 },
                               ),
                               BottomSheetAction(

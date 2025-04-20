@@ -1,28 +1,28 @@
 import 'dart:convert';
 
 class JobModel {
-  String jobNumber;
-  String jobStatus;
-  String dateTime;
-  String client;
-  String rep;
-  String location;
-  String service;
-  String callout;
-  List<CollectorModel> collectors;
-  BookingModel bookingInfo;
+  String? jobNumber;
+  String? jobStatus;
+  String? dateTime;
+  String? client;
+  String? rep;
+  String? location;
+  String? service;
+  String? callout;
+  List<CollectorModel>? collectors;
+  BookingModel? bookingInfo;
 
   JobModel({
-    required this.jobNumber,
-    required this.jobStatus,
-    required this.dateTime,
-    required this.client,
-    required this.rep,
-    required this.location,
-    required this.service,
-    required this.callout,
-    required this.collectors,
-    required this.bookingInfo,
+    this.jobNumber,
+    this.jobStatus,
+    this.dateTime,
+    this.client,
+    this.rep,
+    this.location,
+    this.service,
+    this.callout,
+    this.collectors,
+    this.bookingInfo,
   });
 
   factory JobModel.fromRawJson(String str) =>
@@ -39,10 +39,13 @@ class JobModel {
         rep: json["rep"],
         service: json["service"],
         callout: json["callout"],
-        collectors: List<CollectorModel>.from(
-          json["collectors"].map((x) => CollectorModel.fromJson(x)),
-        ),
-        bookingInfo: BookingModel.fromJson(json["bookingInfo"]),
+        collectors: json["collectors"] != null
+            ? List<CollectorModel>.from(
+                json["collectors"].map((x) => CollectorModel.fromJson(x)))
+            : null,
+        bookingInfo: json["bookingInfo"] != null
+            ? BookingModel.fromJson(json["bookingInfo"])
+            : null,
       );
 
   Map<String, dynamic> toJson() => {
@@ -54,24 +57,16 @@ class JobModel {
         "rep": rep,
         "service": service,
         "callout": callout,
-        "collectors": List<dynamic>.from(collectors.map((x) => x.toJson())),
-        "bookingInfo": bookingInfo.toJson(),
+        "collectors": collectors?.map((x) => x.toJson()).toList(),
+        "bookingInfo": bookingInfo?.toJson(),
       };
 }
 
 class CollectorModel {
-  String collectorName;
-  String collectorStatus;
+  String? collectorName;
+  String? collectorStatus;
 
-  CollectorModel({
-    required this.collectorName,
-    required this.collectorStatus,
-  });
-
-  factory CollectorModel.fromRawJson(String str) =>
-      CollectorModel.fromJson(json.decode(str));
-
-  String toRawJson() => json.encode(toJson());
+  CollectorModel({this.collectorName, this.collectorStatus});
 
   factory CollectorModel.fromJson(Map<String, dynamic> json) => CollectorModel(
         collectorName: json["collectorName"],
@@ -85,51 +80,43 @@ class CollectorModel {
 }
 
 class BookingModel {
-  OrganizationModel organizatioInfo;
-  JobDetailsModel jobDetails;
-  ClientModel clientInfo;
-  BookingModel({
-    required this.organizatioInfo,
-    required this.clientInfo,
-    required this.jobDetails,
-  });
+  OrganizationModel? organizatioInfo;
+  JobDetailsModel? jobDetails;
+  ClientModel? clientInfo;
 
-  factory BookingModel.fromRawJson(String str) =>
-      BookingModel.fromJson(json.decode(str));
-
-  String toRawJson() => json.encode(toJson());
+  BookingModel({this.organizatioInfo, this.clientInfo, this.jobDetails});
 
   factory BookingModel.fromJson(Map<String, dynamic> json) => BookingModel(
-        organizatioInfo: OrganizationModel.fromJson(json["organisationInfo"]),
-        jobDetails: JobDetailsModel.fromJson(json["jobDetails"]),
-        clientInfo: ClientModel.fromJson(json["clientInfo"]),
+        organizatioInfo: json["organisationInfo"] != null
+            ? OrganizationModel.fromJson(json["organisationInfo"])
+            : null,
+        jobDetails: json["jobDetails"] != null
+            ? JobDetailsModel.fromJson(json["jobDetails"])
+            : null,
+        clientInfo: json["clientInfo"] != null
+            ? ClientModel.fromJson(json["clientInfo"])
+            : null,
       );
 
   Map<String, dynamic> toJson() => {
-        "organisationInfo": organizatioInfo.toJson(),
-        "jobDetails": jobDetails.toJson(),
-        "clientInfo": clientInfo.toJson(),
+        "organisationInfo": organizatioInfo?.toJson(),
+        "jobDetails": jobDetails?.toJson(),
+        "clientInfo": clientInfo?.toJson(),
       };
 }
 
 class OrganizationModel {
-  String collectionOrganization;
-  List<String> serviceOffice;
+  String? collectionOrganization;
+  List<String>? serviceOffice;
 
-  OrganizationModel({
-    required this.collectionOrganization,
-    required this.serviceOffice,
-  });
-
-  factory OrganizationModel.fromRawJson(String str) =>
-      OrganizationModel.fromJson(json.decode(str));
-
-  String toRawJson() => json.encode(toJson());
+  OrganizationModel({this.collectionOrganization, this.serviceOffice});
 
   factory OrganizationModel.fromJson(Map<String, dynamic> json) =>
       OrganizationModel(
         collectionOrganization: json["collectionOrganisation"],
-        serviceOffice: List<String>.from(json["serviceOffice"]),
+        serviceOffice: json["serviceOffice"] != null
+            ? List<String>.from(json["serviceOffice"])
+            : null,
       );
 
   Map<String, dynamic> toJson() => {
@@ -139,46 +126,33 @@ class OrganizationModel {
 }
 
 class ClientModel {
-  List<ClientDetailsModel> clientDetails;
-  List<SiteInfoModel> locationDetails;
+  List<ClientDetailsModel>? clientDetails;
+  List<SiteInfoModel>? locationDetails;
 
-  ClientModel({required this.clientDetails, required this.locationDetails});
-
-  factory ClientModel.fromRawJson(String str) =>
-      ClientModel.fromJson(json.decode(str));
-
-  String toRawJson() => json.encode(toJson());
+  ClientModel({this.clientDetails, this.locationDetails});
 
   factory ClientModel.fromJson(Map<String, dynamic> json) => ClientModel(
-        clientDetails: List<ClientDetailsModel>.from(
-          json["clientDetails"].map((x) => ClientDetailsModel.fromJson(x)),
-        ),
-        locationDetails: List<SiteInfoModel>.from(
-          json["locationDetails"].map((x) => SiteInfoModel.fromJson(x)),
-        ),
+        clientDetails: json["clientDetails"] != null
+            ? List<ClientDetailsModel>.from(json["clientDetails"]
+                .map((x) => ClientDetailsModel.fromJson(x)))
+            : null,
+        locationDetails: json["locationDetails"] != null
+            ? List<SiteInfoModel>.from(
+                json["locationDetails"].map((x) => SiteInfoModel.fromJson(x)))
+            : null,
       );
 
   Map<String, dynamic> toJson() => {
-        "clientDetails":
-            List<dynamic>.from(clientDetails.map((x) => x.toJson())),
-        "locationDetails":
-            List<dynamic>.from(locationDetails.map((x) => x.toJson())),
+        "clientDetails": clientDetails?.map((x) => x.toJson()).toList(),
+        "locationDetails": locationDetails?.map((x) => x.toJson()).toList(),
       };
 }
 
 class ClientDetailsModel {
-  String clientName;
-  String clientReference;
+  String? clientName;
+  String? clientReference;
 
-  ClientDetailsModel({
-    required this.clientName,
-    required this.clientReference,
-  });
-
-  factory ClientDetailsModel.fromRawJson(String str) =>
-      ClientDetailsModel.fromJson(json.decode(str));
-
-  String toRawJson() => json.encode(toJson());
+  ClientDetailsModel({this.clientName, this.clientReference});
 
   factory ClientDetailsModel.fromJson(Map<String, dynamic> json) =>
       ClientDetailsModel(
@@ -193,28 +167,23 @@ class ClientDetailsModel {
 }
 
 class JobDetailsModel {
-  String jobType;
-  String jobDate;
-  String startTime;
-  String duration;
-  String noOfDonors;
-  String jobReference;
-  String typeOfService;
+  String? jobType;
+  String? jobDate;
+  String? startTime;
+  String? duration;
+  String? noOfDonors;
+  String? jobReference;
+  String? typeOfService;
 
   JobDetailsModel({
-    required this.jobType,
-    required this.jobDate,
-    required this.startTime,
-    required this.duration,
-    required this.noOfDonors,
-    required this.jobReference,
-    required this.typeOfService,
+    this.jobType,
+    this.jobDate,
+    this.startTime,
+    this.duration,
+    this.noOfDonors,
+    this.jobReference,
+    this.typeOfService,
   });
-
-  factory JobDetailsModel.fromRawJson(String str) =>
-      JobDetailsModel.fromJson(json.decode(str));
-
-  String toRawJson() => json.encode(toJson());
 
   factory JobDetailsModel.fromJson(Map<String, dynamic> json) =>
       JobDetailsModel(
@@ -238,71 +207,31 @@ class JobDetailsModel {
       };
 }
 
-/* class LocationDetailsModel {
-  List<SiteInfoModel> locationDetails;
-
-  LocationDetailsModel({
-    required this.locationDetails,
-  });
-
-  factory LocationDetailsModel.fromRawJson(String str) =>
-      LocationDetailsModel.fromJson(json.decode(str));
-
-  String toRawJson() => json.encode(toJson());
-
-  factory LocationDetailsModel.fromJson(Map<String, dynamic> json) =>
-      LocationDetailsModel(
-        locationDetails: List<SiteInfoModel>.from(
-          json["locationDetails"].map((x) => SiteInfoModel.fromJson(x)),
-        ),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "locationDetails":
-            List<dynamic>.from(locationDetails.map((x) => x.toJson()))
-      };
-} */
-
 class SiteInfoModel {
-  String siteName;
-  List<SiteContactsModel> siteContacts;
+  String? siteName;
+  List<SiteContactsModel>? siteContacts;
 
-  SiteInfoModel({
-    required this.siteName,
-    required this.siteContacts,
-  });
-
-  factory SiteInfoModel.fromRawJson(String str) =>
-      SiteInfoModel.fromJson(json.decode(str));
-
-  String toRawJson() => json.encode(toJson());
+  SiteInfoModel({this.siteName, this.siteContacts});
 
   factory SiteInfoModel.fromJson(Map<String, dynamic> json) => SiteInfoModel(
         siteName: json["siteName"],
-        siteContacts: List<SiteContactsModel>.from(
-          json["siteContacts"].map((x) => SiteContactsModel.fromJson(x)),
-        ),
+        siteContacts: json["siteContacts"] != null
+            ? List<SiteContactsModel>.from(
+                json["siteContacts"].map((x) => SiteContactsModel.fromJson(x)))
+            : null,
       );
 
   Map<String, dynamic> toJson() => {
         "siteName": siteName,
-        "siteContacts": List<dynamic>.from(siteContacts.map((x) => x.toJson())),
+        "siteContacts": siteContacts?.map((x) => x.toJson()).toList(),
       };
 }
 
 class SiteContactsModel {
-  String siteContactName;
-  String siteContactMobile;
+  String? siteContactName;
+  String? siteContactMobile;
 
-  SiteContactsModel({
-    required this.siteContactName,
-    required this.siteContactMobile,
-  });
-
-  factory SiteContactsModel.fromRawJson(String str) =>
-      SiteContactsModel.fromJson(json.decode(str));
-
-  String toRawJson() => json.encode(toJson());
+  SiteContactsModel({this.siteContactName, this.siteContactMobile});
 
   factory SiteContactsModel.fromJson(Map<String, dynamic> json) =>
       SiteContactsModel(
@@ -317,16 +246,9 @@ class SiteContactsModel {
 }
 
 class TestsAndDevicesModel {
-  String testType;
+  String? testType;
 
-  TestsAndDevicesModel({
-    required this.testType,
-  });
-
-  factory TestsAndDevicesModel.fromRawJson(String str) =>
-      TestsAndDevicesModel.fromJson(json.decode(str));
-
-  String toRawJson() => json.encode(toJson());
+  TestsAndDevicesModel({this.testType});
 
   factory TestsAndDevicesModel.fromJson(Map<String, dynamic> json) =>
       TestsAndDevicesModel(
