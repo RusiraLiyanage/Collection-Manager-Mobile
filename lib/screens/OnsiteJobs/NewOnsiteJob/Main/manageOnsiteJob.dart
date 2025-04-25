@@ -14,6 +14,7 @@ import 'package:project_code_blue/screens/OnsiteJobs/NewOnsiteJob/Components/Tes
 import 'package:project_code_blue/screens/OnsiteJobs/NewOnsiteJob/Components/TypeOneFields/customizedTypeOne.dart';
 import 'package:project_code_blue/screens/OnsiteJobs/NewOnsiteJob/Components/TypeOneFields/customizedTypeTwo.dart';
 import 'package:project_code_blue/screens/OnsiteJobs/NewOnsiteJob/Components/extraInfoFormField.dart';
+import 'package:intl/intl.dart';
 
 enum TestsType {
   alcoholOnly,
@@ -52,10 +53,12 @@ class _NewOnsiteJobState extends State<ManageOnsiteJob> {
 
   List<Collector> collectors = List.empty(growable: true);
 
-  final List<String> _sites = ['Site 1', 'Site 2', 'Site 3'];
+  List<String> _sites = ['Site 1', 'Site 2', 'Site 3'];
+
+  dynamic testsAndDevices = {};
 
   Map<String, List<SiteContact>> siteContactsMap = {
-    'Site 1': [
+    /*  'Site 1': [
       SiteContact(id: '1', contactName: 'Alice', contact: 'alice@sitea.com'),
       SiteContact(id: '2', contactName: 'Bob', contact: 'bob@sitea.com'),
     ],
@@ -66,11 +69,13 @@ class _NewOnsiteJobState extends State<ManageOnsiteJob> {
     ],
     'Site 3': [
       SiteContact(id: '5', contactName: 'Eve', contact: 'eve@sitec.com'),
-    ],
+    ], */
   };
 
   String? _selectedSite;
   List<SiteContact> _selectedContacts = [];
+
+  List<dynamic> locationDetails = [];
 
   void removeCollector() {
     setState(() {
@@ -123,7 +128,112 @@ class _NewOnsiteJobState extends State<ManageOnsiteJob> {
     _serviceOffices =
         widget.jobData["bookingInfo"]["organisationInfo"]["serviceOffice"];
 
+    List<dynamic> clientDetailsJson =
+        widget.jobData["bookingInfo"]["clientInfo"]["clientDetails"];
+
+    String selectedClient =
+        widget.jobData["bookingInfo"]["clientInfo"]["selectedClient"];
+
     print(widget.jobData["bookingInfo"]["organisationInfo"]["serviceOffice"]);
+
+    _selectedServiceOffice = widget.jobData["bookingInfo"]["organisationInfo"]
+        ["selectedServiceOffice"];
+
+    print(clientDetailsJson);
+
+    String selectedSite =
+        widget.jobData["bookingInfo"]["clientInfo"]["selectedSite"];
+
+    print(selectedSite);
+
+    _clientData = {
+      for (var client in clientDetailsJson)
+        client["clientName"]: client["clientReference"]
+    };
+
+    //_selectedJobDate = (widget.jobData["bookingInfo"]["jobDetails"]["jobDate"]);
+
+    String dateString = widget.jobData["bookingInfo"]["jobDetails"]
+        ["jobDate"]; // e.g., "20/04/2025"
+    DateFormat inputFormat = DateFormat("dd/MM/yyyy");
+    _selectedJobDate = inputFormat.parse(dateString);
+
+    String timeString = widget.jobData["bookingInfo"]["jobDetails"]
+        ["startTime"]; // e.g., "16:41"
+    List<String> parts = timeString.split(':');
+    int hour = int.parse(parts[0]);
+    int minute = int.parse(parts[1]);
+
+    _selectedTime = TimeOfDay(hour: hour, minute: minute);
+
+    String durationString =
+        widget.jobData["bookingInfo"]["jobDetails"]["duration"]; // e.g., "0:10"
+    List<String> parts2 = durationString.split(':');
+    hours = int.parse(parts2[0]);
+    minutes = int.parse(parts2[1]);
+
+    _selectedDuration = Duration(hours: hours, minutes: minutes);
+
+    _donorsController.text =
+        widget.jobData["bookingInfo"]["jobDetails"]["noOfDonors"];
+
+    _jobReferenceController.text =
+        widget.jobData["bookingInfo"]["jobDetails"]["jobReference"];
+
+    _typeOfServiceController.text =
+        widget.jobData["bookingInfo"]["jobDetails"]["typeOfService"];
+
+    locationDetails =
+        widget.jobData["bookingInfo"]["clientInfo"]["locationDetails"];
+
+    _sites = locationDetails
+        .map<String>((site) => site["siteName"] as String)
+        .toList();
+
+    int idCounter = 1; // For generating unique IDs
+
+    for (var site in locationDetails) {
+      String siteName = site["siteName"];
+      List<dynamic> contacts = site["siteContacts"];
+
+      siteContactsMap[siteName] = contacts.map<SiteContact>((contact) {
+        return SiteContact(
+          id: (idCounter++).toString(),
+          contactName: contact["siteContactName"],
+          contact: contact["siteContactMobile"],
+        );
+      }).toList();
+    }
+
+    _clientNameController.text = selectedClient;
+    _clientReferenceController.text = _clientData[selectedClient] ?? '';
+    _clientReferenceKey.currentState?.validate();
+
+    print(_selectedJobDate);
+
+    _selectedSite = selectedSite;
+    //_siteKey.currentState!.validate();
+    _selectedContacts = siteContactsMap[_selectedSite] ?? [];
+
+    // 💡 Find the selected site's full object
+    // Safely find the selected site
+    final selectedSiteData = locationDetails.firstWhere(
+      (site) => site["siteName"] == _selectedSite,
+      orElse: () => <String, dynamic>{}, // ✅ FIXED HERE
+    );
+
+    final testsAndDevices = selectedSiteData["testsAndDevices"];
+    final testType = testsAndDevices?["testType"];
+
+    print("Selected Site's Test Type: $testType");
+
+    if (testType == "Alcohol Only") {
+      _testsType = TestsType.alcoholOnly;
+    } else if (testType == "Drug and Alcohol Test") {
+      _testsType = TestsType.alcoholAndDrug;
+    } else if (testType == "Drug Test Only") {
+      _testsType = TestsType.DrugOnly;
+    }
 
     // TODO: implement initState
     super.initState();
@@ -412,11 +522,7 @@ class _NewOnsiteJobState extends State<ManageOnsiteJob> {
   ];
   List<String> _serviceOffices = ['Clinic 1', 'Clinic 2', 'Clinic 3'];
 
-  final Map<String, String> _clientData = {
-    'Client A': 'Ref-001',
-    'Client B': 'Ref-002',
-    'Client C': 'Ref-003',
-  };
+  Map<String, String> _clientData = {};
 
   List<String> get _clientNames => _clientData.keys.toList();
 
@@ -1268,7 +1374,10 @@ class _NewOnsiteJobState extends State<ManageOnsiteJob> {
                                           final selectedDate =
                                               await showDatePicker(
                                             context: context,
-                                            initialDate: DateTime.now(),
+                                            initialDate:
+                                                _selectedJobDate == null
+                                                    ? DateTime.now()
+                                                    : _selectedJobDate,
                                             builder: (BuildContext context,
                                                     Widget? widget) =>
                                                 Theme(
@@ -1434,7 +1543,8 @@ class _NewOnsiteJobState extends State<ManageOnsiteJob> {
                                               child: widget!,
                                             ),
                                             context: context,
-                                            initialTime: TimeOfDay.now(),
+                                            initialTime: _selectedTime ??
+                                                TimeOfDay.now(),
                                           );
 
                                           if (selectedTime != null) {
@@ -2173,11 +2283,41 @@ class _NewOnsiteJobState extends State<ManageOnsiteJob> {
                                           setState(() {
                                             _selectedSite = value;
                                             _siteKey.currentState!.validate();
-                                            _selectedSite = value;
                                             _selectedContacts = siteContactsMap[
                                                     _selectedSite] ??
                                                 [];
-                                            _siteKey.currentState!.validate();
+
+                                            // 💡 Find the selected site's full object
+                                            // Safely find the selected site
+                                            final selectedSiteData =
+                                                locationDetails.firstWhere(
+                                              (site) =>
+                                                  site["siteName"] ==
+                                                  _selectedSite,
+                                              orElse: () => <String,
+                                                  dynamic>{}, // ✅ FIXED HERE
+                                            );
+
+                                            final testsAndDevices =
+                                                selectedSiteData[
+                                                    "testsAndDevices"];
+                                            final testType =
+                                                testsAndDevices?["testType"];
+
+                                            print(
+                                                "Selected Site's Test Type: $testType");
+
+                                            if (testType == "Alcohol Only") {
+                                              _testsType =
+                                                  TestsType.alcoholOnly;
+                                            } else if (testType ==
+                                                "Drug and Alcohol Test") {
+                                              _testsType =
+                                                  TestsType.alcoholAndDrug;
+                                            } else if (testType ==
+                                                "Drug Test Only") {
+                                              _testsType = TestsType.DrugOnly;
+                                            }
                                           });
                                         },
                                         validator: (value) => value == null

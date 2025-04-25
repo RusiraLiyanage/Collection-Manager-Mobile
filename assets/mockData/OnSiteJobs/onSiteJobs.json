@@ -73,7 +73,24 @@
                   "siteContactName": "Bob",
                   "siteContactMobile": "0418549596"
                 }
-              ]
+              ],
+              "testsAndDevices": {
+                "testType": "Drug Test Only",
+                "drugTestSpecifications": {
+                  "primaryDrugTest": {
+                    "drugTestName": "Drug Test 123",
+                    "selectPreferedDevice": "Device 123"
+                  },
+                  "secondaryDrugTest": {
+                    "drugTestName": "Drug Test 456",
+                    "selectPreferedDevice": "Device 456"
+                  },
+                  "teritoryDrugTest": {
+                    "drugTestName": "Drug Test 789",
+                    "selectPreferedDevice": "Device 789"
+                  }
+                }
+              }
             },
             {
               "siteName": "Site 2",
@@ -86,7 +103,24 @@
                   "siteContactName": "Diana",
                   "siteContactMobile": "0418549596"
                 }
-              ]
+              ],
+              "testsAndDevices": {
+                "testType": "Drug Test Only",
+                "drugTestSpecifications": {
+                  "primaryDrugTest": {
+                    "drugTestName": "Drug Test 123",
+                    "selectPreferedDevice": "Device 123"
+                  },
+                  "secondaryDrugTest": {
+                    "drugTestName": "Drug Test 456",
+                    "selectPreferedDevice": "Device 456"
+                  },
+                  "teritoryDrugTest": {
+                    "drugTestName": "Drug Test 789",
+                    "selectPreferedDevice": "Device 789"
+                  }
+                }
+              }
             },
             {
               "siteName": "Site 3",
@@ -95,26 +129,27 @@
                   "siteContactName": "Eva",
                   "siteContactMobile": "0418549596"
                 }
-              ]
-            }
-          ],
-          "testsAndDevices": {
-            "testType": "Drug Test Only",
-            "drugTestSpecifications": {
-              "primaryDrugTest": {
-                "drugTestName": "Drug Test 123",
-                "selectPreferedDevice": "Device 123"
-              },
-              "secondaryDrugTest": {
-                "drugTestName": "Drug Test 456",
-                "selectPreferedDevice": "Device 456"
-              },
-              "teritoryDrugTest": {
-                "drugTestName": "Drug Test 789",
-                "selectPreferedDevice": "Device 789"
+              ],
+              "testsAndDevices": {
+                "testType": "Drug Test Only",
+                "drugTestSpecifications": {
+                  "primaryDrugTest": {
+                    "drugTestName": "Drug Test 123",
+                    "selectPreferedDevice": "Device 123"
+                  },
+                  "secondaryDrugTest": {
+                    "drugTestName": "Drug Test 456",
+                    "selectPreferedDevice": "Device 456"
+                  },
+                  "teritoryDrugTest": {
+                    "drugTestName": "Drug Test 789",
+                    "selectPreferedDevice": "Device 789"
+                  }
+                }
               }
             }
-          },
+          ],
+
           "extraInfo": {
             "additionalTests": "this is the additional test information",
             "furtherInfo": "this is the further test information",
@@ -178,18 +213,20 @@
       "bookingInfo": {
         "organisationInfo": {
           "collectionOrganisation": "collection0123",
+          "selectedServiceOffice": "Melbourne",
           "serviceOffice": ["Sydney", "Melbourne", "Paramatta"]
         },
         "jobDetails": {
           "jobType": "In Clinic",
           "jobDate": "20/04/2025",
-          "startTime": "11:09",
-          "duration": "0:10",
+          "startTime": "16:41",
+          "duration": "1:10",
           "noOfDonors": "6",
           "jobReference": "jo1234",
           "typeOfService": "service 123"
         },
         "clientInfo": {
+          "selectedClient": "Client B",
           "clientDetails": [
             {
               "clientName": "Client A",
@@ -204,6 +241,7 @@
               "clientReference": "ref789"
             }
           ],
+          "selectedSite": "Site 1",
           "locationDetails": [
             {
               "siteName": "Site 1",
@@ -216,7 +254,24 @@
                   "siteContactName": "Bob",
                   "siteContactMobile": "0418549596"
                 }
-              ]
+              ],
+              "testsAndDevices": {
+                "testType": "Drug Test Only",
+                "drugTestSpecifications": {
+                  "primaryDrugTest": {
+                    "drugTestName": "Drug Test 123",
+                    "selectPreferedDevice": "Device 123"
+                  },
+                  "secondaryDrugTest": {
+                    "drugTestName": "Drug Test 456",
+                    "selectPreferedDevice": "Device 456"
+                  },
+                  "teritoryDrugTest": {
+                    "drugTestName": "Drug Test 789",
+                    "selectPreferedDevice": "Device 789"
+                  }
+                }
+              }
             },
             {
               "siteName": "Site 2",
@@ -229,7 +284,24 @@
                   "siteContactName": "Diana",
                   "siteContactMobile": "0418549596"
                 }
-              ]
+              ],
+              "testsAndDevices": {
+                "testType": "Alcohol Only",
+                "drugTestSpecifications": {
+                  "primaryDrugTest": {
+                    "drugTestName": "Drug Test 123",
+                    "selectPreferedDevice": "Device 123"
+                  },
+                  "secondaryDrugTest": {
+                    "drugTestName": "Drug Test 456",
+                    "selectPreferedDevice": "Device 456"
+                  },
+                  "teritoryDrugTest": {
+                    "drugTestName": "Drug Test 789",
+                    "selectPreferedDevice": "Device 789"
+                  }
+                }
+              }
             },
             {
               "siteName": "Site 3",
@@ -238,26 +310,27 @@
                   "siteContactName": "Eva",
                   "siteContactMobile": "0418549596"
                 }
-              ]
-            }
-          ],
-          "testsAndDevices": {
-            "testType": "Drug Test Only",
-            "drugTestSpecifications": {
-              "primaryDrugTest": {
-                "drugTestName": "Drug Test 123",
-                "selectPreferedDevice": "Device 123"
-              },
-              "secondaryDrugTest": {
-                "drugTestName": "Drug Test 456",
-                "selectPreferedDevice": "Device 456"
-              },
-              "teritoryDrugTest": {
-                "drugTestName": "Drug Test 789",
-                "selectPreferedDevice": "Device 789"
+              ],
+              "testsAndDevices": {
+                "testType": "Drug and Alcohol Test",
+                "drugTestSpecifications": {
+                  "primaryDrugTest": {
+                    "drugTestName": "Drug Test 123",
+                    "selectPreferedDevice": "Device 123"
+                  },
+                  "secondaryDrugTest": {
+                    "drugTestName": "Drug Test 456",
+                    "selectPreferedDevice": "Device 456"
+                  },
+                  "teritoryDrugTest": {
+                    "drugTestName": "Drug Test 789",
+                    "selectPreferedDevice": "Device 789"
+                  }
+                }
               }
             }
-          },
+          ],
+
           "extraInfo": {
             "additionalTests": "this is the additional test information",
             "furtherInfo": "this is the further test information",
@@ -359,7 +432,24 @@
                   "siteContactName": "Bob",
                   "siteContactMobile": "0418549596"
                 }
-              ]
+              ],
+              "testsAndDevices": {
+                "testType": "Drug Test Only",
+                "drugTestSpecifications": {
+                  "primaryDrugTest": {
+                    "drugTestName": "Drug Test 123",
+                    "selectPreferedDevice": "Device 123"
+                  },
+                  "secondaryDrugTest": {
+                    "drugTestName": "Drug Test 456",
+                    "selectPreferedDevice": "Device 456"
+                  },
+                  "teritoryDrugTest": {
+                    "drugTestName": "Drug Test 789",
+                    "selectPreferedDevice": "Device 789"
+                  }
+                }
+              }
             },
             {
               "siteName": "Site 2",
@@ -372,7 +462,24 @@
                   "siteContactName": "Diana",
                   "siteContactMobile": "0418549596"
                 }
-              ]
+              ],
+              "testsAndDevices": {
+                "testType": "Alcohol Only",
+                "drugTestSpecifications": {
+                  "primaryDrugTest": {
+                    "drugTestName": "Drug Test 123",
+                    "selectPreferedDevice": "Device 123"
+                  },
+                  "secondaryDrugTest": {
+                    "drugTestName": "Drug Test 456",
+                    "selectPreferedDevice": "Device 456"
+                  },
+                  "teritoryDrugTest": {
+                    "drugTestName": "Drug Test 789",
+                    "selectPreferedDevice": "Device 789"
+                  }
+                }
+              }
             },
             {
               "siteName": "Site 3",
@@ -381,26 +488,26 @@
                   "siteContactName": "Eva",
                   "siteContactMobile": "0418549596"
                 }
-              ]
-            }
-          ],
-          "testsAndDevices": {
-            "testType": "Drug Test Only",
-            "drugTestSpecifications": {
-              "primaryDrugTest": {
-                "drugTestName": "Drug Test 123",
-                "selectPreferedDevice": "Device 123"
-              },
-              "secondaryDrugTest": {
-                "drugTestName": "Drug Test 456",
-                "selectPreferedDevice": "Device 456"
-              },
-              "teritoryDrugTest": {
-                "drugTestName": "Drug Test 789",
-                "selectPreferedDevice": "Device 789"
+              ],
+              "testsAndDevices": {
+                "testType": "Drug and Alcohol Test",
+                "drugTestSpecifications": {
+                  "primaryDrugTest": {
+                    "drugTestName": "Drug Test 123",
+                    "selectPreferedDevice": "Device 123"
+                  },
+                  "secondaryDrugTest": {
+                    "drugTestName": "Drug Test 456",
+                    "selectPreferedDevice": "Device 456"
+                  },
+                  "teritoryDrugTest": {
+                    "drugTestName": "Drug Test 789",
+                    "selectPreferedDevice": "Device 789"
+                  }
+                }
               }
             }
-          },
+          ],
           "extraInfo": {
             "additionalTests": "this is the additional test information",
             "furtherInfo": "this is the further test information",

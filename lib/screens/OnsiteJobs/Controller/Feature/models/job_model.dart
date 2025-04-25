@@ -107,13 +107,20 @@ class BookingModel {
 
 class OrganizationModel {
   String? collectionOrganization;
+  String? selectedServiceOffice;
   List<String>? serviceOffice;
 
-  OrganizationModel({this.collectionOrganization, this.serviceOffice});
+  OrganizationModel(
+      {this.collectionOrganization,
+      this.selectedServiceOffice,
+      this.serviceOffice});
 
   factory OrganizationModel.fromJson(Map<String, dynamic> json) =>
       OrganizationModel(
         collectionOrganization: json["collectionOrganisation"],
+        selectedServiceOffice: json["selectedServiceOffice"] != null
+            ? json["selectedServiceOffice"]
+            : null,
         serviceOffice: json["serviceOffice"] != null
             ? List<String>.from(json["serviceOffice"])
             : null,
@@ -121,17 +128,28 @@ class OrganizationModel {
 
   Map<String, dynamic> toJson() => {
         "collectionOrganization": collectionOrganization,
+        "selectedServiceOffice": selectedServiceOffice,
         "serviceOffice": serviceOffice,
       };
 }
 
 class ClientModel {
+  String? selectedClient;
+  String? selectedSite;
   List<ClientDetailsModel>? clientDetails;
   List<SiteInfoModel>? locationDetails;
 
-  ClientModel({this.clientDetails, this.locationDetails});
+  ClientModel(
+      {this.selectedClient,
+      this.selectedSite,
+      this.clientDetails,
+      this.locationDetails});
 
   factory ClientModel.fromJson(Map<String, dynamic> json) => ClientModel(
+        selectedClient:
+            json["selectedClient"] != null ? json["selectedClient"] : null,
+        selectedSite:
+            json["selectedSite"] != null ? json["selectedSite"] : null,
         clientDetails: json["clientDetails"] != null
             ? List<ClientDetailsModel>.from(json["clientDetails"]
                 .map((x) => ClientDetailsModel.fromJson(x)))
@@ -143,6 +161,8 @@ class ClientModel {
       );
 
   Map<String, dynamic> toJson() => {
+        "selectedClient": selectedClient,
+        "selectedSite": selectedSite,
         "clientDetails": clientDetails?.map((x) => x.toJson()).toList(),
         "locationDetails": locationDetails?.map((x) => x.toJson()).toList(),
       };
@@ -210,20 +230,28 @@ class JobDetailsModel {
 class SiteInfoModel {
   String? siteName;
   List<SiteContactsModel>? siteContacts;
+  TestsAndDevicesModel? testsAndDevices;
 
-  SiteInfoModel({this.siteName, this.siteContacts});
+  SiteInfoModel({this.siteName, this.siteContacts, this.testsAndDevices});
 
   factory SiteInfoModel.fromJson(Map<String, dynamic> json) => SiteInfoModel(
         siteName: json["siteName"],
         siteContacts: json["siteContacts"] != null
             ? List<SiteContactsModel>.from(
-                json["siteContacts"].map((x) => SiteContactsModel.fromJson(x)))
+                json["siteContacts"].map(
+                  (x) => SiteContactsModel.fromJson(x),
+                ),
+              )
+            : null,
+        testsAndDevices: json["testsAndDevices"] != null
+            ? TestsAndDevicesModel.fromJson(json["testsAndDevices"])
             : null,
       );
 
   Map<String, dynamic> toJson() => {
         "siteName": siteName,
         "siteContacts": siteContacts?.map((x) => x.toJson()).toList(),
+        "testsAndDevices": testsAndDevices?.toJson(),
       };
 }
 
