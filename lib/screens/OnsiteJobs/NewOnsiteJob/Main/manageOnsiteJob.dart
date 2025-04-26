@@ -212,6 +212,87 @@ class _NewOnsiteJobState extends State<ManageOnsiteJob> {
     final testsAndDevices = selectedSiteData["testsAndDevices"];
     final testType = testsAndDevices?["testType"];
 
+    final drugTestSpecifications = testsAndDevices["drugTestSpecifications"];
+
+    final primaryDrugTest =
+        drugTestSpecifications["primaryDrugTest"]["drugTestName"];
+
+    final primaryTestSelectedPreferedDevice =
+        drugTestSpecifications["primaryDrugTest"]["selectPreferedDevice"];
+
+    final secondaryDrugTest =
+        drugTestSpecifications["secondaryDrugTest"]["drugTestName"];
+
+    final secondaryTestSelectedPreferedDevice =
+        drugTestSpecifications["secondaryDrugTest"]["selectPreferedDevice"];
+
+    final teritoryDrugTest =
+        drugTestSpecifications["teritoryDrugTest"]["drugTestName"];
+
+    final teritorTestSelectedPreferedDevice =
+        drugTestSpecifications["teritoryDrugTest"]["selectPreferedDevice"];
+
+    print(drugTestSpecifications);
+    print(primaryTestSelectedPreferedDevice);
+    print(secondaryDrugTest);
+    print(secondaryTestSelectedPreferedDevice);
+    print(teritoryDrugTest);
+    print(teritorTestSelectedPreferedDevice);
+
+    _primaryDrugTestController.text = primaryDrugTest;
+    _primaryDrugTestPreferredDeviceController.text =
+        primaryTestSelectedPreferedDevice;
+
+    _secondaryDrugTestController.text = secondaryDrugTest;
+    _secondaryDrugTestPreferredDeviceController.text =
+        secondaryTestSelectedPreferedDevice;
+
+    _thirteryDrugTestController.text = teritoryDrugTest;
+    _thirteryDrugTestPreferredDeviceController.text =
+        teritorTestSelectedPreferedDevice;
+
+    final additionalInfo = testsAndDevices["drugTestSpecifications"];
+
+    print(additionalInfo);
+
+    _additionalTestsController.text =
+        additionalInfo["additionalInfo"]["additionalTests"];
+
+    _additioanlTestInstructionsController.text =
+        additionalInfo["additionalInfo"]["additionalTestInstructions"];
+
+    _donorSelectionProcessController.text =
+        additionalInfo["additionalInfo"]["donorSelectionProcess"];
+
+    _screeningAndTestingProcessController.text =
+        additionalInfo["additionalInfo"]["screeningAndTestingProcess"];
+
+    _testConfirmationInstructionsController.text =
+        additionalInfo["additionalInfo"]["testConfirmationInstructions"];
+
+    _globalSiteAccessInstructionsController.text =
+        additionalInfo["additionalInfo"]["globalSiteAccessInstructions"];
+
+    _specificLocalSiteAccessInstructionsController.text =
+        additionalInfo["additionalInfo"]["specificLocalSiteAccessInstructions"];
+
+    _specialInstructionsController.text =
+        additionalInfo["additionalInfo"]["specificInstructions"];
+
+    print(additionalInfo["authorizedRepresentativeInfo"]);
+
+    _authorizedRepresentativeController.text =
+        additionalInfo["authorizedRepresentativeInfo"]["representativeName"];
+
+    _authorizedRepresentativeMobileNumberController.text =
+        additionalInfo["authorizedRepresentativeInfo"]["representativeMobile"];
+
+    _positionController.text = additionalInfo["authorizedRepresentativeInfo"]
+        ["representativePosition"];
+
+    _authorizedRepresentativeEmailController.text =
+        additionalInfo["authorizedRepresentativeInfo"]["representativeEmail"];
+
     print("Selected Site's Test Type: $testType");
 
     if (testType == "Alcohol Only") {

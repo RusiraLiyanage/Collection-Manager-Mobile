@@ -9,7 +9,7 @@
       "rep": "John De Diablo",
       "location": "Parramatta",
       "service": "Random Testing",
-      "callout": "No",
+      "callout": "Non Callout",
       "collectors": [
         {
           "collectorName": "George Poulos",
@@ -88,6 +88,16 @@
                   "teritoryDrugTest": {
                     "drugTestName": "Drug Test 789",
                     "selectPreferedDevice": "Device 789"
+                  },
+                  "additionalInfo": {
+                    "additionalTests": "",
+                    "additionalTestInstructions": "",
+                    "donorSelectionProcess": "Donor selection procedures have been advised to the collectors accordingly",
+                    "screeningAndTestingProcess": "",
+                    "testConfirmationInstructions": "",
+                    "globalSiteAccessInstructions": "",
+                    "specificLocalSiteAccessInstructions": "To access the site, please use the given access card",
+                    "specificInstructions": "Any potential issues ? please contact the assigned authorized representative"
                   }
                 }
               }
@@ -118,6 +128,16 @@
                   "teritoryDrugTest": {
                     "drugTestName": "Drug Test 789",
                     "selectPreferedDevice": "Device 789"
+                  },
+                  "additionalInfo": {
+                    "additionalTests": "",
+                    "additionalTestInstructions": "",
+                    "donorSelectionProcess": "Donor selection procedures have been advised to the collectors accordingly",
+                    "screeningAndTestingProcess": "",
+                    "testConfirmationInstructions": "",
+                    "globalSiteAccessInstructions": "",
+                    "specificLocalSiteAccessInstructions": "To access the site, please use the given access card",
+                    "specificInstructions": "Any potential issues ? please contact the assigned authorized representative"
                   }
                 }
               }
@@ -144,28 +164,21 @@
                   "teritoryDrugTest": {
                     "drugTestName": "Drug Test 789",
                     "selectPreferedDevice": "Device 789"
+                  },
+                  "additionalInfo": {
+                    "additionalTests": "",
+                    "additionalTestInstructions": "",
+                    "donorSelectionProcess": "Donor selection procedures have been advised to the collectors accordingly",
+                    "screeningAndTestingProcess": "",
+                    "testConfirmationInstructions": "",
+                    "globalSiteAccessInstructions": "",
+                    "specificLocalSiteAccessInstructions": "To access the site, please use the given access card",
+                    "specificInstructions": "Any potential issues ? please contact the assigned authorized representative"
                   }
                 }
               }
             }
           ],
-
-          "extraInfo": {
-            "additionalTests": "this is the additional test information",
-            "furtherInfo": "this is the further test information",
-            "donorSelectionProcess": "",
-            "screeningAndTestingProcess": "",
-            "testConfirmationInstructions": "",
-            "globalSiteAccessInstructions": "",
-            "specificLocalSiteAccessInstructions": "",
-            "specificInsturctions": ""
-          },
-          "authorizedRepresentative": {
-            "representativeName": "rusira123",
-            "representativeMobile": "0418549586",
-            "representativePosition": "position123",
-            "email": "rusira.senath@gmail.com"
-          },
           "assignCollectors": [
             {
               "collectorName": "Micheal Kikrinam",
@@ -187,7 +200,7 @@
       "rep": "John Roberts",
       "location": "Parramatta",
       "service": "Random Testing",
-      "callout": "Callout",
+      "callout": "Non Callout",
       "collectors": [
         {
           "collectorName": "George Poulos",
@@ -269,6 +282,22 @@
                   "teritoryDrugTest": {
                     "drugTestName": "Drug Test 789",
                     "selectPreferedDevice": "Device 789"
+                  },
+                  "additionalInfo": {
+                    "additionalTests": "",
+                    "additionalTestInstructions": "",
+                    "donorSelectionProcess": "Donor selection procedures have been advised to the collectors accordingly",
+                    "screeningAndTestingProcess": "",
+                    "testConfirmationInstructions": "",
+                    "globalSiteAccessInstructions": "",
+                    "specificLocalSiteAccessInstructions": "To access the site, please use the given access card",
+                    "specificInstructions": "Any potential issues ? please contact the assigned authorized representative"
+                  },
+                  "authorizedRepresentativeInfo": {
+                    "representativeName": "Rusira Senath Liyanage",
+                    "representativeMobile": "0418549586",
+                    "representativePosition": "Urine Drug Screening specialist",
+                    "representativeEmail": "rusira.senath@gmail.com"
                   }
                 }
               }
@@ -286,7 +315,7 @@
                 }
               ],
               "testsAndDevices": {
-                "testType": "Alcohol Only",
+                "testType": "Drug Test Only",
                 "drugTestSpecifications": {
                   "primaryDrugTest": {
                     "drugTestName": "Drug Test 123",
@@ -299,6 +328,22 @@
                   "teritoryDrugTest": {
                     "drugTestName": "Drug Test 789",
                     "selectPreferedDevice": "Device 789"
+                  },
+                  "additionalInfo": {
+                    "additionalTests": "",
+                    "additionalTestInstructions": "",
+                    "donorSelectionProcess": "Donor selection procedures have been advised to the collectors accordingly",
+                    "screeningAndTestingProcess": "",
+                    "testConfirmationInstructions": "",
+                    "globalSiteAccessInstructions": "",
+                    "specificLocalSiteAccessInstructions": "To access the site, please use the given access card",
+                    "specificInstructions": "Any potential issues ? please contact the assigned authorized representative"
+                  },
+                  "authorizedRepresentativeInfo": {
+                    "representativeName": "rusira123",
+                    "representativeMobile": "0418549586",
+                    "representativePosition": "position123",
+                    "representativeEmail": "rusira.senath@gmail.com"
                   }
                 }
               }
@@ -312,7 +357,7 @@
                 }
               ],
               "testsAndDevices": {
-                "testType": "Drug and Alcohol Test",
+                "testType": "Drug Test Only",
                 "drugTestSpecifications": {
                   "primaryDrugTest": {
                     "drugTestName": "Drug Test 123",
@@ -325,28 +370,28 @@
                   "teritoryDrugTest": {
                     "drugTestName": "Drug Test 789",
                     "selectPreferedDevice": "Device 789"
+                  },
+                  "additionalInfo": {
+                    "additionalTests": "",
+                    "additionalTestInstructions": "",
+                    "donorSelectionProcess": "Donor selection procedures have been advised to the collectors accordingly",
+                    "screeningAndTestingProcess": "",
+                    "testConfirmationInstructions": "",
+                    "globalSiteAccessInstructions": "",
+                    "specificLocalSiteAccessInstructions": "To access the site, please use the given access card",
+                    "specificInstructions": "Any potential issues ? please contact the assigned authorized representative"
+                  },
+                  "authorizedRepresentativeInfo": {
+                    "representativeName": "rusira123",
+                    "representativeMobile": "0418549586",
+                    "representativePosition": "position123",
+                    "representativeEmail": "rusira.senath@gmail.com"
                   }
                 }
               }
             }
           ],
 
-          "extraInfo": {
-            "additionalTests": "this is the additional test information",
-            "furtherInfo": "this is the further test information",
-            "donorSelectionProcess": "",
-            "screeningAndTestingProcess": "",
-            "testConfirmationInstructions": "",
-            "globalSiteAccessInstructions": "",
-            "specificLocalSiteAccessInstructions": "",
-            "specificInsturctions": ""
-          },
-          "authorizedRepresentative": {
-            "representativeName": "rusira123",
-            "representativeMobile": "0418549586",
-            "representativePosition": "position123",
-            "email": "rusira.senath@gmail.com"
-          },
           "assignCollectors": [
             {
               "collectorName": "Micheal Kikrinam",
@@ -447,6 +492,16 @@
                   "teritoryDrugTest": {
                     "drugTestName": "Drug Test 789",
                     "selectPreferedDevice": "Device 789"
+                  },
+                  "additionalInfo": {
+                    "additionalTests": "",
+                    "additionalTestInstructions": "",
+                    "donorSelectionProcess": "Donor selection procedures have been advised to the collectors accordingly",
+                    "screeningAndTestingProcess": "",
+                    "testConfirmationInstructions": "",
+                    "globalSiteAccessInstructions": "",
+                    "specificLocalSiteAccessInstructions": "To access the site, please use the given access card",
+                    "specificInstructions": "Any potential issues ? please contact the assigned authorized representative"
                   }
                 }
               }
@@ -464,7 +519,7 @@
                 }
               ],
               "testsAndDevices": {
-                "testType": "Alcohol Only",
+                "testType": "Drug Test Only",
                 "drugTestSpecifications": {
                   "primaryDrugTest": {
                     "drugTestName": "Drug Test 123",
@@ -477,6 +532,16 @@
                   "teritoryDrugTest": {
                     "drugTestName": "Drug Test 789",
                     "selectPreferedDevice": "Device 789"
+                  },
+                  "additionalInfo": {
+                    "additionalTests": "",
+                    "additionalTestInstructions": "",
+                    "donorSelectionProcess": "Donor selection procedures have been advised to the collectors accordingly",
+                    "screeningAndTestingProcess": "",
+                    "testConfirmationInstructions": "",
+                    "globalSiteAccessInstructions": "",
+                    "specificLocalSiteAccessInstructions": "To access the site, please use the given access card",
+                    "specificInstructions": "Any potential issues ? please contact the assigned authorized representative"
                   }
                 }
               }
@@ -490,7 +555,7 @@
                 }
               ],
               "testsAndDevices": {
-                "testType": "Drug and Alcohol Test",
+                "testType": "Drug Test Only",
                 "drugTestSpecifications": {
                   "primaryDrugTest": {
                     "drugTestName": "Drug Test 123",
@@ -503,21 +568,21 @@
                   "teritoryDrugTest": {
                     "drugTestName": "Drug Test 789",
                     "selectPreferedDevice": "Device 789"
+                  },
+                  "additionalInfo": {
+                    "additionalTests": "",
+                    "additionalTestInstructions": "",
+                    "donorSelectionProcess": "Donor selection procedures have been advised to the collectors accordingly",
+                    "screeningAndTestingProcess": "",
+                    "testConfirmationInstructions": "",
+                    "globalSiteAccessInstructions": "",
+                    "specificLocalSiteAccessInstructions": "To access the site, please use the given access card",
+                    "specificInstructions": "Any potential issues ? please contact the assigned authorized representative"
                   }
                 }
               }
             }
           ],
-          "extraInfo": {
-            "additionalTests": "this is the additional test information",
-            "furtherInfo": "this is the further test information",
-            "donorSelectionProcess": "",
-            "screeningAndTestingProcess": "",
-            "testConfirmationInstructions": "",
-            "globalSiteAccessInstructions": "",
-            "specificLocalSiteAccessInstructions": "",
-            "specificInsturctions": ""
-          },
           "authorizedRepresentative": {
             "representativeName": "rusira123",
             "representativeMobile": "0418549586",

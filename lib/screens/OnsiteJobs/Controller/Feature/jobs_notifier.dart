@@ -17,7 +17,7 @@ class JobsNotifier extends BaseNotifier {
   Future<List<JobModel>> getJobs() async {
     uiState = UiState.loading;
     notifyListeners();
-    await Future.delayed(const Duration(seconds: 2));
+    await Future.delayed(const Duration(milliseconds: 700));
     final response = await jobsApi.getJobs();
     if (response.isSuccess()) {
       jobs = response.data ?? [];

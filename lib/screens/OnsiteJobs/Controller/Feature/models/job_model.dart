@@ -31,14 +31,14 @@ class JobModel {
   String toRawJson() => json.encode(toJson());
 
   factory JobModel.fromJson(Map<String, dynamic> json) => JobModel(
-        jobNumber: json["jobNumber"],
-        jobStatus: json["jobStatus"],
-        dateTime: json["dateTime"],
-        location: json["location"],
-        client: json["client"],
-        rep: json["rep"],
-        service: json["service"],
-        callout: json["callout"],
+        jobNumber: json["jobNumber"] ?? null,
+        jobStatus: json["jobStatus"] ?? null,
+        dateTime: json["dateTime"] ?? null,
+        location: json["location"] ?? null,
+        client: json["client"] ?? null,
+        rep: json["rep"] ?? null,
+        service: json["service"] ?? null,
+        callout: json["callout"] ?? null,
         collectors: json["collectors"] != null
             ? List<CollectorModel>.from(
                 json["collectors"].map((x) => CollectorModel.fromJson(x)))
@@ -69,8 +69,8 @@ class CollectorModel {
   CollectorModel({this.collectorName, this.collectorStatus});
 
   factory CollectorModel.fromJson(Map<String, dynamic> json) => CollectorModel(
-        collectorName: json["collectorName"],
-        collectorStatus: json["collectorStatus"],
+        collectorName: json["collectorName"] ?? null,
+        collectorStatus: json["collectorStatus"] ?? null,
       );
 
   Map<String, dynamic> toJson() => {
@@ -118,9 +118,7 @@ class OrganizationModel {
   factory OrganizationModel.fromJson(Map<String, dynamic> json) =>
       OrganizationModel(
         collectionOrganization: json["collectionOrganisation"],
-        selectedServiceOffice: json["selectedServiceOffice"] != null
-            ? json["selectedServiceOffice"]
-            : null,
+        selectedServiceOffice: json["selectedServiceOffice"] ?? null,
         serviceOffice: json["serviceOffice"] != null
             ? List<String>.from(json["serviceOffice"])
             : null,
@@ -146,10 +144,8 @@ class ClientModel {
       this.locationDetails});
 
   factory ClientModel.fromJson(Map<String, dynamic> json) => ClientModel(
-        selectedClient:
-            json["selectedClient"] != null ? json["selectedClient"] : null,
-        selectedSite:
-            json["selectedSite"] != null ? json["selectedSite"] : null,
+        selectedClient: json["selectedClient"] ?? null,
+        selectedSite: json["selectedSite"] ?? null,
         clientDetails: json["clientDetails"] != null
             ? List<ClientDetailsModel>.from(json["clientDetails"]
                 .map((x) => ClientDetailsModel.fromJson(x)))
@@ -176,8 +172,8 @@ class ClientDetailsModel {
 
   factory ClientDetailsModel.fromJson(Map<String, dynamic> json) =>
       ClientDetailsModel(
-        clientName: json["clientName"],
-        clientReference: json["clientReference"],
+        clientName: json["clientName"] ?? null,
+        clientReference: json["clientReference"] ?? null,
       );
 
   Map<String, dynamic> toJson() => {
@@ -207,13 +203,13 @@ class JobDetailsModel {
 
   factory JobDetailsModel.fromJson(Map<String, dynamic> json) =>
       JobDetailsModel(
-        jobType: json["jobType"],
-        jobDate: json["jobDate"],
-        startTime: json["startTime"],
-        duration: json["duration"],
-        noOfDonors: json["noOfDonors"],
-        jobReference: json["jobReference"],
-        typeOfService: json["typeOfService"],
+        jobType: json["jobType"] ?? null,
+        jobDate: json["jobDate"] ?? null,
+        startTime: json["startTime"] ?? null,
+        duration: json["duration"] ?? null,
+        noOfDonors: json["noOfDonors"] ?? null,
+        jobReference: json["jobReference"] ?? null,
+        typeOfService: json["typeOfService"] ?? null,
       );
 
   Map<String, dynamic> toJson() => {
@@ -263,8 +259,8 @@ class SiteContactsModel {
 
   factory SiteContactsModel.fromJson(Map<String, dynamic> json) =>
       SiteContactsModel(
-        siteContactName: json["siteContactName"],
-        siteContactMobile: json["siteContactMobile"],
+        siteContactName: json["siteContactName"] ?? null,
+        siteContactMobile: json["siteContactMobile"] ?? null,
       );
 
   Map<String, dynamic> toJson() => {
@@ -275,15 +271,195 @@ class SiteContactsModel {
 
 class TestsAndDevicesModel {
   String? testType;
+  DrugTestSpecificationsModel? drugTestSpecifications;
 
-  TestsAndDevicesModel({this.testType});
+  TestsAndDevicesModel({this.testType, this.drugTestSpecifications});
 
   factory TestsAndDevicesModel.fromJson(Map<String, dynamic> json) =>
       TestsAndDevicesModel(
-        testType: json["testType"],
+        testType: json["testType"] ?? null,
+        drugTestSpecifications: json["drugTestSpecifications"] != null
+            ? DrugTestSpecificationsModel.fromJson(
+                json["drugTestSpecifications"])
+            : null,
       );
 
   Map<String, dynamic> toJson() => {
         "testType": testType,
+        "drugTestSpecifications": drugTestSpecifications?.toJson(),
+      };
+}
+
+class DrugTestSpecificationsModel {
+  PrimaryDrugTestModel? primaryDrugTest;
+  SecondaryDrugTestModel? secondaryDrugTest;
+  TeritoryDrugTestModel? teritoryDrugTest;
+  AdditionalInfoModel? additionalInfo;
+  AuthorizedRepresentativeModel? authorizedRepresentative;
+
+  DrugTestSpecificationsModel({
+    this.primaryDrugTest,
+    this.secondaryDrugTest,
+    this.teritoryDrugTest,
+    this.additionalInfo,
+    this.authorizedRepresentative,
+  });
+
+  factory DrugTestSpecificationsModel.fromJson(Map<String, dynamic> json) =>
+      DrugTestSpecificationsModel(
+        primaryDrugTest: json["primaryDrugTest"] != null
+            ? PrimaryDrugTestModel.fromJson(json["primaryDrugTest"])
+            : null,
+        secondaryDrugTest: json["secondaryDrugTest"] != null
+            ? SecondaryDrugTestModel.fromJson(json["secondaryDrugTest"])
+            : null,
+        teritoryDrugTest: json["teritoryDrugTest"] != null
+            ? TeritoryDrugTestModel.fromJson(json["teritoryDrugTest"])
+            : null,
+        additionalInfo: json["additionalInfo"] != null
+            ? AdditionalInfoModel.fromJson(json["additionalInfo"])
+            : null,
+        authorizedRepresentative: json["authorizedRepresentativeInfo"] != null
+            ? AuthorizedRepresentativeModel.fromJson(
+                json["authorizedRepresentativeInfo"])
+            : null,
+      );
+
+  Map<String, dynamic> toJson() => {
+        "primaryDrugTest": primaryDrugTest?.toJson(),
+        "secondaryDrugTest": secondaryDrugTest?.toJson(),
+        "teritoryDrugTest": teritoryDrugTest?.toJson(),
+        "additionalInfo": additionalInfo?.toJson(),
+        "authorizedRepresentativeInfo": authorizedRepresentative?.toJson(),
+      };
+}
+
+class PrimaryDrugTestModel {
+  String? drugTestName;
+  String? selectPreferedDevice;
+
+  PrimaryDrugTestModel({this.drugTestName, this.selectPreferedDevice});
+
+  factory PrimaryDrugTestModel.fromJson(Map<String, dynamic> json) =>
+      PrimaryDrugTestModel(
+        drugTestName: json["drugTestName"] ?? null,
+        selectPreferedDevice: json["selectPreferedDevice"] ?? null,
+      );
+
+  Map<String, dynamic> toJson() => {
+        "drugTestName": drugTestName,
+        "selectPreferedDevice": selectPreferedDevice,
+      };
+}
+
+class SecondaryDrugTestModel {
+  String? drugTestName;
+  String? selectPreferedDevice;
+
+  SecondaryDrugTestModel({this.drugTestName, this.selectPreferedDevice});
+
+  factory SecondaryDrugTestModel.fromJson(Map<String, dynamic> json) =>
+      SecondaryDrugTestModel(
+        drugTestName: json["drugTestName"] ?? null,
+        selectPreferedDevice: json["selectPreferedDevice"] ?? null,
+      );
+
+  Map<String, dynamic> toJson() => {
+        "drugTestName": drugTestName,
+        "selectPreferedDevice": selectPreferedDevice,
+      };
+}
+
+class TeritoryDrugTestModel {
+  String? drugTestName;
+  String? selectPreferedDevice;
+
+  TeritoryDrugTestModel({this.drugTestName, this.selectPreferedDevice});
+
+  factory TeritoryDrugTestModel.fromJson(Map<String, dynamic> json) =>
+      TeritoryDrugTestModel(
+        drugTestName: json["drugTestName"] ?? null,
+        selectPreferedDevice: json["selectPreferedDevice"] ?? null,
+      );
+
+  Map<String, dynamic> toJson() => {
+        "drugTestName": drugTestName,
+        "selectPreferedDevice": selectPreferedDevice,
+      };
+}
+
+class AdditionalInfoModel {
+  String? additionalTests;
+  String? additionalTestInstructions;
+  String? donorSelectionProcess;
+  String? screeningAndTestingProcess;
+  String? testConfirmationInstructions;
+  String? globalSiteAccessInstructions;
+  String? specificLocalSiteAccessInstructions;
+  String? specificInstructions;
+
+  AdditionalInfoModel({
+    this.additionalTests,
+    this.additionalTestInstructions,
+    this.donorSelectionProcess,
+    this.screeningAndTestingProcess,
+    this.testConfirmationInstructions,
+    this.globalSiteAccessInstructions,
+    this.specificLocalSiteAccessInstructions,
+    this.specificInstructions,
+  });
+
+  factory AdditionalInfoModel.fromJson(Map<String, dynamic> json) =>
+      AdditionalInfoModel(
+        additionalTests: json["additionalTests"] ?? null,
+        additionalTestInstructions: json["additionalTestInstructions"] ?? null,
+        donorSelectionProcess: json["donorSelectionProcess"] ?? null,
+        screeningAndTestingProcess: json["screeningAndTestingProcess"] ?? null,
+        testConfirmationInstructions:
+            json["testConfirmationInstructions"] ?? null,
+        globalSiteAccessInstructions:
+            json["globalSiteAccessInstructions"] ?? null,
+        specificLocalSiteAccessInstructions:
+            json["specificLocalSiteAccessInstructions"] ?? null,
+        specificInstructions: json["specificInstructions"] ?? null,
+      );
+
+  Map<String, dynamic> toJson() => {
+        "additionalTests": additionalTests,
+        "additionalTestInstructions": additionalTestInstructions,
+        "donorSelectionProcess": donorSelectionProcess,
+        "screeningAndTestingProcess": screeningAndTestingProcess,
+        "testConfirmationInstructions": testConfirmationInstructions,
+        "globalSiteAccessInstructions": globalSiteAccessInstructions,
+        "specificLocalSiteAccessInstructions":
+            specificLocalSiteAccessInstructions,
+        "specificInstructions": specificInstructions,
+      };
+}
+
+class AuthorizedRepresentativeModel {
+  String? representativeName;
+  String? representativeMobile;
+  String? representativePosition;
+  String? representativeEmail;
+  AuthorizedRepresentativeModel(
+      {this.representativeName,
+      this.representativeMobile,
+      this.representativePosition,
+      this.representativeEmail});
+
+  factory AuthorizedRepresentativeModel.fromJson(Map<String, dynamic> json) =>
+      AuthorizedRepresentativeModel(
+        representativeName: json["representativeName"] ?? null,
+        representativeMobile: json["representativeMobile"] ?? null,
+        representativePosition: json["representativePosition"] ?? null,
+        representativeEmail: json["representativeEmail"] ?? null,
+      );
+
+  Map<String, dynamic> toJson() => {
+        "representativeName": representativeName,
+        "representativeMobile": representativeMobile,
+        "representativePosition": representativePosition,
+        "representativeEmail": representativeEmail,
       };
 }
