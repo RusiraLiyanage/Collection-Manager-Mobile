@@ -20,6 +20,17 @@ class TabsPage extends StatefulWidget {
 class _TabsPageState extends State<TabsPage> {
   int _selectedIndex = 0;
   bool _isDrawerOpen = false; // Track drawer state
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.selectedIndex == 0) {
+      widget.firstInstance = true;
+    } else {
+      _onItemTapped(widget.selectedIndex);
+    }
+  }
+
   void _onItemTapped(int index, {bool fromBottomNavigation = false}) {
     setState(() {
       widget.firstInstance = false;
@@ -27,7 +38,6 @@ class _TabsPageState extends State<TabsPage> {
         case 0:
           _updateState(index: 1, selectedIndex: 0);
           break;
-
         case 1:
           if (widget.navigationMethod == "sidebar" && !fromBottomNavigation) {
             _updateState(index: 1, selectedIndex: 0);
@@ -36,19 +46,15 @@ class _TabsPageState extends State<TabsPage> {
             _updateState(index: 5, selectedIndex: 1);
           }
           break;
-
         case 2:
           _updateState(index: 7, selectedIndex: 2);
           break;
-
         case 3:
           _updateState(index: 13, selectedIndex: 3);
           break;
-
         case 4:
           _updateState(index: 8, selectedIndex: 4);
           break;
-
         default:
           _updateState(index: index, selectedIndex: index);
           break;
@@ -62,14 +68,9 @@ class _TabsPageState extends State<TabsPage> {
     _selectedIndex = selectedIndex;
   }
 
-  @override
-  void initState() {
-    if (widget.selectedIndex == 0) {
-      widget.firstInstance = true;
-    } else {
-      _onItemTapped(widget.selectedIndex);
-      super.initState();
-    }
+  /// This method now dynamically creates the page fresh based on selectedIndex
+  Widget _getPage(int index) {
+    return TabNavigationItem.items[index].page;
   }
 
   @override
@@ -79,18 +80,12 @@ class _TabsPageState extends State<TabsPage> {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(5),
         child: AppBar(
-          backgroundColor: Color(0xFF00004C),
-          // Fixed custom color
+          backgroundColor: const Color(0xFF00004C),
         ),
       ),
-      extendBody: true, // Allow the body to extend behind the bottom bar
+      extendBody: true,
       body: Scaffold(
-        body: IndexedStack(
-          index: widget.selectedIndex,
-          children: [
-            for (final tabItem in TabNavigationItem.items) tabItem.page,
-          ],
-        ),
+        body: _getPage(_selectedIndex), // <- Here: Dynamic page generation
       ),
       bottomNavigationBar: appState.isDrawerOpen || widget.selectedIndex == 0
           ? null
@@ -101,17 +96,16 @@ class _TabsPageState extends State<TabsPage> {
                   bottom: 2,
                   left: 10,
                   right: 10,
-                ), // Add padding for scaling
+                ),
                 child: Container(
                   height: 70,
                   decoration: BoxDecoration(
                     border: Border.all(
-                      color: AppColors.bottomNavigationBorder
-                          .withOpacity(0.52), // Set the border color here
-                      width: 2.0, // Set the border width
+                      color: AppColors.bottomNavigationBorder.withOpacity(0.52),
+                      width: 2.0,
                     ),
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(16), // Set the border radius here
+                    borderRadius: const BorderRadius.all(
+                      Radius.circular(16),
                     ),
                   ),
                   child: ClipRRect(
@@ -120,14 +114,12 @@ class _TabsPageState extends State<TabsPage> {
                     ),
                     child: Stack(
                       children: [
-                        // Blurry Background Effect
                         Positioned.fill(
                           child: BackdropFilter(
-                            filter: ImageFilter.blur(
-                                sigmaX: 10.0, sigmaY: 10.0), // Blur effect
+                            filter:
+                                ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
                             child: Container(
-                              color: Colors.white
-                                  .withOpacity(0.2), // Adjust transparency
+                              color: Colors.white.withOpacity(0.2),
                             ),
                           ),
                         ),
@@ -136,18 +128,17 @@ class _TabsPageState extends State<TabsPage> {
                               BottomNavigationBarLandscapeLayout.spread,
                           elevation: 1,
                           type: BottomNavigationBarType.fixed,
-                          backgroundColor: const Color(0xFFFFFFFF)
-                              .withOpacity(0.5), // Background with transparency
+                          backgroundColor:
+                              const Color(0xFFFFFFFF).withOpacity(0.5),
                           items: <BottomNavigationBarItem>[
                             BottomNavigationBarItem(
                               icon: Image.asset(
                                 _selectedIndex == 0 &&
                                         widget.firstInstance == false
-                                    ? 'assets/images/bottomNavigationIcons/selectedIcons/dashboardTrueColor.png' // Selected image
-                                    : 'assets/images/bottomNavigationIcons/unselectedIcons/dashboard_unselected.png', // Unselected image
-                                height: 24, // Increase height
-                                fit: BoxFit
-                                    .contain, // Ensures the image fits within the specified size
+                                    ? 'assets/images/bottomNavigationIcons/selectedIcons/dashboardTrueColor.png'
+                                    : 'assets/images/bottomNavigationIcons/unselectedIcons/dashboard_unselected.png',
+                                height: 24,
+                                fit: BoxFit.contain,
                               ),
                               label: '',
                             ),
@@ -155,11 +146,10 @@ class _TabsPageState extends State<TabsPage> {
                               icon: Image.asset(
                                 _selectedIndex == 1 &&
                                         widget.firstInstance == false
-                                    ? 'assets/images/bottomNavigationIcons/selectedIcons/jobsTrueColor.png' // Selected image
-                                    : 'assets/images/bottomNavigationIcons/unselectedIcons/onsiteJobs_unselected.png', // Unselected image
-                                height: 28, // Increase height
-                                fit: BoxFit
-                                    .contain, // Ensures the image fits within the specified size
+                                    ? 'assets/images/bottomNavigationIcons/selectedIcons/jobsTrueColor.png'
+                                    : 'assets/images/bottomNavigationIcons/unselectedIcons/onsiteJobs_unselected.png',
+                                height: 28,
+                                fit: BoxFit.contain,
                               ),
                               label: '',
                             ),
@@ -169,11 +159,10 @@ class _TabsPageState extends State<TabsPage> {
                                 child: Image.asset(
                                   _selectedIndex == 2 &&
                                           widget.firstInstance == false
-                                      ? 'assets/images/bottomNavigationIcons/selectedIcons/cmTrueColor.png' // Selected image
-                                      : 'assets/images/bottomNavigationIcons/unselectedIcons/clientManagement_unselected.png', // Unselected image
-                                  height: 28, // Increase height
-                                  fit: BoxFit
-                                      .contain, // Ensures the image fits within the specified size
+                                      ? 'assets/images/bottomNavigationIcons/selectedIcons/cmTrueColor.png'
+                                      : 'assets/images/bottomNavigationIcons/unselectedIcons/clientManagement_unselected.png',
+                                  height: 28,
+                                  fit: BoxFit.contain,
                                 ),
                               ),
                               label: '',
@@ -182,11 +171,10 @@ class _TabsPageState extends State<TabsPage> {
                               icon: Image.asset(
                                 _selectedIndex == 3 &&
                                         widget.firstInstance == false
-                                    ? 'assets/images/bottomNavigationIcons/selectedIcons/reportsTrueColor.png' // Selected image
-                                    : 'assets/images/bottomNavigationIcons/unselectedIcons/collectionReports_unselected.png', // Unselected image
-                                height: 28, // Increase height
-                                fit: BoxFit
-                                    .contain, // Ensures the image fits within the specified size
+                                    ? 'assets/images/bottomNavigationIcons/selectedIcons/reportsTrueColor.png'
+                                    : 'assets/images/bottomNavigationIcons/unselectedIcons/collectionReports_unselected.png',
+                                height: 28,
+                                fit: BoxFit.contain,
                               ),
                               label: '',
                             ),
@@ -194,36 +182,30 @@ class _TabsPageState extends State<TabsPage> {
                               icon: Image.asset(
                                 _selectedIndex == 4 &&
                                         widget.firstInstance == false
-                                    ? 'assets/images/bottomNavigationIcons/selectedIcons/accountingTrueColor.png' // Selected image
-                                    : 'assets/images/bottomNavigationIcons/unselectedIcons/accounting_unselected.png', // Unselected image
-                                height: 28, // Increase height
-                                fit: BoxFit
-                                    .contain, // Ensures the image fits within the specified size
+                                    ? 'assets/images/bottomNavigationIcons/selectedIcons/accountingTrueColor.png'
+                                    : 'assets/images/bottomNavigationIcons/unselectedIcons/accounting_unselected.png',
+                                height: 28,
+                                fit: BoxFit.contain,
                               ),
                               label: '',
                             ),
                           ],
                           currentIndex: _selectedIndex,
-                          selectedItemColor: widget.firstInstance
-                              ? AppColors.bottomNavigationBorder
-                              : AppColors.bottomNavigationBorder,
+                          selectedItemColor: AppColors.bottomNavigationBorder,
                           unselectedItemColor: AppColors.bottomNavigationBorder,
                           selectedLabelStyle: const TextStyle(
-                            fontSize:
-                                13, // Increase font size for selected label
-                            fontWeight:
-                                FontWeight.bold, // Make it bold (optional)
+                            fontSize: 13,
+                            fontWeight: FontWeight.bold,
                           ),
                           unselectedLabelStyle: const TextStyle(
-                            fontSize:
-                                13, // Increase font size for selected label
-                            fontWeight:
-                                FontWeight.bold, // Make it bold (optional)
+                            fontSize: 13,
+                            fontWeight: FontWeight.bold,
                           ),
-                          showSelectedLabels: false, // Hide selected labels
-                          showUnselectedLabels: false, // Hide unselected labels
+                          showSelectedLabels: false,
+                          showUnselectedLabels: false,
                           onTap: (index) {
                             _onItemTapped(index, fromBottomNavigation: true);
+
                             if (index == 0) {
                               appState.setHome(false);
                               appState.setDashboard(true);
