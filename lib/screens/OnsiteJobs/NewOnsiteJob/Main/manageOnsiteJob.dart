@@ -57,20 +57,7 @@ class _NewOnsiteJobState extends State<ManageOnsiteJob> {
 
   dynamic testsAndDevices = {};
 
-  Map<String, List<SiteContact>> siteContactsMap = {
-    /*  'Site 1': [
-      SiteContact(id: '1', contactName: 'Alice', contact: 'alice@sitea.com'),
-      SiteContact(id: '2', contactName: 'Bob', contact: 'bob@sitea.com'),
-    ],
-    'Site 2': [
-      SiteContact(
-          id: '3', contactName: 'Charlie', contact: 'charlie@siteb.com'),
-      SiteContact(id: '4', contactName: 'Diana', contact: 'diana@siteb.com'),
-    ],
-    'Site 3': [
-      SiteContact(id: '5', contactName: 'Eve', contact: 'eve@sitec.com'),
-    ], */
-  };
+  Map<String, List<SiteContact>> siteContactsMap = {};
 
   String? _selectedSite;
   List<SiteContact> _selectedContacts = [];
