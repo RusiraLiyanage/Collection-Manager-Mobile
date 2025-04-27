@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 class OnsiteApprovalModal extends StatelessWidget {
   final TextEditingController _textController = TextEditingController();
+  final ScrollController _scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
@@ -81,9 +82,11 @@ class OnsiteApprovalModal extends StatelessWidget {
                   ),
                   Expanded(
                     child: Scrollbar(
+                      controller: _scrollController,
                       thickness: 3,
                       thumbVisibility: true,
                       child: SingleChildScrollView(
+                        controller: _scrollController,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [

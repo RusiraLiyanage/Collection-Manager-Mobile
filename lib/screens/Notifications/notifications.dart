@@ -24,6 +24,12 @@ class _NotificationsState extends State<Notifications> {
   }
 
   @override
+  void dispose() {
+    _scrollController.dispose(); // Dispose the controller when done
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final appState = Provider.of<AppState>(context, listen: true);
     appState.setNoNotifications(notifications.length);

@@ -329,6 +329,12 @@ class _NewOnsiteJobState extends State<ManageOnsiteJob> {
     super.initState();
   }
 
+  @override
+  void dispose() {
+    widget.scrollController.dispose(); // Dispose the controller when done
+    super.dispose();
+  }
+
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _donorsController = TextEditingController();

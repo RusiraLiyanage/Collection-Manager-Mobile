@@ -22,6 +22,7 @@ import 'package:project_code_blue/screens/OnsiteJobs/onSiteJobCard.dart';
 import 'package:im_stepper/stepper.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:provider/provider.dart';
 
 import '../Components/ClientDetails/TestingSpecifications/DrugTestSpecifications/drugTestFormField.dart';
 import '../Components/ClientDetails/TestingSpecifications/DrugTestSpecifications/preferredDeviceFormField.dart';
@@ -1649,6 +1650,7 @@ class _NewClientJobState extends State<NewClient> {
 
   @override
   void dispose() {
+    widget.scrollController.dispose();
     _locationSearchController.dispose();
     _startDateController.dispose();
     _endDateController.dispose(); // Dispose the controller when done

@@ -108,6 +108,12 @@ class _OnsiteApprovalsState extends State<OnsiteApprovals> {
   }
 
   @override
+  void dispose() {
+    _scrollController.dispose(); // Dispose the controller when done
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final appState = Provider.of<AppState>(context, listen: false);
     return Scaffold(
@@ -125,6 +131,7 @@ class _OnsiteApprovalsState extends State<OnsiteApprovals> {
           width: 40.0,
           child: FittedBox(
             child: FloatingActionButton(
+              heroTag: "onSiteApro",
               backgroundColor:
                   AppColors.floatingActionBarColor.withOpacity(0.6),
               onPressed: () {

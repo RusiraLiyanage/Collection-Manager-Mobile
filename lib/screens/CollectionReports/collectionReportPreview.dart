@@ -59,6 +59,13 @@ class _CollectionReportPreviewState extends State<CollectionReportPreview> {
   final ScrollController _scrollController = ScrollController();
   int _rowsPerPage = 5; // Default page size
   final MyDataTableSource _data = MyDataTableSource();
+
+  @override
+  void dispose() {
+    _scrollController.dispose(); // Dispose the controller when done
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

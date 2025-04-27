@@ -4,7 +4,7 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'package:project_code_blue/screens/OnsiteJobs/Controller/Feature/utils/api/api_exceptions.dart';
 import 'package:project_code_blue/screens/OnsiteJobs/Controller/Feature/utils/utils.dart';
 
-class MockInterceptor extends Interceptor {
+class OnsiteJobsMockInterceptor extends Interceptor {
   @override
   void onRequest(
     RequestOptions options,

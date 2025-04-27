@@ -150,6 +150,12 @@ class _TestSampleResultsState extends State<TestSampleResults> {
     super.initState();
   }
 
+  @override
+  void dispose() {
+    _scrollController.dispose(); // Dispose the controller when done
+    super.dispose();
+  }
+
   void _updateDayList(int year, int month) {
     int daysInMonth = DateTime(year, month + 1, 0).day;
     setState(() {

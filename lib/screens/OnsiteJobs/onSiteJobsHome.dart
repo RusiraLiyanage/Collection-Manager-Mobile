@@ -285,6 +285,7 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
           width: 40.0,
           child: FittedBox(
             child: FloatingActionButton(
+              heroTag: "onSiteJobsHome",
               backgroundColor:
                   AppColors.floatingActionBarColor.withOpacity(0.6),
               onPressed: () {

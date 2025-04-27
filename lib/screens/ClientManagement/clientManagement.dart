@@ -156,6 +156,7 @@ class _ClientManagementState extends State<ClientManagement> {
           width: 40.0,
           child: FittedBox(
             child: FloatingActionButton(
+              heroTag: "clientMan",
               backgroundColor:
                   AppColors.floatingActionBarColor.withOpacity(0.6),
               onPressed: () {

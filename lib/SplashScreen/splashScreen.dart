@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:project_code_blue/ColorSchemas/AppColors.dart';
+import 'package:project_code_blue/screens/Login/loginScreen.dart';
 import 'package:project_code_blue/tabs/tabs_page.dart';
 import 'package:flutter/services.dart';
 
@@ -23,13 +24,20 @@ class _SplashScreenState extends State<SplashScreen> {
     Future.delayed(const Duration(seconds: 1), () {
       // Restore bottom navigation bar when leaving splash screen
       SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
-      Navigator.pushReplacement(
+      /*     Navigator.pushReplacement(
         context,
         MaterialPageRoute(
           builder: (context) => TabsPage(
             selectedIndex: 0,
             navigationMethod: "app_startup",
           ),
+        ),
+      ); */
+
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => LoginScreen(),
         ),
       );
     });

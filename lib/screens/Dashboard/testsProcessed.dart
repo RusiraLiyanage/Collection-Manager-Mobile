@@ -151,6 +151,12 @@ class _TestsProcessedState extends State<TestsProcessed> {
   }
 
   @override
+  void dispose() {
+    _scrollController.dispose(); // Dispose the controller when done
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.appWideBackground,

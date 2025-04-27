@@ -257,6 +257,7 @@ class _ITServicesState extends State<ITServices> {
           trackVisibility: true,
           controller: _scrollController,
           child: SingleChildScrollView(
+            controller: _scrollController,
             child: Column(
               children: [
                 Container(

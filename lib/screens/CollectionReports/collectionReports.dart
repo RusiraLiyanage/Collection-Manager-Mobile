@@ -67,6 +67,12 @@ class _CollectionReportsState extends State<CollectionReports> {
   }
 
   @override
+  void dispose() {
+    _scrollController.dispose(); // Dispose the controller when done
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final appState = Provider.of<AppState>(context, listen: false);
     return Scaffold(

@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
-import 'mock_interceptor.dart'; // your interceptor
+import 'OnSite_Jobs_Mock_Interceptor.dart'; // your interceptor
 
 class ApiService {
   static final ApiService _instance = ApiService._internal();
@@ -25,7 +25,7 @@ class ApiService {
       compact: true,
       maxWidth: 90,
     );
-    MockInterceptor mockInterceptor = MockInterceptor();
+    OnsiteJobsMockInterceptor mockInterceptor = OnsiteJobsMockInterceptor();
     // Add interceptors
     dio.interceptors.addAll({prettyDioLogger, mockInterceptor});
   }

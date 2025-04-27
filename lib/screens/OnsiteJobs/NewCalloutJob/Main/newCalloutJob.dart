@@ -203,6 +203,12 @@ class _NewCalloutJobState extends State<NewCalloutJob> {
     super.initState();
   }
 
+  @override
+  void dispose() {
+    widget.scrollController.dispose(); // Dispose the controller when done
+    super.dispose();
+  }
+
   bool collectorSelected = false;
 
   Widget _buildStepContent() {

@@ -146,6 +146,7 @@ class _TestsState extends State<Tests> {
           trackVisibility: true,
           controller: _scrollController,
           child: SingleChildScrollView(
+            controller: _scrollController,
             child: Column(
               children: [
                 Container(

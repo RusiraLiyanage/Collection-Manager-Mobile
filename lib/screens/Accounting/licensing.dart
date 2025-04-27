@@ -132,6 +132,7 @@ class _LicensingState extends State<Licensing> {
           trackVisibility: true,
           controller: _scrollController,
           child: SingleChildScrollView(
+            controller: _scrollController,
             child: Column(
               children: [
                 Container(

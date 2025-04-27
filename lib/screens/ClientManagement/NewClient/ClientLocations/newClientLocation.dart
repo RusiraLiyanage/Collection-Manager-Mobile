@@ -123,6 +123,13 @@ class _NewClientLocationState extends State<NewClientLocation> {
   }
 
   @override
+  void dispose() {
+    _scrollController.dispose();
+    // TODO: implement dispose
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Stack(
       children: [

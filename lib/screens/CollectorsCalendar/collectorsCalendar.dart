@@ -95,6 +95,12 @@ class _CollectorsCalendarState extends State<CollectorsCalendar> {
         .toList();
   }
 
+  @override
+  void dispose() {
+    _scrollController.dispose(); // Dispose the controller when done
+    super.dispose();
+  }
+
   void _onCalendarTapped(CalendarTapDetails details) {
     if (details.targetElement == CalendarElement.calendarCell &&
         details.date != null) {

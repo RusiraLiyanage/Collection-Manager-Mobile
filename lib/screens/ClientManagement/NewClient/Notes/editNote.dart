@@ -55,6 +55,13 @@ class _EditNoteState extends State<EditNote> {
     _noteTextController.text = widget.noteText;
   }
 
+  @override
+  void dispose() {
+    _scrollController.dispose();
+
+    super.dispose();
+  }
+
   void _nextStep() {
     // Validate the current form
     if (_formKey.currentState!.validate()) {
