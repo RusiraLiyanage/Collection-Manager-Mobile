@@ -1,5 +1,6 @@
 import 'package:adaptive_action_sheet/adaptive_action_sheet.dart';
 import 'package:flutter/material.dart';
+import 'package:project_code_blue/screens/OnsiteJobs/NewCalloutJob/Main/manageCalloutJob.dart';
 import 'package:project_code_blue/screens/OnsiteJobs/NewOnsiteJob/Main/manageOnsiteJob.dart';
 import 'package:project_code_blue/screens/OnsiteJobs/widgets/cancelJobConfirmationModal.dart';
 import 'package:project_code_blue/screens/OnsiteJobs/widgets/collectorsModal.dart';
@@ -298,6 +299,43 @@ class OnsiteJobCard extends StatelessWidget {
                                 onPressed: (_) {
                                   Navigator.pop(
                                       context); // Close the bottom sheet
+                                  showModalBottomSheet<void>(
+                                    isScrollControlled:
+                                        true, // Allows controlling the height
+                                    isDismissible: false,
+                                    enableDrag: false,
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return DraggableScrollableSheet(
+                                        expand: false,
+                                        initialChildSize:
+                                            1, // Initial height of the sheet (93% of the screen)
+                                        minChildSize:
+                                            1, // Allow shrinking to 50% of the screen
+                                        maxChildSize:
+                                            1, // Prevent expansion above 93% of the screen
+                                        builder: (BuildContext context,
+                                            ScrollController scrollController) {
+                                          return Container(
+                                            width: double.infinity,
+                                            decoration: const BoxDecoration(
+                                              color: Color(
+                                                  0xFFEDEEF0), // Background color of the bottom sheet
+                                              borderRadius:
+                                                  BorderRadius.vertical(
+                                                top: Radius.circular(
+                                                    0), // Rounded top corners
+                                              ),
+                                            ),
+                                            child: ManageCalloutJob(
+                                                jobData: job,
+                                                scrollController:
+                                                    scrollController),
+                                          );
+                                        },
+                                      );
+                                    },
+                                  );
                                 },
                               ),
                               BottomSheetAction(

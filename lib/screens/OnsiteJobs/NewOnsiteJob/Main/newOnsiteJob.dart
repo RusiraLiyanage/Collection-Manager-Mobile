@@ -681,10 +681,6 @@ class _NewOnsiteJobState extends State<NewOnsiteJob> {
                                           _selectedServiceOffice = value;
                                           _serviceOfficeKey.currentState!
                                               .validate();
-                                          /* if (_selectedCollectionOrganisation!.length < 0) {
-                                // Clear error state once a valid selection is made
-                                _formKeys[_currentStep].currentState?.validate();
-                              } */
                                         });
                                       },
                                       validator: (value) => value == null

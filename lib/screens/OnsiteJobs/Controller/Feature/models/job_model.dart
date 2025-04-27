@@ -271,13 +271,16 @@ class SiteContactsModel {
 
 class TestsAndDevicesModel {
   String? testType;
+  String? callOutInstructions;
   DrugTestSpecificationsModel? drugTestSpecifications;
 
-  TestsAndDevicesModel({this.testType, this.drugTestSpecifications});
+  TestsAndDevicesModel(
+      {this.testType, this.drugTestSpecifications, this.callOutInstructions});
 
   factory TestsAndDevicesModel.fromJson(Map<String, dynamic> json) =>
       TestsAndDevicesModel(
         testType: json["testType"] ?? null,
+        callOutInstructions: json["callOutInstructions"] ?? null,
         drugTestSpecifications: json["drugTestSpecifications"] != null
             ? DrugTestSpecificationsModel.fromJson(
                 json["drugTestSpecifications"])
@@ -286,6 +289,7 @@ class TestsAndDevicesModel {
 
   Map<String, dynamic> toJson() => {
         "testType": testType,
+        "callOutInstructions": callOutInstructions,
         "drugTestSpecifications": drugTestSpecifications?.toJson(),
       };
 }
@@ -296,6 +300,7 @@ class DrugTestSpecificationsModel {
   TeritoryDrugTestModel? teritoryDrugTest;
   AdditionalInfoModel? additionalInfo;
   AuthorizedRepresentativeModel? authorizedRepresentative;
+  List<AssignedCollectorsModel>? assignedCollectors;
 
   DrugTestSpecificationsModel({
     this.primaryDrugTest,
@@ -303,6 +308,7 @@ class DrugTestSpecificationsModel {
     this.teritoryDrugTest,
     this.additionalInfo,
     this.authorizedRepresentative,
+    this.assignedCollectors,
   });
 
   factory DrugTestSpecificationsModel.fromJson(Map<String, dynamic> json) =>
@@ -323,6 +329,12 @@ class DrugTestSpecificationsModel {
             ? AuthorizedRepresentativeModel.fromJson(
                 json["authorizedRepresentativeInfo"])
             : null,
+        assignedCollectors: json["assignedCollectors"] != null
+            ? List<AssignedCollectorsModel>.from(
+                json["assignedCollectors"]
+                    .map((x) => AssignedCollectorsModel.fromJson(x)),
+              )
+            : null,
       );
 
   Map<String, dynamic> toJson() => {
@@ -331,6 +343,8 @@ class DrugTestSpecificationsModel {
         "teritoryDrugTest": teritoryDrugTest?.toJson(),
         "additionalInfo": additionalInfo?.toJson(),
         "authorizedRepresentativeInfo": authorizedRepresentative?.toJson(),
+        "assignedCollectors":
+            assignedCollectors?.map((x) => x.toJson()).toList(),
       };
 }
 
@@ -461,5 +475,26 @@ class AuthorizedRepresentativeModel {
         "representativeMobile": representativeMobile,
         "representativePosition": representativePosition,
         "representativeEmail": representativeEmail,
+      };
+}
+
+class AssignedCollectorsModel {
+  String? collectorName;
+  String? assignedDateTime;
+
+  AssignedCollectorsModel({
+    this.collectorName,
+    this.assignedDateTime,
+  });
+
+  factory AssignedCollectorsModel.fromJson(Map<String, dynamic> json) =>
+      AssignedCollectorsModel(
+        collectorName: json["collectorName"] ?? null,
+        assignedDateTime: json["assignedDateTime"] ?? null,
+      );
+
+  Map<String, dynamic> toJson() => {
+        "collectorName": collectorName,
+        "assignedDateTime": assignedDateTime,
       };
 }

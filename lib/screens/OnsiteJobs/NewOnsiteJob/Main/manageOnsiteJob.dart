@@ -45,15 +45,13 @@ class _NewOnsiteJobState extends State<ManageOnsiteJob> {
 
   int numberOfCollectors = 0;
 
-  bool _hasSubmitted = false; // ✅ Added: Flag to track submission
-
   bool _hasSubmitted3 = false; // ✅ Added: Flag to track submission
 
   bool addCollectorOpened = false;
 
   List<Collector> collectors = List.empty(growable: true);
 
-  List<String> _sites = ['Site 1', 'Site 2', 'Site 3'];
+  List<String> _sites = [];
 
   dynamic testsAndDevices = {};
 
@@ -63,6 +61,9 @@ class _NewOnsiteJobState extends State<ManageOnsiteJob> {
   List<SiteContact> _selectedContacts = [];
 
   List<dynamic> locationDetails = [];
+
+  int baseTime = DateTime.now().millisecondsSinceEpoch;
+  int counter = 0;
 
   void removeCollector() {
     setState(() {
@@ -99,16 +100,13 @@ class _NewOnsiteJobState extends State<ManageOnsiteJob> {
     });
   }
 
-  final List<String> _collectorNames = [
-    'George Poulos',
-    'Michelle Kirkman',
-    'Valerie McKenzie',
-    'Zac Hepburn',
-    'Gina Landini'
-  ];
+  final List<String> _collectorNames = [];
 
   @override
   void initState() {
+    _selectedCollectionOrganisation = widget.jobData["bookingInfo"]
+        ["organisationInfo"]["collectionOrganization"];
+
     _jobReferenceController.text = widget.jobData["bookingInfo"]
         ["organisationInfo"]["collectionOrganization"];
 
@@ -190,6 +188,14 @@ class _NewOnsiteJobState extends State<ManageOnsiteJob> {
           contact: contact["siteContactMobile"],
         );
       }).toList();
+    }
+
+    final _collectors = widget.jobData["collectors"];
+
+    for (var collector in _collectors) {
+      String collectorName = collector["collectorName"];
+
+      _collectorNames.add(collectorName);
     }
 
     _clientNameController.text = selectedClient;
@@ -292,6 +298,22 @@ class _NewOnsiteJobState extends State<ManageOnsiteJob> {
 
     _authorizedRepresentativeEmailController.text =
         additionalInfo["authorizedRepresentativeInfo"]["representativeEmail"];
+
+    print(additionalInfo["assignedCollectors"]);
+
+    List<dynamic> assignedCollectors = additionalInfo["assignedCollectors"];
+
+    for (var assignedCollector in assignedCollectors) {
+      collectors.add(
+        Collector(
+          id: (baseTime + counter++).toString(), // Unique ID
+          collectorName: assignedCollector["collectorName"] ?? '',
+          assignedTime: assignedCollector["assignedDateTime"] ?? '',
+          status: "Assigned",
+        ),
+      );
+      numberOfCollectors++;
+    }
 
     print("Selected Site's Test Type: $testType");
 
@@ -422,14 +444,14 @@ class _NewOnsiteJobState extends State<ManageOnsiteJob> {
       TextEditingController();
 
   // Dropdown values
-  String? _selectedCollectionOrganisation = "CollectionO123";
+  String? _selectedCollectionOrganisation = "";
   String? _selectedCollectorOneAssignment;
   String? _selectedCollectorTwoAssignment;
   String? _selectedServiceOffice;
 
   String? _selectedClientName;
   String? _selectedClientReference;
-  String? _selectedJobReference = "ref123";
+  String? _selectedJobReference = "";
   String? _selectedTypeOfService;
 
   final GlobalKey<FormFieldState<String>> _collectionOrgKey =
@@ -577,28 +599,11 @@ class _NewOnsiteJobState extends State<ManageOnsiteJob> {
       GlobalKey<FormFieldState<String>>();
 
   // Dropdown options
-  final List<String> _collectionOrganisations = ['Org 1', 'Org 2', 'Org 3'];
-  final List<String> _collectorOneAssignment = [
-    'Allocated',
-    'Accepted',
-    'Rejected'
-  ];
-  final List<String> _collectorTwoAssignment = [
-    'Allocated',
-    'Accepted',
-    'Rejected'
-  ];
-  List<String> _serviceOffices = ['Clinic 1', 'Clinic 2', 'Clinic 3'];
+  List<String> _serviceOffices = [];
 
   Map<String, String> _clientData = {};
 
   List<String> get _clientNames => _clientData.keys.toList();
-
-  final List<String> _clientReferences = [
-    'Reference X',
-    'Reference Y',
-    'Reference Z'
-  ];
 
   DateTime? _selectedJobDate;
   TimeOfDay? _selectedTime;
@@ -6790,9 +6795,7 @@ class _NewOnsiteJobState extends State<ManageOnsiteJob> {
                                           ),
                                         ),
                                         onPressed: () {
-                                          setState(() {
-                                            //numberOfCollectors++;
-                                          });
+                                          setState(() {});
                                         },
                                         child: Text(
                                           "Add Collector",
@@ -7163,7 +7166,6 @@ class _NewOnsiteJobState extends State<ManageOnsiteJob> {
     final formState = _formKeys[_currentStep].currentState;
 
     setState(() {
-      _hasSubmitted = true;
       if (_currentStep == 2) {
         _hasSubmitted3 = true;
       } // ✅ Set flag to true before validation

@@ -23,7 +23,7 @@ void main() {
         ),
       ],
       child: GlobalLoaderOverlay(
-        overlayColor: Colors.black.withOpacity(0.30),
+        overlayColor: Colors.black.withOpacity(0.70),
         useDefaultLoading: false,
         overlayWidgetBuilder: (_) {
           //ignored progress for the moment
@@ -31,14 +31,22 @@ void main() {
           return Center(
               child: Padding(
             padding: const EdgeInsets.only(
-              top: 145.0,
+              top: 445.0,
             ),
             child: SizedBox(
-              width: 30, // Set your desired size
-              height: 30,
-              child: CupertinoActivityIndicator(
-                radius: 20.0,
-                color: AppColors.primary, // default is 10.0
+              width: double.infinity, // Set your desired size
+              height: double.infinity,
+              child: Column(
+                children: [
+                  CupertinoActivityIndicator(
+                    radius: 15.0,
+                    color: Colors.white, // default is 10.0
+                  ),
+                  Text(
+                    "Loading ...",
+                    style: TextStyle(color: Colors.white, fontSize: 16),
+                  ),
+                ],
               ),
             ),
           ));
