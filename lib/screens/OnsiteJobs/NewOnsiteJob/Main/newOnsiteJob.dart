@@ -6984,8 +6984,9 @@ class _NewOnsiteJobState extends State<NewOnsiteJob> {
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
+          backgroundColor: Colors.white,
           title: const Text('Success'),
-          content: const Text('Form submitted successfully!'),
+          content: const Text('Onsite Job Successfully Created !!'),
           actions: [
             TextButton(
               onPressed: () {

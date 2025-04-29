@@ -9,6 +9,8 @@ class JobModel {
   String? location;
   String? service;
   String? callout;
+  String? reportID;
+  String? sentByStatus;
   List<CollectorModel>? collectors;
   BookingModel? bookingInfo;
 
@@ -21,6 +23,8 @@ class JobModel {
     this.location,
     this.service,
     this.callout,
+    this.reportID,
+    this.sentByStatus,
     this.collectors,
     this.bookingInfo,
   });
@@ -39,6 +43,8 @@ class JobModel {
         rep: json["rep"] ?? null,
         service: json["service"] ?? null,
         callout: json["callout"] ?? null,
+        reportID: json["reportID"] ?? null,
+        sentByStatus: json["sentByStatus"] ?? null,
         collectors: json["collectors"] != null
             ? List<CollectorModel>.from(
                 json["collectors"].map((x) => CollectorModel.fromJson(x)))
@@ -57,6 +63,8 @@ class JobModel {
         "rep": rep,
         "service": service,
         "callout": callout,
+        "reportID": reportID,
+        "sentByStatus": sentByStatus,
         "collectors": collectors?.map((x) => x.toJson()).toList(),
         "bookingInfo": bookingInfo?.toJson(),
       };

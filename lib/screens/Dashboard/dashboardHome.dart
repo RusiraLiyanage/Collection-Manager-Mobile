@@ -25,13 +25,16 @@ class _DashboardHomeState extends State<DashboardHome> {
   bool isAtBottom = false; // Track whether the scroll is at the bottom
   TextEditingController _dashboardSummaryDateController =
       TextEditingController();
+  String? _selectedServiceOffice;
   String? _selectedLocation;
+
+  late DateTime todaysDate;
 
   @override
   void initState() {
     print("Dashboard home called");
     super.initState();
-    //_selectedLocation = locationFilter.first;
+    //_selectedServiceOffice = serviceOfficeFilter.first;
     //_selectedClient = clients.first;
     //_selectedStatus = status.first;
     //_selectedFilteringValue = filteringAmounts.first;
@@ -51,6 +54,7 @@ class _DashboardHomeState extends State<DashboardHome> {
       }
     });
 
+    _selectedServiceOffice = serviceOfficeFilter.first;
     _selectedLocation = locationFilter.first;
 
     _scrollController.addListener(() {
@@ -61,12 +65,20 @@ class _DashboardHomeState extends State<DashboardHome> {
         });
       }
     });
+    todaysDate = DateTime.now();
+    _dashboardSummaryDateController.text =
+        "${todaysDate.day}/${todaysDate.month}/${todaysDate.year}";
+    _selectedSummaryDate = todaysDate;
   }
 
-  final List<String> locationFilter = [
+  final List<String> serviceOfficeFilter = [
     "All",
-    "Specific Location",
+    "Sydney Office",
+    "Melbourne",
+    "Darwin"
   ];
+
+  final List<String> locationFilter = ["All", "Onsite", "In-clinic"];
 
   // Function to show the date picker
   Future<void> _selectDashboardDate(BuildContext context) async {
@@ -332,9 +344,9 @@ class _DashboardHomeState extends State<DashboardHome> {
                           child: Row(
                             children: [
                               Padding(
-                                padding: const EdgeInsets.only(right: 52.0),
+                                padding: const EdgeInsets.only(right: 92.0),
                                 child: Text(
-                                  "Service Office",
+                                  "Location",
                                   style: TextStyle(
                                     color: Color(0xFF005277),
                                     fontWeight: FontWeight.bold,
@@ -360,6 +372,7 @@ class _DashboardHomeState extends State<DashboardHome> {
                                   ],
                                 ),
                                 child: DropdownButtonFormField<String>(
+                                  dropdownColor: Colors.white,
                                   value: _selectedLocation,
                                   decoration: InputDecoration(
                                     contentPadding: const EdgeInsets.symmetric(
@@ -407,6 +420,106 @@ class _DashboardHomeState extends State<DashboardHome> {
                                   onChanged: (value) {
                                     setState(() {
                                       _selectedLocation = value;
+                                    });
+                                  },
+                                ),
+                              ),
+                              SizedBox(
+                                height: 3,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: Container(
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                            left: 8.0,
+                            right: 8.0,
+                            top: 10.0,
+                          ),
+                          child: Row(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(right: 52.0),
+                                child: Text(
+                                  "Service Office",
+                                  style: TextStyle(
+                                    color: Color(0xFF005277),
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                width: 190,
+                                height: 28,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(8),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.white.withOpacity(
+                                          0.2), // Shadow color with opacity
+                                      spreadRadius:
+                                          1, // How much the shadow spreads
+                                      blurRadius: 1, // How blurry the shadow is
+                                      offset: Offset(0,
+                                          0), // Offset for shadow position (x, y)
+                                    ),
+                                  ],
+                                ),
+                                child: DropdownButtonFormField<String>(
+                                  dropdownColor: Colors.white,
+                                  value: _selectedServiceOffice,
+                                  decoration: InputDecoration(
+                                    contentPadding: const EdgeInsets.symmetric(
+                                        horizontal: 8, vertical: 4),
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(8),
+                                      borderSide: BorderSide(
+                                          color: Colors.transparent, width: 2),
+                                    ),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(8),
+                                      borderSide: BorderSide(
+                                          color: Colors.transparent,
+                                          width: 2), // Border colo
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(8),
+                                      borderSide: BorderSide(
+                                          color: Colors.transparent,
+                                          width:
+                                              2), // Border color when focused
+                                    ),
+                                    fillColor: Colors
+                                        .white, // Set the background color to white
+                                    filled: true,
+                                  ),
+                                  icon: Icon(
+                                    Icons.arrow_drop_down_outlined,
+                                    color: Color(
+                                      0xFF71717A,
+                                    ),
+                                  ),
+                                  items: serviceOfficeFilter
+                                      .map((item) => DropdownMenuItem(
+                                            value: item,
+                                            child: Text(
+                                              item,
+                                              style: TextStyle(
+                                                fontSize: 14,
+                                                color: Color(0xFF007AFF),
+                                              ),
+                                            ),
+                                          ))
+                                      .toList(),
+                                  onChanged: (value) {
+                                    setState(() {
+                                      _selectedServiceOffice = value;
                                     });
                                   },
                                 ),

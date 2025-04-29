@@ -16,21 +16,21 @@ enum TestsType {
   DrugOnly,
 }
 
-class ManageCalloutJob extends StatefulWidget {
+class ViewCalloutJob extends StatefulWidget {
   final ScrollController scrollController;
   final Map<String, dynamic> jobData;
 
-  const ManageCalloutJob({
+  const ViewCalloutJob({
     super.key,
     required this.scrollController,
     required this.jobData,
   });
 
   @override
-  State<ManageCalloutJob> createState() => _ManageCalloutJobState();
+  State<ViewCalloutJob> createState() => _ViewCalloutJobState();
 }
 
-class _ManageCalloutJobState extends State<ManageCalloutJob> {
+class _ViewCalloutJobState extends State<ViewCalloutJob> {
   final List<GlobalKey<FormState>> _formKeys = [
     GlobalKey<FormState>(),
   ];
@@ -163,25 +163,29 @@ class _ManageCalloutJobState extends State<ManageCalloutJob> {
   @override
   void initState() {
     _selectedCollectionOrganisation = widget.jobData["bookingInfo"]
-        ["organisationInfo"]["collectionOrganization"];
+            ["organisationInfo"]["collectionOrganization"] ??
+        "";
 
-    _serviceOffices =
-        widget.jobData["bookingInfo"]["organisationInfo"]["serviceOffice"];
+    _serviceOffices = widget.jobData["bookingInfo"]["organisationInfo"]
+            ["serviceOffice"] ??
+        "";
 
     _selectedServiceOffice = widget.jobData["bookingInfo"]["organisationInfo"]
-        ["selectedServiceOffice"];
+            ["selectedServiceOffice"] ??
+        "";
 
     List<dynamic> clientDetailsJson =
-        widget.jobData["bookingInfo"]["clientInfo"]["clientDetails"];
+        widget.jobData["bookingInfo"]["clientInfo"]["clientDetails"] ?? [];
 
     String selectedClient =
-        widget.jobData["bookingInfo"]["clientInfo"]["selectedClient"];
+        widget.jobData["bookingInfo"]["clientInfo"]["selectedClient"] ?? "";
 
     _selectedServiceOffice = widget.jobData["bookingInfo"]["organisationInfo"]
-        ["selectedServiceOffice"];
+            ["selectedServiceOffice"] ??
+        "";
 
     String selectedSite =
-        widget.jobData["bookingInfo"]["clientInfo"]["selectedSite"];
+        widget.jobData["bookingInfo"]["clientInfo"]["selectedSite"] ?? "";
 
     print(selectedSite);
 
@@ -191,20 +195,23 @@ class _ManageCalloutJobState extends State<ManageCalloutJob> {
     };
 
     String dateString = widget.jobData["bookingInfo"]["jobDetails"]
-        ["jobDate"]; // e.g., "20/04/2025"
+            ["jobDate"] ??
+        ""; // e.g., "20/04/2025"
     DateFormat inputFormat = DateFormat("dd/MM/yyyy");
     _selectedJobDate = inputFormat.parse(dateString);
 
     String timeString = widget.jobData["bookingInfo"]["jobDetails"]
-        ["startTime"]; // e.g., "16:41"
+            ["startTime"] ??
+        ""; // e.g., "16:41"
     List<String> parts = timeString.split(':');
     int hour = int.parse(parts[0]);
     int minute = int.parse(parts[1]);
 
     _selectedTime = TimeOfDay(hour: hour, minute: minute);
 
-    String durationString =
-        widget.jobData["bookingInfo"]["jobDetails"]["duration"]; // e.g., "0:10"
+    String durationString = widget.jobData["bookingInfo"]["jobDetails"]
+            ["duration"] ??
+        []; // e.g., "0:10"
     List<String> parts2 = durationString.split(':');
     hours = int.parse(parts2[0]);
     minutes = int.parse(parts2[1]);
@@ -212,16 +219,16 @@ class _ManageCalloutJobState extends State<ManageCalloutJob> {
     _selectedDuration = Duration(hours: hours, minutes: minutes);
 
     _donorsController.text =
-        widget.jobData["bookingInfo"]["jobDetails"]["noOfDonors"];
+        widget.jobData["bookingInfo"]["jobDetails"]["noOfDonors"] ?? "";
 
     _jobReferenceController.text =
-        widget.jobData["bookingInfo"]["jobDetails"]["jobReference"];
+        widget.jobData["bookingInfo"]["jobDetails"]["jobReference"] ?? "";
 
     _typeOfServiceController.text =
-        widget.jobData["bookingInfo"]["jobDetails"]["typeOfService"];
+        widget.jobData["bookingInfo"]["jobDetails"]["typeOfService"] ?? "";
 
     locationDetails =
-        widget.jobData["bookingInfo"]["clientInfo"]["locationDetails"];
+        widget.jobData["bookingInfo"]["clientInfo"]["locationDetails"] ?? [];
 
     _sites = locationDetails
         .map<String>((site) => site["siteName"] as String)
@@ -242,7 +249,7 @@ class _ManageCalloutJobState extends State<ManageCalloutJob> {
       }).toList();
     }
 
-    final _collectors = widget.jobData["collectors"];
+    final _collectors = widget.jobData["collectors"] ?? [];
 
     for (var collector in _collectors) {
       String collectorName = collector["collectorName"];
@@ -265,16 +272,17 @@ class _ManageCalloutJobState extends State<ManageCalloutJob> {
       orElse: () => <String, dynamic>{}, // ✅ FIXED HERE
     );
 
-    final testsAndDevices = selectedSiteData["testsAndDevices"];
+    final testsAndDevices = selectedSiteData["testsAndDevices"] ?? {};
     print(testsAndDevices);
-    final callOutInstructions = testsAndDevices?["callOutInstructions"];
+    final callOutInstructions = testsAndDevices?["callOutInstructions"] ?? "";
 
     _calloutInstructionsController.text = callOutInstructions;
 
-    final drugTestSpecifications = testsAndDevices["drugTestSpecifications"];
+    final drugTestSpecifications =
+        testsAndDevices["drugTestSpecifications"] ?? {};
 
     List<dynamic> assignedCollectors =
-        drugTestSpecifications["assignedCollectors"];
+        drugTestSpecifications["assignedCollectors"] ?? [];
 
     for (var assignedCollector in assignedCollectors) {
       collectors.add(
@@ -3161,9 +3169,8 @@ class _ManageCalloutJobState extends State<ManageCalloutJob> {
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
-          backgroundColor: Colors.white,
           title: const Text('Success'),
-          content: const Text('Callout Job Successfully Updated!!'),
+          content: const Text('Form submitted successfully!'),
           actions: [
             TextButton(
               onPressed: () {
@@ -3238,7 +3245,7 @@ class _ManageCalloutJobState extends State<ManageCalloutJob> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   const Text(
-                                    "Manage Callout Job",
+                                    "Callout Job Details",
                                     style: TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold,

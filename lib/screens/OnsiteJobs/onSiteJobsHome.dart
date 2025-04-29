@@ -35,6 +35,7 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
   DateTime? _selectedStartDate;
   DateTime? _selectedEndDate;
   final List<String> items = [
+    "All",
     "Newcastle City",
     "Sydney Office",
     "Melbourne Branch",
@@ -42,6 +43,7 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
   String? _selectedValue;
 
   final List<String> clients = [
+    "All",
     "New Castle City Council",
     "Wollongong City Council",
     "Transport for New South Wales",
@@ -937,6 +939,7 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
                                     itemCount: paginatedJobData.length,
                                     itemBuilder: (context, index) {
                                       final job = paginatedJobData[index];
+                                      print(job["bookingInfo"]);
                                       return Center(
                                         child: Padding(
                                           padding: const EdgeInsets.only(

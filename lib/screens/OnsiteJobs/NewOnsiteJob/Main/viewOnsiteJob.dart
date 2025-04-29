@@ -22,18 +22,18 @@ enum TestsType {
   DrugOnly,
 }
 
-class ManageOnsiteJob extends StatefulWidget {
+class ViewOnsiteJob extends StatefulWidget {
   final ScrollController scrollController;
   final Map<String, dynamic> jobData;
 
-  const ManageOnsiteJob(
+  const ViewOnsiteJob(
       {super.key, required this.scrollController, required this.jobData});
 
   @override
-  State<ManageOnsiteJob> createState() => _NewOnsiteJobState();
+  State<ViewOnsiteJob> createState() => _ViewOnsiteJobState();
 }
 
-class _NewOnsiteJobState extends State<ManageOnsiteJob> {
+class _ViewOnsiteJobState extends State<ViewOnsiteJob> {
   TestsType? _testsType = TestsType.alcoholOnly;
   final List<GlobalKey<FormState>> _formKeys = [
     GlobalKey<FormState>(),
@@ -7207,9 +7207,8 @@ class _NewOnsiteJobState extends State<ManageOnsiteJob> {
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
-          backgroundColor: Colors.white,
           title: const Text('Success'),
-          content: const Text('Onsite Job Successfully Updated!!'),
+          content: const Text('Form submitted successfully!'),
           actions: [
             TextButton(
               onPressed: () {
@@ -7298,7 +7297,7 @@ class _NewOnsiteJobState extends State<ManageOnsiteJob> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   const Text(
-                                    "Manage Onsite Job",
+                                    "Onsite Job Details",
                                     style: TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold,

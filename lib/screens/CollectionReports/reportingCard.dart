@@ -11,15 +11,7 @@ class ReportingCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        /* showDialog(
-          context: context,
-          builder: (context) => EditNote(
-            subject: report['subject']!,
-            noteText: report['noteText']!,
-          ),
-        ); */
-      },
+      onTap: () {},
       child: Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12), // Rounded corners

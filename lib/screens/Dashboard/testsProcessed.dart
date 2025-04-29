@@ -28,21 +28,39 @@ class _TestsProcessedState extends State<TestsProcessed> {
 
   String? _selectedColorScheme;
 
-  final List<String> locationFilter = ["In Clinic", "Out Clinic", "Default"];
+  String? _selectedServiceOffice;
+
+  final List<String> locationFilter = ["All", "Onsite", "In-clinic"];
 
   final List<String> colorSchemeFilter = ["Normal", "Specific", "Default"];
 
   final List<Map<String, dynamic>> legendItems =
       TestsProcessedData().processedTestslegendItems;
 
-  final List<String> showValues = [
-    "All",
-    "Specific",
-  ];
+  final List<String> showValues = ["Daily", "Weekly", "Monthly"];
+
+  List<String> theYear = [];
+
+  final List<String> theMonth = List.generate(
+    12,
+    (index) => (index + 1).toString(),
+  );
+
+  List<String> days = [];
 
   List<ProcessedTests> processedTests = TestsProcessedData().processedTestsData;
 
+  DateTime? _selectedTestsProcessedStartDate;
+
+  DateTime? _selectedTestsProcessedEndDate;
+
+  String? _selectedTheYear;
+
   String? _selectedShow;
+
+  String? _selectedTheDay;
+
+  String? _selectedTheMonth;
 
   String? totalTests = "59";
 
@@ -52,9 +70,16 @@ class _TestsProcessedState extends State<TestsProcessed> {
     'Yeah'
   ];
 
-  DateTime? _selectedTestsProcessedStartDate;
-  DateTime? _selectedTestsProcessedEndDate;
-  Future<void> _selectTestProcessedStartDate(BuildContext context) async {
+  final List<String> serviceOfficeFilter = [
+    "All",
+    "Sydney Office",
+    "Melbourne",
+    "Darwin"
+  ];
+
+  bool dateRangeOrSpecific = true;
+
+  Future<void> _selectTestsProcessedStartDate(BuildContext context) async {
     DateTime initialDate = _selectedTestsProcessedStartDate ?? DateTime.now();
     final DateTime? picked = await showDatePicker(
       context: context,
@@ -85,7 +110,7 @@ class _TestsProcessedState extends State<TestsProcessed> {
     }
   }
 
-  Future<void> _selectTestProcessedEndDate(BuildContext context) async {
+  Future<void> _selectTestsProcessedEndDate(BuildContext context) async {
     if (_selectedTestsProcessedStartDate == null) {
       // If no Start Date is selected, show an alert or prompt
       showDialog(
@@ -146,8 +171,35 @@ class _TestsProcessedState extends State<TestsProcessed> {
     // TODO: implement initState
     super.initState();
     _selectedLocation = locationFilter.first;
+    _selectedServiceOffice = serviceOfficeFilter.first;
     _selectedColorScheme = colorSchemeFilter.first;
     _selectedShow = showValues.first;
+
+    DateTime now = DateTime.now();
+    //_generateYears();
+    // Generate the last 10 years dynamically
+    theYear = List.generate(10, (index) => (now.year - index).toString());
+    // Set initial selections to the current date
+    _selectedTheYear = now.year.toString();
+    _selectedTheMonth = now.month.toString();
+    _selectedTheDay = now.day.toString();
+    _selectedLocation = locationFilter.first;
+    // Populate the day list based on current month & year
+    _updateDayList(
+      int.parse(_selectedTheYear!),
+      int.parse(_selectedTheMonth!),
+    );
+  }
+
+  void _updateDayList(int year, int month) {
+    int daysInMonth = DateTime(year, month + 1, 0).day;
+    setState(() {
+      days = List.generate(daysInMonth, (index) => (index + 1).toString());
+      // Ensure the selected day is valid
+      if (!days.contains(_selectedTheDay)) {
+        _selectedTheDay = days.first;
+      }
+    });
   }
 
   @override
@@ -291,6 +343,7 @@ class _TestsProcessedState extends State<TestsProcessed> {
                                   ],
                                 ),
                                 child: DropdownButtonFormField<String>(
+                                  dropdownColor: Colors.white,
                                   value: _selectedLocation,
                                   decoration: InputDecoration(
                                     contentPadding: const EdgeInsets.symmetric(
@@ -350,10 +403,10 @@ class _TestsProcessedState extends State<TestsProcessed> {
                         ),
                       ),
                     ),
-                    SizedBox(
+                    /*   SizedBox(
                       height: 5,
-                    ),
-                    Align(
+                    ), */
+                    /* Align(
                       alignment: Alignment.topLeft,
                       child: Container(
                         child: Padding(
@@ -451,9 +504,107 @@ class _TestsProcessedState extends State<TestsProcessed> {
                           ),
                         ),
                       ),
+                    ), */
+
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: Container(
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                            left: 8.0,
+                            right: 8.0,
+                            top: 10.0,
+                          ),
+                          child: Row(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(right: 20.0),
+                                child: Text(
+                                  "Service Office",
+                                  style: TextStyle(
+                                    color: Color(0xFF005277),
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                width: 190,
+                                height: 28,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(8),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.white.withOpacity(
+                                          0.2), // Shadow color with opacity
+                                      spreadRadius:
+                                          1, // How much the shadow spreads
+                                      blurRadius: 1, // How blurry the shadow is
+                                      offset: Offset(0,
+                                          0), // Offset for shadow position (x, y)
+                                    ),
+                                  ],
+                                ),
+                                child: DropdownButtonFormField<String>(
+                                  dropdownColor: Colors.white,
+                                  value: _selectedServiceOffice,
+                                  decoration: InputDecoration(
+                                    contentPadding: const EdgeInsets.symmetric(
+                                        horizontal: 8, vertical: 4),
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(8),
+                                      borderSide: BorderSide(
+                                          color: Colors.transparent, width: 2),
+                                    ),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(8),
+                                      borderSide: BorderSide(
+                                          color: Colors.transparent,
+                                          width: 2), // Border colo
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(8),
+                                      borderSide: BorderSide(
+                                          color: Colors.transparent,
+                                          width:
+                                              2), // Border color when focused
+                                    ),
+                                    fillColor: Colors
+                                        .white, // Set the background color to white
+                                    filled: true,
+                                  ),
+                                  icon: Icon(
+                                    Icons.arrow_drop_down_outlined,
+                                    color: Color(
+                                      0xFF71717A,
+                                    ),
+                                  ),
+                                  items: serviceOfficeFilter
+                                      .map((item) => DropdownMenuItem(
+                                            value: item,
+                                            child: Text(
+                                              item,
+                                              style: TextStyle(
+                                                fontSize: 14,
+                                                color: Color(0xFF007AFF),
+                                              ),
+                                            ),
+                                          ))
+                                      .toList(),
+                                  onChanged: (value) {
+                                    setState(() {
+                                      _selectedServiceOffice = value;
+                                    });
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
                     ),
                     SizedBox(
-                      height: 12,
+                      height: 10,
                     ),
                     Align(
                       child: Padding(
@@ -492,6 +643,7 @@ class _TestsProcessedState extends State<TestsProcessed> {
                                 ],
                               ),
                               child: DropdownButtonFormField<String>(
+                                dropdownColor: Colors.white,
                                 value: _selectedShow,
                                 decoration: InputDecoration(
                                   contentPadding: const EdgeInsets.symmetric(
@@ -573,178 +725,610 @@ class _TestsProcessedState extends State<TestsProcessed> {
                     SizedBox(
                       height: 10,
                     ),
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: Container(
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-                          child: Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(right: 80.0),
-                                child: Text(
-                                  "Date From",
-                                  style: TextStyle(
-                                    color: Color(0xFF005277),
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                    Row(
+                      children: [
+                        !dateRangeOrSpecific
+                            ? Text(
+                                "Date Range",
+                                style: TextStyle(
+                                  color: Colors.blueAccent,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              )
+                            : Text(
+                                "Date Range",
+                                style: TextStyle(
+                                  color: Colors.grey,
+                                  fontWeight: FontWeight.bold,
                                 ),
                               ),
-                              Container(
-                                width: 190,
-                                height: 28,
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(8),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.white.withOpacity(
-                                          0.2), // Shadow color with opacity
-                                      spreadRadius:
-                                          1, // How much the shadow spreads
-                                      blurRadius: 1, // How blurry the shadow is
-                                      offset: Offset(0,
-                                          0), // Offset for shadow position (x, y)
-                                    ),
-                                  ],
-                                ),
-                                child: TextField(
-                                  controller: _testProcessedStartDateController,
-                                  readOnly: true,
-                                  onTap: () =>
-                                      _selectTestProcessedStartDate(context),
-                                  decoration: InputDecoration(
-                                    contentPadding: const EdgeInsets.symmetric(
-                                        horizontal: 8, vertical: 4),
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(8),
-                                      borderSide: BorderSide(
-                                          color: Colors.transparent,
-                                          width:
-                                              2), // Default border with thickness
-                                    ),
-                                    enabledBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(8),
-                                      borderSide: BorderSide(
-                                          color: Colors.transparent,
-                                          width:
-                                              3), // Border color when enabled
-                                    ),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(8),
-                                      borderSide: BorderSide(
-                                          color: Colors.transparent,
-                                          width:
-                                              3), // Border color when focused
-                                    ),
-                                    fillColor: Colors.white,
-                                    filled: true,
-                                    hintText:
-                                        'Select start date', // Placeholder text
-                                    hintStyle: TextStyle(
-                                      color: Color(0xFF007AFF),
-                                    ), // Style for the hint text
-                                  ),
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    color: Color(0xFF007AFF),
-                                  ), // Text style for the input text
-                                ),
-                              ),
-                            ],
+                        Transform.scale(
+                          scale: 0.7,
+                          child: Switch(
+                            activeColor: Colors.white,
+                            activeTrackColor: Color(0xFF1A8CFF),
+                            value: dateRangeOrSpecific,
+                            onChanged: (value) {
+                              setState(() {
+                                dateRangeOrSpecific = value;
+                              });
+                            },
                           ),
                         ),
-                      ),
+                        dateRangeOrSpecific
+                            ? Text(
+                                "Specific Date",
+                                style: TextStyle(
+                                  color: Colors.blueAccent,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              )
+                            : Text(
+                                "Specific Date",
+                                style: TextStyle(
+                                  color: Colors.grey,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                      ],
                     ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: Container(
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-                          child: Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(right: 80.0),
-                                child: Text(
-                                  "Date To",
-                                  style: TextStyle(
-                                    color: Color(0xFF005277),
-                                    fontWeight: FontWeight.bold,
+                    !dateRangeOrSpecific
+                        ? Container(
+                            child: Column(
+                              children: [
+                                Align(
+                                  alignment: Alignment.topLeft,
+                                  child: Container(
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 8.0, right: 8.0),
+                                      child: Row(
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                right: 80.0),
+                                            child: Text(
+                                              "Date From",
+                                              style: TextStyle(
+                                                color: Color(0xFF005277),
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ),
+                                          Container(
+                                            width: 190,
+                                            height: 28,
+                                            decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius:
+                                                  BorderRadius.circular(8),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.white.withOpacity(
+                                                      0.2), // Shadow color with opacity
+                                                  spreadRadius:
+                                                      1, // How much the shadow spreads
+                                                  blurRadius:
+                                                      1, // How blurry the shadow is
+                                                  offset: Offset(0,
+                                                      0), // Offset for shadow position (x, y)
+                                                ),
+                                              ],
+                                            ),
+                                            child: TextField(
+                                              controller:
+                                                  _testProcessedStartDateController,
+                                              readOnly: true,
+                                              onTap: () =>
+                                                  _selectTestsProcessedStartDate(
+                                                      context),
+                                              decoration: InputDecoration(
+                                                contentPadding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 8,
+                                                        vertical: 4),
+                                                border: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(8),
+                                                  borderSide: BorderSide(
+                                                      color: Colors.transparent,
+                                                      width:
+                                                          2), // Default border with thickness
+                                                ),
+                                                enabledBorder:
+                                                    OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(8),
+                                                  borderSide: BorderSide(
+                                                      color: Colors.transparent,
+                                                      width:
+                                                          3), // Border color when enabled
+                                                ),
+                                                focusedBorder:
+                                                    OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(8),
+                                                  borderSide: BorderSide(
+                                                      color: Colors.transparent,
+                                                      width:
+                                                          3), // Border color when focused
+                                                ),
+                                                fillColor: Colors.white,
+                                                filled: true,
+                                                hintText:
+                                                    'Select start date', // Placeholder text
+                                                hintStyle: TextStyle(
+                                                  color: Color(0xFF007AFF),
+                                                ), // Style for the hint text
+                                              ),
+                                              style: TextStyle(
+                                                fontSize: 14,
+                                                color: Color(0xFF007AFF),
+                                              ), // Text style for the input text
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
                                   ),
                                 ),
-                              ),
-                              SizedBox(
-                                width: 18,
-                              ),
-                              Container(
-                                width: 190,
-                                height: 28,
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(8),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.white.withOpacity(
-                                          0.2), // Shadow color with opacity
-                                      spreadRadius:
-                                          1, // How much the shadow spreads
-                                      blurRadius: 1, // How blurry the shadow is
-                                      offset: Offset(0,
-                                          0), // Offset for shadow position (x, y)
-                                    ),
-                                  ],
+                                SizedBox(
+                                  height: 10,
                                 ),
-                                child: TextField(
-                                  controller: _testProcessedEndDateController,
-                                  readOnly: true,
-                                  onTap: () =>
-                                      _selectTestProcessedEndDate(context),
-                                  decoration: InputDecoration(
-                                    contentPadding: const EdgeInsets.symmetric(
-                                        horizontal: 8, vertical: 4),
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(8),
-                                      borderSide: BorderSide(
-                                          color: Colors.transparent,
-                                          width:
-                                              2), // Default border with thickness
+                                Align(
+                                  alignment: Alignment.topLeft,
+                                  child: Container(
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 8.0, right: 8.0),
+                                      child: Row(
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                right: 80.0),
+                                            child: Text(
+                                              "Date To",
+                                              style: TextStyle(
+                                                color: Color(0xFF005277),
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: 20,
+                                          ),
+                                          Container(
+                                            width: 190,
+                                            height: 28,
+                                            decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius:
+                                                  BorderRadius.circular(8),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.white.withOpacity(
+                                                      0.2), // Shadow color with opacity
+                                                  spreadRadius:
+                                                      1, // How much the shadow spreads
+                                                  blurRadius:
+                                                      1, // How blurry the shadow is
+                                                  offset: Offset(0,
+                                                      0), // Offset for shadow position (x, y)
+                                                ),
+                                              ],
+                                            ),
+                                            child: TextField(
+                                              controller:
+                                                  _testProcessedEndDateController,
+                                              readOnly: true,
+                                              onTap: () =>
+                                                  _selectTestsProcessedEndDate(
+                                                      context),
+                                              decoration: InputDecoration(
+                                                contentPadding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 8,
+                                                        vertical: 4),
+                                                border: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(8),
+                                                  borderSide: BorderSide(
+                                                      color: Colors.transparent,
+                                                      width:
+                                                          2), // Default border with thickness
+                                                ),
+                                                enabledBorder:
+                                                    OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(8),
+                                                  borderSide: BorderSide(
+                                                      color: Colors.transparent,
+                                                      width:
+                                                          3), // Border color when enabled
+                                                ),
+                                                focusedBorder:
+                                                    OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(8),
+                                                  borderSide: BorderSide(
+                                                      color: Colors.transparent,
+                                                      width:
+                                                          3), // Border color when focused
+                                                ),
+                                                fillColor: Colors.white,
+                                                filled: true,
+                                                hintText:
+                                                    'Select end date', // Placeholder text
+                                                hintStyle: TextStyle(
+                                                  color: Color(0xFF007AFF),
+                                                ), // Style for the hint text
+                                              ),
+                                              style: TextStyle(
+                                                fontSize: 14,
+                                                color: Color(0xFF007AFF),
+                                              ), // Text style for the input text
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                    enabledBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(8),
-                                      borderSide: BorderSide(
-                                          color: Colors.transparent,
-                                          width:
-                                              3), // Border color when enabled
-                                    ),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(8),
-                                      borderSide: BorderSide(
-                                          color: Colors.transparent,
-                                          width:
-                                              3), // Border color when focused
-                                    ),
-                                    fillColor: Colors.white,
-                                    filled: true,
-                                    hintText:
-                                        'Select end date', // Placeholder text
-                                    hintStyle: TextStyle(
-                                      color: Color(0xFF007AFF),
-                                    ), // Style for the hint text
                                   ),
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    color: Color(0xFF007AFF),
-                                  ), // Text style for the input text
                                 ),
-                              ),
-                            ],
+                                SizedBox(
+                                  height: 10,
+                                ),
+                              ],
+                            ),
+                          )
+                        : Container(
+                            child: Column(
+                              children: [
+                                Align(
+                                  alignment: Alignment.topLeft,
+                                  child: Container(
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                        left: 8.0,
+                                        right: 8.0,
+                                        top: 5.0,
+                                      ),
+                                      child: Row(
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                right: 20.0),
+                                            child: Text(
+                                              "Year",
+                                              style: TextStyle(
+                                                color: Color(0xFF005277),
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: 20,
+                                          ),
+                                          Container(
+                                            width: 190,
+                                            height: 28,
+                                            decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius:
+                                                  BorderRadius.circular(8),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.white.withOpacity(
+                                                      0.2), // Shadow color with opacity
+                                                  spreadRadius:
+                                                      1, // How much the shadow spreads
+                                                  blurRadius:
+                                                      1, // How blurry the shadow is
+                                                  offset: Offset(0,
+                                                      0), // Offset for shadow position (x, y)
+                                                ),
+                                              ],
+                                            ),
+                                            child:
+                                                DropdownButtonFormField<String>(
+                                              dropdownColor: Colors.white,
+                                              value: _selectedTheYear,
+                                              decoration: InputDecoration(
+                                                contentPadding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 8,
+                                                        vertical: 4),
+                                                border: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(8),
+                                                  borderSide: BorderSide(
+                                                      color: Colors.transparent,
+                                                      width: 2),
+                                                ),
+                                                enabledBorder:
+                                                    OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(8),
+                                                  borderSide: BorderSide(
+                                                      color: Colors.transparent,
+                                                      width: 2), // Border colo
+                                                ),
+                                                focusedBorder:
+                                                    OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(8),
+                                                  borderSide: BorderSide(
+                                                      color: Colors.transparent,
+                                                      width:
+                                                          2), // Border color when focused
+                                                ),
+                                                fillColor: Colors
+                                                    .white, // Set the background color to white
+                                                filled: true,
+                                              ),
+                                              icon: Icon(
+                                                Icons.arrow_drop_down_outlined,
+                                                color: Color(
+                                                  0xFF71717A,
+                                                ),
+                                              ),
+                                              items: theYear
+                                                  .map((year) =>
+                                                      DropdownMenuItem(
+                                                        value: year,
+                                                        child: Text(
+                                                          year,
+                                                          style: TextStyle(
+                                                            fontSize: 14,
+                                                            color: Color(
+                                                                0xFF007AFF),
+                                                          ),
+                                                        ),
+                                                      ))
+                                                  .toList(),
+                                              onChanged: (value) {
+                                                setState(() {
+                                                  _selectedTheYear = value;
+                                                  _updateDayList(
+                                                      int.parse(value!),
+                                                      int.parse(
+                                                          _selectedTheMonth!));
+                                                });
+                                              },
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 3,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Align(
+                                  alignment: Alignment.topLeft,
+                                  child: Container(
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                        left: 8.0,
+                                        right: 8.0,
+                                        top: 10.0,
+                                      ),
+                                      child: Row(
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                right: 20.0),
+                                            child: Text(
+                                              "Month",
+                                              style: TextStyle(
+                                                color: Color(0xFF005277),
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: 10,
+                                          ),
+                                          Container(
+                                            width: 80,
+                                            height: 28,
+                                            decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius:
+                                                  BorderRadius.circular(8),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.white.withOpacity(
+                                                      0.2), // Shadow color with opacity
+                                                  spreadRadius:
+                                                      1, // How much the shadow spreads
+                                                  blurRadius:
+                                                      1, // How blurry the shadow is
+                                                  offset: Offset(0,
+                                                      0), // Offset for shadow position (x, y)
+                                                ),
+                                              ],
+                                            ),
+                                            child:
+                                                DropdownButtonFormField<String>(
+                                              dropdownColor: Colors.white,
+                                              value: _selectedTheMonth,
+                                              decoration: InputDecoration(
+                                                contentPadding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 8,
+                                                        vertical: 4),
+                                                border: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(8),
+                                                  borderSide: BorderSide(
+                                                      color: Colors.transparent,
+                                                      width: 2),
+                                                ),
+                                                enabledBorder:
+                                                    OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(8),
+                                                  borderSide: BorderSide(
+                                                      color: Colors.transparent,
+                                                      width: 2), // Border colo
+                                                ),
+                                                focusedBorder:
+                                                    OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(8),
+                                                  borderSide: BorderSide(
+                                                      color: Colors.transparent,
+                                                      width:
+                                                          2), // Border color when focused
+                                                ),
+                                                fillColor: Colors
+                                                    .white, // Set the background color to white
+                                                filled: true,
+                                              ),
+                                              icon: Icon(
+                                                Icons.arrow_drop_down_outlined,
+                                                color: Color(
+                                                  0xFF71717A,
+                                                ),
+                                              ),
+                                              items: theMonth
+                                                  .map((month) =>
+                                                      DropdownMenuItem(
+                                                        value: month,
+                                                        child: Text(
+                                                          month,
+                                                          style: TextStyle(
+                                                            fontSize: 14,
+                                                            color: Color(
+                                                                0xFF007AFF),
+                                                          ),
+                                                        ),
+                                                      ))
+                                                  .toList(),
+                                              onChanged: (value) {
+                                                setState(() {
+                                                  _selectedTheMonth = value;
+                                                  _updateDayList(
+                                                      int.parse(
+                                                          _selectedTheYear!),
+                                                      int.parse(value!));
+                                                });
+                                              },
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: 50,
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                right: 20.0),
+                                            child: Text(
+                                              "Day",
+                                              style: TextStyle(
+                                                color: Color(0xFF005277),
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: 10,
+                                          ),
+                                          Container(
+                                            width: 80,
+                                            height: 28,
+                                            decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius:
+                                                  BorderRadius.circular(8),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.white.withOpacity(
+                                                      0.2), // Shadow color with opacity
+                                                  spreadRadius:
+                                                      1, // How much the shadow spreads
+                                                  blurRadius:
+                                                      1, // How blurry the shadow is
+                                                  offset: Offset(0,
+                                                      0), // Offset for shadow position (x, y)
+                                                ),
+                                              ],
+                                            ),
+                                            child:
+                                                DropdownButtonFormField<String>(
+                                              dropdownColor: Colors.white,
+                                              value: _selectedTheDay,
+                                              decoration: InputDecoration(
+                                                contentPadding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 8,
+                                                        vertical: 4),
+                                                border: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(8),
+                                                  borderSide: BorderSide(
+                                                      color: Colors.transparent,
+                                                      width: 2),
+                                                ),
+                                                enabledBorder:
+                                                    OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(8),
+                                                  borderSide: BorderSide(
+                                                      color: Colors.transparent,
+                                                      width: 2), // Border colo
+                                                ),
+                                                focusedBorder:
+                                                    OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(8),
+                                                  borderSide: BorderSide(
+                                                      color: Colors.transparent,
+                                                      width:
+                                                          2), // Border color when focused
+                                                ),
+                                                fillColor: Colors
+                                                    .white, // Set the background color to white
+                                                filled: true,
+                                              ),
+                                              icon: Icon(
+                                                Icons.arrow_drop_down_outlined,
+                                                color: Color(
+                                                  0xFF71717A,
+                                                ),
+                                              ),
+                                              items: days
+                                                  .map((item) =>
+                                                      DropdownMenuItem(
+                                                        value: item,
+                                                        child: Text(
+                                                          item,
+                                                          style: TextStyle(
+                                                            fontSize: 14,
+                                                            color: Color(
+                                                                0xFF007AFF),
+                                                          ),
+                                                        ),
+                                                      ))
+                                                  .toList(),
+                                              onChanged: (value) {
+                                                setState(() {
+                                                  _selectedTheDay = value;
+                                                });
+                                              },
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                      ),
-                    ),
                     SizedBox(
                       height: 10,
                     ),

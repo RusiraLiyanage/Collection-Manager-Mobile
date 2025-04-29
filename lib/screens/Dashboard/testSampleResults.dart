@@ -19,18 +19,19 @@ class TestSampleResults extends StatefulWidget {
 class _TestSampleResultsState extends State<TestSampleResults> {
   final ScrollController _scrollController = ScrollController();
   String? _selectedLocation;
-  final List<String> locationFilter = ["In Clinic", "Out Clinic", "Default"];
+  final List<String> locationFilter = ["All", "Onsite", "In-clinic"];
+  final List<String> showValues = ["Daily", "Weekly", "Monthly"];
   List<String> theYear = [];
   final List<String> theMonth = List.generate(
     12,
     (index) => (index + 1).toString(),
   ); // Months from 1 to 12
   List<String> days = [];
-  bool dateRangeOrSpecific = false;
-  TextEditingController _testProcessedStartDateController =
+  bool dateRangeOrSpecific = true;
+  TextEditingController _testsSampleResultsStartDateController =
       TextEditingController();
 
-  TextEditingController _testProcessedEndDateController =
+  TextEditingController _testsSampleResultsEndDateController =
       TextEditingController();
 
   final List<Map<String, dynamic>> legendItems =
@@ -41,6 +42,18 @@ class _TestSampleResultsState extends State<TestSampleResults> {
   String? _selectedTheYear;
   String? _selectedTheMonth;
   String? _selectedTheDay;
+
+  String? _selectedServiceOffice;
+
+  final List<String> serviceOfficeFilter = [
+    "All",
+    "Sydney Office",
+    "Melbourne",
+    "Darwin"
+  ];
+
+  String? _selectedShow;
+
   Future<void> _selectTestSampleResultsStartDate(BuildContext context) async {
     DateTime initialDate =
         _selectedTestSampleResultsStartDate ?? DateTime.now();
@@ -67,7 +80,7 @@ class _TestSampleResultsState extends State<TestSampleResults> {
     if (picked != null && picked != _selectedTestSampleResultsStartDate) {
       setState(() {
         _selectedTestSampleResultsStartDate = picked;
-        _testProcessedStartDateController.text =
+        _testsSampleResultsStartDateController.text =
             "${picked.day}/${picked.month}/${picked.year}"; // Display the selected date
       });
     }
@@ -123,7 +136,7 @@ class _TestSampleResultsState extends State<TestSampleResults> {
     if (picked != null && picked != _selectedTestSampleResultsEndDate) {
       setState(() {
         _selectedTestSampleResultsEndDate = picked;
-        _testProcessedEndDateController.text =
+        _testsSampleResultsEndDateController.text =
             "${picked.day}/${picked.month}/${picked.year}"; // Display the selected date
       });
     }
@@ -142,6 +155,8 @@ class _TestSampleResultsState extends State<TestSampleResults> {
     _selectedTheMonth = now.month.toString();
     _selectedTheDay = now.day.toString();
     _selectedLocation = locationFilter.first;
+    _selectedServiceOffice = serviceOfficeFilter.first;
+    _selectedShow = showValues.first;
     // Populate the day list based on current month & year
     _updateDayList(
       int.parse(_selectedTheYear!),
@@ -166,20 +181,6 @@ class _TestSampleResultsState extends State<TestSampleResults> {
       }
     });
   }
-
-  /*  void _generateDays() {
-    if (_selectedTheYear != null && _selectedTheMonth != null) {
-      int year = int.parse(_selectedTheYear!);
-      int month = int.parse(_selectedTheMonth!);
-      int numDays =
-          DateTime(year, month + 1, 0).day; // Get last day of the month
-      setState(() {
-        days = List.generate(numDays, (index) => (index + 1).toString());
-        _selectedTheDay =
-            null; // Reset the selected day when month/year changes
-      });
-    }
-  } */
 
   @override
   Widget build(BuildContext context) {
@@ -285,7 +286,7 @@ class _TestSampleResultsState extends State<TestSampleResults> {
                           child: Row(
                             children: [
                               Padding(
-                                padding: const EdgeInsets.only(right: 54.0),
+                                padding: const EdgeInsets.only(right: 60.0),
                                 child: Text(
                                   "Location",
                                   style: TextStyle(
@@ -313,6 +314,7 @@ class _TestSampleResultsState extends State<TestSampleResults> {
                                   ],
                                 ),
                                 child: DropdownButtonFormField<String>(
+                                  dropdownColor: Colors.white,
                                   value: _selectedLocation,
                                   decoration: InputDecoration(
                                     contentPadding: const EdgeInsets.symmetric(
@@ -369,6 +371,201 @@ class _TestSampleResultsState extends State<TestSampleResults> {
                               ),
                             ],
                           ),
+                        ),
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: Container(
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                            left: 8.0,
+                            right: 8.0,
+                            top: 10.0,
+                          ),
+                          child: Row(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(right: 20.0),
+                                child: Text(
+                                  "Service Office",
+                                  style: TextStyle(
+                                    color: Color(0xFF005277),
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                width: 190,
+                                height: 28,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(8),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.white.withOpacity(
+                                          0.2), // Shadow color with opacity
+                                      spreadRadius:
+                                          1, // How much the shadow spreads
+                                      blurRadius: 1, // How blurry the shadow is
+                                      offset: Offset(0,
+                                          0), // Offset for shadow position (x, y)
+                                    ),
+                                  ],
+                                ),
+                                child: DropdownButtonFormField<String>(
+                                  dropdownColor: Colors.white,
+                                  value: _selectedServiceOffice,
+                                  decoration: InputDecoration(
+                                    contentPadding: const EdgeInsets.symmetric(
+                                        horizontal: 8, vertical: 4),
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(8),
+                                      borderSide: BorderSide(
+                                          color: Colors.transparent, width: 2),
+                                    ),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(8),
+                                      borderSide: BorderSide(
+                                          color: Colors.transparent,
+                                          width: 2), // Border colo
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(8),
+                                      borderSide: BorderSide(
+                                          color: Colors.transparent,
+                                          width:
+                                              2), // Border color when focused
+                                    ),
+                                    fillColor: Colors
+                                        .white, // Set the background color to white
+                                    filled: true,
+                                  ),
+                                  icon: Icon(
+                                    Icons.arrow_drop_down_outlined,
+                                    color: Color(
+                                      0xFF71717A,
+                                    ),
+                                  ),
+                                  items: serviceOfficeFilter
+                                      .map((item) => DropdownMenuItem(
+                                            value: item,
+                                            child: Text(
+                                              item,
+                                              style: TextStyle(
+                                                fontSize: 14,
+                                                color: Color(0xFF007AFF),
+                                              ),
+                                            ),
+                                          ))
+                                      .toList(),
+                                  onChanged: (value) {
+                                    setState(() {
+                                      _selectedServiceOffice = value;
+                                    });
+                                  },
+                                ),
+                              ),
+                              SizedBox(
+                                height: 3,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Align(
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(right: 75.0),
+                              child: Text(
+                                "Show",
+                                style: TextStyle(
+                                  color: Color(0xFF005277),
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              width: 8,
+                            ),
+                            Container(
+                              width: 159,
+                              height: 28,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(8),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.white.withOpacity(
+                                        0.2), // Shadow color with opacity
+                                    spreadRadius:
+                                        1, // How much the shadow spreads
+                                    blurRadius: 1, // How blurry the shadow is
+                                    offset: Offset(0,
+                                        0), // Offset for shadow position (x, y)
+                                  ),
+                                ],
+                              ),
+                              child: DropdownButtonFormField<String>(
+                                dropdownColor: Colors.white,
+                                value: _selectedShow,
+                                decoration: InputDecoration(
+                                  contentPadding: const EdgeInsets.symmetric(
+                                      horizontal: 8, vertical: 4),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                    borderSide: BorderSide(
+                                        color: Colors.transparent, width: 2),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                    borderSide: BorderSide(
+                                        color: Colors.transparent,
+                                        width: 2), // Border colo
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                    borderSide: BorderSide(
+                                        color: Colors.transparent,
+                                        width: 2), // Border color when focused
+                                  ),
+                                  fillColor: Colors
+                                      .white, // Set the background color to white
+                                  filled: true,
+                                ),
+                                icon: Icon(
+                                  Icons.arrow_drop_down_outlined,
+                                  color: Color(
+                                    0xFF71717A,
+                                  ),
+                                ),
+                                items: showValues
+                                    .map((item) => DropdownMenuItem(
+                                          value: item,
+                                          child: Text(
+                                            item,
+                                            style: TextStyle(
+                                              fontSize: 14,
+                                              color: Color(0xFF007AFF),
+                                            ),
+                                          ),
+                                        ))
+                                    .toList(),
+                                onChanged: (value) {
+                                  setState(() {
+                                    _selectedShow = value;
+                                  });
+                                },
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
@@ -510,7 +707,7 @@ class _TestSampleResultsState extends State<TestSampleResults> {
                                             ),
                                             child: TextField(
                                               controller:
-                                                  _testProcessedStartDateController,
+                                                  _testsSampleResultsStartDateController,
                                               readOnly: true,
                                               onTap: () =>
                                                   _selectTestSampleResultsStartDate(
@@ -612,7 +809,7 @@ class _TestSampleResultsState extends State<TestSampleResults> {
                                             ),
                                             child: TextField(
                                               controller:
-                                                  _testProcessedEndDateController,
+                                                  _testsSampleResultsEndDateController,
                                               readOnly: true,
                                               onTap: () =>
                                                   _selectTestSampleResultsEndDate(
@@ -723,6 +920,7 @@ class _TestSampleResultsState extends State<TestSampleResults> {
                                             ),
                                             child:
                                                 DropdownButtonFormField<String>(
+                                              dropdownColor: Colors.white,
                                               value: _selectedTheYear,
                                               decoration: InputDecoration(
                                                 contentPadding:
@@ -846,6 +1044,7 @@ class _TestSampleResultsState extends State<TestSampleResults> {
                                             ),
                                             child:
                                                 DropdownButtonFormField<String>(
+                                              dropdownColor: Colors.white,
                                               value: _selectedTheMonth,
                                               decoration: InputDecoration(
                                                 contentPadding:
@@ -950,6 +1149,7 @@ class _TestSampleResultsState extends State<TestSampleResults> {
                                             ),
                                             child:
                                                 DropdownButtonFormField<String>(
+                                              dropdownColor: Colors.white,
                                               value: _selectedTheDay,
                                               decoration: InputDecoration(
                                                 contentPadding:
