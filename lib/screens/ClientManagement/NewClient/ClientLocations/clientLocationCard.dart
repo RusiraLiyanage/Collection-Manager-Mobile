@@ -212,7 +212,7 @@ class ClientLocationCard extends StatelessWidget {
             // Content Rows
             _buildInfoRow(
                 iconPath: 'assets/images/icons/dafault_icon.png',
-                title: 'Site Contract',
+                title: 'Site Contact',
                 value: location["siteContract"]!),
             /* _buildInfoRow(
                 iconPath: 'assets/images/icons/dafault_icon.png',

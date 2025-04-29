@@ -56,6 +56,27 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
   int currentPageAchieved = 1; // Tracks the current page
   int itemsPerPageAchieved = 5; // Default items per page
 
+  String? _selectedTheDay;
+
+  List<String> days = [];
+
+  bool dateRangeOrSpecific = true;
+
+  DateTime? _selectedOnsiteJobStartDate;
+
+  DateTime? _selectedOnsiteJobEndDate;
+
+  String? _selectedTheYear;
+
+  List<String> theYear = [];
+
+  String? _selectedTheMonth;
+
+  TextEditingController _onSiteJobsStartDateController =
+      TextEditingController();
+
+  TextEditingController _onSiteJobsEndDateController = TextEditingController();
+
   // Filtered jobs to display based on pagination
   List<Map<String, dynamic>> get paginatedJobData {
     int startIndex = (currentPage - 1) * itemsPerPage;
@@ -116,6 +137,109 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
     return "$start - $end";
   }
 
+  Future<void> _selectOnsiteJobsStartDate(BuildContext context) async {
+    DateTime initialDate = _selectedOnsiteJobStartDate ?? DateTime.now();
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: initialDate,
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2101),
+      builder: (BuildContext context, Widget? child) {
+        return Theme(
+          data: ThemeData(
+            colorScheme: const ColorScheme.highContrastLight(
+              primary: Color(0xFF01B4D2),
+            ),
+            datePickerTheme: const DatePickerThemeData(
+              backgroundColor: Colors.white,
+            ),
+          ),
+          child: child!,
+        );
+      },
+    );
+
+    if (picked != null && picked != _selectedOnsiteJobStartDate) {
+      setState(() {
+        _selectedOnsiteJobStartDate = picked;
+        _onSiteJobsStartDateController.text =
+            "${picked.day}/${picked.month}/${picked.year}"; // Display the selected date
+      });
+    }
+  }
+
+  void _updateDayList(int year, int month) {
+    int daysInMonth = DateTime(year, month + 1, 0).day;
+    setState(() {
+      days = List.generate(daysInMonth, (index) => (index + 1).toString());
+      // Ensure the selected day is valid
+      if (!days.contains(_selectedTheDay)) {
+        _selectedTheDay = days.first;
+      }
+    });
+  }
+
+  final List<String> theMonth = List.generate(
+    12,
+    (index) => (index + 1).toString(),
+  );
+
+  Future<void> _selectOnsiteJobsEndDate(BuildContext context) async {
+    if (_selectedOnsiteJobStartDate == null) {
+      // If no Start Date is selected, show an alert or prompt
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            backgroundColor: Colors.white,
+            title: const Text("Start Date Required"),
+            content: const Text(
+                "Please select a Start Date before choosing an End Date."),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(),
+                child: const Text("OK"),
+              ),
+            ],
+          );
+        },
+      );
+      return; // Exit the function if Start Date is not selected
+    }
+    DateTime initialDate = (_selectedOnsiteJobStartDate != null)
+        ? _selectedOnsiteJobStartDate!.add(const Duration(days: 1))
+        : DateTime(2000);
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: initialDate,
+      firstDate: (_selectedOnsiteJobStartDate != null)
+          ? _selectedOnsiteJobStartDate!.add(const Duration(days: 1))
+          : DateTime(2000), // Safe null fallback
+      lastDate: DateTime(2101),
+      builder: (BuildContext context, Widget? child) {
+        return Theme(
+          data: ThemeData(
+            colorScheme: const ColorScheme.highContrastLight(
+              primary: Color(0xFF01B4D2),
+            ),
+            datePickerTheme: const DatePickerThemeData(
+              backgroundColor: Colors.white,
+            ),
+          ),
+          child: child!,
+        );
+      },
+    );
+
+    if (picked != null && picked != _selectedOnsiteJobEndDate) {
+      setState(() {
+        _selectedOnsiteJobEndDate = picked;
+        _onSiteJobsEndDateController.text =
+            "${picked.day}/${picked.month}/${picked.year}"; // Display the selected date
+      });
+    }
+  }
+
   @override
   void initState() {
     print("yes onsite jobs called");
@@ -125,7 +249,20 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
     _selectedStatus = status.first;
     _selectedFilteringValue = filteringAmounts.first;
     _selectedFilteringValueAchieved = filteringAmountsArchieved.first;
+
+    DateTime now = DateTime.now();
+    //_generateYears();
+    // Generate the last 10 years dynamically
+    theYear = List.generate(10, (index) => (now.year - index).toString());
+    // Set initial selections to the current date
+    _selectedTheYear = now.year.toString();
+    _selectedTheMonth = now.month.toString();
+    _selectedTheDay = now.day.toString();
     // Initialize selected value
+    _updateDayList(
+      int.parse(_selectedTheYear!),
+      int.parse(_selectedTheMonth!),
+    );
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       final appState = Provider.of<AppState>(context, listen: false);
@@ -545,9 +682,9 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
                 ),
                 Container(
                   width: double.infinity,
-                  height: 130,
                   color: AppColors.appWideBackground.withOpacity(1),
                   child: Column(
+                    mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
@@ -557,6 +694,692 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
                       ),
                       SizedBox(
                         width: 5,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          left: 8.0,
+                          right: 8.0,
+                        ),
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(right: 40.0),
+                              child: Padding(
+                                padding: const EdgeInsets.only(
+                                  left: 8.0,
+                                ),
+                                child: Text(
+                                  "Date",
+                                  style: TextStyle(
+                                    color: Color(0xFF005277),
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            !dateRangeOrSpecific
+                                ? Text(
+                                    "Date Range",
+                                    style: TextStyle(
+                                      color: Color(0xFF005277),
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  )
+                                : Text(
+                                    "Date Range",
+                                    style: TextStyle(
+                                      color: Colors.grey,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                            Transform.scale(
+                              scale: 0.7,
+                              child: Switch(
+                                activeColor: Colors.white,
+                                activeTrackColor: Color(0xFF1A8CFF),
+                                value: dateRangeOrSpecific,
+                                onChanged: (value) {
+                                  setState(() {
+                                    dateRangeOrSpecific = value;
+                                  });
+                                },
+                              ),
+                            ),
+                            dateRangeOrSpecific
+                                ? Text(
+                                    "Specific Date",
+                                    style: TextStyle(
+                                      color: Color(0xFF005277),
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  )
+                                : Text(
+                                    "Specific Date",
+                                    style: TextStyle(
+                                      color: Colors.grey,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                          ],
+                        ),
+                      ),
+                      !dateRangeOrSpecific
+                          ? Padding(
+                              padding: const EdgeInsets.only(
+                                left: 8.0,
+                                right: 8.0,
+                              ),
+                              child: Container(
+                                child: Column(
+                                  children: [
+                                    Align(
+                                      alignment: Alignment.topLeft,
+                                      child: Container(
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 8.0, right: 8.0),
+                                          child: Row(
+                                            children: [
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    right: 80.0),
+                                                child: Text(
+                                                  "Date From",
+                                                  style: TextStyle(
+                                                    color: Color(0xFF005277),
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                ),
+                                              ),
+                                              Container(
+                                                width: 190,
+                                                height: 28,
+                                                decoration: BoxDecoration(
+                                                  color: Colors.white,
+                                                  borderRadius:
+                                                      BorderRadius.circular(8),
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color: Colors.white
+                                                          .withOpacity(
+                                                              0.2), // Shadow color with opacity
+                                                      spreadRadius:
+                                                          1, // How much the shadow spreads
+                                                      blurRadius:
+                                                          1, // How blurry the shadow is
+                                                      offset: Offset(0,
+                                                          0), // Offset for shadow position (x, y)
+                                                    ),
+                                                  ],
+                                                ),
+                                                child: TextField(
+                                                  controller:
+                                                      _onSiteJobsStartDateController,
+                                                  readOnly: true,
+                                                  onTap: () =>
+                                                      _selectOnsiteJobsStartDate(
+                                                          context),
+                                                  decoration: InputDecoration(
+                                                    contentPadding:
+                                                        const EdgeInsets
+                                                            .symmetric(
+                                                            horizontal: 8,
+                                                            vertical: 4),
+                                                    border: OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              8),
+                                                      borderSide: BorderSide(
+                                                          color: Colors
+                                                              .transparent,
+                                                          width:
+                                                              2), // Default border with thickness
+                                                    ),
+                                                    enabledBorder:
+                                                        OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              8),
+                                                      borderSide: BorderSide(
+                                                          color: Colors
+                                                              .transparent,
+                                                          width:
+                                                              3), // Border color when enabled
+                                                    ),
+                                                    focusedBorder:
+                                                        OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              8),
+                                                      borderSide: BorderSide(
+                                                          color: Colors
+                                                              .transparent,
+                                                          width:
+                                                              3), // Border color when focused
+                                                    ),
+                                                    fillColor: Colors.white,
+                                                    filled: true,
+                                                    hintText:
+                                                        'Select start date', // Placeholder text
+                                                    hintStyle: TextStyle(
+                                                      color: Color(0xFF007AFF),
+                                                    ), // Style for the hint text
+                                                  ),
+                                                  style: TextStyle(
+                                                    fontSize: 14,
+                                                    color: Color(0xFF007AFF),
+                                                  ), // Text style for the input text
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Align(
+                                      alignment: Alignment.topLeft,
+                                      child: Container(
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 8.0, right: 8.0),
+                                          child: Row(
+                                            children: [
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    right: 80.0),
+                                                child: Text(
+                                                  "Date To",
+                                                  style: TextStyle(
+                                                    color: Color(0xFF005277),
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 20,
+                                              ),
+                                              Container(
+                                                width: 190,
+                                                height: 28,
+                                                decoration: BoxDecoration(
+                                                  color: Colors.white,
+                                                  borderRadius:
+                                                      BorderRadius.circular(8),
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color: Colors.white
+                                                          .withOpacity(
+                                                              0.2), // Shadow color with opacity
+                                                      spreadRadius:
+                                                          1, // How much the shadow spreads
+                                                      blurRadius:
+                                                          1, // How blurry the shadow is
+                                                      offset: Offset(0,
+                                                          0), // Offset for shadow position (x, y)
+                                                    ),
+                                                  ],
+                                                ),
+                                                child: TextField(
+                                                  controller:
+                                                      _onSiteJobsEndDateController,
+                                                  readOnly: true,
+                                                  onTap: () =>
+                                                      _selectOnsiteJobsEndDate(
+                                                          context),
+                                                  decoration: InputDecoration(
+                                                    contentPadding:
+                                                        const EdgeInsets
+                                                            .symmetric(
+                                                            horizontal: 8,
+                                                            vertical: 4),
+                                                    border: OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              8),
+                                                      borderSide: BorderSide(
+                                                          color: Colors
+                                                              .transparent,
+                                                          width:
+                                                              2), // Default border with thickness
+                                                    ),
+                                                    enabledBorder:
+                                                        OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              8),
+                                                      borderSide: BorderSide(
+                                                          color: Colors
+                                                              .transparent,
+                                                          width:
+                                                              3), // Border color when enabled
+                                                    ),
+                                                    focusedBorder:
+                                                        OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              8),
+                                                      borderSide: BorderSide(
+                                                          color: Colors
+                                                              .transparent,
+                                                          width:
+                                                              3), // Border color when focused
+                                                    ),
+                                                    fillColor: Colors.white,
+                                                    filled: true,
+                                                    hintText:
+                                                        'Select end date', // Placeholder text
+                                                    hintStyle: TextStyle(
+                                                      color: Color(0xFF007AFF),
+                                                    ), // Style for the hint text
+                                                  ),
+                                                  style: TextStyle(
+                                                    fontSize: 14,
+                                                    color: Color(0xFF007AFF),
+                                                  ), // Text style for the input text
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            )
+                          : Padding(
+                              padding: const EdgeInsets.only(
+                                left: 8.0,
+                                right: 8.0,
+                              ),
+                              child: Container(
+                                child: Column(
+                                  children: [
+                                    Align(
+                                      alignment: Alignment.topLeft,
+                                      child: Container(
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(
+                                            left: 8.0,
+                                            right: 8.0,
+                                            top: 5.0,
+                                          ),
+                                          child: Row(
+                                            children: [
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    right: 20.0),
+                                                child: Text(
+                                                  "Year",
+                                                  style: TextStyle(
+                                                    color: Color(0xFF005277),
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 20,
+                                              ),
+                                              Container(
+                                                width: 190,
+                                                height: 28,
+                                                decoration: BoxDecoration(
+                                                  color: Colors.white,
+                                                  borderRadius:
+                                                      BorderRadius.circular(8),
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color: Colors.white
+                                                          .withOpacity(
+                                                              0.2), // Shadow color with opacity
+                                                      spreadRadius:
+                                                          1, // How much the shadow spreads
+                                                      blurRadius:
+                                                          1, // How blurry the shadow is
+                                                      offset: Offset(0,
+                                                          0), // Offset for shadow position (x, y)
+                                                    ),
+                                                  ],
+                                                ),
+                                                child: DropdownButtonFormField<
+                                                    String>(
+                                                  dropdownColor: Colors.white,
+                                                  value: _selectedTheYear,
+                                                  decoration: InputDecoration(
+                                                    contentPadding:
+                                                        const EdgeInsets
+                                                            .symmetric(
+                                                            horizontal: 8,
+                                                            vertical: 4),
+                                                    border: OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              8),
+                                                      borderSide: BorderSide(
+                                                          color: Colors
+                                                              .transparent,
+                                                          width: 2),
+                                                    ),
+                                                    enabledBorder:
+                                                        OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              8),
+                                                      borderSide: BorderSide(
+                                                          color: Colors
+                                                              .transparent,
+                                                          width:
+                                                              2), // Border colo
+                                                    ),
+                                                    focusedBorder:
+                                                        OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              8),
+                                                      borderSide: BorderSide(
+                                                          color: Colors
+                                                              .transparent,
+                                                          width:
+                                                              2), // Border color when focused
+                                                    ),
+                                                    fillColor: Colors
+                                                        .white, // Set the background color to white
+                                                    filled: true,
+                                                  ),
+                                                  icon: Icon(
+                                                    Icons
+                                                        .arrow_drop_down_outlined,
+                                                    color: Color(
+                                                      0xFF71717A,
+                                                    ),
+                                                  ),
+                                                  items: theYear
+                                                      .map((year) =>
+                                                          DropdownMenuItem(
+                                                            value: year,
+                                                            child: Text(
+                                                              year,
+                                                              style: TextStyle(
+                                                                fontSize: 14,
+                                                                color: Color(
+                                                                    0xFF007AFF),
+                                                              ),
+                                                            ),
+                                                          ))
+                                                      .toList(),
+                                                  onChanged: (value) {
+                                                    setState(() {
+                                                      _selectedTheYear = value;
+                                                      _updateDayList(
+                                                          int.parse(value!),
+                                                          int.parse(
+                                                              _selectedTheMonth!));
+                                                    });
+                                                  },
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 3,
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 5,
+                                    ),
+                                    Align(
+                                      alignment: Alignment.topLeft,
+                                      child: Container(
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(
+                                            left: 8.0,
+                                            right: 8.0,
+                                            top: 10.0,
+                                          ),
+                                          child: Row(
+                                            children: [
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    right: 20.0),
+                                                child: Text(
+                                                  "Month",
+                                                  style: TextStyle(
+                                                    color: Color(0xFF005277),
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 10,
+                                              ),
+                                              Container(
+                                                width: 80,
+                                                height: 28,
+                                                decoration: BoxDecoration(
+                                                  color: Colors.white,
+                                                  borderRadius:
+                                                      BorderRadius.circular(8),
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color: Colors.white
+                                                          .withOpacity(
+                                                              0.2), // Shadow color with opacity
+                                                      spreadRadius:
+                                                          1, // How much the shadow spreads
+                                                      blurRadius:
+                                                          1, // How blurry the shadow is
+                                                      offset: Offset(0,
+                                                          0), // Offset for shadow position (x, y)
+                                                    ),
+                                                  ],
+                                                ),
+                                                child: DropdownButtonFormField<
+                                                    String>(
+                                                  dropdownColor: Colors.white,
+                                                  value: _selectedTheMonth,
+                                                  decoration: InputDecoration(
+                                                    contentPadding:
+                                                        const EdgeInsets
+                                                            .symmetric(
+                                                            horizontal: 8,
+                                                            vertical: 4),
+                                                    border: OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              8),
+                                                      borderSide: BorderSide(
+                                                          color: Colors
+                                                              .transparent,
+                                                          width: 2),
+                                                    ),
+                                                    enabledBorder:
+                                                        OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              8),
+                                                      borderSide: BorderSide(
+                                                          color: Colors
+                                                              .transparent,
+                                                          width:
+                                                              2), // Border colo
+                                                    ),
+                                                    focusedBorder:
+                                                        OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              8),
+                                                      borderSide: BorderSide(
+                                                          color: Colors
+                                                              .transparent,
+                                                          width:
+                                                              2), // Border color when focused
+                                                    ),
+                                                    fillColor: Colors
+                                                        .white, // Set the background color to white
+                                                    filled: true,
+                                                  ),
+                                                  icon: Icon(
+                                                    Icons
+                                                        .arrow_drop_down_outlined,
+                                                    color: Color(
+                                                      0xFF71717A,
+                                                    ),
+                                                  ),
+                                                  items: theMonth
+                                                      .map((month) =>
+                                                          DropdownMenuItem(
+                                                            value: month,
+                                                            child: Text(
+                                                              month,
+                                                              style: TextStyle(
+                                                                fontSize: 14,
+                                                                color: Color(
+                                                                    0xFF007AFF),
+                                                              ),
+                                                            ),
+                                                          ))
+                                                      .toList(),
+                                                  onChanged: (value) {
+                                                    setState(() {
+                                                      _selectedTheMonth = value;
+                                                      _updateDayList(
+                                                          int.parse(
+                                                              _selectedTheYear!),
+                                                          int.parse(value!));
+                                                    });
+                                                  },
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 50,
+                                              ),
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    right: 20.0),
+                                                child: Text(
+                                                  "Day",
+                                                  style: TextStyle(
+                                                    color: Color(0xFF005277),
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 10,
+                                              ),
+                                              Container(
+                                                width: 80,
+                                                height: 28,
+                                                decoration: BoxDecoration(
+                                                  color: Colors.white,
+                                                  borderRadius:
+                                                      BorderRadius.circular(8),
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color: Colors.white
+                                                          .withOpacity(
+                                                              0.2), // Shadow color with opacity
+                                                      spreadRadius:
+                                                          1, // How much the shadow spreads
+                                                      blurRadius:
+                                                          1, // How blurry the shadow is
+                                                      offset: Offset(0,
+                                                          0), // Offset for shadow position (x, y)
+                                                    ),
+                                                  ],
+                                                ),
+                                                child: DropdownButtonFormField<
+                                                    String>(
+                                                  dropdownColor: Colors.white,
+                                                  value: _selectedTheDay,
+                                                  decoration: InputDecoration(
+                                                    contentPadding:
+                                                        const EdgeInsets
+                                                            .symmetric(
+                                                            horizontal: 8,
+                                                            vertical: 4),
+                                                    border: OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              8),
+                                                      borderSide: BorderSide(
+                                                          color: Colors
+                                                              .transparent,
+                                                          width: 2),
+                                                    ),
+                                                    enabledBorder:
+                                                        OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              8),
+                                                      borderSide: BorderSide(
+                                                          color: Colors
+                                                              .transparent,
+                                                          width:
+                                                              2), // Border colo
+                                                    ),
+                                                    focusedBorder:
+                                                        OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              8),
+                                                      borderSide: BorderSide(
+                                                          color: Colors
+                                                              .transparent,
+                                                          width:
+                                                              2), // Border color when focused
+                                                    ),
+                                                    fillColor: Colors
+                                                        .white, // Set the background color to white
+                                                    filled: true,
+                                                  ),
+                                                  icon: Icon(
+                                                    Icons
+                                                        .arrow_drop_down_outlined,
+                                                    color: Color(
+                                                      0xFF71717A,
+                                                    ),
+                                                  ),
+                                                  items: days
+                                                      .map((item) =>
+                                                          DropdownMenuItem(
+                                                            value: item,
+                                                            child: Text(
+                                                              item,
+                                                              style: TextStyle(
+                                                                fontSize: 14,
+                                                                color: Color(
+                                                                    0xFF007AFF),
+                                                              ),
+                                                            ),
+                                                          ))
+                                                      .toList(),
+                                                  onChanged: (value) {
+                                                    setState(() {
+                                                      _selectedTheDay = value;
+                                                    });
+                                                  },
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                      SizedBox(
+                        height: 25,
                       ),
                       Padding(
                         padding: const EdgeInsets.only(left: 8.0, right: 8.0),
@@ -743,142 +1566,6 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
                       ),
                       SizedBox(
                         height: 10,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-                        child: Row(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(right: 80.0),
-                              child: Text(
-                                "Date",
-                                style: TextStyle(
-                                  color: Color(0xFF005277),
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                            Container(
-                              width: 100,
-                              height: 28,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(8),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.white.withOpacity(
-                                        0.2), // Shadow color with opacity
-                                    spreadRadius:
-                                        1, // How much the shadow spreads
-                                    blurRadius: 1, // How blurry the shadow is
-                                    offset: Offset(0,
-                                        0), // Offset for shadow position (x, y)
-                                  ),
-                                ],
-                              ),
-                              child: TextField(
-                                controller: _startDateController,
-                                readOnly: true,
-                                onTap: () => _selectStartDate(context),
-                                decoration: InputDecoration(
-                                  contentPadding: const EdgeInsets.symmetric(
-                                      horizontal: 8, vertical: 4),
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(8),
-                                    borderSide: BorderSide(
-                                        color: Colors.transparent,
-                                        width:
-                                            2), // Default border with thickness
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(8),
-                                    borderSide: BorderSide(
-                                        color: Colors.transparent,
-                                        width: 3), // Border color when enabled
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(8),
-                                    borderSide: BorderSide(
-                                        color: Colors.transparent,
-                                        width: 3), // Border color when focused
-                                  ),
-                                  fillColor: Colors.white,
-                                  filled: true,
-                                  hintText: 'Start', // Placeholder text
-                                  hintStyle: TextStyle(
-                                    color: Color(0xFF007AFF),
-                                  ), // Style for the hint text
-                                ),
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: Color(0xFF007AFF),
-                                ), // Text style for the input text
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 10.0),
-                              child: Container(
-                                width: 100,
-                                height: 28,
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(8),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.white.withOpacity(
-                                          0.2), // Shadow color with opacity
-                                      spreadRadius:
-                                          1, // How much the shadow spreads
-                                      blurRadius: 1, // How blurry the shadow is
-                                      offset: Offset(0,
-                                          0), // Offset for shadow position (x, y)
-                                    ),
-                                  ],
-                                ),
-                                child: TextField(
-                                  controller: _endDateController,
-                                  readOnly: true,
-                                  onTap: () => _selectEndDate(context),
-                                  decoration: InputDecoration(
-                                    contentPadding: const EdgeInsets.symmetric(
-                                        horizontal: 8, vertical: 4),
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(8),
-                                      borderSide: BorderSide(
-                                          color: Colors.transparent,
-                                          width:
-                                              2), // Default border with thickness
-                                    ),
-                                    enabledBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(8),
-                                      borderSide: BorderSide(
-                                          color: Colors.transparent,
-                                          width:
-                                              3), // Border color when enabled
-                                    ),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(8),
-                                      borderSide: BorderSide(
-                                          color: Colors.transparent,
-                                          width:
-                                              3), // Border color when focused
-                                    ),
-                                    fillColor: Colors.white,
-                                    filled: true,
-                                    hintText: 'Ends', // Placeholder text
-                                    hintStyle: TextStyle(
-                                      color: Color(0xFF007AFF),
-                                    ), // Style for the hint text
-                                  ),
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    color: Color(0xFF007AFF),
-                                  ), // Text style for the input text
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
                       ),
                       SizedBox(
                         height: 10,

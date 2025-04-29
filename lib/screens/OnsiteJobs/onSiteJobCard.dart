@@ -678,7 +678,7 @@ class OnsiteJobCard extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 2),
-            Card(
+            /*  Card(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20),
               ),
@@ -695,16 +695,20 @@ class OnsiteJobCard extends StatelessWidget {
                   ),
                 ),
               ),
-            ),
+            ), */
             // Content Rows
             _buildInfoRow(
                 iconPath: 'assets/images/icons/dafault_icon.png',
-                title: 'Authorized Rep',
-                value: job["rep"]!),
+                title: 'Job Reference',
+                value: job["bookingInfo"]["jobDetails"]["jobReference"]!),
             _buildInfoRow(
                 iconPath: 'assets/images/icons/dafault_icon.png',
                 title: 'Date / Time',
                 value: job["dateTime"]!),
+            _buildInfoRow(
+                iconPath: 'assets/images/icons/dafault_icon.png',
+                title: 'Authorized Rep',
+                value: job["rep"]!),
             _buildInfoRow(
                 iconPath: 'assets/images/icons/dafault_icon.png',
                 title: 'Location',

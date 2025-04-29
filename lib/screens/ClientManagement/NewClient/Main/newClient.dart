@@ -22,7 +22,6 @@ import 'package:project_code_blue/screens/OnsiteJobs/onSiteJobCard.dart';
 import 'package:im_stepper/stepper.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:provider/provider.dart';
 
 import '../Components/ClientDetails/TestingSpecifications/DrugTestSpecifications/drugTestFormField.dart';
 import '../Components/ClientDetails/TestingSpecifications/DrugTestSpecifications/preferredDeviceFormField.dart';
@@ -143,7 +142,7 @@ class _NewClientJobState extends State<NewClient> {
     return "$start - $end";
   }
 
-  List<Map<String, String>> get paginatedJobDataAchieved {
+  List<Map<String, dynamic>> get paginatedJobDataAchieved {
     int startIndexAchieved = (currentPageAchieved - 1) * itemsPerPageAchieved;
     int endIndexAchieved = startIndexAchieved + itemsPerPageAchieved;
     endIndexAchieved = endIndexAchieved > jobDataAchieved.length
@@ -496,7 +495,7 @@ class _NewClientJobState extends State<NewClient> {
     }
   }
 
-  final List<Map<String, String>> jobData = [
+  final List<Map<String, dynamic>> jobData = [
     {
       "jobNumber": "1",
       "jobStatus": "Draft",
@@ -506,6 +505,201 @@ class _NewClientJobState extends State<NewClient> {
       "location": "Parramatta",
       "service": "Random Testing",
       "callout": "Callout",
+      "collectors": [
+        {"collectorName": "George Poulos", "collectorStatus": "Allocated"},
+        {"collectorName": "Michelle Kirkman", "collectorStatus": "Accepted"},
+        {"collectorName": "Valerie McKenzie", "collectorStatus": "Accepted"},
+        {"collectorName": "Zac Hepburn", "collectorStatus": "Accepted"},
+        {"collectorName": "Gina Landini", "collectorStatus": "Rejected"}
+      ],
+      "bookingInfo": {
+        "organisationInfo": {
+          "collectionOrganisation": "collection0123",
+          "selectedServiceOffice": "Melbourne",
+          "serviceOffice": ["Sydney", "Melbourne", "Paramatta"]
+        },
+        "jobDetails": {
+          "jobType": "In Clinic",
+          "jobDate": "20/04/2025",
+          "startTime": "16:41",
+          "duration": "1:10",
+          "noOfDonors": "6",
+          "jobReference": "jo1234",
+          "typeOfService": "service 123"
+        },
+        "clientInfo": {
+          "selectedClient": "Client B",
+          "clientDetails": [
+            {"clientName": "Client A", "clientReference": "ref123"},
+            {"clientName": "Client B", "clientReference": "ref456"},
+            {"clientName": "Client C", "clientReference": "ref789"}
+          ],
+          "selectedSite": "Site 1",
+          "locationDetails": [
+            {
+              "siteName": "Site 1",
+              "siteContacts": [
+                {"siteContactName": "Alice", "siteContactMobile": "0418549596"},
+                {"siteContactName": "Bob", "siteContactMobile": "0418549596"}
+              ],
+              "testsAndDevices": {
+                "testType": "Drug Test Only",
+                "drugTestSpecifications": {
+                  "primaryDrugTest": {
+                    "drugTestName": "Drug Test 123",
+                    "selectPreferedDevice": "Device 123"
+                  },
+                  "secondaryDrugTest": {
+                    "drugTestName": "Drug Test 456",
+                    "selectPreferedDevice": "Device 456"
+                  },
+                  "teritoryDrugTest": {
+                    "drugTestName": "Drug Test 789",
+                    "selectPreferedDevice": "Device 789"
+                  },
+                  "additionalInfo": {
+                    "additionalTests": "",
+                    "additionalTestInstructions": "",
+                    "donorSelectionProcess":
+                        "Donor selection procedures have been advised to the collectors accordingly",
+                    "screeningAndTestingProcess": "",
+                    "testConfirmationInstructions": "",
+                    "globalSiteAccessInstructions": "",
+                    "specificLocalSiteAccessInstructions":
+                        "To access the site, please use the given access card",
+                    "specificInstructions":
+                        "Any potential issues ? please contact the assigned authorized representative"
+                  },
+                  "authorizedRepresentativeInfo": {
+                    "representativeName": "Rusira Senath Liyanage",
+                    "representativeMobile": "0418549586",
+                    "representativePosition": "Urine Drug Screening specialist",
+                    "representativeEmail": "rusira.senath@gmail.com"
+                  },
+                  "assignedCollectors": [
+                    {
+                      "collectorName": "Micheal Kikrinam",
+                      "assignedDateTime": "11:44 AM | 20 Apr 2025"
+                    },
+                    {
+                      "collectorName": "George Poulas",
+                      "assignedDateTime": "11:40 AM | 20 Apr 2025"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "siteName": "Site 2",
+              "siteContacts": [
+                {
+                  "siteContactName": "Charlie",
+                  "siteContactMobile": "0418549596"
+                },
+                {"siteContactName": "Diana", "siteContactMobile": "0418549596"}
+              ],
+              "testsAndDevices": {
+                "testType": "Drug Test Only",
+                "drugTestSpecifications": {
+                  "primaryDrugTest": {
+                    "drugTestName": "Drug Test 123",
+                    "selectPreferedDevice": "Device 123"
+                  },
+                  "secondaryDrugTest": {
+                    "drugTestName": "Drug Test 456",
+                    "selectPreferedDevice": "Device 456"
+                  },
+                  "teritoryDrugTest": {
+                    "drugTestName": "Drug Test 789",
+                    "selectPreferedDevice": "Device 789"
+                  },
+                  "additionalInfo": {
+                    "additionalTests": "",
+                    "additionalTestInstructions": "",
+                    "donorSelectionProcess":
+                        "Donor selection procedures have been advised to the collectors accordingly",
+                    "screeningAndTestingProcess": "",
+                    "testConfirmationInstructions": "",
+                    "globalSiteAccessInstructions": "",
+                    "specificLocalSiteAccessInstructions":
+                        "To access the site, please use the given access card",
+                    "specificInstructions":
+                        "Any potential issues ? please contact the assigned authorized representative"
+                  },
+                  "authorizedRepresentativeInfo": {
+                    "representativeName": "rusira123",
+                    "representativeMobile": "0418549586",
+                    "representativePosition": "position123",
+                    "representativeEmail": "rusira.senath@gmail.com"
+                  },
+                  "assignedCollectors": [
+                    {
+                      "collectorName": "Micheal Kikrinam",
+                      "assignedDateTime": "11:44 AM | 20 Apr 2025"
+                    },
+                    {
+                      "collectorName": "George Poulas",
+                      "assignedDateTime": "11:40 AM | 20 Apr 2025"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "siteName": "Site 3",
+              "siteContacts": [
+                {"siteContactName": "Eva", "siteContactMobile": "0418549596"}
+              ],
+              "testsAndDevices": {
+                "testType": "Drug Test Only",
+                "drugTestSpecifications": {
+                  "primaryDrugTest": {
+                    "drugTestName": "Drug Test 123",
+                    "selectPreferedDevice": "Device 123"
+                  },
+                  "secondaryDrugTest": {
+                    "drugTestName": "Drug Test 456",
+                    "selectPreferedDevice": "Device 456"
+                  },
+                  "teritoryDrugTest": {
+                    "drugTestName": "Drug Test 789",
+                    "selectPreferedDevice": "Device 789"
+                  },
+                  "additionalInfo": {
+                    "additionalTests": "",
+                    "additionalTestInstructions": "",
+                    "donorSelectionProcess":
+                        "Donor selection procedures have been advised to the collectors accordingly",
+                    "screeningAndTestingProcess": "",
+                    "testConfirmationInstructions": "",
+                    "globalSiteAccessInstructions": "",
+                    "specificLocalSiteAccessInstructions":
+                        "To access the site, please use the given access card",
+                    "specificInstructions":
+                        "Any potential issues ? please contact the assigned authorized representative"
+                  },
+                  "authorizedRepresentativeInfo": {
+                    "representativeName": "rusira123",
+                    "representativeMobile": "0418549586",
+                    "representativePosition": "position123",
+                    "representativeEmail": "rusira.senath@gmail.com"
+                  },
+                  "assignedCollectors": [
+                    {
+                      "collectorName": "Micheal Kikrinam",
+                      "assignedDateTime": "11:44 AM | 20 Apr 2025"
+                    },
+                    {
+                      "collectorName": "George Poulas",
+                      "assignedDateTime": "11:40 AM | 20 Apr 2025"
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      }
     },
     {
       "jobNumber": "2",
@@ -516,6 +710,201 @@ class _NewClientJobState extends State<NewClient> {
       "location": "Parramatta",
       "service": "Random Testing",
       "callout": "Callout",
+      "collectors": [
+        {"collectorName": "George Poulos", "collectorStatus": "Allocated"},
+        {"collectorName": "Michelle Kirkman", "collectorStatus": "Accepted"},
+        {"collectorName": "Valerie McKenzie", "collectorStatus": "Accepted"},
+        {"collectorName": "Zac Hepburn", "collectorStatus": "Accepted"},
+        {"collectorName": "Gina Landini", "collectorStatus": "Rejected"}
+      ],
+      "bookingInfo": {
+        "organisationInfo": {
+          "collectionOrganisation": "collection0123",
+          "selectedServiceOffice": "Melbourne",
+          "serviceOffice": ["Sydney", "Melbourne", "Paramatta"]
+        },
+        "jobDetails": {
+          "jobType": "In Clinic",
+          "jobDate": "20/04/2025",
+          "startTime": "16:41",
+          "duration": "1:10",
+          "noOfDonors": "6",
+          "jobReference": "jo1234",
+          "typeOfService": "service 123"
+        },
+        "clientInfo": {
+          "selectedClient": "Client B",
+          "clientDetails": [
+            {"clientName": "Client A", "clientReference": "ref123"},
+            {"clientName": "Client B", "clientReference": "ref456"},
+            {"clientName": "Client C", "clientReference": "ref789"}
+          ],
+          "selectedSite": "Site 1",
+          "locationDetails": [
+            {
+              "siteName": "Site 1",
+              "siteContacts": [
+                {"siteContactName": "Alice", "siteContactMobile": "0418549596"},
+                {"siteContactName": "Bob", "siteContactMobile": "0418549596"}
+              ],
+              "testsAndDevices": {
+                "testType": "Drug Test Only",
+                "drugTestSpecifications": {
+                  "primaryDrugTest": {
+                    "drugTestName": "Drug Test 123",
+                    "selectPreferedDevice": "Device 123"
+                  },
+                  "secondaryDrugTest": {
+                    "drugTestName": "Drug Test 456",
+                    "selectPreferedDevice": "Device 456"
+                  },
+                  "teritoryDrugTest": {
+                    "drugTestName": "Drug Test 789",
+                    "selectPreferedDevice": "Device 789"
+                  },
+                  "additionalInfo": {
+                    "additionalTests": "",
+                    "additionalTestInstructions": "",
+                    "donorSelectionProcess":
+                        "Donor selection procedures have been advised to the collectors accordingly",
+                    "screeningAndTestingProcess": "",
+                    "testConfirmationInstructions": "",
+                    "globalSiteAccessInstructions": "",
+                    "specificLocalSiteAccessInstructions":
+                        "To access the site, please use the given access card",
+                    "specificInstructions":
+                        "Any potential issues ? please contact the assigned authorized representative"
+                  },
+                  "authorizedRepresentativeInfo": {
+                    "representativeName": "Rusira Senath Liyanage",
+                    "representativeMobile": "0418549586",
+                    "representativePosition": "Urine Drug Screening specialist",
+                    "representativeEmail": "rusira.senath@gmail.com"
+                  },
+                  "assignedCollectors": [
+                    {
+                      "collectorName": "Micheal Kikrinam",
+                      "assignedDateTime": "11:44 AM | 20 Apr 2025"
+                    },
+                    {
+                      "collectorName": "George Poulas",
+                      "assignedDateTime": "11:40 AM | 20 Apr 2025"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "siteName": "Site 2",
+              "siteContacts": [
+                {
+                  "siteContactName": "Charlie",
+                  "siteContactMobile": "0418549596"
+                },
+                {"siteContactName": "Diana", "siteContactMobile": "0418549596"}
+              ],
+              "testsAndDevices": {
+                "testType": "Drug Test Only",
+                "drugTestSpecifications": {
+                  "primaryDrugTest": {
+                    "drugTestName": "Drug Test 123",
+                    "selectPreferedDevice": "Device 123"
+                  },
+                  "secondaryDrugTest": {
+                    "drugTestName": "Drug Test 456",
+                    "selectPreferedDevice": "Device 456"
+                  },
+                  "teritoryDrugTest": {
+                    "drugTestName": "Drug Test 789",
+                    "selectPreferedDevice": "Device 789"
+                  },
+                  "additionalInfo": {
+                    "additionalTests": "",
+                    "additionalTestInstructions": "",
+                    "donorSelectionProcess":
+                        "Donor selection procedures have been advised to the collectors accordingly",
+                    "screeningAndTestingProcess": "",
+                    "testConfirmationInstructions": "",
+                    "globalSiteAccessInstructions": "",
+                    "specificLocalSiteAccessInstructions":
+                        "To access the site, please use the given access card",
+                    "specificInstructions":
+                        "Any potential issues ? please contact the assigned authorized representative"
+                  },
+                  "authorizedRepresentativeInfo": {
+                    "representativeName": "rusira123",
+                    "representativeMobile": "0418549586",
+                    "representativePosition": "position123",
+                    "representativeEmail": "rusira.senath@gmail.com"
+                  },
+                  "assignedCollectors": [
+                    {
+                      "collectorName": "Micheal Kikrinam",
+                      "assignedDateTime": "11:44 AM | 20 Apr 2025"
+                    },
+                    {
+                      "collectorName": "George Poulas",
+                      "assignedDateTime": "11:40 AM | 20 Apr 2025"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "siteName": "Site 3",
+              "siteContacts": [
+                {"siteContactName": "Eva", "siteContactMobile": "0418549596"}
+              ],
+              "testsAndDevices": {
+                "testType": "Drug Test Only",
+                "drugTestSpecifications": {
+                  "primaryDrugTest": {
+                    "drugTestName": "Drug Test 123",
+                    "selectPreferedDevice": "Device 123"
+                  },
+                  "secondaryDrugTest": {
+                    "drugTestName": "Drug Test 456",
+                    "selectPreferedDevice": "Device 456"
+                  },
+                  "teritoryDrugTest": {
+                    "drugTestName": "Drug Test 789",
+                    "selectPreferedDevice": "Device 789"
+                  },
+                  "additionalInfo": {
+                    "additionalTests": "",
+                    "additionalTestInstructions": "",
+                    "donorSelectionProcess":
+                        "Donor selection procedures have been advised to the collectors accordingly",
+                    "screeningAndTestingProcess": "",
+                    "testConfirmationInstructions": "",
+                    "globalSiteAccessInstructions": "",
+                    "specificLocalSiteAccessInstructions":
+                        "To access the site, please use the given access card",
+                    "specificInstructions":
+                        "Any potential issues ? please contact the assigned authorized representative"
+                  },
+                  "authorizedRepresentativeInfo": {
+                    "representativeName": "rusira123",
+                    "representativeMobile": "0418549586",
+                    "representativePosition": "position123",
+                    "representativeEmail": "rusira.senath@gmail.com"
+                  },
+                  "assignedCollectors": [
+                    {
+                      "collectorName": "Micheal Kikrinam",
+                      "assignedDateTime": "11:44 AM | 20 Apr 2025"
+                    },
+                    {
+                      "collectorName": "George Poulas",
+                      "assignedDateTime": "11:40 AM | 20 Apr 2025"
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      }
     },
     {
       "jobNumber": "3",
@@ -526,6 +915,201 @@ class _NewClientJobState extends State<NewClient> {
       "location": "Parramatta",
       "service": "Random Testing",
       "callout": "Non Callout",
+      "collectors": [
+        {"collectorName": "George Poulos", "collectorStatus": "Allocated"},
+        {"collectorName": "Michelle Kirkman", "collectorStatus": "Accepted"},
+        {"collectorName": "Valerie McKenzie", "collectorStatus": "Accepted"},
+        {"collectorName": "Zac Hepburn", "collectorStatus": "Accepted"},
+        {"collectorName": "Gina Landini", "collectorStatus": "Rejected"}
+      ],
+      "bookingInfo": {
+        "organisationInfo": {
+          "collectionOrganisation": "collection0123",
+          "selectedServiceOffice": "Melbourne",
+          "serviceOffice": ["Sydney", "Melbourne", "Paramatta"]
+        },
+        "jobDetails": {
+          "jobType": "In Clinic",
+          "jobDate": "20/04/2025",
+          "startTime": "16:41",
+          "duration": "1:10",
+          "noOfDonors": "6",
+          "jobReference": "jo1234",
+          "typeOfService": "service 123"
+        },
+        "clientInfo": {
+          "selectedClient": "Client B",
+          "clientDetails": [
+            {"clientName": "Client A", "clientReference": "ref123"},
+            {"clientName": "Client B", "clientReference": "ref456"},
+            {"clientName": "Client C", "clientReference": "ref789"}
+          ],
+          "selectedSite": "Site 1",
+          "locationDetails": [
+            {
+              "siteName": "Site 1",
+              "siteContacts": [
+                {"siteContactName": "Alice", "siteContactMobile": "0418549596"},
+                {"siteContactName": "Bob", "siteContactMobile": "0418549596"}
+              ],
+              "testsAndDevices": {
+                "testType": "Drug Test Only",
+                "drugTestSpecifications": {
+                  "primaryDrugTest": {
+                    "drugTestName": "Drug Test 123",
+                    "selectPreferedDevice": "Device 123"
+                  },
+                  "secondaryDrugTest": {
+                    "drugTestName": "Drug Test 456",
+                    "selectPreferedDevice": "Device 456"
+                  },
+                  "teritoryDrugTest": {
+                    "drugTestName": "Drug Test 789",
+                    "selectPreferedDevice": "Device 789"
+                  },
+                  "additionalInfo": {
+                    "additionalTests": "",
+                    "additionalTestInstructions": "",
+                    "donorSelectionProcess":
+                        "Donor selection procedures have been advised to the collectors accordingly",
+                    "screeningAndTestingProcess": "",
+                    "testConfirmationInstructions": "",
+                    "globalSiteAccessInstructions": "",
+                    "specificLocalSiteAccessInstructions":
+                        "To access the site, please use the given access card",
+                    "specificInstructions":
+                        "Any potential issues ? please contact the assigned authorized representative"
+                  },
+                  "authorizedRepresentativeInfo": {
+                    "representativeName": "Rusira Senath Liyanage",
+                    "representativeMobile": "0418549586",
+                    "representativePosition": "Urine Drug Screening specialist",
+                    "representativeEmail": "rusira.senath@gmail.com"
+                  },
+                  "assignedCollectors": [
+                    {
+                      "collectorName": "Micheal Kikrinam",
+                      "assignedDateTime": "11:44 AM | 20 Apr 2025"
+                    },
+                    {
+                      "collectorName": "George Poulas",
+                      "assignedDateTime": "11:40 AM | 20 Apr 2025"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "siteName": "Site 2",
+              "siteContacts": [
+                {
+                  "siteContactName": "Charlie",
+                  "siteContactMobile": "0418549596"
+                },
+                {"siteContactName": "Diana", "siteContactMobile": "0418549596"}
+              ],
+              "testsAndDevices": {
+                "testType": "Drug Test Only",
+                "drugTestSpecifications": {
+                  "primaryDrugTest": {
+                    "drugTestName": "Drug Test 123",
+                    "selectPreferedDevice": "Device 123"
+                  },
+                  "secondaryDrugTest": {
+                    "drugTestName": "Drug Test 456",
+                    "selectPreferedDevice": "Device 456"
+                  },
+                  "teritoryDrugTest": {
+                    "drugTestName": "Drug Test 789",
+                    "selectPreferedDevice": "Device 789"
+                  },
+                  "additionalInfo": {
+                    "additionalTests": "",
+                    "additionalTestInstructions": "",
+                    "donorSelectionProcess":
+                        "Donor selection procedures have been advised to the collectors accordingly",
+                    "screeningAndTestingProcess": "",
+                    "testConfirmationInstructions": "",
+                    "globalSiteAccessInstructions": "",
+                    "specificLocalSiteAccessInstructions":
+                        "To access the site, please use the given access card",
+                    "specificInstructions":
+                        "Any potential issues ? please contact the assigned authorized representative"
+                  },
+                  "authorizedRepresentativeInfo": {
+                    "representativeName": "rusira123",
+                    "representativeMobile": "0418549586",
+                    "representativePosition": "position123",
+                    "representativeEmail": "rusira.senath@gmail.com"
+                  },
+                  "assignedCollectors": [
+                    {
+                      "collectorName": "Micheal Kikrinam",
+                      "assignedDateTime": "11:44 AM | 20 Apr 2025"
+                    },
+                    {
+                      "collectorName": "George Poulas",
+                      "assignedDateTime": "11:40 AM | 20 Apr 2025"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "siteName": "Site 3",
+              "siteContacts": [
+                {"siteContactName": "Eva", "siteContactMobile": "0418549596"}
+              ],
+              "testsAndDevices": {
+                "testType": "Drug Test Only",
+                "drugTestSpecifications": {
+                  "primaryDrugTest": {
+                    "drugTestName": "Drug Test 123",
+                    "selectPreferedDevice": "Device 123"
+                  },
+                  "secondaryDrugTest": {
+                    "drugTestName": "Drug Test 456",
+                    "selectPreferedDevice": "Device 456"
+                  },
+                  "teritoryDrugTest": {
+                    "drugTestName": "Drug Test 789",
+                    "selectPreferedDevice": "Device 789"
+                  },
+                  "additionalInfo": {
+                    "additionalTests": "",
+                    "additionalTestInstructions": "",
+                    "donorSelectionProcess":
+                        "Donor selection procedures have been advised to the collectors accordingly",
+                    "screeningAndTestingProcess": "",
+                    "testConfirmationInstructions": "",
+                    "globalSiteAccessInstructions": "",
+                    "specificLocalSiteAccessInstructions":
+                        "To access the site, please use the given access card",
+                    "specificInstructions":
+                        "Any potential issues ? please contact the assigned authorized representative"
+                  },
+                  "authorizedRepresentativeInfo": {
+                    "representativeName": "rusira123",
+                    "representativeMobile": "0418549586",
+                    "representativePosition": "position123",
+                    "representativeEmail": "rusira.senath@gmail.com"
+                  },
+                  "assignedCollectors": [
+                    {
+                      "collectorName": "Micheal Kikrinam",
+                      "assignedDateTime": "11:44 AM | 20 Apr 2025"
+                    },
+                    {
+                      "collectorName": "George Poulas",
+                      "assignedDateTime": "11:40 AM | 20 Apr 2025"
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      }
     },
     {
       "jobNumber": "4",
@@ -536,6 +1120,201 @@ class _NewClientJobState extends State<NewClient> {
       "location": "Parramatta",
       "service": "Random Testing",
       "callout": "Non Callout",
+      "collectors": [
+        {"collectorName": "George Poulos", "collectorStatus": "Allocated"},
+        {"collectorName": "Michelle Kirkman", "collectorStatus": "Accepted"},
+        {"collectorName": "Valerie McKenzie", "collectorStatus": "Accepted"},
+        {"collectorName": "Zac Hepburn", "collectorStatus": "Accepted"},
+        {"collectorName": "Gina Landini", "collectorStatus": "Rejected"}
+      ],
+      "bookingInfo": {
+        "organisationInfo": {
+          "collectionOrganisation": "collection0123",
+          "selectedServiceOffice": "Melbourne",
+          "serviceOffice": ["Sydney", "Melbourne", "Paramatta"]
+        },
+        "jobDetails": {
+          "jobType": "In Clinic",
+          "jobDate": "20/04/2025",
+          "startTime": "16:41",
+          "duration": "1:10",
+          "noOfDonors": "6",
+          "jobReference": "jo1234",
+          "typeOfService": "service 123"
+        },
+        "clientInfo": {
+          "selectedClient": "Client B",
+          "clientDetails": [
+            {"clientName": "Client A", "clientReference": "ref123"},
+            {"clientName": "Client B", "clientReference": "ref456"},
+            {"clientName": "Client C", "clientReference": "ref789"}
+          ],
+          "selectedSite": "Site 1",
+          "locationDetails": [
+            {
+              "siteName": "Site 1",
+              "siteContacts": [
+                {"siteContactName": "Alice", "siteContactMobile": "0418549596"},
+                {"siteContactName": "Bob", "siteContactMobile": "0418549596"}
+              ],
+              "testsAndDevices": {
+                "testType": "Drug Test Only",
+                "drugTestSpecifications": {
+                  "primaryDrugTest": {
+                    "drugTestName": "Drug Test 123",
+                    "selectPreferedDevice": "Device 123"
+                  },
+                  "secondaryDrugTest": {
+                    "drugTestName": "Drug Test 456",
+                    "selectPreferedDevice": "Device 456"
+                  },
+                  "teritoryDrugTest": {
+                    "drugTestName": "Drug Test 789",
+                    "selectPreferedDevice": "Device 789"
+                  },
+                  "additionalInfo": {
+                    "additionalTests": "",
+                    "additionalTestInstructions": "",
+                    "donorSelectionProcess":
+                        "Donor selection procedures have been advised to the collectors accordingly",
+                    "screeningAndTestingProcess": "",
+                    "testConfirmationInstructions": "",
+                    "globalSiteAccessInstructions": "",
+                    "specificLocalSiteAccessInstructions":
+                        "To access the site, please use the given access card",
+                    "specificInstructions":
+                        "Any potential issues ? please contact the assigned authorized representative"
+                  },
+                  "authorizedRepresentativeInfo": {
+                    "representativeName": "Rusira Senath Liyanage",
+                    "representativeMobile": "0418549586",
+                    "representativePosition": "Urine Drug Screening specialist",
+                    "representativeEmail": "rusira.senath@gmail.com"
+                  },
+                  "assignedCollectors": [
+                    {
+                      "collectorName": "Micheal Kikrinam",
+                      "assignedDateTime": "11:44 AM | 20 Apr 2025"
+                    },
+                    {
+                      "collectorName": "George Poulas",
+                      "assignedDateTime": "11:40 AM | 20 Apr 2025"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "siteName": "Site 2",
+              "siteContacts": [
+                {
+                  "siteContactName": "Charlie",
+                  "siteContactMobile": "0418549596"
+                },
+                {"siteContactName": "Diana", "siteContactMobile": "0418549596"}
+              ],
+              "testsAndDevices": {
+                "testType": "Drug Test Only",
+                "drugTestSpecifications": {
+                  "primaryDrugTest": {
+                    "drugTestName": "Drug Test 123",
+                    "selectPreferedDevice": "Device 123"
+                  },
+                  "secondaryDrugTest": {
+                    "drugTestName": "Drug Test 456",
+                    "selectPreferedDevice": "Device 456"
+                  },
+                  "teritoryDrugTest": {
+                    "drugTestName": "Drug Test 789",
+                    "selectPreferedDevice": "Device 789"
+                  },
+                  "additionalInfo": {
+                    "additionalTests": "",
+                    "additionalTestInstructions": "",
+                    "donorSelectionProcess":
+                        "Donor selection procedures have been advised to the collectors accordingly",
+                    "screeningAndTestingProcess": "",
+                    "testConfirmationInstructions": "",
+                    "globalSiteAccessInstructions": "",
+                    "specificLocalSiteAccessInstructions":
+                        "To access the site, please use the given access card",
+                    "specificInstructions":
+                        "Any potential issues ? please contact the assigned authorized representative"
+                  },
+                  "authorizedRepresentativeInfo": {
+                    "representativeName": "rusira123",
+                    "representativeMobile": "0418549586",
+                    "representativePosition": "position123",
+                    "representativeEmail": "rusira.senath@gmail.com"
+                  },
+                  "assignedCollectors": [
+                    {
+                      "collectorName": "Micheal Kikrinam",
+                      "assignedDateTime": "11:44 AM | 20 Apr 2025"
+                    },
+                    {
+                      "collectorName": "George Poulas",
+                      "assignedDateTime": "11:40 AM | 20 Apr 2025"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "siteName": "Site 3",
+              "siteContacts": [
+                {"siteContactName": "Eva", "siteContactMobile": "0418549596"}
+              ],
+              "testsAndDevices": {
+                "testType": "Drug Test Only",
+                "drugTestSpecifications": {
+                  "primaryDrugTest": {
+                    "drugTestName": "Drug Test 123",
+                    "selectPreferedDevice": "Device 123"
+                  },
+                  "secondaryDrugTest": {
+                    "drugTestName": "Drug Test 456",
+                    "selectPreferedDevice": "Device 456"
+                  },
+                  "teritoryDrugTest": {
+                    "drugTestName": "Drug Test 789",
+                    "selectPreferedDevice": "Device 789"
+                  },
+                  "additionalInfo": {
+                    "additionalTests": "",
+                    "additionalTestInstructions": "",
+                    "donorSelectionProcess":
+                        "Donor selection procedures have been advised to the collectors accordingly",
+                    "screeningAndTestingProcess": "",
+                    "testConfirmationInstructions": "",
+                    "globalSiteAccessInstructions": "",
+                    "specificLocalSiteAccessInstructions":
+                        "To access the site, please use the given access card",
+                    "specificInstructions":
+                        "Any potential issues ? please contact the assigned authorized representative"
+                  },
+                  "authorizedRepresentativeInfo": {
+                    "representativeName": "rusira123",
+                    "representativeMobile": "0418549586",
+                    "representativePosition": "position123",
+                    "representativeEmail": "rusira.senath@gmail.com"
+                  },
+                  "assignedCollectors": [
+                    {
+                      "collectorName": "Micheal Kikrinam",
+                      "assignedDateTime": "11:44 AM | 20 Apr 2025"
+                    },
+                    {
+                      "collectorName": "George Poulas",
+                      "assignedDateTime": "11:40 AM | 20 Apr 2025"
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      }
     },
     {
       "jobNumber": "5",
@@ -546,6 +1325,201 @@ class _NewClientJobState extends State<NewClient> {
       "location": "Parramatta",
       "service": "Random Testing",
       "callout": "Non Callout",
+      "collectors": [
+        {"collectorName": "George Poulos", "collectorStatus": "Allocated"},
+        {"collectorName": "Michelle Kirkman", "collectorStatus": "Accepted"},
+        {"collectorName": "Valerie McKenzie", "collectorStatus": "Accepted"},
+        {"collectorName": "Zac Hepburn", "collectorStatus": "Accepted"},
+        {"collectorName": "Gina Landini", "collectorStatus": "Rejected"}
+      ],
+      "bookingInfo": {
+        "organisationInfo": {
+          "collectionOrganisation": "collection0123",
+          "selectedServiceOffice": "Melbourne",
+          "serviceOffice": ["Sydney", "Melbourne", "Paramatta"]
+        },
+        "jobDetails": {
+          "jobType": "In Clinic",
+          "jobDate": "20/04/2025",
+          "startTime": "16:41",
+          "duration": "1:10",
+          "noOfDonors": "6",
+          "jobReference": "jo1234",
+          "typeOfService": "service 123"
+        },
+        "clientInfo": {
+          "selectedClient": "Client B",
+          "clientDetails": [
+            {"clientName": "Client A", "clientReference": "ref123"},
+            {"clientName": "Client B", "clientReference": "ref456"},
+            {"clientName": "Client C", "clientReference": "ref789"}
+          ],
+          "selectedSite": "Site 1",
+          "locationDetails": [
+            {
+              "siteName": "Site 1",
+              "siteContacts": [
+                {"siteContactName": "Alice", "siteContactMobile": "0418549596"},
+                {"siteContactName": "Bob", "siteContactMobile": "0418549596"}
+              ],
+              "testsAndDevices": {
+                "testType": "Drug Test Only",
+                "drugTestSpecifications": {
+                  "primaryDrugTest": {
+                    "drugTestName": "Drug Test 123",
+                    "selectPreferedDevice": "Device 123"
+                  },
+                  "secondaryDrugTest": {
+                    "drugTestName": "Drug Test 456",
+                    "selectPreferedDevice": "Device 456"
+                  },
+                  "teritoryDrugTest": {
+                    "drugTestName": "Drug Test 789",
+                    "selectPreferedDevice": "Device 789"
+                  },
+                  "additionalInfo": {
+                    "additionalTests": "",
+                    "additionalTestInstructions": "",
+                    "donorSelectionProcess":
+                        "Donor selection procedures have been advised to the collectors accordingly",
+                    "screeningAndTestingProcess": "",
+                    "testConfirmationInstructions": "",
+                    "globalSiteAccessInstructions": "",
+                    "specificLocalSiteAccessInstructions":
+                        "To access the site, please use the given access card",
+                    "specificInstructions":
+                        "Any potential issues ? please contact the assigned authorized representative"
+                  },
+                  "authorizedRepresentativeInfo": {
+                    "representativeName": "Rusira Senath Liyanage",
+                    "representativeMobile": "0418549586",
+                    "representativePosition": "Urine Drug Screening specialist",
+                    "representativeEmail": "rusira.senath@gmail.com"
+                  },
+                  "assignedCollectors": [
+                    {
+                      "collectorName": "Micheal Kikrinam",
+                      "assignedDateTime": "11:44 AM | 20 Apr 2025"
+                    },
+                    {
+                      "collectorName": "George Poulas",
+                      "assignedDateTime": "11:40 AM | 20 Apr 2025"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "siteName": "Site 2",
+              "siteContacts": [
+                {
+                  "siteContactName": "Charlie",
+                  "siteContactMobile": "0418549596"
+                },
+                {"siteContactName": "Diana", "siteContactMobile": "0418549596"}
+              ],
+              "testsAndDevices": {
+                "testType": "Drug Test Only",
+                "drugTestSpecifications": {
+                  "primaryDrugTest": {
+                    "drugTestName": "Drug Test 123",
+                    "selectPreferedDevice": "Device 123"
+                  },
+                  "secondaryDrugTest": {
+                    "drugTestName": "Drug Test 456",
+                    "selectPreferedDevice": "Device 456"
+                  },
+                  "teritoryDrugTest": {
+                    "drugTestName": "Drug Test 789",
+                    "selectPreferedDevice": "Device 789"
+                  },
+                  "additionalInfo": {
+                    "additionalTests": "",
+                    "additionalTestInstructions": "",
+                    "donorSelectionProcess":
+                        "Donor selection procedures have been advised to the collectors accordingly",
+                    "screeningAndTestingProcess": "",
+                    "testConfirmationInstructions": "",
+                    "globalSiteAccessInstructions": "",
+                    "specificLocalSiteAccessInstructions":
+                        "To access the site, please use the given access card",
+                    "specificInstructions":
+                        "Any potential issues ? please contact the assigned authorized representative"
+                  },
+                  "authorizedRepresentativeInfo": {
+                    "representativeName": "rusira123",
+                    "representativeMobile": "0418549586",
+                    "representativePosition": "position123",
+                    "representativeEmail": "rusira.senath@gmail.com"
+                  },
+                  "assignedCollectors": [
+                    {
+                      "collectorName": "Micheal Kikrinam",
+                      "assignedDateTime": "11:44 AM | 20 Apr 2025"
+                    },
+                    {
+                      "collectorName": "George Poulas",
+                      "assignedDateTime": "11:40 AM | 20 Apr 2025"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "siteName": "Site 3",
+              "siteContacts": [
+                {"siteContactName": "Eva", "siteContactMobile": "0418549596"}
+              ],
+              "testsAndDevices": {
+                "testType": "Drug Test Only",
+                "drugTestSpecifications": {
+                  "primaryDrugTest": {
+                    "drugTestName": "Drug Test 123",
+                    "selectPreferedDevice": "Device 123"
+                  },
+                  "secondaryDrugTest": {
+                    "drugTestName": "Drug Test 456",
+                    "selectPreferedDevice": "Device 456"
+                  },
+                  "teritoryDrugTest": {
+                    "drugTestName": "Drug Test 789",
+                    "selectPreferedDevice": "Device 789"
+                  },
+                  "additionalInfo": {
+                    "additionalTests": "",
+                    "additionalTestInstructions": "",
+                    "donorSelectionProcess":
+                        "Donor selection procedures have been advised to the collectors accordingly",
+                    "screeningAndTestingProcess": "",
+                    "testConfirmationInstructions": "",
+                    "globalSiteAccessInstructions": "",
+                    "specificLocalSiteAccessInstructions":
+                        "To access the site, please use the given access card",
+                    "specificInstructions":
+                        "Any potential issues ? please contact the assigned authorized representative"
+                  },
+                  "authorizedRepresentativeInfo": {
+                    "representativeName": "rusira123",
+                    "representativeMobile": "0418549586",
+                    "representativePosition": "position123",
+                    "representativeEmail": "rusira.senath@gmail.com"
+                  },
+                  "assignedCollectors": [
+                    {
+                      "collectorName": "Micheal Kikrinam",
+                      "assignedDateTime": "11:44 AM | 20 Apr 2025"
+                    },
+                    {
+                      "collectorName": "George Poulas",
+                      "assignedDateTime": "11:40 AM | 20 Apr 2025"
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      }
     },
     {
       "jobNumber": "6",
@@ -556,6 +1530,201 @@ class _NewClientJobState extends State<NewClient> {
       "location": "Parramatta",
       "service": "Random Testing",
       "callout": "Non Callout",
+      "collectors": [
+        {"collectorName": "George Poulos", "collectorStatus": "Allocated"},
+        {"collectorName": "Michelle Kirkman", "collectorStatus": "Accepted"},
+        {"collectorName": "Valerie McKenzie", "collectorStatus": "Accepted"},
+        {"collectorName": "Zac Hepburn", "collectorStatus": "Accepted"},
+        {"collectorName": "Gina Landini", "collectorStatus": "Rejected"}
+      ],
+      "bookingInfo": {
+        "organisationInfo": {
+          "collectionOrganisation": "collection0123",
+          "selectedServiceOffice": "Melbourne",
+          "serviceOffice": ["Sydney", "Melbourne", "Paramatta"]
+        },
+        "jobDetails": {
+          "jobType": "In Clinic",
+          "jobDate": "20/04/2025",
+          "startTime": "16:41",
+          "duration": "1:10",
+          "noOfDonors": "6",
+          "jobReference": "jo1234",
+          "typeOfService": "service 123"
+        },
+        "clientInfo": {
+          "selectedClient": "Client B",
+          "clientDetails": [
+            {"clientName": "Client A", "clientReference": "ref123"},
+            {"clientName": "Client B", "clientReference": "ref456"},
+            {"clientName": "Client C", "clientReference": "ref789"}
+          ],
+          "selectedSite": "Site 1",
+          "locationDetails": [
+            {
+              "siteName": "Site 1",
+              "siteContacts": [
+                {"siteContactName": "Alice", "siteContactMobile": "0418549596"},
+                {"siteContactName": "Bob", "siteContactMobile": "0418549596"}
+              ],
+              "testsAndDevices": {
+                "testType": "Drug Test Only",
+                "drugTestSpecifications": {
+                  "primaryDrugTest": {
+                    "drugTestName": "Drug Test 123",
+                    "selectPreferedDevice": "Device 123"
+                  },
+                  "secondaryDrugTest": {
+                    "drugTestName": "Drug Test 456",
+                    "selectPreferedDevice": "Device 456"
+                  },
+                  "teritoryDrugTest": {
+                    "drugTestName": "Drug Test 789",
+                    "selectPreferedDevice": "Device 789"
+                  },
+                  "additionalInfo": {
+                    "additionalTests": "",
+                    "additionalTestInstructions": "",
+                    "donorSelectionProcess":
+                        "Donor selection procedures have been advised to the collectors accordingly",
+                    "screeningAndTestingProcess": "",
+                    "testConfirmationInstructions": "",
+                    "globalSiteAccessInstructions": "",
+                    "specificLocalSiteAccessInstructions":
+                        "To access the site, please use the given access card",
+                    "specificInstructions":
+                        "Any potential issues ? please contact the assigned authorized representative"
+                  },
+                  "authorizedRepresentativeInfo": {
+                    "representativeName": "Rusira Senath Liyanage",
+                    "representativeMobile": "0418549586",
+                    "representativePosition": "Urine Drug Screening specialist",
+                    "representativeEmail": "rusira.senath@gmail.com"
+                  },
+                  "assignedCollectors": [
+                    {
+                      "collectorName": "Micheal Kikrinam",
+                      "assignedDateTime": "11:44 AM | 20 Apr 2025"
+                    },
+                    {
+                      "collectorName": "George Poulas",
+                      "assignedDateTime": "11:40 AM | 20 Apr 2025"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "siteName": "Site 2",
+              "siteContacts": [
+                {
+                  "siteContactName": "Charlie",
+                  "siteContactMobile": "0418549596"
+                },
+                {"siteContactName": "Diana", "siteContactMobile": "0418549596"}
+              ],
+              "testsAndDevices": {
+                "testType": "Drug Test Only",
+                "drugTestSpecifications": {
+                  "primaryDrugTest": {
+                    "drugTestName": "Drug Test 123",
+                    "selectPreferedDevice": "Device 123"
+                  },
+                  "secondaryDrugTest": {
+                    "drugTestName": "Drug Test 456",
+                    "selectPreferedDevice": "Device 456"
+                  },
+                  "teritoryDrugTest": {
+                    "drugTestName": "Drug Test 789",
+                    "selectPreferedDevice": "Device 789"
+                  },
+                  "additionalInfo": {
+                    "additionalTests": "",
+                    "additionalTestInstructions": "",
+                    "donorSelectionProcess":
+                        "Donor selection procedures have been advised to the collectors accordingly",
+                    "screeningAndTestingProcess": "",
+                    "testConfirmationInstructions": "",
+                    "globalSiteAccessInstructions": "",
+                    "specificLocalSiteAccessInstructions":
+                        "To access the site, please use the given access card",
+                    "specificInstructions":
+                        "Any potential issues ? please contact the assigned authorized representative"
+                  },
+                  "authorizedRepresentativeInfo": {
+                    "representativeName": "rusira123",
+                    "representativeMobile": "0418549586",
+                    "representativePosition": "position123",
+                    "representativeEmail": "rusira.senath@gmail.com"
+                  },
+                  "assignedCollectors": [
+                    {
+                      "collectorName": "Micheal Kikrinam",
+                      "assignedDateTime": "11:44 AM | 20 Apr 2025"
+                    },
+                    {
+                      "collectorName": "George Poulas",
+                      "assignedDateTime": "11:40 AM | 20 Apr 2025"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "siteName": "Site 3",
+              "siteContacts": [
+                {"siteContactName": "Eva", "siteContactMobile": "0418549596"}
+              ],
+              "testsAndDevices": {
+                "testType": "Drug Test Only",
+                "drugTestSpecifications": {
+                  "primaryDrugTest": {
+                    "drugTestName": "Drug Test 123",
+                    "selectPreferedDevice": "Device 123"
+                  },
+                  "secondaryDrugTest": {
+                    "drugTestName": "Drug Test 456",
+                    "selectPreferedDevice": "Device 456"
+                  },
+                  "teritoryDrugTest": {
+                    "drugTestName": "Drug Test 789",
+                    "selectPreferedDevice": "Device 789"
+                  },
+                  "additionalInfo": {
+                    "additionalTests": "",
+                    "additionalTestInstructions": "",
+                    "donorSelectionProcess":
+                        "Donor selection procedures have been advised to the collectors accordingly",
+                    "screeningAndTestingProcess": "",
+                    "testConfirmationInstructions": "",
+                    "globalSiteAccessInstructions": "",
+                    "specificLocalSiteAccessInstructions":
+                        "To access the site, please use the given access card",
+                    "specificInstructions":
+                        "Any potential issues ? please contact the assigned authorized representative"
+                  },
+                  "authorizedRepresentativeInfo": {
+                    "representativeName": "rusira123",
+                    "representativeMobile": "0418549586",
+                    "representativePosition": "position123",
+                    "representativeEmail": "rusira.senath@gmail.com"
+                  },
+                  "assignedCollectors": [
+                    {
+                      "collectorName": "Micheal Kikrinam",
+                      "assignedDateTime": "11:44 AM | 20 Apr 2025"
+                    },
+                    {
+                      "collectorName": "George Poulas",
+                      "assignedDateTime": "11:40 AM | 20 Apr 2025"
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      }
     },
     {
       "jobNumber": "7",
@@ -566,6 +1735,201 @@ class _NewClientJobState extends State<NewClient> {
       "location": "Parramatta",
       "service": "Random Testing",
       "callout": "Non Callout",
+      "collectors": [
+        {"collectorName": "George Poulos", "collectorStatus": "Allocated"},
+        {"collectorName": "Michelle Kirkman", "collectorStatus": "Accepted"},
+        {"collectorName": "Valerie McKenzie", "collectorStatus": "Accepted"},
+        {"collectorName": "Zac Hepburn", "collectorStatus": "Accepted"},
+        {"collectorName": "Gina Landini", "collectorStatus": "Rejected"}
+      ],
+      "bookingInfo": {
+        "organisationInfo": {
+          "collectionOrganisation": "collection0123",
+          "selectedServiceOffice": "Melbourne",
+          "serviceOffice": ["Sydney", "Melbourne", "Paramatta"]
+        },
+        "jobDetails": {
+          "jobType": "In Clinic",
+          "jobDate": "20/04/2025",
+          "startTime": "16:41",
+          "duration": "1:10",
+          "noOfDonors": "6",
+          "jobReference": "jo1234",
+          "typeOfService": "service 123"
+        },
+        "clientInfo": {
+          "selectedClient": "Client B",
+          "clientDetails": [
+            {"clientName": "Client A", "clientReference": "ref123"},
+            {"clientName": "Client B", "clientReference": "ref456"},
+            {"clientName": "Client C", "clientReference": "ref789"}
+          ],
+          "selectedSite": "Site 1",
+          "locationDetails": [
+            {
+              "siteName": "Site 1",
+              "siteContacts": [
+                {"siteContactName": "Alice", "siteContactMobile": "0418549596"},
+                {"siteContactName": "Bob", "siteContactMobile": "0418549596"}
+              ],
+              "testsAndDevices": {
+                "testType": "Drug Test Only",
+                "drugTestSpecifications": {
+                  "primaryDrugTest": {
+                    "drugTestName": "Drug Test 123",
+                    "selectPreferedDevice": "Device 123"
+                  },
+                  "secondaryDrugTest": {
+                    "drugTestName": "Drug Test 456",
+                    "selectPreferedDevice": "Device 456"
+                  },
+                  "teritoryDrugTest": {
+                    "drugTestName": "Drug Test 789",
+                    "selectPreferedDevice": "Device 789"
+                  },
+                  "additionalInfo": {
+                    "additionalTests": "",
+                    "additionalTestInstructions": "",
+                    "donorSelectionProcess":
+                        "Donor selection procedures have been advised to the collectors accordingly",
+                    "screeningAndTestingProcess": "",
+                    "testConfirmationInstructions": "",
+                    "globalSiteAccessInstructions": "",
+                    "specificLocalSiteAccessInstructions":
+                        "To access the site, please use the given access card",
+                    "specificInstructions":
+                        "Any potential issues ? please contact the assigned authorized representative"
+                  },
+                  "authorizedRepresentativeInfo": {
+                    "representativeName": "Rusira Senath Liyanage",
+                    "representativeMobile": "0418549586",
+                    "representativePosition": "Urine Drug Screening specialist",
+                    "representativeEmail": "rusira.senath@gmail.com"
+                  },
+                  "assignedCollectors": [
+                    {
+                      "collectorName": "Micheal Kikrinam",
+                      "assignedDateTime": "11:44 AM | 20 Apr 2025"
+                    },
+                    {
+                      "collectorName": "George Poulas",
+                      "assignedDateTime": "11:40 AM | 20 Apr 2025"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "siteName": "Site 2",
+              "siteContacts": [
+                {
+                  "siteContactName": "Charlie",
+                  "siteContactMobile": "0418549596"
+                },
+                {"siteContactName": "Diana", "siteContactMobile": "0418549596"}
+              ],
+              "testsAndDevices": {
+                "testType": "Drug Test Only",
+                "drugTestSpecifications": {
+                  "primaryDrugTest": {
+                    "drugTestName": "Drug Test 123",
+                    "selectPreferedDevice": "Device 123"
+                  },
+                  "secondaryDrugTest": {
+                    "drugTestName": "Drug Test 456",
+                    "selectPreferedDevice": "Device 456"
+                  },
+                  "teritoryDrugTest": {
+                    "drugTestName": "Drug Test 789",
+                    "selectPreferedDevice": "Device 789"
+                  },
+                  "additionalInfo": {
+                    "additionalTests": "",
+                    "additionalTestInstructions": "",
+                    "donorSelectionProcess":
+                        "Donor selection procedures have been advised to the collectors accordingly",
+                    "screeningAndTestingProcess": "",
+                    "testConfirmationInstructions": "",
+                    "globalSiteAccessInstructions": "",
+                    "specificLocalSiteAccessInstructions":
+                        "To access the site, please use the given access card",
+                    "specificInstructions":
+                        "Any potential issues ? please contact the assigned authorized representative"
+                  },
+                  "authorizedRepresentativeInfo": {
+                    "representativeName": "rusira123",
+                    "representativeMobile": "0418549586",
+                    "representativePosition": "position123",
+                    "representativeEmail": "rusira.senath@gmail.com"
+                  },
+                  "assignedCollectors": [
+                    {
+                      "collectorName": "Micheal Kikrinam",
+                      "assignedDateTime": "11:44 AM | 20 Apr 2025"
+                    },
+                    {
+                      "collectorName": "George Poulas",
+                      "assignedDateTime": "11:40 AM | 20 Apr 2025"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "siteName": "Site 3",
+              "siteContacts": [
+                {"siteContactName": "Eva", "siteContactMobile": "0418549596"}
+              ],
+              "testsAndDevices": {
+                "testType": "Drug Test Only",
+                "drugTestSpecifications": {
+                  "primaryDrugTest": {
+                    "drugTestName": "Drug Test 123",
+                    "selectPreferedDevice": "Device 123"
+                  },
+                  "secondaryDrugTest": {
+                    "drugTestName": "Drug Test 456",
+                    "selectPreferedDevice": "Device 456"
+                  },
+                  "teritoryDrugTest": {
+                    "drugTestName": "Drug Test 789",
+                    "selectPreferedDevice": "Device 789"
+                  },
+                  "additionalInfo": {
+                    "additionalTests": "",
+                    "additionalTestInstructions": "",
+                    "donorSelectionProcess":
+                        "Donor selection procedures have been advised to the collectors accordingly",
+                    "screeningAndTestingProcess": "",
+                    "testConfirmationInstructions": "",
+                    "globalSiteAccessInstructions": "",
+                    "specificLocalSiteAccessInstructions":
+                        "To access the site, please use the given access card",
+                    "specificInstructions":
+                        "Any potential issues ? please contact the assigned authorized representative"
+                  },
+                  "authorizedRepresentativeInfo": {
+                    "representativeName": "rusira123",
+                    "representativeMobile": "0418549586",
+                    "representativePosition": "position123",
+                    "representativeEmail": "rusira.senath@gmail.com"
+                  },
+                  "assignedCollectors": [
+                    {
+                      "collectorName": "Micheal Kikrinam",
+                      "assignedDateTime": "11:44 AM | 20 Apr 2025"
+                    },
+                    {
+                      "collectorName": "George Poulas",
+                      "assignedDateTime": "11:40 AM | 20 Apr 2025"
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      }
     },
     {
       "jobNumber": "8",
@@ -576,6 +1940,201 @@ class _NewClientJobState extends State<NewClient> {
       "location": "Parramatta",
       "service": "Random Testing",
       "callout": "Non Callout",
+      "collectors": [
+        {"collectorName": "George Poulos", "collectorStatus": "Allocated"},
+        {"collectorName": "Michelle Kirkman", "collectorStatus": "Accepted"},
+        {"collectorName": "Valerie McKenzie", "collectorStatus": "Accepted"},
+        {"collectorName": "Zac Hepburn", "collectorStatus": "Accepted"},
+        {"collectorName": "Gina Landini", "collectorStatus": "Rejected"}
+      ],
+      "bookingInfo": {
+        "organisationInfo": {
+          "collectionOrganisation": "collection0123",
+          "selectedServiceOffice": "Melbourne",
+          "serviceOffice": ["Sydney", "Melbourne", "Paramatta"]
+        },
+        "jobDetails": {
+          "jobType": "In Clinic",
+          "jobDate": "20/04/2025",
+          "startTime": "16:41",
+          "duration": "1:10",
+          "noOfDonors": "6",
+          "jobReference": "jo1234",
+          "typeOfService": "service 123"
+        },
+        "clientInfo": {
+          "selectedClient": "Client B",
+          "clientDetails": [
+            {"clientName": "Client A", "clientReference": "ref123"},
+            {"clientName": "Client B", "clientReference": "ref456"},
+            {"clientName": "Client C", "clientReference": "ref789"}
+          ],
+          "selectedSite": "Site 1",
+          "locationDetails": [
+            {
+              "siteName": "Site 1",
+              "siteContacts": [
+                {"siteContactName": "Alice", "siteContactMobile": "0418549596"},
+                {"siteContactName": "Bob", "siteContactMobile": "0418549596"}
+              ],
+              "testsAndDevices": {
+                "testType": "Drug Test Only",
+                "drugTestSpecifications": {
+                  "primaryDrugTest": {
+                    "drugTestName": "Drug Test 123",
+                    "selectPreferedDevice": "Device 123"
+                  },
+                  "secondaryDrugTest": {
+                    "drugTestName": "Drug Test 456",
+                    "selectPreferedDevice": "Device 456"
+                  },
+                  "teritoryDrugTest": {
+                    "drugTestName": "Drug Test 789",
+                    "selectPreferedDevice": "Device 789"
+                  },
+                  "additionalInfo": {
+                    "additionalTests": "",
+                    "additionalTestInstructions": "",
+                    "donorSelectionProcess":
+                        "Donor selection procedures have been advised to the collectors accordingly",
+                    "screeningAndTestingProcess": "",
+                    "testConfirmationInstructions": "",
+                    "globalSiteAccessInstructions": "",
+                    "specificLocalSiteAccessInstructions":
+                        "To access the site, please use the given access card",
+                    "specificInstructions":
+                        "Any potential issues ? please contact the assigned authorized representative"
+                  },
+                  "authorizedRepresentativeInfo": {
+                    "representativeName": "Rusira Senath Liyanage",
+                    "representativeMobile": "0418549586",
+                    "representativePosition": "Urine Drug Screening specialist",
+                    "representativeEmail": "rusira.senath@gmail.com"
+                  },
+                  "assignedCollectors": [
+                    {
+                      "collectorName": "Micheal Kikrinam",
+                      "assignedDateTime": "11:44 AM | 20 Apr 2025"
+                    },
+                    {
+                      "collectorName": "George Poulas",
+                      "assignedDateTime": "11:40 AM | 20 Apr 2025"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "siteName": "Site 2",
+              "siteContacts": [
+                {
+                  "siteContactName": "Charlie",
+                  "siteContactMobile": "0418549596"
+                },
+                {"siteContactName": "Diana", "siteContactMobile": "0418549596"}
+              ],
+              "testsAndDevices": {
+                "testType": "Drug Test Only",
+                "drugTestSpecifications": {
+                  "primaryDrugTest": {
+                    "drugTestName": "Drug Test 123",
+                    "selectPreferedDevice": "Device 123"
+                  },
+                  "secondaryDrugTest": {
+                    "drugTestName": "Drug Test 456",
+                    "selectPreferedDevice": "Device 456"
+                  },
+                  "teritoryDrugTest": {
+                    "drugTestName": "Drug Test 789",
+                    "selectPreferedDevice": "Device 789"
+                  },
+                  "additionalInfo": {
+                    "additionalTests": "",
+                    "additionalTestInstructions": "",
+                    "donorSelectionProcess":
+                        "Donor selection procedures have been advised to the collectors accordingly",
+                    "screeningAndTestingProcess": "",
+                    "testConfirmationInstructions": "",
+                    "globalSiteAccessInstructions": "",
+                    "specificLocalSiteAccessInstructions":
+                        "To access the site, please use the given access card",
+                    "specificInstructions":
+                        "Any potential issues ? please contact the assigned authorized representative"
+                  },
+                  "authorizedRepresentativeInfo": {
+                    "representativeName": "rusira123",
+                    "representativeMobile": "0418549586",
+                    "representativePosition": "position123",
+                    "representativeEmail": "rusira.senath@gmail.com"
+                  },
+                  "assignedCollectors": [
+                    {
+                      "collectorName": "Micheal Kikrinam",
+                      "assignedDateTime": "11:44 AM | 20 Apr 2025"
+                    },
+                    {
+                      "collectorName": "George Poulas",
+                      "assignedDateTime": "11:40 AM | 20 Apr 2025"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "siteName": "Site 3",
+              "siteContacts": [
+                {"siteContactName": "Eva", "siteContactMobile": "0418549596"}
+              ],
+              "testsAndDevices": {
+                "testType": "Drug Test Only",
+                "drugTestSpecifications": {
+                  "primaryDrugTest": {
+                    "drugTestName": "Drug Test 123",
+                    "selectPreferedDevice": "Device 123"
+                  },
+                  "secondaryDrugTest": {
+                    "drugTestName": "Drug Test 456",
+                    "selectPreferedDevice": "Device 456"
+                  },
+                  "teritoryDrugTest": {
+                    "drugTestName": "Drug Test 789",
+                    "selectPreferedDevice": "Device 789"
+                  },
+                  "additionalInfo": {
+                    "additionalTests": "",
+                    "additionalTestInstructions": "",
+                    "donorSelectionProcess":
+                        "Donor selection procedures have been advised to the collectors accordingly",
+                    "screeningAndTestingProcess": "",
+                    "testConfirmationInstructions": "",
+                    "globalSiteAccessInstructions": "",
+                    "specificLocalSiteAccessInstructions":
+                        "To access the site, please use the given access card",
+                    "specificInstructions":
+                        "Any potential issues ? please contact the assigned authorized representative"
+                  },
+                  "authorizedRepresentativeInfo": {
+                    "representativeName": "rusira123",
+                    "representativeMobile": "0418549586",
+                    "representativePosition": "position123",
+                    "representativeEmail": "rusira.senath@gmail.com"
+                  },
+                  "assignedCollectors": [
+                    {
+                      "collectorName": "Micheal Kikrinam",
+                      "assignedDateTime": "11:44 AM | 20 Apr 2025"
+                    },
+                    {
+                      "collectorName": "George Poulas",
+                      "assignedDateTime": "11:40 AM | 20 Apr 2025"
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      }
     },
     {
       "jobNumber": "9",
@@ -586,6 +2145,201 @@ class _NewClientJobState extends State<NewClient> {
       "location": "Parramatta",
       "service": "Random Testing",
       "callout": "Non Callout",
+      "collectors": [
+        {"collectorName": "George Poulos", "collectorStatus": "Allocated"},
+        {"collectorName": "Michelle Kirkman", "collectorStatus": "Accepted"},
+        {"collectorName": "Valerie McKenzie", "collectorStatus": "Accepted"},
+        {"collectorName": "Zac Hepburn", "collectorStatus": "Accepted"},
+        {"collectorName": "Gina Landini", "collectorStatus": "Rejected"}
+      ],
+      "bookingInfo": {
+        "organisationInfo": {
+          "collectionOrganisation": "collection0123",
+          "selectedServiceOffice": "Melbourne",
+          "serviceOffice": ["Sydney", "Melbourne", "Paramatta"]
+        },
+        "jobDetails": {
+          "jobType": "In Clinic",
+          "jobDate": "20/04/2025",
+          "startTime": "16:41",
+          "duration": "1:10",
+          "noOfDonors": "6",
+          "jobReference": "jo1234",
+          "typeOfService": "service 123"
+        },
+        "clientInfo": {
+          "selectedClient": "Client B",
+          "clientDetails": [
+            {"clientName": "Client A", "clientReference": "ref123"},
+            {"clientName": "Client B", "clientReference": "ref456"},
+            {"clientName": "Client C", "clientReference": "ref789"}
+          ],
+          "selectedSite": "Site 1",
+          "locationDetails": [
+            {
+              "siteName": "Site 1",
+              "siteContacts": [
+                {"siteContactName": "Alice", "siteContactMobile": "0418549596"},
+                {"siteContactName": "Bob", "siteContactMobile": "0418549596"}
+              ],
+              "testsAndDevices": {
+                "testType": "Drug Test Only",
+                "drugTestSpecifications": {
+                  "primaryDrugTest": {
+                    "drugTestName": "Drug Test 123",
+                    "selectPreferedDevice": "Device 123"
+                  },
+                  "secondaryDrugTest": {
+                    "drugTestName": "Drug Test 456",
+                    "selectPreferedDevice": "Device 456"
+                  },
+                  "teritoryDrugTest": {
+                    "drugTestName": "Drug Test 789",
+                    "selectPreferedDevice": "Device 789"
+                  },
+                  "additionalInfo": {
+                    "additionalTests": "",
+                    "additionalTestInstructions": "",
+                    "donorSelectionProcess":
+                        "Donor selection procedures have been advised to the collectors accordingly",
+                    "screeningAndTestingProcess": "",
+                    "testConfirmationInstructions": "",
+                    "globalSiteAccessInstructions": "",
+                    "specificLocalSiteAccessInstructions":
+                        "To access the site, please use the given access card",
+                    "specificInstructions":
+                        "Any potential issues ? please contact the assigned authorized representative"
+                  },
+                  "authorizedRepresentativeInfo": {
+                    "representativeName": "Rusira Senath Liyanage",
+                    "representativeMobile": "0418549586",
+                    "representativePosition": "Urine Drug Screening specialist",
+                    "representativeEmail": "rusira.senath@gmail.com"
+                  },
+                  "assignedCollectors": [
+                    {
+                      "collectorName": "Micheal Kikrinam",
+                      "assignedDateTime": "11:44 AM | 20 Apr 2025"
+                    },
+                    {
+                      "collectorName": "George Poulas",
+                      "assignedDateTime": "11:40 AM | 20 Apr 2025"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "siteName": "Site 2",
+              "siteContacts": [
+                {
+                  "siteContactName": "Charlie",
+                  "siteContactMobile": "0418549596"
+                },
+                {"siteContactName": "Diana", "siteContactMobile": "0418549596"}
+              ],
+              "testsAndDevices": {
+                "testType": "Drug Test Only",
+                "drugTestSpecifications": {
+                  "primaryDrugTest": {
+                    "drugTestName": "Drug Test 123",
+                    "selectPreferedDevice": "Device 123"
+                  },
+                  "secondaryDrugTest": {
+                    "drugTestName": "Drug Test 456",
+                    "selectPreferedDevice": "Device 456"
+                  },
+                  "teritoryDrugTest": {
+                    "drugTestName": "Drug Test 789",
+                    "selectPreferedDevice": "Device 789"
+                  },
+                  "additionalInfo": {
+                    "additionalTests": "",
+                    "additionalTestInstructions": "",
+                    "donorSelectionProcess":
+                        "Donor selection procedures have been advised to the collectors accordingly",
+                    "screeningAndTestingProcess": "",
+                    "testConfirmationInstructions": "",
+                    "globalSiteAccessInstructions": "",
+                    "specificLocalSiteAccessInstructions":
+                        "To access the site, please use the given access card",
+                    "specificInstructions":
+                        "Any potential issues ? please contact the assigned authorized representative"
+                  },
+                  "authorizedRepresentativeInfo": {
+                    "representativeName": "rusira123",
+                    "representativeMobile": "0418549586",
+                    "representativePosition": "position123",
+                    "representativeEmail": "rusira.senath@gmail.com"
+                  },
+                  "assignedCollectors": [
+                    {
+                      "collectorName": "Micheal Kikrinam",
+                      "assignedDateTime": "11:44 AM | 20 Apr 2025"
+                    },
+                    {
+                      "collectorName": "George Poulas",
+                      "assignedDateTime": "11:40 AM | 20 Apr 2025"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "siteName": "Site 3",
+              "siteContacts": [
+                {"siteContactName": "Eva", "siteContactMobile": "0418549596"}
+              ],
+              "testsAndDevices": {
+                "testType": "Drug Test Only",
+                "drugTestSpecifications": {
+                  "primaryDrugTest": {
+                    "drugTestName": "Drug Test 123",
+                    "selectPreferedDevice": "Device 123"
+                  },
+                  "secondaryDrugTest": {
+                    "drugTestName": "Drug Test 456",
+                    "selectPreferedDevice": "Device 456"
+                  },
+                  "teritoryDrugTest": {
+                    "drugTestName": "Drug Test 789",
+                    "selectPreferedDevice": "Device 789"
+                  },
+                  "additionalInfo": {
+                    "additionalTests": "",
+                    "additionalTestInstructions": "",
+                    "donorSelectionProcess":
+                        "Donor selection procedures have been advised to the collectors accordingly",
+                    "screeningAndTestingProcess": "",
+                    "testConfirmationInstructions": "",
+                    "globalSiteAccessInstructions": "",
+                    "specificLocalSiteAccessInstructions":
+                        "To access the site, please use the given access card",
+                    "specificInstructions":
+                        "Any potential issues ? please contact the assigned authorized representative"
+                  },
+                  "authorizedRepresentativeInfo": {
+                    "representativeName": "rusira123",
+                    "representativeMobile": "0418549586",
+                    "representativePosition": "position123",
+                    "representativeEmail": "rusira.senath@gmail.com"
+                  },
+                  "assignedCollectors": [
+                    {
+                      "collectorName": "Micheal Kikrinam",
+                      "assignedDateTime": "11:44 AM | 20 Apr 2025"
+                    },
+                    {
+                      "collectorName": "George Poulas",
+                      "assignedDateTime": "11:40 AM | 20 Apr 2025"
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      }
     },
     {
       "jobNumber": "10",
@@ -596,6 +2350,201 @@ class _NewClientJobState extends State<NewClient> {
       "location": "Parramatta",
       "service": "Random Testing",
       "callout": "Non Callout",
+      "collectors": [
+        {"collectorName": "George Poulos", "collectorStatus": "Allocated"},
+        {"collectorName": "Michelle Kirkman", "collectorStatus": "Accepted"},
+        {"collectorName": "Valerie McKenzie", "collectorStatus": "Accepted"},
+        {"collectorName": "Zac Hepburn", "collectorStatus": "Accepted"},
+        {"collectorName": "Gina Landini", "collectorStatus": "Rejected"}
+      ],
+      "bookingInfo": {
+        "organisationInfo": {
+          "collectionOrganisation": "collection0123",
+          "selectedServiceOffice": "Melbourne",
+          "serviceOffice": ["Sydney", "Melbourne", "Paramatta"]
+        },
+        "jobDetails": {
+          "jobType": "In Clinic",
+          "jobDate": "20/04/2025",
+          "startTime": "16:41",
+          "duration": "1:10",
+          "noOfDonors": "6",
+          "jobReference": "jo1234",
+          "typeOfService": "service 123"
+        },
+        "clientInfo": {
+          "selectedClient": "Client B",
+          "clientDetails": [
+            {"clientName": "Client A", "clientReference": "ref123"},
+            {"clientName": "Client B", "clientReference": "ref456"},
+            {"clientName": "Client C", "clientReference": "ref789"}
+          ],
+          "selectedSite": "Site 1",
+          "locationDetails": [
+            {
+              "siteName": "Site 1",
+              "siteContacts": [
+                {"siteContactName": "Alice", "siteContactMobile": "0418549596"},
+                {"siteContactName": "Bob", "siteContactMobile": "0418549596"}
+              ],
+              "testsAndDevices": {
+                "testType": "Drug Test Only",
+                "drugTestSpecifications": {
+                  "primaryDrugTest": {
+                    "drugTestName": "Drug Test 123",
+                    "selectPreferedDevice": "Device 123"
+                  },
+                  "secondaryDrugTest": {
+                    "drugTestName": "Drug Test 456",
+                    "selectPreferedDevice": "Device 456"
+                  },
+                  "teritoryDrugTest": {
+                    "drugTestName": "Drug Test 789",
+                    "selectPreferedDevice": "Device 789"
+                  },
+                  "additionalInfo": {
+                    "additionalTests": "",
+                    "additionalTestInstructions": "",
+                    "donorSelectionProcess":
+                        "Donor selection procedures have been advised to the collectors accordingly",
+                    "screeningAndTestingProcess": "",
+                    "testConfirmationInstructions": "",
+                    "globalSiteAccessInstructions": "",
+                    "specificLocalSiteAccessInstructions":
+                        "To access the site, please use the given access card",
+                    "specificInstructions":
+                        "Any potential issues ? please contact the assigned authorized representative"
+                  },
+                  "authorizedRepresentativeInfo": {
+                    "representativeName": "Rusira Senath Liyanage",
+                    "representativeMobile": "0418549586",
+                    "representativePosition": "Urine Drug Screening specialist",
+                    "representativeEmail": "rusira.senath@gmail.com"
+                  },
+                  "assignedCollectors": [
+                    {
+                      "collectorName": "Micheal Kikrinam",
+                      "assignedDateTime": "11:44 AM | 20 Apr 2025"
+                    },
+                    {
+                      "collectorName": "George Poulas",
+                      "assignedDateTime": "11:40 AM | 20 Apr 2025"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "siteName": "Site 2",
+              "siteContacts": [
+                {
+                  "siteContactName": "Charlie",
+                  "siteContactMobile": "0418549596"
+                },
+                {"siteContactName": "Diana", "siteContactMobile": "0418549596"}
+              ],
+              "testsAndDevices": {
+                "testType": "Drug Test Only",
+                "drugTestSpecifications": {
+                  "primaryDrugTest": {
+                    "drugTestName": "Drug Test 123",
+                    "selectPreferedDevice": "Device 123"
+                  },
+                  "secondaryDrugTest": {
+                    "drugTestName": "Drug Test 456",
+                    "selectPreferedDevice": "Device 456"
+                  },
+                  "teritoryDrugTest": {
+                    "drugTestName": "Drug Test 789",
+                    "selectPreferedDevice": "Device 789"
+                  },
+                  "additionalInfo": {
+                    "additionalTests": "",
+                    "additionalTestInstructions": "",
+                    "donorSelectionProcess":
+                        "Donor selection procedures have been advised to the collectors accordingly",
+                    "screeningAndTestingProcess": "",
+                    "testConfirmationInstructions": "",
+                    "globalSiteAccessInstructions": "",
+                    "specificLocalSiteAccessInstructions":
+                        "To access the site, please use the given access card",
+                    "specificInstructions":
+                        "Any potential issues ? please contact the assigned authorized representative"
+                  },
+                  "authorizedRepresentativeInfo": {
+                    "representativeName": "rusira123",
+                    "representativeMobile": "0418549586",
+                    "representativePosition": "position123",
+                    "representativeEmail": "rusira.senath@gmail.com"
+                  },
+                  "assignedCollectors": [
+                    {
+                      "collectorName": "Micheal Kikrinam",
+                      "assignedDateTime": "11:44 AM | 20 Apr 2025"
+                    },
+                    {
+                      "collectorName": "George Poulas",
+                      "assignedDateTime": "11:40 AM | 20 Apr 2025"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "siteName": "Site 3",
+              "siteContacts": [
+                {"siteContactName": "Eva", "siteContactMobile": "0418549596"}
+              ],
+              "testsAndDevices": {
+                "testType": "Drug Test Only",
+                "drugTestSpecifications": {
+                  "primaryDrugTest": {
+                    "drugTestName": "Drug Test 123",
+                    "selectPreferedDevice": "Device 123"
+                  },
+                  "secondaryDrugTest": {
+                    "drugTestName": "Drug Test 456",
+                    "selectPreferedDevice": "Device 456"
+                  },
+                  "teritoryDrugTest": {
+                    "drugTestName": "Drug Test 789",
+                    "selectPreferedDevice": "Device 789"
+                  },
+                  "additionalInfo": {
+                    "additionalTests": "",
+                    "additionalTestInstructions": "",
+                    "donorSelectionProcess":
+                        "Donor selection procedures have been advised to the collectors accordingly",
+                    "screeningAndTestingProcess": "",
+                    "testConfirmationInstructions": "",
+                    "globalSiteAccessInstructions": "",
+                    "specificLocalSiteAccessInstructions":
+                        "To access the site, please use the given access card",
+                    "specificInstructions":
+                        "Any potential issues ? please contact the assigned authorized representative"
+                  },
+                  "authorizedRepresentativeInfo": {
+                    "representativeName": "rusira123",
+                    "representativeMobile": "0418549586",
+                    "representativePosition": "position123",
+                    "representativeEmail": "rusira.senath@gmail.com"
+                  },
+                  "assignedCollectors": [
+                    {
+                      "collectorName": "Micheal Kikrinam",
+                      "assignedDateTime": "11:44 AM | 20 Apr 2025"
+                    },
+                    {
+                      "collectorName": "George Poulas",
+                      "assignedDateTime": "11:40 AM | 20 Apr 2025"
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      }
     },
     {
       "jobNumber": "11",
@@ -606,6 +2555,201 @@ class _NewClientJobState extends State<NewClient> {
       "location": "Parramatta",
       "service": "Random Testing",
       "callout": "Callout",
+      "collectors": [
+        {"collectorName": "George Poulos", "collectorStatus": "Allocated"},
+        {"collectorName": "Michelle Kirkman", "collectorStatus": "Accepted"},
+        {"collectorName": "Valerie McKenzie", "collectorStatus": "Accepted"},
+        {"collectorName": "Zac Hepburn", "collectorStatus": "Accepted"},
+        {"collectorName": "Gina Landini", "collectorStatus": "Rejected"}
+      ],
+      "bookingInfo": {
+        "organisationInfo": {
+          "collectionOrganisation": "collection0123",
+          "selectedServiceOffice": "Melbourne",
+          "serviceOffice": ["Sydney", "Melbourne", "Paramatta"]
+        },
+        "jobDetails": {
+          "jobType": "In Clinic",
+          "jobDate": "20/04/2025",
+          "startTime": "16:41",
+          "duration": "1:10",
+          "noOfDonors": "6",
+          "jobReference": "jo1234",
+          "typeOfService": "service 123"
+        },
+        "clientInfo": {
+          "selectedClient": "Client B",
+          "clientDetails": [
+            {"clientName": "Client A", "clientReference": "ref123"},
+            {"clientName": "Client B", "clientReference": "ref456"},
+            {"clientName": "Client C", "clientReference": "ref789"}
+          ],
+          "selectedSite": "Site 1",
+          "locationDetails": [
+            {
+              "siteName": "Site 1",
+              "siteContacts": [
+                {"siteContactName": "Alice", "siteContactMobile": "0418549596"},
+                {"siteContactName": "Bob", "siteContactMobile": "0418549596"}
+              ],
+              "testsAndDevices": {
+                "testType": "Drug Test Only",
+                "drugTestSpecifications": {
+                  "primaryDrugTest": {
+                    "drugTestName": "Drug Test 123",
+                    "selectPreferedDevice": "Device 123"
+                  },
+                  "secondaryDrugTest": {
+                    "drugTestName": "Drug Test 456",
+                    "selectPreferedDevice": "Device 456"
+                  },
+                  "teritoryDrugTest": {
+                    "drugTestName": "Drug Test 789",
+                    "selectPreferedDevice": "Device 789"
+                  },
+                  "additionalInfo": {
+                    "additionalTests": "",
+                    "additionalTestInstructions": "",
+                    "donorSelectionProcess":
+                        "Donor selection procedures have been advised to the collectors accordingly",
+                    "screeningAndTestingProcess": "",
+                    "testConfirmationInstructions": "",
+                    "globalSiteAccessInstructions": "",
+                    "specificLocalSiteAccessInstructions":
+                        "To access the site, please use the given access card",
+                    "specificInstructions":
+                        "Any potential issues ? please contact the assigned authorized representative"
+                  },
+                  "authorizedRepresentativeInfo": {
+                    "representativeName": "Rusira Senath Liyanage",
+                    "representativeMobile": "0418549586",
+                    "representativePosition": "Urine Drug Screening specialist",
+                    "representativeEmail": "rusira.senath@gmail.com"
+                  },
+                  "assignedCollectors": [
+                    {
+                      "collectorName": "Micheal Kikrinam",
+                      "assignedDateTime": "11:44 AM | 20 Apr 2025"
+                    },
+                    {
+                      "collectorName": "George Poulas",
+                      "assignedDateTime": "11:40 AM | 20 Apr 2025"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "siteName": "Site 2",
+              "siteContacts": [
+                {
+                  "siteContactName": "Charlie",
+                  "siteContactMobile": "0418549596"
+                },
+                {"siteContactName": "Diana", "siteContactMobile": "0418549596"}
+              ],
+              "testsAndDevices": {
+                "testType": "Drug Test Only",
+                "drugTestSpecifications": {
+                  "primaryDrugTest": {
+                    "drugTestName": "Drug Test 123",
+                    "selectPreferedDevice": "Device 123"
+                  },
+                  "secondaryDrugTest": {
+                    "drugTestName": "Drug Test 456",
+                    "selectPreferedDevice": "Device 456"
+                  },
+                  "teritoryDrugTest": {
+                    "drugTestName": "Drug Test 789",
+                    "selectPreferedDevice": "Device 789"
+                  },
+                  "additionalInfo": {
+                    "additionalTests": "",
+                    "additionalTestInstructions": "",
+                    "donorSelectionProcess":
+                        "Donor selection procedures have been advised to the collectors accordingly",
+                    "screeningAndTestingProcess": "",
+                    "testConfirmationInstructions": "",
+                    "globalSiteAccessInstructions": "",
+                    "specificLocalSiteAccessInstructions":
+                        "To access the site, please use the given access card",
+                    "specificInstructions":
+                        "Any potential issues ? please contact the assigned authorized representative"
+                  },
+                  "authorizedRepresentativeInfo": {
+                    "representativeName": "rusira123",
+                    "representativeMobile": "0418549586",
+                    "representativePosition": "position123",
+                    "representativeEmail": "rusira.senath@gmail.com"
+                  },
+                  "assignedCollectors": [
+                    {
+                      "collectorName": "Micheal Kikrinam",
+                      "assignedDateTime": "11:44 AM | 20 Apr 2025"
+                    },
+                    {
+                      "collectorName": "George Poulas",
+                      "assignedDateTime": "11:40 AM | 20 Apr 2025"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "siteName": "Site 3",
+              "siteContacts": [
+                {"siteContactName": "Eva", "siteContactMobile": "0418549596"}
+              ],
+              "testsAndDevices": {
+                "testType": "Drug Test Only",
+                "drugTestSpecifications": {
+                  "primaryDrugTest": {
+                    "drugTestName": "Drug Test 123",
+                    "selectPreferedDevice": "Device 123"
+                  },
+                  "secondaryDrugTest": {
+                    "drugTestName": "Drug Test 456",
+                    "selectPreferedDevice": "Device 456"
+                  },
+                  "teritoryDrugTest": {
+                    "drugTestName": "Drug Test 789",
+                    "selectPreferedDevice": "Device 789"
+                  },
+                  "additionalInfo": {
+                    "additionalTests": "",
+                    "additionalTestInstructions": "",
+                    "donorSelectionProcess":
+                        "Donor selection procedures have been advised to the collectors accordingly",
+                    "screeningAndTestingProcess": "",
+                    "testConfirmationInstructions": "",
+                    "globalSiteAccessInstructions": "",
+                    "specificLocalSiteAccessInstructions":
+                        "To access the site, please use the given access card",
+                    "specificInstructions":
+                        "Any potential issues ? please contact the assigned authorized representative"
+                  },
+                  "authorizedRepresentativeInfo": {
+                    "representativeName": "rusira123",
+                    "representativeMobile": "0418549586",
+                    "representativePosition": "position123",
+                    "representativeEmail": "rusira.senath@gmail.com"
+                  },
+                  "assignedCollectors": [
+                    {
+                      "collectorName": "Micheal Kikrinam",
+                      "assignedDateTime": "11:44 AM | 20 Apr 2025"
+                    },
+                    {
+                      "collectorName": "George Poulas",
+                      "assignedDateTime": "11:40 AM | 20 Apr 2025"
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      }
     },
     {
       "jobNumber": "12",
@@ -616,6 +2760,201 @@ class _NewClientJobState extends State<NewClient> {
       "location": "Parramatta",
       "service": "Random Testing",
       "callout": "Callout",
+      "collectors": [
+        {"collectorName": "George Poulos", "collectorStatus": "Allocated"},
+        {"collectorName": "Michelle Kirkman", "collectorStatus": "Accepted"},
+        {"collectorName": "Valerie McKenzie", "collectorStatus": "Accepted"},
+        {"collectorName": "Zac Hepburn", "collectorStatus": "Accepted"},
+        {"collectorName": "Gina Landini", "collectorStatus": "Rejected"}
+      ],
+      "bookingInfo": {
+        "organisationInfo": {
+          "collectionOrganisation": "collection0123",
+          "selectedServiceOffice": "Melbourne",
+          "serviceOffice": ["Sydney", "Melbourne", "Paramatta"]
+        },
+        "jobDetails": {
+          "jobType": "In Clinic",
+          "jobDate": "20/04/2025",
+          "startTime": "16:41",
+          "duration": "1:10",
+          "noOfDonors": "6",
+          "jobReference": "jo1234",
+          "typeOfService": "service 123"
+        },
+        "clientInfo": {
+          "selectedClient": "Client B",
+          "clientDetails": [
+            {"clientName": "Client A", "clientReference": "ref123"},
+            {"clientName": "Client B", "clientReference": "ref456"},
+            {"clientName": "Client C", "clientReference": "ref789"}
+          ],
+          "selectedSite": "Site 1",
+          "locationDetails": [
+            {
+              "siteName": "Site 1",
+              "siteContacts": [
+                {"siteContactName": "Alice", "siteContactMobile": "0418549596"},
+                {"siteContactName": "Bob", "siteContactMobile": "0418549596"}
+              ],
+              "testsAndDevices": {
+                "testType": "Drug Test Only",
+                "drugTestSpecifications": {
+                  "primaryDrugTest": {
+                    "drugTestName": "Drug Test 123",
+                    "selectPreferedDevice": "Device 123"
+                  },
+                  "secondaryDrugTest": {
+                    "drugTestName": "Drug Test 456",
+                    "selectPreferedDevice": "Device 456"
+                  },
+                  "teritoryDrugTest": {
+                    "drugTestName": "Drug Test 789",
+                    "selectPreferedDevice": "Device 789"
+                  },
+                  "additionalInfo": {
+                    "additionalTests": "",
+                    "additionalTestInstructions": "",
+                    "donorSelectionProcess":
+                        "Donor selection procedures have been advised to the collectors accordingly",
+                    "screeningAndTestingProcess": "",
+                    "testConfirmationInstructions": "",
+                    "globalSiteAccessInstructions": "",
+                    "specificLocalSiteAccessInstructions":
+                        "To access the site, please use the given access card",
+                    "specificInstructions":
+                        "Any potential issues ? please contact the assigned authorized representative"
+                  },
+                  "authorizedRepresentativeInfo": {
+                    "representativeName": "Rusira Senath Liyanage",
+                    "representativeMobile": "0418549586",
+                    "representativePosition": "Urine Drug Screening specialist",
+                    "representativeEmail": "rusira.senath@gmail.com"
+                  },
+                  "assignedCollectors": [
+                    {
+                      "collectorName": "Micheal Kikrinam",
+                      "assignedDateTime": "11:44 AM | 20 Apr 2025"
+                    },
+                    {
+                      "collectorName": "George Poulas",
+                      "assignedDateTime": "11:40 AM | 20 Apr 2025"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "siteName": "Site 2",
+              "siteContacts": [
+                {
+                  "siteContactName": "Charlie",
+                  "siteContactMobile": "0418549596"
+                },
+                {"siteContactName": "Diana", "siteContactMobile": "0418549596"}
+              ],
+              "testsAndDevices": {
+                "testType": "Drug Test Only",
+                "drugTestSpecifications": {
+                  "primaryDrugTest": {
+                    "drugTestName": "Drug Test 123",
+                    "selectPreferedDevice": "Device 123"
+                  },
+                  "secondaryDrugTest": {
+                    "drugTestName": "Drug Test 456",
+                    "selectPreferedDevice": "Device 456"
+                  },
+                  "teritoryDrugTest": {
+                    "drugTestName": "Drug Test 789",
+                    "selectPreferedDevice": "Device 789"
+                  },
+                  "additionalInfo": {
+                    "additionalTests": "",
+                    "additionalTestInstructions": "",
+                    "donorSelectionProcess":
+                        "Donor selection procedures have been advised to the collectors accordingly",
+                    "screeningAndTestingProcess": "",
+                    "testConfirmationInstructions": "",
+                    "globalSiteAccessInstructions": "",
+                    "specificLocalSiteAccessInstructions":
+                        "To access the site, please use the given access card",
+                    "specificInstructions":
+                        "Any potential issues ? please contact the assigned authorized representative"
+                  },
+                  "authorizedRepresentativeInfo": {
+                    "representativeName": "rusira123",
+                    "representativeMobile": "0418549586",
+                    "representativePosition": "position123",
+                    "representativeEmail": "rusira.senath@gmail.com"
+                  },
+                  "assignedCollectors": [
+                    {
+                      "collectorName": "Micheal Kikrinam",
+                      "assignedDateTime": "11:44 AM | 20 Apr 2025"
+                    },
+                    {
+                      "collectorName": "George Poulas",
+                      "assignedDateTime": "11:40 AM | 20 Apr 2025"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "siteName": "Site 3",
+              "siteContacts": [
+                {"siteContactName": "Eva", "siteContactMobile": "0418549596"}
+              ],
+              "testsAndDevices": {
+                "testType": "Drug Test Only",
+                "drugTestSpecifications": {
+                  "primaryDrugTest": {
+                    "drugTestName": "Drug Test 123",
+                    "selectPreferedDevice": "Device 123"
+                  },
+                  "secondaryDrugTest": {
+                    "drugTestName": "Drug Test 456",
+                    "selectPreferedDevice": "Device 456"
+                  },
+                  "teritoryDrugTest": {
+                    "drugTestName": "Drug Test 789",
+                    "selectPreferedDevice": "Device 789"
+                  },
+                  "additionalInfo": {
+                    "additionalTests": "",
+                    "additionalTestInstructions": "",
+                    "donorSelectionProcess":
+                        "Donor selection procedures have been advised to the collectors accordingly",
+                    "screeningAndTestingProcess": "",
+                    "testConfirmationInstructions": "",
+                    "globalSiteAccessInstructions": "",
+                    "specificLocalSiteAccessInstructions":
+                        "To access the site, please use the given access card",
+                    "specificInstructions":
+                        "Any potential issues ? please contact the assigned authorized representative"
+                  },
+                  "authorizedRepresentativeInfo": {
+                    "representativeName": "rusira123",
+                    "representativeMobile": "0418549586",
+                    "representativePosition": "position123",
+                    "representativeEmail": "rusira.senath@gmail.com"
+                  },
+                  "assignedCollectors": [
+                    {
+                      "collectorName": "Micheal Kikrinam",
+                      "assignedDateTime": "11:44 AM | 20 Apr 2025"
+                    },
+                    {
+                      "collectorName": "George Poulas",
+                      "assignedDateTime": "11:40 AM | 20 Apr 2025"
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      }
     },
     {
       "jobNumber": "13",
@@ -626,6 +2965,201 @@ class _NewClientJobState extends State<NewClient> {
       "location": "Parramatta",
       "service": "Random Testing",
       "callout": "Non Callout",
+      "collectors": [
+        {"collectorName": "George Poulos", "collectorStatus": "Allocated"},
+        {"collectorName": "Michelle Kirkman", "collectorStatus": "Accepted"},
+        {"collectorName": "Valerie McKenzie", "collectorStatus": "Accepted"},
+        {"collectorName": "Zac Hepburn", "collectorStatus": "Accepted"},
+        {"collectorName": "Gina Landini", "collectorStatus": "Rejected"}
+      ],
+      "bookingInfo": {
+        "organisationInfo": {
+          "collectionOrganisation": "collection0123",
+          "selectedServiceOffice": "Melbourne",
+          "serviceOffice": ["Sydney", "Melbourne", "Paramatta"]
+        },
+        "jobDetails": {
+          "jobType": "In Clinic",
+          "jobDate": "20/04/2025",
+          "startTime": "16:41",
+          "duration": "1:10",
+          "noOfDonors": "6",
+          "jobReference": "jo1234",
+          "typeOfService": "service 123"
+        },
+        "clientInfo": {
+          "selectedClient": "Client B",
+          "clientDetails": [
+            {"clientName": "Client A", "clientReference": "ref123"},
+            {"clientName": "Client B", "clientReference": "ref456"},
+            {"clientName": "Client C", "clientReference": "ref789"}
+          ],
+          "selectedSite": "Site 1",
+          "locationDetails": [
+            {
+              "siteName": "Site 1",
+              "siteContacts": [
+                {"siteContactName": "Alice", "siteContactMobile": "0418549596"},
+                {"siteContactName": "Bob", "siteContactMobile": "0418549596"}
+              ],
+              "testsAndDevices": {
+                "testType": "Drug Test Only",
+                "drugTestSpecifications": {
+                  "primaryDrugTest": {
+                    "drugTestName": "Drug Test 123",
+                    "selectPreferedDevice": "Device 123"
+                  },
+                  "secondaryDrugTest": {
+                    "drugTestName": "Drug Test 456",
+                    "selectPreferedDevice": "Device 456"
+                  },
+                  "teritoryDrugTest": {
+                    "drugTestName": "Drug Test 789",
+                    "selectPreferedDevice": "Device 789"
+                  },
+                  "additionalInfo": {
+                    "additionalTests": "",
+                    "additionalTestInstructions": "",
+                    "donorSelectionProcess":
+                        "Donor selection procedures have been advised to the collectors accordingly",
+                    "screeningAndTestingProcess": "",
+                    "testConfirmationInstructions": "",
+                    "globalSiteAccessInstructions": "",
+                    "specificLocalSiteAccessInstructions":
+                        "To access the site, please use the given access card",
+                    "specificInstructions":
+                        "Any potential issues ? please contact the assigned authorized representative"
+                  },
+                  "authorizedRepresentativeInfo": {
+                    "representativeName": "Rusira Senath Liyanage",
+                    "representativeMobile": "0418549586",
+                    "representativePosition": "Urine Drug Screening specialist",
+                    "representativeEmail": "rusira.senath@gmail.com"
+                  },
+                  "assignedCollectors": [
+                    {
+                      "collectorName": "Micheal Kikrinam",
+                      "assignedDateTime": "11:44 AM | 20 Apr 2025"
+                    },
+                    {
+                      "collectorName": "George Poulas",
+                      "assignedDateTime": "11:40 AM | 20 Apr 2025"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "siteName": "Site 2",
+              "siteContacts": [
+                {
+                  "siteContactName": "Charlie",
+                  "siteContactMobile": "0418549596"
+                },
+                {"siteContactName": "Diana", "siteContactMobile": "0418549596"}
+              ],
+              "testsAndDevices": {
+                "testType": "Drug Test Only",
+                "drugTestSpecifications": {
+                  "primaryDrugTest": {
+                    "drugTestName": "Drug Test 123",
+                    "selectPreferedDevice": "Device 123"
+                  },
+                  "secondaryDrugTest": {
+                    "drugTestName": "Drug Test 456",
+                    "selectPreferedDevice": "Device 456"
+                  },
+                  "teritoryDrugTest": {
+                    "drugTestName": "Drug Test 789",
+                    "selectPreferedDevice": "Device 789"
+                  },
+                  "additionalInfo": {
+                    "additionalTests": "",
+                    "additionalTestInstructions": "",
+                    "donorSelectionProcess":
+                        "Donor selection procedures have been advised to the collectors accordingly",
+                    "screeningAndTestingProcess": "",
+                    "testConfirmationInstructions": "",
+                    "globalSiteAccessInstructions": "",
+                    "specificLocalSiteAccessInstructions":
+                        "To access the site, please use the given access card",
+                    "specificInstructions":
+                        "Any potential issues ? please contact the assigned authorized representative"
+                  },
+                  "authorizedRepresentativeInfo": {
+                    "representativeName": "rusira123",
+                    "representativeMobile": "0418549586",
+                    "representativePosition": "position123",
+                    "representativeEmail": "rusira.senath@gmail.com"
+                  },
+                  "assignedCollectors": [
+                    {
+                      "collectorName": "Micheal Kikrinam",
+                      "assignedDateTime": "11:44 AM | 20 Apr 2025"
+                    },
+                    {
+                      "collectorName": "George Poulas",
+                      "assignedDateTime": "11:40 AM | 20 Apr 2025"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "siteName": "Site 3",
+              "siteContacts": [
+                {"siteContactName": "Eva", "siteContactMobile": "0418549596"}
+              ],
+              "testsAndDevices": {
+                "testType": "Drug Test Only",
+                "drugTestSpecifications": {
+                  "primaryDrugTest": {
+                    "drugTestName": "Drug Test 123",
+                    "selectPreferedDevice": "Device 123"
+                  },
+                  "secondaryDrugTest": {
+                    "drugTestName": "Drug Test 456",
+                    "selectPreferedDevice": "Device 456"
+                  },
+                  "teritoryDrugTest": {
+                    "drugTestName": "Drug Test 789",
+                    "selectPreferedDevice": "Device 789"
+                  },
+                  "additionalInfo": {
+                    "additionalTests": "",
+                    "additionalTestInstructions": "",
+                    "donorSelectionProcess":
+                        "Donor selection procedures have been advised to the collectors accordingly",
+                    "screeningAndTestingProcess": "",
+                    "testConfirmationInstructions": "",
+                    "globalSiteAccessInstructions": "",
+                    "specificLocalSiteAccessInstructions":
+                        "To access the site, please use the given access card",
+                    "specificInstructions":
+                        "Any potential issues ? please contact the assigned authorized representative"
+                  },
+                  "authorizedRepresentativeInfo": {
+                    "representativeName": "rusira123",
+                    "representativeMobile": "0418549586",
+                    "representativePosition": "position123",
+                    "representativeEmail": "rusira.senath@gmail.com"
+                  },
+                  "assignedCollectors": [
+                    {
+                      "collectorName": "Micheal Kikrinam",
+                      "assignedDateTime": "11:44 AM | 20 Apr 2025"
+                    },
+                    {
+                      "collectorName": "George Poulas",
+                      "assignedDateTime": "11:40 AM | 20 Apr 2025"
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      }
     },
     {
       "jobNumber": "14",
@@ -636,6 +3170,201 @@ class _NewClientJobState extends State<NewClient> {
       "location": "Parramatta",
       "service": "Random Testing",
       "callout": "Non Callout",
+      "collectors": [
+        {"collectorName": "George Poulos", "collectorStatus": "Allocated"},
+        {"collectorName": "Michelle Kirkman", "collectorStatus": "Accepted"},
+        {"collectorName": "Valerie McKenzie", "collectorStatus": "Accepted"},
+        {"collectorName": "Zac Hepburn", "collectorStatus": "Accepted"},
+        {"collectorName": "Gina Landini", "collectorStatus": "Rejected"}
+      ],
+      "bookingInfo": {
+        "organisationInfo": {
+          "collectionOrganisation": "collection0123",
+          "selectedServiceOffice": "Melbourne",
+          "serviceOffice": ["Sydney", "Melbourne", "Paramatta"]
+        },
+        "jobDetails": {
+          "jobType": "In Clinic",
+          "jobDate": "20/04/2025",
+          "startTime": "16:41",
+          "duration": "1:10",
+          "noOfDonors": "6",
+          "jobReference": "jo1234",
+          "typeOfService": "service 123"
+        },
+        "clientInfo": {
+          "selectedClient": "Client B",
+          "clientDetails": [
+            {"clientName": "Client A", "clientReference": "ref123"},
+            {"clientName": "Client B", "clientReference": "ref456"},
+            {"clientName": "Client C", "clientReference": "ref789"}
+          ],
+          "selectedSite": "Site 1",
+          "locationDetails": [
+            {
+              "siteName": "Site 1",
+              "siteContacts": [
+                {"siteContactName": "Alice", "siteContactMobile": "0418549596"},
+                {"siteContactName": "Bob", "siteContactMobile": "0418549596"}
+              ],
+              "testsAndDevices": {
+                "testType": "Drug Test Only",
+                "drugTestSpecifications": {
+                  "primaryDrugTest": {
+                    "drugTestName": "Drug Test 123",
+                    "selectPreferedDevice": "Device 123"
+                  },
+                  "secondaryDrugTest": {
+                    "drugTestName": "Drug Test 456",
+                    "selectPreferedDevice": "Device 456"
+                  },
+                  "teritoryDrugTest": {
+                    "drugTestName": "Drug Test 789",
+                    "selectPreferedDevice": "Device 789"
+                  },
+                  "additionalInfo": {
+                    "additionalTests": "",
+                    "additionalTestInstructions": "",
+                    "donorSelectionProcess":
+                        "Donor selection procedures have been advised to the collectors accordingly",
+                    "screeningAndTestingProcess": "",
+                    "testConfirmationInstructions": "",
+                    "globalSiteAccessInstructions": "",
+                    "specificLocalSiteAccessInstructions":
+                        "To access the site, please use the given access card",
+                    "specificInstructions":
+                        "Any potential issues ? please contact the assigned authorized representative"
+                  },
+                  "authorizedRepresentativeInfo": {
+                    "representativeName": "Rusira Senath Liyanage",
+                    "representativeMobile": "0418549586",
+                    "representativePosition": "Urine Drug Screening specialist",
+                    "representativeEmail": "rusira.senath@gmail.com"
+                  },
+                  "assignedCollectors": [
+                    {
+                      "collectorName": "Micheal Kikrinam",
+                      "assignedDateTime": "11:44 AM | 20 Apr 2025"
+                    },
+                    {
+                      "collectorName": "George Poulas",
+                      "assignedDateTime": "11:40 AM | 20 Apr 2025"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "siteName": "Site 2",
+              "siteContacts": [
+                {
+                  "siteContactName": "Charlie",
+                  "siteContactMobile": "0418549596"
+                },
+                {"siteContactName": "Diana", "siteContactMobile": "0418549596"}
+              ],
+              "testsAndDevices": {
+                "testType": "Drug Test Only",
+                "drugTestSpecifications": {
+                  "primaryDrugTest": {
+                    "drugTestName": "Drug Test 123",
+                    "selectPreferedDevice": "Device 123"
+                  },
+                  "secondaryDrugTest": {
+                    "drugTestName": "Drug Test 456",
+                    "selectPreferedDevice": "Device 456"
+                  },
+                  "teritoryDrugTest": {
+                    "drugTestName": "Drug Test 789",
+                    "selectPreferedDevice": "Device 789"
+                  },
+                  "additionalInfo": {
+                    "additionalTests": "",
+                    "additionalTestInstructions": "",
+                    "donorSelectionProcess":
+                        "Donor selection procedures have been advised to the collectors accordingly",
+                    "screeningAndTestingProcess": "",
+                    "testConfirmationInstructions": "",
+                    "globalSiteAccessInstructions": "",
+                    "specificLocalSiteAccessInstructions":
+                        "To access the site, please use the given access card",
+                    "specificInstructions":
+                        "Any potential issues ? please contact the assigned authorized representative"
+                  },
+                  "authorizedRepresentativeInfo": {
+                    "representativeName": "rusira123",
+                    "representativeMobile": "0418549586",
+                    "representativePosition": "position123",
+                    "representativeEmail": "rusira.senath@gmail.com"
+                  },
+                  "assignedCollectors": [
+                    {
+                      "collectorName": "Micheal Kikrinam",
+                      "assignedDateTime": "11:44 AM | 20 Apr 2025"
+                    },
+                    {
+                      "collectorName": "George Poulas",
+                      "assignedDateTime": "11:40 AM | 20 Apr 2025"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "siteName": "Site 3",
+              "siteContacts": [
+                {"siteContactName": "Eva", "siteContactMobile": "0418549596"}
+              ],
+              "testsAndDevices": {
+                "testType": "Drug Test Only",
+                "drugTestSpecifications": {
+                  "primaryDrugTest": {
+                    "drugTestName": "Drug Test 123",
+                    "selectPreferedDevice": "Device 123"
+                  },
+                  "secondaryDrugTest": {
+                    "drugTestName": "Drug Test 456",
+                    "selectPreferedDevice": "Device 456"
+                  },
+                  "teritoryDrugTest": {
+                    "drugTestName": "Drug Test 789",
+                    "selectPreferedDevice": "Device 789"
+                  },
+                  "additionalInfo": {
+                    "additionalTests": "",
+                    "additionalTestInstructions": "",
+                    "donorSelectionProcess":
+                        "Donor selection procedures have been advised to the collectors accordingly",
+                    "screeningAndTestingProcess": "",
+                    "testConfirmationInstructions": "",
+                    "globalSiteAccessInstructions": "",
+                    "specificLocalSiteAccessInstructions":
+                        "To access the site, please use the given access card",
+                    "specificInstructions":
+                        "Any potential issues ? please contact the assigned authorized representative"
+                  },
+                  "authorizedRepresentativeInfo": {
+                    "representativeName": "rusira123",
+                    "representativeMobile": "0418549586",
+                    "representativePosition": "position123",
+                    "representativeEmail": "rusira.senath@gmail.com"
+                  },
+                  "assignedCollectors": [
+                    {
+                      "collectorName": "Micheal Kikrinam",
+                      "assignedDateTime": "11:44 AM | 20 Apr 2025"
+                    },
+                    {
+                      "collectorName": "George Poulas",
+                      "assignedDateTime": "11:40 AM | 20 Apr 2025"
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      }
     },
     {
       "jobNumber": "15",
@@ -646,6 +3375,201 @@ class _NewClientJobState extends State<NewClient> {
       "location": "Parramatta",
       "service": "Random Testing",
       "callout": "Non Callout",
+      "collectors": [
+        {"collectorName": "George Poulos", "collectorStatus": "Allocated"},
+        {"collectorName": "Michelle Kirkman", "collectorStatus": "Accepted"},
+        {"collectorName": "Valerie McKenzie", "collectorStatus": "Accepted"},
+        {"collectorName": "Zac Hepburn", "collectorStatus": "Accepted"},
+        {"collectorName": "Gina Landini", "collectorStatus": "Rejected"}
+      ],
+      "bookingInfo": {
+        "organisationInfo": {
+          "collectionOrganisation": "collection0123",
+          "selectedServiceOffice": "Melbourne",
+          "serviceOffice": ["Sydney", "Melbourne", "Paramatta"]
+        },
+        "jobDetails": {
+          "jobType": "In Clinic",
+          "jobDate": "20/04/2025",
+          "startTime": "16:41",
+          "duration": "1:10",
+          "noOfDonors": "6",
+          "jobReference": "jo1234",
+          "typeOfService": "service 123"
+        },
+        "clientInfo": {
+          "selectedClient": "Client B",
+          "clientDetails": [
+            {"clientName": "Client A", "clientReference": "ref123"},
+            {"clientName": "Client B", "clientReference": "ref456"},
+            {"clientName": "Client C", "clientReference": "ref789"}
+          ],
+          "selectedSite": "Site 1",
+          "locationDetails": [
+            {
+              "siteName": "Site 1",
+              "siteContacts": [
+                {"siteContactName": "Alice", "siteContactMobile": "0418549596"},
+                {"siteContactName": "Bob", "siteContactMobile": "0418549596"}
+              ],
+              "testsAndDevices": {
+                "testType": "Drug Test Only",
+                "drugTestSpecifications": {
+                  "primaryDrugTest": {
+                    "drugTestName": "Drug Test 123",
+                    "selectPreferedDevice": "Device 123"
+                  },
+                  "secondaryDrugTest": {
+                    "drugTestName": "Drug Test 456",
+                    "selectPreferedDevice": "Device 456"
+                  },
+                  "teritoryDrugTest": {
+                    "drugTestName": "Drug Test 789",
+                    "selectPreferedDevice": "Device 789"
+                  },
+                  "additionalInfo": {
+                    "additionalTests": "",
+                    "additionalTestInstructions": "",
+                    "donorSelectionProcess":
+                        "Donor selection procedures have been advised to the collectors accordingly",
+                    "screeningAndTestingProcess": "",
+                    "testConfirmationInstructions": "",
+                    "globalSiteAccessInstructions": "",
+                    "specificLocalSiteAccessInstructions":
+                        "To access the site, please use the given access card",
+                    "specificInstructions":
+                        "Any potential issues ? please contact the assigned authorized representative"
+                  },
+                  "authorizedRepresentativeInfo": {
+                    "representativeName": "Rusira Senath Liyanage",
+                    "representativeMobile": "0418549586",
+                    "representativePosition": "Urine Drug Screening specialist",
+                    "representativeEmail": "rusira.senath@gmail.com"
+                  },
+                  "assignedCollectors": [
+                    {
+                      "collectorName": "Micheal Kikrinam",
+                      "assignedDateTime": "11:44 AM | 20 Apr 2025"
+                    },
+                    {
+                      "collectorName": "George Poulas",
+                      "assignedDateTime": "11:40 AM | 20 Apr 2025"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "siteName": "Site 2",
+              "siteContacts": [
+                {
+                  "siteContactName": "Charlie",
+                  "siteContactMobile": "0418549596"
+                },
+                {"siteContactName": "Diana", "siteContactMobile": "0418549596"}
+              ],
+              "testsAndDevices": {
+                "testType": "Drug Test Only",
+                "drugTestSpecifications": {
+                  "primaryDrugTest": {
+                    "drugTestName": "Drug Test 123",
+                    "selectPreferedDevice": "Device 123"
+                  },
+                  "secondaryDrugTest": {
+                    "drugTestName": "Drug Test 456",
+                    "selectPreferedDevice": "Device 456"
+                  },
+                  "teritoryDrugTest": {
+                    "drugTestName": "Drug Test 789",
+                    "selectPreferedDevice": "Device 789"
+                  },
+                  "additionalInfo": {
+                    "additionalTests": "",
+                    "additionalTestInstructions": "",
+                    "donorSelectionProcess":
+                        "Donor selection procedures have been advised to the collectors accordingly",
+                    "screeningAndTestingProcess": "",
+                    "testConfirmationInstructions": "",
+                    "globalSiteAccessInstructions": "",
+                    "specificLocalSiteAccessInstructions":
+                        "To access the site, please use the given access card",
+                    "specificInstructions":
+                        "Any potential issues ? please contact the assigned authorized representative"
+                  },
+                  "authorizedRepresentativeInfo": {
+                    "representativeName": "rusira123",
+                    "representativeMobile": "0418549586",
+                    "representativePosition": "position123",
+                    "representativeEmail": "rusira.senath@gmail.com"
+                  },
+                  "assignedCollectors": [
+                    {
+                      "collectorName": "Micheal Kikrinam",
+                      "assignedDateTime": "11:44 AM | 20 Apr 2025"
+                    },
+                    {
+                      "collectorName": "George Poulas",
+                      "assignedDateTime": "11:40 AM | 20 Apr 2025"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "siteName": "Site 3",
+              "siteContacts": [
+                {"siteContactName": "Eva", "siteContactMobile": "0418549596"}
+              ],
+              "testsAndDevices": {
+                "testType": "Drug Test Only",
+                "drugTestSpecifications": {
+                  "primaryDrugTest": {
+                    "drugTestName": "Drug Test 123",
+                    "selectPreferedDevice": "Device 123"
+                  },
+                  "secondaryDrugTest": {
+                    "drugTestName": "Drug Test 456",
+                    "selectPreferedDevice": "Device 456"
+                  },
+                  "teritoryDrugTest": {
+                    "drugTestName": "Drug Test 789",
+                    "selectPreferedDevice": "Device 789"
+                  },
+                  "additionalInfo": {
+                    "additionalTests": "",
+                    "additionalTestInstructions": "",
+                    "donorSelectionProcess":
+                        "Donor selection procedures have been advised to the collectors accordingly",
+                    "screeningAndTestingProcess": "",
+                    "testConfirmationInstructions": "",
+                    "globalSiteAccessInstructions": "",
+                    "specificLocalSiteAccessInstructions":
+                        "To access the site, please use the given access card",
+                    "specificInstructions":
+                        "Any potential issues ? please contact the assigned authorized representative"
+                  },
+                  "authorizedRepresentativeInfo": {
+                    "representativeName": "rusira123",
+                    "representativeMobile": "0418549586",
+                    "representativePosition": "position123",
+                    "representativeEmail": "rusira.senath@gmail.com"
+                  },
+                  "assignedCollectors": [
+                    {
+                      "collectorName": "Micheal Kikrinam",
+                      "assignedDateTime": "11:44 AM | 20 Apr 2025"
+                    },
+                    {
+                      "collectorName": "George Poulas",
+                      "assignedDateTime": "11:40 AM | 20 Apr 2025"
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      }
     },
     {
       "jobNumber": "16",
@@ -656,6 +3580,201 @@ class _NewClientJobState extends State<NewClient> {
       "location": "Parramatta",
       "service": "Random Testing",
       "callout": "Non Callout",
+      "collectors": [
+        {"collectorName": "George Poulos", "collectorStatus": "Allocated"},
+        {"collectorName": "Michelle Kirkman", "collectorStatus": "Accepted"},
+        {"collectorName": "Valerie McKenzie", "collectorStatus": "Accepted"},
+        {"collectorName": "Zac Hepburn", "collectorStatus": "Accepted"},
+        {"collectorName": "Gina Landini", "collectorStatus": "Rejected"}
+      ],
+      "bookingInfo": {
+        "organisationInfo": {
+          "collectionOrganisation": "collection0123",
+          "selectedServiceOffice": "Melbourne",
+          "serviceOffice": ["Sydney", "Melbourne", "Paramatta"]
+        },
+        "jobDetails": {
+          "jobType": "In Clinic",
+          "jobDate": "20/04/2025",
+          "startTime": "16:41",
+          "duration": "1:10",
+          "noOfDonors": "6",
+          "jobReference": "jo1234",
+          "typeOfService": "service 123"
+        },
+        "clientInfo": {
+          "selectedClient": "Client B",
+          "clientDetails": [
+            {"clientName": "Client A", "clientReference": "ref123"},
+            {"clientName": "Client B", "clientReference": "ref456"},
+            {"clientName": "Client C", "clientReference": "ref789"}
+          ],
+          "selectedSite": "Site 1",
+          "locationDetails": [
+            {
+              "siteName": "Site 1",
+              "siteContacts": [
+                {"siteContactName": "Alice", "siteContactMobile": "0418549596"},
+                {"siteContactName": "Bob", "siteContactMobile": "0418549596"}
+              ],
+              "testsAndDevices": {
+                "testType": "Drug Test Only",
+                "drugTestSpecifications": {
+                  "primaryDrugTest": {
+                    "drugTestName": "Drug Test 123",
+                    "selectPreferedDevice": "Device 123"
+                  },
+                  "secondaryDrugTest": {
+                    "drugTestName": "Drug Test 456",
+                    "selectPreferedDevice": "Device 456"
+                  },
+                  "teritoryDrugTest": {
+                    "drugTestName": "Drug Test 789",
+                    "selectPreferedDevice": "Device 789"
+                  },
+                  "additionalInfo": {
+                    "additionalTests": "",
+                    "additionalTestInstructions": "",
+                    "donorSelectionProcess":
+                        "Donor selection procedures have been advised to the collectors accordingly",
+                    "screeningAndTestingProcess": "",
+                    "testConfirmationInstructions": "",
+                    "globalSiteAccessInstructions": "",
+                    "specificLocalSiteAccessInstructions":
+                        "To access the site, please use the given access card",
+                    "specificInstructions":
+                        "Any potential issues ? please contact the assigned authorized representative"
+                  },
+                  "authorizedRepresentativeInfo": {
+                    "representativeName": "Rusira Senath Liyanage",
+                    "representativeMobile": "0418549586",
+                    "representativePosition": "Urine Drug Screening specialist",
+                    "representativeEmail": "rusira.senath@gmail.com"
+                  },
+                  "assignedCollectors": [
+                    {
+                      "collectorName": "Micheal Kikrinam",
+                      "assignedDateTime": "11:44 AM | 20 Apr 2025"
+                    },
+                    {
+                      "collectorName": "George Poulas",
+                      "assignedDateTime": "11:40 AM | 20 Apr 2025"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "siteName": "Site 2",
+              "siteContacts": [
+                {
+                  "siteContactName": "Charlie",
+                  "siteContactMobile": "0418549596"
+                },
+                {"siteContactName": "Diana", "siteContactMobile": "0418549596"}
+              ],
+              "testsAndDevices": {
+                "testType": "Drug Test Only",
+                "drugTestSpecifications": {
+                  "primaryDrugTest": {
+                    "drugTestName": "Drug Test 123",
+                    "selectPreferedDevice": "Device 123"
+                  },
+                  "secondaryDrugTest": {
+                    "drugTestName": "Drug Test 456",
+                    "selectPreferedDevice": "Device 456"
+                  },
+                  "teritoryDrugTest": {
+                    "drugTestName": "Drug Test 789",
+                    "selectPreferedDevice": "Device 789"
+                  },
+                  "additionalInfo": {
+                    "additionalTests": "",
+                    "additionalTestInstructions": "",
+                    "donorSelectionProcess":
+                        "Donor selection procedures have been advised to the collectors accordingly",
+                    "screeningAndTestingProcess": "",
+                    "testConfirmationInstructions": "",
+                    "globalSiteAccessInstructions": "",
+                    "specificLocalSiteAccessInstructions":
+                        "To access the site, please use the given access card",
+                    "specificInstructions":
+                        "Any potential issues ? please contact the assigned authorized representative"
+                  },
+                  "authorizedRepresentativeInfo": {
+                    "representativeName": "rusira123",
+                    "representativeMobile": "0418549586",
+                    "representativePosition": "position123",
+                    "representativeEmail": "rusira.senath@gmail.com"
+                  },
+                  "assignedCollectors": [
+                    {
+                      "collectorName": "Micheal Kikrinam",
+                      "assignedDateTime": "11:44 AM | 20 Apr 2025"
+                    },
+                    {
+                      "collectorName": "George Poulas",
+                      "assignedDateTime": "11:40 AM | 20 Apr 2025"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "siteName": "Site 3",
+              "siteContacts": [
+                {"siteContactName": "Eva", "siteContactMobile": "0418549596"}
+              ],
+              "testsAndDevices": {
+                "testType": "Drug Test Only",
+                "drugTestSpecifications": {
+                  "primaryDrugTest": {
+                    "drugTestName": "Drug Test 123",
+                    "selectPreferedDevice": "Device 123"
+                  },
+                  "secondaryDrugTest": {
+                    "drugTestName": "Drug Test 456",
+                    "selectPreferedDevice": "Device 456"
+                  },
+                  "teritoryDrugTest": {
+                    "drugTestName": "Drug Test 789",
+                    "selectPreferedDevice": "Device 789"
+                  },
+                  "additionalInfo": {
+                    "additionalTests": "",
+                    "additionalTestInstructions": "",
+                    "donorSelectionProcess":
+                        "Donor selection procedures have been advised to the collectors accordingly",
+                    "screeningAndTestingProcess": "",
+                    "testConfirmationInstructions": "",
+                    "globalSiteAccessInstructions": "",
+                    "specificLocalSiteAccessInstructions":
+                        "To access the site, please use the given access card",
+                    "specificInstructions":
+                        "Any potential issues ? please contact the assigned authorized representative"
+                  },
+                  "authorizedRepresentativeInfo": {
+                    "representativeName": "rusira123",
+                    "representativeMobile": "0418549586",
+                    "representativePosition": "position123",
+                    "representativeEmail": "rusira.senath@gmail.com"
+                  },
+                  "assignedCollectors": [
+                    {
+                      "collectorName": "Micheal Kikrinam",
+                      "assignedDateTime": "11:44 AM | 20 Apr 2025"
+                    },
+                    {
+                      "collectorName": "George Poulas",
+                      "assignedDateTime": "11:40 AM | 20 Apr 2025"
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      }
     },
     {
       "jobNumber": "17",
@@ -666,6 +3785,201 @@ class _NewClientJobState extends State<NewClient> {
       "location": "Parramatta",
       "service": "Random Testing",
       "callout": "Non Callout",
+      "collectors": [
+        {"collectorName": "George Poulos", "collectorStatus": "Allocated"},
+        {"collectorName": "Michelle Kirkman", "collectorStatus": "Accepted"},
+        {"collectorName": "Valerie McKenzie", "collectorStatus": "Accepted"},
+        {"collectorName": "Zac Hepburn", "collectorStatus": "Accepted"},
+        {"collectorName": "Gina Landini", "collectorStatus": "Rejected"}
+      ],
+      "bookingInfo": {
+        "organisationInfo": {
+          "collectionOrganisation": "collection0123",
+          "selectedServiceOffice": "Melbourne",
+          "serviceOffice": ["Sydney", "Melbourne", "Paramatta"]
+        },
+        "jobDetails": {
+          "jobType": "In Clinic",
+          "jobDate": "20/04/2025",
+          "startTime": "16:41",
+          "duration": "1:10",
+          "noOfDonors": "6",
+          "jobReference": "jo1234",
+          "typeOfService": "service 123"
+        },
+        "clientInfo": {
+          "selectedClient": "Client B",
+          "clientDetails": [
+            {"clientName": "Client A", "clientReference": "ref123"},
+            {"clientName": "Client B", "clientReference": "ref456"},
+            {"clientName": "Client C", "clientReference": "ref789"}
+          ],
+          "selectedSite": "Site 1",
+          "locationDetails": [
+            {
+              "siteName": "Site 1",
+              "siteContacts": [
+                {"siteContactName": "Alice", "siteContactMobile": "0418549596"},
+                {"siteContactName": "Bob", "siteContactMobile": "0418549596"}
+              ],
+              "testsAndDevices": {
+                "testType": "Drug Test Only",
+                "drugTestSpecifications": {
+                  "primaryDrugTest": {
+                    "drugTestName": "Drug Test 123",
+                    "selectPreferedDevice": "Device 123"
+                  },
+                  "secondaryDrugTest": {
+                    "drugTestName": "Drug Test 456",
+                    "selectPreferedDevice": "Device 456"
+                  },
+                  "teritoryDrugTest": {
+                    "drugTestName": "Drug Test 789",
+                    "selectPreferedDevice": "Device 789"
+                  },
+                  "additionalInfo": {
+                    "additionalTests": "",
+                    "additionalTestInstructions": "",
+                    "donorSelectionProcess":
+                        "Donor selection procedures have been advised to the collectors accordingly",
+                    "screeningAndTestingProcess": "",
+                    "testConfirmationInstructions": "",
+                    "globalSiteAccessInstructions": "",
+                    "specificLocalSiteAccessInstructions":
+                        "To access the site, please use the given access card",
+                    "specificInstructions":
+                        "Any potential issues ? please contact the assigned authorized representative"
+                  },
+                  "authorizedRepresentativeInfo": {
+                    "representativeName": "Rusira Senath Liyanage",
+                    "representativeMobile": "0418549586",
+                    "representativePosition": "Urine Drug Screening specialist",
+                    "representativeEmail": "rusira.senath@gmail.com"
+                  },
+                  "assignedCollectors": [
+                    {
+                      "collectorName": "Micheal Kikrinam",
+                      "assignedDateTime": "11:44 AM | 20 Apr 2025"
+                    },
+                    {
+                      "collectorName": "George Poulas",
+                      "assignedDateTime": "11:40 AM | 20 Apr 2025"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "siteName": "Site 2",
+              "siteContacts": [
+                {
+                  "siteContactName": "Charlie",
+                  "siteContactMobile": "0418549596"
+                },
+                {"siteContactName": "Diana", "siteContactMobile": "0418549596"}
+              ],
+              "testsAndDevices": {
+                "testType": "Drug Test Only",
+                "drugTestSpecifications": {
+                  "primaryDrugTest": {
+                    "drugTestName": "Drug Test 123",
+                    "selectPreferedDevice": "Device 123"
+                  },
+                  "secondaryDrugTest": {
+                    "drugTestName": "Drug Test 456",
+                    "selectPreferedDevice": "Device 456"
+                  },
+                  "teritoryDrugTest": {
+                    "drugTestName": "Drug Test 789",
+                    "selectPreferedDevice": "Device 789"
+                  },
+                  "additionalInfo": {
+                    "additionalTests": "",
+                    "additionalTestInstructions": "",
+                    "donorSelectionProcess":
+                        "Donor selection procedures have been advised to the collectors accordingly",
+                    "screeningAndTestingProcess": "",
+                    "testConfirmationInstructions": "",
+                    "globalSiteAccessInstructions": "",
+                    "specificLocalSiteAccessInstructions":
+                        "To access the site, please use the given access card",
+                    "specificInstructions":
+                        "Any potential issues ? please contact the assigned authorized representative"
+                  },
+                  "authorizedRepresentativeInfo": {
+                    "representativeName": "rusira123",
+                    "representativeMobile": "0418549586",
+                    "representativePosition": "position123",
+                    "representativeEmail": "rusira.senath@gmail.com"
+                  },
+                  "assignedCollectors": [
+                    {
+                      "collectorName": "Micheal Kikrinam",
+                      "assignedDateTime": "11:44 AM | 20 Apr 2025"
+                    },
+                    {
+                      "collectorName": "George Poulas",
+                      "assignedDateTime": "11:40 AM | 20 Apr 2025"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "siteName": "Site 3",
+              "siteContacts": [
+                {"siteContactName": "Eva", "siteContactMobile": "0418549596"}
+              ],
+              "testsAndDevices": {
+                "testType": "Drug Test Only",
+                "drugTestSpecifications": {
+                  "primaryDrugTest": {
+                    "drugTestName": "Drug Test 123",
+                    "selectPreferedDevice": "Device 123"
+                  },
+                  "secondaryDrugTest": {
+                    "drugTestName": "Drug Test 456",
+                    "selectPreferedDevice": "Device 456"
+                  },
+                  "teritoryDrugTest": {
+                    "drugTestName": "Drug Test 789",
+                    "selectPreferedDevice": "Device 789"
+                  },
+                  "additionalInfo": {
+                    "additionalTests": "",
+                    "additionalTestInstructions": "",
+                    "donorSelectionProcess":
+                        "Donor selection procedures have been advised to the collectors accordingly",
+                    "screeningAndTestingProcess": "",
+                    "testConfirmationInstructions": "",
+                    "globalSiteAccessInstructions": "",
+                    "specificLocalSiteAccessInstructions":
+                        "To access the site, please use the given access card",
+                    "specificInstructions":
+                        "Any potential issues ? please contact the assigned authorized representative"
+                  },
+                  "authorizedRepresentativeInfo": {
+                    "representativeName": "rusira123",
+                    "representativeMobile": "0418549586",
+                    "representativePosition": "position123",
+                    "representativeEmail": "rusira.senath@gmail.com"
+                  },
+                  "assignedCollectors": [
+                    {
+                      "collectorName": "Micheal Kikrinam",
+                      "assignedDateTime": "11:44 AM | 20 Apr 2025"
+                    },
+                    {
+                      "collectorName": "George Poulas",
+                      "assignedDateTime": "11:40 AM | 20 Apr 2025"
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      }
     },
     {
       "jobNumber": "18",
@@ -676,6 +3990,201 @@ class _NewClientJobState extends State<NewClient> {
       "location": "Parramatta",
       "service": "Random Testing",
       "callout": "Non Callout",
+      "collectors": [
+        {"collectorName": "George Poulos", "collectorStatus": "Allocated"},
+        {"collectorName": "Michelle Kirkman", "collectorStatus": "Accepted"},
+        {"collectorName": "Valerie McKenzie", "collectorStatus": "Accepted"},
+        {"collectorName": "Zac Hepburn", "collectorStatus": "Accepted"},
+        {"collectorName": "Gina Landini", "collectorStatus": "Rejected"}
+      ],
+      "bookingInfo": {
+        "organisationInfo": {
+          "collectionOrganisation": "collection0123",
+          "selectedServiceOffice": "Melbourne",
+          "serviceOffice": ["Sydney", "Melbourne", "Paramatta"]
+        },
+        "jobDetails": {
+          "jobType": "In Clinic",
+          "jobDate": "20/04/2025",
+          "startTime": "16:41",
+          "duration": "1:10",
+          "noOfDonors": "6",
+          "jobReference": "jo1234",
+          "typeOfService": "service 123"
+        },
+        "clientInfo": {
+          "selectedClient": "Client B",
+          "clientDetails": [
+            {"clientName": "Client A", "clientReference": "ref123"},
+            {"clientName": "Client B", "clientReference": "ref456"},
+            {"clientName": "Client C", "clientReference": "ref789"}
+          ],
+          "selectedSite": "Site 1",
+          "locationDetails": [
+            {
+              "siteName": "Site 1",
+              "siteContacts": [
+                {"siteContactName": "Alice", "siteContactMobile": "0418549596"},
+                {"siteContactName": "Bob", "siteContactMobile": "0418549596"}
+              ],
+              "testsAndDevices": {
+                "testType": "Drug Test Only",
+                "drugTestSpecifications": {
+                  "primaryDrugTest": {
+                    "drugTestName": "Drug Test 123",
+                    "selectPreferedDevice": "Device 123"
+                  },
+                  "secondaryDrugTest": {
+                    "drugTestName": "Drug Test 456",
+                    "selectPreferedDevice": "Device 456"
+                  },
+                  "teritoryDrugTest": {
+                    "drugTestName": "Drug Test 789",
+                    "selectPreferedDevice": "Device 789"
+                  },
+                  "additionalInfo": {
+                    "additionalTests": "",
+                    "additionalTestInstructions": "",
+                    "donorSelectionProcess":
+                        "Donor selection procedures have been advised to the collectors accordingly",
+                    "screeningAndTestingProcess": "",
+                    "testConfirmationInstructions": "",
+                    "globalSiteAccessInstructions": "",
+                    "specificLocalSiteAccessInstructions":
+                        "To access the site, please use the given access card",
+                    "specificInstructions":
+                        "Any potential issues ? please contact the assigned authorized representative"
+                  },
+                  "authorizedRepresentativeInfo": {
+                    "representativeName": "Rusira Senath Liyanage",
+                    "representativeMobile": "0418549586",
+                    "representativePosition": "Urine Drug Screening specialist",
+                    "representativeEmail": "rusira.senath@gmail.com"
+                  },
+                  "assignedCollectors": [
+                    {
+                      "collectorName": "Micheal Kikrinam",
+                      "assignedDateTime": "11:44 AM | 20 Apr 2025"
+                    },
+                    {
+                      "collectorName": "George Poulas",
+                      "assignedDateTime": "11:40 AM | 20 Apr 2025"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "siteName": "Site 2",
+              "siteContacts": [
+                {
+                  "siteContactName": "Charlie",
+                  "siteContactMobile": "0418549596"
+                },
+                {"siteContactName": "Diana", "siteContactMobile": "0418549596"}
+              ],
+              "testsAndDevices": {
+                "testType": "Drug Test Only",
+                "drugTestSpecifications": {
+                  "primaryDrugTest": {
+                    "drugTestName": "Drug Test 123",
+                    "selectPreferedDevice": "Device 123"
+                  },
+                  "secondaryDrugTest": {
+                    "drugTestName": "Drug Test 456",
+                    "selectPreferedDevice": "Device 456"
+                  },
+                  "teritoryDrugTest": {
+                    "drugTestName": "Drug Test 789",
+                    "selectPreferedDevice": "Device 789"
+                  },
+                  "additionalInfo": {
+                    "additionalTests": "",
+                    "additionalTestInstructions": "",
+                    "donorSelectionProcess":
+                        "Donor selection procedures have been advised to the collectors accordingly",
+                    "screeningAndTestingProcess": "",
+                    "testConfirmationInstructions": "",
+                    "globalSiteAccessInstructions": "",
+                    "specificLocalSiteAccessInstructions":
+                        "To access the site, please use the given access card",
+                    "specificInstructions":
+                        "Any potential issues ? please contact the assigned authorized representative"
+                  },
+                  "authorizedRepresentativeInfo": {
+                    "representativeName": "rusira123",
+                    "representativeMobile": "0418549586",
+                    "representativePosition": "position123",
+                    "representativeEmail": "rusira.senath@gmail.com"
+                  },
+                  "assignedCollectors": [
+                    {
+                      "collectorName": "Micheal Kikrinam",
+                      "assignedDateTime": "11:44 AM | 20 Apr 2025"
+                    },
+                    {
+                      "collectorName": "George Poulas",
+                      "assignedDateTime": "11:40 AM | 20 Apr 2025"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "siteName": "Site 3",
+              "siteContacts": [
+                {"siteContactName": "Eva", "siteContactMobile": "0418549596"}
+              ],
+              "testsAndDevices": {
+                "testType": "Drug Test Only",
+                "drugTestSpecifications": {
+                  "primaryDrugTest": {
+                    "drugTestName": "Drug Test 123",
+                    "selectPreferedDevice": "Device 123"
+                  },
+                  "secondaryDrugTest": {
+                    "drugTestName": "Drug Test 456",
+                    "selectPreferedDevice": "Device 456"
+                  },
+                  "teritoryDrugTest": {
+                    "drugTestName": "Drug Test 789",
+                    "selectPreferedDevice": "Device 789"
+                  },
+                  "additionalInfo": {
+                    "additionalTests": "",
+                    "additionalTestInstructions": "",
+                    "donorSelectionProcess":
+                        "Donor selection procedures have been advised to the collectors accordingly",
+                    "screeningAndTestingProcess": "",
+                    "testConfirmationInstructions": "",
+                    "globalSiteAccessInstructions": "",
+                    "specificLocalSiteAccessInstructions":
+                        "To access the site, please use the given access card",
+                    "specificInstructions":
+                        "Any potential issues ? please contact the assigned authorized representative"
+                  },
+                  "authorizedRepresentativeInfo": {
+                    "representativeName": "rusira123",
+                    "representativeMobile": "0418549586",
+                    "representativePosition": "position123",
+                    "representativeEmail": "rusira.senath@gmail.com"
+                  },
+                  "assignedCollectors": [
+                    {
+                      "collectorName": "Micheal Kikrinam",
+                      "assignedDateTime": "11:44 AM | 20 Apr 2025"
+                    },
+                    {
+                      "collectorName": "George Poulas",
+                      "assignedDateTime": "11:40 AM | 20 Apr 2025"
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      }
     },
     {
       "jobNumber": "19",
@@ -686,6 +4195,201 @@ class _NewClientJobState extends State<NewClient> {
       "location": "Parramatta",
       "service": "Random Testing",
       "callout": "Non Callout",
+      "collectors": [
+        {"collectorName": "George Poulos", "collectorStatus": "Allocated"},
+        {"collectorName": "Michelle Kirkman", "collectorStatus": "Accepted"},
+        {"collectorName": "Valerie McKenzie", "collectorStatus": "Accepted"},
+        {"collectorName": "Zac Hepburn", "collectorStatus": "Accepted"},
+        {"collectorName": "Gina Landini", "collectorStatus": "Rejected"}
+      ],
+      "bookingInfo": {
+        "organisationInfo": {
+          "collectionOrganisation": "collection0123",
+          "selectedServiceOffice": "Melbourne",
+          "serviceOffice": ["Sydney", "Melbourne", "Paramatta"]
+        },
+        "jobDetails": {
+          "jobType": "In Clinic",
+          "jobDate": "20/04/2025",
+          "startTime": "16:41",
+          "duration": "1:10",
+          "noOfDonors": "6",
+          "jobReference": "jo1234",
+          "typeOfService": "service 123"
+        },
+        "clientInfo": {
+          "selectedClient": "Client B",
+          "clientDetails": [
+            {"clientName": "Client A", "clientReference": "ref123"},
+            {"clientName": "Client B", "clientReference": "ref456"},
+            {"clientName": "Client C", "clientReference": "ref789"}
+          ],
+          "selectedSite": "Site 1",
+          "locationDetails": [
+            {
+              "siteName": "Site 1",
+              "siteContacts": [
+                {"siteContactName": "Alice", "siteContactMobile": "0418549596"},
+                {"siteContactName": "Bob", "siteContactMobile": "0418549596"}
+              ],
+              "testsAndDevices": {
+                "testType": "Drug Test Only",
+                "drugTestSpecifications": {
+                  "primaryDrugTest": {
+                    "drugTestName": "Drug Test 123",
+                    "selectPreferedDevice": "Device 123"
+                  },
+                  "secondaryDrugTest": {
+                    "drugTestName": "Drug Test 456",
+                    "selectPreferedDevice": "Device 456"
+                  },
+                  "teritoryDrugTest": {
+                    "drugTestName": "Drug Test 789",
+                    "selectPreferedDevice": "Device 789"
+                  },
+                  "additionalInfo": {
+                    "additionalTests": "",
+                    "additionalTestInstructions": "",
+                    "donorSelectionProcess":
+                        "Donor selection procedures have been advised to the collectors accordingly",
+                    "screeningAndTestingProcess": "",
+                    "testConfirmationInstructions": "",
+                    "globalSiteAccessInstructions": "",
+                    "specificLocalSiteAccessInstructions":
+                        "To access the site, please use the given access card",
+                    "specificInstructions":
+                        "Any potential issues ? please contact the assigned authorized representative"
+                  },
+                  "authorizedRepresentativeInfo": {
+                    "representativeName": "Rusira Senath Liyanage",
+                    "representativeMobile": "0418549586",
+                    "representativePosition": "Urine Drug Screening specialist",
+                    "representativeEmail": "rusira.senath@gmail.com"
+                  },
+                  "assignedCollectors": [
+                    {
+                      "collectorName": "Micheal Kikrinam",
+                      "assignedDateTime": "11:44 AM | 20 Apr 2025"
+                    },
+                    {
+                      "collectorName": "George Poulas",
+                      "assignedDateTime": "11:40 AM | 20 Apr 2025"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "siteName": "Site 2",
+              "siteContacts": [
+                {
+                  "siteContactName": "Charlie",
+                  "siteContactMobile": "0418549596"
+                },
+                {"siteContactName": "Diana", "siteContactMobile": "0418549596"}
+              ],
+              "testsAndDevices": {
+                "testType": "Drug Test Only",
+                "drugTestSpecifications": {
+                  "primaryDrugTest": {
+                    "drugTestName": "Drug Test 123",
+                    "selectPreferedDevice": "Device 123"
+                  },
+                  "secondaryDrugTest": {
+                    "drugTestName": "Drug Test 456",
+                    "selectPreferedDevice": "Device 456"
+                  },
+                  "teritoryDrugTest": {
+                    "drugTestName": "Drug Test 789",
+                    "selectPreferedDevice": "Device 789"
+                  },
+                  "additionalInfo": {
+                    "additionalTests": "",
+                    "additionalTestInstructions": "",
+                    "donorSelectionProcess":
+                        "Donor selection procedures have been advised to the collectors accordingly",
+                    "screeningAndTestingProcess": "",
+                    "testConfirmationInstructions": "",
+                    "globalSiteAccessInstructions": "",
+                    "specificLocalSiteAccessInstructions":
+                        "To access the site, please use the given access card",
+                    "specificInstructions":
+                        "Any potential issues ? please contact the assigned authorized representative"
+                  },
+                  "authorizedRepresentativeInfo": {
+                    "representativeName": "rusira123",
+                    "representativeMobile": "0418549586",
+                    "representativePosition": "position123",
+                    "representativeEmail": "rusira.senath@gmail.com"
+                  },
+                  "assignedCollectors": [
+                    {
+                      "collectorName": "Micheal Kikrinam",
+                      "assignedDateTime": "11:44 AM | 20 Apr 2025"
+                    },
+                    {
+                      "collectorName": "George Poulas",
+                      "assignedDateTime": "11:40 AM | 20 Apr 2025"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "siteName": "Site 3",
+              "siteContacts": [
+                {"siteContactName": "Eva", "siteContactMobile": "0418549596"}
+              ],
+              "testsAndDevices": {
+                "testType": "Drug Test Only",
+                "drugTestSpecifications": {
+                  "primaryDrugTest": {
+                    "drugTestName": "Drug Test 123",
+                    "selectPreferedDevice": "Device 123"
+                  },
+                  "secondaryDrugTest": {
+                    "drugTestName": "Drug Test 456",
+                    "selectPreferedDevice": "Device 456"
+                  },
+                  "teritoryDrugTest": {
+                    "drugTestName": "Drug Test 789",
+                    "selectPreferedDevice": "Device 789"
+                  },
+                  "additionalInfo": {
+                    "additionalTests": "",
+                    "additionalTestInstructions": "",
+                    "donorSelectionProcess":
+                        "Donor selection procedures have been advised to the collectors accordingly",
+                    "screeningAndTestingProcess": "",
+                    "testConfirmationInstructions": "",
+                    "globalSiteAccessInstructions": "",
+                    "specificLocalSiteAccessInstructions":
+                        "To access the site, please use the given access card",
+                    "specificInstructions":
+                        "Any potential issues ? please contact the assigned authorized representative"
+                  },
+                  "authorizedRepresentativeInfo": {
+                    "representativeName": "rusira123",
+                    "representativeMobile": "0418549586",
+                    "representativePosition": "position123",
+                    "representativeEmail": "rusira.senath@gmail.com"
+                  },
+                  "assignedCollectors": [
+                    {
+                      "collectorName": "Micheal Kikrinam",
+                      "assignedDateTime": "11:44 AM | 20 Apr 2025"
+                    },
+                    {
+                      "collectorName": "George Poulas",
+                      "assignedDateTime": "11:40 AM | 20 Apr 2025"
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      }
     },
     {
       "jobNumber": "20",
@@ -696,6 +4400,201 @@ class _NewClientJobState extends State<NewClient> {
       "location": "Parramatta",
       "service": "Random Testing",
       "callout": "Non Callout",
+      "collectors": [
+        {"collectorName": "George Poulos", "collectorStatus": "Allocated"},
+        {"collectorName": "Michelle Kirkman", "collectorStatus": "Accepted"},
+        {"collectorName": "Valerie McKenzie", "collectorStatus": "Accepted"},
+        {"collectorName": "Zac Hepburn", "collectorStatus": "Accepted"},
+        {"collectorName": "Gina Landini", "collectorStatus": "Rejected"}
+      ],
+      "bookingInfo": {
+        "organisationInfo": {
+          "collectionOrganisation": "collection0123",
+          "selectedServiceOffice": "Melbourne",
+          "serviceOffice": ["Sydney", "Melbourne", "Paramatta"]
+        },
+        "jobDetails": {
+          "jobType": "In Clinic",
+          "jobDate": "20/04/2025",
+          "startTime": "16:41",
+          "duration": "1:10",
+          "noOfDonors": "6",
+          "jobReference": "jo1234",
+          "typeOfService": "service 123"
+        },
+        "clientInfo": {
+          "selectedClient": "Client B",
+          "clientDetails": [
+            {"clientName": "Client A", "clientReference": "ref123"},
+            {"clientName": "Client B", "clientReference": "ref456"},
+            {"clientName": "Client C", "clientReference": "ref789"}
+          ],
+          "selectedSite": "Site 1",
+          "locationDetails": [
+            {
+              "siteName": "Site 1",
+              "siteContacts": [
+                {"siteContactName": "Alice", "siteContactMobile": "0418549596"},
+                {"siteContactName": "Bob", "siteContactMobile": "0418549596"}
+              ],
+              "testsAndDevices": {
+                "testType": "Drug Test Only",
+                "drugTestSpecifications": {
+                  "primaryDrugTest": {
+                    "drugTestName": "Drug Test 123",
+                    "selectPreferedDevice": "Device 123"
+                  },
+                  "secondaryDrugTest": {
+                    "drugTestName": "Drug Test 456",
+                    "selectPreferedDevice": "Device 456"
+                  },
+                  "teritoryDrugTest": {
+                    "drugTestName": "Drug Test 789",
+                    "selectPreferedDevice": "Device 789"
+                  },
+                  "additionalInfo": {
+                    "additionalTests": "",
+                    "additionalTestInstructions": "",
+                    "donorSelectionProcess":
+                        "Donor selection procedures have been advised to the collectors accordingly",
+                    "screeningAndTestingProcess": "",
+                    "testConfirmationInstructions": "",
+                    "globalSiteAccessInstructions": "",
+                    "specificLocalSiteAccessInstructions":
+                        "To access the site, please use the given access card",
+                    "specificInstructions":
+                        "Any potential issues ? please contact the assigned authorized representative"
+                  },
+                  "authorizedRepresentativeInfo": {
+                    "representativeName": "Rusira Senath Liyanage",
+                    "representativeMobile": "0418549586",
+                    "representativePosition": "Urine Drug Screening specialist",
+                    "representativeEmail": "rusira.senath@gmail.com"
+                  },
+                  "assignedCollectors": [
+                    {
+                      "collectorName": "Micheal Kikrinam",
+                      "assignedDateTime": "11:44 AM | 20 Apr 2025"
+                    },
+                    {
+                      "collectorName": "George Poulas",
+                      "assignedDateTime": "11:40 AM | 20 Apr 2025"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "siteName": "Site 2",
+              "siteContacts": [
+                {
+                  "siteContactName": "Charlie",
+                  "siteContactMobile": "0418549596"
+                },
+                {"siteContactName": "Diana", "siteContactMobile": "0418549596"}
+              ],
+              "testsAndDevices": {
+                "testType": "Drug Test Only",
+                "drugTestSpecifications": {
+                  "primaryDrugTest": {
+                    "drugTestName": "Drug Test 123",
+                    "selectPreferedDevice": "Device 123"
+                  },
+                  "secondaryDrugTest": {
+                    "drugTestName": "Drug Test 456",
+                    "selectPreferedDevice": "Device 456"
+                  },
+                  "teritoryDrugTest": {
+                    "drugTestName": "Drug Test 789",
+                    "selectPreferedDevice": "Device 789"
+                  },
+                  "additionalInfo": {
+                    "additionalTests": "",
+                    "additionalTestInstructions": "",
+                    "donorSelectionProcess":
+                        "Donor selection procedures have been advised to the collectors accordingly",
+                    "screeningAndTestingProcess": "",
+                    "testConfirmationInstructions": "",
+                    "globalSiteAccessInstructions": "",
+                    "specificLocalSiteAccessInstructions":
+                        "To access the site, please use the given access card",
+                    "specificInstructions":
+                        "Any potential issues ? please contact the assigned authorized representative"
+                  },
+                  "authorizedRepresentativeInfo": {
+                    "representativeName": "rusira123",
+                    "representativeMobile": "0418549586",
+                    "representativePosition": "position123",
+                    "representativeEmail": "rusira.senath@gmail.com"
+                  },
+                  "assignedCollectors": [
+                    {
+                      "collectorName": "Micheal Kikrinam",
+                      "assignedDateTime": "11:44 AM | 20 Apr 2025"
+                    },
+                    {
+                      "collectorName": "George Poulas",
+                      "assignedDateTime": "11:40 AM | 20 Apr 2025"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "siteName": "Site 3",
+              "siteContacts": [
+                {"siteContactName": "Eva", "siteContactMobile": "0418549596"}
+              ],
+              "testsAndDevices": {
+                "testType": "Drug Test Only",
+                "drugTestSpecifications": {
+                  "primaryDrugTest": {
+                    "drugTestName": "Drug Test 123",
+                    "selectPreferedDevice": "Device 123"
+                  },
+                  "secondaryDrugTest": {
+                    "drugTestName": "Drug Test 456",
+                    "selectPreferedDevice": "Device 456"
+                  },
+                  "teritoryDrugTest": {
+                    "drugTestName": "Drug Test 789",
+                    "selectPreferedDevice": "Device 789"
+                  },
+                  "additionalInfo": {
+                    "additionalTests": "",
+                    "additionalTestInstructions": "",
+                    "donorSelectionProcess":
+                        "Donor selection procedures have been advised to the collectors accordingly",
+                    "screeningAndTestingProcess": "",
+                    "testConfirmationInstructions": "",
+                    "globalSiteAccessInstructions": "",
+                    "specificLocalSiteAccessInstructions":
+                        "To access the site, please use the given access card",
+                    "specificInstructions":
+                        "Any potential issues ? please contact the assigned authorized representative"
+                  },
+                  "authorizedRepresentativeInfo": {
+                    "representativeName": "rusira123",
+                    "representativeMobile": "0418549586",
+                    "representativePosition": "position123",
+                    "representativeEmail": "rusira.senath@gmail.com"
+                  },
+                  "assignedCollectors": [
+                    {
+                      "collectorName": "Micheal Kikrinam",
+                      "assignedDateTime": "11:44 AM | 20 Apr 2025"
+                    },
+                    {
+                      "collectorName": "George Poulas",
+                      "assignedDateTime": "11:40 AM | 20 Apr 2025"
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      }
     },
   ];
 
@@ -910,7 +4809,7 @@ class _NewClientJobState extends State<NewClient> {
 
   String? _selectedClient;
 
-  List<Map<String, String>> get paginatedJobData {
+  List<Map<String, dynamic>> get paginatedJobData {
     int startIndex = (currentPage - 1) * itemsPerPage;
     int endIndex = startIndex + itemsPerPage;
     endIndex = endIndex > jobData.length ? jobData.length : endIndex;
