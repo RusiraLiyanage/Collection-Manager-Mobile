@@ -17,6 +17,7 @@ import 'package:project_code_blue/screens/ClientManagement/NewClient/SiteContrac
 import 'package:project_code_blue/screens/ClientManagement/NewClient/ClientLocations/newClientLocation.dart';
 import 'package:project_code_blue/screens/ClientManagement/NewClient/Notes/newNote.dart';
 import 'package:project_code_blue/screens/ClientManagement/NewClient/Notes/noteCard.dart';
+import 'package:project_code_blue/screens/OnsiteJobs/NewOnsiteJob/Main/manageOnsiteJob.dart';
 import 'package:project_code_blue/screens/OnsiteJobs/achievedJobsCard.dart';
 import 'package:project_code_blue/screens/OnsiteJobs/onSiteJobCard.dart';
 import 'package:im_stepper/stepper.dart';
@@ -37,16 +38,16 @@ enum ClientSpec {
   mobileClinic,
 }
 
-class NewClient extends StatefulWidget {
+class ManageClient extends StatefulWidget {
   final ScrollController scrollController;
 
-  const NewClient({super.key, required this.scrollController});
+  const ManageClient({super.key, required this.scrollController});
 
   @override
-  State<NewClient> createState() => _NewClientJobState();
+  State<ManageClient> createState() => _ManageClientJobState();
 }
 
-class _NewClientJobState extends State<NewClient> {
+class _ManageClientJobState extends State<ManageClient> {
   TestsType? _testsType = TestsType.alcoholOnly;
   ClientSpec? _clientSpecType = ClientSpec.inHouse;
   final List<GlobalKey<FormState>> _formKeys = [
@@ -15212,7 +15213,7 @@ class _NewClientJobState extends State<NewClient> {
                     minimumSize: Size(80, 30),
                   ),
                   child: const Text(
-                    "Create Client",
+                    "Update Client",
                     style: TextStyle(color: Colors.white),
                   ),
                 ),
@@ -15303,7 +15304,7 @@ class _NewClientJobState extends State<NewClient> {
           builder: (context) => AlertDialog(
             backgroundColor: Colors.white,
             title: const Text('Success'),
-            content: const Text('Client Created Successfully!'),
+            content: const Text('Client Updated Successfully!'),
             actions: [
               TextButton(
                 onPressed: () {
@@ -15379,7 +15380,7 @@ class _NewClientJobState extends State<NewClient> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   const Text(
-                                    "New Client",
+                                    "Manage Client",
                                     style: TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold,
@@ -15408,22 +15409,6 @@ class _NewClientJobState extends State<NewClient> {
                                   lineDotRadius: 1.1,
                                   onStepReached: (index) {
                                     setState(() {
-                                      /* final formState =
-                                          _formKeys[_currentStep].currentState; */
-
-                                      // Validate the current form
-                                      /* if (formState != null &&
-                                          !formState.validate()) {
-                                        // If validation fails, return or show a message (optional)
-                                        // Scroll to the top if validation fails
-                                        widget.scrollController.animateTo(
-                                          0, // Scroll to top
-                                          duration:
-                                              const Duration(milliseconds: 500),
-                                          curve: Curves.easeInOut,
-                                        );
-                                        return;
-                                      } */
                                       _currentStep = index;
                                     });
                                   },

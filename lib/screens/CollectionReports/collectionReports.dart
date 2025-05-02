@@ -323,6 +323,7 @@ class _CollectionReportsState extends State<CollectionReports> {
                           ],
                         ),
                         child: DropdownButtonFormField<String>(
+                          dropdownColor: Colors.white,
                           value: _selectedLocation,
                           decoration: InputDecoration(
                             contentPadding: const EdgeInsets.symmetric(

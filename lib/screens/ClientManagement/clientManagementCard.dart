@@ -1,5 +1,6 @@
 import 'package:adaptive_action_sheet/adaptive_action_sheet.dart';
 import 'package:flutter/material.dart';
+import 'package:project_code_blue/screens/ClientManagement/NewClient/Main/manageClient.dart';
 
 class ClientManagementCard extends StatelessWidget {
   final Map<String, String> client;
@@ -121,12 +122,41 @@ class ClientManagementCard extends StatelessWidget {
                               onPressed: (_) {
                                 Navigator.pop(
                                     context); // Close the bottom sheet
-                                /* showDialog(
+                                showModalBottomSheet<void>(
+                                  isScrollControlled:
+                                      true, // Allows controlling the height
+                                  isDismissible: false,
+                                  enableDrag: false,
                                   context: context,
-                                  barrierDismissible:
-                                      false, // Prevent closing on backdrop tap
-                                  builder: (context) => OnsiteApprovalModal(),
-                                ); */
+                                  builder: (BuildContext context) {
+                                    return DraggableScrollableSheet(
+                                      expand: false,
+                                      initialChildSize:
+                                          1, // Initial height of the sheet (93% of the screen)
+                                      minChildSize:
+                                          1, // Allow shrinking to 50% of the screen
+                                      maxChildSize:
+                                          1, // Prevent expansion above 93% of the screen
+                                      builder: (BuildContext context,
+                                          ScrollController scrollController) {
+                                        return Container(
+                                          width: double.infinity,
+                                          decoration: const BoxDecoration(
+                                            color: Color(
+                                                0xFFEDEEF0), // Background color of the bottom sheet
+                                            borderRadius: BorderRadius.vertical(
+                                              top: Radius.circular(
+                                                  0), // Rounded top corners
+                                            ),
+                                          ),
+                                          child: ManageClient(
+                                              scrollController:
+                                                  scrollController),
+                                        );
+                                      },
+                                    );
+                                  },
+                                );
                               },
                             ),
                             BottomSheetAction(

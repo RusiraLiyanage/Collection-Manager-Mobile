@@ -250,6 +250,7 @@ class _CollectorsCalendarState extends State<CollectorsCalendar> {
                             ],
                           ),
                           child: DropdownButtonFormField<String>(
+                            dropdownColor: Colors.white,
                             value: _selectedValue,
                             decoration: InputDecoration(
                               contentPadding: const EdgeInsets.symmetric(
@@ -353,6 +354,7 @@ class _CollectorsCalendarState extends State<CollectorsCalendar> {
                             ],
                           ),
                           child: DropdownButtonFormField<String>(
+                            dropdownColor: Colors.white,
                             value: _selectedCollector,
                             decoration: InputDecoration(
                               contentPadding: const EdgeInsets.symmetric(
