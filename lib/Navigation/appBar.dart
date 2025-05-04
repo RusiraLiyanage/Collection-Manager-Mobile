@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:icon_badge/icon_badge.dart';
 import 'package:project_code_blue/AppState/appState.dart';
 import 'package:project_code_blue/ColorSchemas/AppColors.dart';
+import 'package:project_code_blue/screens/Login/loginScreen.dart';
 import 'package:project_code_blue/screens/Notifications/notifications.dart';
 import 'package:provider/provider.dart';
 
@@ -76,13 +77,30 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
               );
             },
           ),
-          IconButton(
-              icon: Icon(
-                Icons.account_circle_rounded,
-                color: Colors.white,
-                size: 40,
+          PopupMenuButton<String>(
+            icon: Icon(
+              Icons.account_circle_rounded,
+              color: Colors.white,
+              size: 40,
+            ),
+            color: Colors.white,
+            onSelected: (String result) {
+              if (result == 'logout') {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => LoginScreen(),
+                  ),
+                );
+              }
+            },
+            itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
+              PopupMenuItem<String>(
+                value: 'logout',
+                child: Text('Logout'),
               ),
-              onPressed: () {}),
+            ],
+          ),
         ],
       ),
     ]);

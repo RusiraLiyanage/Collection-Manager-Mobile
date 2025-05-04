@@ -489,78 +489,79 @@ class _CollectorsCalendarState extends State<CollectorsCalendar> {
                           child: Padding(
                             padding: EdgeInsets.symmetric(
                                 vertical: 12, horizontal: 12),
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                // Vertical color bar
-                                Container(
-                                  width: 5,
-                                  height: 90,
-                                  decoration: BoxDecoration(
-                                    color: meeting.background,
-                                    borderRadius: BorderRadius.circular(3),
+                            child: IntrinsicHeight(
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  // Vertical color bar
+                                  Container(
+                                    width: 5,
+                                    decoration: BoxDecoration(
+                                      color: meeting.background,
+                                      borderRadius: BorderRadius.circular(3),
+                                    ),
                                   ),
-                                ),
-                                SizedBox(width: 12),
+                                  SizedBox(width: 12),
 
-                                // Event details
-                                Expanded(
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                  // Event details
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          meeting.eventName,
+                                          style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        SizedBox(height: 4),
+                                        Row(
+                                          children: [
+                                            Image.asset(
+                                              "assets/images/icons/newClient.png",
+                                              width: 25,
+                                              height: 25,
+                                            ),
+                                            SizedBox(
+                                              width: 5,
+                                            ),
+                                            Text("Mr. Rusira Rusira !!")
+                                          ],
+                                        ),
+                                        SizedBox(height: 4),
+                                        Text(
+                                          meeting.reason,
+                                          style: TextStyle(
+                                              fontSize: 14, color: Colors.grey),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+
+                                  // Event times
+                                  Column(
+                                    crossAxisAlignment: CrossAxisAlignment.end,
                                     children: [
                                       Text(
-                                        meeting.eventName,
+                                        "${_formatTime(meeting.from)}",
                                         style: TextStyle(
-                                            fontSize: 16,
+                                            fontSize: 14,
                                             fontWeight: FontWeight.bold),
                                       ),
                                       SizedBox(height: 4),
-                                      Row(
-                                        children: [
-                                          Image.asset(
-                                            "assets/images/icons/newClient.png",
-                                            width: 25,
-                                            height: 25,
-                                          ),
-                                          SizedBox(
-                                            width: 5,
-                                          ),
-                                          Text("Mr. Rusira Rusira !!")
-                                        ],
-                                      ),
-                                      SizedBox(height: 4),
                                       Text(
-                                        meeting.reason,
+                                        "${_formatTime(meeting.to)}",
                                         style: TextStyle(
-                                            fontSize: 14, color: Colors.grey),
+                                          fontSize: 14,
+                                          color: Colors.grey,
+                                          fontWeight: FontWeight.bold,
+                                        ),
                                       ),
                                     ],
                                   ),
-                                ),
-
-                                // Event times
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: [
-                                    Text(
-                                      "${_formatTime(meeting.from)}",
-                                      style: TextStyle(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    SizedBox(height: 4),
-                                    Text(
-                                      "${_formatTime(meeting.to)}",
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        color: Colors.grey,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
                         );

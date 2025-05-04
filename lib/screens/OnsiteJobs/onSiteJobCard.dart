@@ -1,6 +1,7 @@
 import 'package:adaptive_action_sheet/adaptive_action_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:project_code_blue/screens/CollectionReports/collectionReportPreview.dart';
+import 'package:project_code_blue/screens/OnsiteApprovals/onSiteApprovalModal.dart';
 import 'package:project_code_blue/screens/OnsiteJobs/NewCalloutJob/Main/manageCalloutJob.dart';
 import 'package:project_code_blue/screens/OnsiteJobs/NewCalloutJob/Main/viewCalloutJob.dart';
 import 'package:project_code_blue/screens/OnsiteJobs/NewOnsiteJob/Main/manageOnsiteJob.dart';
@@ -505,6 +506,26 @@ class OnsiteJobCard extends StatelessWidget {
                                         reportID: job["reportID"]!,
                                         currentStatus: job["sentByStatus"]!,
                                       ),
+                                    ),
+                                  );
+                                },
+                              ),
+                              BottomSheetAction(
+                                title: const Text(
+                                  'View Onsite Approval',
+                                  style: TextStyle(
+                                      color: Colors.blue,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18),
+                                ),
+                                onPressed: (_) {
+                                  Navigator.pop(
+                                      context); // Close the bottom sheet
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          OnsiteApprovalModal(),
                                     ),
                                   );
                                 },

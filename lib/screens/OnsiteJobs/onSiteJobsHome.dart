@@ -1414,6 +1414,7 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
                                 ],
                               ),
                               child: DropdownButtonFormField<String>(
+                                dropdownColor: Colors.white,
                                 value: _selectedValue,
                                 decoration: InputDecoration(
                                   contentPadding: const EdgeInsets.symmetric(
@@ -1506,6 +1507,7 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
                                 ],
                               ),
                               child: DropdownButtonFormField<String>(
+                                dropdownColor: Colors.white,
                                 focusColor: Colors.white,
                                 value: _selectedClient,
                                 decoration: InputDecoration(

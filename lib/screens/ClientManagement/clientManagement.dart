@@ -441,6 +441,7 @@ class _ClientManagementState extends State<ClientManagement> {
                                 ],
                               ),
                               child: DropdownButtonFormField<String>(
+                                dropdownColor: Colors.white,
                                 value: _selectedShow,
                                 decoration: InputDecoration(
                                   contentPadding: const EdgeInsets.symmetric(

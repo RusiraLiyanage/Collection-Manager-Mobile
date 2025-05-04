@@ -4,24 +4,39 @@ class FaqData {
       "platform": "Collection Manager",
       "subjects": [
         {
-          "subject": "Subject A",
+          "subject": "User Management",
           "faqs": [
             {
-              "question": "How to use feature X?",
-              "answer": "You can use feature X by ..."
+              "question": "How do I add a new collector to the system?",
+              "answer":
+                  "Navigate to the Collectors section, click the “+” icon, and fill in the required details such as name, mobile, and email. Assign them to a service office and save to complete the setup."
             },
             {
-              "question": "Where to find setting Y?",
-              "answer": "You can find setting Y in ..."
+              "question":
+                  "Can I deactivate a collector without deleting their data?",
+              "answer":
+                  "Yes. You can mark a collector as inactive by editing their profile and toggling the \“Active\” switch off. Their job history will still remain accessible."
+            },
+            {
+              "question":
+                  " What happens if a collector is unavailable during a scheduled job?",
+              "answer":
+                  " If a collector marks themselves as unavailable, the job will appear flagged in the admin view. You will be prompted to reassign a different available collector."
             }
           ]
         },
         {
-          "subject": "Subject B",
+          "subject": "Collection Reports",
           "faqs": [
             {
-              "question": "What is the latest update?",
-              "answer": "The latest update includes ..."
+              "question": "How are collection reports submitted by collectors?",
+              "answer":
+                  "Collectors can submit batch results through the Collection Reports section of the app. The status will update in real time to indicate successful submission or errors."
+            },
+            {
+              "question": "What does \“Send by Collector\” mean in reports?",
+              "answer":
+                  "This status means the report has not yet been submitted. It is pending action from the assigned collector to complete and send the report."
             }
           ]
         }
