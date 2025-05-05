@@ -6,6 +6,8 @@ import 'package:project_code_blue/AppState/appState.dart';
 import 'package:project_code_blue/ColorSchemas/AppColors.dart';
 import 'package:project_code_blue/screens/Login/loginScreen.dart';
 import 'package:project_code_blue/screens/Notifications/notifications.dart';
+import 'package:project_code_blue/screens/OnsiteJobs/widgets/cancelJobConfirmationModal.dart';
+import 'package:project_code_blue/screens/OnsiteJobs/widgets/logOutConfirmationModal.dart';
 import 'package:provider/provider.dart';
 
 class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -86,11 +88,16 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
             color: Colors.white,
             onSelected: (String result) {
               if (result == 'logout') {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => LoginScreen(),
-                  ),
+                Future.delayed(
+                  Duration(milliseconds: 200),
+                  () {
+                    showDialog(
+                      context: context,
+                      barrierDismissible: true,
+                      builder: (BuildContext context) =>
+                          const LogOutConfirmationModal(),
+                    );
+                  },
                 );
               }
             },
