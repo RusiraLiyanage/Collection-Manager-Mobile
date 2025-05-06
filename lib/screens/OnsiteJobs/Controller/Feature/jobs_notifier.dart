@@ -22,6 +22,7 @@ class JobsNotifier extends BaseNotifier {
     if (response.isSuccess()) {
       jobs = response.data ?? [];
       uiState = UiState.success;
+      //uiState = UiState.error;
       notifyListeners();
       return jobs;
     } else {

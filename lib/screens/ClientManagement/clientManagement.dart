@@ -662,6 +662,7 @@ class _ClientManagementState extends State<ClientManagement> {
                                 height: 28,
                                 child: DropdownButtonFormField<String>(
                                   focusColor: Colors.white,
+                                  dropdownColor: Colors.white,
                                   value: _selectedFilteringValue,
                                   decoration: InputDecoration(
                                     contentPadding: const EdgeInsets.symmetric(
@@ -763,9 +764,9 @@ class _ClientManagementState extends State<ClientManagement> {
                                 ),
                               ),
 
-                              SizedBox(
+                              /*    SizedBox(
                                 width: 10,
-                              ),
+                              ), */
 
                               // Right Arrow
                               GestureDetector(
@@ -979,6 +980,8 @@ class _ClientManagementState extends State<ClientManagement> {
                                                             DropdownButtonFormField<
                                                                 String>(
                                                           focusColor:
+                                                              Colors.white,
+                                                          dropdownColor:
                                                               Colors.white,
                                                           value:
                                                               _selectedFilteringValueAchieved,
