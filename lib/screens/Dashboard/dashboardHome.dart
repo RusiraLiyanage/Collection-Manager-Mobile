@@ -266,7 +266,7 @@ class _DashboardHomeState extends State<DashboardHome> {
                               ),
                               Platform.isIOS
                                   ? SizedBox(width: 40)
-                                  : SizedBox(width: 0),
+                                  : SizedBox(width: 20),
                               Container(
                                 width: 190,
                                 height: 28,

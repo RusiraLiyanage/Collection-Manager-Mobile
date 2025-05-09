@@ -279,7 +279,6 @@ class _onSiteJobsHomeState extends State<OnsiteJobsHome> {
         });
       }
     });
-
     // Add listener to monitor scroll changes
     _scrollController.addListener(() {
       // Check if the scroll position is at the bottom

@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:project_code_blue/ColorSchemas/AppColors.dart';
 import 'package:project_code_blue/screens/Login/loginScreen.dart';
-import 'package:project_code_blue/tabs/tabs_page.dart';
 import 'package:flutter/services.dart';
 
 class SplashScreen extends StatefulWidget {

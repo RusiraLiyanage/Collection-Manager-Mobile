@@ -1,8 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:project_code_blue/AppState/appState.dart';
-import 'package:project_code_blue/screens/Home/homePage.dart';
-import 'package:project_code_blue/tabs/tabs_page.dart';
 import 'package:provider/provider.dart';
 
 class GlobalErrorModel extends StatelessWidget {

@@ -1,14 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-import 'package:project_code_blue/ColorSchemas/AppColors.dart';
 import 'package:project_code_blue/SplashScreen/splashScreen.dart';
 import 'package:project_code_blue/screens/OnsiteJobs/Controller/Feature/jobs_api.dart';
 import 'package:project_code_blue/screens/OnsiteJobs/Controller/Feature/jobs_notifier.dart';
 import 'package:project_code_blue/screens/OnsiteJobs/Controller/Feature/utils/api/api_service.dart';
 import 'package:provider/provider.dart';
 import './AppState/appState.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 void main() {
   //WidgetsFlutterBinding.ensureInitialized(); // Ensure plugins are initialized
