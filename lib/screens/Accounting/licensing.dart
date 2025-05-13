@@ -298,6 +298,7 @@ class _LicensingState extends State<Licensing> {
                                           ],
                                         ),
                                         child: DropdownButtonFormField<String>(
+                                          dropdownColor: Colors.white,
                                           value: _selectedBillingCycle,
                                           decoration: InputDecoration(
                                             contentPadding:

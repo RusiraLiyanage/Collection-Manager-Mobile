@@ -21,7 +21,7 @@ class _AccountingDashboardState extends State<AccountingDashboard> {
       TextEditingController(); // Controller for the text field
   DateTime? _selectedStartDate;
   DateTime? _selectedEndDate;
-  bool isMobileClinic = false;
+  bool inclusiveOrExclusive = false;
   String? _selectedValue;
   String? _selectedDateRange;
   final List<String> exports = ['PDF', 'print'];
@@ -292,6 +292,7 @@ class _AccountingDashboardState extends State<AccountingDashboard> {
                                         ],
                                       ),
                                       child: DropdownButtonFormField<String>(
+                                        dropdownColor: Colors.white,
                                         value: _selectedServiceOffice,
                                         decoration: InputDecoration(
                                           contentPadding:
@@ -393,6 +394,7 @@ class _AccountingDashboardState extends State<AccountingDashboard> {
                                         ],
                                       ),
                                       child: DropdownButtonFormField<String>(
+                                        dropdownColor: Colors.white,
                                         value: _selectedClient,
                                         decoration: InputDecoration(
                                           contentPadding:
@@ -497,6 +499,7 @@ class _AccountingDashboardState extends State<AccountingDashboard> {
                                         ],
                                       ),
                                       child: DropdownButtonFormField<String>(
+                                        dropdownColor: Colors.white,
                                         value: _dateRange,
                                         decoration: InputDecoration(
                                           contentPadding:
@@ -731,7 +734,7 @@ class _AccountingDashboardState extends State<AccountingDashboard> {
                               ),
                               Row(
                                 children: [
-                                  isMobileClinic
+                                  inclusiveOrExclusive
                                       ? const Text(
                                           "excluasive",
                                         )
@@ -748,15 +751,15 @@ class _AccountingDashboardState extends State<AccountingDashboard> {
                                     child: Switch(
                                       activeColor: Colors.white,
                                       activeTrackColor: Colors.black,
-                                      value: isMobileClinic,
+                                      value: inclusiveOrExclusive,
                                       onChanged: (value) {
                                         setState(() {
-                                          isMobileClinic = value;
+                                          inclusiveOrExclusive = value;
                                         });
                                       },
                                     ),
                                   ),
-                                  isMobileClinic
+                                  inclusiveOrExclusive
                                       ? const Text(
                                           "inclusive",
                                           style: TextStyle(
@@ -989,7 +992,7 @@ class _AccountingDashboardState extends State<AccountingDashboard> {
                                     ),
                                     const SizedBox(width: 15),
                                     /* Text(
-                                      "${DateFormat('dd/MM/yyyy').format(selectedStartDate)} - ${DateFormat('dd/MM/yyyy').format(selectedEndDate)} | GST ${isMobileClinic ? "inclusive" : "exclusive"}",
+                                      "${DateFormat('dd/MM/yyyy').format(selectedStartDate)} - ${DateFormat('dd/MM/yyyy').format(selectedEndDate)} | GST ${inclusiveOrExclusive ? "inclusive" : "exclusive"}",
                                       style: TextStyle(color: Colors.black),
                                     ), */
                                   ],
@@ -1061,9 +1064,10 @@ class _AccountingDashboardState extends State<AccountingDashboard> {
                                         double gst =
                                             double.tryParse(gstStr) ?? 0.0;
 
-                                        double finalAmount = isMobileClinic
-                                            ? (amount - gst)
-                                            : amount;
+                                        double finalAmount =
+                                            inclusiveOrExclusive
+                                                ? (amount - gst)
+                                                : amount;
                                         String displayedAmount =
                                             "\$${finalAmount.toStringAsFixed(2)}";
 
@@ -1167,7 +1171,7 @@ class _AccountingDashboardState extends State<AccountingDashboard> {
                       });
 
                       // 🔹 Calculate the final amount
-                      double finalAmount = isMobileClinic
+                      double finalAmount = inclusiveOrExclusive
                           ? (totalAmount - totalGst)
                           : totalAmount;
                       String displayedAmount =
@@ -1193,7 +1197,7 @@ class _AccountingDashboardState extends State<AccountingDashboard> {
                                   ),
                                   const SizedBox(width: 15),
                                   Text(
-                                    "${DateFormat('dd/MM/yyyy').format(selectedStartDate)} - ${DateFormat('dd/MM/yyyy').format(selectedEndDate)} | GST ${isMobileClinic ? "inclusive" : "exclusive"}",
+                                    "${DateFormat('dd/MM/yyyy').format(selectedStartDate)} - ${DateFormat('dd/MM/yyyy').format(selectedEndDate)} | GST ${inclusiveOrExclusive ? "inclusive" : "exclusive"}",
                                     style: TextStyle(
                                       color: Colors.black,
                                       fontSize: 15,

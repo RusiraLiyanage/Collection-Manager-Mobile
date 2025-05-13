@@ -312,6 +312,7 @@ class _TestsState extends State<Tests> {
                                           ],
                                         ),
                                         child: DropdownButtonFormField<String>(
+                                          dropdownColor: Colors.white,
                                           value: _selectedBillingCycle,
                                           decoration: InputDecoration(
                                             contentPadding:

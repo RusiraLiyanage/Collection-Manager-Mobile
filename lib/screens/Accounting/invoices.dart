@@ -173,6 +173,7 @@ class _InvoicesState extends State<Invoices> {
                                         ],
                                       ),
                                       child: DropdownButtonFormField<String>(
+                                        dropdownColor: Colors.white,
                                         value: _selectedInvoiceType,
                                         decoration: InputDecoration(
                                           contentPadding:
@@ -274,6 +275,7 @@ class _InvoicesState extends State<Invoices> {
                                         ],
                                       ),
                                       child: DropdownButtonFormField<String>(
+                                        dropdownColor: Colors.white,
                                         value: _selectedDisplayType,
                                         decoration: InputDecoration(
                                           contentPadding:
@@ -378,6 +380,7 @@ class _InvoicesState extends State<Invoices> {
                                         ],
                                       ),
                                       child: DropdownButtonFormField<String>(
+                                        dropdownColor: Colors.white,
                                         value: _selectedYear,
                                         decoration: InputDecoration(
                                           contentPadding:

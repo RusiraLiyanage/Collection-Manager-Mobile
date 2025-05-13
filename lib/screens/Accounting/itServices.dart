@@ -423,6 +423,7 @@ class _ITServicesState extends State<ITServices> {
                                           ],
                                         ),
                                         child: DropdownButtonFormField<String>(
+                                          dropdownColor: Colors.white,
                                           value: _selectedBillingCycle,
                                           decoration: InputDecoration(
                                             contentPadding:
