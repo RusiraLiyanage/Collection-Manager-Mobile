@@ -8,6 +8,7 @@ class JobModel {
   String? rep;
   String? location;
   String? service;
+  String? jobTypeMain;
   String? callout;
   String? reportID;
   String? sentByStatus;
@@ -22,6 +23,7 @@ class JobModel {
     this.rep,
     this.location,
     this.service,
+    this.jobTypeMain,
     this.callout,
     this.reportID,
     this.sentByStatus,
@@ -42,6 +44,7 @@ class JobModel {
         client: json["client"] ?? null,
         rep: json["rep"] ?? null,
         service: json["service"] ?? null,
+        jobTypeMain: json["jobTypeMain"] ?? null,
         callout: json["callout"] ?? null,
         reportID: json["reportID"] ?? null,
         sentByStatus: json["sentByStatus"] ?? null,
@@ -62,6 +65,7 @@ class JobModel {
         "client": client,
         "rep": rep,
         "service": service,
+        "jobTypeMain": jobTypeMain,
         "callout": callout,
         "reportID": reportID,
         "sentByStatus": sentByStatus,

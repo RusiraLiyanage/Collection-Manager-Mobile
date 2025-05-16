@@ -11,7 +11,6 @@ import 'package:project_code_blue/screens/OnsiteJobs/NewOnsiteJob/Components/Tes
 import 'package:project_code_blue/screens/OnsiteJobs/NewOnsiteJob/Components/TestsAndDevices/categoryField.dart';
 import 'package:project_code_blue/screens/OnsiteJobs/NewOnsiteJob/Components/TestsAndDevices/limitField.dart';
 import 'package:project_code_blue/screens/OnsiteJobs/NewOnsiteJob/Components/TestsAndDevices/sitOutTimeField.dart';
-import 'package:project_code_blue/screens/OnsiteJobs/NewOnsiteJob/Components/TypeOneFields/customizedTypeOne.dart';
 import 'package:project_code_blue/screens/OnsiteJobs/NewOnsiteJob/Components/TypeOneFields/customizedTypeTwo.dart';
 import 'package:project_code_blue/screens/OnsiteJobs/NewOnsiteJob/Components/extraInfoFormField.dart';
 
@@ -51,6 +50,18 @@ class _NewOnsiteJobState extends State<NewOnsiteJob> {
   List<Collector> collectors = List.empty(growable: true);
 
   final List<String> _sites = ['Site 1', 'Site 2', 'Site 3'];
+
+  final List<String> _drugTestSpecifications = [
+    'Oral Fluid Drug Screen',
+    'Oral Fluid Drug Screen',
+    'Oral Fluid Drug Screen'
+  ];
+
+  final List<String> _availablePreferredDevices = [
+    'Device 1',
+    'Device 2',
+    'Device 3'
+  ];
 
   Map<String, List<SiteContact>> siteContactsMap = {
     'Site 1': [
@@ -415,7 +426,25 @@ class _NewOnsiteJobState extends State<NewOnsiteJob> {
     'Client C': 'Ref-003',
   };
 
+  final Map<String, String> _typeOfServicesData = {
+    'Random Testing': 'Ref-001',
+    'Blanket Testing': 'Ref-002',
+    'For Cause': 'Ref-003',
+    "Incident Testing": "Ref-004",
+    "Pre-employment": "Ref-005",
+    "Return to work": "Ref-006",
+    "Court Order Medical": "Ref-007",
+    "Medical Review Officer (MRO)": "Ref-008",
+    "Aviation Medical": "Ref-009",
+    "Driving Medical": "Ref-010",
+    "Diving Medical": "Ref-011",
+    "Mining Medical": "Ref-012",
+    "Rail Medical": "Ref-013"
+  };
+
   List<String> get _clientNames => _clientData.keys.toList();
+
+  List<String> get _typeOfServices => _typeOfServicesData.keys.toList();
 
   final List<String> _clientReferences = [
     'Reference X',
@@ -434,6 +463,10 @@ class _NewOnsiteJobState extends State<NewOnsiteJob> {
   int minutes = 0;
 
   bool isMobileClinic = false;
+
+  bool isPrimaryLocation = false;
+
+  bool isRemoteWork = false;
 
   bool collectorSelected = false;
 
@@ -1075,7 +1108,6 @@ class _NewOnsiteJobState extends State<NewOnsiteJob> {
             ),
             child: SizedBox(
               width: double.infinity,
-              height: 490,
               child: Card(
                 surfaceTintColor: Colors.white,
                 color: Colors.white,
@@ -1091,6 +1123,7 @@ class _NewOnsiteJobState extends State<NewOnsiteJob> {
                     right: 16.0,
                   ),
                   child: Column(
+                    mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
@@ -1119,13 +1152,22 @@ class _NewOnsiteJobState extends State<NewOnsiteJob> {
                           // Left-aligned title
                           Row(
                             children: [
-                              Text(
-                                "In Clinc",
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
+                              !isMobileClinic
+                                  ? Text(
+                                      "In House",
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.blue,
+                                      ),
+                                    )
+                                  : Text(
+                                      "In House",
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
                               Transform.scale(
                                 scale: 0.7,
                                 child: Switch(
@@ -1139,11 +1181,59 @@ class _NewOnsiteJobState extends State<NewOnsiteJob> {
                                   },
                                 ),
                               ),
-                              Text(
-                                "Mobile Clinc",
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.bold,
+                              isMobileClinic
+                                  ? Text(
+                                      "Mobile Clinc",
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.blue,
+                                      ),
+                                    )
+                                  : Text(
+                                      "Mobile Clinc",
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                            ],
+                          ),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          // Left-aligned title
+                          Row(
+                            children: [
+                              isRemoteWork
+                                  ? Text(
+                                      "Remote Work",
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.blue,
+                                      ),
+                                    )
+                                  : Text(
+                                      "Remote Work",
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                              Transform.scale(
+                                scale: 0.7,
+                                child: Switch(
+                                  activeColor: Colors.white,
+                                  activeTrackColor: Colors.black,
+                                  value: isRemoteWork,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      isRemoteWork = value;
+                                    });
+                                  },
                                 ),
                               ),
                             ],
@@ -1970,7 +2060,246 @@ class _NewOnsiteJobState extends State<NewOnsiteJob> {
                                     color: Colors.grey,
                                   ),
                                 ),
-                                CustomizedTypeOne(
+                                Platform.isIOS
+                                    ? Material(
+                                        elevation: 4,
+                                        shadowColor:
+                                            Colors.black.withOpacity(0.5),
+                                        borderRadius: BorderRadius.circular(4),
+                                        child: Container(
+                                          height: 40,
+                                          width: 206,
+                                          color: Colors.white,
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 0),
+                                          alignment: Alignment.center,
+                                          child: DropdownSearch<String>(
+                                            key: _typeOfServiceKey,
+                                            items: _typeOfServices,
+                                            selectedItem:
+                                                _typeOfServiceController
+                                                        .text.isNotEmpty
+                                                    ? _typeOfServiceController
+                                                        .text
+                                                    : null,
+                                            popupProps: PopupProps.menu(
+                                              showSearchBox: true,
+                                              fit: FlexFit.tight,
+                                              searchFieldProps: TextFieldProps(
+                                                decoration: InputDecoration(
+                                                  hintText: "Type of Service",
+                                                  border: OutlineInputBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            4),
+                                                    borderSide:
+                                                        const BorderSide(
+                                                            color:
+                                                                Colors.white),
+                                                  ),
+                                                  contentPadding:
+                                                      const EdgeInsets
+                                                          .symmetric(
+                                                          vertical: 5,
+                                                          horizontal: 12),
+                                                ),
+                                              ),
+                                              menuProps: const MenuProps(
+                                                backgroundColor: Colors.white,
+                                                elevation: 4,
+                                              ),
+                                            ),
+                                            dropdownDecoratorProps:
+                                                DropDownDecoratorProps(
+                                              baseStyle: const TextStyle(
+                                                fontSize:
+                                                    16, // 👈 This controls the selected item's font size
+                                                color: Colors.black,
+                                              ),
+                                              dropdownSearchDecoration:
+                                                  InputDecoration(
+                                                filled: true,
+                                                fillColor: Colors.white,
+                                                hintText: 'Type of service',
+                                                border: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(4),
+                                                  borderSide: const BorderSide(
+                                                      color: Colors.white,
+                                                      width: 2),
+                                                ),
+                                                enabledBorder:
+                                                    OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(4),
+                                                  borderSide: const BorderSide(
+                                                      color: Colors.white,
+                                                      width: 2),
+                                                ),
+                                                focusedBorder:
+                                                    OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(4),
+                                                  borderSide: const BorderSide(
+                                                      color: Colors.white,
+                                                      width: 2),
+                                                ),
+                                                errorBorder: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(4),
+                                                  borderSide: const BorderSide(
+                                                      color: Colors.red,
+                                                      width: 2),
+                                                ),
+                                                contentPadding:
+                                                    const EdgeInsets.symmetric(
+                                                        vertical: 2,
+                                                        horizontal: 12),
+                                              ),
+                                            ),
+                                            validator: (value) {
+                                              if (value == null ||
+                                                  value.isEmpty) {
+                                                return 'select a Type of Service';
+                                              }
+                                              return null;
+                                            },
+                                            onChanged: (String? newValue) {
+                                              if (newValue != null) {
+                                                _typeOfServiceController.text =
+                                                    newValue;
+
+                                                _typeOfServiceKey.currentState
+                                                    ?.validate();
+                                              }
+                                            },
+                                            onSaved: (String? value) {
+                                              _selectedTypeOfService = value;
+                                            },
+                                          ),
+                                        ),
+                                      )
+                                    : Material(
+                                        elevation: 4,
+                                        shadowColor:
+                                            Colors.black.withOpacity(0.5),
+                                        borderRadius: BorderRadius.circular(4),
+                                        child: Container(
+                                          height: 40,
+                                          width: 206,
+                                          color: Colors.white,
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 0),
+                                          alignment: Alignment.center,
+                                          child: DropdownSearch<String>(
+                                            key: _typeOfServiceKey,
+                                            items: _typeOfServices,
+                                            selectedItem:
+                                                _typeOfServiceController
+                                                        .text.isNotEmpty
+                                                    ? _typeOfServiceController
+                                                        .text
+                                                    : null,
+                                            popupProps: PopupProps.menu(
+                                              showSearchBox: true,
+                                              fit: FlexFit.tight,
+                                              searchFieldProps: TextFieldProps(
+                                                decoration: InputDecoration(
+                                                  hintText:
+                                                      "Search Type of Service",
+                                                  border: OutlineInputBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            4),
+                                                    borderSide:
+                                                        const BorderSide(
+                                                            color:
+                                                                Colors.white),
+                                                  ),
+                                                  contentPadding:
+                                                      const EdgeInsets
+                                                          .symmetric(
+                                                          vertical: 5,
+                                                          horizontal: 12),
+                                                ),
+                                              ),
+                                              menuProps: const MenuProps(
+                                                backgroundColor: Colors.white,
+                                                elevation: 4,
+                                              ),
+                                            ),
+                                            dropdownDecoratorProps:
+                                                DropDownDecoratorProps(
+                                              baseStyle: const TextStyle(
+                                                fontSize:
+                                                    16, // 👈 This controls the selected item's font size
+                                                color: Colors.black,
+                                              ),
+                                              dropdownSearchDecoration:
+                                                  InputDecoration(
+                                                filled: true,
+                                                fillColor: Colors.white,
+                                                hintText:
+                                                    'Type type of service',
+                                                border: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(4),
+                                                  borderSide: const BorderSide(
+                                                      color: Colors.white,
+                                                      width: 2),
+                                                ),
+                                                enabledBorder:
+                                                    OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(4),
+                                                  borderSide: const BorderSide(
+                                                      color: Colors.white,
+                                                      width: 2),
+                                                ),
+                                                focusedBorder:
+                                                    OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(4),
+                                                  borderSide: const BorderSide(
+                                                      color: Colors.white,
+                                                      width: 2),
+                                                ),
+                                                errorBorder: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(4),
+                                                  borderSide: const BorderSide(
+                                                      color: Colors.red,
+                                                      width: 2),
+                                                ),
+                                                contentPadding:
+                                                    const EdgeInsets.symmetric(
+                                                        vertical: 5,
+                                                        horizontal: 12),
+                                              ),
+                                            ),
+                                            validator: (value) {
+                                              if (value == null ||
+                                                  value.isEmpty) {
+                                                return 'Please select a Type of Service';
+                                              }
+                                              return null;
+                                            },
+                                            onChanged: (String? newValue) {
+                                              if (newValue != null) {
+                                                _typeOfServiceController.text =
+                                                    newValue;
+
+                                                _typeOfServiceKey.currentState
+                                                    ?.validate();
+                                              }
+                                            },
+                                            onSaved: (String? value) {
+                                              _selectedTypeOfService = value;
+                                            },
+                                          ),
+                                        ),
+                                      ),
+                                /* CustomizedTypeOne(
                                   width: 206,
                                   height: 40,
                                   controller: _typeOfServiceController,
@@ -1991,7 +2320,7 @@ class _NewOnsiteJobState extends State<NewOnsiteJob> {
                                     }
                                     return null;
                                   },
-                                ),
+                                ), */
                               ],
                             ),
                           ),
@@ -2053,6 +2382,61 @@ class _NewOnsiteJobState extends State<NewOnsiteJob> {
                       ),
                       Column(
                         children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              // Left-aligned title
+                              Row(
+                                children: [
+                                  !isPrimaryLocation
+                                      ? Text(
+                                          "Primary",
+                                          style: TextStyle(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.blue,
+                                          ),
+                                        )
+                                      : Text(
+                                          "Primary",
+                                          style: TextStyle(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                  Transform.scale(
+                                    scale: 0.7,
+                                    child: Switch(
+                                      activeColor: Colors.white,
+                                      activeTrackColor: Colors.black,
+                                      value: isPrimaryLocation,
+                                      onChanged: (value) {
+                                        setState(() {
+                                          isPrimaryLocation = value;
+                                        });
+                                      },
+                                    ),
+                                  ),
+                                  isPrimaryLocation
+                                      ? Text(
+                                          "Ad Hoc",
+                                          style: TextStyle(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.blue,
+                                          ),
+                                        )
+                                      : Text(
+                                          "Ad Hoc",
+                                          style: TextStyle(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                ],
+                              ),
+                            ],
+                          ),
                           Padding(
                             padding: const EdgeInsets.only(
                               left: 0.0,
@@ -4682,17 +5066,25 @@ class _NewOnsiteJobState extends State<NewOnsiteJob> {
                                                 SizedBox(
                                                   height: 5,
                                                 ),
-                                                DrugTestFormField(
+                                                DrugTestDropdownFormField(
                                                   fieldKey:
                                                       _primaryTestSpecificationsKey,
-                                                  controller:
-                                                      _primaryDrugTestController,
+                                                  items:
+                                                      _drugTestSpecifications,
+                                                  hintText:
+                                                      "Select Primary Drug Test",
+                                                  selectedItem:
+                                                      _primaryDrugTestController
+                                                              .text.isNotEmpty
+                                                          ? _primaryDrugTestController
+                                                              .text
+                                                          : null,
                                                   onChanged: (value) {
                                                     setState(() {
                                                       // Update the number of donors and the text controller
                                                       _primaryDrugTestController
                                                               .text =
-                                                          value; // Manually update the controller text
+                                                          value!; // Manually update the controller text
                                                       _primaryTestSpecificationsKey
                                                           .currentState!
                                                           .validate();
@@ -4706,6 +5098,7 @@ class _NewOnsiteJobState extends State<NewOnsiteJob> {
                                                     }
                                                     return null;
                                                   },
+                                                  onSaved: (value) {},
                                                 ),
                                               ],
                                             ),
@@ -4743,12 +5136,14 @@ class _NewOnsiteJobState extends State<NewOnsiteJob> {
                                                       _selectPreferedPrimaryDeviceKey,
                                                   controller:
                                                       _primaryDrugTestPreferredDeviceController,
+                                                  items:
+                                                      _availablePreferredDevices,
                                                   onChanged: (value) {
                                                     setState(() {
                                                       // Update the number of donors and the text controller
                                                       _primaryDrugTestPreferredDeviceController
                                                               .text =
-                                                          value; // Manually update the controller text
+                                                          value!; // Manually update the controller text
                                                       _selectPreferedPrimaryDeviceKey
                                                           .currentState!
                                                           .validate();
@@ -4811,17 +5206,25 @@ class _NewOnsiteJobState extends State<NewOnsiteJob> {
                                                 SizedBox(
                                                   height: 5,
                                                 ),
-                                                DrugTestFormField(
+                                                DrugTestDropdownFormField(
                                                   fieldKey:
                                                       _secondaryDrugTestKey,
-                                                  controller:
-                                                      _secondaryDrugTestController,
+                                                  items:
+                                                      _drugTestSpecifications,
+                                                  hintText:
+                                                      "Select Secondary Drug Test",
+                                                  selectedItem:
+                                                      _secondaryDrugTestController
+                                                              .text.isNotEmpty
+                                                          ? _secondaryDrugTestController
+                                                              .text
+                                                          : null,
                                                   onChanged: (value) {
                                                     setState(() {
                                                       // Update the number of donors and the text controller
                                                       _secondaryDrugTestController
                                                               .text =
-                                                          value; // Manually update the controller text
+                                                          value!; // Manually update the controller text
                                                       _secondaryDrugTestKey
                                                           .currentState!
                                                           .validate();
@@ -4831,10 +5234,11 @@ class _NewOnsiteJobState extends State<NewOnsiteJob> {
                                                     if (_secondaryDrugTestController
                                                             .text ==
                                                         "") {
-                                                      return 'Please enter a valid drug test name';
+                                                      return 'Please enter the secondary drug test name';
                                                     }
                                                     return null;
                                                   },
+                                                  onSaved: (value) {},
                                                 ),
                                               ],
                                             ),
@@ -4872,12 +5276,14 @@ class _NewOnsiteJobState extends State<NewOnsiteJob> {
                                                       _selectPreferedSecondaryDeviceKey,
                                                   controller:
                                                       _secondaryDrugTestPreferredDeviceController,
+                                                  items:
+                                                      _availablePreferredDevices,
                                                   onChanged: (value) {
                                                     setState(() {
                                                       // Update the number of donors and the text controller
                                                       _secondaryDrugTestPreferredDeviceController
                                                               .text =
-                                                          value; // Manually update the controller text
+                                                          value!; // Manually update the controller text
                                                       _selectPreferedSecondaryDeviceKey
                                                           .currentState!
                                                           .validate();
@@ -4937,17 +5343,25 @@ class _NewOnsiteJobState extends State<NewOnsiteJob> {
                                                 SizedBox(
                                                   height: 5,
                                                 ),
-                                                DrugTestFormField(
+                                                DrugTestDropdownFormField(
                                                   fieldKey:
                                                       _thirtoryDrugTestKey,
-                                                  controller:
-                                                      _thirteryDrugTestController,
+                                                  items:
+                                                      _drugTestSpecifications,
+                                                  hintText:
+                                                      "Select tertiary Drug Test",
+                                                  selectedItem:
+                                                      _thirteryDrugTestController
+                                                              .text.isNotEmpty
+                                                          ? _thirteryDrugTestController
+                                                              .text
+                                                          : null,
                                                   onChanged: (value) {
                                                     setState(() {
                                                       // Update the number of donors and the text controller
                                                       _thirteryDrugTestController
                                                               .text =
-                                                          value; // Manually update the controller text
+                                                          value!; // Manually update the controller text
                                                       _thirtoryDrugTestKey
                                                           .currentState!
                                                           .validate();
@@ -4957,10 +5371,11 @@ class _NewOnsiteJobState extends State<NewOnsiteJob> {
                                                     if (_thirteryDrugTestController
                                                             .text ==
                                                         "") {
-                                                      return 'Please enter a valid drug test name';
+                                                      return 'Please enter the tertiary drug test name';
                                                     }
                                                     return null;
                                                   },
+                                                  onSaved: (value) {},
                                                 ),
                                               ],
                                             ),
@@ -4998,12 +5413,14 @@ class _NewOnsiteJobState extends State<NewOnsiteJob> {
                                                       _selectPreferedThirtoryDeviceKey,
                                                   controller:
                                                       _thirteryDrugTestPreferredDeviceController,
+                                                  items:
+                                                      _availablePreferredDevices,
                                                   onChanged: (value) {
                                                     setState(() {
                                                       // Update the number of donors and the text controller
                                                       _thirteryDrugTestPreferredDeviceController
                                                               .text =
-                                                          value; // Manually update the controller text
+                                                          value!; // Manually update the controller text
                                                       _selectPreferedThirtoryDeviceKey
                                                           .currentState!
                                                           .validate();
@@ -5091,17 +5508,26 @@ class _NewOnsiteJobState extends State<NewOnsiteJob> {
                                                     SizedBox(
                                                       height: 5,
                                                     ),
-                                                    DrugTestFormField(
+                                                    DrugTestDropdownFormField(
                                                       fieldKey:
                                                           _primaryTestSpecificationsKey,
-                                                      controller:
-                                                          _primaryDrugTestController,
+                                                      items:
+                                                          _drugTestSpecifications,
+                                                      hintText:
+                                                          "Select Primary Drug Test",
+                                                      selectedItem:
+                                                          _primaryDrugTestController
+                                                                  .text
+                                                                  .isNotEmpty
+                                                              ? _primaryDrugTestController
+                                                                  .text
+                                                              : null,
                                                       onChanged: (value) {
                                                         setState(() {
                                                           // Update the number of donors and the text controller
                                                           _primaryDrugTestController
                                                                   .text =
-                                                              value; // Manually update the controller text
+                                                              value!; // Manually update the controller text
                                                           _primaryTestSpecificationsKey
                                                               .currentState!
                                                               .validate();
@@ -5115,6 +5541,7 @@ class _NewOnsiteJobState extends State<NewOnsiteJob> {
                                                         }
                                                         return null;
                                                       },
+                                                      onSaved: (value) {},
                                                     ),
                                                   ],
                                                 ),
@@ -5153,12 +5580,14 @@ class _NewOnsiteJobState extends State<NewOnsiteJob> {
                                                           _selectPreferedPrimaryDeviceKey,
                                                       controller:
                                                           _primaryDrugTestPreferredDeviceController,
+                                                      items:
+                                                          _availablePreferredDevices,
                                                       onChanged: (value) {
                                                         setState(() {
                                                           // Update the number of donors and the text controller
                                                           _primaryDrugTestPreferredDeviceController
                                                                   .text =
-                                                              value; // Manually update the controller text
+                                                              value!; // Manually update the controller text
                                                           _selectPreferedPrimaryDeviceKey
                                                               .currentState!
                                                               .validate();
@@ -5224,17 +5653,26 @@ class _NewOnsiteJobState extends State<NewOnsiteJob> {
                                                     SizedBox(
                                                       height: 5,
                                                     ),
-                                                    DrugTestFormField(
+                                                    DrugTestDropdownFormField(
                                                       fieldKey:
                                                           _secondaryDrugTestKey,
-                                                      controller:
-                                                          _secondaryDrugTestController,
+                                                      items:
+                                                          _drugTestSpecifications,
+                                                      hintText:
+                                                          "Select Secondary Drug Test",
+                                                      selectedItem:
+                                                          _secondaryDrugTestController
+                                                                  .text
+                                                                  .isNotEmpty
+                                                              ? _secondaryDrugTestController
+                                                                  .text
+                                                              : null,
                                                       onChanged: (value) {
                                                         setState(() {
                                                           // Update the number of donors and the text controller
                                                           _secondaryDrugTestController
                                                                   .text =
-                                                              value; // Manually update the controller text
+                                                              value!; // Manually update the controller text
                                                           _secondaryDrugTestKey
                                                               .currentState!
                                                               .validate();
@@ -5244,10 +5682,11 @@ class _NewOnsiteJobState extends State<NewOnsiteJob> {
                                                         if (_secondaryDrugTestController
                                                                 .text ==
                                                             "") {
-                                                          return 'Please enter a valid drug test name';
+                                                          return 'Please enter the secondary drug test name';
                                                         }
                                                         return null;
                                                       },
+                                                      onSaved: (value) {},
                                                     ),
                                                   ],
                                                 ),
@@ -5286,12 +5725,14 @@ class _NewOnsiteJobState extends State<NewOnsiteJob> {
                                                           _selectPreferedSecondaryDeviceKey,
                                                       controller:
                                                           _secondaryDrugTestPreferredDeviceController,
+                                                      items:
+                                                          _availablePreferredDevices,
                                                       onChanged: (value) {
                                                         setState(() {
                                                           // Update the number of donors and the text controller
                                                           _secondaryDrugTestPreferredDeviceController
                                                                   .text =
-                                                              value; // Manually update the controller text
+                                                              value!; // Manually update the controller text
                                                           _selectPreferedSecondaryDeviceKey
                                                               .currentState!
                                                               .validate();
@@ -5354,17 +5795,26 @@ class _NewOnsiteJobState extends State<NewOnsiteJob> {
                                                     SizedBox(
                                                       height: 5,
                                                     ),
-                                                    DrugTestFormField(
+                                                    DrugTestDropdownFormField(
                                                       fieldKey:
                                                           _thirtoryDrugTestKey,
-                                                      controller:
-                                                          _thirteryDrugTestController,
+                                                      items:
+                                                          _drugTestSpecifications,
+                                                      hintText:
+                                                          "Select tertiary Drug Test",
+                                                      selectedItem:
+                                                          _thirteryDrugTestController
+                                                                  .text
+                                                                  .isNotEmpty
+                                                              ? _thirteryDrugTestController
+                                                                  .text
+                                                              : null,
                                                       onChanged: (value) {
                                                         setState(() {
                                                           // Update the number of donors and the text controller
                                                           _thirteryDrugTestController
                                                                   .text =
-                                                              value; // Manually update the controller text
+                                                              value!; // Manually update the controller text
                                                           _thirtoryDrugTestKey
                                                               .currentState!
                                                               .validate();
@@ -5374,10 +5824,11 @@ class _NewOnsiteJobState extends State<NewOnsiteJob> {
                                                         if (_thirteryDrugTestController
                                                                 .text ==
                                                             "") {
-                                                          return 'Please enter a valid drug test name';
+                                                          return 'Please enter the tertiary drug test name';
                                                         }
                                                         return null;
                                                       },
+                                                      onSaved: (value) {},
                                                     ),
                                                   ],
                                                 ),
@@ -5416,12 +5867,14 @@ class _NewOnsiteJobState extends State<NewOnsiteJob> {
                                                           _selectPreferedThirtoryDeviceKey,
                                                       controller:
                                                           _thirteryDrugTestPreferredDeviceController,
+                                                      items:
+                                                          _availablePreferredDevices,
                                                       onChanged: (value) {
                                                         setState(() {
                                                           // Update the number of donors and the text controller
                                                           _thirteryDrugTestPreferredDeviceController
                                                                   .text =
-                                                              value; // Manually update the controller text
+                                                              value!; // Manually update the controller text
                                                           _selectPreferedThirtoryDeviceKey
                                                               .currentState!
                                                               .validate();

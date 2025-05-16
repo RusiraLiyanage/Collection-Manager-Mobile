@@ -9,6 +9,7 @@
       "rep": "John De Diablo",
       "location": "Parramatta",
       "service": "Random Testing",
+      "jobTypeMain": "Mobile Clinic",
       "callout": "Non Callout",
       "collectors": [
         {
@@ -241,6 +242,7 @@
       "rep": "John Roberts",
       "location": "Parramatta",
       "service": "Random Testing",
+      "jobTypeMain": "Mobile Clinic",
       "callout": "Non Callout",
       "collectors": [
         {
@@ -473,6 +475,7 @@
       "rep": "John Roberts",
       "location": "Parramatta",
       "service": "Random Testing",
+      "jobTypeMain": "Mobile Clinic",
       "callout": "Callout",
       "reportID": "ID123",
       "sentByStatus": "Successfully Sent",
@@ -623,6 +626,7 @@
       "rep": "John Roberts",
       "location": "Parramatta",
       "service": "Random Testing",
+      "jobTypeMain": "Mobile Clinic",
       "callout": "Callout",
       "collectors": [
         {
@@ -771,6 +775,7 @@
       "rep": "John Roberts",
       "location": "Parramatta",
       "service": "Random Testing",
+      "jobTypeMain": "Mobile Clinic",
       "callout": "Callout",
       "collectors": [
         {
@@ -899,6 +904,7 @@
       "rep": "John Roberts",
       "location": "Parramatta",
       "service": "Random Testing",
+      "jobTypeMain": "Mobile Clinic",
       "callout": "Non Callout",
       "collectors": [
         {
@@ -1131,6 +1137,7 @@
       "rep": "John Roberts",
       "location": "Parramatta",
       "service": "Random Testing",
+      "jobTypeMain": "Mobile Clinic",
       "callout": "Non Callout",
       "collectors": [
         {
@@ -1274,6 +1281,7 @@
       "rep": "John Roberts",
       "location": "Parramatta",
       "service": "Random Testing",
+      "jobTypeMain": "Mobile Clinic",
       "callout": "Non Callout",
       "collectors": [
         {
@@ -1417,6 +1425,7 @@
       "rep": "John Roberts",
       "location": "Parramatta",
       "service": "Random Testing",
+      "jobTypeMain": "Mobile Clinic",
       "callout": "Non Callout",
       "collectors": [
         {
@@ -1560,6 +1569,7 @@
       "rep": "John Roberts",
       "location": "Parramatta",
       "service": "Random Testing",
+      "jobTypeMain": "Mobile Clinic",
       "callout": "Non Callout",
       "collectors": [
         {
@@ -1703,6 +1713,7 @@
       "rep": "John Roberts",
       "location": "Parramatta",
       "service": "Random Testing",
+      "jobTypeMain": "Mobile Clinic",
       "callout": "Callout",
       "collectors": [
         {
@@ -1846,6 +1857,7 @@
       "rep": "John Roberts",
       "location": "Parramatta",
       "service": "Random Testing",
+      "jobTypeMain": "Mobile Clinic",
       "callout": "Callout",
       "collectors": [
         {
@@ -1989,6 +2001,7 @@
       "rep": "John Roberts",
       "location": "Parramatta",
       "service": "Random Testing",
+      "jobTypeMain": "Mobile Clinic",
       "callout": "Non Callout",
       "collectors": [
         {
@@ -2132,6 +2145,7 @@
       "rep": "John Roberts",
       "location": "Parramatta",
       "service": "Random Testing",
+      "jobTypeMain": "Mobile Clinic",
       "callout": "Non Callout",
       "collectors": [
         {
@@ -2275,6 +2289,7 @@
       "rep": "John Roberts",
       "location": "Parramatta",
       "service": "Random Testing",
+      "jobTypeMain": "Mobile Clinic",
       "callout": "Non Callout",
       "collectors": [
         {
@@ -2418,6 +2433,7 @@
       "rep": "John Roberts",
       "location": "Parramatta",
       "service": "Random Testing",
+      "jobTypeMain": "Mobile Clinic",
       "callout": "Non Callout",
       "collectors": [
         {
@@ -2561,6 +2577,7 @@
       "rep": "John Roberts",
       "location": "Parramatta",
       "service": "Random Testing",
+      "jobTypeMain": "Mobile Clinic",
       "callout": "Non Callout",
       "collectors": [
         {
@@ -2704,6 +2721,7 @@
       "rep": "John Roberts",
       "location": "Parramatta",
       "service": "Random Testing",
+      "jobTypeMain": "Mobile Clinic",
       "callout": "Non Callout",
       "collectors": [
         {
@@ -2847,6 +2865,7 @@
       "rep": "John Roberts",
       "location": "Parramatta",
       "service": "Random Testing",
+      "jobTypeMain": "Mobile Clinic",
       "callout": "Non Callout",
       "collectors": [
         {
@@ -2990,6 +3009,7 @@
       "rep": "John Roberts",
       "location": "Parramatta",
       "service": "Random Testing",
+      "jobTypeMain": "Mobile Clinic",
       "callout": "Non Callout",
       "collectors": [
         {

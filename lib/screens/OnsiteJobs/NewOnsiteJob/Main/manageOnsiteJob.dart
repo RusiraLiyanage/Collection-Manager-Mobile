@@ -65,6 +65,18 @@ class _NewOnsiteJobState extends State<ManageOnsiteJob> {
   int baseTime = DateTime.now().millisecondsSinceEpoch;
   int counter = 0;
 
+  final List<String> _drugTestSpecifications = [
+    'Oral Fluid Drug Screen',
+    'Oral Fluid Drug Screen',
+    'Oral Fluid Drug Screen'
+  ];
+
+  final List<String> _availablePreferredDevices = [
+    'Device 1',
+    'Device 2',
+    'Device 3'
+  ];
+
   void removeCollector() {
     setState(() {
       numberOfCollectors--; // Decrease count when a collector is deleted
@@ -4908,17 +4920,25 @@ class _NewOnsiteJobState extends State<ManageOnsiteJob> {
                                                 SizedBox(
                                                   height: 5,
                                                 ),
-                                                DrugTestFormField(
+                                                DrugTestDropdownFormField(
                                                   fieldKey:
                                                       _primaryTestSpecificationsKey,
-                                                  controller:
-                                                      _primaryDrugTestController,
+                                                  items:
+                                                      _drugTestSpecifications,
+                                                  hintText:
+                                                      "Select Primary Drug Test",
+                                                  selectedItem:
+                                                      _primaryDrugTestController
+                                                              .text.isNotEmpty
+                                                          ? _primaryDrugTestController
+                                                              .text
+                                                          : null,
                                                   onChanged: (value) {
                                                     setState(() {
                                                       // Update the number of donors and the text controller
                                                       _primaryDrugTestController
                                                               .text =
-                                                          value; // Manually update the controller text
+                                                          value!; // Manually update the controller text
                                                       _primaryTestSpecificationsKey
                                                           .currentState!
                                                           .validate();
@@ -4932,6 +4952,7 @@ class _NewOnsiteJobState extends State<ManageOnsiteJob> {
                                                     }
                                                     return null;
                                                   },
+                                                  onSaved: (value) {},
                                                 ),
                                               ],
                                             ),
@@ -4969,12 +4990,14 @@ class _NewOnsiteJobState extends State<ManageOnsiteJob> {
                                                       _selectPreferedPrimaryDeviceKey,
                                                   controller:
                                                       _primaryDrugTestPreferredDeviceController,
+                                                  items:
+                                                      _availablePreferredDevices,
                                                   onChanged: (value) {
                                                     setState(() {
                                                       // Update the number of donors and the text controller
                                                       _primaryDrugTestPreferredDeviceController
                                                               .text =
-                                                          value; // Manually update the controller text
+                                                          value!; // Manually update the controller text
                                                       _selectPreferedPrimaryDeviceKey
                                                           .currentState!
                                                           .validate();
@@ -5037,17 +5060,25 @@ class _NewOnsiteJobState extends State<ManageOnsiteJob> {
                                                 SizedBox(
                                                   height: 5,
                                                 ),
-                                                DrugTestFormField(
+                                                DrugTestDropdownFormField(
                                                   fieldKey:
                                                       _secondaryDrugTestKey,
-                                                  controller:
-                                                      _secondaryDrugTestController,
+                                                  items:
+                                                      _drugTestSpecifications,
+                                                  hintText:
+                                                      "Select Secondary Drug Test",
+                                                  selectedItem:
+                                                      _secondaryDrugTestController
+                                                              .text.isNotEmpty
+                                                          ? _secondaryDrugTestController
+                                                              .text
+                                                          : null,
                                                   onChanged: (value) {
                                                     setState(() {
                                                       // Update the number of donors and the text controller
                                                       _secondaryDrugTestController
                                                               .text =
-                                                          value; // Manually update the controller text
+                                                          value!; // Manually update the controller text
                                                       _secondaryDrugTestKey
                                                           .currentState!
                                                           .validate();
@@ -5057,10 +5088,11 @@ class _NewOnsiteJobState extends State<ManageOnsiteJob> {
                                                     if (_secondaryDrugTestController
                                                             .text ==
                                                         "") {
-                                                      return 'Please enter a valid drug test name';
+                                                      return 'Please enter the secondary drug test name';
                                                     }
                                                     return null;
                                                   },
+                                                  onSaved: (value) {},
                                                 ),
                                               ],
                                             ),
@@ -5098,12 +5130,14 @@ class _NewOnsiteJobState extends State<ManageOnsiteJob> {
                                                       _selectPreferedSecondaryDeviceKey,
                                                   controller:
                                                       _secondaryDrugTestPreferredDeviceController,
+                                                  items:
+                                                      _availablePreferredDevices,
                                                   onChanged: (value) {
                                                     setState(() {
                                                       // Update the number of donors and the text controller
                                                       _secondaryDrugTestPreferredDeviceController
                                                               .text =
-                                                          value; // Manually update the controller text
+                                                          value!; // Manually update the controller text
                                                       _selectPreferedSecondaryDeviceKey
                                                           .currentState!
                                                           .validate();
@@ -5163,17 +5197,25 @@ class _NewOnsiteJobState extends State<ManageOnsiteJob> {
                                                 SizedBox(
                                                   height: 5,
                                                 ),
-                                                DrugTestFormField(
+                                                DrugTestDropdownFormField(
                                                   fieldKey:
                                                       _thirtoryDrugTestKey,
-                                                  controller:
-                                                      _thirteryDrugTestController,
+                                                  items:
+                                                      _drugTestSpecifications,
+                                                  hintText:
+                                                      "Select tertiary Drug Test",
+                                                  selectedItem:
+                                                      _thirteryDrugTestController
+                                                              .text.isNotEmpty
+                                                          ? _thirteryDrugTestController
+                                                              .text
+                                                          : null,
                                                   onChanged: (value) {
                                                     setState(() {
                                                       // Update the number of donors and the text controller
                                                       _thirteryDrugTestController
                                                               .text =
-                                                          value; // Manually update the controller text
+                                                          value!; // Manually update the controller text
                                                       _thirtoryDrugTestKey
                                                           .currentState!
                                                           .validate();
@@ -5183,10 +5225,11 @@ class _NewOnsiteJobState extends State<ManageOnsiteJob> {
                                                     if (_thirteryDrugTestController
                                                             .text ==
                                                         "") {
-                                                      return 'Please enter a valid drug test name';
+                                                      return 'Please enter the tertiary drug test name';
                                                     }
                                                     return null;
                                                   },
+                                                  onSaved: (value) {},
                                                 ),
                                               ],
                                             ),
@@ -5224,12 +5267,14 @@ class _NewOnsiteJobState extends State<ManageOnsiteJob> {
                                                       _selectPreferedThirtoryDeviceKey,
                                                   controller:
                                                       _thirteryDrugTestPreferredDeviceController,
+                                                  items:
+                                                      _availablePreferredDevices,
                                                   onChanged: (value) {
                                                     setState(() {
                                                       // Update the number of donors and the text controller
                                                       _thirteryDrugTestPreferredDeviceController
                                                               .text =
-                                                          value; // Manually update the controller text
+                                                          value!; // Manually update the controller text
                                                       _selectPreferedThirtoryDeviceKey
                                                           .currentState!
                                                           .validate();
@@ -5317,17 +5362,26 @@ class _NewOnsiteJobState extends State<ManageOnsiteJob> {
                                                     SizedBox(
                                                       height: 5,
                                                     ),
-                                                    DrugTestFormField(
+                                                    DrugTestDropdownFormField(
                                                       fieldKey:
                                                           _primaryTestSpecificationsKey,
-                                                      controller:
-                                                          _primaryDrugTestController,
+                                                      items:
+                                                          _drugTestSpecifications,
+                                                      hintText:
+                                                          "Select Primary Drug Test",
+                                                      selectedItem:
+                                                          _primaryDrugTestController
+                                                                  .text
+                                                                  .isNotEmpty
+                                                              ? _primaryDrugTestController
+                                                                  .text
+                                                              : null,
                                                       onChanged: (value) {
                                                         setState(() {
                                                           // Update the number of donors and the text controller
                                                           _primaryDrugTestController
                                                                   .text =
-                                                              value; // Manually update the controller text
+                                                              value!; // Manually update the controller text
                                                           _primaryTestSpecificationsKey
                                                               .currentState!
                                                               .validate();
@@ -5341,6 +5395,7 @@ class _NewOnsiteJobState extends State<ManageOnsiteJob> {
                                                         }
                                                         return null;
                                                       },
+                                                      onSaved: (value) {},
                                                     ),
                                                   ],
                                                 ),
@@ -5379,12 +5434,14 @@ class _NewOnsiteJobState extends State<ManageOnsiteJob> {
                                                           _selectPreferedPrimaryDeviceKey,
                                                       controller:
                                                           _primaryDrugTestPreferredDeviceController,
+                                                      items:
+                                                          _availablePreferredDevices,
                                                       onChanged: (value) {
                                                         setState(() {
                                                           // Update the number of donors and the text controller
                                                           _primaryDrugTestPreferredDeviceController
                                                                   .text =
-                                                              value; // Manually update the controller text
+                                                              value!; // Manually update the controller text
                                                           _selectPreferedPrimaryDeviceKey
                                                               .currentState!
                                                               .validate();
@@ -5450,17 +5507,26 @@ class _NewOnsiteJobState extends State<ManageOnsiteJob> {
                                                     SizedBox(
                                                       height: 5,
                                                     ),
-                                                    DrugTestFormField(
+                                                    DrugTestDropdownFormField(
                                                       fieldKey:
                                                           _secondaryDrugTestKey,
-                                                      controller:
-                                                          _secondaryDrugTestController,
+                                                      items:
+                                                          _drugTestSpecifications,
+                                                      hintText:
+                                                          "Select Secondary Drug Test",
+                                                      selectedItem:
+                                                          _secondaryDrugTestController
+                                                                  .text
+                                                                  .isNotEmpty
+                                                              ? _secondaryDrugTestController
+                                                                  .text
+                                                              : null,
                                                       onChanged: (value) {
                                                         setState(() {
                                                           // Update the number of donors and the text controller
                                                           _secondaryDrugTestController
                                                                   .text =
-                                                              value; // Manually update the controller text
+                                                              value!; // Manually update the controller text
                                                           _secondaryDrugTestKey
                                                               .currentState!
                                                               .validate();
@@ -5470,10 +5536,11 @@ class _NewOnsiteJobState extends State<ManageOnsiteJob> {
                                                         if (_secondaryDrugTestController
                                                                 .text ==
                                                             "") {
-                                                          return 'Please enter a valid drug test name';
+                                                          return 'Please enter the secondary drug test name';
                                                         }
                                                         return null;
                                                       },
+                                                      onSaved: (value) {},
                                                     ),
                                                   ],
                                                 ),
@@ -5512,12 +5579,14 @@ class _NewOnsiteJobState extends State<ManageOnsiteJob> {
                                                           _selectPreferedSecondaryDeviceKey,
                                                       controller:
                                                           _secondaryDrugTestPreferredDeviceController,
+                                                      items:
+                                                          _availablePreferredDevices,
                                                       onChanged: (value) {
                                                         setState(() {
                                                           // Update the number of donors and the text controller
                                                           _secondaryDrugTestPreferredDeviceController
                                                                   .text =
-                                                              value; // Manually update the controller text
+                                                              value!; // Manually update the controller text
                                                           _selectPreferedSecondaryDeviceKey
                                                               .currentState!
                                                               .validate();
@@ -5580,17 +5649,26 @@ class _NewOnsiteJobState extends State<ManageOnsiteJob> {
                                                     SizedBox(
                                                       height: 5,
                                                     ),
-                                                    DrugTestFormField(
+                                                    DrugTestDropdownFormField(
                                                       fieldKey:
                                                           _thirtoryDrugTestKey,
-                                                      controller:
-                                                          _thirteryDrugTestController,
+                                                      items:
+                                                          _drugTestSpecifications,
+                                                      hintText:
+                                                          "Select tertiary Drug Test",
+                                                      selectedItem:
+                                                          _thirteryDrugTestController
+                                                                  .text
+                                                                  .isNotEmpty
+                                                              ? _thirteryDrugTestController
+                                                                  .text
+                                                              : null,
                                                       onChanged: (value) {
                                                         setState(() {
                                                           // Update the number of donors and the text controller
                                                           _thirteryDrugTestController
                                                                   .text =
-                                                              value; // Manually update the controller text
+                                                              value!; // Manually update the controller text
                                                           _thirtoryDrugTestKey
                                                               .currentState!
                                                               .validate();
@@ -5600,10 +5678,11 @@ class _NewOnsiteJobState extends State<ManageOnsiteJob> {
                                                         if (_thirteryDrugTestController
                                                                 .text ==
                                                             "") {
-                                                          return 'Please enter a valid drug test name';
+                                                          return 'Please enter the tertiary drug test name';
                                                         }
                                                         return null;
                                                       },
+                                                      onSaved: (value) {},
                                                     ),
                                                   ],
                                                 ),
@@ -5642,12 +5721,14 @@ class _NewOnsiteJobState extends State<ManageOnsiteJob> {
                                                           _selectPreferedThirtoryDeviceKey,
                                                       controller:
                                                           _thirteryDrugTestPreferredDeviceController,
+                                                      items:
+                                                          _availablePreferredDevices,
                                                       onChanged: (value) {
                                                         setState(() {
                                                           // Update the number of donors and the text controller
                                                           _thirteryDrugTestPreferredDeviceController
                                                                   .text =
-                                                              value; // Manually update the controller text
+                                                              value!; // Manually update the controller text
                                                           _selectPreferedThirtoryDeviceKey
                                                               .currentState!
                                                               .validate();

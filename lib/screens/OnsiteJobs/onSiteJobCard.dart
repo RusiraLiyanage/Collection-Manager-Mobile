@@ -741,8 +741,16 @@ class OnsiteJobCard extends StatelessWidget {
                 value: job["service"]!),
             _buildInfoRow(
                 iconPath: 'assets/images/icons/dafault_icon.png',
-                title: 'Callout Job',
-                value: job["callout"]!),
+                title: 'Job Type',
+                value: job["jobTypeMain"]!),
+            job["callout"]! == "Callout"
+                ? _buildInfoRow(
+                    iconPath: 'assets/images/icons/dafault_icon.png',
+                    title: 'Callout Job',
+                    value: job["callout"]!)
+                : SizedBox(
+                    height: 0,
+                  ),
             _buildInfoRow(
                 iconPath: 'assets/images/icons/dafault_icon.png',
                 title: 'Job Status',
