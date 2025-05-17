@@ -1813,6 +1813,9 @@ class _NewOnsiteJobState extends State<ManageOnsiteJob> {
                                                                   width: 8),
                                                               DropdownButton<
                                                                   int>(
+                                                                dropdownColor:
+                                                                    Colors
+                                                                        .white,
                                                                 value:
                                                                     tempHours,
                                                                 items: List
@@ -1862,6 +1865,9 @@ class _NewOnsiteJobState extends State<ManageOnsiteJob> {
                                                                   width: 8),
                                                               DropdownButton<
                                                                   int>(
+                                                                dropdownColor:
+                                                                    Colors
+                                                                        .white,
                                                                 value:
                                                                     tempMinutes,
                                                                 items: List

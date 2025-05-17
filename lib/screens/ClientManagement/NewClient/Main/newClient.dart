@@ -5533,7 +5533,7 @@ class _NewClientJobState extends State<NewClient> {
   bool isMobileClinic = false;
   bool isReminder = false;
   bool reportByTextMessage = false;
-  bool isReportByEmail = false;
+  bool isReportByEmail = true;
   bool isSendByCollector = false;
   bool showMainLocations = true;
 

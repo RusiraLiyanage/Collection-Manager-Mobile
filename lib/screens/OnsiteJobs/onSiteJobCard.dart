@@ -699,7 +699,7 @@ class OnsiteJobCard extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 2),
-            /*  Card(
+            Card(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20),
               ),
@@ -708,15 +708,15 @@ class OnsiteJobCard extends StatelessWidget {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                 child: Text(
-                  job["bookingInfo"]["jobDetails"]["jobReference"]!,
+                  job["jobNumber"]!,
                   style: const TextStyle(
                     color: Colors.white,
-                    fontSize: 10,
+                    fontSize: 12,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
-            ), */
+            ),
             // Content Rows
             _buildInfoRow(
                 iconPath: 'assets/images/icons/dafault_icon.png',
