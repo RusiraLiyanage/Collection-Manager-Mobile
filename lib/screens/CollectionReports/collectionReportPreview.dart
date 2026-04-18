@@ -74,7 +74,7 @@ class _CollectionReportPreviewState extends State<CollectionReportPreview> {
       drawer: SideMenu(
         navigationType: "subPartNavigation",
       ),
-      appBar: AppBarGoBack2(),
+      appBar: const AppBarGoBack2(),
       body: Scrollbar(
         thumbVisibility: true,
         interactive: true,
@@ -97,8 +97,8 @@ class _CollectionReportPreviewState extends State<CollectionReportPreview> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.only(left: 16.0),
+                        const Padding(
+                          padding: EdgeInsets.only(left: 16.0),
                           child: Text(
                             "Collection Report / Report Summary",
                             style: TextStyle(
@@ -126,7 +126,7 @@ class _CollectionReportPreviewState extends State<CollectionReportPreview> {
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     Padding(
@@ -138,7 +138,7 @@ class _CollectionReportPreviewState extends State<CollectionReportPreview> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
+                          const Text(
                             "Report Summary",
                             style: TextStyle(
                               fontSize: 24,
@@ -200,7 +200,7 @@ class _CollectionReportPreviewState extends State<CollectionReportPreview> {
                                 Column(
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
-                                    SizedBox(height: 10),
+                                    const SizedBox(height: 10),
                                     Padding(
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 8.0),
@@ -208,7 +208,7 @@ class _CollectionReportPreviewState extends State<CollectionReportPreview> {
                                         width: double.infinity,
                                         height: 60,
                                         decoration: BoxDecoration(
-                                          color: Color(0xFFCBF5FC),
+                                          color: const Color(0xFFCBF5FC),
                                           borderRadius:
                                               BorderRadius.circular(16),
                                         ),
@@ -240,7 +240,7 @@ class _CollectionReportPreviewState extends State<CollectionReportPreview> {
                                                               width: 40,
                                                               height: 40,
                                                             )
-                                                          : SizedBox(
+                                                          : const SizedBox(
                                                               height: 0,
                                                             ),
                                               const SizedBox(width: 12),
@@ -250,7 +250,7 @@ class _CollectionReportPreviewState extends State<CollectionReportPreview> {
                                                 ),
                                                 child: Text(
                                                   widget.currentStatus,
-                                                  style: TextStyle(
+                                                  style: const TextStyle(
                                                     fontSize: 16,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black,
@@ -262,8 +262,8 @@ class _CollectionReportPreviewState extends State<CollectionReportPreview> {
                                         ),
                                       ),
                                     ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(
+                                    const Padding(
+                                      padding: EdgeInsets.only(
                                         left: 16.0,
                                         right: 16.0,
                                         top: 10,
@@ -282,8 +282,8 @@ class _CollectionReportPreviewState extends State<CollectionReportPreview> {
                                         ),
                                       ),
                                     ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(
+                                    const Padding(
+                                      padding: EdgeInsets.only(
                                         left: 32.0,
                                         right: 32.0,
                                         top: 10,
@@ -536,7 +536,7 @@ class _CollectionReportPreviewState extends State<CollectionReportPreview> {
                         ),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 8,
                     ),
                     Padding(
@@ -563,9 +563,9 @@ class _CollectionReportPreviewState extends State<CollectionReportPreview> {
                                 Column(
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
-                                    SizedBox(height: 2),
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
+                                    const SizedBox(height: 2),
+                                    const Padding(
+                                      padding: EdgeInsets.symmetric(
                                           horizontal: 8.0),
                                     ),
                                     Padding(
@@ -587,18 +587,18 @@ class _CollectionReportPreviewState extends State<CollectionReportPreview> {
                                                 },
                                                 style: TextButton.styleFrom(
                                                   backgroundColor:
-                                                      Color(0xFF1A8CFF)
+                                                      const Color(0xFF1A8CFF)
                                                           .withOpacity(0.1),
                                                   shape: RoundedRectangleBorder(
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             8),
                                                   ),
-                                                  padding: EdgeInsets.symmetric(
+                                                  padding: const EdgeInsets.symmetric(
                                                       horizontal: 12,
                                                       vertical: 8),
                                                 ),
-                                                child: Row(
+                                                child: const Row(
                                                   mainAxisSize:
                                                       MainAxisSize.min,
                                                   children: [
@@ -616,7 +616,7 @@ class _CollectionReportPreviewState extends State<CollectionReportPreview> {
                                               ),
                                             ),
                                           ),
-                                          SizedBox(
+                                          const SizedBox(
                                             height: 10,
                                           ),
                                           Row(
@@ -630,8 +630,8 @@ class _CollectionReportPreviewState extends State<CollectionReportPreview> {
                                                     width: 18,
                                                     height: 18,
                                                   ),
-                                                  SizedBox(width: 10),
-                                                  Text(
+                                                  const SizedBox(width: 10),
+                                                  const Text(
                                                     "Date",
                                                     style: TextStyle(
                                                       fontWeight:
@@ -642,13 +642,13 @@ class _CollectionReportPreviewState extends State<CollectionReportPreview> {
                                                   ),
                                                 ],
                                               ),
-                                              Text(
+                                              const Text(
                                                 "Thu 02/05/24",
                                                 style: TextStyle(fontSize: 14),
                                               )
                                             ],
                                           ),
-                                          SizedBox(
+                                          const SizedBox(
                                             height: 5,
                                           ),
                                           Row(
@@ -662,10 +662,10 @@ class _CollectionReportPreviewState extends State<CollectionReportPreview> {
                                                     width: 18,
                                                     height: 18,
                                                   ),
-                                                  SizedBox(
+                                                  const SizedBox(
                                                     width: 10,
                                                   ),
-                                                  Text(
+                                                  const Text(
                                                     "Sent At",
                                                     style: TextStyle(
                                                       fontWeight:
@@ -676,13 +676,13 @@ class _CollectionReportPreviewState extends State<CollectionReportPreview> {
                                                   ),
                                                 ],
                                               ),
-                                              Text(
+                                              const Text(
                                                 "10.00 am",
                                                 style: TextStyle(fontSize: 14),
                                               )
                                             ],
                                           ),
-                                          SizedBox(
+                                          const SizedBox(
                                             height: 5,
                                           ),
                                           Row(
@@ -696,10 +696,10 @@ class _CollectionReportPreviewState extends State<CollectionReportPreview> {
                                                     width: 18,
                                                     height: 18,
                                                   ),
-                                                  SizedBox(
+                                                  const SizedBox(
                                                     width: 10,
                                                   ),
-                                                  Text(
+                                                  const Text(
                                                     "Sent By",
                                                     style: TextStyle(
                                                       fontWeight:
@@ -710,13 +710,13 @@ class _CollectionReportPreviewState extends State<CollectionReportPreview> {
                                                   ),
                                                 ],
                                               ),
-                                              Text(
+                                              const Text(
                                                 "John Snow",
                                                 style: TextStyle(fontSize: 14),
                                               )
                                             ],
                                           ),
-                                          SizedBox(
+                                          const SizedBox(
                                             height: 5,
                                           ),
                                           Row(
@@ -730,10 +730,10 @@ class _CollectionReportPreviewState extends State<CollectionReportPreview> {
                                                     width: 18,
                                                     height: 18,
                                                   ),
-                                                  SizedBox(
+                                                  const SizedBox(
                                                     width: 10,
                                                   ),
-                                                  Text(
+                                                  const Text(
                                                     "Total",
                                                     style: TextStyle(
                                                       fontWeight:
@@ -744,7 +744,7 @@ class _CollectionReportPreviewState extends State<CollectionReportPreview> {
                                                   ),
                                                 ],
                                               ),
-                                              Text(
+                                              const Text(
                                                 "11",
                                                 style: TextStyle(fontSize: 16),
                                               )
@@ -761,11 +761,11 @@ class _CollectionReportPreviewState extends State<CollectionReportPreview> {
                         ),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 5,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(
+                    const Padding(
+                      padding: EdgeInsets.only(
                         left: 5.0,
                         bottom: 8.0,
                       ),
@@ -857,7 +857,7 @@ class _CollectionReportPreviewState extends State<CollectionReportPreview> {
                 ),
               ),
 
-              SizedBox(
+              const SizedBox(
                 height: 150,
               ),
             ],
