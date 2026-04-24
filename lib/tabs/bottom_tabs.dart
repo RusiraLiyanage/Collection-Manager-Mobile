@@ -7,12 +7,13 @@ import 'package:project_code_blue/screens/Accounting/tests.dart';
 import 'package:project_code_blue/screens/ClientManagement/clientManagement.dart';
 import 'package:project_code_blue/screens/CollectionReports/collectionReports.dart';
 import 'package:project_code_blue/screens/CollectorsCalendar/collectorsCalendar.dart';
+import 'package:project_code_blue/screens/Dashboard/testCollectionSummary.dart';
 import 'package:project_code_blue/screens/Dashboard/testSampleResults.dart';
 import 'package:project_code_blue/screens/Dashboard/testsProcessed.dart';
+import 'package:project_code_blue/screens/Home/homePage.dart';
 import 'package:project_code_blue/screens/OnsiteApprovals/onsiteApprovals.dart';
-import '../screens/home.dart';
+import 'package:project_code_blue/screens/OnsiteJobs/onSiteJobsHome.dart';
 import '../screens/Dashboard/DashboardHome.dart';
-import '../screens/OnsiteJobs/OnSiteJobsHome.dart';
 
 class TabNavigationItem {
   final Widget page;
@@ -24,7 +25,7 @@ class TabNavigationItem {
 
   static List<TabNavigationItem> get items => [
         TabNavigationItem(
-          page: const Home(),
+          page: const HomePage(),
           icon: Icon(Icons.home),
           title: Text("Home"),
         ),
@@ -42,6 +43,11 @@ class TabNavigationItem {
           page: const TestSampleResults(),
           icon: Icon(Icons.dashboard),
           title: Text("Test Sample Results"),
+        ),
+        TabNavigationItem(
+          page: const TestCollectionSummary(),
+          icon: Icon(Icons.dashboard),
+          title: Text("Test Collection Summary"),
         ),
         TabNavigationItem(
           page: const OnsiteJobsHome(),

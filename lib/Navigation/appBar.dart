@@ -1,54 +1,114 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
+import 'package:icon_badge/icon_badge.dart';
+import 'package:project_code_blue/AppState/appState.dart';
+import 'package:project_code_blue/ColorSchemas/AppColors.dart';
+import 'package:project_code_blue/screens/Notifications/notifications.dart';
+import 'package:project_code_blue/screens/OnsiteJobs/widgets/logOutConfirmationModal.dart';
+import 'package:provider/provider.dart';
 
 class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   const MyAppBar({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return AppBar(
-      toolbarHeight: 68,
-      backgroundColor: Color(0xFF2C7796),
-      title: Text(
-        "Hi Rusira",
-        style: TextStyle(
-          fontSize: 21.5,
-          color: Colors.white,
-          fontWeight: FontWeight.bold,
+    return Stack(children: [
+      // Blurred Background
+      Positioned.fill(
+        child: ClipRRect(
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0), // Blur effect
+            child: Container(
+              color: Colors.transparent, // Keep it transparent to apply blur
+            ),
+          ),
         ),
       ),
-      leading: Builder(
-        builder: (BuildContext context) {
-          return RotatedBox(
-            quarterTurns: 0,
-            child: IconButton(
-              icon: Icon(
-                Icons.menu_sharp,
-                color: Colors.white,
-                size: 28,
+      AppBar(
+        toolbarHeight: 68,
+        backgroundColor: AppColors.primary.withOpacity(0.58),
+        foregroundColor: Colors.transparent,
+        title: Text(
+          "Hi Rusira",
+          style: TextStyle(
+            fontSize: 21.5,
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        leading: Builder(
+          builder: (BuildContext context) {
+            return RotatedBox(
+              quarterTurns: 0,
+              child: IconButton(
+                icon: Icon(
+                  Icons.menu_sharp,
+                  color: Colors.white,
+                  size: 28,
+                ),
+                onPressed: () => Scaffold.of(context).openDrawer(),
               ),
-              onPressed: () => Scaffold.of(context).openDrawer(),
-            ),
-          );
-        },
-      ),
-      elevation: 0.0,
-      actions: <Widget>[
-        IconButton(
-            icon: Icon(
-              Icons.notifications_active_outlined,
-              color: Colors.white,
-              size: 28,
-            ),
-            onPressed: () {}),
-        IconButton(
+            );
+          },
+        ),
+        elevation: 0.0,
+        actions: <Widget>[
+          Consumer<AppState>(
+            builder: (context, appState, child) {
+              return IconBadge(
+                icon: Icon(
+                  Icons.notifications_active_outlined,
+                  color: Colors.white,
+                  weight: 50,
+                  size: 28,
+                ),
+                itemCount: appState.noNotifications,
+                badgeColor: Colors.redAccent.withOpacity(0.6),
+                itemColor: Colors.white,
+                maxCount: 99,
+                hideZero: false,
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Notifications()),
+                  );
+                },
+              );
+            },
+          ),
+          PopupMenuButton<String>(
             icon: Icon(
               Icons.account_circle_rounded,
               color: Colors.white,
               size: 40,
             ),
-            onPressed: () {}),
-      ],
-    );
+            color: Colors.white,
+            onSelected: (String result) {
+              if (result == 'logout') {
+                Future.delayed(
+                  Duration(milliseconds: 200),
+                  () {
+                    showDialog(
+                      context: context,
+                      barrierDismissible: true,
+                      builder: (BuildContext context) =>
+                          const LogOutConfirmationModal(),
+                    );
+                  },
+                );
+              }
+            },
+            itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
+              PopupMenuItem<String>(
+                value: 'logout',
+                child: Text('Logout'),
+              ),
+            ],
+          ),
+        ],
+      ),
+    ]);
   }
 
   @override

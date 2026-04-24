@@ -1,0 +1,34 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Collection-Manager-Mobile",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "Collection-Manager-Mobile (profile mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "Collection-Manager-Mobile (release mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+      
+        {
+            "name": "Flutter",
+            "request": "launch",
+            "type": "dart",
+            "deviceId": "DA916227-30E2-4DF1-BD20-2EB972228EEE"
+        }
+            
+        
+    ]
+}

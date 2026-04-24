@@ -1,0 +1,1 @@
+/Users/rusiraliyanage/Flutter Development/Collection Manager Updated/Collection-Manager-Mobile/build/app/intermediates/cxx/Debug/6g1u672w/obj/arm64-v8a
