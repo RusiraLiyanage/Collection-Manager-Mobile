@@ -313,4 +313,4 @@ flutter test
 
 ## Repository Goal
 
-This repository demonstrates the mobile adaptation of Sample Assist's collection management workflows, with emphasis on onsite job execution, emergency response, approvals, client configuration, reporting, and a modular Flutter code structure that can support future backend integration.
+This repository demonstrates the mobile adaptation of Sample Assist's collection management workflows, with emphasis on onsite job execution, emergency response, approvals, client configuration, reporting, and a modular Flutter code structure that can support future backend integration and Collection Manager features parity.
