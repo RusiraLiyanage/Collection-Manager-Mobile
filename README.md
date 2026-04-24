@@ -19,7 +19,7 @@ The goal of this repository is to show the mobile implementation clearly: what t
 The live walkthrough demonstrates the implemented mobile workflows and the final presentation report documents the project background, design, implementation, and evaluation.
 
 - **Live demo video**: [Watch Project Code Blue live demo on Google Drive](https://drive.google.com/file/d/10IL2cRp2V07POnmEDU9UNQPjDNwEggIk/view?usp=drive_link)
-- **Project report**: Not stored in this repository because the PDF exceeds GitHub's normal file size limit.
+- **Project report**: [Open CSIT998 Assignment 4 Group 14 report on Google Drive](https://drive.google.com/file/d/1MEOLQcqm_8s-kZxZXpQzU0V5sRgD6J-Q/view?usp=drive_link)
 
 ## Main Features
 
