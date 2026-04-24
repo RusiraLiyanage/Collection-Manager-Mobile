@@ -43,3 +43,10 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Large documentation media should be hosted externally.
+docs/media/
+docs/reports/*.pdf
+*.mp4
+*.mov
+*.m4v

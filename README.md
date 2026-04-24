@@ -14,6 +14,13 @@ The goal of this repository is to show the mobile implementation clearly: what t
 - **Primary users**: Collection agency managers, booking coordinators, collectors, and administrative staff
 - **Core domain**: Workplace drug screening, onsite collections, callout response, approvals, and client reporting
 
+## Live Demo and Report
+
+The live walkthrough demonstrates the implemented mobile workflows and the final presentation report documents the project background, design, implementation, and evaluation.
+
+- **Live demo video**: [Watch Project Code Blue live demo on Google Drive](https://drive.google.com/file/d/10IL2cRp2V07POnmEDU9UNQPjDNwEggIk/view?usp=drive_link)
+- **Project report**: Not stored in this repository because the PDF exceeds GitHub's normal file size limit.
+
 ## Main Features
 
 - **Operational dashboard** with summary charts for processed tests, sample results, demographics, and collection activity.
