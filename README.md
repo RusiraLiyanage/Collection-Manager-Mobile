@@ -303,7 +303,7 @@ flutter test
 
 | Name | Role | Contact |
 | --- | --- | --- |
-| Rusira Senath Liyanage | Project Manager | rusira@sampleassist.com |
+| Rusira Senath Liyanage | Team Lead / Project Manager | rusira@sampleassist.com |
 | Jinchen Wang | Frontend Lead | jinchen.wang@sampleassist.com |
 | Jingwei Li | Software Engineer | jingwei.Li@sampleassist.com |
 | Jihoon Lee | AWS Lead | jihoon.lee@sampleassist.com |
